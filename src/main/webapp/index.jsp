@@ -12,6 +12,7 @@
 	<h2>보입니다 -주연</h2>
 	<h1>임한솔</h1>
 	<h1>하얀//</h1>
+	<h1>테텥텥스트</h1>
 >>>>>>> branch 'master' of https://github.com/HitMi0212/finalProject-museedart.git
 </body>
 </html>
