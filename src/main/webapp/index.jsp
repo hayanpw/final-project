@@ -10,6 +10,8 @@
 	<h1>테스트트트</h1>
 	<h2>보이나요... 이 말이 보여요....?</h2>
 	<h2>보입니다 -주연</h2>
+	<h1>임한솔</h1>
 	<h1>하얀//</h1>
+>>>>>>> branch 'master' of https://github.com/HitMi0212/finalProject-museedart.git
 </body>
 </html>
