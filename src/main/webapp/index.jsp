@@ -13,6 +13,6 @@
 	<h1>임한솔</h1>
 	<h1>하얀//</h1>
 	<h1>테텥텥스트</h1>
->>>>>>> branch 'master' of https://github.com/HitMi0212/finalProject-museedart.git
+	<h1>마무리~~~~</h1>
 </body>
 </html>
