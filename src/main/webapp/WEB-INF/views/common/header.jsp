@@ -5,7 +5,7 @@
 
 	<meta charset="UTF-8">
 	<!-- 기본css -->
-	<link rel="stylesheet" href="/css/default.css">
+	<link rel="stylesheet" href="/resources/commonCss/default.css">
 	<!-- 부트스트랩 -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">

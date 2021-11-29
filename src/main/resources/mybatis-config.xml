@@ -6,5 +6,7 @@
 	</settings>
 	<typeAliases>
 		<typeAlias type="show.vo.Show" alias="show"/>
+		<typeAlias type="kr.or.member.vo.Member" alias="m"/>
 	</typeAliases>
+	
 </configuration>
