@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="show">
-	<select id="ShowList" resultType="show">
+	<select id="showList" resultType="show">
 		select
 			show_no as showNo,
 			show_name as showName,
@@ -10,4 +10,24 @@
 			filepath
 		from show
 	</select>
+	<select id="showView" parameterType="_int" resultMap="s">
+		select * from show where show_no=#{showNo}
+	</select>
+	<select id="starAvg" parameterType="_int" resultType="_double">
+		select avg(star) from show_review where show_no = #{showNo}
+	</select>
+	
+	<resultMap type="show" id="s">
+		<result column="show_no" property="showNo"/>
+		<result column="show_name" property="showName"/>
+		<result column="show_start" property="showStart"/>
+		<result column="show_end" property="showEnd"/>
+		<result column="show_time" property="showTime"/>
+		<result column="show_age" property="showAge"/>
+		<result column="show_content" property="showContent"/>
+		<result column="show_price" property="showPrice"/>
+		<result column="show_seat" property="showSeat"/>
+		<result column="filepath" property="filepath"/>
+		<result column="show_hall" property="showHall"/>
+	</resultMap>
 </mapper>
