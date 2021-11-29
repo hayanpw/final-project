@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.or.addition.model.service.AdditionService;
 import kr.or.addition.model.vo.Board;
+import kr.or.addition.model.vo.BoardPageData;
 
 @Controller
 public class AdditionController {
@@ -20,21 +21,22 @@ public class AdditionController {
 		return "addition/addition";
 	}
 	@RequestMapping(value = "/additionNotice.do")
-	public String notice(int boardType,Model model) {
-		ArrayList<Board> list= service.selectNoticeList(boardType);
-		model.addAttribute("list",list);
+	public String notice(int boardType,int reqPage,Model model) {
+		BoardPageData bpd= service.selectNoticeList(boardType,reqPage);
+		model.addAttribute("list",bpd.getList());
+		model.addAttribute("pageNavi",bpd.getPageNavi());
+		model.addAttribute("start",bpd.getStart());
 		return "addition/notice";
 	}
-	@RequestMapping(value = "/additionQNA.do")
-	public String qna(int boardType,Model model) {
-		ArrayList<Board> list= service.selectNoticeList(boardType);
-		model.addAttribute("list",list);
-		return "addition/qna";
-	}
-	@RequestMapping(value = "/additionFree.do")
-	public String free(int boardType,Model model) {
-		ArrayList<Board> list= service.selectNoticeList(boardType);
-		model.addAttribute("list",list);
-		return "addition/free";
-	}
+	/*
+	 * @RequestMapping(value = "/additionQNA.do") public String qna(int
+	 * boardType,Model model) { ArrayList<Board> list=
+	 * service.selectNoticeList(boardType); model.addAttribute("list",list); return
+	 * "addition/qna"; }
+	 * 
+	 * @RequestMapping(value = "/additionFree.do") public String free(int
+	 * boardType,Model model) { ArrayList<Board> list=
+	 * service.selectNoticeList(boardType); model.addAttribute("list",list); return
+	 * "addition/free"; }
+	 */
 }
