@@ -1,0 +1,17 @@
+table{
+    margin: 0 auto;
+    border: 2px solid #A79078;
+    border-radius: 5px;
+    margin-bottom: 50px;
+}
+input,select{
+    width: 100%;
+    line-height: 20px;
+}
+.container{
+    text-align: center;
+}
+.container>form>table{
+	border-collapse: separate;
+	border-spacing: 20px
+}
