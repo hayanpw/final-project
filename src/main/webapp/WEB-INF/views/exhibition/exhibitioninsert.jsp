@@ -11,7 +11,6 @@
 	<c:import url="/WEB-INF/views/common/header.jsp"></c:import>
 	<div class="container">
 	 <h2>전시 등록하기</h1>
-	 
 	</div>
 </body>
 </html>
