@@ -5,7 +5,7 @@
 
 	<meta charset="UTF-8">
 	<!-- 기본css -->
-	<link rel="stylesheet" href="/css/default.css">
+	<link rel="stylesheet" href="/resources/commonCss/default.css">
 	<!-- 부트스트랩 -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -13,7 +13,15 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 		
 	<div class="header-title">
-			<h1>타이틀들어가겠죠</h1>
+		<div class="h-left">
+     
+        </div> 
+        <div class="h-logo">
+			Musée d'art
+        </div>
+		<div class="h-right">
+			<a href=""> Sign in <span>></span></a>
+		</div>   
 	</div>
 	<nav class="header-nav">
 			<h1>여기메뉴일거에요하하</h1>

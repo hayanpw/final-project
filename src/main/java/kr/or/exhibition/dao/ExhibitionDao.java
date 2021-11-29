@@ -1,11 +1,11 @@
-package kr.or.space.model.dao;
+package kr.or.exhibition.dao;
 
-import org.mybatis.spring.SqlSessionTemplate;
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class SpaceDao {
+public class ExhibitionDao {
 	@Autowired
-	private SqlSessionTemplate sqlSession;
+	private SqlSession sqlSession;
 }
