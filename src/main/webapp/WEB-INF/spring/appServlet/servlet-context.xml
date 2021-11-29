@@ -71,5 +71,8 @@
 	<context:component-scan base-package="show" />
 	<context:component-scan base-package="kr.or.space" />	
 	<context:component-scan base-package="kr.or.addition"/>
-	<context:component-scan base-package="kr.or.member" />	
+	<context:component-scan base-package="kr.or.member" />
+	<context:component-scan base-package="kr.or.exhibition"/>
+	<context:component-scan base-package="kr.or.resume"/>
+	<context:component-scan base-package="kr.or.addition"/>	
 </beans:beans>
