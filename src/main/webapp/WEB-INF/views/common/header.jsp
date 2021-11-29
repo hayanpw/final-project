@@ -1,9 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html>
-<html>
-<head>
+
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.js"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -11,8 +9,9 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-</head>
-<body>
-	<h1>헤더</h1>
-</body>
-</html>
+	<div class="header-title">
+		<h1>타이틀들어가겠죠</h1>
+	</div>
+	<nav class="header-nav">
+		<h1>여기메뉴일거에요하하</h1>
+	</nav>
