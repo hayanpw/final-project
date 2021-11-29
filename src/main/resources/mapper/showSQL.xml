@@ -16,6 +16,9 @@
 	<select id="starAvg" parameterType="_int" resultType="_double">
 		select nvl(avg(star),0) from show_review where show_no = #{showNo}
 	</select>
+	<insert id="insertShow" parameterType="show">
+		insert into show values(show_seq.nextval, #{showName}, #{showStart}, #{showEnd}, #{showTime}, #{showAge}, #{showContent}, #{showPrice}, 0, #{filepath}, #{showHall})
+	</insert>
 	
 	<resultMap type="show" id="s">
 		<result column="show_no" property="showNo"/>

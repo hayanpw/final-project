@@ -24,4 +24,8 @@ public class ShowService {
 		s.setShowStar(star);
 		return s;
 	}
+
+	public int insertShow(Show s) {
+		return dao.insertShow(s);
+	}
 }
