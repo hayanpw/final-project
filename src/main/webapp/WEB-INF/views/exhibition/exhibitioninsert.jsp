@@ -8,9 +8,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<c:import url="/WEB-INF/views/common/header.jsp"></c:import>
+	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="container">
-	 <h2>전시 등록하기</h1>
+		<h2>전시 등록하기</h2>
 	</div>
+	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>
