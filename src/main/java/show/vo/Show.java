@@ -15,4 +15,5 @@ public class Show {
 	private int showSeat;
 	private String filepath;
 	private String showHall;
+	private double showStar;
 }
