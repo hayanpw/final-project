@@ -46,6 +46,7 @@
       <label for="exhibitionTitle">가격</label>
       <textarea type="text" class="form-control" rows="7" id="exhibitionDetail" placeholder="내용을 입력해주세요" name="exhibitionDetail"></textarea>
     </div>
+       <input type="submit" class="btn btn-info" style="float:right" value="등록하기">
   </form>
 </div>
 	</div>
