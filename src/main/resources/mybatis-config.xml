@@ -6,5 +6,6 @@
 	</settings>
 	<typeAliases>
 		<typeAlias type="show.vo.Show" alias="show"/>
+		<typeAlias type="kr.or.addition.model.vo.Board" alias="board"/>
 	</typeAliases>
 </configuration>
