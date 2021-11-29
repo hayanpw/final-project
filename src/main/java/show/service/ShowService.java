@@ -16,4 +16,16 @@ public class ShowService {
 	public ArrayList<Show> selectShowList() {
 		return dao.selectShowList();
 	}
+
+	public Show selectOneShow(int showNo) {
+		Show s = dao.selectOneShow(showNo);
+		double star = dao.showStarAvg(showNo);
+		star = Math.round(star*10.0)/10.0;
+		s.setShowStar(star);
+		return s;
+	}
+
+	public int insertShow(Show s) {
+		return dao.insertShow(s);
+	}
 }

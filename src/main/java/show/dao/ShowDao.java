@@ -15,7 +15,19 @@ public class ShowDao {
 	private SqlSessionTemplate sqlSession;
 
 	public ArrayList<Show> selectShowList() {
-		List<Show> list = sqlSession.selectList("show.ShowList");
+		List<Show> list = sqlSession.selectList("show.showList");
 		return (ArrayList<Show>)list;
+	}
+
+	public Show selectOneShow(int showNo) {
+		return sqlSession.selectOne("show.showView", showNo);
+	}
+
+	public double showStarAvg(int showNo) {
+		return sqlSession.selectOne("show.starAvg", showNo);
+	}
+
+	public int insertShow(Show s) {
+		return sqlSession.insert("show.insertShow", s);
 	}
 }

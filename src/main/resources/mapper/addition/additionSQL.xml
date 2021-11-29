@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="addition">
-
+	<select id="noticeList" parameterType="map" resultType="board">
+		select
+			rnum as bnum, 
+			board_no as boardNo,
+			board_title as boardTitle,
+			board_writer as boardWriter,
+			readcount as readCount,
+			reg_date as regDate,
+			filename,
+			filepath
+		from 
+		(select rownum as rnum,n.* from 
+		(select*
+		from board where boardtype=#{boardType} order by board_no desc)n) 
+		where rnum between #{start} and #{end} 
+	</select>
+	<select id="totalCount" parameterType="map" resultType="_int">
+		select count(*) from board where boardtype=#{boardType}
+	</select>
 </mapper>
