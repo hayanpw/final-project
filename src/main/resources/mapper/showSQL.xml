@@ -14,7 +14,7 @@
 		select * from show where show_no=#{showNo}
 	</select>
 	<select id="starAvg" parameterType="_int" resultType="_double">
-		select avg(star) from show_review where show_no = #{showNo}
+		select nvl(avg(star),0) from show_review where show_no = #{showNo}
 	</select>
 	
 	<resultMap type="show" id="s">

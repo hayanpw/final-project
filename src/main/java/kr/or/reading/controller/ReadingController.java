@@ -18,6 +18,19 @@ public class ReadingController {
 	@Autowired
 	private ReadingService service;
 	
+	@RequestMapping(value="/readingNotice.do")
+	public String readingNotice(HttpSession session, Model model) {
+		//로그인 해야 열람실 안내를 들어올수있게
+		//로그인 구현되면 return 위치 바꿔야됌
+		if(session.getAttribute("m")==null) {
+			return "reading/readingNotice";
+		}else {
+			model.addAttribute("msg","로그인이 필요한 서비스입니다.");
+			model.addAttribute("loc", "/");
+			return "common/msg";		
+		}
+	}
+	
 	@RequestMapping(value="/readingList.do")
 	public String readingList(String memberId, Model model) {
 		//안내->예약 넘어갈때
@@ -26,7 +39,7 @@ public class ReadingController {
 		//등록되어있지 않다면 예약페이지로 넘어감
 		ReadingBlack rb = service.selectOneBlackList(memberId);
 		if(rb==null) {
-			return "reading/readingList.jsp";
+			return "reading/readingList";
 		}else {
 			model.addAttribute("msg","당신은"+rb.getBlackEnd()+"까지 열람실을 이용할 수 없습니다.");
 			model.addAttribute("loc", "/");
