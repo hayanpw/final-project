@@ -21,4 +21,13 @@ public class ShowController {
 		model.addAttribute("list", list);
 		return "show/showList";
 	}
+	
+	@RequestMapping(value = "/showView.do")
+	public String showView(int showNo, Model model) {
+		Show s = service.selectOneShow(showNo);
+		model.addAttribute("s",s);
+		return "show/showView";
+	}
+	
+	
 }
