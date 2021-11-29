@@ -28,15 +28,23 @@ public class AdditionController {
 		model.addAttribute("start",bpd.getStart());
 		return "addition/notice";
 	}
-	/*
-	 * @RequestMapping(value = "/additionQNA.do") public String qna(int
-	 * boardType,Model model) { ArrayList<Board> list=
-	 * service.selectNoticeList(boardType); model.addAttribute("list",list); return
-	 * "addition/qna"; }
-	 * 
-	 * @RequestMapping(value = "/additionFree.do") public String free(int
-	 * boardType,Model model) { ArrayList<Board> list=
-	 * service.selectNoticeList(boardType); model.addAttribute("list",list); return
-	 * "addition/free"; }
-	 */
+	
+	@RequestMapping(value = "/additionQNA.do") 
+	public String qna(int boardType,int reqPage,Model model) { 
+		BoardPageData bpd= service.selectNoticeList(boardType,reqPage);
+		model.addAttribute("list",bpd.getList());
+		model.addAttribute("pageNavi",bpd.getPageNavi());
+		model.addAttribute("start",bpd.getStart());
+		return"addition/qna"; 
+	 }
+	 
+	@RequestMapping(value = "/additionFree.do") 
+	public String free(int boardType,int reqPage,Model model) { 
+		BoardPageData bpd= service.selectNoticeList(boardType,reqPage);
+		model.addAttribute("list",bpd.getList());
+		model.addAttribute("pageNavi",bpd.getPageNavi());
+		model.addAttribute("start",bpd.getStart());
+		return"addition/free"; 
+	 }
+	 
 }

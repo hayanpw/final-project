@@ -17,7 +17,7 @@
 			</tr>
 			<c:forEach	items="${list }" var="b" varStatus="i">
 			<tr>
-				<td>${i.count }</td>
+				<td>${b.bnum }</td>
 				<td><a href="/boardView.do?boardNo=${b.boardNo}">${b.boardTitle }</a></td>
 				<td>${b.boardWriter }</td>
 				<td>${b.regDate }</td>
@@ -25,6 +25,7 @@
 			</tr>
 			</c:forEach>
 		</table>
+		<div id="pageNavi">${pageNavi }</div>
 		<button><a href="/boardWriter.do">글작성</a></button>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>

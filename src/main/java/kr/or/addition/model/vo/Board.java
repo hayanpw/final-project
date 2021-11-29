@@ -14,4 +14,5 @@ public class Board {
 	private String filename;
 	private String filepath;
 	private int boardType;
+	private int bnum;
 }
