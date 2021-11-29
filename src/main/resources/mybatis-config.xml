@@ -5,6 +5,6 @@
 		<setting name="jdbcTypeForNull" value="NULL"/>
 	</settings>
 	<typeAliases>
-
+		<typeAlias type="show.vo.Show" alias="show"/>
 	</typeAliases>
 </configuration>
