@@ -2,15 +2,16 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-	<%@include file = "/WEB-INF/views/common/header.jsp" %>
+	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="container">
-		<h1>페이지 컨테니어 작성</h1>
+		<h2>전시 등록하기</h2>
 	</div>
-	<%@include file = "/WEB-INF/views/common/footer.jsp" %>
+	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>
