@@ -16,5 +16,8 @@
 	<h1>마무리~~~~</h1>
 	<h2>지원입니다 :D !</h2>
 	<h1><a href="/addition.do">부가서비스</a></h1>
+	<script>
+		location.href="/main.do";
+	</script>
 </body>
 </html>

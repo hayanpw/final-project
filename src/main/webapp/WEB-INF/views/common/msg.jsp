@@ -7,10 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
-	<div class="container">
-		<h1>페이지 컨테니어 작성</h1>
-	</div>
-	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+	<script>
+		alert('${msg}');
+		location.href="${loc}";
+	</script>
 </body>
 </html>
