@@ -8,7 +8,8 @@
 </head>
 <body>
 	<script>
-		location.href="/main.do";
+		alert('${msg}');
+		location.href="${loc}";
 	</script>
 </body>
 </html>

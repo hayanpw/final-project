@@ -7,6 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>메인</h1>
+	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+	<div class="container">
+		<h1>페이지 컨테니어 작성</h1>
+	</div>
+	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>

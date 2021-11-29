@@ -7,8 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<script>
-		location.href="/main.do";
-	</script>
+	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+	<div class="container">
+  		<h2>강의 등록하기</h2>
+  
+	</div>
+	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>
