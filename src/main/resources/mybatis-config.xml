@@ -6,5 +6,7 @@
 	</settings>
 	<typeAliases>
 		<typeAlias type="show.vo.Show" alias="show"/>
+		<typeAlias type="kr.or.reading.model.vo.Reading" alias="reading"/>
+		<typeAlias type="kr.or.reading.model.vo.ReadingBlack" alias="black"/>
 	</typeAliases>
 </configuration>
