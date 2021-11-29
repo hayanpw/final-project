@@ -1,0 +1,30 @@
+.space-img>h1{
+	text-align: center;
+}
+.space-img>p{
+	margin : 10px;
+	font-size: 25px;
+}
+.space-img img{
+	display : block;
+	margin : auto;
+	width: 80%;
+	
+	}
+.container>div{
+	border: 1px solid blue;
+}
+.s-title{
+	border-bottom: 1px solid #563D39;
+}
+.rental-sequence>img{
+	display : block;
+	margin : auto;
+	width: 80%;
+}
+#rentalBtn{
+	width : 200px;
+	height : 50px;
+	display: block;
+	margin: auto;
+}
