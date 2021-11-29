@@ -75,4 +75,5 @@
 	<context:component-scan base-package="kr.or.exhibition"/>
 	<context:component-scan base-package="kr.or.resume"/>
 	<context:component-scan base-package="kr.or.reading"/>
+	<context:component-scan base-package="kr.or.academy"/>
 </beans:beans>
