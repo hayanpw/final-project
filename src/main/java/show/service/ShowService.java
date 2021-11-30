@@ -28,4 +28,9 @@ public class ShowService {
 	public int insertShow(Show s) {
 		return dao.insertShow(s);
 	}
+
+	public int deleteShow(int showNo) {
+		return dao.deleteShow(showNo);
+	}
+
 }

@@ -19,6 +19,9 @@
 	<insert id="insertShow" parameterType="show">
 		insert into show values(show_seq.nextval, #{showName}, #{showStart}, #{showEnd}, #{showTime}, #{showAge}, #{showContent}, #{showPrice}, 0, #{filepath}, #{showHall})
 	</insert>
+	<delete id="deleteShow" parameterType="_int">
+		delete from show where show_no=#{showNo}
+	</delete>
 	
 	<resultMap type="show" id="s">
 		<result column="show_no" property="showNo"/>
