@@ -149,5 +149,34 @@ public class AdditionController {
 				}
 				return "common/msg"; 
 	}
-	 
+	
+	//글보기
+	@RequestMapping(value = "/boardView.do")
+	public String boardView(int boardType,int boardNo,Model model) {
+		//boardNo을 이용하여 조회한 board객체,arrayList<fileVo>
+		Board b = service.selectOneBoard(boardNo);
+		model.addAttribute("b",b);
+		if(boardType==1) {
+			return "addition/noticeView";
+		}else if(boardType==2){
+			return "addition/qnaView";
+		}else {
+			return "addition/freeView";
+		}
+		
+	}
+	
+	//글삭제하기
+	@RequestMapping(value = "/boardDelete.do")
+	public String boardDelete(int boardNo,Model model) {
+		int result = service.boardDelete(boardNo);
+		if(result>0) {
+			model.addAttribute("msg", "삭제성공");
+			
+		}else {
+			model.addAttribute("msg", "삭제실패");
+		}
+		model.addAttribute("loc","/additionNotice.do?boardType=1&reqPage=1");
+		return "common/msg"; 
+	}
 }

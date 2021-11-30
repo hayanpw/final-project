@@ -18,6 +18,8 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 	<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+	<script type="text/javascript" src="/resources/jquery-ui/jquery-ui.min.js"></script>
+	<link rel="stylesheet" href="/resources/jquery-ui/jquery-ui-big.css">
     <div class="container">
         <div class="summary">
             <div class="summaryTop">
@@ -69,8 +71,8 @@
         </div>
         <div class="controllBox">
         	<%-- <c:if test="${sessionScope.m.memberLevel == 0 }"> --%>
-	            <a href="/updateShow.do" class="btn btn-primary">수정</a>
-	            <a href="/deleteShow.do" class="btn btn-primary">삭제</a>        	
+	            <a href="/updateShowFrm.do?showNo=${s.showNo}" class="btn btn-primary">수정</a>
+	            <a href="/deleteShow.do?showNo=${s.showNo}" class="btn btn-primary">삭제</a>
         	<%-- </c:if> --%>
         </div>
         <div class="infoWrapper">

@@ -7,7 +7,6 @@
 <title>Insert title here</title>
     <link href="resources/spaceCss/space_default.css" rel="stylesheet">
     <link href="resources/spaceCss/space_insert.css" rel="stylesheet">
-    <script type="text/javascript" src="/js/jquery-3.3.1.js"></script>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
@@ -17,7 +16,7 @@
 			<div class="space-img">
 				<img style="width: 400px; height: 250px">
 				<input style="display: block;" type="file" id="input-image"
-					name="upfile">
+					name="files" multiple>
 			</div>
 			<div class="space-info">
 				<table class="table-condensed info-table">
@@ -53,27 +52,5 @@
 		</form>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
-	<script>
-	function readImage(input) {
-	    // 인풋 태그에 파일이 있는 경우
-	    if(input.files && input.files[0]) {
-	        // 이미지 파일인지 검사 (생략)
-	        // FileReader 인스턴스 생성
-	        const reader = new FileReader()
-	        // 이미지가 로드가 된 경우
-	        reader.onload = e => {
-	            const previewImage = document.getElementById("preview-image")
-	            previewImage.src = e.target.result
-	        }
-	        // reader가 이미지 읽도록 하기
-	        reader.readAsDataURL(input.files[0])
-	    }
-	}
-	// input file에 change 이벤트 부여
-	const inputImage = document.getElementById("input-image")
-	inputImage.addEventListener("change", e => {
-	    readImage(e.target)
-	})
-	</script>
 </body>
 </html>
