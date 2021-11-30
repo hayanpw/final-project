@@ -31,7 +31,7 @@
       <input type="date" class="form-control" id="startDate" name="startDate">
     </div>
     <div class="form-group col-sm-6">
-      <h4>종료일</h3>
+      <h4>종료일</h4>
       <input type="date" class="form-control" id="endDate" name="endDate">
     </div>
     <h3><span class="line">관</span>람 연령</h3>
@@ -44,7 +44,7 @@
       <input type="time" class="form-control" id="startTime" name="startTime">
     </div>
     <div class="form-group col-sm-6">
-      <h4>종료일</h4>
+      <h4>종료시간</h4>
       <input type="time" class="form-control" id="endTime" name="endTime">
     </div>
     <div class="form-group">
