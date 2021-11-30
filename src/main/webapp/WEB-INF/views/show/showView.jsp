@@ -68,10 +68,10 @@
             </div>
         </div>
         <div class="controllBox">
-        	<c:if test="${sessionScope.m.memberLevel == 0 }">
+        	<%-- <c:if test="${sessionScope.m.memberLevel == 0 }"> --%>
 	            <a href="/updateShow.do" class="btn btn-primary">수정</a>
 	            <a href="/deleteShow.do" class="btn btn-primary">삭제</a>        	
-        	</c:if>
+        	<%-- </c:if> --%>
         </div>
         <div class="infoWrapper">
             <div class="showInfo">
@@ -107,7 +107,7 @@
 	                		</c:otherwise>
 	                	</c:choose>
 	                </div>
-	                <input type="submit" class="btn btn-danger btn-lg" value="예매하기">
+	                <input type="submit" class="btn btn-danger btn-lg reservBtn" value="예매하기">
                 </form>
             </div>
         </div>

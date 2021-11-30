@@ -14,7 +14,9 @@
     <div class="container">
         <h1>musée d'art<br>공연 일정</h1>
         <div class="showSearchBox">
-            <a class="btn btn-danger">공연 추가</a>
+	        <%-- <c:if test="${sessionScope.m.memberLevel == 0 }"> --%>
+	            <a href="/insertShowFrm.do" class="btn btn-danger">공연 추가</a>
+	        <%-- </c:if> --%>
         </div>
         <div class="showList">
         	<c:forEach items="${list }" var="s">

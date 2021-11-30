@@ -26,4 +26,8 @@ public class ShowDao {
 	public double showStarAvg(int showNo) {
 		return sqlSession.selectOne("show.starAvg", showNo);
 	}
+
+	public int insertShow(Show s) {
+		return sqlSession.insert("show.insertShow", s);
+	}
 }

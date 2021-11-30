@@ -7,18 +7,20 @@
 <title>Insert title here</title>
     <link href="resources/spaceCss/space_default.css" rel="stylesheet">
     <link href="resources/spaceCss/space_insert.css" rel="stylesheet">
+    <script type="text/javascript" src="/js/jquery-3.3.1.js"></script>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="container">
 		<form action="/spaceInsert.do" method="post" enctype="multipart/form-data">
-			<h2>공간 등록</h2>
+			<h3>공간 등록</h3>
 			<div class="space-img">
-						   <img style="width: 250px; height: 250px" id="preview-image" src="https://dummyimage.com/500x500/ffffff/000000.png&text=preview+image">
- 					   <input style="display: block;" type="file" id="input-image" name="upfile">
+				<img style="width: 400px; height: 250px">
+				<input style="display: block;" type="file" id="input-image"
+					name="upfile">
 			</div>
 			<div class="space-info">
-				<table class="table-condensed">
+				<table class="table-condensed info-table">
 					<tr>
 						<th>이름</th>
 						<td><input type="text" name="spaceName"></td>
@@ -45,9 +47,33 @@
 					</tr>
 				</table>
 			</div>
+			<div id="insertBtn">
+				<button class="btn btn-default" type="submit">등록하기</button>
+			</div>
 		</form>
-		<button class="btn btn-default" type="submit">등록하기</button>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+	<script>
+	function readImage(input) {
+	    // 인풋 태그에 파일이 있는 경우
+	    if(input.files && input.files[0]) {
+	        // 이미지 파일인지 검사 (생략)
+	        // FileReader 인스턴스 생성
+	        const reader = new FileReader()
+	        // 이미지가 로드가 된 경우
+	        reader.onload = e => {
+	            const previewImage = document.getElementById("preview-image")
+	            previewImage.src = e.target.result
+	        }
+	        // reader가 이미지 읽도록 하기
+	        reader.readAsDataURL(input.files[0])
+	    }
+	}
+	// input file에 change 이벤트 부여
+	const inputImage = document.getElementById("input-image")
+	inputImage.addEventListener("change", e => {
+	    readImage(e.target)
+	})
+	</script>
 </body>
 </html>
