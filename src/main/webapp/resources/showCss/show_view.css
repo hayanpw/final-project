@@ -1,0 +1,108 @@
+.summary{
+    padding-left: 100px;
+    border-radius: 10px;
+    background-color: #BDB19A;
+}
+.summaryTop{
+    margin-top: 30px;
+    display: flex;
+}
+.summaryTop>span{
+    padding-top: 35px;
+}
+.summaryTop>h1{
+    margin-right: 20px;
+}
+#reviewAvg{
+    font-size: 15px;
+    margin-left: 5px;
+}
+.poster{
+    height: 270px;
+    margin-bottom: 20px;
+}
+.summaryBottom{
+    display: flex;
+}
+.info>table{
+    margin-left: 30px;
+    font-size: 20px;
+    border-spacing: 20px;
+    line-height: 30px;
+    border-collapse: separate;
+}
+.info td:last-child{
+    text-indent: 30px;
+}
+.controllBox{
+    height: 50px;
+    text-align: right;
+    line-height: 50px;
+}
+.infoWrapper{
+    display: flex;
+    margin-bottom: 50px;
+}
+.infoWrapper>div{
+    width: calc(100%/2);
+}
+.showNavi{
+    display: flex;
+    margin-bottom: 30px;
+}
+.showNavi>div{
+    width: calc(100%/3);
+    border-bottom: 2px solid #A79078;
+    text-align: center;
+    cursor: pointer;
+}
+.showNavi>div:hover{
+    background-color: #BDB19A;
+    color: #fff;
+}
+.selec{
+    background-color: #BDB19A;
+    color: #fff;
+}
+.showContent>img{
+    width: 100%;
+}
+.hideContent{
+    display: none;
+}
+.reserv h3{
+	text-align: center;
+}
+.reserv{
+    padding: 0 20px;
+}
+#datepicker>div{
+    width: 100%;
+}
+#datepicker>div>div{
+	background-color: #BDB19A;
+}
+#datepicker>div>div>*{
+    line-height: 50px;
+    height: 50px;
+    font-size: 20px;
+}
+#datepicker>div>table>tbody td>*{
+    height: 30px;
+}
+.ticketPrice{
+	background-color: #BDB19A;
+	height: 100px;
+	padding: 0 50px;
+	border-radius: 10px;
+}
+.ticketPrice>h4{
+	line-height: 100px;
+	font-weight: blod;
+	font-size: 25px;
+}
+.reservBtn{
+	width: 100%;
+	height: 50px;
+	margin-top: 20px;
+}

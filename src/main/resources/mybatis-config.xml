@@ -6,7 +6,10 @@
 	</settings>
 	<typeAliases>
 		<typeAlias type="show.vo.Show" alias="show"/>
+		<typeAlias type="kr.or.addition.model.vo.Board" alias="board"/>
+		<typeAlias type="kr.or.reading.model.vo.Reading" alias="reading"/>
+		<typeAlias type="kr.or.reading.model.vo.ReadingBlack" alias="black"/>
+		<typeAlias type="kr.or.space.model.vo.Space" alias="space"/>
 		<typeAlias type="kr.or.member.vo.Member" alias="m"/>
 	</typeAliases>
-	
 </configuration>

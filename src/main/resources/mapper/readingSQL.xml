@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="reading">
+<!--
+강사님한테 여쭤봐야됌
+만약 22일 15시에 강제퇴실 되었으면
+29일 15시가 아닌 30일날 저절로 삭제되어야됌
+
+생각나는방식은 insert에서 (start+8)공식 + 00:00:00을 직접넣는다? 
+ -->
+	<select id="selectOneBlackList" parameterType="string" resultType="black">
+		select
+			black_no as blackNo,
+			to_char(black_start,'yy/mm/dd hh24:mi:ss') as blackStart,
+			to_char(black_end,'yy/mm/dd hh24:mi:ss') as blackEnd,
+			black_id as blackId
+		from reading_black where black_id=#{memberId}
+	</select>
+</mapper>
+

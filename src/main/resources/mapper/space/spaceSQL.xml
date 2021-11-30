@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="space">
-	
+	<insert id="insertSpace" parameterType="space">
+		insert
+			into space
+			values(space_seq.nextval,#{spaceName},#{spacePurPose},#{mainFacility},#{mainProduct},#{maxPeople},#{price},#{filename},#{filepath}
+	</insert>
+	<select id="selectAllSpace" resultType="space">
+		select
+			space_name as spaceName,
+			space_purpose as spacePurpose,
+			main_facility as mainFacility,
+			main_product as mainProduct,
+			max_people as maxPeople,
+			price,
+			filename,
+			filepath
+		from space	
+	</select>
 </mapper>
