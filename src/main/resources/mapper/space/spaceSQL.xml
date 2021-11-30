@@ -4,7 +4,17 @@
 	<insert id="insertSpace" parameterType="space">
 		insert
 			into space
-			values(space_seq.nextval,#{spaceName},#{spacePurPose},#{mainFacility},#{mainProduct},#{maxPeople},#{price},#{filename},#{filepath}
+			values(space_seq.nextval,#{spaceName},#{spacePurpose},#{mainFacility},#{mainProduct},#{maxPeople},#{price},'N')
+	</insert>
+	<select id="selectSpaceNo" resultType="_int">
+		select
+			max(space_no)
+			from space
+	</select>
+	<insert id="insertFile" parameterType="fv">
+		insert
+			into space_file 
+			values(space_file_seq.nextval,#{spaceNo},#{filename},#{filepath},'N')
 	</insert>
 	<select id="selectAllSpace" resultType="space">
 		select
@@ -13,9 +23,7 @@
 			main_facility as mainFacility,
 			main_product as mainProduct,
 			max_people as maxPeople,
-			price,
-			filename,
-			filepath
+			price
 		from space	
 	</select>
 </mapper>
