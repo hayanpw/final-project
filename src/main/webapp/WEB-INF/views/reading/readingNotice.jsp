@@ -10,11 +10,12 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+	<br><br><br>
 	<div class="container">
 		<div class="main-title">
 			<h1>열람실 안내</h1>
 		</div>
-		<br>
+		<br><br><br>
 		<div class="single-title">
 			<h3><span>대</span>상</h3>
 			<ul>
@@ -52,7 +53,7 @@
 				<li>비품 대여자는 비품반납 후 보증금 수령</li>
 			</ul>
 		</div>
-		<br><br>
+		<br><br><br><br>
 		<div class="readingList-form">
 			<form action="/readingList.do">
 				<fieldset>

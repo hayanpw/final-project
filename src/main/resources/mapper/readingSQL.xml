@@ -11,8 +11,8 @@
 	<select id="selectOneBlackList" parameterType="string" resultType="black">
 		select
 			black_no as blackNo,
-			to_char(black_start,'yymmdd hh24:mi:ss') as blackStart,
-			to_char(black_end,'yymmdd hh24:mi:ss') as blackEnd,
+			to_char(black_start,'yy/mm/dd hh24:mi:ss') as blackStart,
+			to_char(black_end,'yy/mm/dd hh24:mi:ss') as blackEnd,
 			black_id as blackId
 		from reading_black where black_id=#{memberId}
 	</select>
