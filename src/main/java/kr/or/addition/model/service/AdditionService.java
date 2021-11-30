@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import kr.or.addition.model.dao.AdditionDao;
 import kr.or.addition.model.vo.Board;
 import kr.or.addition.model.vo.BoardPageData;
+import kr.or.addition.model.vo.FileVO;
 
 @Service
 public class AdditionService {
@@ -96,4 +97,5 @@ public class AdditionService {
 		BoardPageData bpd = new BoardPageData(list, pageNavi, start);
 		return bpd;
 	}
+
 }

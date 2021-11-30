@@ -1,5 +1,7 @@
 package kr.or.addition.model.vo;
 
+import java.util.ArrayList;
+
 import lombok.Data;
 
 @Data
@@ -11,8 +13,7 @@ public class Board {
 	private String boardContent;
 	private int readCount;
 	private String regDate;
-	private String filename;
-	private String filepath;
 	private int boardType;
 	private int bnum;
+	private ArrayList<FileVO> list;
 }
