@@ -24,6 +24,7 @@
 			main_product as mainProduct,
 			max_people as maxPeople,
 			price
-		from space	
+		from space
+		where del_yn like 'N' 	
 	</select>
 </mapper>

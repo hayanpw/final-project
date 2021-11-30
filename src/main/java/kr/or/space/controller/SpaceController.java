@@ -31,7 +31,9 @@ public class SpaceController {
 
 	// 공간메인 이동
 	@RequestMapping(value = "/spaceMain.do")
-	public String spaceMain() {
+	public String spaceMain(Model model) {
+		ArrayList<Space> list = service.selectAllSpace();
+		model.addAttribute("list", list);
 		return "space/spaceMain";
 	}
 
@@ -47,6 +49,11 @@ public class SpaceController {
 	@RequestMapping(value = "/spaceInsertFrm.do")
 	public String spaceInsertFrm() {
 		return "space/spaceInsert";
+	}
+	// 신청 현황 페이지로 이동
+	@RequestMapping(value = "/spaceRes.do")
+	public String spaceRes() {
+		return "space/spaceRes";
 	}
 
 	// 공간 등록
@@ -114,7 +121,7 @@ public class SpaceController {
 			}
 		}
 		int result = service.insertSpace(s, list);
-		if (result <0 ) {
+		if (result == -1 ) {
 			model.addAttribute("msg", "등록실패");
 		} else {
 			model.addAttribute("msg", "등록성공");
