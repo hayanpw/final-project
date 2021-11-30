@@ -83,7 +83,7 @@ public class AdditionController {
 					//MultipartFile을 이용해서 파일업로드 작업을 수행해야함
 					//파일을 업로드할 경로 설정
 					//request....getRealPath > /webapp/폴더
-					String savePath =request.getSession().getServletContext().getRealPath("/resources/upload/addition/");
+					String savePath =request.getSession().getServletContext().getRealPath("/resources/additionImage/");
 					//반복문을 이용해서 파일 처리(파일 업로드)
 					for(MultipartFile file:files) {
 						//유저가 올린 파일명이 이미 업로드폴더에 존재하면 덮어쓰기가 되어 이전파일이 삭제
