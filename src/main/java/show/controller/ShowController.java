@@ -42,7 +42,7 @@ public class ShowController {
 		return "show/insertShowFrm";
 	}
 	
-	@RequestMapping(value = "insertShow.do")
+	@RequestMapping(value = "/insertShow.do")
 	public String insertShow(Show s, MultipartFile upfile, HttpServletRequest request, Model model) {
 		if(upfile != null) {
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/showImage/upload/");
@@ -51,13 +51,13 @@ public class ShowController {
 			String onlyFilename = filename.substring(0, filename.indexOf("."));
 			String extention = filename.substring(filename.indexOf("."));
 			
-			String filepath = null;
+			String filepath = "/resources/showImage/upload/";
 			int count = 0;
 			while(true) {
 				if(count==0) {
-					filepath = onlyFilename + extention;
+					filepath += onlyFilename + extention;
 				}else {
-					filepath = onlyFilename+"_"+count+extention;
+					filepath += onlyFilename+"_"+count+extention;
 				}
 				File checkFile = new File(savePath+filepath);
 				if(!checkFile.exists()) {
@@ -82,16 +82,13 @@ public class ShowController {
 			s.setFilepath(filepath);
 		}
 		
-		System.out.println(s);
-		
-//		int result = service.insertShow(s);
-//		if(result>0) {
-//			model.addAttribute("msg", "공연 등록 성공");			
-//		}else {
-//			model.addAttribute("msg", "공연 등록 실패");
-//		}
-//		model.addAttribute("loc", "/showList.do");
-//		return "common/msg";
-		return "/showList.do";
+		int result = service.insertShow(s);
+		if(result>0) {
+			model.addAttribute("msg", "공연 등록 성공");			
+		}else {
+			model.addAttribute("msg", "공연 등록 실패");
+		}
+		model.addAttribute("loc", "/showList.do");
+		return "common/msg";
 	}
 }

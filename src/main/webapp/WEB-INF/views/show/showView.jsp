@@ -32,7 +32,7 @@
             </div>
             <div class="summaryBottom">
                 <div class="poster">
-                    <!-- <img src="/image/지하.gif" class="poster"> -->
+                    <img src="${s.filepath}" class="poster">
                 </div>
                 <div class="info">
                     <table>
