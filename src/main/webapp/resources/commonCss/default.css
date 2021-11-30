@@ -3,7 +3,10 @@ body{
     flex-direction: column;
     min-height: 200vh;
 }
-
+.container{
+    width: 1170px;
+    margin: 0 auto;
+}
 .header-title{
     background-color: #563D39;
 }
@@ -31,4 +34,72 @@ body{
 #footer{
     background-color: #563D39;
     height: 500px;
+}
+
+/*navi 진행중*/
+
+.navi{
+    position: relative;
+}
+.navi ul{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+}
+.navi>ul{
+    width: 100%;
+    margin: 0 auto;
+    background-color: #fff;
+}
+.navi ul>li{
+    float: left;
+    width: 150px;
+    height: 50px;
+}
+.navi ul>li>a{
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    line-height: 50px;            
+    text-decoration: none;
+}
+.navi>ul>li>a{
+    color : #563D39;  
+}
+/* .navi>ul>li:hover>a{
+    font-weight: 900;
+    border-bottom: solid 2px #563D39;
+} */
+.sub>li>a{
+    color:#A79078;
+}
+.navi ul:first-child{
+    display:inline-block; 
+}
+.navi ul>li>a:first-child:after{
+    display:block;
+    position: absolute;
+    content: '';
+    border-bottom : solid 3px #563D39;
+    width: 50px;
+    transform: scaleX(0);  
+    transition: transform 250ms ease-in-out;
+}
+.navi ul>li>a:first-child:hover:after { 
+    transform: scaleX(1); 
+}
+.navi>ul>li:hover>.sub{
+    display: block;
+}
+.sub>li>a:hover{
+    color:#563D39;
+    font-weight: 900;
+}
+.sub{
+    display: none;
+    position: absolute;
+    left:0;
+    width: 800px;
 }

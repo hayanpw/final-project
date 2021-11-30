@@ -24,12 +24,13 @@ public class MemberController {
 	public String main() {
 		return "common/main";
 	}
-	
+	@RequestMapping(value="/loginFrm.do")
+	public String loginFrm() {
+		return "member/login";
+	}
 	@RequestMapping(value="/login.do")
 	public String login(Member member, HttpSession session, Model model ) {
-		System.out.println("로그인 비즈니스 로직 수행전");
 		Member m = service.selectOneMember(member);
-		System.out.println("로그인 비즈니스 로직 수행후");
 		if(m != null) {
 			session.setAttribute("m", m);
 			model.addAttribute("msg","로그인성공");
