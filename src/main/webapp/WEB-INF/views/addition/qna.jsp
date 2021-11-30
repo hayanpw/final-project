@@ -18,7 +18,7 @@
 			<c:forEach	items="${list }" var="b" varStatus="i">
 			<tr>
 				<td>${b.bnum }</td>
-				<td><a href="/boardView.do?boardNo=${b.boardNo}">${b.boardTitle }</a></td>
+				<td><a href="/boardView.do?boardType=2&boardNo=${b.boardNo}">${b.boardTitle }</a></td>
 				<td>${b.boardWriter }</td>
 				<td>${b.regDate }</td>
 				<td>아직</td>

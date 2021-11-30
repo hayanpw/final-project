@@ -20,6 +20,10 @@
         <h3><span class="line">수</span>업명</h3>
         <input type="text" class="form-control" id="academyTitle" placeholder="수업명을 입력해주세요" name="academyTitle">
       </div>
+       <div class="form-group">
+        <h3><span class="line">수</span>업 대표사진</h3>
+        <input type="file"  id="academyfile"  name="academyfile">
+      </div>
       <h3><span class="line">수</span>업 기간</h3>
       <div class="form-group col-sm-6">
         <h4>시작일</h4>

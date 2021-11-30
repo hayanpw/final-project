@@ -32,14 +32,20 @@ public class AdditionDao {
 
 
 	public int selectBoardNo() {
-		// TODO Auto-generated method stub
 		return sqlSession.selectOne("addition.getBoardNo");
 	}
 
 
 	public int insertFile(FileVO fv) {
-		// TODO Auto-generated method stub
 		return sqlSession.insert("addition.insertFile",fv);
+	}
+
+	public Board selectOneBoard(int boardNo) {
+		return sqlSession.selectOne("addition.selectOneBoard",boardNo);
+	}
+
+	public int boardDelete(int boardNo) {
+		return sqlSession.delete("addition.boardDelete",boardNo);
 	}
 
 

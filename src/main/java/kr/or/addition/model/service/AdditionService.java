@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.addition.model.dao.AdditionDao;
 import kr.or.addition.model.vo.Board;
@@ -98,6 +99,7 @@ public class AdditionService {
 		return bpd;
 	}
 
+	@Transactional
 	public int insertBoard(Board b, ArrayList<FileVO> list) {
 		int result1 = dao.insertBoard(b);
 		int result = 0;
@@ -112,5 +114,17 @@ public class AdditionService {
 		}
 		return result;
 	}
+
+	public Board selectOneBoard(int boardNo) {
+		Board b = dao.selectOneBoard(boardNo);
+		return b;
+	}
+	
+	@Transactional
+	public int boardDelete(int boardNo) {
+		int result = dao.boardDelete(boardNo);
+		return result;
+	}
+
 
 }

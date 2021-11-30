@@ -28,6 +28,14 @@ public class MemberController {
 	public String loginFrm() {
 		return "member/login";
 	}
+	@RequestMapping(value="/mypage.do")
+	public String mypage() {
+		return "common/mypage";
+	}
+	@RequestMapping(value="/adminpage.do")
+	public String adminpage() {
+		return "common/adminpage";
+	}
 	@RequestMapping(value="/login.do")
 	public String login(Member member, HttpSession session, Model model ) {
 		Member m = service.selectOneMember(member);
