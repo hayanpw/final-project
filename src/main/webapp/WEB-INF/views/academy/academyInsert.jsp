@@ -5,27 +5,32 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<!-- include summernote css/js -->
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<link href="resources/hansolCss/hansol_default.css" rel="stylesheet">
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 	<div class="container">
   		 <h2>수업 등록하기</h2>
     <form action="/action_page.php">
       <div class="form-group">
-        <label for="academyTitle">수업명</label>
+        <h3><span class="line">수</span>업명</h3>
         <input type="text" class="form-control" id="academyTitle" placeholder="수업명을 입력해주세요" name="academyTitle">
       </div>
-      <label>수업 기간</label><br>
+      <h3><span class="line">수</span>업 기간</h3>
       <div class="form-group col-sm-6">
-        <label>시작일</label>
+        <h4>시작일</h4>
         <input type="date" class="form-control" id="startDate" name="startDate">
       </div>
       <div class="form-group col-sm-6">
-        <label>종료일</label>
+        <h4>종료일</h4>
         <input type="date" class="form-control" id="endDate" name="endDate">
       </div>
       <div class="form-group">
-        <label for="sel1">카테고리</label>
+        <h3><span class="line">카</span>테고리</h3>
         <select class="form-control" id="category" name="category">
           <option>음악</option>
           <option>미술</option>
@@ -33,7 +38,7 @@
           <option>dhkdhkhdkhdk</option>
         </select>
       </div>
-      <label>장소</label>
+      <h3><span class="line">장</span>소</h3>
        <div class="checkbox">
                 <label class="radio-inline"><input type="radio" name="place" checked>A</label>
                 <label class="radio-inline"><input type="radio" name="place" >B</label>
@@ -41,24 +46,35 @@
                 <label class="radio-inline"><input type="radio" name="place" >D</label>
           </div>
          <div class="form-group">
-          <label for="academyTeacher">담당 강사</label>
+          <h3><span class="line">담</span>당 강사</h3>
           <input type="text" class="form-control" id="academyTeacher" placeholder="담당 강사이름을 입력해주세요" name="academyTeacher">
         </div>
       <div class="form-group">
-        <label for="academyContent">수업 내용</label>
+        <h3><span class="line">수</span>업 내용</h3>
         <input type="text" class="form-control" id="academyContent" placeholder="수업내용을 입력해주세요" name="academyContent">
       </div>
       <div class="form-group">
-        <label for="academyPrice">수업료</label>
+        <h3><span class="line">수</span>업료</h3>
         <input type="text" class="form-control" id="academyPrice" placeholder="수업료를 입력해주세요" name="academyPrice">
       </div>
       <div class="form-group">
-        <label for="exhibitionTitle">상세 설명</label>
-        <textarea type="text" class="form-control" rows="7" id="exhibitionDetail" placeholder="내용을 입력해주세요" name="exhibitionDetail"></textarea>
+        <h3><span class="line">상</span>세 설명</h3>
+         <textarea id="summernote" class="form-control" name="academyDetail"></textarea>
       </div>
       <input type="submit" class="btn btn-info" style="float:right" value="수업 등록하기">
     </form>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
+<script>
+$('#summernote').summernote({
+	  height: 300,                 // set editor height
+	  minHeight: null,             // set minimum height of editor
+	  maxHeight: null,             // set maximum height of editor
+	  focus: true                  // set focus to editable area after initializing summernote
+	});
+$(document).ready(function() {
+	  $('#summernote').summernote();
+	});
+</script>
 </html>

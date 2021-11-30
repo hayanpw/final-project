@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.or.addition.model.vo.Board;
+import kr.or.addition.model.vo.FileVO;
 
 @Repository
 public class AdditionDao {
@@ -23,4 +24,23 @@ public class AdditionDao {
 	public int totalCount(HashMap<String, Object> map) {
 		return sqlSession.selectOne("addition.totalCount",map);
 	}
+
+	public int insertBoard(Board b) {
+		
+		return sqlSession.insert("addition.insertBoard",b);
+	}
+
+
+	public int selectBoardNo() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("addition.getBoardNo");
+	}
+
+
+	public int insertFile(FileVO fv) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("addition.insertFile",fv);
+	}
+
+
 }

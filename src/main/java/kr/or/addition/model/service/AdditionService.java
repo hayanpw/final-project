@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import kr.or.addition.model.dao.AdditionDao;
 import kr.or.addition.model.vo.Board;
 import kr.or.addition.model.vo.BoardPageData;
+import kr.or.addition.model.vo.FileVO;
 
 @Service
 public class AdditionService {
@@ -96,4 +97,20 @@ public class AdditionService {
 		BoardPageData bpd = new BoardPageData(list, pageNavi, start);
 		return bpd;
 	}
+
+	public int insertBoard(Board b, ArrayList<FileVO> list) {
+		int result1 = dao.insertBoard(b);
+		int result = 0;
+		if(result1>0) {
+			int boardNo = b.getBoardNo();
+			for(FileVO fv: list) {
+				fv.setBoardNo(boardNo);
+				result += dao.insertFile(fv);
+			}
+		}else {
+			return -1;
+		}
+		return result;
+	}
+
 }
