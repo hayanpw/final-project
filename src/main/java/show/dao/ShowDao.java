@@ -30,4 +30,8 @@ public class ShowDao {
 	public int insertShow(Show s) {
 		return sqlSession.insert("show.insertShow", s);
 	}
+
+	public int deleteShow(int showNo) {
+		return sqlSession.delete("show.deleteShow", showNo);
+	}
 }

@@ -69,8 +69,8 @@
         </div>
         <div class="controllBox">
         	<%-- <c:if test="${sessionScope.m.memberLevel == 0 }"> --%>
-	            <a href="/updateShow.do" class="btn btn-primary">수정</a>
-	            <a href="/deleteShow.do" class="btn btn-primary">삭제</a>        	
+	            <a href="/updateShowFrm.do?showNo=${s.showNo}" class="btn btn-primary">수정</a>
+	            <a href="/deleteShow.do?showNo=${s.showNo}" class="btn btn-primary">삭제</a>
         	<%-- </c:if> --%>
         </div>
         <div class="infoWrapper">

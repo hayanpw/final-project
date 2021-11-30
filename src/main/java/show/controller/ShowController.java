@@ -91,4 +91,24 @@ public class ShowController {
 		model.addAttribute("loc", "/showList.do");
 		return "common/msg";
 	}
+	
+	@RequestMapping(value = "/updateShowFrm.do")
+	public String updateShow(Show show, Model model) {
+		System.out.println(show.getShowNo());
+//		model.addAttribute("s",show);
+//		return "show/showUpdateFrm";
+		return "redirect:/showList.do";
+	}
+	
+	@RequestMapping(value = "/deleteShow.do")
+	public String deleteShow(int showNo, Model model) {
+		int result = service.deleteShow(showNo);
+		if(result>0) {
+			model.addAttribute("msg", "삭제 성공");			
+		}else {
+			model.addAttribute("msg", "삭제 실패");
+		}
+		model.addAttribute("loc", "/showList.do");
+		return "common/msg";
+	}
 }
