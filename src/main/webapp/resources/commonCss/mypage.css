@@ -1,0 +1,46 @@
+.mypage-nav{
+    width: 1170px;
+    margin: 0 auto;
+    margin-top: 100px;
+}
+.mypage-navi{
+    overflow: hidden;
+}
+.mypage-navi>div{
+    float: left /*세로로된 div를 가로로 바꿔줌*/
+}
+.mypage-navi>div>a{ /*a 태그에 크기를 줌*/
+    height: 90px;
+    width: calc(1170px/7); /*calc 산술식*/
+    display: block; /*inline속성이라 block으로 바꿔줌  여러요소를쓰기위함*/
+    text-align : center; /*글씨 가운데정렬*/
+    line-height: 90px; /*상 하로 가운데*/
+    text-decoration : none; /*밑줄 제거*/
+    color: #BDB19A;
+    background-color: #fff;
+    border: 2px solid #BDB19A; /*선넣어주기*/
+    box-sizing: border-box; /*메뉴가 짤리지않게*/
+}
+.mypage-navi>div>a:hover{
+    font-weight: 900;
+    color : #BDB19A;
+}
+.mypage-navi>div:first-child>a{
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    
+}
+.mypage-navi>div:last-child>a{
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+.mypage-title{
+    margin: 100px 0 50px 100px;
+    font-size: 28px;
+    font-weight: 900;
+    color : #BDB19A;
+}
+.mypage-container{
+    width: 1070px;
+    margin: 0 auto;
+}
