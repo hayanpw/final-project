@@ -25,11 +25,11 @@
 				<a href="/loginFrm.do">Sign in <span>></span></a>
 			</c:when>
 			<c:when test="${not empty sessionScope.m && sessionScope.m.memberLevel == 0}">
-			    <a href="#">My Page[관리] <span>></span></a>
+			    <a href="/adminpage.do">My Page[관리] <span>></span></a>
 			    <a href="/logout.do">로그아웃</a>
 			</c:when>
 			<c:when test="${not empty sessionScope.m && sessionScope.m.memberLevel == 1}">
-			    <a href="#">My Page[일반] <span>></span></a>
+			    <a href="/mypage.do">My Page[일반] <span>></span></a>
 			    <a href="/logout.do"> 로그아웃</a>
 			</c:when>
 		</c:choose>
