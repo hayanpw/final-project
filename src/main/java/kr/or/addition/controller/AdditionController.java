@@ -179,4 +179,14 @@ public class AdditionController {
 		model.addAttribute("loc","/additionNotice.do?boardType=1&reqPage=1");
 		return "common/msg"; 
 	}
+	//오시는길
+	@RequestMapping(value="/additionGuide.do")
+	public String additionGuide() {
+		return "addition/guide";
+	}
+	//할인 및 이벤트
+	@RequestMapping(value = "/discount.do")
+	public String discount() {
+		return "addition/discount";
+	}
 }

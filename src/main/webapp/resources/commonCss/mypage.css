@@ -5,6 +5,7 @@
 }
 .mypage-navi{
     overflow: hidden;
+        margin: 0 80px;
 }
 .mypage-navi>div{
     float: left /*세로로된 div를 가로로 바꿔줌*/
