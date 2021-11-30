@@ -37,6 +37,11 @@
 		<beans:property name="password" value="1234"/>
 	</beans:bean>
 	
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<beans:property name="maxUploadSize" value="10485760"/>
+	</beans:bean>
+	
+	
 	<!-- Mybatis사용 객체 생성 -->
 	<beans:bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<beans:property name="dataSource" ref="dataSource"/>
@@ -76,4 +81,5 @@
 	<context:component-scan base-package="kr.or.resume"/>
 	<context:component-scan base-package="kr.or.reading"/>
 	<context:component-scan base-package="kr.or.academy"/>
+	
 </beans:beans>
