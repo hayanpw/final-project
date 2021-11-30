@@ -51,13 +51,13 @@ public class ShowController {
 			String onlyFilename = filename.substring(0, filename.indexOf("."));
 			String extention = filename.substring(filename.indexOf("."));
 			
-			String filepath = null;
+			String filepath = "/resources/showImage/upload/";
 			int count = 0;
 			while(true) {
 				if(count==0) {
-					filepath = onlyFilename + extention;
+					filepath += onlyFilename + extention;
 				}else {
-					filepath = onlyFilename+"_"+count+extention;
+					filepath += onlyFilename+"_"+count+extention;
 				}
 				File checkFile = new File(savePath+filepath);
 				if(!checkFile.exists()) {
@@ -81,7 +81,6 @@ public class ShowController {
 			}
 			s.setFilepath(filepath);
 		}
-		
 		
 		int result = service.insertShow(s);
 		if(result>0) {
