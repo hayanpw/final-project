@@ -25,4 +25,22 @@ public class AdditionDao {
 		return sqlSession.selectOne("addition.totalCount",map);
 	}
 
+	public int insertBoard(Board b) {
+		
+		return sqlSession.insert("addition.insertBoard",b);
+	}
+
+
+	public int selectBoardNo() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("addition.getBoardNo");
+	}
+
+
+	public int insertFile(FileVO fv) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("addition.insertFile",fv);
+	}
+
+
 }

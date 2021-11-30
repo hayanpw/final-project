@@ -26,7 +26,7 @@
 			</c:forEach>
 		</table>
 		<div id="pageNavi">${pageNavi }</div>
-		<button><a href="/boardWriter.do">글작성</a></button>
+		<button><a href="/boardWriteFrm.do?boardType=2">글작성</a></button>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>

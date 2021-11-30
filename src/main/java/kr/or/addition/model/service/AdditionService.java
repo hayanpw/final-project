@@ -98,4 +98,19 @@ public class AdditionService {
 		return bpd;
 	}
 
+	public int insertBoard(Board b, ArrayList<FileVO> list) {
+		int result1 = dao.insertBoard(b);
+		int result = 0;
+		if(result1>0) {
+			int boardNo = b.getBoardNo();
+			for(FileVO fv: list) {
+				fv.setBoardNo(boardNo);
+				result += dao.insertFile(fv);
+			}
+		}else {
+			return -1;
+		}
+		return result;
+	}
+
 }
