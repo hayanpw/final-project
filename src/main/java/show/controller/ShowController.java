@@ -42,7 +42,7 @@ public class ShowController {
 		return "show/insertShowFrm";
 	}
 	
-	@RequestMapping(value = "insertShow.do")
+	@RequestMapping(value = "/insertShow.do")
 	public String insertShow(Show s, MultipartFile upfile, HttpServletRequest request, Model model) {
 		if(upfile != null) {
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/showImage/upload/");
@@ -82,16 +82,14 @@ public class ShowController {
 			s.setFilepath(filepath);
 		}
 		
-		System.out.println(s);
 		
-//		int result = service.insertShow(s);
-//		if(result>0) {
-//			model.addAttribute("msg", "공연 등록 성공");			
-//		}else {
-//			model.addAttribute("msg", "공연 등록 실패");
-//		}
-//		model.addAttribute("loc", "/showList.do");
-//		return "common/msg";
-		return "/showList.do";
+		int result = service.insertShow(s);
+		if(result>0) {
+			model.addAttribute("msg", "공연 등록 성공");			
+		}else {
+			model.addAttribute("msg", "공연 등록 실패");
+		}
+		model.addAttribute("loc", "/showList.do");
+		return "common/msg";
 	}
 }
