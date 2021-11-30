@@ -7,14 +7,35 @@
 <meta charset="UTF-8">
 <title>열람실 예약</title>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+	<link rel="stylesheet" href="/resources/jquery-ui/jquery-ui-big.css">
+    <link href="resources/readingCss/reading_list.css" rel="stylesheet">
+</head>
+<body>
+	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 	<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>	
 	<script type="text/javascript" src="/resources/jquery-ui/jquery-ui.min.js"></script>
-	<link rel="stylesheet" href="/resources/jquery-ui/jquery-ui-big.css">
-</head>
-<body>
-	<!-- 캘린더 코드 -->
-	<div id="datepicker"></div>
+	
+	<br><br><br>
+	<div class="container">
+		<h1>열람실 예약</h1><br><br>
+		<div class="container-left" >
+			<!-- 캘린더 코드 -->
+			<div id="datepicker"></div>
+			<div class="container-right">
+				<form action="" method="post">
+				    <input type="hidden" name="date">
+				    <input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
+				    <h2 name="showdate"></h2>
+				    <h2 name="showseat"></h2>
+				    <!-- 총좌석-카운트 -->
+					<input type="submit" class="btn btn-success btn-lg" value="좌석 선택하기" style="background-color: #563D39; border-color: #563D39">
+				</form>
+			</div>
+		</div>
+		
+		
+	</div>
     <script>
 	    $(function() {
 	        var today = new Date(); //오늘부터
@@ -37,7 +58,18 @@
 	   	//월요일 휴무 코드
 	    function noMondays(date) {
 	    	return [date.getDay() != 1, ''];
-	    }
+	    };
+	    
+	    $("#datepicker").change(function() {
+			selectDate = $(this).val();
+			$(".slide").fadeOut();
+			$("input[name=date]").val(selectDate);
+			var month = selectDate.substring(5,7);
+			var day = selectDate.substring(8,10);
+			$("h2[name=showdate]").html(month+"월 "+day+"일");
+			$("h2[name=showseat]").html("남은좌석 : "+ "석");
+        });
     </script>
+	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>

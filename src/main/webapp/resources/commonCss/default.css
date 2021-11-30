@@ -8,7 +8,7 @@ body{
     margin: 0 auto;
 }
 .header-title{
-    background-color: #563D39;
+    background-color: #fff;
 }
 .h-left{
     width: 20%;
@@ -18,9 +18,10 @@ body{
 .h-logo{
     width: 60%;
     text-align: center;
-    background-color: #BDB19A;
+    background-color: #fff;
     float: left;
     height: 90px;
+    border-bottom: 2px solid #BDB19A;
 }
 .h-right{
     width: 20%;
@@ -44,12 +45,12 @@ body{
 .navi ul{
     list-style-type: none;
     padding: 0;
-    margin: 0;
-    overflow: hidden;
+    margin: 0 auto;
+    height: 50px;
+    width: 900px;
 }
 .navi>ul{
-    width: 100%;
-    margin: 0 auto;
+    position: relative;
     background-color: #fff;
 }
 .navi ul>li{
@@ -75,9 +76,6 @@ body{
 .sub>li>a{
     color:#A79078;
 }
-.navi ul:first-child{
-    display:inline-block; 
-}
 .navi ul>li>a:first-child:after{
     display:block;
     position: absolute;
@@ -101,5 +99,5 @@ body{
     display: none;
     position: absolute;
     left:0;
-    width: 800px;
+    top:50px;
 }

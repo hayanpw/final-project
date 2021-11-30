@@ -16,4 +16,8 @@ public class ExhibitionController {
 		return "exhibition/exhibitionInsert";
 	}
 	
+	@RequestMapping(value="/exhibitionView.do")
+	public String exhibitionView() {
+		return "exhibition/exhibitionView";
+	}
 }
