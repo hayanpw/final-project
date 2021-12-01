@@ -20,9 +20,53 @@
 			Musée d'art
         </div>
 		<div class="h-right">
-			<a href=""> Sign in <span>></span></a>
+		<c:choose>
+	    	<c:when test="${empty sessionScope.m }">
+				<a href="/loginFrm.do">Sign in <span>></span></a>
+			</c:when>
+			<c:when test="${not empty sessionScope.m && sessionScope.m.memberLevel == 0}">
+			    <a href="/adminpage.do">My Page[관리] <span>></span></a>
+			    <a href="/logout.do">로그아웃</a>
+			</c:when>
+			<c:when test="${not empty sessionScope.m && sessionScope.m.memberLevel == 1}">
+			    <a href="/mypage.do">My Page[일반] <span>></span></a>
+			    <a href="/logout.do"> 로그아웃</a>
+			</c:when>
+		</c:choose>
 		</div>   
 	</div>
 	<nav class="header-nav">
-			<h1>여기메뉴일거에요하하</h1>
+           <div class="navi">
+               <ul>
+                   <li><a href="#">공연 · 예매</a></li>
+                   <li><a href="#">공간 · 대관</a></li>
+                   <li><a href="#">전시</a></li>
+                   <li><a href="#">열람실</a></li>
+                   <li>
+                       <a href="#">아카데미</a>
+                       <ul class="sub">
+                           <li><a href="#">수강 신청</a></li>
+                           <li><a href="#">강사 모집</a></li>
+	                     	<c:choose>
+						    	<c:when test="${not empty sessionScope.m && sessionScope.m.memberLevel == 1 }">
+									<li><a href="#">수업 관리</a></li>
+								</c:when>
+								<c:when test="${not empty sessionScope.m && sessionScope.m.memberLevel == 2 }">
+								    <li><a href="#">학생 관리</a></li>
+								</c:when>
+							</c:choose>
+                        </ul>
+                   </li>
+                   <li>
+                       <a href="#">부가서비스</a>
+                       <ul class="sub">
+                           <li><a href="#">공지사항</a></li>
+                           <li><a href="#">소통게시판</a></li>
+                           <li><a href="#">1:1문의</a></li>
+                           <li><a href="#">시설안내 · 오시는 길</a></li>
+                           <li><a href="#">이벤트</a></li>
+                       </ul>
+                   </li>
+               </ul>
+           </div>
 	</nav>

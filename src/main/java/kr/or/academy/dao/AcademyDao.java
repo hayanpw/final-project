@@ -1,6 +1,7 @@
 package kr.or.academy.dao;
 
-import org.apache.ibatis.session.SqlSession;
+
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -8,5 +9,5 @@ import org.springframework.stereotype.Repository;
 public class AcademyDao {
 
 	@Autowired
-	private SqlSession sqlSession;
+	private SqlSessionTemplate sqlSession;
 }

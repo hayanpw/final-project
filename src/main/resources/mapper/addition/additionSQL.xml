@@ -8,9 +8,7 @@
 			board_title as boardTitle,
 			board_writer as boardWriter,
 			readcount as readCount,
-			reg_date as regDate,
-			filename,
-			filepath
+			reg_date as regDate
 		from 
 		(select rownum as rnum,n.* from 
 		(select*
@@ -20,4 +18,39 @@
 	<select id="totalCount" parameterType="map" resultType="_int">
 		select count(*) from board where boardtype=#{boardType}
 	</select>
+	<insert id="insertBoard" parameterType="board">
+		insert into board values (board_seq.nextval,#{boardWriter},#{boardTitle},#{boardContent},default,to_char(sysdate,'yyyy-mm-dd'),#{boardType})
+		<selectKey  resultType="_int" order="AFTER" keyProperty="boardNo">
+			select max(board_no) from board
+		</selectKey>
+	</insert>
+	<select id="getBoardNo" resultType="_int">
+		select max(board_no) from board
+	</select>
+	<insert id="insertFile" parameterType="kr.or.addition.model.vo.FileVO">
+		insert into file_tbl values(file_seq.nextval,#{boardNo},#{filename},#{filepath})
+	</insert>
+	<select id="selectOneBoard" parameterType="_int" resultMap="board">
+		select*from board where board_no=#{boardNo}
+	</select>
+	<select id="selectFilelist" parameterType="_int" resultType="kr.or.addition.model.vo.FileVO">
+		select	
+			file_no as fileNo,
+			board_no as boardNo,
+			filename,
+			filepath
+		from file_tbl where board_no = #{boardNo}	
+	</select>
+	<resultMap type="board" id="board">
+		<result column="board_no" property="boardNo"/>
+		<result column="board_title" property="boardTitle"/>
+		<result column="board_content" property="boardContent"/>
+		<result column="board_writer" property="boardWriter"/>
+		<result column="readcount" property="readCount"/>
+		<result column="reg_date" property="regDate"/>
+		<collection property="list" column="board_no" javaType="java.util.ArrayList" ofType="kr.or.addition.model.vo.FileVO" select="selectFilelist"></collection>
+	</resultMap>
+	<delete id="boardDelete" parameterType="_int">
+		delete from board where board_no=#{boardNo}
+	</delete>
 </mapper>

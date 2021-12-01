@@ -12,13 +12,14 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="container">
 		<form action="/spaceInsert.do" method="post" enctype="multipart/form-data">
-			<h2>공간 등록</h2>
+			<h3>공간 등록</h3>
 			<div class="space-img">
-						   <img style="width: 250px; height: 250px" id="preview-image" src="https://dummyimage.com/500x500/ffffff/000000.png&text=preview+image">
- 					   <input style="display: block;" type="file" id="input-image" name="upfile">
+				<img style="width: 400px; height: 250px">
+				<input style="display: block;" type="file" id="input-image"
+					name="files" multiple>
 			</div>
 			<div class="space-info">
-				<table class="table-condensed">
+				<table class="table-condensed info-table">
 					<tr>
 						<th>이름</th>
 						<td><input type="text" name="spaceName"></td>
@@ -45,8 +46,10 @@
 					</tr>
 				</table>
 			</div>
+			<div id="insertBtn">
+				<button class="btn btn-default" type="submit">등록하기</button>
+			</div>
 		</form>
-		<button class="btn btn-default" type="submit">등록하기</button>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>

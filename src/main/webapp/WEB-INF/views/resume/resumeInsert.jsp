@@ -5,50 +5,52 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<!-- include summernote css/js -->
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<link href="resources/hansolCss/hansol_default.css" rel="stylesheet">
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 	<div class="container">
-    <h2>공고 등록하기</h2>
-    <form action="/action_page.php">
+		<h2>강사 지원하기</h2>
+    <form action="/action_page.php" enctype="multipart/form-data">
       <div class="form-group">
-        <label for="resumeTitle">공고명</label>
-        <input type="text" class="form-control" id="resumeTitle" placeholder="공고명을 입력해주세요" name="resumeTitle">
+        <h3><span class="line">지</span>원하시는 공고</h3>
+        <input type="text" class="form-control" id="resumeTitle"  name="resumeTitle" value="자동으로 뽑아 올꺼" readonly>
       </div>
-      <label>공고 기간</label><br>
-      <div class="form-group col-sm-6">
-        <label>시작일</label>
-        <input type="date" class="form-control" id="startDate" name="startDate">
-      </div>
-      <div class="form-group col-sm-6">
-        <label>종료일</label>
-        <input type="date" class="form-control" id="endDate" name="endDate">
+      <h3><span class="line">관</span>람 연령</h3>
+      <div class="checkbox">
+          <label class="radio-inline"><input type="radio" name="gender" checked>남자</label>
+          <label class="radio-inline"><input type="radio" name="gender" >여자</label>
       </div>
       <div class="form-group">
-        <label for="resumecareer">경력 사항</label>
-        <input type="text" class="form-control" id="resumecareer" placeholder="경력사항을 입력해주세요" name="resumecareer">
+          <h3><span class="line">연</span>락받으실 연락처</h3>
+          <input type="text" class="form-control" id="resumePhone"  name="resumePhone">
       </div>
-      <label>성별</label>
-       <div class="checkbox">
-                <label class="radio-inline"><input type="radio" name="gender" checked>남자</label>
-                <label class="radio-inline"><input type="radio" name="gender" >여자</label>
-          </div>
-         <div class="form-group">
-          <label for="academyField">직종</label>
-          <input type="text" class="form-control" id="academyField" placeholder="직종을 입력해주세요" name="academyField">
-        </div>
-        <label>고용형태</label>
-       <div class="checkbox">
-                <label class="radio-inline"><input type="radio" name="employeeType" checked>정규직</label>
-                <label class="radio-inline"><input type="radio" name="employeeType" >계약직</label>
-       </div>
-      <div>
-        <label for="adcademyDetail">상세 설명</label>
-        <textarea type="text" class="form-control" rows="7" id="adcademyDetail" placeholder="내용을 입력해주세요" name="adcademyDetail"></textarea>
-      </div><br>
-      <input type="submit" class="btn btn-info" style="float:right" value="공고 등록하기">
+      <div class="form-group">
+        <h3><span class="line">이</span>력서 첨부</h3>
+        <input type="file"  id="resumefile"  name="resumefile">
+      </div>
+      <div class="form-group">
+        <h3><span class="line">간</span>단 자기소개</h3>
+        <textarea id="summernote" class="form-control" name="resumeDetail"></textarea>
+      </div>
+      <input type="submit" class="btn btn-info" style="float:right" value="지원 하기">
     </form>
-  </div>
+	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
+<script>
+$('#summernote').summernote({
+	  height: 300,                 // set editor height
+	  minHeight: null,             // set minimum height of editor
+	  maxHeight: null,             // set maximum height of editor
+	  focus: true                  // set focus to editable area after initializing summernote
+	});
+$(document).ready(function() {
+	  $('#summernote').summernote();
+	});
+</script>
 </html>

@@ -4,10 +4,8 @@
  	<select id="selectOneMember" parameterType="m" resultType="m">
  		select 
  			member_id as memberId,
- 			member_pw as memberPw,
- 			member_name as memberName,
- 			address,
- 			enroll_date as enrollDate
- 		from member where member_id=#{memberId} and member_pw=#{memberPw}
+ 			member_password as memberPassword,
+ 			member_level as memberLevel
+ 		from member where member_id=#{memberId} and member_password=#{memberPassword}
  	</select>
 </mapper>

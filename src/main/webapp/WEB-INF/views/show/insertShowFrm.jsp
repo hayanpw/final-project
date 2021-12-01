@@ -71,8 +71,13 @@
                 </tr>
                 <tr>
                     <th>공연 정보</th>
+<<<<<<< HEAD
                     <td colspan="3">
                     	<textarea id="summernote" class="form-control" name="showContent"></textarea>
+=======
+                    <td colspan="3" id="noteEditor">
+                    	<textarea type="text" id="summernote" class="form-control" name="showContent"></textarea>
+>>>>>>> branch 'master' of https://github.com/HitMi0212/finalProject-museedart.git
                     </td>
                 </tr>
                 <tr>

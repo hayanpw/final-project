@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,6 +28,32 @@
 		</div>
 		<div class="rental-price">
 			<h3 class="s-title">대관료 안내</h3>
+			<div>
+				<c:forEach items="${list }" var ="s">
+					<table class = "table table-condensed" id="s-table">
+					<tr>
+						<td rowspan="5" >${s.spaceName }</td>
+					</tr>
+					<tr>
+						<td>이름</td>
+						<td>${s.spaceName }</td>
+					</tr>
+					<tr>
+						<td>용도</td>
+						<td>${s.spacePurpose }</td>
+					</tr>
+					<tr>
+						<td>수용인원</td>
+						<td>${s.maxPeople }</td>
+					</tr>
+					<tr>
+						<td>가격</td>
+						<td>${s.price }</td>
+					</tr>
+				</table>
+				</c:forEach>
+				
+			</div>
 		</div>
 		<button class="btn btn-default" id="rentalBtn" onclick="location.href='/rentalSpace.do'">대관 신청하기</button>
 	</div>

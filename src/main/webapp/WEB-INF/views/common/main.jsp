@@ -8,8 +8,8 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
-	<div class="container">
-		<h1>페이지 컨테니어 작성</h1>
+	<div class="container" style="border: 2px solid #BDB19A;">
+		화이링~메인은멀었습니다 :D!
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
