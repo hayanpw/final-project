@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.space.model.dao.SpaceDao;
 import kr.or.space.model.vo.FileVO;
@@ -13,15 +14,15 @@ import kr.or.space.model.vo.Space;
 public class SpaceService {
 	@Autowired
 	private SpaceDao dao;
-
+	
+	@Transactional
 	//공간등록 + 파일 업로드
 	public int insertSpace(Space s, ArrayList<FileVO> list) {
 		int result1 = dao.insertSpace(s);
 		int result=0;
-		if(result>0) {
-			int spaceNo = dao.selectSpaceNo();
+		if(result1>0) {
 			for(FileVO fv : list) {
-				fv.setSpaceNo(spaceNo);
+				fv.setSpaceNo(s.getSpaceNo());
 				result += dao.insertFile(fv);
 			}
 		}else {
@@ -33,5 +34,10 @@ public class SpaceService {
 	public ArrayList<Space> selectAllSpace() {
 		ArrayList<Space> list = dao.selectAllSpace();
 		return list;
+	}
+
+	public ArrayList<FileVO> selectFile() {
+		ArrayList<FileVO> fileList = dao.selectFile();
+		return fileList;
 	}
 }

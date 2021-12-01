@@ -1,0 +1,13 @@
+.space-list{
+	border: 1px solid black;
+	margin: 10px;
+	width: 40%;
+	overflow: auto;
+}
+.space-list p{
+	margin : 10px;
+	border-bottom: 1px solid #BDB19A;
+}
+.space-list img{
+	margin-left:80px;
+}

@@ -5,6 +5,9 @@
 		insert
 			into space
 			values(space_seq.nextval,#{spaceName},#{spacePurpose},#{mainFacility},#{mainProduct},#{maxPeople},#{price},'N')
+			<selectKey resultType="_int" order="AFTER" keyProperty="spaceNo">
+				select max(space_no) from space
+			</selectKey>
 	</insert>
 	<select id="selectSpaceNo" resultType="_int">
 		select
@@ -18,6 +21,7 @@
 	</insert>
 	<select id="selectAllSpace" resultType="space">
 		select
+			space_no as spaceNo,
 			space_name as spaceName,
 			space_purpose as spacePurpose,
 			main_facility as mainFacility,
@@ -26,5 +30,14 @@
 			price
 		from space
 		where del_yn like 'N' 	
+	</select>
+	<select id="selectFile" resultType="fv">
+		select
+			space_no as spaceNo,
+			filename,
+			filepath,
+			thumbnail
+		from space_file	
+		where thumbnail like 'Y'
 	</select>
 </mapper>

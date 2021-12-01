@@ -3,7 +3,7 @@
 }
 .space-img>p{
 	margin : 10px;
-	font-size: 25px;
+	text-align: center;
 }
 .space-img img{
 	display : block;
@@ -11,9 +11,6 @@
 	width: 80%;
 	
 	}
-.container>div{
-	border: 1px solid blue;
-}
 .s-title{
 	border-bottom: 1px solid #563D39;
 }
@@ -28,6 +25,32 @@
 	display: block;
 	margin: auto;
 }
-#s-table tr td{
-	color: red;
+#s-table {
+	margin: 10px;
 }
+#s-table tr td:first-child{
+	width: 20%;
+	text-align: center;
+	border-right: 1px solid #BDB19A ;
+}
+#s-table tr td:last-child{
+	width: 50%;
+	text-align: center;
+}
+#s-table tr td{
+	border-bottom: 1px solid #BDB19A;
+}
+.info-img{
+	width: 300px;
+}
+.spaceRes{
+	float: right;
+}
+.spaceRes>a{
+	color: #563D39;
+}
+.spaceRes>a:hover{
+	font-weight : bold;
+	color: #563D39;
+}
+
