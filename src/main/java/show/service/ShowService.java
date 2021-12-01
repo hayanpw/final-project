@@ -33,4 +33,8 @@ public class ShowService {
 		return dao.deleteShow(showNo);
 	}
 
+	public int updateShow(Show s) {
+		return dao.updateShow(s);
+	}
+
 }
