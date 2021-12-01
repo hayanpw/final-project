@@ -31,33 +31,33 @@
 			<div class="spaceRes"><a href="/spaceRes.do">>신청하기</a></div>
 			<div>
 				<c:forEach items="${list }" var ="s">
-					<table   id="s-table">
-					<c:forEach items="${fList }" var="f">
-						<tr>
-							<th rowspan="5" >
-								<c:if test="${s.spaceNo } eq ${f.spaceNo }">
-									<img style='width: 300px' class="info-img" src="resources/spaceImage/upload/${f.filename }">
-								</c:if>
-							</th>
+					<div>
+						<table class="table table-bordered"  id="s-table">
+							<tr>
+								<td rowspan="5"><c:forEach items="${fList }" var="f">
+										<c:if test="${s.spaceNo eq f.spaceNo }">
+											<img  class="info-img" src="resources/spaceImage/upload/${f.filename }">
+										</c:if>
+									</c:forEach></td>
+							</tr>
+							<tr>
+							<td>이름</td>
+							<td>${s.spaceName }</td>
 						</tr>
-					</c:forEach>
-					<tr>
-						<td>이름</td>
-						<td>${s.spaceName }</td>
-					</tr>
-					<tr>
-						<td>용도</td>
-						<td>${s.spacePurpose }</td>
-					</tr>
-					<tr>
-						<td>수용인원</td>
-						<td>${s.maxPeople } 명</td>
-					</tr>
-					<tr>
-						<td>가격</td>
-						<td>${s.price } / 2시간</td>
-					</tr>
-				</table>
+						<tr>
+							<td>용도</td>
+							<td>${s.spacePurpose }</td>
+						</tr>
+						<tr>
+							<td>수용인원</td>
+							<td>${s.maxPeople } 명</td>
+						</tr>
+						<tr>
+							<td>가격</td>
+							<td>${s.price } / 2시간</td>
+						</tr>
+					</table>
+					</div>
 				</c:forEach>
 				
 			</div>

@@ -28,8 +28,12 @@
 #s-table {
 	margin: 10px;
 }
+#s-table tr td img{
+	width: 300px;
+	height: 200px;
+}
 #s-table tr td:first-child{
-	width: 20%;
+	width: 10%;
 	text-align: center;
 	border-right: 1px solid #BDB19A ;
 }
