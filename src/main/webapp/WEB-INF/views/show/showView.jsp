@@ -123,16 +123,6 @@
 								<li>
 									<p>${sr.reviewContentBr }</p>
 									<textarea name="reviewContent" class="form-control updateContent" style="display: none;">${sr.reviewContent }</textarea>
-									<div style="display: none;" class="updateStar">
-										<p>평점선택</p>
-										<select name="star">
-											<option value="1">1</option>
-											<option value="2">2</option>
-											<option value="3">3</option>
-											<option value="4">4</option>
-											<option value="5">5</option>
-										</select>
-									</div>
 									<div class="starBox">
 										<c:forEach begin="1" end="${sr.star }" >
 											<span><img src="resources/showImage/star-on.png" style="height: 10px;"></span>											
@@ -229,13 +219,12 @@
 	    function modifyReview(obj,reviewNo,showNo) {
 			//textarea를 화면에 표현
 			$(obj).parents("li").children().filter(".updateContent").show();
-			$(obj).parents("li").children().filter(".updateStar").show();
 			//기존 본문 내용을 숨김
 			$(obj).parents("li").children().first().hide();
 			$(obj).parents("li").children().filter(".starBox").hide();
 			//수정 -> 수정완료
 			$(obj).html('수정완료');
-			$(obj).attr("onclick", "modifyComplete(this, '"+reviewNo+"', '"+showNo+"');");
+			$(obj).attr("onclick", "modifyComplete(this, '"+reviewNo+"', '"+showNo+"')");
 			//삭제 -> 취소
 			$(obj).next().html('취소');
 			$(obj).next().attr("onclick", "modifyCancel(this, '"+reviewNo+"', '"+showNo+"');");
@@ -248,7 +237,6 @@
 			$(obj).parents("li").children().filter(".starBox").show();
 			//기존 본문내용을 화면에 다시 표현
 			$(obj).parents("li").children().filter(".updateContent").hide();
-			$(obj).parents("li").children().filter(".updateStar").hide();
 			//수정완료 -> 수정
 			$(obj).prev().html('수정');
 			$(obj).prev().attr("onclick", "modifyReview(this, '"+reviewNo+"', '"+showNo+"');");
@@ -260,13 +248,12 @@
 		}
 		function modifyComplete(obj,reviewNo,showNo){
 			var form = $("<form action='/updateReview.do' method='post'></form>");
-			//form안에 수정댓글 번호 설정
+			//form안에 수정 번호 설정
 			form.append($("<input type='text' name='reviewNo' value='"+reviewNo+"'>"));
-			//form에 공지사항 번호 설정
+			//form에 공연 번호 설정
 			form.append($("<input type='text' name='showNo' value='"+showNo+"'>"));
-			//수정한 댓글 내용을 설정
+			//수정한 내용을 설정
 			form.append($(obj).parents("li").children().filter(".updateContent"));
-			form.append($(obj).parents("li").children().filter(".updateStar"));
 			//전송할 form태그를 현재 페이지에 추가
 			$("body").append(form);
 			//form태그 전송

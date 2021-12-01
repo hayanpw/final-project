@@ -42,7 +42,7 @@
 		insert into show_review values(sreview_seq.nextval, #{showNo}, #{reviewWriter}, #{reviewContent}, #{star}, to_char(sysdate, 'yyyy-mm-dd'))
 	</insert>
 	<update id="updateReview" parameterType="sReview">
-		update show_review set review_content=#{reviewContent}, star=#{star} where review_no=#{reviewNo} and show_no=#{showNo}
+		update show_review set review_content=#{reviewContent} where review_no=#{reviewNo} and show_no=#{showNo}
 	</update>
 	
 	<resultMap type="show" id="s">
