@@ -20,7 +20,7 @@ public class ShowDao {
 	}
 
 	public Show selectOneShow(int showNo) {
-		return sqlSession.selectOne("show.showView", showNo);
+		return sqlSession.selectOne("show.selectOneShow", showNo);
 	}
 
 	public double showStarAvg(int showNo) {
@@ -33,5 +33,9 @@ public class ShowDao {
 
 	public int deleteShow(int showNo) {
 		return sqlSession.delete("show.deleteShow", showNo);
+	}
+
+	public int updateShow(Show s) {
+		return sqlSession.update("show.updateShow", s);
 	}
 }

@@ -51,13 +51,13 @@ public class ShowController {
 			String onlyFilename = filename.substring(0, filename.indexOf("."));
 			String extention = filename.substring(filename.indexOf("."));
 			
-			String filepath = "/resources/showImage/upload/";
+			String filepath = null;
 			int count = 0;
 			while(true) {
 				if(count==0) {
-					filepath += onlyFilename + extention;
+					filepath = onlyFilename + extention;
 				}else {
-					filepath += onlyFilename+"_"+count+extention;
+					filepath = onlyFilename+"_"+count+extention;
 				}
 				File checkFile = new File(savePath+filepath);
 				if(!checkFile.exists()) {
@@ -79,7 +79,8 @@ public class ShowController {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			s.setFilepath(filepath);
+			String showFilepath = "/resources/showImage/upload/"+filepath;
+			s.setFilepath(showFilepath);
 		}
 		int result = service.insertShow(s);
 		if(result>0) {
@@ -92,11 +93,10 @@ public class ShowController {
 	}
 	
 	@RequestMapping(value = "/updateShowFrm.do")
-	public String updateShow(Show show, Model model) {
-		System.out.println(show.getShowNo());
-//		model.addAttribute("s",show);
-//		return "show/showUpdateFrm";
-		return "redirect:/showList.do";
+	public String updateShow(int showNo, Model model) {
+		Show show = service.selectOneShow(showNo);
+		model.addAttribute("s",show);
+		return "show/showUpdateFrm";
 	}
 	
 	@RequestMapping(value = "/deleteShow.do")
@@ -111,4 +111,55 @@ public class ShowController {
 		return "common/msg";
 	}
 	
+	@RequestMapping(value = "/updateShow.do")
+	public String updateShow(Show s, MultipartFile upfile, int status, HttpServletRequest request, Model model) {
+		if(status == 2) {
+			if(upfile != null) {
+				String savePath = request.getSession().getServletContext().getRealPath("/resources/showImage/upload/");
+				
+				String filename = upfile.getOriginalFilename();
+				String onlyFilename = filename.substring(0, filename.indexOf("."));
+				String extention = filename.substring(filename.indexOf("."));
+				
+				String filepath = null;
+				int count = 0;
+				while(true) {
+					if(count==0) {
+						filepath = onlyFilename + extention;
+					}else {
+						filepath = onlyFilename+"_"+count+extention;
+					}
+					File checkFile = new File(savePath+filepath);
+					if(!checkFile.exists()) {
+						break;
+					}
+					count++;
+				}
+				
+				try {
+					FileOutputStream fos = new FileOutputStream(new File(savePath+filepath));
+					BufferedOutputStream bos = new BufferedOutputStream(fos);
+					byte[] bytes = upfile.getBytes();
+					bos.write(bytes);
+					bos.close();
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				String showFilepath = "/resources/showImage/upload/"+filepath;
+				s.setFilepath(showFilepath);
+			}
+		}
+		int result = service.updateShow(s);
+		if(result>0) {
+			model.addAttribute("msg", "공연 수정 성공");			
+		}else {
+			model.addAttribute("msg", "공연 수정 실패");
+		}
+		model.addAttribute("loc", "/showView.do?showNo="+s.getShowNo());
+		return "common/msg";
+	}
 }
