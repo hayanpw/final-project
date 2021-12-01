@@ -43,46 +43,6 @@ public class ShowController {
 	}
 	
 	@RequestMapping(value = "/insertShow.do")
-<<<<<<< HEAD
-	public String insertShow(Show show, MultipartFile upfile, HttpServletRequest request, Model model) {
-//		if(upfile != null) {
-//			String savePath = request.getSession().getServletContext().getRealPath("/resources/showImage/upload/");
-//			
-//			String filename = upfile.getOriginalFilename();
-//			String onlyFilename = filename.substring(0, filename.indexOf("."));
-//			String extention = filename.substring(filename.indexOf("."));
-//			
-//			String filepath = null;
-//			int count = 0;
-//			while(true) {
-//				if(count==0) {
-//					filepath = onlyFilename + extention;
-//				}else {
-//					filepath = onlyFilename+"_"+count+extention;
-//				}
-//				File checkFile = new File(savePath+filepath);
-//				if(!checkFile.exists()) {
-//					break;
-//				}
-//				count++;
-//			}
-//			
-//			try {
-//				FileOutputStream fos = new FileOutputStream(new File(savePath+filepath));
-//				BufferedOutputStream bos = new BufferedOutputStream(fos);
-//				byte[] bytes = upfile.getBytes();
-//				bos.write(bytes);
-//				bos.close();
-//			} catch (FileNotFoundException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			} catch (IOException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//			s.setFilepath(filepath);
-//		}
-=======
 	public String insertShow(Show s, MultipartFile upfile, HttpServletRequest request, Model model) {
 		if(upfile != null) {
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/showImage/upload/");
@@ -121,22 +81,6 @@ public class ShowController {
 			}
 			s.setFilepath(filepath);
 		}
->>>>>>> branch 'master' of https://github.com/HitMi0212/finalProject-museedart.git
-		
-<<<<<<< HEAD
-		System.out.println(show);
-		System.out.println(upfile);
-		
-//		int result = service.insertShow(s);
-//		if(result>0) {
-//			model.addAttribute("msg", "공연 등록 성공");			
-//		}else {
-//			model.addAttribute("msg", "공연 등록 실패");
-//		}
-//		model.addAttribute("loc", "/showList.do");
-//		return "common/msg";
-		return "redirect:/insertShowFrm.do";
-=======
 		int result = service.insertShow(s);
 		if(result>0) {
 			model.addAttribute("msg", "공연 등록 성공");			
@@ -165,7 +109,6 @@ public class ShowController {
 		}
 		model.addAttribute("loc", "/showList.do");
 		return "common/msg";
->>>>>>> branch 'master' of https://github.com/HitMi0212/finalProject-museedart.git
 	}
 	
 }
