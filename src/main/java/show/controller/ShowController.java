@@ -81,7 +81,6 @@ public class ShowController {
 			}
 			s.setFilepath(filepath);
 		}
-		
 		int result = service.insertShow(s);
 		if(result>0) {
 			model.addAttribute("msg", "공연 등록 성공");			
@@ -111,4 +110,5 @@ public class ShowController {
 		model.addAttribute("loc", "/showList.do");
 		return "common/msg";
 	}
+	
 }

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>공연 목록</title>
     <link href="resources/showCss/show_default.css" rel="stylesheet">
     <link href="resources/showCss/show_list.css" rel="stylesheet">
 </head>

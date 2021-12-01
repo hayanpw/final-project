@@ -24,6 +24,8 @@ public class SpaceService {
 				fv.setSpaceNo(spaceNo);
 				result += dao.insertFile(fv);
 			}
+		}else {
+			return -1;
 		}
 		return result;		
 	}

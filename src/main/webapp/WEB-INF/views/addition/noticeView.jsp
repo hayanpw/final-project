@@ -6,11 +6,21 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+	#title{
+		padding-top:30px;
+		padding-left:30px;
+		font-weight:700;
+		font-size: 40px;
+		padding-bottom: 30px;
+		}
+</style>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
-	<h2>공지</h2>
-	<table border="1">
+	<div class="container" id="container">
+	<p id="title">공지사항</p>
+	<table class="table">
 		<tr>
 			<th>글번호</th>
 			<td>${b.boardNo }</td>
@@ -47,6 +57,7 @@
 	<button><a href="/boardDelete.do?boardNo=${b.boardNo }">글삭제</a></button>
 	<button><a href="/boardUpdate.do?boardNo=${b.boardNo }">글수정</a></button>
 	<a href="/">메인으로</a>
+	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>
