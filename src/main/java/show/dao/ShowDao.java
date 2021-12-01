@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import show.vo.Show;
+import show.vo.ShowReview;
 
 @Repository
 public class ShowDao {
@@ -37,5 +38,22 @@ public class ShowDao {
 
 	public int updateShow(Show s) {
 		return sqlSession.update("show.updateShow", s);
+	}
+
+	public ArrayList<ShowReview> selectReivewList(int showNo) {
+		List list = sqlSession.selectList("show.selectReviewList", showNo); 
+		return (ArrayList<ShowReview>)list;
+	}
+
+	public int deleteReview(ShowReview sr) {
+		return sqlSession.delete("show.deleteReview", sr);
+	}
+
+	public int insertReview(ShowReview sr) {
+		return sqlSession.insert("show.insertReview", sr);
+	}
+
+	public int updateReview(ShowReview sr) {
+		return sqlSession.update("show.updateReview", sr);
 	}
 }
