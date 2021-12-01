@@ -14,7 +14,7 @@
 		
 	<div class="header-title">
 		<div class="h-left">
-     
+        <a href="#"><img class="search-img" src="/resources/mainImage/upload/search-droopy.jpg" style="width:18px;height:40px"></a>
         </div> 
         <div class="h-logo">
 			Musée d'art

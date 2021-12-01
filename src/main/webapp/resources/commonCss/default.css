@@ -15,6 +15,12 @@ body{
     float: left;
     height: 90px;
 }
+.search-img {
+    width: auto;
+    height: auto;
+    max-width: 30px;
+    max-height: 50px;
+}
 .h-logo{
     width: 60%;
     text-align: center;
@@ -101,3 +107,4 @@ body{
     left:0;
     top:50px;
 }
+
