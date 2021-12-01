@@ -17,7 +17,8 @@
         <a href="#"><img class="search-img" src="/resources/mainImage/upload/search-droopy.jpg" style="width:18px;height:40px"></a>
         </div> 
         <div class="h-logo">
-			Musée d'art
+			Musée d'art<br>
+			글꼴 로고 추천받아요  ٩( ᐛ )و 
         </div>
 		<div class="h-right">
 		<c:choose>

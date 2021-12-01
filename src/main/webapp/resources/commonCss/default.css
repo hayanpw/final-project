@@ -34,6 +34,14 @@ body{
     float: left;
 	height: 90px;
 }
+.h-right>a{
+	text-decoration: none;
+    color:#563D39;
+}
+.h-right>a:hover {
+    text-decoration: none;
+    color:#BDB19A;
+}
 
 .container{
     flex:1;
@@ -85,9 +93,10 @@ body{
 .navi ul>li>a:first-child:after{
     display:block;
     position: absolute;
+    text-align: center;
     content: '';
-    border-bottom : solid 3px #563D39;
-    width: 50px;
+    border-bottom: solid 2px #563D39;
+    width: 150px;
     transform: scaleX(0);  
     transition: transform 250ms ease-in-out;
 }
