@@ -4,13 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>공연 등록</title>
 <link href="resources/showCss/show_default.css" rel="stylesheet">
 <link href="resources/showCss/show_insert.css" rel="stylesheet">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
-<!-- include libraries(jQuery, bootstrap) -->
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
-
 <!-- include summernote css/js -->
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 </head>
@@ -74,7 +71,7 @@
                 </tr>
                 <tr>
                     <th>공연 정보</th>
-                    <td colspan="3" id="noteEditor">
+                    <td colspan="3">
                     	<textarea id="summernote" class="form-control" name="showContent"></textarea>
                     </td>
                 </tr>
@@ -85,7 +82,6 @@
                 </tr>
             </table>
         </form>
-    </div>
 
     <script>
     $('#summernote').summernote({
@@ -120,7 +116,6 @@
                 yearSuffix : '년',
                 minDate: date
             });
-            
         });
     </script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>

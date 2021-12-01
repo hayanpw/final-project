@@ -8,7 +8,7 @@ public class Show {
 	private String showName;
 	private String showStart;
 	private String showEnd;
-	private String ShowTime;
+	private String showTime;
 	private int showAge;
 	private String showContent;
 	private int showPrice;
