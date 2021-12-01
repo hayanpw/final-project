@@ -1,0 +1,36 @@
+ul{
+    list-style: none;
+    overflow: hidden;
+    padding: 0;
+}
+.secondCol{
+    padding-top: 10px;
+    margin: 0 50px;
+}
+/* .firstCol>ul{
+    transform: rotate(10deg);
+}
+.thirdCol>ul{
+    transform: rotate(-10deg);
+} */
+.seatList{
+    background-color: #BDB19A;
+    width: 20px;
+    height: 20px;
+    font-size: 13px;
+    text-align: center;
+    margin: 1px;
+    float: left;
+}
+a{
+    text-decoration: none;
+    font-weight: bold;
+    color: #fff;
+    display: block;
+}
+.showSeat{
+    overflow: hidden;
+}
+.seatCol{
+    float: left;
+}
