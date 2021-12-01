@@ -4,20 +4,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>공연 등록</title>
 <link href="resources/showCss/show_default.css" rel="stylesheet">
 <link href="resources/showCss/show_insert.css" rel="stylesheet">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
-<!-- include libraries(jQuery, bootstrap) -->
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
-
 <!-- include summernote css/js -->
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
-	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-	<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 	<div class="container">
@@ -39,11 +34,11 @@
                 <tr>
                     <th>공연 시작일</th>
                     <td>
-                        <input type="text" class="form-control" id="datepicker" name="showStart">
+                        <input type="date" class="form-control" name="showStart">
                     </td>
                     <th>공연 종료일</th>
                     <td>
-                        <input type="text" class="form-control" id="datepicker2" name="showEnd">
+                        <input type="date" class="form-control" name="showEnd">
                     </td>
                 </tr>
                 <tr>
@@ -74,8 +69,8 @@
                 </tr>
                 <tr>
                     <th>공연 정보</th>
-                    <td colspan="3" id="noteEditor">
-                    	<textarea type="text" id="summernote" class="form-control" name="showContent"></textarea>
+                    <td colspan="3">
+                    	<textarea id="summernote" class="form-control" name="showContent"></textarea>
                     </td>
                 </tr>
                 <tr>
@@ -85,7 +80,6 @@
                 </tr>
             </table>
         </form>
-    </div>
 
     <script>
     $('#summernote').summernote({
@@ -97,31 +91,6 @@
     $(document).ready(function() {
     	  $('#summernote').summernote();
     	});
-        $(function() {
-        	
-            var date = new Date();
-            $( "#datepicker" ).datepicker({
-                dateFormat: "yy-mm-dd",
-                monthNames : [ '1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월','9월', '10월', '11월', '12월' ],
-                monthNamesShort : [ '1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월','9월', '10월', '11월', '12월' ],
-                dayNames : [ '일', '월', '화', '수', '목', '금', '토' ],
-                dayNamesShort : [ '일', '월', '화', '수', '목', '금', '토' ],
-                dayNamesMin : [ '일', '월', '화', '수', '목', '금', '토' ],
-                yearSuffix : '년',
-                minDate: date
-            });
-            $( "#datepicker2" ).datepicker({
-                dateFormat: "yy-mm-dd",
-                monthNames : [ '1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월','9월', '10월', '11월', '12월' ],
-                monthNamesShort : [ '1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월','9월', '10월', '11월', '12월' ],
-                dayNames : [ '일', '월', '화', '수', '목', '금', '토' ],
-                dayNamesShort : [ '일', '월', '화', '수', '목', '금', '토' ],
-                dayNamesMin : [ '일', '월', '화', '수', '목', '금', '토' ],
-                yearSuffix : '년',
-                minDate: date
-            });
-            
-        });
     </script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>

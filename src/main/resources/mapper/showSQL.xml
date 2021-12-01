@@ -8,9 +8,9 @@
 			show_start as showStart,
 			show_end as showEnd,
 			filepath
-		from show
+		from show order by 1 desc
 	</select>
-	<select id="showView" parameterType="_int" resultMap="s">
+	<select id="selectOneShow" parameterType="_int" resultMap="s">
 		select * from show where show_no=#{showNo}
 	</select>
 	<select id="starAvg" parameterType="_int" resultType="_double">
@@ -22,6 +22,28 @@
 	<delete id="deleteShow" parameterType="_int">
 		delete from show where show_no=#{showNo}
 	</delete>
+	<update id="updateShow" parameterType="show">
+		update show set show_name=#{showName}, show_start=#{showStart}, show_end=#{showEnd}, show_time=#{showTime}, show_age=#{showAge}, show_content=#{showContent}, show_price=#{showPrice}, filepath=#{filepath}, show_hall=#{showHall} where show_no=#{showNo}
+	</update>
+	<select id="selectReviewList" parameterType="_int" resultType="sReview">
+		select
+			review_no as reviewNo,
+			show_no as showNo,
+			review_writer as reviewWriter,
+			review_content as reviewContent,
+			star,
+			review_date as reviewDate
+		from show_review where show_no=#{showNo} order by 1 desc
+	</select>
+	<delete id="deleteReview" parameterType="sReview">
+		delete from show_review where review_no=#{reviewNo} and show_no=#{showNo}
+	</delete>
+	<insert id="insertReview" parameterType="sReview">
+		insert into show_review values(sreview_seq.nextval, #{showNo}, #{reviewWriter}, #{reviewContent}, #{star}, to_char(sysdate, 'yyyy-mm-dd'))
+	</insert>
+	<update id="updateReview" parameterType="sReview">
+		update show_review set review_content=#{reviewContent}, star=#{star} where review_no=#{reviewNo} and show_no=#{showNo}
+	</update>
 	
 	<resultMap type="show" id="s">
 		<result column="show_no" property="showNo"/>

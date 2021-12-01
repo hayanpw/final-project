@@ -6,18 +6,23 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="/resources/memberCss/login.css">
 </head>
 <body>
-	<h1>미완성 로그인틀..</h1>
-	<hr>
-	<form action="/login.do" method="post">
-		<fieldset>
-			<legend>로그인</legend>
-			아이디 <input type="text" name="memberId"><br>
-			비밀번호 <input type="password" name="memberPassword"><br>
-			<input type="submit" value="로그인">
-			<a href="#">회원가입</a>
-		</fieldset>
-	</form>
+	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+	<div class="container">
+		<div class="login-title"><span>로그</span>인</div>
+		<div class="login-box">
+		<form action="/login.do" method="post">
+			<fieldset>
+					<label for="memberId">ID </label><input type="text" name="memberId"><br><br>
+					<label for="memberPassword">PW </label><input type="password" name="memberPassword"><br><br>
+					<input type="submit" value="login">
+					<a href="#" class="searchidpw">ID · PASSWORD 찾기</a>
+				</fieldset>
+		</form>
+		</div>
+	</div>
+	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>

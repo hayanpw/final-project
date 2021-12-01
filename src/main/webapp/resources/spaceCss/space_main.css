@@ -28,3 +28,6 @@
 	display: block;
 	margin: auto;
 }
+#s-table tr td{
+	color: red;
+}

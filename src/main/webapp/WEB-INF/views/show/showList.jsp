@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>공연 목록</title>
     <link href="resources/showCss/show_default.css" rel="stylesheet">
     <link href="resources/showCss/show_list.css" rel="stylesheet">
 </head>
@@ -14,9 +14,9 @@
     <div class="container">
         <h1>musée d'art<br>공연 일정</h1>
         <div class="showSearchBox">
-	        <%-- <c:if test="${sessionScope.m.memberLevel == 0 }"> --%>
+	        <c:if test="${sessionScope.m.memberLevel == 0 }">
 	            <a href="/insertShowFrm.do" class="btn btn-danger">공연 추가</a>
-	        <%-- </c:if> --%>
+	        </c:if>
         </div>
         <div class="showList">
         	<c:forEach items="${list }" var="s">
