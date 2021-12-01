@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-
 	<meta charset="UTF-8">
 	<!-- 기본css -->
 	<link rel="stylesheet" href="/resources/commonCss/default.css">
@@ -17,8 +16,7 @@
         <a href="#"><img class="search-img" src="/resources/mainImage/upload/search-droopy.jpg" style="width:18px;height:40px"></a>
         </div> 
         <div class="h-logo">
-			Musée d'art<br>
-			글꼴 로고 추천받아요  ٩( ᐛ )و 
+			Musée d'art
         </div>
 		<div class="h-right">
 		<c:choose>

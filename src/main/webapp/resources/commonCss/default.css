@@ -1,7 +1,22 @@
+@font-face {
+  font-family: "NotoSansKR";
+  src: local("NotoSansKR"), url(/resources/font/NotoSansKR-Regular.otf);
+}
+@font-face {
+  font-family: "d_i";
+  src: url(/resources/font/DMSerifDisplay-Italic.ttf);
+}
+@font-face {
+  font-family: "d_r";
+  src: url(/resources/font/DMSerifDisplay-Regular.ttf);
+}
+
 body{
     display: flex;
     flex-direction: column;
     min-height: 200vh;
+    font-family: "NotoSansKR";
+  	color:black;
 }
 .container{
     width: 1170px;
@@ -28,6 +43,9 @@ body{
     float: left;
     height: 90px;
     border-bottom: 2px solid #BDB19A;
+    font-family: d_r; 
+    font-size:50px;
+    color:#BDB19A;
 }
 .h-right{
     width: 20%;
