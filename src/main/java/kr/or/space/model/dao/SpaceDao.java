@@ -34,4 +34,9 @@ public class SpaceDao {
 		int result = sqlSession.insert("space.insertFile",fv);
 		return result;
 	}
+	//파일 조회
+	public ArrayList<FileVO> selectFile() {
+		List<FileVO> list = sqlSession.selectList("space.selectFile");
+		return (ArrayList<FileVO>)list;
+	}
 }

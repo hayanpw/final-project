@@ -27,9 +27,8 @@
 				    <input type="hidden" name="date">
 				    <input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
 				    <h2 name="showdate"></h2>
-				    <h2 name="showseat"></h2>
-				    <!-- 총좌석-카운트 -->
-					<input type="submit" class="btn btn-success btn-lg" value="좌석 선택하기" style="background-color: #563D39; border-color: #563D39">
+				    <h2 name="showseat"></h2><!-- 총좌석 - 카운트 = 남은좌석 -->
+					<input type="hidden" name="sub"class="btn btn-success btn-lg" value="좌석 선택하기" style="background-color: #563D39; border-color: #563D39">
 				</form>
 			</div>
 		</div>
@@ -64,10 +63,11 @@
 			selectDate = $(this).val();
 			$(".slide").fadeOut();
 			$("input[name=date]").val(selectDate);
-			var month = selectDate.substring(5,7);
-			var day = selectDate.substring(8,10);
+			var month = selectDate.substring(5,7); //몇월
+			var day = selectDate.substring(8,10);  //몇일
 			$("h2[name=showdate]").html(month+"월 "+day+"일");
 			$("h2[name=showseat]").html("남은좌석 : "+ "석");
+			$("input[name=sub]").attr("type","submit"); //좌석선택 hidden에서 submit으로
         });
     </script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>

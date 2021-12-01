@@ -12,7 +12,7 @@
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="container">
-		<h1>대관 안내</h1>
+		<h4 class="s-title">대관 안내</h4>
 		<div class="space-img">
 			<img src="resources/spaceImage/연습실1.png">
 			<p>
@@ -23,17 +23,24 @@
 			</p>
 		</div>
 		<div class="rental-sequence">
-			<h3 class="s-title">대관 절차</h3>
+			<h4 class="s-title">대관 절차</h4>
 			<img src="resources/spaceImage/대관절차.png">
 		</div>
 		<div class="rental-price">
-			<h3 class="s-title">대관료 안내</h3>
+			<h4 class="s-title">대관료 안내</h4>
+			<div class="spaceRes"><a href="/spaceRes.do">>신청하기</a></div>
 			<div>
 				<c:forEach items="${list }" var ="s">
-					<table class = "table table-condensed" id="s-table">
-					<tr>
-						<td rowspan="5" >${s.spaceName }</td>
-					</tr>
+					<table   id="s-table">
+					<c:forEach items="${fList }" var="f">
+						<tr>
+							<th rowspan="5" >
+								<c:if test="${s.spaceNo } eq ${f.spaceNo }">
+									<img style='width: 300px' class="info-img" src="resources/spaceImage/upload/${f.filename }">
+								</c:if>
+							</th>
+						</tr>
+					</c:forEach>
 					<tr>
 						<td>이름</td>
 						<td>${s.spaceName }</td>
@@ -44,11 +51,11 @@
 					</tr>
 					<tr>
 						<td>수용인원</td>
-						<td>${s.maxPeople }</td>
+						<td>${s.maxPeople } 명</td>
 					</tr>
 					<tr>
 						<td>가격</td>
-						<td>${s.price }</td>
+						<td>${s.price } / 2시간</td>
 					</tr>
 				</table>
 				</c:forEach>

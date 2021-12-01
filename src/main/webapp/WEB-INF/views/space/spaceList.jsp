@@ -6,12 +6,25 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+    <link href="resources/spaceCss/space_default.css" rel="stylesheet">
+    <link href="resources/spaceCss/space_list.css" rel="stylesheet">
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="container">
-	
-	</div>
+		<div class="space-list">
+			<c:forEach items="${spaceList }" var ="s">
+				<c:forEach items="${fileList }" var="f" >
+					<%-- <c:if test="${s.spaceNo } == ${f.spaceNo }"> --%>
+						<img style='width: 300px' class="info-img" src="resources/spaceImage/upload/${f.filename }">
+					<%-- </c:if> --%>
+				</c:forEach>
+				<p>공간 : ${s.spaceName }</p>
+				<p>용도 : ${s.spacePurpose }</p>
+				<p>수용인원 : ${s.maxPeople }</p>
+				<p>가격 : ${s.price }</p>
+			</c:forEach>
+		</div>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
