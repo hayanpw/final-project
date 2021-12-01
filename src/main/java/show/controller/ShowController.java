@@ -17,6 +17,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import show.service.ShowService;
 import show.vo.Show;
+import show.vo.ShowAndReview;
+import show.vo.ShowReserv;
+import show.vo.ShowReview;
 
 @Controller
 public class ShowController {
@@ -32,8 +35,8 @@ public class ShowController {
 	
 	@RequestMapping(value = "/showView.do")
 	public String showView(int showNo, Model model) {
-		Show s = service.selectOneShow(showNo);
-		model.addAttribute("s",s);
+		ShowAndReview snr = service.selectShowView(showNo);
+		model.addAttribute("snr",snr);
 		return "show/showView";
 	}
 	
@@ -160,6 +163,48 @@ public class ShowController {
 			model.addAttribute("msg", "공연 수정 실패");
 		}
 		model.addAttribute("loc", "/showView.do?showNo="+s.getShowNo());
+		return "common/msg";
+	}
+	
+	@RequestMapping(value = "/selectSeat.do")
+	public String selectSeat(ShowReserv sr, Model model) {
+		model.addAttribute("sr",sr);
+		return "show/selectSeat";
+	}
+	
+	@RequestMapping(value = "/insertReview.do")
+	public String insertReview(ShowReview sr, Model model) {
+		int result = service.insertReview(sr);
+		if(result>0) {
+			model.addAttribute("msg", "등록 성공");			
+		}else {
+			model.addAttribute("msg", "등록 실패");
+		}
+		model.addAttribute("loc", "/showView.do?showNo="+sr.getShowNo());
+		return "common/msg";
+	}
+	
+	@RequestMapping(value = "/deleteReview.do")
+	public String deleteReview(ShowReview sr, Model model) {
+		int result = service.deleteReview(sr);
+		if(result>0) {
+			model.addAttribute("msg", "삭제 성공");			
+		}else {
+			model.addAttribute("msg", "삭제 실패");
+		}
+		model.addAttribute("loc", "/showView.do?showNo="+sr.getShowNo());
+		return "common/msg";
+	}
+	
+	@RequestMapping(value = "/updateReview.do")
+	public String updateReview(ShowReview sr, Model model) {
+		int result = service.updateReview(sr);
+		if(result>0) {
+			model.addAttribute("msg", "수정 성공");			
+		}else {
+			model.addAttribute("msg", "수정 실패");
+		}
+		model.addAttribute("loc", "/showView.do?showNo="+sr.getShowNo());
 		return "common/msg";
 	}
 }
