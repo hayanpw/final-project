@@ -35,10 +35,10 @@ display: none; /* 화살표 없애기 for IE10, 11*/
 .ui-datepicker-buttonpane button[data-handler="today"] { color: #BDB19A; opacity: 0.75; }
 .ui-datepicker-buttonpane button[data-handler="hide"] { }
 
-.ui-datepicker a.ui-state-default{border-top: 3px solid #000; border-bottom: 3px solid #000; color:#333; border-radius:0;}
-.ui-datepicker a.ui-state-default:first-chlid{border-left: 3px solid #000;}
-.ui-datepicker a.ui-state-default:last-chlid{border-right: 3px solid #000;}
-.ui-datepicker a.ui-state-active{background-color: #fff; color:#000;}
+.ui-datepicker a.ui-state-default{border-top: 3px solid #BDB19A; border-bottom: 3px solid #BDB19A; color:#000; border-radius:0;}
+.ui-datepicker a.ui-state-default:first-of-type{border-left: 3px solid #BDB19A;}
+.ui-datepicker a.ui-state-default:last-chlid{border-right: 3px solid #BDB19A;}
+.ui-datepicker a.ui-state-active{background-color: #fff; color:#BDB19A;}
 
 /* ie add Style */
 .ui-datepicker td, .ui-datepicker th { border: 0 }
