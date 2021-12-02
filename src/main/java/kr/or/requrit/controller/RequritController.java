@@ -1,6 +1,5 @@
 package kr.or.requrit.controller;
 
-import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -26,9 +25,11 @@ public class RequritController {
 	//공지 리스트 페이지로 이동
 	@RequestMapping(value="requritList.do")
 	public String requritList(Model model , int reqPage) {
+		System.out.println("컨트롤러"+reqPage);
 		RequritPageData rpd = service.selectRequritPageData(reqPage);
-		ArrayList<Requrit> list = service.selectRequritList();
-		model.addAttribute("list",list);
+		model.addAttribute("list",rpd.getList());
+		model.addAttribute("pageNavi",rpd.getPageNavi());
+		model.addAttribute("start",rpd.getStart());
 		return "requrit/requritList";
 	}
 	@RequestMapping(value="requritInsert.do")

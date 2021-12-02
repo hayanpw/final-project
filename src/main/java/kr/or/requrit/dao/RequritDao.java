@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.or.requrit.vo.Requrit;
 import kr.or.requrit.vo.RequritPageData;
+import kr.or.requrit.vo.RequritPagingVo;
 
 @Repository
 public class RequritDao {
@@ -21,8 +22,15 @@ public class RequritDao {
 		return result;
 	}
 
-	public ArrayList<Requrit> selectRequritList(RequritPageData paging) {
+	public ArrayList<Requrit> selectRequritList(RequritPagingVo paging) {
+		System.out.println(paging.getEnd());
+		System.out.println(paging.getStart());
 		List<Requrit> list = sqlSession.selectList("requrit.selectRequritList",paging);
 		return (ArrayList<Requrit>)list;
+	}
+
+	public int selectTotalCount() {
+		int totalCount = sqlSession.selectOne("requrit.selectTotalCount");
+		return totalCount;
 	}
 }

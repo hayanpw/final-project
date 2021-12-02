@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,27 +21,19 @@
                   <th>근무시간</th>
               </tr>
           </thead>
+          
           <tbody>
-              <tr>
-                  <td>f</td>
-                  <td>o</td>
-                  <td>r</td>
-                  <td>e</td>
-              </tr>
-              <tr>
-                  <td>c</td>
-                  <td>h</td>
-                  <td>써</td>
-                  <td>서</td>
-              </tr>
-              <tr>
-                  <td>한페이지</td>
-                  <td>10</td>
-                  <td>개</td>
-                  <td>씩</td>
-              </tr>
+          	<c:forEach items="${list }" var="r" varStatus="i">
+             	<tr>
+				   <td>${start + i.index }</td>
+				   <td><a href="/requritView.do?requritNo=${r.requritNo }">${r.requritTitle }</a></td>
+				   <td>관리자</td>
+				   <td>${r.requritStart }~${r.requritEnd }</td>
+			   </tr>
+			 </c:forEach>
             </tbody>
           </table>
+          <div id="pageNavi">${pageNavi }</div>
         </div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
