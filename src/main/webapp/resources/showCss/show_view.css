@@ -95,6 +95,9 @@
 #datepicker>div>div{
 	height: 120px;
 }
+#datepicker>div{
+	margin-top: 0;
+}
 #datepicker>div>div>a{
 	padding: 40px 0;
 }
