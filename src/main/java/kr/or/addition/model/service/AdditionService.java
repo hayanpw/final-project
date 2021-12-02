@@ -9,7 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.addition.model.dao.AdditionDao;
 import kr.or.addition.model.vo.Board;
+import kr.or.addition.model.vo.BoardComment;
 import kr.or.addition.model.vo.BoardPageData;
+import kr.or.addition.model.vo.BoardViewData;
 import kr.or.addition.model.vo.FileVO;
 
 @Service
@@ -17,6 +19,7 @@ public class AdditionService {
 	@Autowired
 	private AdditionDao dao;
 
+	//글 리스트 조회
 	public BoardPageData selectNoticeList(int boardType, int reqPage) {
 		// 한페이지에 보여줄 게시물 수
 		int numPerPage = 10;
@@ -99,6 +102,8 @@ public class AdditionService {
 		return bpd;
 	}
 
+	
+	//글쓰기
 	@Transactional
 	public int insertBoard(Board b, ArrayList<FileVO> list) {
 		int result1 = dao.insertBoard(b);
@@ -115,11 +120,17 @@ public class AdditionService {
 		return result;
 	}
 
-	public Board selectOneBoard(int boardNo) {
-		Board b = dao.selectOneBoard(boardNo);
-		return b;
+	//글보기
+	@Transactional
+	public BoardViewData selectOneBoard(int boardNo) {
+		int result = dao.updateReadCount(boardNo); //조회수올림
+		Board b = dao.selectOneBoard(boardNo); //게시글정보
+		ArrayList<BoardComment> list = dao.selectCommentList(boardNo);//댓글정보
+		BoardViewData bvd = new BoardViewData(list,b);
+		return bvd;
 	}
 	
+	//글삭제
 	@Transactional
 	public int boardDelete(int boardNo) {
 		int result = dao.boardDelete(boardNo);

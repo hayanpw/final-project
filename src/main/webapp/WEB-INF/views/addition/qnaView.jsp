@@ -6,47 +6,52 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+	#title{
+	padding-top:30px;
+	padding-left:30px;
+	font-weight:700;
+	font-size: 40px;
+	padding-bottom: 30px;
+	}
+	#table{
+	margin-left: 50px;
+	margin-right: 50px;
+	text-align: left;
+	}
+	#buttons{
+	text-align: right;
+	}
+</style>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
-	<h2>문의</h2>
-	<table border="1">
-		<tr>
-			<th>글번호</th>
-			<td>${b.boardNo }</td>
-		</tr>
-		<tr>
-			<th>제목</th>
-			<td>${b.boardTitle }</td>
-		</tr>
-		<tr>
-			<th>작성자</th>
-			<td>${b.boardWriter }</td>
-		</tr>
-		<tr>
-			<th>작성일</th>
-			<td>${b.regDate }</td>
-		</tr>
-		<tr>
-			<th>조회수</th>
-			<td>${b.readCount }</td>
-		</tr>
-		<tr>
-			<th>첨부파일</th>
-			<td>
-				<c:forEach items="${b.list }" var="f">
-					<a href="/boardFileDownload?fileNo=${f.fileNo }">${f.filename }</a><br>
-				</c:forEach>
-			</td>
-		</tr>
-		<tr>
-			<th>내용</th>
-			<td>${b.boardContent }</td>
-		</tr>
-	</table>
-	<button><a href="/boardDelete.do?boardNo=${b.boardNo }">글삭제</a></button>
-	<button><a href="/boardUpdate.do?boardNo=${b.boardNo }">글수정</a></button>
-	<a href="/">메인으로</a>
+	<div class="container" id="container">
+		<p id="title">질문과 답변</p>
+		<div id="table">
+			<table class="table">
+				<tr>
+					<td colspan="6">${b.boardTitle }(제목칸)</td>
+				</tr>
+				<tr>
+					<td>작성자</td>
+					<td>${b.boardWriter }</td>
+					<td>작성일</td>
+					<td>${b.regDate }</td>
+					<td>조회수</td>
+					<td>${b.readCount }</td>
+				</tr>
+				<tr>
+					<td colspan="6">${b.boardContent }(내용칸)</td>
+				</tr>
+			</table>
+			<div id="buttons">
+				<a class="btn" href="/boardDelete.do?boardNo=${b.boardNo }">글삭제</a>
+				<a class="btn" href="/boardUpdate.do?boardNo=${b.boardNo }">글수정</a>
+				<a class="btn" href="/additionQNA.do?boardType=2&reqPage=1">목록</a>
+			</div>
+		</div>
+	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>

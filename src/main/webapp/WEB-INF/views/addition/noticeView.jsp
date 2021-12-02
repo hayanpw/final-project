@@ -19,44 +19,22 @@
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="container" id="container">
-	<p id="title">공지사항</p>
-	<table class="table">
-		<tr>
-			<th>글번호</th>
-			<td>${b.boardNo }</td>
-		</tr>
-		<tr>
-			<th>제목</th>
-			<td>${b.boardTitle }</td>
-		</tr>
-		<tr>
-			<th>작성자</th>
-			<td>${b.boardWriter }</td>
-		</tr>
-		<tr>
-			<th>작성일</th>
-			<td>${b.regDate }</td>
-		</tr>
-		<tr>
-			<th>조회수</th>
-			<td>${b.readCount }</td>
-		</tr>
-		<tr>
-			<th>첨부파일</th>
-			<td>
-				<c:forEach items="${b.list }" var="f">
-					<a href="/boardFileDownload?fileNo=${f.fileNo }">${f.filename }</a><br>
-				</c:forEach>
-			</td>
-		</tr>
-		<tr>
-			<th>내용</th>
-			<td>${b.boardContent }</td>
-		</tr>
-	</table>
-	<button><a href="/boardDelete.do?boardNo=${b.boardNo }">글삭제</a></button>
-	<button><a href="/boardUpdate.do?boardNo=${b.boardNo }">글수정</a></button>
-	<a href="/">메인으로</a>
+		<p id="title">공지사항</p>
+		<table class="table">
+			<tr>
+				<td colspan="2">${b.boardTitle }(제목칸)</td>
+			</tr>
+			<tr>
+				<td>등록일</td>
+				<td>${b.regDate }</td>
+			</tr>
+			<tr>
+				<td colspan="2">${b.boardContent }(내용칸)</td>
+			</tr>
+		</table>
+		<a class="btn" href="/boardDelete.do?boardNo=${b.boardNo }">글삭제</a>
+		<a class="btn" href="/boardUpdate.do?boardNo=${b.boardNo }">글수정</a>
+		<a class="btn" href="/additionNotice.do?boardType=1&reqPage=1">목록</a>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
