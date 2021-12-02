@@ -6,7 +6,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="/resources/memberCss/join.css">
-</head>
+<script	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script type="text/javascript"	src="http://code.jquery.com/jquery-3.3.1.js"></script>
 <script>
 	function join() {
 		var agree = document.getElementById('privacyAgreement');
@@ -19,11 +20,6 @@
 				//패스워드 일치할경우3
 				if ($("#memberPw").val() == $("#chkpw").val() && memberPwchk == true
 						&& $("#memberPw").val() && $("#chkpw").val() != '') {
-					
-					//닉네임이 맞았을경우4
-					if ($("#memberNickname").val() != ''
-							&& $("#nicknamechk").val() == '1') {
-						
 						//이름값 입력했을경우 5
 						if ($("#memberName").val() != '') {
 						
@@ -91,12 +87,6 @@
 							$("#memberName").focus();
 							return false;
 						}
-						//닉네임 중복이거나 null일경우4
-					} else {
-						alert("닉네임을 확인해주세요!");
-						$("#memberNickName").focus();
-						return false;
-					}
 					//비밀번호 일치하지않거나 null일경우3
 				} else {
 					alert("비밀번호를 확인해주세요!");
@@ -170,216 +160,8 @@
 			}
 		}).open();
 	}
-	<script>
-	$("[name=memberId]").eq(0).keyup(function() {
-		var memberId = $(this).val();
-		var regExp = /[a-z0-9]{4,}/; //유효성검사 소문자와 숫자를섞어 4글자이상
-		if (regExp.test(memberId)) {
-			//중복검사
-			$.ajax({
-				url : "/ajaxIdCheck",
-				data : {
-					memberId : memberId
-				},
-				type : "post",
-				success : function(data) {
-					if (data == 0) {
-						$("#ajaxCheck").html("사용 가능한 아이디 입니다.");
-						$("#ajaxCheck").css("color", "blue");
-						$("#idchk").val('1');
-					} else if (data == 1) {
-						$("#ajaxCheck").html("이미 사용중인 아이디 입니다.");
-						$("#ajaxCheck").css("color", "red");
-						$("#idchk").val('2');
-					}
-
-				}
-			});
-		} else {
-			$("#ajaxCheck").html("아이디는 영문+숫자로 4글자 이상입니다.")
-			$("#ajaxCheck").css("color", "red");
-		}
-	});
-
-	$("[name=memberNickname]").eq(0).keyup(function() {
-		var memberNickname = $(this).val();
-		var regExp = /[a-z0-9]{5,}/; //유효성검사 소문자와 숫자를섞어 4글자이하
-		if (regExp.test(memberId)) {
-			//중복검사
-			$.ajax({
-				url : "ajaxNicknameCheck",
-				data : {
-					memberNickname : memberNickname
-				},
-				type : "post",
-				success : function(data) {
-					if (data == 0) {
-						$("#ajaxNicknameCheck").html("사용 가능한 닉네임 입니다.");
-						$("#ajaxNicknameCheck").css("color", "blue");
-						$("#nicknamechk").val('1');
-					} else if (data == 1) {
-						$("#ajaxNicknameCheck").html("이미 사용중인 닉네임 입니다.");
-						$("#ajaxNicknameCheck").css("color", "red");
-						$("#nicknamechk").val('2');
-					}
-
-				}
-			});
-		} else {
-			$("#ajaxNicknameCheck").html("닉네임 영문+숫자로 4글자 이하입니다.")
-			$("#ajaxNicknameCheck").css("color", "red");
-		}
-	});
-
-		var memberPwchk = true;
-	$("[name=memberPw]").eq(0).keyup(function() {
-		var memberPw = $(this).val();
-		// (알파벳 하나)(숫자 하나)(특수문자 하나)(문자열)
-		 var regExpPw = /(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,12}/; 
-		/*  var regExpPw = /^[a-zA-Z0-9]{8,12}$/; */
-		 
-		if (regExpPw.test(memberPw)){
-			$('#pwChkRule').html("사용가능한 비밀번호입니다.");
-			$('#pwChkRule').css('color' ,"#1f4787");
-			memberPwchk = true;
-			
-		}else{
-			$('#pwChkRule').html("비밀번호는  8~12자 이내 영문,숫자,특수문자로 입력해주세요.");
-			$('#pwChkRule').css('color' ,"red");
-			memberPwchk = false;
-		}
-	});
-
-			
-	function checkEmail() {
-		var memberemail = $('#email1').val() + '@' + $('#email2').val();
-		$.ajax({
-					url : "ajaxEmailCheck",
-					data : {
-						memberEmail : memberemail
-					},
-					type : "post",
-					success : function(data) {
-						if (data == 0) {
-							$("#ajaxEmailcheck").html("사용 가능한 이메일 입니다.");
-							$("#ajaxEmailcheck").css("color", "blue");
-							$("#emailchk").val('1');
-							console.log(memberemail);
-							//아이디 사용가능시 MODAL창 인증버튼시 팝업
-							var btnOpen1 = document
-									.getElementById('btnOpen1');
-							var btnCheck1 = document
-									.getElementById('btnCheck1');
-							var btnClose1 = document
-									.getElementById('btnClose1');
-
-							// email check modal 창을 감춤
-							var closeRtn1 = function() {
-								var modal1 = document
-										.getElementById('modal1');
-								modal1.style.display = 'none';
-
-							}
-							// email check modal 창을 보여줌
-
-							var modal1 = document.getElementById('modal1');
-							var email = $('#email1').val() + '@'
-									+ $('#email2').val();
-							
-							modal1.style.display = 'block';
-							var mailCode = '';
-							$.ajax({
-								url : "/sendMail",
-								data : {
-									email : email
-								},
-								type : "post",
-								success : function(data) {
-									mailCode = data;
-									authTime();
-								}
-							});
-
-							btnCheck1.onclick = closeRtn1;
-							btnClose1.onclick = closeRtn1;
-							
-							
-
-							var intervalId;
-							function authTime() {
-								$("#timeZone")
-										.html(
-												"<span id='min'>3</span> : <span id='sec'>00</span>");
-								intervalId = window.setInterval(function() {
-									timeCount();
-								}, 1000);
-							}
-							function timeCount() {
-								var min = Number($("#min").html());
-								var sec = $("#sec").html();
-								if (sec == "00") {
-									if (min == 0) {
-										mailCode = null;
-										clearInterval(intervalId);
-									} else {
-										$("#min").html(--min);
-										$("#sec").html(59);
-
-									}
-								} else {
-									var newSec = Number(sec);
-									newSec--;
-									if (newSec < 10) {
-										$("#sec").html("0" + newSec);
-									} else {
-										$("#sec").html(newSec);
-									}
-								}
-							}
-							$("#btnCheck1").click(function() {
-
-								if (mailCode == null) {
-									$("#authMsg").html("인증 실패");
-									$("#authMsg").css("color", "red");
-									$("#emailchk").val('2');
-								} else {
-									if ($("#authCode").val() == mailCode) {
-										$("#authMsg").html("인증성공");
-										$("#authMsg").css("color", "blue"); //여기다가 인증추가를 해야함
-										$("#emailchk").val('1');
-										clearInterval(intervalId);
-										$("#timeZone").empty();
-										$("#emaildcheck").val('1');
-									} else {
-										$("#authMsg").html("인증코드를 확인하세요");
-										$("#authMsg").css("color", "red");
-										$("#emailchk").val('2');
-									}
-								}
-
-							})
-
-						} else if (data == 1) {
-							$("#ajaxEmailcheck").html("이미 사용중인 이메일 입니다.");
-							$("#ajaxEmailcheck").css("color", "red");
-						}
-
-					}
-				});
-	};
-
-	//sms 광고 수신 체크박스 밸류 리턴
-	if (document.getElementById("smsAgreement-check").checked) {
-		document.getElementById("smsAgreement_hidden").disabled = true;
-
-	}
-
-	//email 광고 수신 체크박스 밸류 리턴
-	if (document.getElementById("emailAgreement-check").checked) {
-		document.getElementById("emailgreement_hidden").disabled = true;
-
-	}
-</script>
+	</script>
+</head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 <form action="" id="modal1">
@@ -567,8 +349,186 @@
 				</form>
 			</div>
 		</div>
-
 	</div>
+		<script>
+	$("[name=memberId]").eq(0).keyup(function() {
+		var memberId = $(this).val();
+		var regExp = /[a-z0-9]{4,}/; //유효성검사 소문자와 숫자를섞어 4글자이상
+		if (regExp.test(memberId)) {
+			//중복검사
+			$.ajax({
+				url : "/ajaxIdCheck",
+				data : {
+					memberId : memberId
+				},
+				type : "post",
+				success : function(data) {
+					if (data == 0) {
+						$("#ajaxCheck").html("사용 가능한 아이디 입니다.");
+						$("#ajaxCheck").css("color", "blue");
+						$("#idchk").val('1');
+					} else if (data == 1) {
+						$("#ajaxCheck").html("이미 사용중인 아이디 입니다.");
+						$("#ajaxCheck").css("color", "red");
+						$("#idchk").val('2');
+					}
+
+				}
+			});
+		} else {
+			$("#ajaxCheck").html("아이디는 영문+숫자로 4글자 이상입니다.")
+			$("#ajaxCheck").css("color", "red");
+		}
+	});
+		var memberPwchk = true;
+	$("[name=memberPw]").eq(0).keyup(function() {
+		var memberPw = $(this).val();
+		// (알파벳 하나)(숫자 하나)(특수문자 하나)(문자열)
+		 var regExpPw = /(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,12}/; 
+		/*  var regExpPw = /^[a-zA-Z0-9]{8,12}$/; */
+		 
+		if (regExpPw.test(memberPw)){
+			$('#pwChkRule').html("사용가능한 비밀번호입니다.");
+			$('#pwChkRule').css('color' ,"#1f4787");
+			memberPwchk = true;
+			
+		}else{
+			$('#pwChkRule').html("비밀번호는  8~12자 이내 영문,숫자,특수문자로 입력해주세요.");
+			$('#pwChkRule').css('color' ,"red");
+			memberPwchk = false;
+		}
+	});
+
+			
+	function checkEmail() {
+		var memberemail = $('#email1').val() + '@' + $('#email2').val();
+		$.ajax({
+					url : "ajaxEmailCheck",
+					data : {
+						memberEmail : memberemail
+					},
+					type : "post",
+					success : function(data) {
+						if (data == 0) {
+							$("#ajaxEmailcheck").html("사용 가능한 이메일 입니다.");
+							$("#ajaxEmailcheck").css("color", "blue");
+							$("#emailchk").val('1');
+							console.log(memberemail);
+							//아이디 사용가능시 MODAL창 인증버튼시 팝업
+							var btnOpen1 = document
+									.getElementById('btnOpen1');
+							var btnCheck1 = document
+									.getElementById('btnCheck1');
+							var btnClose1 = document
+									.getElementById('btnClose1');
+
+							// email check modal 창을 감춤
+							var closeRtn1 = function() {
+								var modal1 = document
+										.getElementById('modal1');
+								modal1.style.display = 'none';
+
+							}
+							// email check modal 창을 보여줌
+
+							var modal1 = document.getElementById('modal1');
+							var email = $('#email1').val() + '@'
+									+ $('#email2').val();
+							
+							modal1.style.display = 'block';
+							var mailCode = '';
+							$.ajax({
+								url : "/sendMail",
+								data : {
+									email : email
+								},
+								type : "post",
+								success : function(data) {
+									mailCode = data;
+									authTime();
+								}
+							});
+
+							btnCheck1.onclick = closeRtn1;
+							btnClose1.onclick = closeRtn1;
+							
+							
+
+							var intervalId;
+							function authTime() {
+								$("#timeZone")
+										.html(
+												"<span id='min'>3</span> : <span id='sec'>00</span>");
+								intervalId = window.setInterval(function() {
+									timeCount();
+								}, 1000);
+							}
+							function timeCount() {
+								var min = Number($("#min").html());
+								var sec = $("#sec").html();
+								if (sec == "00") {
+									if (min == 0) {
+										mailCode = null;
+										clearInterval(intervalId);
+									} else {
+										$("#min").html(--min);
+										$("#sec").html(59);
+
+									}
+								} else {
+									var newSec = Number(sec);
+									newSec--;
+									if (newSec < 10) {
+										$("#sec").html("0" + newSec);
+									} else {
+										$("#sec").html(newSec);
+									}
+								}
+							}
+							$("#btnCheck1").click(function() {
+
+								if (mailCode == null) {
+									$("#authMsg").html("인증 실패");
+									$("#authMsg").css("color", "red");
+									$("#emailchk").val('2');
+								} else {
+									if ($("#authCode").val() == mailCode) {
+										$("#authMsg").html("인증성공");
+										$("#authMsg").css("color", "blue"); //여기다가 인증추가를 해야함
+										$("#emailchk").val('1');
+										clearInterval(intervalId);
+										$("#timeZone").empty();
+										$("#emaildcheck").val('1');
+									} else {
+										$("#authMsg").html("인증코드를 확인하세요");
+										$("#authMsg").css("color", "red");
+										$("#emailchk").val('2');
+									}
+								}
+
+							})
+
+						} else if (data == 1) {
+							$("#ajaxEmailcheck").html("이미 사용중인 이메일 입니다.");
+							$("#ajaxEmailcheck").css("color", "red");
+						}
+
+					}
+				});
+	};
+
+	//sms 광고 수신 체크박스 밸류 리턴
+	if (document.getElementById("smsAgreement-check").checked) {
+		document.getElementById("smsAgreement_hidden").disabled = true;
+
+	}
+
+	//email 광고 수신 체크박스 밸류 리턴
+	if (document.getElementById("emailAgreement-check").checked) {
+		document.getElementById("emailgreement_hidden").disabled = true;
+
+	}
+</script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 
