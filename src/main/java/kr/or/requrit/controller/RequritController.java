@@ -1,5 +1,7 @@
 package kr.or.requrit.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.or.requrit.service.RequritService;
 import kr.or.requrit.vo.Requrit;
+import kr.or.requrit.vo.RequritPageData;
 
 
 @Controller
@@ -22,7 +25,10 @@ public class RequritController {
 	}
 	//공지 리스트 페이지로 이동
 	@RequestMapping(value="requritList.do")
-	public String requritList() {
+	public String requritList(Model model , int reqPage) {
+		RequritPageData rpd = service.selectRequritPageData(reqPage);
+		ArrayList<Requrit> list = service.selectRequritList();
+		model.addAttribute("list",list);
 		return "requrit/requritList";
 	}
 	@RequestMapping(value="requritInsert.do")

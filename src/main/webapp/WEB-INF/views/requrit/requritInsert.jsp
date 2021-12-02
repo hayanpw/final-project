@@ -47,8 +47,8 @@
         </div>
         <h3><span class="line">고</span>용형태</h3>
        <div class="radio">
-                <label class="radio-inline"><input type="radio" name="employeeType" checked>정규직</label>
-                <label class="radio-inline"><input type="radio" name="employeeType" >계약직</label>
+                <label class="radio-inline"><input type="radio" name="employeeType" value="정규직">정규직</label>
+                <label class="radio-inline"><input type="radio" name="employeeType" value="계약직">계약직</label>
        </div>
       <div>
         <h3><span class="line">상</span>세 설명</h3>
