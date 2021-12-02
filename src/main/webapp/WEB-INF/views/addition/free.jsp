@@ -6,28 +6,79 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+	#title{
+	padding-top:30px;
+	padding-left:30px;
+	font-weight:700;
+	font-size: 40px;
+	padding-bottom: 30px;
+	}
+	#table{
+	margin-left: 50px;
+	margin-right: 50px;
+	text-align: center;
+	}
+	#write{
+		float: left;
+	}
+	#my{
+		float: right;
+	}
+	#page{
+	text-align: center;
+	}
+	
+	#firtr>td:nth-child(1){
+	width: 80px;
+	}
+	#firtr>td:nth-child(3){
+	width: 100px;
+	}
+	#firtr>td:nth-child(4){
+	width: 150px;
+	}
+	#firtr>td:nth-child(5){
+	width: 80px;
+	}
+	#new{
+		float: left;
+	}
+	#select{
+		padding-bottom:20px;
+		float: right;
+	}
+</style>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
-	<div class="container">
-		<h1>소통게시판</h1>
-		<table border="1">
-			<tr>
-				<th>번호</th><th>제목</th><th>작성자</th><th>작성일</th><th>조회수</th>
-			</tr>
-			<c:forEach	items="${list }" var="b" varStatus="i">
-			<tr>
-				<td>${b.bnum }</td>
-				<td><a href="/boardView.do?boardType=3&boardNo=${b.boardNo}">${b.boardTitle }</a></td>
-				<td>${b.boardWriter }</td>
-				<td>${b.regDate }</td>
-				<td>${b.readCount }</td>
-			</tr>
-			</c:forEach>
-		</table>
-		<div id="pageNavi">${pageNavi }</div>
-		<button><a href="/boardWriteFrm.do?boardType=3">글작성</a></button>
-		<button><a href="/myFree.do">내글보기</a></button>
+	<div class="container" id="container">
+		<p id="title">소통게시판</p>
+		<div id="table">
+			<div id="new">새글수 자리</div>
+			<div id="select">목록정렬자리</div>
+			<table class="table">
+				<tr id="firtr">
+					<td>번호</td><td>제목</td><td>작성자</td><td>작성일</td><td>조회수</td>
+				</tr>
+				<c:forEach	items="${list }" var="b" varStatus="i">
+				<tr>
+					<td>${b.bnum }</td>
+					<td><a href="/boardView.do?boardType=3&boardNo=${b.boardNo}">${b.boardTitle }</a></td>
+					<td>${b.boardWriter }</td>
+					<td>${b.regDate }</td>
+					<td>${b.readCount }</td>
+				</tr>
+				</c:forEach>
+			</table>
+		</div>
+		<div id="page">
+			<div id="pageNavi">${pageNavi }</div>
+		</div>
+		<div id="table">	
+			<a class="btn" id="write" href="/boardWriteFrm.do?boardType=3">글작성</a>
+			<a class="btn" id="my" href="/myFree.do">내글보기</a>
+		</div>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>

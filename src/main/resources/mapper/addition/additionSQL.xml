@@ -53,4 +53,19 @@
 	<delete id="boardDelete" parameterType="_int">
 		delete from board where board_no=#{boardNo}
 	</delete>
+	<update id="updateReadCount" parameterType="_int">
+		update board set readcount=readcount+1 where board_no=#{boardNo}
+	</update>
+	<select id="selectCommentList" parameterType="_int" resultType="kr.or.addition.model.vo.BoardComment">
+		select	
+			bc_no as bcNo,
+			bc_level as bcLevel,
+			bc_writer as bcWriter,
+			bc_content as bcContent,
+			reg_date as regDate,
+			board_ref as boardRef,
+			bc_ref as bcRef,
+			bcid_ref as bcidRef
+		from comment1 where board_ref = #{boardNo}
+	</select>
 </mapper>

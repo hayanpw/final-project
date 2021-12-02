@@ -15,7 +15,9 @@
 	padding-bottom: 30px;
 	}
 	#table{
-		text-align: center;
+	margin-left: 50px;
+	margin-right: 50px;
+	text-align: center;
 	}
 	#search{
 		padding-right:20px;
@@ -28,32 +30,51 @@
 	#new{
 		float: left;
 	}
+	#page{
+	text-align: center;
+	}
+	
+	#firtr>td:nth-child(1){
+	width: 80px;
+	}
+	#firtr>td:nth-child(3){
+	width: 150px;
+	}
+	#firtr>td:nth-child(4){
+	width: 80px;
+	}
+	.btn{
+		background-color: #A79078;
+	}
 </style>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="container" id="container">
 		<p id="title">공지사항</p>
-		<div id="new">새글수 자리</div>
-		<div id="search">검색자리</div>
 		<div id="table">
+			<div id="new">새글수 자리</div>
+			<div id="search">검색자리</div>
 			<table class="table">
-				<tr>
-					<th>번호</th><th>제목</th><th>작성자</th><th>작성일</th><th>조회수</th>
+				<tr id="firtr">
+					<td>번호</td><td>제목</td><td>작성일</d><td>조회수</td>
 				</tr>
 				<c:forEach	items="${list }" var="b" varStatus="i">
 				<tr>
 					<td>${b.bnum }</td>
 					<td><a href="/boardView.do?boardType=1&boardNo=${b.boardNo}">${b.boardTitle }</a></td>
-					<td>${b.boardWriter }</td>
 					<td>${b.regDate }</td>
 					<td>${b.readCount }</td>
 				</tr>
 				</c:forEach>
 			</table>
+		</div>
+		<div id="page">
 			<div id="pageNavi">${pageNavi }</div>
 		</div>
-		<button id="write"><a href="/boardWriteFrm.do?boardType=1">글작성</a></button>
+		<div id="table">	
+			<a class="btn" id="write" href="/boardWriteFrm.do?boardType=1">글작성</a>
+		</div>	
 	</div>	
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>

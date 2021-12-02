@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import kr.or.addition.model.service.AdditionService;
 import kr.or.addition.model.vo.Board;
 import kr.or.addition.model.vo.BoardPageData;
+import kr.or.addition.model.vo.BoardViewData;
 import kr.or.addition.model.vo.FileVO;
 
 @Controller
@@ -30,7 +31,7 @@ public class AdditionController {
 		return "addition/addition";
 	}
 	
-	//글조회 공지
+	//글리스트조회 공지
 	@RequestMapping(value = "/additionNotice.do")
 	public String notice(int boardType,int reqPage,Model model) {
 		BoardPageData bpd= service.selectNoticeList(boardType,reqPage);
@@ -41,7 +42,7 @@ public class AdditionController {
 	}
 	
 	
-	//글조회 1대1문의
+	//글리스트조회 1대1문의
 	@RequestMapping(value = "/additionQNA.do") 
 	public String qna(int boardType,int reqPage,Model model) { 
 		BoardPageData bpd= service.selectNoticeList(boardType,reqPage);
@@ -52,7 +53,7 @@ public class AdditionController {
 	 }
 	 
 	
-	//글조회 소통
+	//글리스트조회 소통
 	@RequestMapping(value = "/additionFree.do") 
 	public String free(int boardType,int reqPage,Model model) { 
 		BoardPageData bpd= service.selectNoticeList(boardType,reqPage);
@@ -154,8 +155,10 @@ public class AdditionController {
 	@RequestMapping(value = "/boardView.do")
 	public String boardView(int boardType,int boardNo,Model model) {
 		//boardNo을 이용하여 조회한 board객체,arrayList<fileVo>
-		Board b = service.selectOneBoard(boardNo);
-		model.addAttribute("b",b);
+		BoardViewData bvd = service.selectOneBoard(boardNo);
+		model.addAttribute("b",bvd.getB());
+		model.addAttribute("list",bvd.getList());
+		
 		if(boardType==1) {
 			return "addition/noticeView";
 		}else if(boardType==2){
