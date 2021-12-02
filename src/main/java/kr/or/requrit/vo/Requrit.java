@@ -10,6 +10,7 @@ public class Requrit {
 	private String requritEnd;
 	private String requritCareer;
 	private String requritGender;
-	private String requritfield;
+	private String requritField;
 	private String requritDetail;
+	private String employeeType;
 }
