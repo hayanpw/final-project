@@ -8,4 +8,16 @@
 			#{requritEnd},#{requritCareer},#{requritGender},#{requritField},#{requritDetail},
 			#{employeeType})
 	</insert>
+	<select id="selectRequritList" parameterType="pa" resultType="rq">
+		select nn.requrit_no as requritNO, 
+			nn.requrit_title as requritTitle,
+			nn.requrit_start as requritStart,
+			nn.requrit_end as requritEnd,
+			nn.requrit_career as requritCareer,
+			nn.requrit_gender as requritGender,
+			nn.requrit_field as requritGender,
+			nn.requrit_detail as requritDetail,
+			nn.employee_type as employeeType from (select rownum as rnum, n.* from 
+			( select * from teacher_requrit order by requrit_no desc)n)nn where rnum BETWEEN 1 and 10
+	</select>
 </mapper>
