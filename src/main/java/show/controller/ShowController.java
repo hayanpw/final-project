@@ -203,12 +203,6 @@ public class ShowController {
 		return "common/msg";
 	}
 	
-	@RequestMapping(value = "/selectSeat.do")
-	public String selectSeat(ShowReserv sr, Model model) {
-		model.addAttribute("sr",sr);
-		return "show/selectSeat";
-	}
-	
 	@ResponseBody
 	@RequestMapping(value = "/uploadImage.do")
 	public String uploadImage(MultipartFile file, HttpServletRequest request) {
@@ -251,5 +245,14 @@ public class ShowController {
 			
 		}
 		return "/resources/showImage/editor/"+filepath;
+	}
+	
+	
+	@RequestMapping(value = "/selectSeat.do")
+	public String selectSeat(ShowReserv sr, Model model) {
+		Show s = service.selectOneShow(sr.getShowNo());
+		model.addAttribute("s",s);
+		model.addAttribute("sr",sr);
+		return "show/selectSeat";
 	}
 }

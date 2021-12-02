@@ -217,6 +217,8 @@
 				$(".slide").fadeOut();
 				$("input[name=reservDate]").val(selectDate);
 	        });
+	        
+	        $("input[name=reservDate]").val($("#datepicker").datepicker("setDate", today).val());
 
 	    });
 	    
