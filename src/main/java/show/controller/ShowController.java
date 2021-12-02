@@ -166,12 +166,6 @@ public class ShowController {
 		return "common/msg";
 	}
 	
-	@RequestMapping(value = "/selectSeat.do")
-	public String selectSeat(ShowReserv sr, Model model) {
-		model.addAttribute("sr",sr);
-		return "show/selectSeat";
-	}
-	
 	@RequestMapping(value = "/insertReview.do")
 	public String insertReview(ShowReview sr, Model model) {
 		int result = service.insertReview(sr);
@@ -206,5 +200,11 @@ public class ShowController {
 		}
 		model.addAttribute("loc", "/showView.do?showNo="+sr.getShowNo());
 		return "common/msg";
+	}
+	
+	@RequestMapping(value = "/selectSeat.do")
+	public String selectSeat(ShowReserv sr, Model model) {
+		model.addAttribute("sr",sr);
+		return "show/selectSeat";
 	}
 }
