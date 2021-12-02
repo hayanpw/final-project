@@ -19,36 +19,39 @@
 	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 	<div class="container">
 		  <h2>전시 등록하기</h2>
-  <form action="/action_page.php">
+  <form action="/exhibitionInsert.do" method="post" enctype="multipart/form-data">
     <div class="form-group">
       <h3><span class="line">전</span>시제목</h3>
       <input type="text" class="form-control" id="exhibitionTitle" placeholder="전시 제목을 입력해주세요" name="exhibitionTitle">
     </div>
      <div class="form-group">
         <h3><span class="line">전</span>시 대표사진</h3>
-        <input type="file"  id="resumefile"  name="resumefile">
+        <input type="file"  id="exhibitionPhoto"  name="upfile">
       </div>
     <h3><span class="line">전</span>시 기간</h3>
     <div class="form-group col-sm-6">
       <h4>시작일</h4>
-      <input type="text" class="form-control" id="datepicker" name="startDate">
+      <input type="text" class="form-control" id="datepicker" name="exhibitionStart">
     </div>
     <div class="form-group col-sm-6">
       <h4>종료일</h4>
-      <input type="text" class="form-control" id="datepicker2" name="endDate">
+      <input type="text" class="form-control" id="datepicker2" name="exhibitionEnd">
     </div>
     <h3><span class="line">관</span>람 연령</h3>
-     <div class="checkbox">
-      		<label><input type="radio" name="all"> 전체 관람</label><label><input type="radio" name="children">12세 이상</label><label><input type="radio" name="student">15세 이상</label><label><input type="radio" name="adult">19세 이상</label>
+     <div class="radio">
+      		<label><input type="radio" name="exhibitionAge" value="전체 관람">전체 관람</label>
+      		<label><input type="radio" name="exhibitionAge" value="12세 이상">12세 이상</label>
+      		<label><input type="radio" name="exhibitionAge" value="15세 이상">15세 이상</label>
+      		<label><input type="radio" name="exhibitionAge" value="19세 이상">19세 이상</label>
     	</div>
        <h3><span class="line">전</span>시 시간</h3>
     <div class="form-group col-sm-6">
       <h4>시작시간</h4>
-      <input type="time" class="form-control" id="startTime" name="startTime">
+      <input type="time" class="form-control" id="startTime" name="exhibitionTimeStart">
     </div>
     <div class="form-group col-sm-6">
       <h4>종료시간</h4>
-      <input type="time" class="form-control" id="endTime" name="endTime">
+      <input type="time" class="form-control" id="endTime" name="exhibitionTimeEnd">
     </div>
     <div class="form-group">
       <h3><span class="line">가</span>격</h3>
