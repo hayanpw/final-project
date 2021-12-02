@@ -57,7 +57,7 @@
 		<div class="readingList-form">
 			<form action="/readingList.do">
 				<fieldset>
-					<input type="hidden" id="memberId" value="${sessionScope.m.memberId }" readonly>
+					<input type="hidden" name="memberId" value="${sessionScope.m.memberId }" readonly>
 					<input type="submit" class="btn btn-success btn-lg" value="열람실 예약하기" style="background-color: #563D39; border-color: #563D39">
 				</fieldset>
 			</form>
