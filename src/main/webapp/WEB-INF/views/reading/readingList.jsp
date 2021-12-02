@@ -18,13 +18,14 @@
 	
 	<br><br><br>
 	<div class="container">
-		<h1>열람실 예약</h1><br><br>
+		<h1>열람실 예약</h1><br>
+		<h3>총 90석</h3><br>
 		<div class="container-left" >
 			<!-- 캘린더 코드 -->
 			<div id="datepicker"></div>
 			<div class="container-right">
-				<form action="" method="post">
-				    <input type="hidden" name="date">
+				<form action="/readingSeat.do" method="post">
+				    <input type="hidden" name="readingDay">
 				    <input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
 				    <h2 name="showdate"></h2>
 				    <h2 name="showseat"></h2><!-- 총좌석 - 카운트 = 남은좌석 -->
@@ -61,8 +62,7 @@
 	    
 	    $("#datepicker").change(function() {
 			selectDate = $(this).val();
-			$(".slide").fadeOut();
-			$("input[name=date]").val(selectDate);
+			$("input[name=readingDay]").val(selectDate);
 			var month = selectDate.substring(5,7); //몇월
 			var day = selectDate.substring(8,10);  //몇일
 			$("h2[name=showdate]").html(month+"월 "+day+"일");

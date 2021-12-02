@@ -11,8 +11,10 @@ public class ResumeController {
 
 	@Autowired
 	private ResumeService service;
+	
 	@RequestMapping(value="/resumeFrm.do")
 	public String resumeInsert() {
 		return "resume/resumeInsert";
 	}
+	
 }

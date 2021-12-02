@@ -1,13 +1,9 @@
-<%@page import="show.vo.ShowReview"%>
-<%@page import="java.util.ArrayList"%>
 <%@page import="show.vo.ShowAndReview"%>
-<%@page import="show.vo.Show"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     <%
     	ShowAndReview snr = (ShowAndReview)request.getAttribute("snr");
-    	ArrayList<ShowReview> srList = snr.getList();
     %>
 <!DOCTYPE html>
 <html>
@@ -153,7 +149,7 @@
                 <form action="/selectSeat.do" method="post">
 	                <input type="hidden" name="reservDate">
 	                <input type="hidden" name="showNo" value="${snr.s.showNo }">
-	                <input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
+	                <input type="hidden" name="memberNo" value="1<%-- ${sessionScope.m.memberNo } --%>">
 	                <h3>티켓 정보</h3>
 	                <div class="ticketPrice">
 	                	<c:choose>
@@ -170,8 +166,21 @@
                 </form>
             </div>
         </div>
+        <button class="scrollZero" onclick="goTop();" style="display: none">TOP</button>
     </div>
     <script>
+	    $(window).on("scroll", function(){
+	        if($(window).scrollTop() > 400){
+	            $(".scrollZero").show();
+	        }else{
+	            $(".scrollZero").hide();
+	        }
+	    });
+	    
+    	function goTop() {
+			window.scrollTo(0,0);
+		}
+    
 	    $(function() {
 	    	var showNo = ${snr.s.showNo};
 	    	var memberNo = 1;
@@ -208,6 +217,9 @@
 				$(".slide").fadeOut();
 				$("input[name=reservDate]").val(selectDate);
 	        });
+	        
+	        $("input[name=reservDate]").val($("#datepicker").datepicker("setDate", today).val());
+
 	    });
 	    
 	    function deleteShow(showNo) {

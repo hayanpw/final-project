@@ -8,4 +8,12 @@
  			member_level as memberLevel
  		from member where member_id=#{memberId} and member_password=#{memberPassword}
  	</select>
+ 	<insert id="insertMember" parameterType="m">
+ 		insert into member values(member_seq.nextval, 
+								#{memberId},#{memberEmail},
+								#{memberPassword},#{memberName},
+								#{memberPhone},#{memberBirthday},#{memberGender},
+								#{postcode},#{addressRoad},#{addressDetail},
+								1,#{memberReceiveEmail},#{memberReceiveSms},1,to_char(sysdate,'yyyy-mm-dd'))
+ 	</insert>
 </mapper>

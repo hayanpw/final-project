@@ -9,8 +9,6 @@ public class Resume {
 	private String resumeCareer;
 	private String resumeGenger;
 	private String resumePhone;
-	private String resumeFilepath;
-	private String resumeFilename;
 	private String resumeDetail;
 	private int memberNo;
 }

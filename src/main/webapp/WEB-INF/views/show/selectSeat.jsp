@@ -1,66 +1,204 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>좌석 선택</title>
 <link href="resources/showCss/show_default.css" rel="stylesheet">
 <link href="resources/showCss/show_seat.css" rel="stylesheet">
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="container">
-        <a href="showList.html">리스트로</a>
-        <div class="showSeat">
-            <div class="firstCol seatCol">
-                <ul>
-                    <li class="seatList"><a href="javascript:void(0)" class="seat" onclick="choose(this);">1</a></li>
-                    <li class="seatList"><a href="javascript:void(0)" class="seat" onclick="choose(this);">2</a></li>
-                    <li class="seatList"><a href="javascript:void(0)" class="seat" onclick="choose(this);">3</a></li>
-                    <li class="seatList"><a href="javascript:void(0)" class="seat" onclick="choose(this);">4</a></li>
-                </ul>
-            </div>
-            <div class="secondCol seatCol">
-                <ul>
-                    <li class="seatList"><a href="javascript:void(0)" class="seat" onclick="choose(this);">5</a></li>
-                    <li class="seatList"><a href="javascript:void(0)" class="seat" onclick="choose(this);">6</a></li>
-                    <li class="seatList"><a href="javascript:void(0)" class="seat" onclick="choose(this);">7</a></li>
-                    <li class="seatList"><a href="javascript:void(0)" class="seat" onclick="choose(this);">8</a></li>
-                </ul>
-            </div>
-            <div class="thirdCol seatCol">
-                <ul>
-                    <li class="seatList"><a href="javascript:void(0)" class="seat" onclick="choose(this);">9</a></li>
-                    <li class="seatList"><a href="javascript:void(0)" class="seat" onclick="choose(this);">10</a></li>
-                    <li class="seatList"><a href="javascript:void(0)" class="seat" onclick="choose(this);">11</a></li>
-                    <li class="seatList"><a href="javascript:void(0)" class="seat" onclick="choose(this);">12</a></li>
-                </ul>
-            </div>
-        </div>
+		<div class="title">
+			<h1><strong>좌석 선택</strong></h1>
+			<h2>${s.showName } / </h2>
+			<h2>${s.showHall } / </h2>
+			<h2>${sr.reservDate }</h2>
+		</div>
+		<div class="floorWrapper">
+	        <div class="floor">
+	            <div class="firstCol">
+	            	<c:forEach begin="1" end="15" varStatus="i">
+	            		<div class="row">
+	            			<c:choose>
+	            				<c:when test="${i.index < 5 }">
+	            					<c:forEach begin="1" end="${i.index+3 }" varStatus="j">
+			            				<div class="seats">
+			                        		<div id="seat" onclick="choose(this);">
+			                        			${j.index }
+			                        			<input type="hidden" value="A-${i.index }-${j.index}">
+			                        		</div>
+			                    		</div>
+			            			</c:forEach>
+	            				</c:when>
+	            				<c:when test="${i.index < 7 }">
+	            					<c:forEach begin="1" end="7" varStatus="j">
+			            				<div class="seats">
+			                        		<div id="seat" onclick="choose(this);">
+			                        			${j.index }
+			                        			<input type="hidden" value="A-${i.index }-${j.index}">
+			                        		</div>
+			                    		</div>
+			            			</c:forEach>
+	            				</c:when>
+	            				<c:when test="${i.index < 9 }">
+	            					<c:forEach begin="1" end="8" varStatus="j">
+			            				<div class="seats">
+			                        		<div id="seat" onclick="choose(this);">
+			                        			${j.index }
+			                        			<input type="hidden" value="A-${i.index }-${j.index}">
+			                        		</div>
+			                    		</div>
+			            			</c:forEach>
+	            				</c:when>
+	            				<c:when test="${i.index < 11 }">
+	            					<c:forEach begin="1" end="9" varStatus="j">
+			            				<div class="seats">
+			                        		<div id="seat" onclick="choose(this);">
+			                        			${j.index }
+			                        			<input type="hidden" value="A-${i.index }-${j.index}">
+			                        		</div>
+			                    		</div>
+			            			</c:forEach>
+	            				</c:when>
+	            				<c:otherwise>
+	            					<c:forEach begin="1" end="10" varStatus="j">
+			            				<div class="seats">
+			                        		<div id="seat" onclick="choose(this);">
+			                        			${j.index }
+			                        			<input type="hidden" value="A-${i.index }-${j.index}">
+			                        		</div>
+			                    		</div>
+			            			</c:forEach>
+	            				</c:otherwise>
+	            			</c:choose>
+	            		</div>
+	            	</c:forEach>
+	            </div>
+	            <div class="secondCol">
+	                <c:forEach begin="1" end="15" varStatus="i">
+	            		<div class="row">
+	            			<c:choose>
+	            				<c:when test="${i.index % 2 ==1 }">
+			            			<c:forEach begin="1" end="12" varStatus="j">
+			            				<div class="seats">
+			                        		<div id="seat" onclick="choose(this);">
+			                        			${j.index }
+			                        			<input type="hidden" value="B-${i.index }-${j.index}">
+			                        		</div>
+			                    		</div>
+			            			</c:forEach>
+	            				</c:when>
+	            				<c:otherwise>
+	            					<c:forEach begin="1" end="11" varStatus="j">
+	            						<div class="seats">
+			                        		<div id="seat" onclick="choose(this);">
+			                        			${j.index }
+			                        			<input type="hidden" value="B-${i.index }-${j.index}">
+			                        		</div>
+			                    		</div>
+			            			</c:forEach>
+	            				</c:otherwise>
+	            			</c:choose>
+	            		</div>
+	            	</c:forEach>
+	            </div>
+	            <div class="thirdCol">
+	                <c:forEach begin="1" end="15" varStatus="i">
+	            		<div class="row">
+	            			<c:choose>
+	            				<c:when test="${i.index < 5 }">
+	            					<c:forEach begin="1" end="${i.index+3 }" varStatus="j">
+			            				<div class="seats">
+			                        		<div id="seat" onclick="choose(this);">
+			                        			${j.index }
+			                        			<input type="hidden" value="C-${i.index }-${j.index}">
+			                        		</div>
+			                    		</div>
+			            			</c:forEach>
+	            				</c:when>
+	            				<c:when test="${i.index < 7 }">
+	            					<c:forEach begin="1" end="7" varStatus="j">
+			            				<div class="seats">
+			                        		<div id="seat" onclick="choose(this);">
+			                        			${j.index }
+			                        			<input type="hidden" value="C-${i.index }-${j.index}">
+			                        		</div>
+			                    		</div>
+			            			</c:forEach>
+	            				</c:when>
+	            				<c:when test="${i.index < 9 }">
+	            					<c:forEach begin="1" end="8" varStatus="j">
+			            				<div class="seats">
+			                        		<div id="seat" onclick="choose(this);">
+			                        			${j.index }
+			                        			<input type="hidden" value="C-${i.index }-${j.index}">
+			                        		</div>
+			                    		</div>
+			            			</c:forEach>
+	            				</c:when>
+	            				<c:when test="${i.index < 11 }">
+	            					<c:forEach begin="1" end="9" varStatus="j">
+			            				<div class="seats">
+			                        		<div id="seat" onclick="choose(this);">
+			                        			${j.index }
+			                        			<input type="hidden" value="C-${i.index }-${j.index}">
+			                        		</div>
+			                    		</div>
+			            			</c:forEach>
+	            				</c:when>
+	            				<c:otherwise>
+	            					<c:forEach begin="1" end="10" varStatus="j">
+			            				<div class="seats">
+			                        		<div id="seat" onclick="choose(this);">
+			                        			${j.index }
+			                        			<input type="hidden" value="C-${i.index }-${j.index}">
+			                        		</div>
+			                    		</div>
+			            			</c:forEach>
+	            				</c:otherwise>
+	            			</c:choose>
+	            		</div>
+	            	</c:forEach>
+	            </div>
+	        </div>
+	        <div class="reservInfo">
+	        	<div><h1><strong>선택 좌석</strong></h1></div>
+	            <div class="selectSeat"></div>
+	            <button class="btn btn-danger">예매하기</button>
+	        </div>
+		
+		</div>
     </div>
-	<script>
+    <script>
         var count=0;
         var arr = new Array();
         function choose(obj){
-            $(obj).parent().css("background-color", "#563D39");
+            $(obj).css("background-color", "#563D39");
             $(obj).attr("onclick", "cancel(this);");
             count++;
-            console.log(count);
-            arr.push($(obj).html());
-            console.log(arr);
+            arr.push($(obj).children().val());
+            var h3 = $("<h3>");
+            h3.append($(obj).children().val());
+            $(".selectSeat").append(h3);
+            $(".selectSeat").scrollTop(innerHeight);
         }
         function cancel(obj){
-            $(obj).parent().css("background-color", "#BDB19A");
+            $(obj).css("background-color", "#BDB19A");
             $(obj).attr("onclick", "choose(this);");
             count--;
-            console.log(count);
+            $(".selectSeat").empty();
             for(var i=0; i<arr.length; i++){
-                if(arr[i] == $(obj).html()){
+                if(arr[i] == $(obj).children().val()){
                     arr.splice(i,1);
                 }
+                var h3 = $("<h3>");
+                h3.append(arr[i]);
+                $(".selectSeat").append(h3);
             }
-            console.log(arr);
         }
     </script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>

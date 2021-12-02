@@ -2,6 +2,7 @@ package kr.or.member.sevice;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.member.dao.MemberDao;
 import kr.or.member.vo.Member;
@@ -19,5 +20,11 @@ public class MemberService {
 //		}
 		Member m = dao.selectOneMember(member);
 		return m;
+	}
+	@Transactional
+	public int insertMember(Member m) {
+		
+		int result = dao.insertMember(m);
+		return result;
 	}
 }

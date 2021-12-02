@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.or.addition.model.vo.Board;
+import kr.or.addition.model.vo.BoardComment;
 import kr.or.addition.model.vo.FileVO;
 
 @Repository
@@ -46,6 +47,27 @@ public class AdditionDao {
 
 	public int boardDelete(int boardNo) {
 		return sqlSession.delete("addition.boardDelete",boardNo);
+	}
+
+	public int updateReadCount(int boardNo) {
+		return sqlSession.update("addition.updateReadCount",boardNo);
+	}
+
+	public ArrayList<BoardComment> selectCommentList(int boardNo) {
+		List<BoardComment> list= sqlSession.selectList("addition.selectCommentList",boardNo);
+		return (ArrayList<BoardComment>)list;
+	}
+
+	public int insertComment(BoardComment bc) {
+		return sqlSession.insert("addition.insertComment",bc);
+	}
+
+	public int deleteComment(int bcNo) {
+		return sqlSession.delete("addition.deleteComment",bcNo);
+	}
+
+	public int updateComment(HashMap<String, Object> map) {
+		return sqlSession.update("addition.updateComment",map);
 	}
 
 

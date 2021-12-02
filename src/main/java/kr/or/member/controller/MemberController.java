@@ -53,6 +53,22 @@ public class MemberController {
 		session.invalidate();
 		return "redirect:/";
 	}
+	@RequestMapping(value="/joinFrm.do")
+	public String joinFrm() {
+		return "member/joinFrm";
+	}
+	@RequestMapping(value="/join.do")
+	public String join(Member m, Model model) {
+		int result = service.insertMember(m);
+		if(result>0) {
+			model.addAttribute("msg","회원가입성공");
+			model.addAttribute("loc","/");
+		}else {
+			model.addAttribute("msg","회원가입실패");
+			model.addAttribute("loc","/joinFrm.do");
+		}
+		return "common/msg";
+	}
 
 }
 

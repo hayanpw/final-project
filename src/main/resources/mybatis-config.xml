@@ -14,5 +14,8 @@
 		<typeAlias type="kr.or.space.model.vo.Space" alias="space"/>
 		<typeAlias type="kr.or.member.vo.Member" alias="m"/>
 		<typeAlias type="kr.or.space.model.vo.FileVO" alias="fv"/>
+		<typeAlias type="kr.or.exhibition.vo.Exhibition" alias="exb"/>
+		<typeAlias type="kr.or.requrit.vo.Requrit" alias="rq"/>
+		<typeAlias type="kr.or.requrit.vo.RequritPagingVo" alias="pa"/>
 	</typeAliases>
 </configuration>
