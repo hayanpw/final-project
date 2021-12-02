@@ -86,11 +86,36 @@
 		  height: 300,                 // set editor height
 		  minHeight: null,             // set minimum height of editor
 		  maxHeight: null,             // set maximum height of editor
-		  focus: true                  // set focus to editable area after initializing summernote
+		  focus: true,                  // set focus to editable area after initializing summernote
+		  lang : "ko-KR",
+		  callbacks:{
+				onImageUpload : function(files) {
+					uploadImage(files[0],this);
+				}
+			}
 		});
     $(document).ready(function() {
     	  $('#summernote').summernote();
     	});
+    
+	function uploadImage(file,editor) {
+		//form과 같은 효과를 내는 객체
+		var form = new FormData();
+		form.append("file",file);
+		$.ajax({
+			url : "/uploadImage.do",
+			type : "post",
+			data : form,
+			processData : false,
+			contentType : false,
+			success : function(data) {
+				//결과로 받은 업로드 경로를 이용해서 에디터에 이미지 추가
+				$(editor).summernote("insertImage",data, function($image) {
+					$image.css("width", "100%");
+				});
+			}
+		});
+	}
     </script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
