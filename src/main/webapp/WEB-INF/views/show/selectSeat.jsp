@@ -175,6 +175,7 @@
             var h3 = $("<h3>");
             h3.append($(obj).children().val());
             $(".selectSeat").append(h3);
+            $(".selectSeat").scrollTop(innerHeight);
         }
         function cancel(obj){
             $(obj).css("background-color", "#BDB19A");
