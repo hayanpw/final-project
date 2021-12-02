@@ -25,5 +25,10 @@ public class MemberDao {
 			return m;
 		}
 	}
+	public int insertMember(Member m) {
+		int result = sqlSession.insert("member.insertMember",m);
+		return result;
+	}
+
 }
 

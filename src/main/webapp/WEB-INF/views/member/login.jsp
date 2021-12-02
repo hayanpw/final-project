@@ -21,6 +21,8 @@
 					<a type="text" class="searchidpw" data-toggle="modal" data-target="#sModal">ID · PASSWORD 찾기</a>
 				</fieldset>
 		</form>
+		<hr>
+		<a href="/joinFrm.do">회원가입[임시]</a>
 		</div>
 		<div class="modal" id="sModal">
 			<div class="modal-dialog">
