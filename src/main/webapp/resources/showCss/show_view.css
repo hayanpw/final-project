@@ -66,7 +66,10 @@
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
 }
-.showContent>img{
+.showContent{
+	overflow: hidden;
+}
+.showContent img{
     width: 100%;
 }
 .hideContent{
