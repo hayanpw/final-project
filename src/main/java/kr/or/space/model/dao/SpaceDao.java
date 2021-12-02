@@ -39,4 +39,26 @@ public class SpaceDao {
 		List<FileVO> list = sqlSession.selectList("space.selectFile");
 		return (ArrayList<FileVO>)list;
 	}
+	//공간 하나 조회
+	public Space selectOneSpace(int spaceNo) {
+		return sqlSession.selectOne("space.selectOneSpace",spaceNo);
+	}
+	//공간 파일 조회
+	public ArrayList<FileVO> selectSpaceFile(int spaceNo) {
+		List<FileVO> list = sqlSession.selectList("space.selectSpaceFile");
+		return (ArrayList<FileVO>)list;
+	}
+	//썸네일 조회
+	public FileVO selectThumbnail(int spaceNo) {
+		return sqlSession.selectOne("space.selectThumbnail");
+	}
+	//공간 삭제(del -> Y)
+	public int deleteSpace(int spaceNo) {
+		return sqlSession.update("space.deleteSpace",spaceNo);
+	}
+	//1개 공간 파일 조회
+	public ArrayList<FileVO> selectFileList(int spaceNo) {
+		List<FileVO> list = sqlSession.selectList("space.selectFileList");
+		return (ArrayList<FileVO>)list;
+	}
 }

@@ -19,6 +19,11 @@
 			into space_file 
 			values(space_file_seq.nextval,#{spaceNo},#{filename},#{filepath},'N')
 	</insert>
+	<insert id="insertTime" parameterType="kr.or.space.model.vo.SpaceTime">
+		insert
+			into space_time
+			values(st_seq.nextval,#{spaceNo})
+	</insert>
 	<select id="selectAllSpace" resultType="space">
 		select
 			space_no as spaceNo,
@@ -39,5 +44,49 @@
 			thumbnail
 		from space_file	
 		where thumbnail like 'Y'
+	</select>
+	<select id="selectOneSpace" resultType="space" parameterType="_int">
+		select
+			space_no as spaceNo,
+			space_name as spaceName,
+			space_purpose as spacePurpose,
+			main_facility as mainFacility,
+			main_product as mainProduct,
+			max_people as maxPeople,
+			price
+		from space
+		where del_yn like 'N' and space_no=#{spaceNo}
+	</select>
+	<select id="selectSpaceFile" resultType="fv" parameterType="_int">
+		select
+			space_no as spaceNo,
+			filename,
+			filepath,
+			thumbnail
+		from space_file	
+		where thumbnail like 'N' and space_no=#{spaceNo}
+	</select>
+	<select id="selectThumbnail" parameterType="_int" resultType="fv">
+		select
+			space_no as spaceNo,
+			filename,
+			filepath,
+			thumbnail
+		from space_file	
+		where thumbnail like 'Y' and space_no=#{spaceNo}	
+	</select>
+	<update id="deleteSpace" parameterType="_int">
+		update
+			space set del_yn = 'Y'
+			where space_no = #{spaceNo}
+	</update>
+	<select id="selectFileList" parameterType="_int" resultType="fv">
+		select
+			space_no as spaceNo,
+			filename,
+			filepath,
+			thumbnail
+		from space_file	
+		where space_no=#{spaceNo}
 	</select>
 </mapper>

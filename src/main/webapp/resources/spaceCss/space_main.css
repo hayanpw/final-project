@@ -36,10 +36,12 @@
 	width: 10%;
 	text-align: center;
 	border-right: 1px solid #BDB19A ;
+	vertical-align: middle;
 }
 #s-table tr td:last-child{
 	width: 50%;
 	text-align: center;
+	vertical-align: middle;
 }
 #s-table tr td{
 	border-bottom: 1px solid #BDB19A;
@@ -56,5 +58,17 @@
 .spaceRes>a:hover{
 	font-weight : bold;
 	color: #563D39;
+}
+#rentalBtn{
+	border : 1px solid #BDB19A; 
+	width : 250px;
+	height : 50px;
+	margin-bottom : 10px;
+	margin-left: 40%;
+}
+#rentalBtn:hover{
+	border : 1px solid white;
+	background: #BDB19A;	
+	
 }
 

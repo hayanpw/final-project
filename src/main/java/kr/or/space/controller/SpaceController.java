@@ -51,8 +51,19 @@ public class SpaceController {
 
 	// 공간 등록페이지로 이동
 	@RequestMapping(value = "/spaceInsertFrm.do")
-	public String spaceInsertFrm() {
+	public String spaceInsertFrm(Model model) {
 		return "space/spaceInsert";
+	}
+	// 공간 수정 페이지로 이동
+	@RequestMapping(value = "/spaceUpdate.do")
+	public String spaceUpdate(int spaceNo, Model model) {
+		Space space =service.selectOneSpace(spaceNo);
+		ArrayList<FileVO> fv = service.selectSpaceFile(spaceNo);
+		FileVO t = service.selectThumbnail(spaceNo);
+		model.addAttribute("s", space);
+		model.addAttribute("fv", fv);
+		model.addAttribute("t", t);
+		return "space/spaceUpdateFrm";
 	}
 	// 신청 현황 페이지로 이동
 	@RequestMapping(value = "/spaceRes.do")
@@ -69,27 +80,25 @@ public class SpaceController {
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/spaceImage/upload/");
 			for (MultipartFile file : files) {
 				String filename = file.getOriginalFilename();
-				String onlyFilename = filename.substring(0, filename.indexOf(".")); // test (0부터 . 까지)
-				String extention = filename.substring(filename.indexOf(".")); // .txt (.부터 끝까지)
+				String onlyFilename = filename.substring(0, filename.indexOf(".")); 
+				String extention = filename.substring(filename.indexOf(".")); 
 				String filepath = null;
-				int count = 0; // 숫자를 올려줄 변수
+				int count = 0;
 				while (true) {
 					if (count == 0) {
-						filepath = onlyFilename + extention; // text.txt
+						filepath = onlyFilename + extention;
 					} else {
-						filepath = onlyFilename + "_" + count + extention; // test_3.txt
+						filepath = onlyFilename + "_" + count + extention; 
 					}
-					File checkFile = new File(savePath + filepath); // java.io.File
+					File checkFile = new File(savePath + filepath);
 					if (!checkFile.exists()) {
 						break;
 					}
 					count++;
 				}
-				// 파일명 중복 처리가 끝나면 파일 업로드
 				try {
 					FileOutputStream fos = new FileOutputStream(new File(savePath + filepath));
 					BufferedOutputStream bos = new BufferedOutputStream(fos);
-					// 파일 업로드
 					byte[] bytes = file.getBytes();
 					bos.write(bytes);
 					bos.close();
@@ -115,5 +124,26 @@ public class SpaceController {
 		model.addAttribute("loc", "/");
 		return "common/msg";
 
+	}
+	//공간 삭제
+	@RequestMapping(value = "/spaceDelete.do")
+	public String spaceDelete(int spaceNo, Model model) {
+		int result = service.deleteSpace(spaceNo);
+		if(result > 0) {
+			model.addAttribute("msg", "삭제 한 공간은 관리자 페이지에서 찾을 수 있습니다.");
+		}else{
+			model.addAttribute("msg", "삭제를 실패하였습니다.");
+		}
+		model.addAttribute("loc", "/");
+		return "common/msg";
+	}
+	//공간 상세보기
+	@RequestMapping(value = "/spaceInfo.do")
+	public String spaceInfo(int spaceNo, Model model) {
+		Space s = service.selectOneSpace(spaceNo);
+		ArrayList<FileVO> fv = service.selectFileList(spaceNo);
+		model.addAttribute("s", s);
+		model.addAttribute("fv", fv);
+		return "space/spaceInfo";
 	}
 }

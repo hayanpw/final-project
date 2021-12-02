@@ -28,7 +28,7 @@
 		</div>
 		<div class="rental-price">
 			<h4 class="s-title">대관료 안내</h4>
-			<div class="spaceRes"><a href="/spaceRes.do">>신청하기</a></div>
+			<div class="spaceRes"><a href="/spaceList.do">>공간보기</a></div>
 			<div>
 				<c:forEach items="${list }" var ="s">
 					<div>
@@ -62,7 +62,7 @@
 				
 			</div>
 		</div>
-		<button class="btn btn-default" id="rentalBtn" onclick="location.href='/rentalSpace.do'">대관 신청하기</button>
+		<button class="btn btn-default" id="rentalBtn" onclick="location.href='/spaceRes.do'">대관 신청하기</button>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
