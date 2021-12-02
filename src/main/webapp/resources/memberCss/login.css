@@ -34,3 +34,8 @@ fieldset {
 .searchidpw:hover{
     color:#563D39;
 }
+.intputBtn{
+	background-color: #BDB19A;
+	color:#fff;
+	margin-top: 15px;
+}

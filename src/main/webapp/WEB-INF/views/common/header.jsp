@@ -37,8 +37,8 @@
 	<nav class="header-nav">
            <div class="navi">
                <ul>
-                   <li><a href="#">공연 · 예매</a></li>
-                   <li><a href="#">공간 · 대관</a></li>
+                   <li><a href="/showList.do">공연 · 예매</a></li>
+                   <li><a href="/spaceMain.do">공간 · 대관</a></li>
                    <li><a href="#">전시</a></li>
                    <li><a href="#">열람실</a></li>
                    <li>
@@ -57,13 +57,13 @@
                         </ul>
                    </li>
                    <li>
-                       <a href="#">부가서비스</a>
+                       <a href="/addition.do">부가서비스</a>
                        <ul class="sub">
-                           <li><a href="#">공지사항</a></li>
-                           <li><a href="#">소통게시판</a></li>
-                           <li><a href="#">1:1문의</a></li>
-                           <li><a href="#">시설안내 · 오시는 길</a></li>
-                           <li><a href="#">이벤트</a></li>
+                           <li><a href="/additionNotice.do?boardType=1&reqPage=1">공지사항</a></li>
+                           <li><a href="/additionFree.do?boardType=3&reqPage=1">소통게시판</a></li>
+                           <li><a href="/additionQNA.do?boardType=2&reqPage=1">문의게시판</a></li>
+                           <li><a href="/additionGuide.do">시설안내 · 오시는 길</a></li>
+                           <li><a href="/discount.do">이벤트</a></li>
                        </ul>
                    </li>
                </ul>
