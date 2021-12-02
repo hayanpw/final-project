@@ -10,7 +10,7 @@ public class BoardComment {
 	private String bcContent;
 	private String regDate;
 	private int boardRef;
-	private int bcRef;
+	private Integer bcRef;
 	private String bcidRef;
 	
 	public String getBcContentBr() {

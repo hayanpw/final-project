@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kr.or.addition.model.service.AdditionService;
 import kr.or.addition.model.vo.Board;
+import kr.or.addition.model.vo.BoardComment;
 import kr.or.addition.model.vo.BoardPageData;
 import kr.or.addition.model.vo.BoardViewData;
 import kr.or.addition.model.vo.FileVO;
@@ -191,5 +192,43 @@ public class AdditionController {
 	@RequestMapping(value = "/discount.do")
 	public String discount() {
 		return "addition/discount";
+	}
+	//댓글달기
+	@RequestMapping(value = "/insertComment.do")
+	public String insertComment(BoardComment bc,Model model) {
+		int result = service.insertComment(bc);
+		if(result>0) {
+			model.addAttribute("msg","댓글등록성공");
+		}else {
+			model.addAttribute("msg","댓글등록실패");
+		}
+		model.addAttribute("loc","/boardView.do?boardType=3&boardNo="+bc.getBoardRef());
+		return "common/msg";
+	}
+	
+	//댓글삭제
+	@RequestMapping(value = "/deleteComment.do")
+	public String deleteComment(int bcNo,int boardNo,Model model) {
+		int result =service.deleteComment(bcNo);
+		if(result>0) {
+			model.addAttribute("msg","삭제성공");
+		}else {
+			model.addAttribute("msg","삭제실패");
+		}
+		model.addAttribute("loc","/boardView.do?boardType=3&boardNo="+boardNo);
+		return "common/msg";
+	}
+	
+	//댓글수정
+	@RequestMapping(value = "/updateComment.do")
+	public String updateComment(int bcNo,int boardNo,String bcContent,Model model) {
+		int result = service.updateComment(bcNo,bcContent);
+		if(result>0) {
+			model.addAttribute("msg","수정성공");
+		}else {
+			model.addAttribute("msg","수정실패");
+		}
+		model.addAttribute("loc","/boardView.do?boardType=3&boardNo="+boardNo);
+		return "common/msg";
 	}
 }

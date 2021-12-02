@@ -66,6 +66,15 @@
 			board_ref as boardRef,
 			bc_ref as bcRef,
 			bcid_ref as bcidRef
-		from comment1 where board_ref = #{boardNo}
+		from comment1 where board_ref = #{boardNo} order by bc_no
 	</select>
+	<insert id="insertComment" parameterType="kr.or.addition.model.vo.BoardComment" >
+		insert into comment1 values (comment1_seq.nextval,#{bcLevel},#{bcWriter},#{bcContent},to_char(sysdate,'yyyy-mm-dd hh:mi:ss'),#{boardRef},#{bcRef,jdbcType=INTEGER},#{bcidRef})
+	</insert>
+	<delete id="deleteComment" parameterType="_int">
+		delete from comment1 where bc_no=#{bcNo}
+	</delete>
+	<update id="updateComment" parameterType="map">
+		update comment1 set bc_content=#{bcContent} where bc_no=#{bcNo}
+	</update>
 </mapper>

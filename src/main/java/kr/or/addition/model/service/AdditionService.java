@@ -137,5 +137,31 @@ public class AdditionService {
 		return result;
 	}
 
+	//댓글달기
+	@Transactional
+	public int insertComment(BoardComment bc) {
+		int result= dao.insertComment(bc);
+		return result;
+	}
+
+	//댓글삭제
+	@Transactional
+	public int deleteComment(int bcNo) {
+		int result = dao.deleteComment(bcNo);
+		return result;
+	}
+
+
+	//댓글수정
+	@Transactional
+	public int updateComment(int bcNo, String bcContent) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("bcNo", bcNo);
+		map.put("bcContent", bcContent);
+		int result = dao.updateComment(map);
+		return result;
+	}
+	
+	
 
 }

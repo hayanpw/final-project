@@ -58,5 +58,17 @@ public class AdditionDao {
 		return (ArrayList<BoardComment>)list;
 	}
 
+	public int insertComment(BoardComment bc) {
+		return sqlSession.insert("addition.insertComment",bc);
+	}
+
+	public int deleteComment(int bcNo) {
+		return sqlSession.delete("addition.deleteComment",bcNo);
+	}
+
+	public int updateComment(HashMap<String, Object> map) {
+		return sqlSession.update("addition.updateComment",map);
+	}
+
 
 }
