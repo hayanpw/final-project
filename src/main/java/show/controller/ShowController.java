@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import show.service.ShowService;
@@ -166,12 +167,6 @@ public class ShowController {
 		return "common/msg";
 	}
 	
-	@RequestMapping(value = "/selectSeat.do")
-	public String selectSeat(ShowReserv sr, Model model) {
-		model.addAttribute("sr",sr);
-		return "show/selectSeat";
-	}
-	
 	@RequestMapping(value = "/insertReview.do")
 	public String insertReview(ShowReview sr, Model model) {
 		int result = service.insertReview(sr);
@@ -206,5 +201,58 @@ public class ShowController {
 		}
 		model.addAttribute("loc", "/showView.do?showNo="+sr.getShowNo());
 		return "common/msg";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/uploadImage.do")
+	public String uploadImage(MultipartFile file, HttpServletRequest request) {
+		String filepath = null;
+		if(file != null) {
+			String savePath = request.getSession().getServletContext().getRealPath("/resources/showImage/editor/");
+			
+			String filename = file.getOriginalFilename();
+			String onlyFilename = filename.substring(0, filename.indexOf("."));
+			String extention = filename.substring(filename.indexOf("."));
+			
+			
+			int count = 0;
+			while(true) {
+				if(count==0) {
+					filepath = onlyFilename + extention;
+				}else {
+					filepath = onlyFilename+"_"+count+extention;
+				}
+				File checkFile = new File(savePath+filepath);
+				if(!checkFile.exists()) {
+					break;
+				}
+				count++;
+			}
+			
+			try {
+				FileOutputStream fos = new FileOutputStream(new File(savePath+filepath));
+				BufferedOutputStream bos = new BufferedOutputStream(fos);
+				byte[] bytes = file.getBytes();
+				bos.write(bytes);
+				bos.close();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		return "/resources/showImage/editor/"+filepath;
+	}
+	
+	
+	@RequestMapping(value = "/selectSeat.do")
+	public String selectSeat(ShowReserv sr, Model model) {
+		Show s = service.selectOneShow(sr.getShowNo());
+		model.addAttribute("s",s);
+		model.addAttribute("sr",sr);
+		return "show/selectSeat";
 	}
 }

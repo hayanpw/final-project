@@ -40,7 +40,7 @@
                    <li><a href="/showList.do">공연 · 예매</a></li>
                    <li><a href="/spaceMain.do">공간 · 대관</a></li>
                    <li><a href="#">전시</a></li>
-                   <li><a href="#">열람실</a></li>
+                   <li><a href="/readingNotice.do">열람실</a></li>
                    <li>
                        <a href="#">아카데미</a>
                        <ul class="sub">

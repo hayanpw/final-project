@@ -48,7 +48,7 @@
 			<ul>
 				<li>지정좌석에서 마스크 상시 착용</li>
 				<li>점심시간(12:00 ~ 13:00)에 소독을 위한 전원 퇴실 (귀중품 개인 소지 필수)</li>
-				<li>방역지침으로 인한 휴게실 사용 불가 및 거리두기</li>
+				<li>방역지침으로 인한 휴게실 사용 불가</li>
 				<li>조기 퇴실시 다음 이용자를 위해 메인이나 퇴실장치에 찍고 퇴실</li>
 				<li>비품 대여자는 비품반납 후 보증금 수령</li>
 			</ul>
@@ -57,7 +57,7 @@
 		<div class="readingList-form">
 			<form action="/readingList.do">
 				<fieldset>
-					<input type="hidden" id="memberId" value="${sessionScope.m.memberId }" readonly>
+					<input type="hidden" name="memberId" value="${sessionScope.m.memberId }" readonly>
 					<input type="submit" class="btn btn-success btn-lg" value="열람실 예약하기" style="background-color: #563D39; border-color: #563D39">
 				</fieldset>
 			</form>
