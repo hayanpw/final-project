@@ -62,7 +62,6 @@
 	    
 	    $("#datepicker").change(function() {
 			selectDate = $(this).val();
-			$(".slide").fadeOut();
 			$("input[name=readingDay]").val(selectDate);
 			var month = selectDate.substring(5,7); //몇월
 			var day = selectDate.substring(8,10);  //몇일
