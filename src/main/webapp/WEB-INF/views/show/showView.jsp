@@ -166,8 +166,21 @@
                 </form>
             </div>
         </div>
+        <button class="scrollZero" onclick="goTop();" style="display: none">TOP</button>
     </div>
     <script>
+	    $(window).on("scroll", function(){
+	        if($(window).scrollTop() > 400){
+	            $(".scrollZero").show();
+	        }else{
+	            $(".scrollZero").hide();
+	        }
+	    });
+	    
+    	function goTop() {
+			window.scrollTo(0,0);
+		}
+    
 	    $(function() {
 	    	var showNo = ${snr.s.showNo};
 	    	var memberNo = 1;
@@ -204,6 +217,7 @@
 				$(".slide").fadeOut();
 				$("input[name=reservDate]").val(selectDate);
 	        });
+
 	    });
 	    
 	    function deleteShow(showNo) {
