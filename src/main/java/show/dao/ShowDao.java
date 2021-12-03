@@ -1,6 +1,7 @@
 package show.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -74,4 +75,14 @@ public class ShowDao {
 	public int deleteSeat(int reservNo) {
 		return sqlSession.delete("show.deleteSeat", reservNo);
 	}
+
+	public ShowReserv selectReserv(int reservNo) {
+		return sqlSession.selectOne("show.selectReserv", reservNo);
+	}
+
+	public ArrayList<Seat> selectSeatList(int reservNo) {
+		List<Seat> list = sqlSession.selectList("show.selectSeatList", reservNo);
+		return (ArrayList<Seat>)list;
+	}
+
 }

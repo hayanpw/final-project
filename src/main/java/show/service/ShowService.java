@@ -1,6 +1,7 @@
 package show.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -90,6 +91,17 @@ public class ShowService {
 		int result = dao.deleteReserv(reservNo);
 		result = dao.deleteSeat(reservNo);
 		return result;
+	}
+
+	public HashMap<String, Object> selectReservation(int reservNo) {
+		ShowReserv sr = dao.selectReserv(reservNo);
+		Show show = dao.selectOneShow(sr.getShowNo());
+		ArrayList<Seat> list = dao.selectSeatList(reservNo);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("sr", sr);
+		map.put("show", show);
+		map.put("list", list);
+		return map;
 	}
 
 }

@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -274,13 +275,17 @@ public class ShowController {
 	}
 	
 	@RequestMapping(value = "/cancelPayment.do")
-	public String paymentSuccess(int reservNo) {
+	public String cancelPayment(int reservNo) {
 		int result = service.deleteReserv(reservNo);
 		return "redirect:/showList.do";
 	}
 	
 	@RequestMapping(value = "/paymentSuccess.do")
-	public String paymentSuccess() {
+	public String paymentSuccess(int reservNo, Model model) {
+		HashMap<String, Object> map = service.selectReservation(reservNo);
+		model.addAttribute("sr", map.get("sr"));
+		model.addAttribute("show", map.get("show"));
+		model.addAttribute("list", map.get("list"));
 		return "show/paymentSuccess";
 	}
 }

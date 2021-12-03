@@ -61,6 +61,22 @@
 	<delete id="deleteSeat" parameterType="_int">
 		delete from seat where reserv_no=#{reservNo}
 	</delete>
+	<select id="selectReserv" parameterType="_int" resultType="sReserv">
+		select
+			show_no as showNo,
+			member_id as memberId,
+			show_date as showDate,
+			reserv_date as reservDate,
+			reserv_cancel as reservCancel
+		from show_reserv
+	</select>
+	<select id="selectSeatList" parameterType="_int" resultType="seat">
+		select
+			seat_no as seatNo,
+			seat_price as seatPrice,
+			seat_level as seatLevel
+		from seat
+	</select>
 	
 	<resultMap type="show" id="s">
 		<result column="show_no" property="showNo"/>

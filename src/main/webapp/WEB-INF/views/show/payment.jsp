@@ -63,7 +63,7 @@ h1{
 					//성공시 로직 구현(ex. DB결제정보 insert -> 사용자 화면 처리)
 					alert("결제 성공");
 					console.log("카드 승인번호 : "+rsp.apply_num);
-					location.href="/paymentSuccess.do";
+					location.href="/paymentSuccess.do?reservNo="+${seat.reservNo};
 				}else{
 					//실패시 로직 구현(ex. 장바구니 저장 -> 사용자 화면 처리)
 					alert("결제 실패");
