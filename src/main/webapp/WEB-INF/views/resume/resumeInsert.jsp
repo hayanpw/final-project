@@ -15,15 +15,16 @@
 	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 	<div class="container">
 		<h2>강사 지원하기</h2>
-    <form action="/action_page.php" enctype="multipart/form-data">
+    <form action="/resumeInsert.do" method="post" enctype="multipart/form-data">
       <div class="form-group">
         <h3><span class="line">지</span>원하시는 공고</h3>
-        <input type="text" class="form-control" id="resumeTitle"  name="resumeTitle" value="자동으로 뽑아 올꺼" readonly>
+        <input type="hidden" name="requritNo" value="${requritNo }">
+        <input type="text" class="form-control" id="resumeTitle"  name="resumeTitle" value="${requritTitle }" readonly>
       </div>
       <h3><span class="line">관</span>람 연령</h3>
-      <div class="checkbox">
-          <label class="radio-inline"><input type="radio" name="gender" checked>남자</label>
-          <label class="radio-inline"><input type="radio" name="gender" >여자</label>
+      <div class="radio">
+          <label class="radio-inline"><input type="radio" name="resumeGender" checked>남자</label>
+          <label class="radio-inline"><input type="radio" name="resumegender" >여자</label>
       </div>
       <div class="form-group">
           <h3><span class="line">연</span>락받으실 연락처</h3>
@@ -31,7 +32,7 @@
       </div>
       <div class="form-group">
         <h3><span class="line">이</span>력서 첨부</h3>
-        <input type="file"  id="resumefile"  name="resumefile">
+        <input type="file"  id="resumefile"  name="upfile">
       </div>
       <div class="form-group">
         <h3><span class="line">간</span>단 자기소개</h3>

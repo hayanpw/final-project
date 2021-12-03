@@ -125,6 +125,8 @@ public class AdditionService {
 	public BoardViewData selectOneBoard(int boardNo) {
 		int result = dao.updateReadCount(boardNo); //조회수올림
 		Board b = dao.selectOneBoard(boardNo); //게시글정보
+		ArrayList<FileVO> flist = dao.selectFileList(boardNo);
+		b.setList(flist);
 		ArrayList<BoardComment> list = dao.selectCommentList(boardNo);//댓글정보
 		BoardViewData bvd = new BoardViewData(list,b);
 		return bvd;
