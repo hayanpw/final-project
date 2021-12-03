@@ -149,7 +149,7 @@
                 <form action="/selectSeat.do" method="post">
 	                <input type="hidden" name="reservDate">
 	                <input type="hidden" name="showNo" value="${snr.s.showNo }">
-	                <input type="hidden" name="memberNo" value="1<%-- ${sessionScope.m.memberNo } --%>">
+	                <input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
 	                <h3>티켓 정보</h3>
 	                <div class="ticketPrice">
 	                	<c:choose>

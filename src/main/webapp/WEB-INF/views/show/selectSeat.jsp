@@ -168,12 +168,17 @@
 	        <div class="reservInfo">
 	        	<div><h1><strong>선택 좌석</strong></h1></div>
 	            <div class="selectSeat"></div>
-	            <button class="btn btn-danger">예매하기</button>
+	            <button class="btn btn-danger" onclick="reservation();">예매하기</button>
 	        </div>
 		
 		</div>
     </div>
     <script>
+    	$(function() {
+			//DB에 들어있는 좌석번호들은 선택불가 처리
+			
+		});
+    
         var count=0;
         var arr = new Array();
         function choose(obj){
@@ -200,6 +205,32 @@
                 $(".selectSeat").append(h3);
             }
         }
+        
+		function reservation(){
+			if(arr[0] == null){
+				alert("좌석을 선택하세요");
+			}else{
+				var memberId = "${sessionScope.m.memberId}";
+				var reservDate = "${sr.reservDate}"
+				var form = $("<form action='/reservation.do' method='post'></form>");
+				//공연 번호 설정
+				form.append($("<input type='text' name='showNo' value='"+${s.showNo}+"'>"));
+				//예매자 아이디 설정
+				form.append($("<input type='text' name='memberId' value='"+memberId+"'>"));
+				//좌석 가격 설정
+				form.append($("<input type='text' name='seatPrice' value='"+${s.showPrice}+"'>"));
+				//예약 날짜 설정
+				form.append($("<input type='text' name='reservDate' value='"+reservDate+"'>"));
+				// 선택한 좌석 번호들 설정
+				for(var i=0; i<arr.length; i++){
+					form.append($("<input type='text' name='seatList' value='"+arr[i]+"'>"));
+				}
+				//전송할 form태그를 현재 페이지에 추가
+				$("body").append(form);
+				//form태그 전송
+				form.submit();
+			}
+		}
     </script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
