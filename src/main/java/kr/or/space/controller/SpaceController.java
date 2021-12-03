@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import kr.or.space.model.service.SpaceService;
 import kr.or.space.model.vo.FileVO;
 import kr.or.space.model.vo.Space;
+import kr.or.space.model.vo.SpaceTime;
 
 @Controller
 public class SpaceController {
@@ -73,8 +74,9 @@ public class SpaceController {
 
 	// 공간 등록
 	@RequestMapping(value = "/spaceInsert.do")
-	public String spaceInsert(Space s, MultipartFile[] files, HttpServletRequest request, Model model) {
+	public String spaceInsert(Space s, MultipartFile[] files,int thumbnail, String[] startTime, String[] endTime, HttpServletRequest request, Model model) {
 		ArrayList<FileVO> list = new ArrayList<FileVO>();
+		ArrayList<SpaceTime> stList = new ArrayList<SpaceTime>();
 		if (files[0].isEmpty()) {
 		} else {
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/spaceImage/upload/");
@@ -112,10 +114,20 @@ public class SpaceController {
 				FileVO fv = new FileVO();
 				fv.setFilename(filename);
 				fv.setFilepath(filepath);
+
 				list.add(fv);
+				
 			}
 		}
-		int result = service.insertSpace(s, list);
+		list.get(thumbnail).setThumbnail("Y");
+		//시간 셋팅
+		for(int i=0; i < startTime.length; i++) {
+			SpaceTime st = new SpaceTime();
+			st.setStartTime(startTime[i]);
+			st.setEndTime(endTime[i]);
+			stList.add(st);
+		}
+		int result = service.insertSpace(s, list, stList);
 		if (result == -1 || result != list.size() ) {
 			model.addAttribute("msg", "등록실패");
 		} else {

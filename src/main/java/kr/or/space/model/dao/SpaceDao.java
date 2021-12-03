@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.or.space.model.vo.FileVO;
 import kr.or.space.model.vo.Space;
+import kr.or.space.model.vo.SpaceTime;
 
 @Repository
 public class SpaceDao {
@@ -60,5 +61,9 @@ public class SpaceDao {
 	public ArrayList<FileVO> selectFileList(int spaceNo) {
 		List<FileVO> list = sqlSession.selectList("space.selectFileList");
 		return (ArrayList<FileVO>)list;
+	}
+	//공간 시간 등록
+	public int insertSpaceTime(SpaceTime st) {
+		return sqlSession.insert("space.insertSpaceTime",st);
 	}
 }

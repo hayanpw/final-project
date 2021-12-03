@@ -41,7 +41,7 @@
 		<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
     <script>
    	$(function() {
-		/* $(".time-table").hide(); */
+		$(".time-table").hide();
 		var select = $(".ui-state-default");
 		select.click(function () {
 			$(".time-table").show();	
