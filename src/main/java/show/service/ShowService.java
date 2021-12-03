@@ -65,7 +65,7 @@ public class ShowService {
 		return dao.updateReview(sr);
 	}
 
-	public int reservation(Seat s, String memberId) {
+	public Show reservation(Seat s, String memberId) {
 		ShowReserv sr = new ShowReserv();
 		sr.setShowNo(s.getShowNo());
 		sr.setMemberId(memberId);
@@ -78,9 +78,12 @@ public class ShowService {
 			result = dao.insertSeat(s);
 		}
 		
+		Show show = null;
+		if(result>0) {
+			show = dao.selectOneShow(s.getShowNo());
+		}
 		
-		
-		return result;
+		return show;
 	}
 
 }

@@ -259,11 +259,15 @@ public class ShowController {
 	
 	@RequestMapping(value = "/reservation.do")
 	public String reservation(Seat s, String memberId, Model model) {
-		int result = service.reservation(s, memberId);
-		if(result>0) {
+		Show show = service.reservation(s, memberId);
+		if(show != null) {
+			//예약 정보 넘겨줘야됨
+			//나중에 결제완료시 DB추가로 구현
+			model.addAttribute("seat", s);
+			model.addAttribute("show", show);
 			return "show/payment";
 		}else {
-			model.addAttribute("msg", "수정 실패");
+			model.addAttribute("msg", "예매 실패");
 			model.addAttribute("loc", "/showView.do?showNo="+s.getShowNo());
 			return "common/msg";
 		}

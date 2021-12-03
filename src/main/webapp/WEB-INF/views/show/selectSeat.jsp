@@ -1,14 +1,6 @@
-<%@page import="show.vo.ShowReserv"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-    <%
-    	ShowReserv sr = (ShowReserv)request.getAttribute("sr");
-    	String year = sr.getReservDate().substring(0,sr.getReservDate().indexOf("-"));
-    	String month = sr.getReservDate().substring(sr.getReservDate().indexOf("-")+1 ,sr.getReservDate().lastIndexOf("-"));
-    	String day = sr.getReservDate().substring(sr.getReservDate().lastIndexOf("-")+1);
-    	
-    %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -176,7 +168,7 @@
 	        <div class="reservInfo">
 	        	<div><h1><strong>선택 좌석</strong></h1></div>
 	            <div class="selectSeat"></div>
-	            <button class="btn btn-danger" onclick="reservation(<%=year%>,<%=month%>,<%=day%>);">예매하기</button>
+	            <button class="btn btn-danger" onclick="reservation();">예매하기</button>
 	        </div>
 		
 		</div>
@@ -214,24 +206,21 @@
             }
         }
         
-		function reservation(year,month,day){
+		function reservation(){
 			if(arr[0] == null){
 				alert("좌석을 선택하세요");
 			}else{
 				var memberId = "${sessionScope.m.memberId}";
+				var reservDate = "${sr.reservDate}"
 				var form = $("<form action='/reservation.do' method='post'></form>");
 				//공연 번호 설정
 				form.append($("<input type='text' name='showNo' value='"+${s.showNo}+"'>"));
-				//멤버 번호 설정
+				//예매자 아이디 설정
 				form.append($("<input type='text' name='memberId' value='"+memberId+"'>"));
 				//좌석 가격 설정
 				form.append($("<input type='text' name='seatPrice' value='"+${s.showPrice}+"'>"));
 				//예약 날짜 설정
-				if(day<10){
-					form.append($("<input type='text' name='reservDate' value='"+year+"-"+month+"-0"+day+"'>"));
-				}else{
-					form.append($("<input type='text' name='reservDate' value='"+year+"-"+month+"-"+day+"'>"));				
-				}
+				form.append($("<input type='text' name='reservDate' value='"+reservDate+"'>"));
 				// 선택한 좌석 번호들 설정
 				for(var i=0; i<arr.length; i++){
 					form.append($("<input type='text' name='seatList' value='"+arr[i]+"'>"));
