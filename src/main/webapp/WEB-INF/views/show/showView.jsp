@@ -162,8 +162,13 @@
 	                		</c:otherwise>
 	                	</c:choose>
 	                </div>
-	                <input type="submit" class="btn btn-danger btn-lg reservBtn" value="예매하기">
+	                <c:if test="${not empty sessionScope.m }">
+	                	<input type="submit" class="btn btn-danger btn-lg reservBtn" value="예매하기">
+	                </c:if>
                 </form>
+                <c:if test="${empty sessionScope.m }">
+                	<a href="/loginFrm.do" class="btn btn-danger btn-lg reservBtn">예매하기</a>
+                </c:if>
             </div>
         </div>
         <button class="scrollZero" onclick="goTop();" style="display: none">TOP</button>

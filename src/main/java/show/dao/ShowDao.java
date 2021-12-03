@@ -85,4 +85,18 @@ public class ShowDao {
 		return (ArrayList<Seat>)list;
 	}
 
+	public ArrayList<Seat> selectAllSeat() {
+		List<Seat> list = sqlSession.selectList("show.selectAllSeat");
+		return (ArrayList<Seat>)list;
+	}
+
+	public void updateReserv(int reservNo) {
+		sqlSession.update("show.updateReserv", reservNo);
+		
+	}
+
+	public void payCancel() {
+		sqlSession.delete("show.payCancel");
+	}
+
 }

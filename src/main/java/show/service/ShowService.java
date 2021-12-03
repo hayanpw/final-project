@@ -19,6 +19,7 @@ public class ShowService {
 	private ShowDao dao;
 
 	public ArrayList<Show> selectShowList() {
+		dao.payCancel();
 		return dao.selectShowList();
 	}
 
@@ -71,9 +72,9 @@ public class ShowService {
 		sr.setShowNo(s.getShowNo());
 		sr.setMemberId(memberId);
 		sr.setShowDate(s.getShowDate());
-		
 		int result = dao.insertReserv(sr);
 		s.setReservNo(sr.getReservNo());
+		
 		for(int i=0; i<s.getSeatList().size(); i++) {
 			s.setSeatNo(s.getSeatList().get(i));
 			result = dao.insertSeat(s);
@@ -94,11 +95,21 @@ public class ShowService {
 	}
 
 	public HashMap<String, Object> selectReservation(int reservNo) {
+		dao.updateReserv(reservNo);
 		ShowReserv sr = dao.selectReserv(reservNo);
 		Show show = dao.selectOneShow(sr.getShowNo());
 		ArrayList<Seat> list = dao.selectSeatList(reservNo);
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("sr", sr);
+		map.put("show", show);
+		map.put("list", list);
+		return map;
+	}
+
+	public HashMap<String, Object> seatCheck(int showNo) {
+		Show show = dao.selectOneShow(showNo);
+		ArrayList<Seat> list = dao.selectAllSeat();
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("show", show);
 		map.put("list", list);
 		return map;

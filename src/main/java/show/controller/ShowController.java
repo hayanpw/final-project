@@ -252,8 +252,10 @@ public class ShowController {
 	
 	@RequestMapping(value = "/selectSeat.do")
 	public String selectSeat(ShowReserv sr, Model model) {
-		Show s = service.selectOneShow(sr.getShowNo());
-		model.addAttribute("s",s);
+		//예약된 좌석 불러오기
+		HashMap<String, Object> map = service.seatCheck(sr.getShowNo());
+		model.addAttribute("s", map.get("show"));
+		model.addAttribute("list", map.get("list"));
 		model.addAttribute("sr",sr);
 		return "show/selectSeat";
 	}

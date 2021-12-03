@@ -17,6 +17,7 @@
 			<h2>${s.showName } / </h2>
 			<h2>${s.showHall } / </h2>
 			<h2>${sr.showDate }</h2>
+			
 		</div>
 		<div class="floorWrapper">
 	        <div class="floor">
@@ -174,10 +175,7 @@
 		</div>
     </div>
     <script>
-    	$(function() {
-			//DB에 들어있는 좌석번호들은 선택불가 처리
-			
-		});
+
     
         var count=0;
         var arr = new Array();
