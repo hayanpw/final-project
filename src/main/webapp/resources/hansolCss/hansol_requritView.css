@@ -1,0 +1,42 @@
+.line{
+	padding-top : 5px;
+	border-top : 5px solid #563D39;
+}
+.sector{
+    width: 100%;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    display: block;
+    font-size: 20px;
+}
+.first{
+   
+    width: 200px;
+    float:left;
+	display:block;
+    
+}
+.second{
+   
+    width: 970px;
+	display:block;
+}
+.title{
+    margin-bottom: 50px;
+}
+.line{
+	padding-top : 5px;
+	border-top : 5px solid #563D39;
+}
+.requritBtn{
+	border : 1px solid #BDB19A; 
+	width : 250px;
+	height : 50px;
+	margin-bottom : 10px;
+	margin-left: 40%;
+}
+.requritBtn:hover{
+	border : 1px solid white;
+	background: #BDB19A;	
+	
+}

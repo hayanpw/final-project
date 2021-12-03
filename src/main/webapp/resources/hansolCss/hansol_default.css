@@ -2,3 +2,8 @@
 	padding-top : 5px;
 	border-top : 5px solid #563D39;
 }
+.sectorLine{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #563D39;
+}
