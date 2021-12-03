@@ -13,13 +13,6 @@
 	<div class="container">
 		<form action="/spaceUpadte.do" method="post" enctype="multipart/form-data">
 			<h3>공간 수정</h3>
-			<div class="space-img">
-						<c:if test="${s.spaceNo eq t.spaceNo }">
-							<img id="preview-image" style="width: 400px; height: 250px" src="resources/spaceImage/upload/${t.filename }">
-						</c:if> 
-				<input style="display: block;" type="file" id="input-image"
-					name="files" multiple>
-			</div>
 			<div class="space-info">
 				<table class="table-condensed info-table">
 					<tr>
@@ -48,34 +41,50 @@
 					</tr>
 				</table>
 			</div>
-			<div id="insertBtn">
+			<div class="space-time">
+				<span id="plus">+ 시간등록</span>
+				<table class="table-condensed time-table">
+				</table>
+			</div>
+						
+			<div class="space-img">
+				<c:if test="${s.spaceNo eq t.spaceNo }">
+					<input name="files" type="file" id="image" accept="image/*" onchange="setThumbnail(event);" multiple/>
+				</c:if> 
+				 <div id="image_container"></div>
+			</div>	
+			<div id="updatet-btn">
 				<button class="btn btn-default" type="submit">수정하기</button>
 			</div>
 		</form>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 	<script>
-	function readImage(input) {
-	    // 인풋 태그에 파일이 있는 경우
-	    if(input.files && input.files[0]) {
-	        // 이미지 파일인지 검사 (생략)
-	        // FileReader 인스턴스 생성
-	        const reader = new FileReader()
-	        // 이미지가 로드가 된 경우
-	        reader.onload = e => {
-	            const previewImage = document.getElementById("preview-image")
-	            previewImage.src = e.target.result
-	        }
-	        // reader가 이미지 읽도록 하기
-	        reader.readAsDataURL(input.files[0])
-	    }
+	$(function () {
+		
+		$("#plus").click(function () {
+			$(".time-table").append("<tr><th>이용시간<th><td><input name = 'startTime'></td><th>~</th><td><input name='endTime'></td></tr>");
+		});
+	});
+	function setThumbnail(event) {
+		for (var image of event.target.files) {
+			var reader = new FileReader();
+			reader.onload = function(event) {
+				var img = document.createElement("img");
+				img.setAttribute("src", event.target.result);
+				document.querySelector("div#image_container").appendChild(img);
+				};
+				console.log(image);
+				reader.readAsDataURL(image);
+				}
+		$("#image_container").children().addClass("thumbnail");
+		
+		}
+	function thumbnail() {
+		$(".thumbnail").click(function () {
+			alert("갸");
+		});
 	}
-	// input file에 change 이벤트 부여
-	const inputImage = document.getElementById("input-image")
-	inputImage.addEventListener("change", e => {
-	    readImage(e.target)
-	})
-
 	</script>
 </body>
 </html>

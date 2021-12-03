@@ -33,4 +33,9 @@ public class RequritDao {
 		int totalCount = sqlSession.selectOne("requrit.selectTotalCount");
 		return totalCount;
 	}
+
+	public Requrit selectOneRequrit(int requritNo) {
+		Requrit r = sqlSession.selectOne("requrit.selectOneRequrit",requritNo);
+		return r;
+	}
 }

@@ -17,12 +17,21 @@
 	<insert id="insertFile" parameterType="fv">
 		insert
 			into space_file 
-			values(space_file_seq.nextval,#{spaceNo},#{filename},#{filepath},'N')
+			values(space_file_seq.nextval,#{spaceNo},#{filename},#{filepath},
+			<choose>
+				<when test="thumbnail == null">
+					'N'
+				</when>			
+			<otherwise>
+				'Y'
+			</otherwise>
+			</choose>
+			)
 	</insert>
-	<insert id="insertTime" parameterType="kr.or.space.model.vo.SpaceTime">
+	<insert id="insertSpaceTime" parameterType="kr.or.space.model.vo.SpaceTime">
 		insert
 			into space_time
-			values(st_seq.nextval,#{spaceNo})
+			values(st_seq.nextval,#{spaceNo},#{startTime},#{endTime})
 	</insert>
 	<select id="selectAllSpace" resultType="space">
 		select

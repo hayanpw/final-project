@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,37 +17,32 @@
     <link href="resources/spaceCss/space_default.css" rel="stylesheet">	
     <link href="resources/spaceCss/space_res.css" rel="stylesheet">	
 	<div class="container">
-		<div>
 			<h3>신청 현황</h3>
-		</div>
+		<form action="/spaceInfo.do" method="post">
+			<c:forEach items="${list }" var= "s">
+				<span>${s.spaceName }</span>
+			</c:forEach>
 		<!-- 캘린더 코드 -->
 		<div id="datepicker"></div>
+		<input type="text" id="selectDate" name="rentalDate">
 		<div class="time-table">
 			<table class="table table-hover">
 				<tr>
-					<td>10:00~12:00</td>
-				</tr>
-				<tr>
-					<td>13:00~15:00</td>
-				</tr>
-				<tr>
-					<td>16:00~18:00</td>
-				</tr>
-				<tr>
-					<td>19:00~21:00</td>
+					<th>이용시간</th>
+					<td><input type="text" value="꺄" name="startTime"></td>
+					<th>~</th>
+					<td><input type="text" value="꺄" name="endTime"></td>
 				</tr>
 			</table>
 		</div>
+			<div id="insert-btn">
+				<button class="btn btn-default" type="submit">신청하기</button>
+			</div>
+		</form>
 	</div>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
     <script>
-   	$(function() {
-		/* $(".time-table").hide(); */
-		var select = $(".ui-state-default");
-		select.click(function () {
-			$(".time-table").show();	
-		});
-   	});
+   	
 	    $(function() {
 	        var today = new Date(); //오늘부터
 	        var endDate = new Date(today);
@@ -62,14 +58,16 @@
 	            yearSuffix : '년',
 	            minDate: today,
 	            maxDate: endDate,
-	            beforeShowDay: noMondays //월요일은 휴무일
+	            beforeShowDay: noMondays, //월요일은 휴무일
+	            onSelect : function(data){
+	            	$("#selectDate").val(data);
+	            }
 	        });
 	    });
 	   	//월요일 휴무 코드
 	    function noMondays(date) {
 	    	return [date.getDay() != 1, ''];
 	    }
-	
     </script>
 </body>
 </html>

@@ -29,6 +29,13 @@ public class MemberDao {
 		int result = sqlSession.insert("member.insertMember",m);
 		return result;
 	}
-
+	public Member selectOneMemberId(String memberId) {
+		Member m = sqlSession.selectOne("member.selectOneMember",memberId);
+		if(m == null) {
+			return null;
+		}else {
+			return m;
+		}
+	}
 }
 

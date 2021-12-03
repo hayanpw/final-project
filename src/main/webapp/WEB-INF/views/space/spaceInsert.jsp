@@ -1,23 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-    <link href="resources/spaceCss/space_default.css" rel="stylesheet">
-    <link href="resources/spaceCss/space_insert.css" rel="stylesheet">
+<link href="resources/spaceCss/space_default.css" rel="stylesheet">
+<link href="resources/spaceCss/space_insert.css" rel="stylesheet">
 </head>
 <body>
-	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="container">
 		<form action="/spaceInsert.do" method="post" enctype="multipart/form-data">
 			<h3>공간 등록</h3>
-			<div class="space-img">
-				<img style="width: 400px; height: 250px" id="preview-image">
-				<input style="display: block;" type="file" id="input-image"
-					name="files" multiple>
-			</div>
 			<div class="space-info">
 				<table class="table-condensed info-table">
 					<tr>
@@ -46,34 +41,52 @@
 					</tr>
 				</table>
 			</div>
+			<div class="space-time">
+				<span id="plus">+ 시간등록</span>
+				<table class="table-condensed time-table">
+				</table>
+			</div>
+			<div class="space-img">
+				<input name="files" type="file" id="image" accept="image/*" onchange="setThumbnail(event);" multiple/>
+				 <div id="image_container"></div>
+			</div>	
+			<input type="hidden" name="thumbnail">
 			<div id="insertBtn">
 				<button class="btn btn-default" type="submit">등록하기</button>
 			</div>
 		</form>
 	</div>
-	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 	<script>
-	function readImage(input) {
-	    // 인풋 태그에 파일이 있는 경우
-	    if(input.files && input.files[0]) {
-	        // 이미지 파일인지 검사 (생략)
-	        // FileReader 인스턴스 생성
-	        const reader = new FileReader()
-	        // 이미지가 로드가 된 경우
-	        reader.onload = e => {
-	            const previewImage = document.getElementById("preview-image")
-	            previewImage.src = e.target.result
-	        }
-	        // reader가 이미지 읽도록 하기
-	        reader.readAsDataURL(input.files[0])
-	    }
-	}
-	// input file에 change 이벤트 부여
-	const inputImage = document.getElementById("input-image")
-	inputImage.addEventListener("change", e => {
-	    readImage(e.target)
-	})
+	$(function () {
+		
+		$("#plus").click(function () {
+			$(".time-table").append("<tr><th>이용시간<th><td><input name = 'startTime'></td><th>~</th><td><input name='endTime'></td></tr>");
+		});
+		$(document).on("click","#image_container>*",function(){
+				$(this).addClass("mainImg");
+			if($("#image_container>*").not($(this)).hasClass("mainImg")){
+				$("#image_container>*").not($(this)).removeClass("mainImg");
+			}
+			var idx = $("#image_container>*").index(this); 
+			$("[name=thumbnail]").val(idx);
+		
+	    });		
+	});
+	function setThumbnail(event) {
+		for (var image of event.target.files) {
+			var reader = new FileReader();
+			reader.onload = function(event) {
+				var img = document.createElement("img");
+				img.setAttribute("src", event.target.result);
+				document.querySelector("div#image_container").appendChild(img);
+				};
+				console.log(image);
+				reader.readAsDataURL(image);
+				}
+		
+		}
 
-	</script>	
+	</script>
 </body>
 </html>

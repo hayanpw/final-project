@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import kr.or.space.model.dao.SpaceDao;
 import kr.or.space.model.vo.FileVO;
 import kr.or.space.model.vo.Space;
+import kr.or.space.model.vo.SpaceTime;
 
 @Service
 public class SpaceService {
@@ -17,20 +18,25 @@ public class SpaceService {
 	
 	@Transactional
 	//공간등록 + 파일 업로드
-	public int insertSpace(Space s, ArrayList<FileVO> list) {
+	public int insertSpace(Space s, ArrayList<FileVO> list, ArrayList<SpaceTime> stList) {
 		int result1 = dao.insertSpace(s);
+		int stResult = 0;
 		int result=0;
 		if(result1>0) {
 			for(FileVO fv : list) {
 				fv.setSpaceNo(s.getSpaceNo());
 				result += dao.insertFile(fv);
 			}
+			for(SpaceTime st : stList) {
+				st.setSpaceNo(s.getSpaceNo());
+				stResult = dao.insertSpaceTime(st);
+			}
 		}else {
 			return -1;
 		}
 		return result;		
 	}
-
+	
 	public ArrayList<Space> selectAllSpace() {
 		ArrayList<Space> list = dao.selectAllSpace();
 		return list;

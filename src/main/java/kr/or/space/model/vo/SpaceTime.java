@@ -6,8 +6,6 @@ import lombok.Data;
 public class SpaceTime {
 	private int stNo;
 	private int spaceNo;
-	private String stDate;
 	private String startTime;
 	private String endTime;
-	private int status;
 }
