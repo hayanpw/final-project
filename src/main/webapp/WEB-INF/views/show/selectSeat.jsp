@@ -16,7 +16,7 @@
 			<h1><strong>좌석 선택</strong></h1>
 			<h2>${s.showName } / </h2>
 			<h2>${s.showHall } / </h2>
-			<h2>${sr.reservDate }</h2>
+			<h2>${sr.showDate }</h2>
 		</div>
 		<div class="floorWrapper">
 	        <div class="floor">
@@ -182,14 +182,18 @@
         var count=0;
         var arr = new Array();
         function choose(obj){
-            $(obj).css("background-color", "#563D39");
-            $(obj).attr("onclick", "cancel(this);");
-            count++;
-            arr.push($(obj).children().val());
-            var h3 = $("<h3>");
-            h3.append($(obj).children().val());
-            $(".selectSeat").append(h3);
-            $(".selectSeat").scrollTop(innerHeight);
+        	if(arr.length == 5){
+        		alert("한 아이디에 최대 5좌석만 구매가능합니다.");
+        	}else{
+	            $(obj).css("background-color", "#563D39");
+	            $(obj).attr("onclick", "cancel(this);");
+	            count++;
+	            arr.push($(obj).children().val());
+	            var h3 = $("<h3>");
+	            h3.append($(obj).children().val());
+	            $(".selectSeat").append(h3);
+	            $(".selectSeat").scrollTop(innerHeight);
+        	}
         }
         function cancel(obj){
             $(obj).css("background-color", "#BDB19A");
@@ -211,7 +215,7 @@
 				alert("좌석을 선택하세요");
 			}else{
 				var memberId = "${sessionScope.m.memberId}";
-				var reservDate = "${sr.reservDate}"
+				var showDate = "${sr.showDate}"
 				var form = $("<form action='/reservation.do' method='post'></form>");
 				//공연 번호 설정
 				form.append($("<input type='text' name='showNo' value='"+${s.showNo}+"'>"));
@@ -220,7 +224,7 @@
 				//좌석 가격 설정
 				form.append($("<input type='text' name='seatPrice' value='"+${s.showPrice}+"'>"));
 				//예약 날짜 설정
-				form.append($("<input type='text' name='reservDate' value='"+reservDate+"'>"));
+				form.append($("<input type='text' name='showDate' value='"+showDate+"'>"));
 				// 선택한 좌석 번호들 설정
 				for(var i=0; i<arr.length; i++){
 					form.append($("<input type='text' name='seatList' value='"+arr[i]+"'>"));
