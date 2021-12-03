@@ -147,7 +147,7 @@
             <div class="reserv">
                 <div id="datepicker"></div>
                 <form action="/selectSeat.do" method="post">
-	                <input type="hidden" name="reservDate">
+	                <input type="hidden" name="showDate">
 	                <input type="hidden" name="showNo" value="${snr.s.showNo }">
 	                <input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
 	                <h3>티켓 정보</h3>
@@ -215,10 +215,10 @@
 	        $("#datepicker").change(function() {
 				selectDate = $(this).val();
 				$(".slide").fadeOut();
-				$("input[name=reservDate]").val(selectDate);
+				$("input[name=showDate]").val(selectDate);
 	        });
 	        
-	        $("input[name=reservDate]").val($("#datepicker").datepicker("setDate", today).val());
+	        $("input[name=showDate]").val($("#datepicker").datepicker("setDate", today).val());
 
 	    });
 	    

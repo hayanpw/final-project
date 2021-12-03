@@ -69,7 +69,7 @@ public class ShowService {
 		ShowReserv sr = new ShowReserv();
 		sr.setShowNo(s.getShowNo());
 		sr.setMemberId(memberId);
-		sr.setReservDate(s.getReservDate());
+		sr.setShowDate(s.getShowDate());
 		
 		int result = dao.insertReserv(sr);
 		s.setReservNo(sr.getReservNo());
@@ -84,6 +84,12 @@ public class ShowService {
 		}
 		
 		return show;
+	}
+
+	public int deleteReserv(int reservNo) {
+		int result = dao.deleteReserv(reservNo);
+		result = dao.deleteSeat(reservNo);
+		return result;
 	}
 
 }

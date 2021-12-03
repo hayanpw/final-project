@@ -66,4 +66,12 @@ public class ShowDao {
 	public int insertReserv(ShowReserv sr) {
 		return sqlSession.insert("show.insertReserv", sr);
 	}
+
+	public int deleteReserv(int reservNo) {
+		return sqlSession.delete("show.deleteReserv", reservNo);
+	}
+
+	public int deleteSeat(int reservNo) {
+		return sqlSession.delete("show.deleteSeat", reservNo);
+	}
 }

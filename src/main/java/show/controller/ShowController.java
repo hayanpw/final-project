@@ -272,4 +272,15 @@ public class ShowController {
 			return "common/msg";
 		}
 	}
+	
+	@RequestMapping(value = "/cancelPayment.do")
+	public String paymentSuccess(int reservNo) {
+		int result = service.deleteReserv(reservNo);
+		return "redirect:/showList.do";
+	}
+	
+	@RequestMapping(value = "/paymentSuccess.do")
+	public String paymentSuccess() {
+		return "show/paymentSuccess";
+	}
 }
