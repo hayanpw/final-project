@@ -3,6 +3,7 @@
 <mapper namespace="member">
  	<select id="selectOneMember" parameterType="m" resultType="m">
  		select 
+ 			member_no as memberNo,
  			member_id as memberId,
  			member_password as memberPassword,
  			member_level as memberLevel
@@ -16,4 +17,9 @@
 								#{postcode},#{addressRoad},#{addressDetail},
 								1,#{memberReceiveEmail},#{memberReceiveSms},1,to_char(sysdate,'yyyy-mm-dd'))
  	</insert>
+ 	<select id="selectOne" parameterType="string" resultType="m">
+ 		select 
+ 			member_id as memberId
+ 		from member where member_id=#{memberId}
+ 	</select>
 </mapper>

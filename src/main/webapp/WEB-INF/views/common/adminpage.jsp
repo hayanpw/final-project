@@ -14,9 +14,7 @@
 	<div class="container">        
         <div class="mypage-title"><span>회</span>원관리</div>
         <div class="mypage-container" style="border: 1px solid #BDB19A">
-                          마이페이지내용은 여기에 넣어주세요! 
-            style border 빼세요 테두리 보여주려 첨부한거에요
-            width:970px;
+		관리자페이지 내용내용~ 테두리 포장제거후 사용~
         </div>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
