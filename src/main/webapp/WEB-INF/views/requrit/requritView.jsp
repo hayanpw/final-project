@@ -49,8 +49,8 @@
             	${r.requritDetail }
         </div>
         <c:choose>
-        <c:when test="${sessionScope.member.MemberLevel ge 0 }">
-        <button type="button" class="btn requritBtn">지원하기</button>
+        <c:when test="${empty sessionScope }">
+        <button type="button" class="btn requritBtn" onclick="goResumeFrm();">지원하기</button>
         </c:when>
          <c:when test="${sessionScope.member.MemberLevel eq 0 }">
         <button type="button" class="btn requritBtn">삭제하기</button>
@@ -59,8 +59,18 @@
         </c:when>
         </c:choose>
         </c:when></c:choose>
+        <input type="hidden" id ="hide" value="${r.requritNo }">
     </div>
   	
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+	<script>
+	function goResumeFrm(){
+		var requritTitle = $(".title").html();
+		var requritNo = $("#hide").val();
+		if(confirm(requritTitle+"에지원 하시겠습니까")){
+			location.href="/resumeFrm.do?requritNo="+requritNo+"&requritTitle="+requritTitle;
+		}
+	}
+	</script>
 </body>
 </html>

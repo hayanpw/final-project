@@ -11,6 +11,8 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script><!-- 달력 선언 -->
+	<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 	<div class="container">
@@ -27,11 +29,11 @@
       <h3><span class="line">수</span>업 기간</h3>
       <div class="form-group col-sm-6">
         <h4>시작일</h4>
-        <input type="date" class="form-control" id="academyStart" name="academyStart">
+        <input type="date" class="form-control" id="datepicker" name="academyStart">
       </div>
       <div class="form-group col-sm-6">
         <h4>종료일</h4>
-        <input type="date" class="form-control" id="academyEnd" name="academyEnd">
+        <input type="date" class="form-control" id="datepicker2" name="academyEnd">
       </div>
       <div class="form-group">
         <h3><span class="line">카</span>테고리</h3>
@@ -79,5 +81,30 @@ $('#summernote').summernote({
 $(document).ready(function() {
 	  $('#summernote').summernote();
 	});
+$(function() {
+	
+    var date = new Date();
+    $( "#datepicker" ).datepicker({
+        dateFormat: "yy-mm-dd",
+        monthNames : [ '1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월','9월', '10월', '11월', '12월' ],
+        monthNamesShort : [ '1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월','9월', '10월', '11월', '12월' ],
+        dayNames : [ '일', '월', '화', '수', '목', '금', '토' ],
+        dayNamesShort : [ '일', '월', '화', '수', '목', '금', '토' ],
+        dayNamesMin : [ '일', '월', '화', '수', '목', '금', '토' ],
+        yearSuffix : '년',
+        minDate: date
+    });
+    $( "#datepicker2" ).datepicker({
+        dateFormat: "yy-mm-dd",
+        monthNames : [ '1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월','9월', '10월', '11월', '12월' ],
+        monthNamesShort : [ '1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월','9월', '10월', '11월', '12월' ],
+        dayNames : [ '일', '월', '화', '수', '목', '금', '토' ],
+        dayNamesShort : [ '일', '월', '화', '수', '목', '금', '토' ],
+        dayNamesMin : [ '일', '월', '화', '수', '목', '금', '토' ],
+        yearSuffix : '년',
+        minDate: date
+    });
+    
+});
 </script>
 </html>
