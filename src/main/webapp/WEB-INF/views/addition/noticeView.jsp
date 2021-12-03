@@ -22,26 +22,21 @@
 		<p id="title">공지사항</p>
 		<table class="table">
 			<tr>
-				<td colspan="2">${b.boardTitle }(제목칸)</td>
+				<td colspan="4">${b.boardTitle }(제목칸)</td>
 			</tr>
 			<tr>
 				<td>등록일</td>
 				<td>${b.regDate }</td>
+				<td>첨부파일</td>
+				<td>
+				<c:forEach items="${b.list }" var="f">
+				<a href="/fileDown.do?boardNo=${b.boardNo }">${f.filename }</a>
+				</c:forEach>
+				</td>
 			</tr>
 			<tr>
-				<td colspan="2">
-				<c:choose>
-					<c:when test="${empty b.list}">
-						${b.boardContent }(내용칸)
-					</c:when>
-					<c:otherwise>
-						<c:forEach items="${b.list }" var="f">
-						<img src="/resources/additionImage/${f.filepath }" >
-						<br>
-						</c:forEach>
-						${b.boardContent }(내용칸)
-					</c:otherwise>
-				</c:choose>
+				<td colspan="4">
+				${b.boardContent }(내용칸)
 				</td>
 			</tr>
 		</table>

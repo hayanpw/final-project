@@ -48,7 +48,7 @@
 				<table class="table" style="width:100%;">
 					<tr>
 						<td>제목</td>
-						<td colspan="3">
+						<td>
 							<input type="text" id="text" name="boardTitle" class="form-control">
 							<input type="hidden" name="boardType" value="${boardType }">
 						</td>
@@ -56,10 +56,12 @@
 					<tr>
 						<td>작성자</td>
 						<td><input type="text" name="boardWriter" value="hy01" readonly></td>
-						<td>첨부파일</td>
+				   		<!-- 
+				   		<td>첨부파일</td>
 						<td style="text-align:left;">
-							<input type="file" name="files" multiple>
-						</td>
+						<input type="file" name="files" multiple>
+						</td> 
+						-->
 					</tr>
 					<tr>
 						<th>내용</th>
@@ -69,7 +71,7 @@
 						</td>
 					</tr>
 					<tr>
-						<th colspan="4">
+						<th colspan="2">
 							<button type="submit" class="btn btn-block">글등록</button>
 						</th>
 					</tr>
@@ -77,7 +79,7 @@
 		</form>
 	</div>
 	<script type="text/javascript">
-	/* function loadImg(obj){
+	/*  function loadImg(obj){
 		var files = obj.files; //input type=file 에서 선택한 파일을 배열로 가져옴 files속성은 무조건 배열
 		console.log(files);
 		if(files.length != 0){ //첨부파일 있는경우
