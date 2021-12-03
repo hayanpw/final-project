@@ -47,7 +47,7 @@
 	</update>
 	<!-- 예약 -->
 	<insert id="insertReserv" parameterType="sReserv">
-		insert into show_reserv values(sreserv_seq.nextval, #{showNo}, #{memberId}, #{showDate}, to_char(sysdate, 'yyyy-mm-dd'), 0)
+		insert into show_reserv values(sreserv_seq.nextval, #{showNo}, #{memberId}, #{showDate}, to_char(sysdate, 'yyyy-mm-dd'), 0, 0)
 		<selectKey resultType="_int" order="AFTER" keyProperty="reservNo">
 			select max(reserv_no) from show_reserv
 		</selectKey>
@@ -68,15 +68,26 @@
 			show_date as showDate,
 			reserv_date as reservDate,
 			reserv_cancel as reservCancel
-		from show_reserv
+		from show_reserv where reserv_no=#{reservNo}
 	</select>
 	<select id="selectSeatList" parameterType="_int" resultType="seat">
 		select
 			seat_no as seatNo,
 			seat_price as seatPrice,
 			seat_level as seatLevel
-		from seat
+		from seat where reserv_no=#{reservNo}
 	</select>
+	<select id="selectAllSeat" resultType="sReserv">
+		select
+			seat_no as seatNo
+		from seat where show_no=#{showNo} and show_date=#{showDate}
+	</select>
+	<update id="updateReserv" parameterType="_int">
+		update show_reserv set reserv_pay=1 where reserv_no=#{reservNo}
+	</update>
+	<delete id="payCancel">
+		delete from show_reserv where reserv_pay=0
+	</delete>
 	
 	<resultMap type="show" id="s">
 		<result column="show_no" property="showNo"/>
