@@ -25,6 +25,7 @@
 	<update id="updateShow" parameterType="show">
 		update show set show_name=#{showName}, show_start=#{showStart}, show_end=#{showEnd}, show_time=#{showTime}, show_age=#{showAge}, show_content=#{showContent}, show_price=#{showPrice}, filepath=#{filepath}, show_hall=#{showHall} where show_no=#{showNo}
 	</update>
+	<!-- 관람평 -->
 	<select id="selectReviewList" parameterType="_int" resultType="sReview">
 		select
 			review_no as reviewNo,
@@ -44,6 +45,16 @@
 	<update id="updateReview" parameterType="sReview">
 		update show_review set review_content=#{reviewContent} where review_no=#{reviewNo} and show_no=#{showNo}
 	</update>
+	<!-- 예약 -->
+	<insert id="insertReserv" parameterType="sReserv">
+		insert into show_reserv values(sreserv_seq.nextval, #{showNo}, #{memberId}, #{reservDate}, 0)
+		<selectKey resultType="_int" order="AFTER" keyProperty="reservNo">
+			select max(reserv_no) from show_reserv
+		</selectKey>
+	</insert>
+	<insert id="insertSeat" parameterType="seat">
+		insert into seat values(seat_seq.nextval, #{reservNo}, #{showNo}, #{reservDate}, #{seatNo}, #{seatPrice}, 0)
+	</insert>
 	
 	<resultMap type="show" id="s">
 		<result column="show_no" property="showNo"/>

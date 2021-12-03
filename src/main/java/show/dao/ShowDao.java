@@ -7,7 +7,9 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import show.vo.Seat;
 import show.vo.Show;
+import show.vo.ShowReserv;
 import show.vo.ShowReview;
 
 @Repository
@@ -55,5 +57,13 @@ public class ShowDao {
 
 	public int updateReview(ShowReview sr) {
 		return sqlSession.update("show.updateReview", sr);
+	}
+
+	public int insertSeat(Seat s) {
+		return sqlSession.insert("show.insertSeat", s);
+	}
+
+	public int insertReserv(ShowReserv sr) {
+		return sqlSession.insert("show.insertReserv", sr);
 	}
 }

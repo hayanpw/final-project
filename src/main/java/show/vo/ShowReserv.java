@@ -6,6 +6,6 @@ import lombok.Data;
 public class ShowReserv {
 	private int reservNo;
 	private int showNo;
-	private int memberNo;
+	private String memberId;
 	private String reservDate;
 }
