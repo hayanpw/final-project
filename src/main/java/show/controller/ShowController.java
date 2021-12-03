@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import show.service.ShowService;
+import show.vo.Seat;
 import show.vo.Show;
 import show.vo.ShowAndReview;
 import show.vo.ShowReserv;
@@ -254,5 +256,36 @@ public class ShowController {
 		model.addAttribute("s",s);
 		model.addAttribute("sr",sr);
 		return "show/selectSeat";
+	}
+	
+	@RequestMapping(value = "/reservation.do")
+	public String reservation(Seat s, String memberId, Model model) {
+		Show show = service.reservation(s, memberId);
+		if(show != null) {
+			//예약 정보 넘겨줘야됨
+			//나중에 결제완료시 DB추가로 구현
+			model.addAttribute("seat", s);
+			model.addAttribute("show", show);
+			return "show/payment";
+		}else {
+			model.addAttribute("msg", "예매 실패");
+			model.addAttribute("loc", "/showView.do?showNo="+s.getShowNo());
+			return "common/msg";
+		}
+	}
+	
+	@RequestMapping(value = "/cancelPayment.do")
+	public String cancelPayment(int reservNo) {
+		int result = service.deleteReserv(reservNo);
+		return "redirect:/showList.do";
+	}
+	
+	@RequestMapping(value = "/paymentSuccess.do")
+	public String paymentSuccess(int reservNo, Model model) {
+		HashMap<String, Object> map = service.selectReservation(reservNo);
+		model.addAttribute("sr", map.get("sr"));
+		model.addAttribute("show", map.get("show"));
+		model.addAttribute("list", map.get("list"));
+		return "show/paymentSuccess";
 	}
 }
