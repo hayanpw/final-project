@@ -66,4 +66,9 @@ public class SpaceDao {
 	public int insertSpaceTime(SpaceTime st) {
 		return sqlSession.insert("space.insertSpaceTime",st);
 	}
+	//시간 조회
+	public ArrayList<SpaceTime> selectSpaceTime(int spaceNo) {
+		List list = sqlSession.selectList("space.selectSpaceTime",spaceNo);
+		return (ArrayList<SpaceTime>)list;
+	}
 }
