@@ -17,22 +17,26 @@
     <link href="resources/spaceCss/space_default.css" rel="stylesheet">	
     <link href="resources/spaceCss/space_res.css" rel="stylesheet">	
 	<div class="container">
-			<h3>신청 현황</h3>
+			<h3>신청 현황-${s.spaceName } </h3>
 		<form action="/spaceInfo.do" method="post">
-			<c:forEach items="${list }" var= "s">
-				<span>${s.spaceName }</span>
-			</c:forEach>
+			<div class="select-btn">
+				<c:forEach items="${list }" var= "l">
+					<button type="button" onclick="location.href='/spaceRes.do?spaceNo=${l.spaceNo}'">${l.spaceName }</button>
+				</c:forEach>
+			</div>
 		<!-- 캘린더 코드 -->
 		<div id="datepicker"></div>
-		<input type="text" id="selectDate" name="rentalDate">
+		<span>선택한 날짜</span><input type="text" id="selectDate" name="rentalDate">
 		<div class="time-table">
 			<table class="table table-hover">
-				<tr>
-					<th>이용시간</th>
-					<td><input type="text" value="꺄" name="startTime"></td>
-					<th>~</th>
-					<td><input type="text" value="꺄" name="endTime"></td>
-				</tr>
+					<c:forEach items="${st }" var ="st">
+						<tr>
+							<th>이용시간</th>
+							<td><input type="text" value="${st.startTime }" name="startTime"></td>
+							<th>~</th>
+							<td><input type="text" value="${st.endTime }" name="endTime"></td>
+						</tr>
+					</c:forEach>
 			</table>
 		</div>
 			<div id="insert-btn">
@@ -42,7 +46,9 @@
 	</div>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
     <script>
-   	
+   		$(function () {
+			/* $(".time-table").hide(); */
+		})
 	    $(function() {
 	        var today = new Date(); //오늘부터
 	        var endDate = new Date(today);
@@ -61,6 +67,7 @@
 	            beforeShowDay: noMondays, //월요일은 휴무일
 	            onSelect : function(data){
 	            	$("#selectDate").val(data);
+	            	$(".time-table").show();
 	            }
 	        });
 	    });

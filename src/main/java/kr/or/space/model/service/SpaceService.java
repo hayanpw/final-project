@@ -58,12 +58,16 @@ public class SpaceService {
 	public FileVO selectThumbnail(int spaceNo) {
 		return dao.selectThumbnail(spaceNo);
 	}
-
+	//공간 삭제
 	public int deleteSpace(int spaceNo) {
 		return dao.deleteSpace(spaceNo);
 	}
 	//1개 공간의 파일들 가져오기
 	public ArrayList<FileVO> selectFileList(int spaceNo) {
 		return dao.selectFileList(spaceNo);
+	}
+	//시간 조회
+	public ArrayList<SpaceTime> selectSpaceTime(int spaceNo) {
+		return dao.selectSpaceTime(spaceNo);
 	}
 }
