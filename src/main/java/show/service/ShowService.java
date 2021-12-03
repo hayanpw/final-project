@@ -106,9 +106,9 @@ public class ShowService {
 		return map;
 	}
 
-	public HashMap<String, Object> seatCheck(int showNo) {
-		Show show = dao.selectOneShow(showNo);
-		ArrayList<Seat> list = dao.selectAllSeat();
+	public HashMap<String, Object> seatCheck(ShowReserv sr) {
+		Show show = dao.selectOneShow(sr.getShowNo());
+		ArrayList<Seat> list = dao.selectAllSeat(sr);
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("show", show);
 		map.put("list", list);

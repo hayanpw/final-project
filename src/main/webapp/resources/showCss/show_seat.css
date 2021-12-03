@@ -33,13 +33,24 @@
     padding-left: 25px;
 }
 
-.seats{
-    cursor: pointer;
-}
+
 #seat {
+	 cursor: pointer;
     background-color: #BDB19A;
     font-weight: bold;
     color: #fff;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10%;
+    margin: 2.5px;
+}
+#noSeat {
+    background-color: #818181;
+    font-weight: bold;
+    color: #616161;
     width: 20px;
     height: 20px;
     display: flex;

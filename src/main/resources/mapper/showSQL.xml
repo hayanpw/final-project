@@ -77,10 +77,10 @@
 			seat_level as seatLevel
 		from seat where reserv_no=#{reservNo}
 	</select>
-	<select id="selectAllSeat" resultType="seat">
+	<select id="selectAllSeat" resultType="sReserv">
 		select
 			seat_no as seatNo
-		from seat
+		from seat where show_no=#{showNo} and show_date=#{showDate}
 	</select>
 	<update id="updateReserv" parameterType="_int">
 		update show_reserv set reserv_pay=1 where reserv_no=#{reservNo}

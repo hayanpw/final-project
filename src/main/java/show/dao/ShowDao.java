@@ -85,8 +85,8 @@ public class ShowDao {
 		return (ArrayList<Seat>)list;
 	}
 
-	public ArrayList<Seat> selectAllSeat() {
-		List<Seat> list = sqlSession.selectList("show.selectAllSeat");
+	public ArrayList<Seat> selectAllSeat(ShowReserv sr) {
+		List<Seat> list = sqlSession.selectList("show.selectAllSeat", sr);
 		return (ArrayList<Seat>)list;
 	}
 

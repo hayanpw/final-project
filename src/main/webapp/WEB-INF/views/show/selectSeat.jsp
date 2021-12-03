@@ -17,7 +17,6 @@
 			<h2>${s.showName } / </h2>
 			<h2>${s.showHall } / </h2>
 			<h2>${sr.showDate }</h2>
-			
 		</div>
 		<div class="floorWrapper">
 	        <div class="floor">
@@ -28,10 +27,11 @@
 	            				<c:when test="${i.index < 5 }">
 	            					<c:forEach begin="1" end="${i.index+3 }" varStatus="j">
 			            				<div class="seats">
-			                        		<div id="seat" onclick="choose(this);">
+											<div id="seat" onclick="choose(this);">
 			                        			${j.index }
 			                        			<input type="hidden" value="A-${i.index }-${j.index}">
 			                        		</div>
+			                        		
 			                    		</div>
 			            			</c:forEach>
 	            				</c:when>
