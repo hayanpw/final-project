@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import show.service.ShowService;
+import show.vo.Seat;
 import show.vo.Show;
 import show.vo.ShowAndReview;
 import show.vo.ShowReserv;
@@ -254,5 +255,17 @@ public class ShowController {
 		model.addAttribute("s",s);
 		model.addAttribute("sr",sr);
 		return "show/selectSeat";
+	}
+	
+	@RequestMapping(value = "/reservation.do")
+	public String reservation(Seat s, String memberId, Model model) {
+		int result = service.reservation(s, memberId);
+		if(result>0) {
+			return "show/payment";
+		}else {
+			model.addAttribute("msg", "수정 실패");
+			model.addAttribute("loc", "/showView.do?showNo="+s.getShowNo());
+			return "common/msg";
+		}
 	}
 }

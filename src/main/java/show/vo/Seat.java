@@ -1,5 +1,7 @@
 package show.vo;
 
+import java.util.ArrayList;
+
 import lombok.Data;
 
 @Data
@@ -11,4 +13,5 @@ public class Seat {
 	private String seatNo;
 	private int seatPrice;
 	private int seatLevel;
+	private ArrayList<String> seatList;
 }
