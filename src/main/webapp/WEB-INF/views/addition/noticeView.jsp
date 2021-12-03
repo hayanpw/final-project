@@ -29,7 +29,20 @@
 				<td>${b.regDate }</td>
 			</tr>
 			<tr>
-				<td colspan="2">${b.boardContent }(내용칸)</td>
+				<td colspan="2">
+				<c:choose>
+					<c:when test="${empty b.list}">
+						${b.boardContent }(내용칸)
+					</c:when>
+					<c:otherwise>
+						<c:forEach items="${b.list }" var="f">
+						<img src="/resources/additionImage/${f.filepath }" >
+						<br>
+						</c:forEach>
+						${b.boardContent }(내용칸)
+					</c:otherwise>
+				</c:choose>
+				</td>
 			</tr>
 		</table>
 		<a class="btn" href="/boardDelete.do?boardNo=${b.boardNo }">글삭제</a>
