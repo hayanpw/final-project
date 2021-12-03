@@ -68,7 +68,9 @@ public class SpaceController {
 	}
 	// 신청 현황 페이지로 이동
 	@RequestMapping(value = "/spaceRes.do")
-	public String spaceRes() {
+	public String spaceRes(Model model) {
+		ArrayList<Space> list = service.selectAllSpace();
+		model.addAttribute("list", list);
 		return "space/spaceRes";
 	}
 
