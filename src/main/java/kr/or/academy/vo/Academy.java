@@ -9,7 +9,7 @@ public class Academy {
 	private String academyStart;
 	private String academyEnd;
 	private String academyPhoto;
-	private int academyTeacher;
+	private String academyTeacher;
 	private String academyPlace;
 	private int academyPrice;
 	private String academyDetail;
