@@ -70,5 +70,10 @@ public class AdditionDao {
 		return sqlSession.update("addition.updateComment",map);
 	}
 
+	public ArrayList<FileVO> selectFileList(int boardNo) {
+		List<FileVO> list = sqlSession.selectList("addition.selectFileList",boardNo);
+		return (ArrayList<FileVO>)list;
+	}
+
 
 }
