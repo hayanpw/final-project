@@ -23,7 +23,7 @@ public class RequritController {
 		return "requrit/requritInsert";
 	}
 	//공지 리스트 페이지로 이동
-	@RequestMapping(value="requritList.do")
+	@RequestMapping(value="/requritList.do")
 	public String requritList(Model model , int reqPage) {
 		System.out.println("컨트롤러"+reqPage);
 		RequritPageData rpd = service.selectRequritPageData(reqPage);
@@ -32,7 +32,7 @@ public class RequritController {
 		model.addAttribute("start",rpd.getStart());
 		return "requrit/requritList";
 	}
-	@RequestMapping(value="requritInsert.do")
+	@RequestMapping(value="/requritInsert.do")
 	public String requritInsert (Requrit r, HttpServletRequest request, Model model ) {
 		int result = service.requritInsert(r);
 		if(result>0) {
@@ -42,5 +42,11 @@ public class RequritController {
 		}
 		model.addAttribute("loc", "/requritList.do");
 		return "common/msg";
+	}
+	@RequestMapping(value="/requritView.do")
+	public String requritView(int requritNo,Model model) {
+		Requrit r = service.selectOneRequrit(requritNo);
+		model.addAttribute("r",r);
+		return "requrit/requritView";
 	}
 }

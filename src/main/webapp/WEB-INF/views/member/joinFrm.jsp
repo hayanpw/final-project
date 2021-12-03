@@ -20,6 +20,7 @@
 				//패스워드 일치할경우3
 				if ($("#memberPw").val() == $("#chkpw").val() && memberPwchk == true
 						&& $("#memberPw").val() && $("#chkpw").val() != '') {
+						
 						//이름값 입력했을경우 5
 						if ($("#memberName").val() != '') {
 						
@@ -160,18 +161,20 @@
 			}
 		}).open();
 	}
-	</script>
+</script>
+
 </head>
+
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
-<form action="" id="modal1">
+	<form action="" id="modal1">
 		<div id='content' class="modal_window">
 			<div class="modal_window_text" id="auth">
 				<div>
 					<input type='button' value='X' class="close" id='btnClose1' />
 				</div>
 				<div>
-					<h2>인증번호를 입력해주세요</h2>
+					<h2>작동안합니다아 건들면 무너져요 ~~ - id email 인증 고치러갔습니다! </h2>
 					<!-- 인증 받으면 넘어가는 hidden-->
 					<input type="hidden" id="emailcheck">
 				</div>
@@ -251,7 +254,11 @@
 							<tr>
 								<td>아이디</td>
 								<td><input type="text" class="input" name="memberId"
-									id="memberId"> <span id="ajaxCheck"></span> <input type="hidden" id="idchk"></td>
+									id="memberId"><span id="ajaxCheck"></span> <input type="hidden" id="idchk"></td>
+
+
+
+
 							</tr>
 							<tr>
 								<td>비밀번호</td>
@@ -284,10 +291,12 @@
 										<option value="010">010</option>
 										<option value="011">011</option>
 										<option value="016">016</option>
+
 								</select> - <input type="text" class="input short2 memberphone"
 									id="memberPhone2" name="memberPhone2"> - <input
 									type="text" class="input short2 memberphone" id="memberPhone3"
 									name="memberPhone3">
+
 									<div class="agreebox adcheck">
 										<input type="checkbox" id="smsAgreement-check" value="1"
 											name="memberReceivesms" class="agreeCheck"> 광고성 SMS
@@ -296,6 +305,8 @@
 									</div></td>
 							</tr>
 							<tr>
+
+
 								<td>생년월일</td>
 
 								<td><input type="date" id="birth" class="input short3"
@@ -317,17 +328,15 @@
 							</tr>
 							<tr>
 								<td>이메일</td>
-								<td><input type="text" class="input" id="email1"
-									name="email1"> @ <input type="text" class="input"
-									id="email2" name="email2"> <select name="emailSelect"
-									id="emailSelect" onchange="mailSelect(this);">
+								<td><input type="text" class="input" id="email1" name="email1"> @ <input type="text" class="input" id="email2" name="email2"> 
+								<select name="emailSelect" id="emailSelect" onchange="mailSelect(this);">
 										<option value="">직접입력</option>
 										<option value="naver.com">naver.com</option>
 										<option value="nate.com">nate.com</option>
 										<option value="gmail.com">gmail.com</option>
 										<option value="hanmail.net">hanmail.net</option>
 								</select>
-									<button type="button" onclick="checkEmail();" id="btnOpen1">중복체크</button>
+								<button type="button" onclick="checkEmail();" id="btnOpen1">중복체크</button>
 									<span id="ajaxEmailcheck"></span>
 									<div class="agreebox adcheck">
 										<span id="authMsg"></span><input type="hidden" id="emailchk">
@@ -337,8 +346,8 @@
 										E-MAIL 수신 동의 <span class="fcBlue">(선택)</span> <input
 											type="hidden" id="emailAgreement_hidden" value="0"
 											name="memberReceiveemail">
-
-									</div></td>
+									</div>
+								</td>
 							</tr>
 						</table>
 						<br> <br>
@@ -349,187 +358,190 @@
 				</form>
 			</div>
 		</div>
+
 	</div>
-		<script>
-	$("[name=memberId]").eq(0).keyup(function() {
-		var memberId = $(this).val();
-		var regExp = /[a-z0-9]{4,}/; //유효성검사 소문자와 숫자를섞어 4글자이상
-		if (regExp.test(memberId)) {
-			//중복검사
-			$.ajax({
-				url : "/ajaxIdCheck",
-				data : {
-					memberId : memberId
-				},
-				type : "post",
-				success : function(data) {
-					if (data == 0) {
-						$("#ajaxCheck").html("사용 가능한 아이디 입니다.");
-						$("#ajaxCheck").css("color", "blue");
-						$("#idchk").val('1');
-					} else if (data == 1) {
-						$("#ajaxCheck").html("이미 사용중인 아이디 입니다.");
-						$("#ajaxCheck").css("color", "red");
-						$("#idchk").val('2');
-					}
 
-				}
-			});
-		} else {
-			$("#ajaxCheck").html("아이디는 영문+숫자로 4글자 이상입니다.")
-			$("#ajaxCheck").css("color", "red");
-		}
-	});
-		var memberPwchk = true;
-	$("[name=memberPw]").eq(0).keyup(function() {
-		var memberPw = $(this).val();
-		// (알파벳 하나)(숫자 하나)(특수문자 하나)(문자열)
-		 var regExpPw = /(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,12}/; 
-		/*  var regExpPw = /^[a-zA-Z0-9]{8,12}$/; */
-		 
-		if (regExpPw.test(memberPw)){
-			$('#pwChkRule').html("사용가능한 비밀번호입니다.");
-			$('#pwChkRule').css('color' ,"#1f4787");
-			memberPwchk = true;
-			
-		}else{
-			$('#pwChkRule').html("비밀번호는  8~12자 이내 영문,숫자,특수문자로 입력해주세요.");
-			$('#pwChkRule').css('color' ,"red");
-			memberPwchk = false;
-		}
-	});
-
-			
-	function checkEmail() {
-		var memberemail = $('#email1').val() + '@' + $('#email2').val();
-		$.ajax({
-					url : "ajaxEmailCheck",
+	<script>
+		$("[name=memberId]").eq(0).keyup(function() {
+			var memberId = $(this).val();
+			var regExp = /[a-z0-9]{4,}/; //유효성검사 소문자와 숫자를섞어 4글자이상
+			if (regExp.test(memberId)) {
+				//중복검사
+				$.ajax({
+					url : "/ajaxIdCheck.do",
 					data : {
-						memberEmail : memberemail
+						memberId : memberId
 					},
 					type : "post",
 					success : function(data) {
 						if (data == 0) {
-							$("#ajaxEmailcheck").html("사용 가능한 이메일 입니다.");
-							$("#ajaxEmailcheck").css("color", "blue");
-							$("#emailchk").val('1');
-							console.log(memberemail);
-							//아이디 사용가능시 MODAL창 인증버튼시 팝업
-							var btnOpen1 = document
-									.getElementById('btnOpen1');
-							var btnCheck1 = document
-									.getElementById('btnCheck1');
-							var btnClose1 = document
-									.getElementById('btnClose1');
-
-							// email check modal 창을 감춤
-							var closeRtn1 = function() {
-								var modal1 = document
-										.getElementById('modal1');
-								modal1.style.display = 'none';
-
-							}
-							// email check modal 창을 보여줌
-
-							var modal1 = document.getElementById('modal1');
-							var email = $('#email1').val() + '@'
-									+ $('#email2').val();
-							
-							modal1.style.display = 'block';
-							var mailCode = '';
-							$.ajax({
-								url : "/sendMail",
-								data : {
-									email : email
-								},
-								type : "post",
-								success : function(data) {
-									mailCode = data;
-									authTime();
-								}
-							});
-
-							btnCheck1.onclick = closeRtn1;
-							btnClose1.onclick = closeRtn1;
-							
-							
-
-							var intervalId;
-							function authTime() {
-								$("#timeZone")
-										.html(
-												"<span id='min'>3</span> : <span id='sec'>00</span>");
-								intervalId = window.setInterval(function() {
-									timeCount();
-								}, 1000);
-							}
-							function timeCount() {
-								var min = Number($("#min").html());
-								var sec = $("#sec").html();
-								if (sec == "00") {
-									if (min == 0) {
-										mailCode = null;
-										clearInterval(intervalId);
-									} else {
-										$("#min").html(--min);
-										$("#sec").html(59);
-
-									}
-								} else {
-									var newSec = Number(sec);
-									newSec--;
-									if (newSec < 10) {
-										$("#sec").html("0" + newSec);
-									} else {
-										$("#sec").html(newSec);
-									}
-								}
-							}
-							$("#btnCheck1").click(function() {
-
-								if (mailCode == null) {
-									$("#authMsg").html("인증 실패");
-									$("#authMsg").css("color", "red");
-									$("#emailchk").val('2');
-								} else {
-									if ($("#authCode").val() == mailCode) {
-										$("#authMsg").html("인증성공");
-										$("#authMsg").css("color", "blue"); //여기다가 인증추가를 해야함
-										$("#emailchk").val('1');
-										clearInterval(intervalId);
-										$("#timeZone").empty();
-										$("#emaildcheck").val('1');
-									} else {
-										$("#authMsg").html("인증코드를 확인하세요");
-										$("#authMsg").css("color", "red");
-										$("#emailchk").val('2');
-									}
-								}
-
-							})
-
+							$("#ajaxCheck").html("사용 가능한 아이디 입니다.");
+							$("#ajaxCheck").css("color", "blue");
+							$("#idchk").val('1');
 						} else if (data == 1) {
-							$("#ajaxEmailcheck").html("이미 사용중인 이메일 입니다.");
-							$("#ajaxEmailcheck").css("color", "red");
+							$("#ajaxCheck").html("이미 사용중인 아이디 입니다.");
+							$("#ajaxCheck").css("color", "red");
+							$("#idchk").val('2');
 						}
 
 					}
 				});
-	};
+			} else {
+				$("#ajaxCheck").html("아이디는 영문+숫자로 4글자 이상입니다.")
+				$("#ajaxCheck").css("color", "red");
+			}
+		});
+			var memberPwchk = true;
+		$("[name=memberPw]").eq(0).keyup(function() {
+			var memberPw = $(this).val();
+			// (알파벳 하나)(숫자 하나)(특수문자 하나)(문자열)
+			 var regExpPw = /(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,12}/; 
+			/*  var regExpPw = /^[a-zA-Z0-9]{8,12}$/; */
+			 
+			if (regExpPw.test(memberPw)){
+				$('#pwChkRule').html("사용가능한 비밀번호입니다.");
+				$('#pwChkRule').css('color' ,"#1f4787");
+				memberPwchk = true;
+				
+			}else{
+				$('#pwChkRule').html("비밀번호는  8~12자 이내 영문,숫자,특수문자로 입력해주세요.");
+				$('#pwChkRule').css('color' ,"red");
+				memberPwchk = false;
+			}
+		});
 
-	//sms 광고 수신 체크박스 밸류 리턴
-	if (document.getElementById("smsAgreement-check").checked) {
-		document.getElementById("smsAgreement_hidden").disabled = true;
+		function checkEmail() {
+			var memberemail = $('#email1').val() + '@' + $('#email2').val();
+			$.ajax({
+						url : "ajaxEmailCheck",
+						data : {
+							memberEmail : memberemail
+						},
+						type : "post",
+						success : function(data) {
+							if (data == 0) {
+								$("#ajaxEmailcheck").html("사용 가능한 이메일 입니다.");
+								$("#ajaxEmailcheck").css("color", "blue");
+								$("#emailchk").val('1');
+								console.log(memberemail);
+								//아이디 사용가능시 MODAL창 인증버튼시 팝업
+								var btnOpen1 = document
+										.getElementById('btnOpen1');
+								var btnCheck1 = document
+										.getElementById('btnCheck1');
+								var btnClose1 = document
+										.getElementById('btnClose1');
 
-	}
+								// email check modal 창을 감춤
+								var closeRtn1 = function() {
+									var modal1 = document
+											.getElementById('modal1');
+									modal1.style.display = 'none';
 
-	//email 광고 수신 체크박스 밸류 리턴
-	if (document.getElementById("emailAgreement-check").checked) {
-		document.getElementById("emailgreement_hidden").disabled = true;
+								}
+								// email check modal 창을 보여줌
 
-	}
-</script>
+								var modal1 = document.getElementById('modal1');
+								var email = $('#email1').val() + '@'
+										+ $('#email2').val();
+								
+								modal1.style.display = 'block';
+								var mailCode = '';
+								$.ajax({
+									url : "/sendMail",
+									data : {
+										email : email
+									},
+									type : "post",
+									success : function(data) {
+										mailCode = data;
+										authTime();
+									}
+								});
+
+								btnCheck1.onclick = closeRtn1;
+								btnClose1.onclick = closeRtn1;
+								
+								
+
+								var intervalId;
+								function authTime() {
+									$("#timeZone")
+											.html(
+													"<span id='min'>3</span> : <span id='sec'>00</span>");
+									intervalId = window.setInterval(function() {
+										timeCount();
+									}, 1000);
+								}
+								function timeCount() {
+									var min = Number($("#min").html());
+									var sec = $("#sec").html();
+									if (sec == "00") {
+										if (min == 0) {
+											mailCode = null;
+											clearInterval(intervalId);
+										} else {
+											$("#min").html(--min);
+											$("#sec").html(59);
+
+										}
+									} else {
+										var newSec = Number(sec);
+										newSec--;
+										if (newSec < 10) {
+											$("#sec").html("0" + newSec);
+										} else {
+											$("#sec").html(newSec);
+										}
+									}
+								}
+								$("#btnCheck1").click(function() {
+
+									if (mailCode == null) {
+										$("#authMsg").html("인증 실패");
+										$("#authMsg").css("color", "red");
+										$("#emailchk").val('2');
+									} else {
+										if ($("#authCode").val() == mailCode) {
+											$("#authMsg").html("인증성공");
+											$("#authMsg").css("color", "blue"); //여기다가 인증추가를 해야함
+											$("#emailchk").val('1');
+											clearInterval(intervalId);
+											$("#timeZone").empty();
+											$("#emailcheck").val('1');
+
+										} else {
+											$("#authMsg").html("인증코드를 확인하세요");
+											$("#authMsg").css("color", "red");
+											$("#emailchk").val('2');
+										}
+									}
+
+								})
+
+							} else if (data == 1) {
+								$("#ajaxEmailcheck").html("이미 사용중인 이메일 입니다.");
+								$("#ajaxEmailcheck").css("color", "red");
+							}
+
+						}
+					});
+		};
+	
+		//sms 광고 수신 체크박스 밸류 리턴
+		if (document.getElementById("smsAgreement-check").checked) {
+			document.getElementById("smsAgreement_hidden").disabled = true;
+
+		}
+
+		//email 광고 수신 체크박스 밸류 리턴
+		if (document.getElementById("emailAgreement-check").checked) {
+			document.getElementById("emailgreement_hidden").disabled = true;
+
+		}
+		
+		
+	</script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
-
 </html>

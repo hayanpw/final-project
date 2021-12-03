@@ -1,5 +1,8 @@
 package kr.or.requrit.service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,5 +87,15 @@ public class RequritService {
 		rpd.setPageNavi(pageNavi);
 		rpd.setStart(start);
 		return rpd;
+	}
+
+	public Requrit selectOneRequrit(int requritNo) {
+		Requrit r = dao.selectOneRequrit(requritNo);
+		LocalDate now = LocalDate.now();
+		String endDate = r.getRequritEnd();
+		LocalDate date = LocalDate.parse(endDate, DateTimeFormatter.ISO_DATE);
+		long period = ChronoUnit.DAYS.between(now, date);
+		r.setPeriod(period);
+		return r;
 	}
 }

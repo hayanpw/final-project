@@ -30,7 +30,11 @@ public class MemberController {
 	}
 	@RequestMapping(value="/mypage.do")
 	public String mypage() {
-		return "common/mypage";
+		return "member/mypage";
+	}
+	@RequestMapping(value="/memberUpdateFrm.do")
+	public String memberUpdateFrm() {
+		return "member/memberUpdate";
 	}
 	@RequestMapping(value="/adminpage.do")
 	public String adminpage() {
@@ -69,6 +73,16 @@ public class MemberController {
 		}
 		return "common/msg";
 	}
+	@RequestMapping(value="/idCheck.do")
+	public String idchk(String memberId) {
+		Member m = service.selectOneMemberId(memberId);
+		if(m == null) {
+			return "0";
+		}else {
+			return "1";
+		}
+	}
+	
 
 }
 

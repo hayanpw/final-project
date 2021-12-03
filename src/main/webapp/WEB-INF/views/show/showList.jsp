@@ -12,7 +12,7 @@
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
     <div class="container">
-        <h1>musée d'art<br>공연 일정</h1>
+        <h1><strong>공연 일정</strong></h1>
         <div class="showSearchBox">
 	        <c:if test="${sessionScope.m.memberLevel == 0 }">
 	            <a href="/insertShowFrm.do" class="btn btn-danger">공연 추가</a>
