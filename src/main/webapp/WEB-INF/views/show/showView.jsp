@@ -223,8 +223,12 @@
 	            dayNamesMin : [ '일', '월', '화', '수', '목', '금', '토' ],
 	            yearSuffix : '년',
 	            minDate: today,
-	            maxDate: endDate
+	            maxDate: endDate,
+	            beforeShowDay: noMondays //월요일은 휴무일
 	        });
+		    function noMondays(date) {
+		    	return [date.getDay() != 1, ''];
+		    };
 	
 	        $("#datepicker").change(function() {
 				selectDate = $(this).val();
