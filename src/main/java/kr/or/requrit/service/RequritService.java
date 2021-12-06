@@ -37,6 +37,13 @@ public class RequritService {
 		paging.setStart(start);
 		paging.setEnd(end);
 		ArrayList<Requrit> list = dao.selectRequritList(paging);
+		for(Requrit r : list) {
+			LocalDate now = LocalDate.now();
+			String endDate = r.getRequritEnd();
+			LocalDate date = LocalDate.parse(endDate, DateTimeFormatter.ISO_DATE);
+			long period = ChronoUnit.DAYS.between(now, date);
+			r.setPeriod(period);
+		}
 		System.out.println("서비스"+list.size());
 		int totalCount = dao.selectTotalCount();
 		System.out.println("컨트롤러 카운트"+totalCount);

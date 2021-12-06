@@ -47,11 +47,11 @@ h1{
 			var price = ${seat.seatList.size()*seat.seatPrice};
 			var d = new Date();
 			var date = d.getFullYear()+""+(d.getMonth()+1)+""+d.getDate()+""+d.getHours()+""+d.getMinutes()+""+d.getSeconds();
-			
+			var showName = "${show.showName}";
 			IMP.init("imp76831421");	//결제 API 사용을 위해 가맹점 식별코드 입력
 			IMP.request_pay({
 				merchant_uid : showName+"_"+date,	//거래 아이디
-				name : "${show.showName}",				//결제 이름 설정
+				name : showName,				//결제 이름 설정
 				amount : price,	//결제 금액
 				buyer_email : "${sessionScope.m.memberEmail}",	//구매자 이메일
 				buyer_name : "${sessionScope.m.memberName}",	//구매자 이름
@@ -66,6 +66,7 @@ h1{
 					location.href="/paymentSuccess.do?reservNo="+${seat.reservNo};
 				}else{
 					alert("결제 실패");
+					location.href="/cancelPayment.do?reservNo="+${seat.reservNo};
 				}
 			});
 		});

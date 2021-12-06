@@ -45,10 +45,10 @@
       </div>
       <h3><span class="line">장</span>소</h3>
        <div class="radio">
-                <label class="radio-inline"><input type="radio" name="academyPlace" >A</label>
-                <label class="radio-inline"><input type="radio" name="academyPlace" >B</label>
-                <label class="radio-inline"><input type="radio" name="academyPlace" >C</label>
-                <label class="radio-inline"><input type="radio" name="academyPlace" >D</label>
+                <label class="radio-inline"><input type="radio" name="academyPlace" value="A">A</label>
+                <label class="radio-inline"><input type="radio" name="academyPlace" value="B">B</label>
+                <label class="radio-inline"><input type="radio" name="academyPlace" value="C">C</label>
+                <label class="radio-inline"><input type="radio" name="academyPlace" value="D">D</label>
           </div>
          <div class="form-group">
           <h3><span class="line">담</span>당 강사</h3>

@@ -16,10 +16,9 @@
 		if (agree.checked) {
 			//아이디가 맞았을경우2
 			if ($("#memberId").val() != '' && $("#idchk").val() == '1') {
-			
 				//패스워드 일치할경우3
-				if ($("#memberPw").val() == $("#chkpw").val() && memberPwchk == true
-						&& $("#memberPw").val() && $("#chkpw").val() != '') {
+				if ($("#memberPassword").val() == $("#chkpw").val() && memberPwchk == true
+						&& $("#memberPassword").val() && $("#chkpw").val() != '') {
 						
 						//이름값 입력했을경우 5
 						if ($("#memberName").val() != '') {
@@ -28,13 +27,13 @@
 							if ($("#memberPhone2").val() && $("#memberPhone3").val() != '') {
 								
 								//생일값 입력 했을경우7
-								if ($("#birth").val() != '') {
+								if ($("#memberBirthday").val() != '') {
 									
 									//주소 입력 했을경우8
-									if ($("#postCode1").val() && $("#addressRoad1").val() != '') {
+									if ($("#postcode").val() && $("#addressRoad").val() != '') {
 																			
 										//상세주소 입력했을경우9
-										if ($("#addressDetail1").val() != '') {
+										if ($("#addressDetail").val() != '') {
 											
 											//메일 주소 인증 & 아이디중복체크 & null이 아닌경우10
 											if ($("#emailchk").val() == '1' && $("#email1") != '') {
@@ -57,14 +56,14 @@
 											//상세주소 입력안했을경우9
 										} else {
 											alert("상세주소를 확인해주세요!");
-											$("#addressDetail1").focus();
+											$("#addressDetail").focus();
 											return false;
 
 										}
 										//주소검색 안했을경우8
 									} else {
 										alert("주소를 확인해주세요!");
-										$("#postCode1").focus();
+										$("#postcode").focus();
 										return false;
 
 									}
@@ -72,7 +71,7 @@
 									//생일값 입력안했을경우7
 								} else {
 									alert("생일을 확인해주세요!");
-									$("#birth").focus();
+									$("#memberBirthday").focus();
 									return false;
 
 								}
@@ -91,7 +90,7 @@
 					//비밀번호 일치하지않거나 null일경우3
 				} else {
 					alert("비밀번호를 확인해주세요!");
-					$("#memberPw").focus();
+					$("#memberPassword").focus();
 					return false;
 
 				}
@@ -124,7 +123,7 @@
 	//비밀번호 여부
 	function chkPw(obj) {
 		var pwChk = document.getElementById("pwChk");
-		var pw = document.getElementsByName("memberPw")[0].value;
+		var pw = document.getElementsByName("memberPassword")[0].value;
 		var pwRe = obj.value;
 	
 		
@@ -155,9 +154,9 @@
 	function addrSearch() {
 		new daum.Postcode({
 			oncomplete : function(data) {
-				$("#postCode1").val(data.zonecode);
-				$("#addressRoad1").val(data.roadAddress);
-				$("#addressDetail1").focus();
+				$("#postcode").val(data.zonecode);
+				$("#addressRoad").val(data.roadAddress);
+				$("#addressDetail").focus();
 			}
 		}).open();
 	}
@@ -206,7 +205,7 @@
 
 
 			<div class="content">
-				<form action="/bjoin" method="post" class="contentDetail"
+				<form action="/join.do" method="post" class="contentDetail"
 					id="contentDetail-field" name="joinFrm">
 					<legend class="contentDetail-legend">14세 이상 회원 가입 입력양식</legend>
 					<div class="contentDetail">
@@ -255,15 +254,11 @@
 								<td>아이디</td>
 								<td><input type="text" class="input" name="memberId"
 									id="memberId"><span id="ajaxCheck"></span> <input type="hidden" id="idchk"></td>
-
-
-
-
 							</tr>
 							<tr>
 								<td>비밀번호</td>
-								<td><input type="password" class="input" name="memberPw"
-									id="memberPw"> <span id="pw-detail"> 8~12자 이내 
+								<td><input type="password" class="input" name="memberPassword"
+									id="memberPassword"> <span id="pw-detail"> 8~12자 이내 
 										영문,숫자,특수문자(“”-+/\:; 제외)</span> <span id="pwChkRule"></span></td> 
 							</tr>
 							<tr>
@@ -309,22 +304,22 @@
 
 								<td>생년월일</td>
 
-								<td><input type="date" id="birth" class="input short3"
-									id="birth" name="birth" maxlength="4"
+								<td><input type="date" id="memberBirthday" class="input short3"
+									id="memberBirthday" name="memberBirthday" maxlength="4"
 									placeholder="출생년도(ex.1994)"></td>
 							</tr>
 							<tr>
 								<td>주소입력</td>
-								<td><input type="text" id="postCode1" class="input short3"
-									name="postCode1" readonly>
+								<td><input type="text" id="postcode" class="input short3"
+									name="postcode" readonly>
 									<button onclick="addrSearch();" type="button" class="nextBtn">주소검색</button></td>
 							</tr>
 							<tr>
 								<td></td>
 								<td style="padding-top: 5px;"><input type="text"
-									id="addressRoad1" class="input long" name="addressRoad1" readonly>
-									<input type="text" id="addressDetail1" class="input long"
-									name="addressDetail1" placeholder="상세주소"></td>
+									id="addressRoad" class="input long" name="addressRoad" readonly>
+									<input type="text" id="addressDetail" class="input long"
+									name="addressDetail" placeholder="상세주소"></td>
 							</tr>
 							<tr>
 								<td>이메일</td>
@@ -368,16 +363,15 @@
 			if (regExp.test(memberId)) {
 				//중복검사
 				$.ajax({
-					url : "/ajaxIdCheck.do",
-					data : {
-						memberId : memberId
-					},
+					url : "/idCheck.do",
+					data : {memberId : memberId},
 					type : "post",
 					success : function(data) {
 						if (data == 0) {
 							$("#ajaxCheck").html("사용 가능한 아이디 입니다.");
 							$("#ajaxCheck").css("color", "blue");
 							$("#idchk").val('1');
+							//console.log(data);
 						} else if (data == 1) {
 							$("#ajaxCheck").html("이미 사용중인 아이디 입니다.");
 							$("#ajaxCheck").css("color", "red");
@@ -392,13 +386,13 @@
 			}
 		});
 			var memberPwchk = true;
-		$("[name=memberPw]").eq(0).keyup(function() {
-			var memberPw = $(this).val();
+		$("[name=memberPassword]").eq(0).keyup(function() {
+			var memberPassword = $(this).val();
 			// (알파벳 하나)(숫자 하나)(특수문자 하나)(문자열)
 			 var regExpPw = /(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,12}/; 
 			/*  var regExpPw = /^[a-zA-Z0-9]{8,12}$/; */
 			 
-			if (regExpPw.test(memberPw)){
+			if (regExpPw.test(memberPassword)){
 				$('#pwChkRule').html("사용가능한 비밀번호입니다.");
 				$('#pwChkRule').css('color' ,"#1f4787");
 				memberPwchk = true;
@@ -411,19 +405,17 @@
 		});
 
 		function checkEmail() {
-			var memberemail = $('#email1').val() + '@' + $('#email2').val();
+			var memberEmail = $('#email1').val() + '@' + $('#email2').val();
 			$.ajax({
-						url : "ajaxEmailCheck",
-						data : {
-							memberEmail : memberemail
-						},
+						url : "/ajaxEmailCheck.do",
+						data : {memberEmail : memberEmail},
 						type : "post",
 						success : function(data) {
 							if (data == 0) {
 								$("#ajaxEmailcheck").html("사용 가능한 이메일 입니다.");
 								$("#ajaxEmailcheck").css("color", "blue");
 								$("#emailchk").val('1');
-								console.log(memberemail);
+								console.log(memberEmail);
 								//아이디 사용가능시 MODAL창 인증버튼시 팝업
 								var btnOpen1 = document
 										.getElementById('btnOpen1');
@@ -448,10 +440,8 @@
 								modal1.style.display = 'block';
 								var mailCode = '';
 								$.ajax({
-									url : "/sendMail",
-									data : {
-										email : email
-									},
+									url : "/sendMail.do",
+									data : {email : email},
 									type : "post",
 									success : function(data) {
 										mailCode = data;

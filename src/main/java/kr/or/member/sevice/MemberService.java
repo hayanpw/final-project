@@ -31,4 +31,16 @@ public class MemberService {
 		Member m = dao.selectOneMemberId(memberId);
 		return m;
 	}
+	public Member selectOneMemberEmail(String memberEmail) {
+		Member m = dao.selectOneMemberEmail(memberEmail);
+		return m;
+	}
+	public Member selectOneMemberPw(String memberPassword) {
+		Member m = dao.selectOneMemberPw(memberPassword);
+		return m;
+	}
+	public int updateMember(Member member) {
+		int result = dao.updateMember(member);
+		return result;
+	}
 }
