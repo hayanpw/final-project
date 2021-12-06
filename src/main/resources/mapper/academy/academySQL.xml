@@ -11,7 +11,7 @@
 	<select id="acadeyTotal" resultType="_int">
   		select count(*) from academy
   	</select>
-  	<select id="academyList" parameterType="_int" resultType="ac">
+  	<select id="academyList" parameterType="ap" resultType="ac">
   		select 
   			nn.academy_no as academyNo,
   			nn.academy_title as academyTitle,
@@ -23,6 +23,20 @@
   			nn.academy_price as academyPrice,
   			nn.academy_detail as academyDetail,
   			nn.academy_category as academyCategory
-  		from (select rownum as rnum,n.* from(select * from  academy order by academy_no desc)n)nn where rnum between  1 and #{reqPage}
+  		from (select rownum as rnum,n.* from(select * from  academy order by academy_no desc)n)nn where rnum between  #{start} and #{end}
+  	</select>
+  	<select id="selectOneAcademy" parameterType="_int" resultType="ac">
+  	 	select 
+  			academy_no as academyNo,
+  			academy_title as academyTitle,
+  			academy_start as academyStart,
+  			academy_end as academyEnd,
+  			academy_photo as academyPhoto,
+  			academy_teacher as academyTeacher,
+  			academy_place as academyPlace,
+  			academy_price as academyPrice,
+  			academy_detail as academyDetail,
+  			academy_category as academyCategory
+  		from academy where academy_no = #{academyNo}
   	</select>
 </mapper>

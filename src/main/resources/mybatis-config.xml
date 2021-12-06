@@ -19,5 +19,6 @@
 		<typeAlias type="kr.or.requrit.vo.Requrit" alias="rq"/>
 		<typeAlias type="kr.or.requrit.vo.RequritPagingVo" alias="pa"/>
 		<typeAlias type="kr.or.academy.vo.Academy" alias="ac"/>
+		<typeAlias type="kr.or.academy.vo.AcademyPagingVo" alias="ap"/>
 	</typeAliases>
 </configuration>

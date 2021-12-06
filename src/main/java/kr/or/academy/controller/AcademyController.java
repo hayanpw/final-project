@@ -13,10 +13,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.google.gson.Gson;
 
 import kr.or.academy.service.AcademyService;
 import kr.or.academy.vo.Academy;
+import kr.or.academy.vo.AcademyPagingVo;
 
 @Controller
 public class AcademyController {
@@ -33,8 +37,10 @@ public class AcademyController {
 		//전체 페이지 겟수 출력 
 		int totalCount = service.academyTotal();
 		ArrayList<Academy> list = service.selectAcademyList(reqPage);
+		int count = list.size();
 		model.addAttribute("list",list);
 		model.addAttribute("totalCount",totalCount);
+		model.addAttribute("count",count);
 		return "academy/academyList";
 	}
 	//수업 등록
@@ -86,5 +92,20 @@ public class AcademyController {
 		}
 		model.addAttribute("loc", "/academyList.do");
 		return "common/msg";
+	}
+	//더보기
+	@ResponseBody
+	@RequestMapping(value ="/moreAcademy.do",produces = "application/json;charset=utf-8")
+	public String moreAcademy(int start) {
+		//아작스 data start 값 strat 받아옴
+		ArrayList<Academy> list = service.moreAcademy(start);
+		return new Gson().toJson(list);
+	}
+	//상세보기 로 이동
+	@RequestMapping(value="/academyView.do")
+	public String academyView(int academyNo, Model model) {
+		Academy a = service.selectOneAcademy(academyNo);
+		model.addAttribute("a",a);
+		return "academy/academyView";
 	}
 }
