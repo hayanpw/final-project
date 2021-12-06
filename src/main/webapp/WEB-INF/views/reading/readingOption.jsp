@@ -5,35 +5,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>좌석 선택</title>
-    <link href="resources/readingCss/reading_seat.css" rel="stylesheet">
+<title>선택사항</title>
+    <link href="resources/readingCss/reading_option.css" rel="stylesheet">
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 		<div class="container">
 			<div class="container-left">
-			
-				<c:forEach begin="1" end="100" varStatus="i" >
-					<c:choose>
-						<c:when test="${i.index%20 eq 0}">
-							<div id="seat${i.index}" onclick="chocie(this);">${i.index }</div>
-							<br><br><br><br>
-						</c:when>
-						<c:when test="${i.index%10 eq 0}">
-							<div id="seat${i.index}" onclick="chocie(this);">${i.index }</div>
-							<br>
-						</c:when>
-						<c:when test="${i.count%5 eq 0 }" >
-							<div id="seat${i.index}" onclick="chocie(this);">${i.index }</div>
-							<div id="emptyseat">
-								빈
-							</div>
-						</c:when>
-						<c:otherwise>
-							<div id="seat${i.index}" onclick="chocie(this);">${i.index }</div>
-						</c:otherwise>
-					</c:choose>
-				</c:forEach>
+				
 			</div>
 			<div class="container-right">
 				<h2>선택 내역</h2>
@@ -42,20 +21,22 @@
 					<h3 name="showseat"></h3>
 				</div>
 				<button name="rollback" class="btn btn-success btn-lg" onclick="history.go(-1);" style="background-color: #563D39; border-color: #563D39">이전단계</button>
-				<form action="/readingInsert.do" method="post">
-					<input type="hidden" name="readingNum">
+				<form action="/readingOption.do" method="post">
+					<input type="hidden" name="readingNum" value="${re.readingNum }">
 					<input type="hidden" name="readingDay" value="${re.readingDay }">
 					<input type="hidden" name="readingId" value="${sessionScope.m.memberId }">
-					<input type="hidden" name="sub" class="btn btn-success btn-lg" value="예약하기" style="background-color: #563D39; border-color: #563D39">
+					<input type="hidden" name="sub" class="btn btn-success btn-lg" value="좌석 선택하기" style="background-color: #563D39; border-color: #563D39">
 				</form>
 			</div>
 		</div>
 	<script>
 		$(function(){
 			var selectDate = $("input[name=readingDay]").val();
+			var selectNum = $("input[name=readingNum]").val();
 			var month = selectDate.substring(5,7); //몇월
 			var day = selectDate.substring(8,10);  //몇일
 			$("h3[name=showdate]").html(month+"월 "+day+"일");
+			$("h3[name=showseat]").html(selectNum+"번 좌석");
 		});
 	
 		var count = 0;
@@ -66,8 +47,6 @@
 	    	}else{
 				$(obj).css("background-color", "#563D39");
 				$(obj).attr("onclick", "cancel(this);");
-				$("input[name=readingNum]").val($(obj).html());
-				$("h3[name=showseat]").html($(obj).html()+"번 좌석");
 				$("input[name=sub]").attr("type","submit");
 				count++;
 				$("button[name=rollback]").attr("class","hidden");

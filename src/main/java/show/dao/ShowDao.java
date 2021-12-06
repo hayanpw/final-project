@@ -99,4 +99,8 @@ public class ShowDao {
 		sqlSession.delete("show.payCancel");
 	}
 
+	public String selectOneSeat(Seat s) {
+		return sqlSession.selectOne("show.selectOneSeat", s);
+	}
+
 }
