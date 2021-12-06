@@ -295,12 +295,9 @@ public class ShowController {
 	@RequestMapping(value = "/checkSeat.do")
 	public String checkSeat(Seat s) {
 		String seat = service.selectOneSeat(s);
-		if(seat == null) {
-			//아직은 결제로 넘어가야 좌석 선점
-			//좌석 클릭 먼저가 선점인 경우 후에 구현해야됨
-			return seat;
-		}else {
-			return seat;
-		}
+		//아직은 결제로 넘어가야 좌석 선점
+		//좌석 클릭 먼저가 선점인 경우 후에 구현해야됨
+		return seat;
 	}
+
 }

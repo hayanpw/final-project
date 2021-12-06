@@ -71,6 +71,8 @@
 	
 	<!-- AOP 어노테이션방식 사용 선언 -->
 	<aop:aspectj-autoproxy/>
+	<!-- 예약작업 어노테이션방식 사용 선언 -->
+	<task:annotation-driven/>
 	
 	<context:component-scan base-package="kr.or.iei" />
 	<context:component-scan base-package="show" />

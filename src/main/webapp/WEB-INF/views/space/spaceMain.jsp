@@ -62,7 +62,7 @@
 				
 			</div>
 		</div>
-		<button class="btn btn-default" id="rentalBtn" onclick="location.href='/spaceRes.do'">대관 신청하기</button>
+		<button class="btn btn-default" id="rentalBtn" onclick="location.href='/spaceRes.do?spaceNo=1'">대관 신청하기</button>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>

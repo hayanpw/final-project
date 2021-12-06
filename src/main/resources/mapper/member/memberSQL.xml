@@ -3,23 +3,61 @@
 <mapper namespace="member">
  	<select id="selectOneMember" parameterType="m" resultType="m">
  		select 
- 			member_no as memberNo,
- 			member_id as memberId,
- 			member_password as memberPassword,
- 			member_level as memberLevel
+			MEMBER_NO as memberNo,
+			MEMBER_ID as memberId,
+			MEMBER_EMAIL as memberEmail,
+			MEMBER_PASSWORD as memberPassword,
+			MEMBER_NAME as memberName,
+			MEMBER_PHONE as memberPhone,
+			MEMBER_BIRTHDAY as memberBirthday,
+			MEMBER_GENDER as memberGender,
+			POSTCODE as postcode,
+			ADDRESS_ROAD as addressRoad,
+			ADDRESS_DETAIL as addressDetail,
+			MEMBER_LEVEL as memberLevel
  		from member where member_id=#{memberId} and member_password=#{memberPassword}
  	</select>
  	<insert id="insertMember" parameterType="m">
- 		insert into member values(member_seq.nextval, 
-								#{memberId},#{memberEmail},
-								#{memberPassword},#{memberName},
-								#{memberPhone},#{memberBirthday},#{memberGender},
-								#{postcode},#{addressRoad},#{addressDetail},
-								1,#{memberReceiveEmail},#{memberReceiveSms},1,to_char(sysdate,'yyyy-mm-dd'))
+ 		insert into member values
+ 			(member_seq.nextval,
+ 			#{memberId},
+ 			#{memberEmail},
+ 			#{memberPassword},
+ 			#{memberName},
+ 			#{memberPhone},
+ 			#{memberBirthday},
+ 			#{memberGender},
+ 			#{postcode},
+ 			#{addressRoad},
+ 			#{addressDetail},
+ 			1,
+ 			#{memberReceiveEmail},
+ 			#{memberReceiveSms},
+ 			1,
+ 			to_char(sysdate,'yyyy-mm-dd'),null)
  	</insert>
- 	<select id="selectOne" parameterType="string" resultType="m">
+ 	<select id="selectOneId" parameterType="string" resultType="m">
  		select 
  			member_id as memberId
  		from member where member_id=#{memberId}
  	</select>
+ 	 	<select id="selectOneEmail" parameterType="string" resultType="m">
+ 		select 
+ 			member_id as memberEmail
+ 		from member where member_Email=#{memberEmail}
+ 	</select>
+ 	 	<select id="selectOnePw" parameterType="string" resultType="m">
+ 		select 
+ 			member_password as memberPassword
+ 		from member where member_password=#{memberPassword}
+ 	</select>
+ 	<update id="updateMember" parameterType="m">
+ 		update member set 	
+ 			MEMBER_EMAIL = #{memberEmail},	
+ 			MEMBER_PHONE = #{memberPhone},	
+ 			POSTCODE = #{postcode},
+			ADDRESS_ROAD = #{addressRoad},
+			ADDRESS_DETAIL = #{addressDetail} 
+		where member_id=#{memberId}
+ 	</update>
 </mapper>

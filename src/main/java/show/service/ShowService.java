@@ -19,7 +19,6 @@ public class ShowService {
 	private ShowDao dao;
 
 	public ArrayList<Show> selectShowList() {
-		dao.payCancel();
 		return dao.selectShowList();
 	}
 
@@ -106,7 +105,7 @@ public class ShowService {
 		return map;
 	}
 
-	public HashMap<String, Object> checkSeatList(ShowReserv sr) {
+	public HashMap<String, Object> checkSeatList(ShowReserv sr) {		
 		Show show = dao.selectOneShow(sr.getShowNo());
 		ArrayList<Seat> list = dao.selectAllSeat(sr);
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -117,6 +116,10 @@ public class ShowService {
 
 	public String selectOneSeat(Seat s) {
 		return dao.selectOneSeat(s);
+	}
+
+	public void cancelReserv() {
+		dao.payCancel();
 	}
 
 }

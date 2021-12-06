@@ -192,13 +192,9 @@
 		$(function() {
 			var seatList = new Array();
 
-			<%
-			if(!seatList.get(0).equals("nope")){
-			%>
+			<%if(!seatList.get(0).equals("nope")){%>
 			var count = 0;
-			<%
-				for(String str : seatList){
-			%>
+			<%for(String str : seatList){%>
 				seatList[count++] = "<%=str%>";
 			<%}%>
 			<%}%>
@@ -292,6 +288,17 @@
 				form.submit();
 			}
 		}
+		
+		$(document).ready(function() {
+		    $(window).on('beforeunload', function(){
+		        return "Any changes will be lost";
+		    });
+		    // Form Submit
+		    $(document).on("submit", "form", function(event){
+		        // disable warning
+		        $(window).off('beforeunload');
+		    });
+		});
     </script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>

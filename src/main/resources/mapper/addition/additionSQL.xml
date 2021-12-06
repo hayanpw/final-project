@@ -5,18 +5,21 @@
 	<!--글리스트조회-->
 	<select id="noticeList" parameterType="map" resultType="board">
 		select
-			rnum as bnum, 
+			rnum as bnum,
 			board_no as boardNo,
 			board_title as boardTitle,
 			board_writer as boardWriter,
 			readcount as readCount,
-			reg_date as regDate
-		from 
-		(select rownum as rnum,n.* from 
-		(select*
-		from board where boardtype=#{boardType} order by board_no desc)n) 
-		where rnum between #{start} and #{end} 
+			reg_date as regDate,
+			cnt as commentCount
+		from
+		(select rownum as rnum,n.* from
+		(select board_no,board_title,board_writer,readcount,reg_date,nvl(count, 0) as cnt
+		from(select*from board where boardtype=#{boardType}) 
+		left join (select board_no,count(*) as count from (select board_no,board_ref from board join comment1 on (board_no=board_ref)) group by board_no) 
+		using (board_no) order by board_no desc)n) where rnum between #{start} and #{end}
 	</select>
+	
 	
 	<!--전체글 갯수-->
 	<select id="totalCount" parameterType="map" resultType="_int">
@@ -43,7 +46,10 @@
 	
 	<!--글보기-->
 	<select id="selectOneBoard" parameterType="_int" resultMap="board">
-		select*from board where board_no=#{boardNo}
+		select board_no,board_title,board_content,board_writer,readcount,reg_date,nvl(count,0) as cnt
+		from (select *from board where board_no =#{boardNo})
+		left join (select board_ref,count(*) as count from comment1 group by board_ref)
+		on (board_no=board_ref)
 	</select>
 	
 	<!--해당글 파일읽어오기-->
@@ -62,6 +68,7 @@
 		<result column="board_writer" property="boardWriter"/>
 		<result column="readcount" property="readCount"/>
 		<result column="reg_date" property="regDate"/>
+		<result column="cnt" property="commentCount"/>
 		<collection property="list" column="board_no" javaType="java.util.ArrayList" ofType="kr.or.addition.model.vo.FileVO" select="selectFileList"></collection>
 	</resultMap>
 	
@@ -104,5 +111,54 @@
 		update comment1 set bc_content=#{bcContent} where bc_no=#{bcNo}
 	</update>
 	
+	<!--새글수조회-->
+	<select id="selectNewCount" parameterType="_int" resultType="_int">
+		select count(*) from(select *from (select*from board where boardtype=#{boardType}) where reg_date =(select to_char(sysdate,'yyyy-mm-dd') as 오늘날짜 from dual))
+	</select>
 	
+	<!--댓글수 조회-->
+	<select id="selectCommentCount" resultType="_int">
+		select board_no,count(*) from (select board_no,board_ref from board join comment1 on (board_no=board_ref)) group by board_no;
+	</select>
+	
+	<!--키워드 검색-->
+	<select id="searchKeyword" parameterType="map" resultType="board">
+	select
+			rnum as bnum,
+			board_no as boardNo,
+			board_title as boardTitle,
+			board_writer as boardWriter,
+			readcount as readCount,
+			reg_date as regDate,
+			cnt as commentCount
+	from
+	(select rownum as rnum,n.* from
+	(select board_no,board_title,board_content,boardtype,board_writer,readcount,reg_date,nvl(count, 0) as cnt
+	from(select*from board where boardtype=#{boardType}) 
+	left join (select board_no,count(*) as count from (select board_no,board_ref from board join comment1 on (board_no=board_ref)) group by board_no) 
+	using (board_no) order by board_no desc)n
+	where boardtype=#{boardType} and 
+		<choose>
+			<when test="type.equals('tac')">
+			(board_title like '%'||#{keyword}||'%' or board_content like '%'||#{keyword}||'%')) where rnum between #{start} and #{end}
+			</when>
+			<when test="type.equals('writer')">
+			(board_writer like #{keyword})) where rnum between #{start} and #{end}
+			</when>
+		</choose>
+	</select>
+	
+	<!--키워드 검색글 갯수-->
+	<select id="totalKCount" parameterType="map" resultType="_int">
+		select count(*) 
+		from(select *from board where boardtype=#{boardType} and 
+		<choose>
+			<when test="type.equals('tac')">
+			(board_title like '%'||#{keyword}||'%' or board_content like '%'||#{keyword}||'%'))
+			</when>
+			<when test="type.equals('writer')">
+			(board_writer like #{keyword})) 
+			</when>
+		</choose>
+	</select>
 </mapper>

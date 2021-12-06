@@ -53,16 +53,6 @@
 	<div class="container" id="container">
 		<p id="title">공지사항</p>
 		<div id="table">
-			<div id="new">새글수 : ${nCount }/${totalCount } </div>
-			<div id="search">
-			<form action="/searchKeyword.do?boardType=1&reqPage=1" method="post">
-				<select name="type">
-			 		<option value="tac">제목+내용</option>
-			 	</select>
-			 	<input type="text" name="keyword">
-			 	<input type="submit" value="검색">
-			</form>
-			</div>
 			<table class="table">
 				<tr id="firtr">
 					<td>번호</td><td>제목</td><td>작성일</d><td>조회수</td>
@@ -80,9 +70,9 @@
 		<div id="page">
 			<div id="pageNavi">${pageNavi }</div>
 		</div>
-		<div id="table">	
-			<a class="btn" id="write" href="/boardWriteFrm.do?boardType=1">글작성</a>
-		</div>	
+		<div>
+			<a class="btn" href="/additionBoard.do?boardType=1&reqPage=1">목록</a>
+		</div>
 	</div>	
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>

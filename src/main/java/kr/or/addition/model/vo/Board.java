@@ -15,5 +15,6 @@ public class Board {
 	private String regDate;
 	private int boardType;
 	private int bnum;
+	private int commentCount;
 	private ArrayList<FileVO> list;
 }

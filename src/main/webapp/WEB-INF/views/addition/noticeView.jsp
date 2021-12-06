@@ -30,7 +30,7 @@
 				<td>첨부파일</td>
 				<td>
 				<c:forEach items="${b.list }" var="f">
-				<a href="/fileDown.do?boardNo=${b.boardNo }">${f.filename }</a>
+				<a href="/fileDown.do?filename=${f.filename }&filepath=${f.filepath }">${f.filename }</a>
 				</c:forEach>
 				</td>
 			</tr>
@@ -40,9 +40,9 @@
 				</td>
 			</tr>
 		</table>
-		<a class="btn" href="/boardDelete.do?boardNo=${b.boardNo }">글삭제</a>
-		<a class="btn" href="/boardUpdate.do?boardNo=${b.boardNo }">글수정</a>
-		<a class="btn" href="/additionNotice.do?boardType=1&reqPage=1">목록</a>
+		<a class="btn" href="/boardDelete.do?boardType=1&boardNo=${b.boardNo }">글삭제</a>
+		<a class="btn" href="/boardUpdateFrm.do?boardNo=${b.boardNo }">글수정</a>
+		<a class="btn" onclick="history.go(-1);">이전</a>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
