@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -26,8 +27,14 @@ public class AcademyController {
 	public String academyFrm() {
 		return "academy/academyInsert";
 	}
+	//리스트 페이지 출력
 	@RequestMapping(value="/academyList.do")
-	public String academyList() {
+	public String academyList(Academy a,Model model,int reqPage) {
+		//전체 페이지 겟수 출력 
+		int totalCount = service.academyTotal();
+		ArrayList<Academy> list = service.selectAcademyList(reqPage);
+		model.addAttribute("list",list);
+		model.addAttribute("totalCount",totalCount);
 		return "academy/academyList";
 	}
 	//수업 등록
@@ -73,9 +80,9 @@ public class AcademyController {
 		}
 		int result = service.academyInsert(a);
 		if(result>0) {
-			model.addAttribute("msg", "전시 등록 성공");			
+			model.addAttribute("msg", "수업 등록 성공");			
 		}else {
-			model.addAttribute("msg", "전시 등록 실패");
+			model.addAttribute("msg", "수업 등록 실패");
 		}
 		model.addAttribute("loc", "/academyList.do");
 		return "common/msg";
