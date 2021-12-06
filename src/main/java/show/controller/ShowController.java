@@ -257,6 +257,7 @@ public class ShowController {
 		model.addAttribute("s", map.get("show"));
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("sr",sr);
+		System.out.println(map.get("list"));
 		return "show/selectSeat";
 	}
 	

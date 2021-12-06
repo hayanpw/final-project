@@ -1,6 +1,19 @@
+<%@page import="show.vo.Seat"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <%
+    	ArrayList<Seat> list = (ArrayList<Seat>)request.getAttribute("list");
+    	ArrayList<String> seatList = new ArrayList<String>();
+    	if(list.isEmpty()){
+    		seatList.add("nope");
+    	}else{
+	    	for(int i=0;i<list.size(); i++){
+	    		seatList.add(list.get(i).getSeatNo());
+	    	}    		
+    	}
+    %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,11 +40,12 @@
 	            				<c:when test="${i.index < 5 }">
 	            					<c:forEach begin="1" end="${i.index+3 }" varStatus="j">
 			            				<div class="seats">
+											<!-- 테스트 -->
 											<div id="seat" onclick="choose(this);">
 			                        			${j.index }
 			                        			<input type="hidden" value="A-${i.index }-${j.index}">
 			                        		</div>
-			                        		
+			                        		<!-- 테스트 -->
 			                    		</div>
 			            			</c:forEach>
 	            				</c:when>
@@ -175,6 +189,34 @@
 		</div>
     </div>
     <script>
+		$(function() {
+			var seatList = new Array();
+
+			<%
+			if(!seatList.get(0).equals("nope")){
+			%>
+			var count = 0;
+			<%
+				for(String str : seatList){
+			%>
+				seatList[count++] = "<%=str%>";
+			<%}%>
+			<%}%>
+			seatList.sort();
+ 			
+ 			var allSeat = $("#seat>input").eq().prevObject.length;
+ 			
+ 			for(var i=0; i<seatList.length; i++){
+ 				var seat = seatList[i];
+ 				for(var j=0; j<allSeat; j++){
+ 					if($("#seat>input").eq(j).val() == seat){
+ 						$("#seat>input").eq(j).parent().removeAttr("onclick").css("background-color", "#818181").css("color", "#616161").css("cursor", "default");
+ 						break;
+ 					}
+ 				}
+ 				
+ 			}
+		});
 
     
         var count=0;
