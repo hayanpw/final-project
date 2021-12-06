@@ -55,8 +55,8 @@ public class ReadingController {
 		return "reading/readingSeat";
 	}
 	
-	@RequestMapping(value="/readingInsert.do")
-	public String readingInsert(Reading re, Model model) {
+	@RequestMapping(value="/readingOption.do")
+	public String readingOption(Reading re, Model model) {
 		//선 좌석조회 후 insert
 		//같은날 같은 좌석 선택시 이선좌출력
 		//선택사항은 update로 selectOneId
@@ -73,9 +73,11 @@ public class ReadingController {
 		}else {
 			int result = service.insertReading(re);
 			if(result>0){
-				model.addAttribute("re", re);
-				model.addAttribute("msg",re.getReadingDay()+"일 "+re.getReadingNum()+"번 좌석을 예약하셨습니다.");
-				model.addAttribute("loc", "/readingOption.do");
+				Reading re3 = service.selectOneNum(re);
+				model.addAttribute("re", re3);
+				return "reading/readingOption";
+				//model.addAttribute("msg",re.getReadingDay()+"일 "+re.getReadingNum()+"번 좌석을 예약하셨습니다.");
+				//model.addAttribute("loc", "/readingOption.do");
 			}else {
 				model.addAttribute("msg","예약 오류. 다시 시도해주세요.");
 				model.addAttribute("loc", "/readingList.do");
@@ -84,8 +86,9 @@ public class ReadingController {
 		return "common/msg";
 	}
 	
-	@RequestMapping(value="/readingOption.do")
-	public String readingOption(Reading re, Model model) {
+	@RequestMapping(value="/readingOption1.do")
+	public String readingOption1(Reading re, Model model) {
+		System.out.println(re);
 		model.addAttribute("re", re);
 		return "reading/readingOption";
 	}

@@ -61,6 +61,7 @@
 					<input type="submit" class="btn btn-success btn-lg" value="열람실 예약하기" style="background-color: #563D39; border-color: #563D39">
 				</fieldset>
 			</form>
+			<a href="/readingOption1.do" class="btn btn-success btn-lg" style="margin-left: 10px; background-color: #BDB19A; border-color: #BDB19A">예약내역보기</a>
 		</div>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>

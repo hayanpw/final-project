@@ -1,0 +1,9 @@
+.container{
+	margin: 0 auto;
+    text-align: center;
+}
+.info{
+	margin: 0 auto;
+	width:500px;
+	text-align: left;
+}

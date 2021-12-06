@@ -20,7 +20,7 @@
 			reading_name as readingName,
 			reading_ty as readingTy,
 			reading_checkout as readingCheckOut
-		from reading where reading_num=#{readingNum}
+		from reading where reading_day=#{readingDay} and reading_num=#{readingNum}
 	</select>
 	<select id="selectOneId" parameterType="reading" resultType="reading">
 		select
@@ -32,7 +32,7 @@
 			reading_name as readingName,
 			reading_ty as readingTy,
 			reading_checkout as readingCheckOut
-		from reading where reading_day=#{readingDay}
+		from reading where reading_day=#{readingDay} and reading_id=#{readingId}
 	</select>
 	<insert id="insertReading" parameterType="reading">
 		insert into reading
