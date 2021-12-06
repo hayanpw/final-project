@@ -300,9 +300,5 @@ public class ShowController {
 		//좌석 클릭 먼저가 선점인 경우 후에 구현해야됨
 		return seat;
 	}
-	
-	@Scheduled(cron = "0 0 9 * * *")
-	public void cancelReserv() {
-		service.cancelReserv();
-	}
+
 }
