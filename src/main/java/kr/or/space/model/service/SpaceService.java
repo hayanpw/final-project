@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.space.model.dao.SpaceDao;
 import kr.or.space.model.vo.FileVO;
+import kr.or.space.model.vo.Rental;
 import kr.or.space.model.vo.Space;
 import kr.or.space.model.vo.SpaceTime;
 
@@ -16,8 +17,8 @@ public class SpaceService {
 	@Autowired
 	private SpaceDao dao;
 	
-	@Transactional
 	//공간등록 + 파일 업로드
+	@Transactional
 	public int insertSpace(Space s, ArrayList<FileVO> list, ArrayList<SpaceTime> stList) {
 		int result1 = dao.insertSpace(s);
 		int stResult = 0;
@@ -59,6 +60,7 @@ public class SpaceService {
 		return dao.selectThumbnail(spaceNo);
 	}
 	//공간 삭제
+	@Transactional
 	public int deleteSpace(int spaceNo) {
 		return dao.deleteSpace(spaceNo);
 	}
@@ -69,5 +71,14 @@ public class SpaceService {
 	//시간 조회
 	public ArrayList<SpaceTime> selectSpaceTime(int spaceNo) {
 		return dao.selectSpaceTime(spaceNo);
+	}
+	//하나의 시간 조회
+	public SpaceTime selectOneTime(int stNo) {
+		return dao.selectOneTime(stNo);
+	}
+	//공간 예약
+	@Transactional
+	public int insertRental(Rental r) {
+		return dao.insertRental(r);
 	}
 }

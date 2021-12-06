@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kr.or.space.model.service.SpaceService;
 import kr.or.space.model.vo.FileVO;
+import kr.or.space.model.vo.Rental;
 import kr.or.space.model.vo.Space;
 import kr.or.space.model.vo.SpaceTime;
 
@@ -159,11 +160,25 @@ public class SpaceController {
 	}
 	//공간 상세보기
 	@RequestMapping(value = "/spaceInfo.do")
-	public String spaceInfo(int spaceNo, Model model) {
+	public String spaceInfo(int spaceNo,int stNo,String rentalDate, Model model) {
 		Space s = service.selectOneSpace(spaceNo);
 		ArrayList<FileVO> fv = service.selectFileList(spaceNo);
+		SpaceTime st =service.selectOneTime(stNo);
+		model.addAttribute("st", st);
 		model.addAttribute("s", s);
+		model.addAttribute("rentalDate", rentalDate);
 		model.addAttribute("fv", fv);
 		return "space/spaceInfo";
+	}
+	@RequestMapping(value = "/spaceRental.do")
+	public String spaceRental(Model model, Rental r) {
+		int result = service.insertRental(r);
+		if(result>0) {
+			model.addAttribute("msg", "신청이 완료되었습니다.");
+		}else {
+			model.addAttribute("msg", "신청이 실패하였습니다.");
+		}
+		model.addAttribute("loc", "/");
+		return "common/msg";
 	}
 }
