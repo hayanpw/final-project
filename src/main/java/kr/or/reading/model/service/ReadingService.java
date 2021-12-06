@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.or.reading.model.dao.ReadingDao;
+import kr.or.reading.model.vo.Reading;
 import kr.or.reading.model.vo.ReadingBlack;
 
 @Service
@@ -18,5 +19,22 @@ public class ReadingService {
 	public ReadingBlack selectOneBlackList(String memberId) {
 		ReadingBlack rb = dao.selectOneBlackList(memberId);
 		return rb;
+	}
+
+
+	public Reading selectOneNum(Reading re) {
+		Reading re1 = dao.selectOneNum(re);
+		return re1;
+	}
+
+
+	public int insertReading(Reading re) {
+		return dao.insertReading(re);
+	}
+
+
+	public Reading selectOneId(Reading re) {
+		Reading re2 = dao.selectOneId(re);
+		return re2;
 	}
 }

@@ -19,7 +19,7 @@
 	<br><br><br>
 	<div class="container">
 		<h1>열람실 예약</h1><br>
-		<h3>총 90석</h3><br>
+		<h3>총 100석</h3><br>
 		<div class="container-left" >
 			<!-- 캘린더 코드 -->
 			<div id="datepicker"></div>
