@@ -181,4 +181,14 @@ public class SpaceController {
 		model.addAttribute("loc", "/");
 		return "common/msg";
 	}
+	@RequestMapping(value = "/spaceAdmin.do")
+	public String spaceAdmin() {
+		
+		return "space/spaceAdmin";
+	}
+	@RequestMapping(value = "/spaceMypage.do")
+	public String spaceMypage(String memberId) {
+		
+		return "space/spaceMypage";
+	}
 }
