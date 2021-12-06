@@ -1,5 +1,7 @@
 package kr.or.academy.service;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,5 +17,15 @@ public class AcademyService {
 	public int academyInsert(Academy a) {
 		int result = dao.academyInsert(a);
 		return result;
+	}
+
+	public int academyTotal() {
+		int totalCount = dao.academyTotal();
+		return totalCount;
+	}
+
+	public ArrayList<Academy> selectAcademyList(int reqPage) {
+		ArrayList<Academy> list = dao.selectAcademy(reqPage);
+		return list;
 	}
 }

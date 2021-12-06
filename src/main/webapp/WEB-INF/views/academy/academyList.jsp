@@ -13,75 +13,27 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	 <div class="container">
 		<ul class="mainmenu">
+		<c:forEach items="${list }" var="a" >
 			<li class="academy">
 				<div class="academyImg">
-					<a href="#"> 
-					<img src="/resources/academyImage/upload/career.png">
+					<a href="/academyView.do?academtNo=${a.academyNo }"> 
+					<img src="${a.academyPhoto }">
 					</a>
 				</div>
  				<div class="info">
-					<p>너무너무 긴 제목 완전 길어요 완전~~~~~~~~~개길어요~~~~~~~~~~~~~~~~~~~~~~</p>
-					<p>기간 들어갈곳</p>
-					<p>강사 : 이름</p>
-					<p>수업료 : 4억</p>
+					<p>${a.academyTitle }</p>
+					<p>기간: ${a.academyStart } ~ ${a.academyEnd }</p>
+					<p>강사 : ${a.academyTeacher }</p>
+					<p>수업료 : ${a.academyPrice }</p>
 					<p>참여 인원 : 10명 <button>참여인원보기</button></p>
 					<div class="infoButton">
 						<button class="btn1">상세보기</button><button class="btn1">수정하기</button><button class="btn1">삭제하기</button>
 					</div>
 				</div>	
 			</li>
-			<li class="academy">
-				<div class="academyImg">
-					<a href="#"> 
-					<img src="/resources/academyImage/upload/career.png">
-					</a>
-				</div>
- 				<div class="info">
-					<p>너무너무 긴 제목 완전 길어요 완전~~~~~~~~~개길어요~~~~~~~~~~~~~~~~~~~~~~</p>
-					<p>기간 들어갈곳</p>
-					<p>강사 : 이름</p>
-					<p>수업료 : 4억</p>
-					<p>참여 인원 : 10명 <button>참여인원보기</button></p>
-					<div class="infoButton">
-						<button class="btn1">상세보기</button><button class="btn1">수정하기</button><button class="btn1">삭제하기</button>
-					</div>
-				</div>
-			</li>
-			<li class="academy">
-				<div class="academyImg">
-					<a href="#"> 
-					<img src="/resources/academyImage/upload/career.png">
-					</a>
-				</div>
- 				<div class="info">
-					<p>너무너무 긴 제목 완전 길어요 완전~~~~~~~~~개길어요~~~~~~~~~~~~~~~~~~~~~~</p>
-					<p>기간 들어갈곳</p>
-					<p>강사 : 이름</p>
-					<p>수업료 : 4억</p>
-					<p>참여 인원 : 10명 <button>참여인원보기</button></p>
-					<div class="infoButton">
-						<button class="btn1">상세보기</button><button class="btn1">수정하기</button><button class="btn1">삭제하기</button>
-					</div>
-				</div>	
-			</li>
-			<li class="academy">
-				<div class="academyImg">
-					<a href="#"> 
-					<img src="/resources/academyImage/upload/career.png">
-					</a>
-				</div>
- 				<div class="info">
-					<p>너무너무 긴 제목 완전 길어요 완전~~~~~~~~~개길어요~~~~~~~~~~~~~~~~~~~~~~</p>
-					<p>기간 들어갈곳</p>
-					<p>강사 : 이름</p>
-					<p>수업료 : 4억</p>
-					<p>참여 인원 : 10명 <button>참여인원보기</button></p>
-					<div class="infoButton">
-						<button class="btn1">상세보기</button><button class="btn1">수정하기</button><button class="btn1">삭제하기</button>
-					</div>
-				</div>
-			</li>
+		</c:forEach>
 		</ul>
+		<button class="moreBtn">더보기 </button>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
