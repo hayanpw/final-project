@@ -51,7 +51,7 @@ h1{
 			IMP.init("imp76831421");	//결제 API 사용을 위해 가맹점 식별코드 입력
 			IMP.request_pay({
 				merchant_uid : showName+"_"+date,	//거래 아이디
-				name : "공연 예매",				//결제 이름 설정
+				name : showName,				//결제 이름 설정
 				amount : price,	//결제 금액
 				buyer_email : "pache31@naver.com",	//구매자 이메일
 				buyer_name : "최승준",						//구매자 이름
@@ -67,10 +67,13 @@ h1{
 				}else{
 					//실패시 로직 구현
 					alert("결제 실패");
+					location.href="/cancelPayment.do?reservNo="+${seat.reservNo};
 				}
 			});
 		});
-		
+		$(function() {
+			$("#payment").click();
+		});
 	</script>
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
