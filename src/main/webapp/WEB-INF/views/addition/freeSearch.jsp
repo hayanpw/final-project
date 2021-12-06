@@ -19,16 +19,11 @@
 	margin-right: 50px;
 	text-align: center;
 	}
-	#search{
-		padding-right:20px;
-		padding-bottom:20px;
-		float: right;
-	}
 	#write{
-		float: right;
-	}
-	#new{
 		float: left;
+	}
+	#my{
+		float: right;
 	}
 	#page{
 	text-align: center;
@@ -38,39 +33,35 @@
 	width: 80px;
 	}
 	#firtr>td:nth-child(3){
-	width: 150px;
+	width: 100px;
 	}
 	#firtr>td:nth-child(4){
+	width: 150px;
+	}
+	#firtr>td:nth-child(5){
 	width: 80px;
 	}
-	.btn{
-		background-color: #A79078;
+	#new{
+		float: left;
+		padding-bottom:20px;
+		
 	}
 </style>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="container" id="container">
-		<p id="title">공지사항</p>
+		<p id="title">소통게시판</p>
 		<div id="table">
-			<div id="new">새글수 : ${nCount }/${totalCount } </div>
-			<div id="search">
-			<form action="/searchKeyword.do?boardType=1&reqPage=1" method="post">
-				<select name="type">
-			 		<option value="tac">제목+내용</option>
-			 	</select>
-			 	<input type="text" name="keyword">
-			 	<input type="submit" value="검색">
-			</form>
-			</div>
 			<table class="table">
 				<tr id="firtr">
-					<td>번호</td><td>제목</td><td>작성일</d><td>조회수</td>
+					<td>번호</td><td>제목</td><td>작성자</td><td>작성일</td><td>조회수</td>
 				</tr>
 				<c:forEach	items="${list }" var="b" varStatus="i">
 				<tr>
 					<td>${b.bnum }</td>
-					<td><a href="/boardView.do?boardType=1&boardNo=${b.boardNo}">${b.boardTitle }</a></td>
+					<td><a href="/boardView.do?boardType=3&boardNo=${b.boardNo}">${b.boardTitle }[${b.commentCount }]</a></td>
+					<td>${b.boardWriter }</td>
 					<td>${b.regDate }</td>
 					<td>${b.readCount }</td>
 				</tr>
@@ -80,10 +71,10 @@
 		<div id="page">
 			<div id="pageNavi">${pageNavi }</div>
 		</div>
-		<div id="table">	
-			<a class="btn" id="write" href="/boardWriteFrm.do?boardType=1">글작성</a>
-		</div>	
-	</div>	
+		<div>
+			<a class="btn" href="/additionBoard.do?boardType=3&reqPage=1">목록</a>
+		</div>
+	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>

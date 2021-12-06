@@ -75,5 +75,18 @@ public class AdditionDao {
 		return (ArrayList<FileVO>)list;
 	}
 
+	public int selectNewCount(int boardType) {
+		return sqlSession.selectOne("addition.selectNewCount",boardType);
+	}
+
+	public ArrayList<Board> searchKeyword(HashMap<String, Object> map) {
+		List<Board> list = sqlSession.selectList("addition.searchKeyword",map);
+		return (ArrayList<Board>)list;
+	}
+	
+	public int totalKCount(HashMap<String, Object> map) {
+		return sqlSession.selectOne("addition.totalKCount",map);
+	}
+
 
 }
