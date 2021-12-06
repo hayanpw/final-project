@@ -81,4 +81,8 @@ public class SpaceService {
 	public int insertRental(Rental r) {
 		return dao.insertRental(r);
 	}
+	//한사람이 예약한 대관 내역 조회
+	public ArrayList<Rental> selectRentalList(String memberId) {
+		return dao.selectRentalList(memberId);
+	}
 }

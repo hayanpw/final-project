@@ -80,4 +80,9 @@ public class SpaceDao {
 	public int insertRental(Rental r) {
 		return sqlSession.insert("space.insertRental",r);
 	}
+	//한사람이 예약한 대관내역 조회
+	public ArrayList<Rental> selectRentalList(String memberId) {
+		List<Rental> list = sqlSession.selectList("space.selectRentalList",memberId);
+		return (ArrayList<Rental>)list;
+	}
 }

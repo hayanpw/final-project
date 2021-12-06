@@ -11,7 +11,16 @@
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 		<div class="container">
-			
+			<div class="rental-info">
+				<p>${sessionScope.m.memberId }님의 대관 신청 정보입니다.</p>
+				<c:forEach items="${rList }" var="r">
+					<table>
+						<tr>
+							<td></td>
+						</tr>
+					</table>
+				</c:forEach>
+			</div>
 		</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>

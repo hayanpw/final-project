@@ -121,4 +121,17 @@
 			into rental
 			values(rental_seq.nextval,#{spaceNo},#{memberId},#{stNo},#{rentalDate},#{rentalPeople},1,0)
 	</insert>
+	<select id="selectRentalList" parameterType="string" resultType="rental">
+		select
+			rental_no as rentalNo,
+			space_no as spaceNo,
+			member_id as memberId,
+			st_no as stNo,
+			rental_date as rentalDate,
+			rental_people as rentalPeople,
+			rental_status as rentalStatus,
+			used_board as usedBoard
+		from rental
+		where member_id = #{memberId}	
+	</select>
 </mapper>

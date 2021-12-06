@@ -15,6 +15,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import kr.or.member.sevice.MemberService;
+import kr.or.member.vo.Member;
 import kr.or.space.model.service.SpaceService;
 import kr.or.space.model.vo.FileVO;
 import kr.or.space.model.vo.Rental;
@@ -187,8 +189,10 @@ public class SpaceController {
 		return "space/spaceAdmin";
 	}
 	@RequestMapping(value = "/spaceMypage.do")
-	public String spaceMypage(String memberId) {
+	public String spaceMypage(String memberId, Model model) {
+		ArrayList<Rental> rList = service.selectRentalList(memberId);
 		
+		model.addAttribute("rList", rList);
 		return "space/spaceMypage";
 	}
 }
