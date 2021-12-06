@@ -19,7 +19,6 @@ public class ShowService {
 	private ShowDao dao;
 
 	public ArrayList<Show> selectShowList() {
-		dao.payCancel();
 		return dao.selectShowList();
 	}
 
@@ -107,6 +106,9 @@ public class ShowService {
 	}
 
 	public HashMap<String, Object> checkSeatList(ShowReserv sr) {
+		//결제안한 정보 삭제
+		dao.payCancel();
+		
 		Show show = dao.selectOneShow(sr.getShowNo());
 		ArrayList<Seat> list = dao.selectAllSeat(sr);
 		HashMap<String, Object> map = new HashMap<String, Object>();

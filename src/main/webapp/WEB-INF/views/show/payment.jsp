@@ -40,7 +40,7 @@ h1{
         <h2>선택 좌석 : ${seat.seatList.size() }석</h2>
         <h1>결제 금액 : ${seat.seatList.size()*seat.seatPrice} 원</h1>
         <button id="payment" class="btn btn-danger btn-lg">결제</button><br>
-        <a href="/cancelPayment.do?reservNo=${seat.reservNo }" class="btn btn-default">예매 취소</a>
+        <a href="/cancelPayment.do?reservNo=${seat.reservNo }" class="btn btn-default" id="cancelPay">예매 취소</a>
 	</div>
 	<script>
 		$("#payment").click(function() {
@@ -60,16 +60,17 @@ h1{
 				buyer_postcode : "76621" 					//구매자 우편번호
 			}, function(rsp) {
 				if(rsp.success){
-					//성공시 로직 구현(ex. DB결제정보 insert -> 사용자 화면 처리)
+					//DB결제정보 update
 					alert("결제 성공");
 					console.log("카드 승인번호 : "+rsp.apply_num);
 					location.href="/paymentSuccess.do?reservNo="+${seat.reservNo};
 				}else{
-					//실패시 로직 구현(ex. 장바구니 저장 -> 사용자 화면 처리)
+					//실패시 로직 구현
 					alert("결제 실패");
 				}
 			});
 		});
+		
 	</script>
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
