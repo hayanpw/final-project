@@ -77,7 +77,7 @@
 			seat_level as seatLevel
 		from seat where reserv_no=#{reservNo}
 	</select>
-	<select id="selectAllSeat" resultType="sReserv">
+	<select id="selectAllSeat" parameterType="sReserv" resultType="seat">
 		select
 			seat_no as seatNo
 		from seat where show_no=#{showNo} and show_date=#{showDate}
@@ -88,6 +88,11 @@
 	<delete id="payCancel">
 		delete from show_reserv where reserv_pay=0
 	</delete>
+	<select id="selectOneSeat" parameterType="seat" resultType="string">
+		select
+			seat_no
+		from seat where show_no=#{showNo} and show_date=#{showDate} and seat_no=#{seatNo}
+	</select>
 	
 	<resultMap type="show" id="s">
 		<result column="show_no" property="showNo"/>
