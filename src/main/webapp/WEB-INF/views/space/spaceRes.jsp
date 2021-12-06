@@ -22,13 +22,23 @@
 			<input type="hidden" value="${s.spaceNo  }" name="spaceNo">
 			<div class="select-btn">
 				<c:forEach items="${list }" var= "l">
-					<button type="button" onclick="location.href='/spaceRes.do?spaceNo=${l.spaceNo}'">${l.spaceName }</button>
+					<c:choose>
+						<c:when test="${s.spaceNo eq l.spaceNo }">
+							<button id="active" type="button" onclick="location.href='/spaceRes.do?spaceNo=${l.spaceNo}'">${l.spaceName }</button>
+						</c:when>
+						<c:otherwise>
+							<button type="button" onclick="location.href='/spaceRes.do?spaceNo=${l.spaceNo}'">${l.spaceName }</button>
+						</c:otherwise>
+					</c:choose>
 				</c:forEach>
 			</div>
 		<!-- 캘린더 코드 -->
 		<div id="datepicker"></div>
 		<div class="time-table">
 			<table class="table table-hover">
+					<tr>
+						<td id="selectTime" colspan="5">시간 선택</td>
+					</tr>
 						<c:forEach items="${st }" var ="st">
 							<tr>
 								<td>이용시간<input type="hidden" value="${st.stNo }"></td>
@@ -38,17 +48,19 @@
 								<td><button type="button" class="checkBtn">선택</button></td>
 							</tr>
 					</c:forEach>
+			</table>
+			<table class="table">
 					<tr>
-						<td >선택한날짜</td>
+						<td>▶ 선택한날짜</td>
 						<td colspan="4"><input type="text" id="selectDate" name="rentalDate"></td>
 					</tr>
 					<tr>
-						<td>선택시간</td>
+						<td>▶선택시간</td>
 						<td><input type="text" name="startTime"></td>
 						<td>~</td>
 						<td><input type="text" name="endTime"></td>
 					</tr>	
-			</table>
+			</table >		
 			<input type="hidden" name="stNo">
 		</div>
 			<div id="insert-btn">
