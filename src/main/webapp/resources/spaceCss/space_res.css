@@ -32,14 +32,26 @@
 .time-table input{
 	border: none;
 	border-bottom: 1px solid #BDB19A ;
-	width: 150px;
+	width: 130px;
 	outline: none;
 }
-#time-table tr{
-	margin-bottom: 30px;
+#selectTime{
+	text-align: center;
+	font-size: 20px;
+	font-weight : bold;
+	background-color: #BDB19A;
+	color: #ffffff;
+}
+#selectDate{
+	font-size: 15px;
+}
+#active{
+	border : 1px solid white;
+	background-color: #BDB19A;	
 }
 .select-btn>button{
 	width : 80px;
+	background-color : #ffffff;
 	border : 1px solid #BDB19A; 
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
@@ -47,4 +59,19 @@
 .select-btn>button:hover{
 	border : 1px solid white;
 	background: #BDB19A;	
+}
+.time-table{
+	margin-top : 100px;
+	border:  1px solid #BDB19A;
+	box-shadow: 3px 3px 5px gray;
+}
+.checkBtn{
+	border : 1px solid #BDB19A;
+	background: #ffffff;
+	border-radius: 10px;	
+}
+.checkBtn:active{
+	border : 1px solid #fffff;
+	background: #BDB19A;
+	border-radius: 10px;	
 }

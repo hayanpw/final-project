@@ -30,12 +30,32 @@ public class MemberDao {
 		return result;
 	}
 	public Member selectOneMemberId(String memberId) {
-		Member m = sqlSession.selectOne("member.selectOneMember",memberId);
+		Member m = sqlSession.selectOne("member.selectOneId",memberId);
 		if(m == null) {
 			return null;
 		}else {
 			return m;
 		}
+	}
+	public Member selectOneMemberEmail(String memberEmail) {
+		Member m = sqlSession.selectOne("member.selectOneEmail",memberEmail);
+		if(m == null) {
+			return null;
+		}else {
+			return m;
+		}
+	}
+	public Member selectOneMemberPw(String memberPassword) {
+		Member m = sqlSession.selectOne("member.selectOnePw",memberPassword);
+		if(m == null) {
+			return null;
+		}else {
+			return m;
+		}
+	}
+	public int updateMember(Member member) {
+		int result = sqlSession.update("member.updateMember",member);
+		return result;
 	}
 }
 

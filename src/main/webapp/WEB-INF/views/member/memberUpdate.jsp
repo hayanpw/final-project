@@ -27,22 +27,15 @@
 				</div>	
 				<div class="form-group">
 					<fieldset>
-						<label class="control-label" for="memberPw">비밀번호</label>
-						<input type="password" id="memberPassword" name="memberPassword" class="mypagecontrol"
-						value="${sessionScope.m.memberPassword}">
-						</fieldset>
-				</div>	
-				<div class="form-group">
-					<fieldset>
 					 <label class="control-label" for="memberName">이름</label>
 					 <input type="text" id="memberName" name="memberName" class="mypagecontrol"
-					 value="${sessionScope.m.memberName}">	
+					 value="${sessionScope.m.memberName}" readonly>	
 					</fieldset>
 				</div>
 				<div class="form-group">
 					<fieldset>
 					 <label class="control-label" for="memberBirthday">생년월일</label>
-					 <input type="text" id="memberName" name="memberBirthday" class="mypagecontrol" value="${m.memberBirthday}">	
+					 <input type="text" id="memberName" name="memberBirthday" class="mypagecontrol" value="${m.memberBirthday}" readonly>	
 					</fieldset>
 				</div>				
 				<div class="form-group">
@@ -60,32 +53,31 @@
 				<div class="form-group">
 						<fieldset>
 							<label class="control-label" for="memberAddress">주소</label>
-							<input type="text" id="postcode" name="postcode" class="mypagecontrol2" value="${sessionScope.m.postcode}">
-							<button type="button" onclick="addrSearch();" class="btnAdd">주소검색</button> 
-							<input type="text" id="roadAddr" name="roadAddr" class="mypagecontrol" value="${sessionScope.m.addressRoad}">
-							<input type="text" id="detailAddr" name="detailAddr" class="mypagecontrol" value="${sessionScope.m.addressDetail}">
+							<input type="text" id="postcode" name="postcode" class="mypagecontrol2" value="${sessionScope.m.postcode}" readonly>
+							<button onclick="addrSearch();" type="button" class="nextBtn">주소검색</button>
+							<input type="text" id="addressRoad" name="addressRoad" class="mypagecontrol" value="${sessionScope.m.addressRoad}" readonly>
+							<input type="text" id="addressDetail" name="addressDetail" class="mypagecontrol" value="${sessionScope.m.addressDetail}">
 						</fieldset>
-				</div>		
+				</div>
+						
 				<div class="form-group">
 						<fieldset>
 							<button type="submit" class="btnAdd">정보수정</button> 
-							<a href="/memberDelete?memberNo=${sessionScope.m.memberNo}" class="btnAdd2">회원탈퇴</a>
+							<a href="/memberDeleteList?memberNo=${sessionScope.m.memberNo}" class="btnAdd2">회원탈퇴</a>
 						</fieldset>
 				</div>
 			</form>
 	</div>
 </div>
 	<script>
-	function addrSearch1(){
-		 new daum.Postcode({
-		        oncomplete: function(data) {
-		            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
-		            // 예제를 참고하여 다양한 활용법을 확인해 보세요.
-		            $("#postcode").val(data.zonecode); //우편번호
-		            $("#roadAddr").val(data.roadAddress); //도로명주소
-		            $("#detailAddr").focus(); //상세주소
-		        }
-		 }).open();
+	function addrSearch() {
+		new daum.Postcode({
+			oncomplete : function(data) {
+				$("#postcode").val(data.zonecode);
+				$("#addressRoad").val(data.roadAddress);
+				$("#addressDetail").focus();
+			}
+		}).open();
 	}
 	</script>
         </div>

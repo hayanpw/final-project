@@ -15,8 +15,8 @@
 		<div class="login-box">
 		<form action="/login.do" method="post">
 			<fieldset>
-					<label for="memberId">ID </label><input type="text" name="memberId"><br><br>
-					<label for="memberPassword">PW </label><input type="password" name="memberPassword"><br><br>
+					<label for="memberId" class="reg">ID </label><input type="text" name="memberId"><br><br>
+					<label for="memberPassword" class="reg"> PW </label><input type="password" name="memberPassword"><br><br>
 					<input type="submit" value="login">
 					<a type="text" class="searchidpw" data-toggle="modal" data-target="#sModal">ID · PASSWORD 찾기</a>
 				</fieldset>
@@ -34,8 +34,8 @@
                     <div class="modal-body">
                        	<form action="/searchidpw" method="post">
 							<fieldset>
-									<label for="memberId">Email </label><input type="text" name="memberEmail"><br><br>
-									<label for="memberId">Number </label><input type="text" name="authentication">
+									<label for="memberEmail" class="reg" >Email </label><input type="text" name="memberEmail"><br><br>
+									<label for="emailNumber" class="reg" >Number </label><input type="text" name="authentication">
 														<a type="text" class="sendemail">전송</a>
                              		<button type="submit" class="btn btn-block intputBtn">찾기</button>
 								</fieldset>

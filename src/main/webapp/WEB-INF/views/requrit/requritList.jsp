@@ -18,7 +18,7 @@
                   <th>#번호</th>
                   <th>공고명</th>
                   <th>올린사람</th>
-                  <th>근무시간</th>
+                  <th>모집 기간</th>
               </tr>
           </thead>
           
@@ -28,7 +28,17 @@
 				   <td>${start + i.index }</td>
 				   <td><a href="/requritView.do?requritNo=${r.requritNo }">${r.requritTitle }</a></td>
 				   <td>관리자</td>
+				   <c:choose>
+				   <c:when test="${r.period ge 0 }">
 				   <td>${r.requritStart }~${r.requritEnd }</td>
+				   </c:when>
+				   <c:when test="${r.period le 0 }">
+				   <td>마감된 공고</td>
+				   </c:when>
+				   <c:when test="${r.period eq 0 }">
+				   <td>오늘 마감!</td>
+				   </c:when>
+				   </c:choose>
 			   </tr>
 			 </c:forEach>
             </tbody>

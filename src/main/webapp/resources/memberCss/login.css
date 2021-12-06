@@ -2,14 +2,14 @@
     margin: 100px 0 50px 100px;
     font-size: 28px;
     font-weight: 900;
-    color : #BDB19A;
+    color : #000;
 }
 .login-title span{
 	padding-top : 3px;
 	border-top : 5px solid #BDB19A;
 }
 .login-box{
-    width: 800px;
+    width: 400px;
     height:300px;
     margin: 0 auto;
 }
@@ -32,10 +32,26 @@ fieldset {
     color:#BDB19A;
 }
 .searchidpw:hover{
+	border-style:none;
     color:#563D39;
 }
 .intputBtn{
 	background-color: #BDB19A;
 	color:#fff;
 	margin-top: 15px;
+}
+input [type=submit] {
+    width: 70px;
+    height: 30px;
+    background-color:#fff;
+    color:#BDB19A;
+    border: solid 1px #BDB19A;
+}
+input [type=submit]:hover{
+    box-shadow: 1px 1px 1px #BDB19A;
+}
+.reg {
+    font-size: 14px;
+    width: 40px;
+    float: left;
 }

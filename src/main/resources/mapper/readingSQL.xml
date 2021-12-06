@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="reading">
-<!--
-강사님한테 여쭤봐야됌
-만약 22일 15시에 강제퇴실 되었으면
-29일 15시가 아닌 30일날 저절로 삭제되어야됌
-
-생각나는방식은 insert에서 (start+8)공식 + 00:00:00을 직접넣는다? 
- -->
 	<select id="selectOneBlackList" parameterType="string" resultType="black">
 		select
 			black_no as blackNo,
@@ -17,5 +10,33 @@
 			black_ty as blackTy
 		from reading_black where black_id=#{memberId} and black_ty=0
 	</select>
+	<select id="selectOneNum" parameterType="reading" resultType="reading">
+		select
+			reading_no as readingNo,
+			reading_time as readingTime,
+			reading_day as readingDay,
+			reading_num as readingNum,
+			reading_id as readingId,
+			reading_name as readingName,
+			reading_ty as readingTy,
+			reading_checkout as readingCheckOut
+		from reading where reading_num=#{readingNum}
+	</select>
+	<select id="selectOneId" parameterType="reading" resultType="reading">
+		select
+			reading_no as readingNo,
+			reading_time as readingTime,
+			reading_day as readingDay,
+			reading_num as readingNum,
+			reading_id as readingId,
+			reading_name as readingName,
+			reading_ty as readingTy,
+			reading_checkout as readingCheckOut
+		from reading where reading_day=#{readingDay}
+	</select>
+	<insert id="insertReading" parameterType="reading">
+		insert into reading
+			values(reading_seq.nextval,sysdate,#{readingDay},#{readingNum},#{readingId},(select member_name from member where member_id=#{readingId}),0,0)
+	</insert>
 </mapper>
 

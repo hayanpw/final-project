@@ -65,8 +65,23 @@ body{
     flex:1;
 }
 #footer{
-    background-color: #563D39;
+    margin: auto;
+    text-align: center;
     height: 500px;
+    width: 1170px;
+}
+
+.footer-menu{
+    height: 100px;
+    width: 100%;
+    border-bottom: solid 1px #bababa;
+}
+.footer-menu>a {
+    border:none;
+    font-size: 28px;
+    padding: 10px 40px 10px 40px;
+    color:#563D39;
+
 }
 
 /*navi 진행중*/
