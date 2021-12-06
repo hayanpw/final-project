@@ -118,4 +118,8 @@ public class ShowService {
 		return dao.selectOneSeat(s);
 	}
 
+	public void cancelReserv() {
+		dao.payCancel();
+	}
+
 }

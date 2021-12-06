@@ -11,6 +11,7 @@ import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -298,5 +299,10 @@ public class ShowController {
 		//아직은 결제로 넘어가야 좌석 선점
 		//좌석 클릭 먼저가 선점인 경우 후에 구현해야됨
 		return seat;
+	}
+	
+	@Scheduled(cron = "0 0 9 * * *")
+	public void cancelReserv() {
+		service.cancelReserv();
 	}
 }
