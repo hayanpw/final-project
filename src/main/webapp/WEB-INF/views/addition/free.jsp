@@ -43,10 +43,8 @@
 	}
 	#new{
 		float: left;
-	}
-	#select{
 		padding-bottom:20px;
-		float: right;
+		
 	}
 </style>
 </head>
@@ -55,8 +53,7 @@
 	<div class="container" id="container">
 		<p id="title">소통게시판</p>
 		<div id="table">
-			<div id="new">새글수 자리</div>
-			<div id="select">목록정렬자리</div>
+			<div id="new">새글수 : ${nCount }/${totalCount }</div>
 			<table class="table">
 				<tr id="firtr">
 					<td>번호</td><td>제목</td><td>작성자</td><td>작성일</td><td>조회수</td>
@@ -64,7 +61,7 @@
 				<c:forEach	items="${list }" var="b" varStatus="i">
 				<tr>
 					<td>${b.bnum }</td>
-					<td><a href="/boardView.do?boardType=3&boardNo=${b.boardNo}">${b.boardTitle }</a></td>
+					<td><a href="/boardView.do?boardType=3&boardNo=${b.boardNo}">${b.boardTitle }[${b.commentCount }]</a></td>
 					<td>${b.boardWriter }</td>
 					<td>${b.regDate }</td>
 					<td>${b.readCount }</td>
@@ -72,12 +69,20 @@
 				</c:forEach>
 			</table>
 		</div>
-		<div id="page">
-			<div id="pageNavi">${pageNavi }</div>
-		</div>
 		<div id="table">	
 			<a class="btn" id="write" href="/boardWriteFrm.do?boardType=3">글작성</a>
 			<a class="btn" id="my" href="/myFree.do">내글보기</a>
+		</div>
+		<div id="page">
+			<div id="pageNavi">${pageNavi }</div>
+			<form action="/searchKeyword.do?boardType=3&reqPage=1" method="post">
+			 	<select name="type">
+			 		<option value="tac">제목+내용</option>
+			 		<option value="writer">작성자</option>
+			 	</select>
+			 	<input type="text" name="keyword">
+			 	<input type="submit" value="검색">
+			</form>
 		</div>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>

@@ -135,13 +135,13 @@
 					<td>작성일</td>
 					<td>${b.regDate }</td>
 					<td>댓글수</td>
-					<td>수정</td>
+					<td>${b.commentCount }</td>
 				</tr>
 				<tr>
 					<td>첨부파일</td>
 					<td colspan="6">
 						<c:forEach items="${b.list }" var="f">
-							<a href="/boardFileDownload?fileNo=${f.fileNo }">${f.filename }</a><br>
+							<a href="/fileDown.do?filename=${f.filename }&filepath=${f.filepath }">${f.filename }</a>
 						</c:forEach>
 					</td>
 				</tr>
@@ -152,7 +152,7 @@
 			
 			<!-- 댓글쓰기창 로그인 되있을때 -->
 			<div class="inputCommentBox">
-				<form action="/insertComment.do" method="post">
+				<form action="/insertComment.do?boardType=3" method="post">
 					<ul>
 						<li>
 							<i class="far fa-user fa-5x"></i>
@@ -253,9 +253,9 @@
 			
 			
 			
-			<a class="btn" href="/boardDelete.do?boardNo=${b.boardNo }">글삭제</a>
+			<a class="btn" href="/boardDelete.do?boardType=3&boardNo=${b.boardNo }">글삭제</a>
 			<a class="btn" href="/boardUpdate.do?boardNo=${b.boardNo }">글수정</a>
-			<a class="btn" href="/additionFree.do?boardType=3&reqPage=1">목록</a>
+			<a class="btn" onclick="history.go(-1);">이전</a>
 		</div>
 	</div>
 	<script type="text/javascript">
@@ -278,7 +278,7 @@
 	//댓글삭제
 	function deleteComment(obj,bcNo,boardNo){
 		if(confirm("댓글을 삭제하시겠습니까?")){
-			location.href="/deleteComment.do?bcNo="+bcNo+"&boardNo="+boardNo;
+			location.href="/deleteComment.do?boardType=3&bcNo="+bcNo+"&boardNo="+boardNo;
 		}
 	}
 	
@@ -318,7 +318,7 @@
 	//수정제출
 	function modifyComplete(obj,bcNo,boardNo){ /* 자바스크립트이용 */
 			//새로운 form생성
-			var form =$("<form action='/updateComment.do' method='post'></form>");
+			var form =$("<form action='/updateComment.do?boardType=3' method='post'></form>");
 			//폼안에 수정댓글번호 설정
 			form.append($("<input type='text' name='bcNo' value='"+bcNo+"'>"));
 			//폼안에 공지사항번호설정

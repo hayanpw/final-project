@@ -7,9 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<a href="/additionNotice.do?boardType=1&reqPage=1">공지</a>
-	<a href="/additionQNA.do?boardType=2&reqPage=1">QNA</a>
-	<a href="/additionFree.do?boardType=3&reqPage=1">소통</a>
+	<a href="/additionBoard.do?boardType=1&reqPage=1">공지</a>
+	<a href="/additionBoard.do?boardType=2&reqPage=1">QNA</a>
+	<a href="/additionBoard.do?boardType=3&reqPage=1">소통</a>
 	<a href="/additionGuide.do">시설안내</a>
 	<a href="/discount.do">이벤트</a>
 </body>

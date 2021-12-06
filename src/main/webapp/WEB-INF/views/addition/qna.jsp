@@ -58,7 +58,16 @@
 		<div>챗봇자리</div>
 		<p id="title">질문과 답변</p>
 		<div id="table">
-			<div>질문검색자리</div>
+			<div>
+				<form action="/searchKeyword.do?boardType=2&reqPage=1" method="post">
+				 	<select name="type">
+				 		<option value="tac">제목+내용</option>
+				 		<option value="writer">작성자</option>
+				 	</select>
+				 	<input type="text" name="keyword">
+				 	<input type="submit" value="검색">
+				</form>
+			</div>
 			<table class="table">
 				<tr id="firtr">
 					<td>번호</td><td>제목</td><td>작성자</td><td>작성일</td><td>상태</td>
@@ -69,7 +78,14 @@
 					<td><a href="/boardView.do?boardType=2&boardNo=${b.boardNo}">${b.boardTitle }</a></td>
 					<td>${b.boardWriter }</td>
 					<td>${b.regDate }</td>
-					<td>아직</td>
+					<c:choose>
+						<c:when test="${b.commentCount ne 0}">
+						<td>답변완료</td>
+						</c:when>
+						<c:otherwise>
+						<td>아직</td>
+						</c:otherwise>
+					</c:choose>
 				</tr>
 				</c:forEach>
 			</table>

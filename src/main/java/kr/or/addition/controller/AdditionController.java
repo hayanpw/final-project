@@ -1,13 +1,21 @@
 package kr.or.addition.controller;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,36 +42,24 @@ public class AdditionController {
 	}
 	
 	//글리스트조회 공지
-	@RequestMapping(value = "/additionNotice.do")
+	@RequestMapping(value = "/additionBoard.do")
 	public String notice(int boardType,int reqPage,Model model) {
 		BoardPageData bpd= service.selectNoticeList(boardType,reqPage);
+		int nCount = service.selectNewCount(boardType);
+		model.addAttribute("totalCount",bpd.getTotalCount());
 		model.addAttribute("list",bpd.getList());
 		model.addAttribute("pageNavi",bpd.getPageNavi());
 		model.addAttribute("start",bpd.getStart());
-		return "addition/notice";
+		model.addAttribute("nCount",nCount);
+		if(boardType==1) {
+			return "addition/notice";
+		}else if(boardType==2) {
+			return"addition/qna";
+		}else {
+			return"addition/free";
+		}
 	}
 	
-	
-	//글리스트조회 1대1문의
-	@RequestMapping(value = "/additionQNA.do") 
-	public String qna(int boardType,int reqPage,Model model) { 
-		BoardPageData bpd= service.selectNoticeList(boardType,reqPage);
-		model.addAttribute("list",bpd.getList());
-		model.addAttribute("pageNavi",bpd.getPageNavi());
-		model.addAttribute("start",bpd.getStart());
-		return"addition/qna"; 
-	 }
-	 
-	
-	//글리스트조회 소통
-	@RequestMapping(value = "/additionFree.do") 
-	public String free(int boardType,int reqPage,Model model) { 
-		BoardPageData bpd= service.selectNoticeList(boardType,reqPage);
-		model.addAttribute("list",bpd.getList());
-		model.addAttribute("pageNavi",bpd.getPageNavi());
-		model.addAttribute("start",bpd.getStart());
-		return"addition/free"; 
-	 }
 	
 	//글쓰기폼이동
 	@RequestMapping(value = "/boardWriteFrm.do")
@@ -71,6 +67,7 @@ public class AdditionController {
 		model.addAttribute("boardType",boardType);
 		return "addition/boardWriteFrm";
 	}
+	
 	
 	//글쓰기
 	@RequestMapping(value = "/boardWrite.do")
@@ -123,11 +120,11 @@ public class AdditionController {
 					model.addAttribute("msg", "등록성공");
 				}
 				if(b.getBoardType()==1) {
-					model.addAttribute("loc","/additionNotice.do?boardType=1&reqPage=1");
+					model.addAttribute("loc","/additionBoard.do?boardType=1&reqPage=1");
 				}else if(b.getBoardType()==2) {
-					model.addAttribute("loc","/additionQNA.do?boardType=2&reqPage=1");
+					model.addAttribute("loc","/additionBoard.do?boardType=2&reqPage=1");
 				}else {
-					model.addAttribute("loc","/additionFree.do?boardType=3&reqPage=1");
+					model.addAttribute("loc","/additionBoard.do?boardType=3&reqPage=1");
 				}
 				return "common/msg"; 
 	}
@@ -152,7 +149,7 @@ public class AdditionController {
 	
 	//글삭제하기
 	@RequestMapping(value = "/boardDelete.do")
-	public String boardDelete(int boardNo,Model model) {
+	public String boardDelete(int boardType,int boardNo,Model model) {
 		int result = service.boardDelete(boardNo);
 		if(result>0) {
 			model.addAttribute("msg", "삭제성공");
@@ -160,7 +157,13 @@ public class AdditionController {
 		}else {
 			model.addAttribute("msg", "삭제실패");
 		}
-		model.addAttribute("loc","/additionNotice.do?boardType=1&reqPage=1");
+		if(boardType==1) {
+			model.addAttribute("loc","/additionNotice.do?boardType=1&reqPage=1");
+		}else if(boardType==2) {
+			model.addAttribute("loc","/additionQNA.do?boardType=2&reqPage=1");
+		}else {
+			model.addAttribute("loc","/additionFree.do?boardType=3&reqPage=1");
+		}
 		return "common/msg"; 
 	}
 	//오시는길
@@ -175,40 +178,52 @@ public class AdditionController {
 	}
 	//댓글달기
 	@RequestMapping(value = "/insertComment.do")
-	public String insertComment(BoardComment bc,Model model) {
+	public String insertComment(int boardType,BoardComment bc,Model model) {
 		int result = service.insertComment(bc);
 		if(result>0) {
 			model.addAttribute("msg","댓글등록성공");
 		}else {
 			model.addAttribute("msg","댓글등록실패");
 		}
-		model.addAttribute("loc","/boardView.do?boardType=3&boardNo="+bc.getBoardRef());
+		if(boardType==2) {
+			model.addAttribute("loc","/boardView.do?boardType=2&boardNo="+bc.getBoardRef());
+		}else {
+			model.addAttribute("loc","/boardView.do?boardType=3&boardNo="+bc.getBoardRef());
+		}
 		return "common/msg";
 	}
 	
 	//댓글삭제
 	@RequestMapping(value = "/deleteComment.do")
-	public String deleteComment(int bcNo,int boardNo,Model model) {
+	public String deleteComment(int boardType,int bcNo,int boardNo,Model model) {
 		int result =service.deleteComment(bcNo);
 		if(result>0) {
 			model.addAttribute("msg","삭제성공");
 		}else {
 			model.addAttribute("msg","삭제실패");
 		}
-		model.addAttribute("loc","/boardView.do?boardType=3&boardNo="+boardNo);
+		if(boardType==2) {
+			model.addAttribute("loc","/boardView.do?boardType=2&boardNo="+boardNo);
+		}else {
+			model.addAttribute("loc","/boardView.do?boardType=3&boardNo="+boardNo);
+		}
 		return "common/msg";
 	}
 	
 	//댓글수정
 	@RequestMapping(value = "/updateComment.do")
-	public String updateComment(int bcNo,int boardNo,String bcContent,Model model) {
+	public String updateComment(int boardType,int bcNo,int boardNo,String bcContent,Model model) {
 		int result = service.updateComment(bcNo,bcContent);
 		if(result>0) {
 			model.addAttribute("msg","수정성공");
 		}else {
 			model.addAttribute("msg","수정실패");
 		}
-		model.addAttribute("loc","/boardView.do?boardType=3&boardNo="+boardNo);
+		if(boardType==2) {
+			model.addAttribute("loc","/boardView.do?boardType=2&boardNo="+boardNo);
+		}else {
+			model.addAttribute("loc","/boardView.do?boardType=3&boardNo="+boardNo);
+		}
 		return "common/msg";
 	}
 	
@@ -252,4 +267,127 @@ public class AdditionController {
 		}
 		return "/resources/additionImage/"+filepath;
 	}
+	
+	//파일다운로드
+	@RequestMapping(value = "/fileDown.do")
+	public String fileDown(String filename,String filepath, HttpServletRequest request,HttpServletResponse response) {
+	     String savePath = request.getSession().getServletContext().getRealPath("/resources/additionImage/"); 
+	     String file = savePath+filepath;
+	     FileInputStream fis;
+		try {
+			fis = new FileInputStream(file);
+			try {
+				PrintWriter sos = response.getWriter();
+				String resFilename = "";
+				 boolean bool=
+						 request.getHeader("user-agent").indexOf("MSIE") != -1 ||
+						 request.getHeader("user-agent").indexOf("Trident") != -1;
+				 if(bool) {//브라우저가 IE인경우
+					 resFilename = URLEncoder.encode(filename,"UTF-8");
+					 resFilename = resFilename.replaceAll("\\\\", "%20");
+				 }else {//그외 다른 브라우저인 경우
+					 resFilename = new String(filename.getBytes("UTF-8"),"ISO-8859-1");
+				 }
+				 //파일다운로드를 위한 HTTP header설정(사용자 브라우저에 파일다운로드임을 선언)
+				 response.setContentType("application/octet-stream");
+				 //다운로드할 파일 이름 지정
+				 response.setHeader("Content-Disposition","attachment;filename="+resFilename);
+				 while(true){
+					 int read = fis.read();
+					 if(read != -1) {
+						 sos.write(read);
+					 }else {
+						 break;
+					 }
+				 }
+				 fis.close();
+				 sos.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	     
+		 return "addition/noticeView";
+	}
+	
+	//글수정폼이동
+	@RequestMapping(value = "/boardUpdateFrm.do")
+	public String boardUpdateFrm(int boardNo,Model model) {
+		BoardViewData bvd = service.selectOneBoard(boardNo);
+		model.addAttribute("b",bvd.getB());
+		return "addition/boardUpdateFrm";
+	}
+	
+	//글검색
+	@RequestMapping(value="/searchKeyword.do")
+	public String searchKeyword(int boardType,int reqPage,String keyword,String type,Model model) {
+		BoardPageData bpd =service.searchKeyword(reqPage,boardType,keyword,type);
+		model.addAttribute("list",bpd.getList());
+		model.addAttribute("pageNavi",bpd.getPageNavi());
+		model.addAttribute("start",bpd.getStart());
+		if(boardType==1) {
+			return "addition/noticeSearch";
+		}else if(boardType==2) {
+			return"addition/qnaSearch";
+		}else {
+			return"addition/freeSearch";
+		}
+		
+	}
+	
+	
+	
+	/*
+	//글수정
+	@RequestMapping(value = "/boardUpdate.do")
+	public String boardUpdate(int boardNo,MultipartFile[] files, HttpServletRequest request, Model model){
+		ArrayList<FileVO> list = new ArrayList<FileVO>();
+		if(files[0].isEmpty()) {
+		}else {
+			String savePath =request.getSession().getServletContext().getRealPath("/resources/additionImage/");
+			for(MultipartFile file:files) {
+				String filename = file.getOriginalFilename();
+				String onlyFilename = filename.substring(0,filename.indexOf("."));
+				String extention = filename.substring(filename.indexOf("."));
+				String filepath = null;
+				int count = 0;
+				while(true) {
+					if(count == 0) {
+						filepath = onlyFilename+extention;
+					}else {
+						filepath = onlyFilename+"_"+count+extention;
+					File checkFile = new File(savePath+filepath);
+						break;
+					}
+					count++;
+				}
+				try {
+					FileOutputStream fos = new FileOutputStream(new File(savePath+filepath));
+					BufferedOutputStream bos =new BufferedOutputStream(fos);
+					//파일업로드
+					byte[] bytes= file.getBytes();
+					bos.write(bytes);
+					bos.close();
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				FileVO fv = new FileVO();
+				fv.setFilename(filename);
+				fv.setFilepath(filepath);
+				list.add(fv);
+			}
+		}
+		
+		return "addition/noticeView";
+		
+	}
+	*/
+	
 }
