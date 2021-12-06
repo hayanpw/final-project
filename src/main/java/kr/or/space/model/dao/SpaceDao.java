@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.or.space.model.vo.FileVO;
+import kr.or.space.model.vo.Rental;
 import kr.or.space.model.vo.Space;
 import kr.or.space.model.vo.SpaceTime;
 
@@ -59,7 +60,7 @@ public class SpaceDao {
 	}
 	//1개 공간 파일 조회
 	public ArrayList<FileVO> selectFileList(int spaceNo) {
-		List<FileVO> list = sqlSession.selectList("space.selectFileList");
+		List<FileVO> list = sqlSession.selectList("space.selectFileList",spaceNo);
 		return (ArrayList<FileVO>)list;
 	}
 	//공간 시간 등록
@@ -70,5 +71,13 @@ public class SpaceDao {
 	public ArrayList<SpaceTime> selectSpaceTime(int spaceNo) {
 		List list = sqlSession.selectList("space.selectSpaceTime",spaceNo);
 		return (ArrayList<SpaceTime>)list;
+	}
+	//1개 시간 조회
+	public SpaceTime selectOneTime(int stNo) {
+		return sqlSession.selectOne("space.selectOneTime",stNo);
+	}
+	//공간예약
+	public int insertRental(Rental r) {
+		return sqlSession.insert("space.insertRental",r);
 	}
 }

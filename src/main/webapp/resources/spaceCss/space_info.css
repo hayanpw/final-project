@@ -1,0 +1,59 @@
+.item img{
+	width: 500px;
+	height: 300px;
+}
+.space-img{
+	width: 500px;
+	float: left;
+}
+.space-info{
+	width : 500px;
+	margin-left : 100px;
+	display: inline-block;
+}
+.space-info>table tr td:first-child{
+	text-align: center;
+	font-weight: bold;
+	font-size: 20px;
+}
+.space-info>table tr th{
+	width: 130px;
+}
+.rental-info{
+	display: inline-block;
+	margin-top : 20px;
+	margin-left: 100px;
+}
+.rental-info input{
+	border : none;
+	background-color: #ffffff;
+}
+.rental-info>table tr td:first-child{
+	width: 130px;
+}
+.rental-info>table tr td:last-child{
+	width: 200x;
+}
+.big-img{
+	margin-top : 100px;
+	text-align: center;
+}
+.info-img{
+	width: 1100px;
+	margin-top: 20px;
+	text-align: center;
+}
+.btn-box{
+	text-align: center;
+}
+.insert-btn{
+	border : 1px solid #BDB19A; 
+	background-color : #ffffff;
+	width : 250px;
+	height : 40px;
+	margin-bottom : 10px;
+}
+.insert-btn:hover{
+	border : 1px solid white;
+	background: #BDB19A;	
+}

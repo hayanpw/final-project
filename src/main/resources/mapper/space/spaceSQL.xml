@@ -96,7 +96,7 @@
 			filepath,
 			thumbnail
 		from space_file	
-		where space_no=#{spaceNo}
+		where space_no = #{spaceNo}
 	</select>
 	<select id="selectSpaceTime" parameterType="_int" resultType="kr.or.space.model.vo.SpaceTime">
 		select
@@ -107,4 +107,18 @@
 		from space_time
 		where space_no = #{spaceNo}	
 	</select>
+	<select id="selectOneTime" parameterType="_int" resultType="kr.or.space.model.vo.SpaceTime">
+		select
+			st_no as stNo,
+			space_no as spaceNo,
+			start_time as startTime,
+			end_time as endTime
+		from space_time
+		where st_no = #{stNo}	
+	</select>
+	<insert id="insertRental" parameterType="rental">
+		insert
+			into rental
+			values(rental_seq.nextval,#{spaceNo},#{memberId},#{stNo},#{rentalDate},#{rentalPeople},1,0)
+	</insert>
 </mapper>
