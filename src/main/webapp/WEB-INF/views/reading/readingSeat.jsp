@@ -42,7 +42,7 @@
 					<h3 name="showseat"></h3>
 				</div>
 				<button name="rollback" class="btn btn-success btn-lg" onclick="history.go(-1);" style="background-color: #563D39; border-color: #563D39">이전단계</button>
-				<form action="/readingInsert.do" method="post">
+				<form action="/readingOption.do" method="post">
 					<input type="hidden" name="readingNum">
 					<input type="hidden" name="readingDay" value="${re.readingDay }">
 					<input type="hidden" name="readingId" value="${sessionScope.m.memberId }">
