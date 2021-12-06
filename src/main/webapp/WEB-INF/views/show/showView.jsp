@@ -77,14 +77,23 @@
             <div class="showInfo">
                 <div class="showNavi">
                     <div><h2>공연정보</h2></div>
-                    <div><h2>부가정보</h2></div>
+                    <div><h2>예매및취소</h2></div>
                     <div><h2>관람평</h2></div>
                 </div>
                 <div class="showContent hideContent">
 					${snr.s.showContent }
                 </div>
                 <div class="sideInfo hideContent">
-                   	 부가정보정보임
+                   	 <h3>예매</h3>
+                    <p>예매는 PC, 모바일, 고객센터 를 통해 신용카드, 카카오페이, 네이버페이 등으로 예매하실 수 있습니다.<br>
+                        (단, 상품마다 사용 가능한 결제 수단이 다르게 적용될 수 있으니 상품 상세페이지 안내 사항을 확인해주세요.)<br>
+                        	결제 취소시 예매와 선택 좌석이 자동 취소되므로 유의하시기 바랍니다.</p>
+                    <h3>티켓수령방법</h3>
+                    <p><strong>현장수령</strong><br>
+                        티켓은 예매자 본인 수령이 기본 원칙입니다.<br>
+                        공연 당일 예매확인서와 예매자의 신분증 을 지참하신 후 공연장 매표소에서 티켓을 수령하시면 됩니다.</p>
+                    <h3>환불</h3>
+                    <p>예매수수료는 예매 당일 밤 12시 이전까지 환불되며, 그 이후 기간에는 환불되지 않습니다.</p>
                 </div>
                 <div class="reviewBox hideContent">
                 

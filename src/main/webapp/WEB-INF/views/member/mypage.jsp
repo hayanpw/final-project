@@ -17,6 +17,7 @@
         <div class="mypage-container">
         	<div class="white-box">
 				<div class="gray-box pw-confirm mgt30">
+					<form action="/pwCheck.do" method="post">
 					<h4 class="tit">비밀번호 확인</h4>
 					<dl class="mgt10">
 						<dt>
@@ -24,10 +25,12 @@
 							<p>비밀번호는 타인에게 노출되지 않도록 주의 해주시기 바랍니다.</p>
 						</dt>
 						<dd>
-							<input type="password" class="pw-confirm" id="pw_con_chk_password" name="password" placeholder="비밀번호를 입력하세요.">
-							<a href="/memberUpdateFrm.do" onclick="checkPassword();" class="btn red-btn">확인</a>
+							<input type="password" class="pw-confirm" id="pw_con_chk_password" name="memberPassword" placeholder="비밀번호를 입력하세요." >
+							<input type="submit" value="확인">
+							<input type="hidden" name="memberId" value="${sessionScope.m.memberId}">
 						</dd>
 					</dl>
+					</form>
 				</div>
         	</div>
         </div>

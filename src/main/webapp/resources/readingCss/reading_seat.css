@@ -27,6 +27,9 @@
 }
 .container-right{
     width: 300px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 .container-right>h2{
 	text-align:center;
@@ -35,6 +38,9 @@
 	text-align:right;
 }
 .readingInfo{
-	height: 200px;
+	width: 147px;
+	height: 117px;
     background-color: #BDB19A;
+    margin-top: 5px;
+    margin-bottom: 10px;
 }

@@ -19,6 +19,7 @@
 	<div class="container">
 			<h3>신청 현황-${s.spaceName } </h3>
 		<form action="/spaceInfo.do" method="post">
+			<input type="hidden" value="${s.spaceNo  }" name="spaceNo">
 			<div class="select-btn">
 				<c:forEach items="${list }" var= "l">
 					<button type="button" onclick="location.href='/spaceRes.do?spaceNo=${l.spaceNo}'">${l.spaceName }</button>
@@ -26,29 +27,47 @@
 			</div>
 		<!-- 캘린더 코드 -->
 		<div id="datepicker"></div>
-		<span>선택한 날짜</span><input type="text" id="selectDate" name="rentalDate">
 		<div class="time-table">
 			<table class="table table-hover">
-					<c:forEach items="${st }" var ="st">
-						<tr>
-							<th>이용시간</th>
-							<td><input type="text" value="${st.startTime }" name="startTime"></td>
-							<th>~</th>
-							<td><input type="text" value="${st.endTime }" name="endTime"></td>
-						</tr>
+						<c:forEach items="${st }" var ="st">
+							<tr>
+								<td>이용시간<input type="hidden" value="${st.stNo }"></td>
+								<td><input type="text" value="${st.startTime }" ></td>
+								<td>~</td>
+								<td><input type="text" value="${st.endTime }"></td>
+								<td><button type="button" class="checkBtn">선택</button></td>
+							</tr>
 					</c:forEach>
+					<tr>
+						<td >선택한날짜</td>
+						<td colspan="4"><input type="text" id="selectDate" name="rentalDate"></td>
+					</tr>
+					<tr>
+						<td>선택시간</td>
+						<td><input type="text" name="startTime"></td>
+						<td>~</td>
+						<td><input type="text" name="endTime"></td>
+					</tr>	
 			</table>
+			<input type="hidden" name="stNo">
 		</div>
 			<div id="insert-btn">
-				<button class="btn btn-default" type="submit">신청하기</button>
+				<c:choose>
+					<c:when test="${empty sessionScope.m }">
+						<button class="btn btn-default" type="button"  onclick="location.href='/loginFrm.do'">로그인 후 예약하기</button>
+					</c:when>
+					<c:otherwise>
+						<button class="btn btn-default" type="submit">신청하기</button>
+					</c:otherwise>				
+				</c:choose>
 			</div>
 		</form>
 	</div>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
     <script>
    		$(function () {
-			/* $(".time-table").hide(); */
-		})
+			 $(".time-table").hide();
+		});
 	    $(function() {
 	        var today = new Date(); //오늘부터
 	        var endDate = new Date(today);
@@ -75,6 +94,26 @@
 	    function noMondays(date) {
 	    	return [date.getDay() != 1, ''];
 	    }
+		$(".checkBtn").click(function(){ 
+           var str = ""
+           var tdArr = new Array();    // 배열 선언
+           var checkBtn = $(this);
+           var tr = checkBtn.parent().parent();
+           var td = tr.children();
+           
+           var startTime = td.eq(1).find('input').val();
+           var endTime = td.eq(3).find('input').val();
+           var stNo = td.eq(0).find('input').val();
+           
+           // 반복문을 이용해서 배열에 값을 담아 사용할 수 도 있다.
+           td.each(function(i){    
+               tdArr.push(td.eq(i).text());
+           });
+           
+           $("[name=startTime]").val(startTime);
+           $("[name=endTime]").val(endTime);
+           $("[name=stNo]").val(stNo);
+       });
     </script>
 </body>
 </html>
