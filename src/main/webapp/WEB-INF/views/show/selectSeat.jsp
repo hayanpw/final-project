@@ -206,7 +206,7 @@
  			
  			var allSeat = $("#seat>input").eq().prevObject.length;
  			
- 			for(var i=0; i<seatList.length; i++){
+  			for(var i=0; i<seatList.length; i++){
  				var seat = seatList[i];
  				for(var j=0; j<allSeat; j++){
  					if($("#seat>input").eq(j).val() == seat){
@@ -225,14 +225,31 @@
         	if(arr.length == 5){
         		alert("한 아이디에 최대 5좌석만 구매가능합니다.");
         	}else{
-	            $(obj).css("background-color", "#563D39");
-	            $(obj).attr("onclick", "cancel(this);");
-	            count++;
-	            arr.push($(obj).children().val());
-	            var h3 = $("<h3>");
-	            h3.append($(obj).children().val());
-	            $(".selectSeat").append(h3);
-	            $(".selectSeat").scrollTop(innerHeight);
+        		var seatNo = $(obj).children().val();
+        		var showNo = ${s.showNo};
+        		var showDate = "${sr.showDate}"
+        		var result = 0;
+        		$.ajax({
+        			url: "/checkSeat.do",
+        			type: "post",
+        			data: {seatNo:seatNo, showNo:showNo, showDate:showDate},
+        			success: function(data) {
+        				console.log(data);
+						if(data == ""){
+							$(obj).css("background-color", "#563D39");
+				            $(obj).attr("onclick", "cancel(this);");
+				            count++;
+				            arr.push($(obj).children().val());
+				            var h3 = $("<h3>");
+				            h3.append($(obj).children().val());
+				            $(".selectSeat").append(h3);
+				            $(".selectSeat").scrollTop(innerHeight);
+						}else{
+							alert("이미 선택된 좌석입니다.");
+						}
+					}
+        		});
+	            
         	}
         }
         function cancel(obj){
