@@ -36,10 +36,6 @@ public class MemberController {
 	public String mypage() {
 		return "member/mypage";
 	}
-	@RequestMapping(value="/memberUpdateFrm.do")
-	public String memberUpdateFrm() {
-		return "member/memberUpdate";
-	}
 	@RequestMapping(value="/adminpage.do")
 	public String adminpage() {
 		return "common/adminpage";
@@ -121,9 +117,19 @@ public class MemberController {
 		String result = sendMailservice.mailSend(email);
 		return result;
 	}
-
-}
 	
+	@RequestMapping(value="/memberUpdate.do")
+		public String updateMember(Member member,Model model) {
+			int result = service.updateMember(member);
+			if(result>0) {
+				model.addAttribute("msg","정보변경 성공");
+			}else {
+				model.addAttribute("msg","정보변경 실패");
+			}
+			model.addAttribute("loc","/");
+			return "common/msg";
+		}
+}
 	
 	
 	

@@ -39,4 +39,8 @@ public class MemberService {
 		Member m = dao.selectOneMemberPw(memberPassword);
 		return m;
 	}
+	public int updateMember(Member member) {
+		int result = dao.updateMember(member);
+		return result;
+	}
 }
