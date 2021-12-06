@@ -53,5 +53,9 @@ public class MemberDao {
 			return m;
 		}
 	}
+	public int updateMember(Member member) {
+		int result = sqlSession.update("member.updateMember",member);
+		return result;
+	}
 }
 
