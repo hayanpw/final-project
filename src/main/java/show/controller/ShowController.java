@@ -253,11 +253,10 @@ public class ShowController {
 	@RequestMapping(value = "/selectSeat.do")
 	public String selectSeat(ShowReserv sr, Model model) {
 		//예약된 좌석 불러오기
-		HashMap<String, Object> map = service.seatCheck(sr);
+		HashMap<String, Object> map = service.checkSeatList(sr);
 		model.addAttribute("s", map.get("show"));
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("sr",sr);
-		System.out.println(map.get("list"));
 		return "show/selectSeat";
 	}
 	
@@ -279,7 +278,7 @@ public class ShowController {
 	
 	@RequestMapping(value = "/cancelPayment.do")
 	public String cancelPayment(int reservNo) {
-		int result = service.deleteReserv(reservNo);
+		service.deleteReserv(reservNo);
 		return "redirect:/showList.do";
 	}
 	
@@ -290,5 +289,18 @@ public class ShowController {
 		model.addAttribute("show", map.get("show"));
 		model.addAttribute("list", map.get("list"));
 		return "show/paymentSuccess";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/checkSeat.do")
+	public String checkSeat(Seat s) {
+		String seat = service.selectOneSeat(s);
+		if(seat == null) {
+			//아직은 결제로 넘어가야 좌석 선점
+			//좌석 클릭 먼저가 선점인 경우 후에 구현해야됨
+			return seat;
+		}else {
+			return seat;
+		}
 	}
 }

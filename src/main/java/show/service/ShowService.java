@@ -106,13 +106,17 @@ public class ShowService {
 		return map;
 	}
 
-	public HashMap<String, Object> seatCheck(ShowReserv sr) {
+	public HashMap<String, Object> checkSeatList(ShowReserv sr) {
 		Show show = dao.selectOneShow(sr.getShowNo());
 		ArrayList<Seat> list = dao.selectAllSeat(sr);
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("show", show);
 		map.put("list", list);
 		return map;
+	}
+
+	public String selectOneSeat(Seat s) {
+		return dao.selectOneSeat(s);
 	}
 
 }
