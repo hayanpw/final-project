@@ -57,15 +57,25 @@
 				<tr id="firtr">
 					<td>번호</td><td>제목</td><td>작성자</td><td>작성일</td><td>조회수</td>
 				</tr>
-				<c:forEach	items="${list }" var="b" varStatus="i">
-				<tr>
-					<td>${b.bnum }</td>
-					<td><a href="/boardView.do?boardType=3&boardNo=${b.boardNo}">${b.boardTitle }[${b.commentCount }]</a></td>
-					<td>${b.boardWriter }</td>
-					<td>${b.regDate }</td>
-					<td>${b.readCount }</td>
-				</tr>
-				</c:forEach>
+				<c:choose>
+					<c:when test="${not empty list }">
+						<c:forEach	items="${list }" var="b" varStatus="i">
+							<tr>
+								<td>${b.bnum }</td>
+								<td><a href="/boardView.do?boardType=3&boardNo=${b.boardNo}">${b.boardTitle }[${b.commentCount }]</a></td>
+								<td>${b.boardWriter }</td>
+								<td>${b.regDate }</td>
+								<td>${b.readCount }</td>
+							</tr>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+						<tr>
+							<td colspan="5">일치하는 검색 결과가 없습니다.</td>
+						</tr>
+					</c:otherwise>
+				</c:choose>
+				
 			</table>
 		</div>
 		<div id="page">

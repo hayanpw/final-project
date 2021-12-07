@@ -69,10 +69,12 @@
 				</c:forEach>
 			</table>
 		</div>
-		<div id="table">	
-			<a class="btn" id="write" href="/boardWriteFrm.do?boardType=3">글작성</a>
-			<a class="btn" id="my" href="/myFree.do">내글보기</a>
-		</div>
+		<c:if test="${not empty sessionScope.m }">
+			<div id="table">	
+				<a class="btn" id="write" href="/boardWriteFrm.do?boardType=3">글작성</a>
+				<a class="btn" id="my" href="/myFree.do">내글보기</a>
+			</div>
+		</c:if>
 		<div id="page">
 			<div id="pageNavi">${pageNavi }</div>
 			<form action="/searchKeyword.do?boardType=3&reqPage=1" method="post">
@@ -80,11 +82,20 @@
 			 		<option value="tac">제목+내용</option>
 			 		<option value="writer">작성자</option>
 			 	</select>
-			 	<input type="text" name="keyword">
-			 	<input type="submit" value="검색">
+			 	<input type="text" id="keyword" name="keyword">
+			 	<input type="submit" id="submit" value="검색">
 			</form>
 		</div>
 	</div>
+	<script type="text/javascript">
+	$("#submit").click(function(){
+		var keyword = $("#keyword").val();
+		if(keyword == ""){
+			alert("검색어를 입력하세요.");
+			return false;
+		}
+	});
+	</script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>

@@ -120,8 +120,9 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="container" id="container">
 		<p id="title">소통게시판</p>
+		<input id="loginId" type="hidden" value="${sessionScope.m.memberId }">
 		<div id="table">
-			<a class="btn" href="#">목록</a>
+			<a class="btn" href="/additionBoard.do?boardType=3&reqPage=1">목록</a>
 			<a class="btn" href="#">이전글</a>
 			<a class="btn" href="#">다음글</a>
 			<table class="table">
@@ -151,26 +152,28 @@
 			</table>
 			
 			<!-- 댓글쓰기창 로그인 되있을때 -->
-			<div class="inputCommentBox">
-				<form action="/insertComment.do?boardType=3" method="post">
-					<ul>
-						<li>
-							<i class="far fa-user fa-5x"></i>
-						</li>
-						<li>
-							<input type="hidden" name="bcLevel" value="1">
-							<input type="hidden" name="bcWriter" value="hy01">
-							<input type="hidden" name="boardRef" value="${b.boardNo }">
-							<input type="hidden" name="bcRef" value="">
-							<input type="hidden" name="bcidRef" value="">
-							<textarea name="bcContent" class="form-control"></textarea>
-						</li>
-						<li>
-							<button type="submit" class="btn btn-primary btn-lg btn-block">등록</button>
-						</li>
-					</ul>
-				</form>
-			</div>
+			
+				<div class="inputCommentBox">
+					<form action="/insertComment.do?boardType=3" method="post">
+						<ul>
+							<li>
+								<i class="far fa-user fa-5x"></i>
+							</li>
+							<li>
+								<input type="hidden" name="bcLevel" value="1">
+								<input type="hidden" name="bcWriter" value="${sessionScope.m.memberId }">
+								<input type="hidden" name="boardRef" value="${b.boardNo }">
+								<input type="hidden" name="bcRef" value="">
+								<input type="hidden" name="bcidRef" value="">
+								<textarea id="comment" name="bcContent" class="form-control"></textarea>
+							</li>
+							<li>
+								<button type="submit" class="btn btn-primary btn-lg btn-block" onclick="return commentChk();">등록</button>
+							</li>
+						</ul>
+					</form>
+				</div>
+
 			
 			<!-- 댓글출력 -->
 			<div class="commentBox">
@@ -186,19 +189,21 @@
 								<p>${bc.bcContentBr }</p>
 								<textarea name="bcContent" class="form-control" style="display:none;">${bc.bcContentBr }</textarea><!-- 수정시보임 -->
 								<p class="commentsBtn">
-									<a href="javascript:void(0)"  onclick="modifyComment(this,'${bc.bcNo }','${b.boardNo }');">수정</a>
-									<a href="javascript:void(0)" onclick="deleteComment(this,'${bc.bcNo }','${b.boardNo }');">삭제</a>
+									<c:if test="${sessionScope.m.memberId eq bc.bcWriter }">
+										<a href="javascript:void(0)"  onclick="modifyComment(this,'${bc.bcNo }','${b.boardNo }');">수정</a>
+										<a href="javascript:void(0)" onclick="deleteComment(this,'${bc.bcNo }','${b.boardNo }');">삭제</a>
+									</c:if>
 									<a href="javascript:void(0)" class="recShow">답글달기</a>
 								</p>
-								<form action="/insertComment.do" class="recoment"> <!-- recoment 클래스가 안보이게 하는 속성 -->
+								<form action="/insertComment.do?boardType=3" class="recoment" method="post"> <!-- recoment 클래스가 안보이게 하는 속성 -->
 									<input type="hidden" name="bcLevel" value="2">
-									<input type="hidden" name="bcWriter" value="admin"> <!--로그인 된 아이디로 변경해야함 -->
+									<input type="hidden" name="bcWriter" value="${sessionScope.m.memberId }"> <!--로그인 된 아이디로 변경해야함 -->
 									<input type="hidden" name="boardRef" value="${b.boardNo }">
 									<input type="hidden" name="bcRef" value="${bc.bcNo }">
 									<input type="hidden" name="bcidRef" value=""> 
-									<textarea name="bcContent" class="form-control"></textarea> 
+									<textarea name="bcContent" class="bcContent form-control"></textarea> 
 									<div>
-										<button type="submit" class="btn btn-outline-primary">등록</button>
+										<button type="submit" class="recomment btn btn-outline-primary">등록</button>
 										<button type="reset" class="btn btn-outline-primary recCancel">취소</button>
 									</div>
 								</form>
@@ -226,19 +231,21 @@
 										</c:choose>
 										<textarea name="bcContent" class="form-control" style="display:none;">${bcc.bcContentBr }</textarea>
 										<p class="commentsBtn">
+											<c:if test="${sessionScope.m.memberId eq bcc.bcWriter }">
 												<a href="javascript:void(0)" onclick="modifyComment(this,'${bcc.bcNo }','${b.boardNo }');">수정</a>
 												<a href="javascript:void(0)" onclick="deleteComment(this,'${bcc.bcNo }','${b.boardNo }');">삭제</a>
+											</c:if>	
 												<a href="javascript:void(0)" class="recShow">답글달기</a>
 										</p>
-										<form action="/insertComment.do" class="recoment"> <!-- recoment 클래스가 안보이게 하는 속성 -->
+										<form action="/insertComment.do?boardType=3" class="recoment" method="post"> <!-- recoment 클래스가 안보이게 하는 속성 -->
 											<input type="hidden" name="bcLevel" value="2">
-											<input type="hidden" name="bcWriter" value="hy01"> <!--로그인 된 아이디로 변경해야함 -->
+											<input type="hidden" name="bcWriter" value="${sessionScope.m.memberId }"> <!--로그인 된 아이디로 변경해야함 -->
 											<input type="hidden" name="boardRef" value="${b.boardNo }">
 											<input type="hidden" name="bcRef" value="${bc.bcNo }">
 											<input type="hidden" name="bcidRef" value="${bcc.bcWriter} "> 
-											<textarea name="bcContent" class="form-control"></textarea> 
+											<textarea name="bcContent" class="bcContent form-control"></textarea> 
 											<div>
-												<button type="submit" class="btn btn-outline-primary">등록</button>
+												<button type="submit" class="recomment btn btn-outline-primary">등록</button>
 												<button type="reset" class="btn btn-outline-primary recCancel">취소</button>
 											</div>
 										</form>
@@ -252,18 +259,35 @@
 			
 			
 			
-			
+			<c:if test="${sessionScope.m.memberId == b.boardWriter}">
 			<a class="btn" href="/boardDelete.do?boardType=3&boardNo=${b.boardNo }">글삭제</a>
 			<a class="btn" href="/boardUpdate.do?boardNo=${b.boardNo }">글수정</a>
+			</c:if>
 			<a class="btn" onclick="history.go(-1);">이전</a>
 		</div>
 	</div>
+	
 	<script type="text/javascript">
+	$(document).on("click",".recomment",function(){
+		var idx=$(".recomment").index(this);
+		var bcContent=$(".bcContent").eq(idx).val();
+		if(bcContent==""){
+			alert("내용을 입력하세요.");
+			return false;
+		}
+    });
+	
 	
 	//답댓글 등록창 켜기
 	$(".recShow").click(function(){
+		var loginId = $("#loginId").val();
+		if(loginId == ""){
+			alert("로그인 후 이용하실 수 있습니다.");
+			return false;
+		}
 		//몇번째 답글달기 버튼을 클릭했는지
 		var idx=$(".recShow").index(this);
+		console.log(idx);
 		$(this).hide();
 		$(".recoment").eq(idx).css("display","flex");
 	});
@@ -317,6 +341,11 @@
 	
 	//수정제출
 	function modifyComplete(obj,bcNo,boardNo){ /* 자바스크립트이용 */
+			var content=$(obj).parent().prev().val();
+			if(content==""){
+				alert("내용을 입력하세요.");
+				return false;
+			}
 			//새로운 form생성
 			var form =$("<form action='/updateComment.do?boardType=3' method='post'></form>");
 			//폼안에 수정댓글번호 설정
@@ -330,6 +359,19 @@
 			//폼태그 전송
 			form.submit();
 		} 
+	
+	function commentChk(){
+		var loginId = $("#loginId").val();
+		var comment = $("#comment").val();
+		if(loginId == ""){
+			alert("로그인 후 이용하실 수 있습니다.");
+			return false;
+		}
+		if(comment == ""){
+			alert("내용을 입력하세요.");
+			return false;
+		}
+	}
 	
 	
 	

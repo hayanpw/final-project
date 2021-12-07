@@ -64,13 +64,13 @@
 				 		<option value="tac">제목+내용</option>
 				 		<option value="writer">작성자</option>
 				 	</select>
-				 	<input type="text" name="keyword">
-				 	<input type="submit" value="검색">
+				 	<input type="text" id="keyword" name="keyword">
+				 	<input type="submit" id="submit" value="검색">
 				</form>
 			</div>
 			<table class="table">
 				<tr id="firtr">
-					<td>번호</td><td>제목</td><td>작성자</td><td>작성일</td><td>상태</td>
+					<td>번호</td><td>제목</td><td>작성자</td><td>작성일</td><td>답변상태</td>
 				</tr>
 				<c:forEach	items="${list }" var="b" varStatus="i">
 				<tr>
@@ -83,7 +83,7 @@
 						<td>답변완료</td>
 						</c:when>
 						<c:otherwise>
-						<td>아직</td>
+						<td>미답변</td>
 						</c:otherwise>
 					</c:choose>
 				</tr>
@@ -93,11 +93,22 @@
 		<div id="page">
 			<div id="pageNavi">${pageNavi }</div>
 		</div>
-		<div id="table">
-			<a class="btn" id="write" href="/boardWriteFrm.do?boardType=2">글작성</a>
-			<a class="btn" id="my" href="#">내문의보기</a>
-		</div>	
+		<c:if test="${not empty sessionScope.m }">
+			<div id="table">
+				<a class="btn" id="write" href="/boardWriteFrm.do?boardType=2">글작성</a>
+				<a class="btn" id="my" href="#">내문의보기</a>
+			</div>	
+		</c:if>
 	</div>
+	<script type="text/javascript">
+	$("#submit").click(function(){
+		var keyword = $("#keyword").val();
+		if(keyword == ""){
+			alert("검색어를 입력하세요.");
+			return false;
+		}
+	});
+	</script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>

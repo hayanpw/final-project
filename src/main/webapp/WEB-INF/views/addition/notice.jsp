@@ -59,8 +59,8 @@
 				<select name="type">
 			 		<option value="tac">제목+내용</option>
 			 	</select>
-			 	<input type="text" name="keyword">
-			 	<input type="submit" value="검색">
+			 	<input type="text" id="keyword" name="keyword">
+			 	<input type="submit" id="submit" value="검색">
 			</form>
 			</div>
 			<table class="table">
@@ -80,10 +80,21 @@
 		<div id="page">
 			<div id="pageNavi">${pageNavi }</div>
 		</div>
-		<div id="table">	
-			<a class="btn" id="write" href="/boardWriteFrm.do?boardType=1">글작성</a>
-		</div>	
+		<c:if test="${not empty sessionScope.m && sessionScope.m.memberLevel eq 0 }">
+			<div id="table">	
+				<a class="btn" id="write" href="/boardWriteFrm.do?boardType=1">글작성</a>
+			</div>
+		</c:if>
 	</div>	
+	<script type="text/javascript">
+	$("#submit").click(function(){
+		var keyword = $("#keyword").val();
+		if(keyword == ""){
+			alert("검색어를 입력하세요.");
+			return false;
+		}
+	});
+	</script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>

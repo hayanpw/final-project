@@ -40,8 +40,10 @@
 				</td>
 			</tr>
 		</table>
+		<c:if test="${sessionScope.m.memberLevel eq 0 }">
 		<a class="btn" href="/boardDelete.do?boardType=1&boardNo=${b.boardNo }">글삭제</a>
 		<a class="btn" href="/boardUpdateFrm.do?boardNo=${b.boardNo }">글수정</a>
+		</c:if>
 		<a class="btn" onclick="history.go(-1);">이전</a>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>

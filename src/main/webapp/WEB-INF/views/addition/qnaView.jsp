@@ -117,7 +117,7 @@
 		<div id="table">
 			<table class="table">
 				<tr>
-					<td colspan="6">${b.boardTitle }(제목칸)</td>
+					<td colspan="8">${b.boardTitle }(제목칸)</td>
 				</tr>
 				<tr>
 					<td>작성자</td>
@@ -126,32 +126,44 @@
 					<td>${b.regDate }</td>
 					<td>조회수</td>
 					<td>${b.readCount }</td>
+					<td>답변상태</td>
+					<td>
+						<c:choose>
+							<c:when test="${b.commentCount ne 0}">
+							답변완료
+							</c:when>
+							<c:otherwise>
+							미답변
+							</c:otherwise>
+						</c:choose>
+					</td>
 				</tr>
 				<tr>
-					<td colspan="6">${b.boardContent }(내용칸)</td>
+					<td colspan="8">${b.boardContent }(내용칸)</td>
 				</tr>
 			</table>
-			<!-- 댓글쓰기창 로그인 되있을때 -->
-			<div class="inputCommentBox">
-				<form action="/insertComment.do?boardType=2" method="post">
-					<ul>
-						<li>
-							<i class="far fa-user fa-5x"></i>
-						</li>
-						<li>
-							<input type="hidden" name="bcLevel" value="1">
-							<input type="hidden" name="bcWriter" value="hy01">
-							<input type="hidden" name="boardRef" value="${b.boardNo }">
-							<input type="hidden" name="bcRef" value="">
-							<input type="hidden" name="bcidRef" value="">
-							<textarea name="bcContent" class="form-control"></textarea>
-						</li>
-						<li>
-							<button type="submit" class="btn btn-primary btn-lg btn-block">등록</button>
-						</li>
-					</ul>
-				</form>
-			</div>
+			<c:if test="${not empty sessionScope.m && sessionScope.m.memberLevel eq 0 }">
+				<div class="inputCommentBox">
+					<form action="/insertComment.do?boardType=2" method="post">
+						<ul>
+							<li>
+								<i class="far fa-user fa-5x"></i>
+							</li>
+							<li>
+								<input type="hidden" name="bcLevel" value="1">
+								<input type="hidden" name="bcWriter" value="${sessionScope.m.memberId }">
+								<input type="hidden" name="boardRef" value="${b.boardNo }">
+								<input type="hidden" name="bcRef" value="">
+								<input type="hidden" name="bcidRef" value="">
+								<textarea id="comment" name="bcContent" class="form-control"></textarea>
+							</li>
+							<li>
+								<button type="submit" class="btn btn-primary btn-lg btn-block" onclick="return commentChk();" >등록</button>
+							</li>
+						</ul>
+					</form>
+				</div>
+			</c:if>
 			
 			<!-- 댓글출력 -->
 			<div class="commentBox">
@@ -167,19 +179,21 @@
 								<p>${bc.bcContentBr }</p>
 								<textarea name="bcContent" class="form-control" style="display:none;">${bc.bcContentBr }</textarea><!-- 수정시보임 -->
 								<p class="commentsBtn">
-									<a href="javascript:void(0)"  onclick="modifyComment(this,'${bc.bcNo }','${b.boardNo }');">수정</a>
-									<a href="javascript:void(0)" onclick="deleteComment(this,'${bc.bcNo }','${b.boardNo }');">삭제</a>
-									<a href="javascript:void(0)" class="recShow">답글달기</a>
+								    <c:if test="${sessionScope.m.memberId eq bc.bcWriter }">
+										<a href="javascript:void(0)"  onclick="modifyComment(this,'${bc.bcNo }','${b.boardNo }');">수정</a>
+										<a href="javascript:void(0)" onclick="deleteComment(this,'${bc.bcNo }','${b.boardNo }');">삭제</a>
+										<a href="javascript:void(0)" class="recShow">답글달기</a>
+								    </c:if>	
 								</p>
-								<form action="/insertComment.do" class="recoment"> <!-- recoment 클래스가 안보이게 하는 속성 -->
+								<form action="/insertComment.do?boardType=2" class="recoment" method="post"> <!-- recoment 클래스가 안보이게 하는 속성 -->
 									<input type="hidden" name="bcLevel" value="2">
 									<input type="hidden" name="bcWriter" value="admin"> <!--로그인 된 아이디로 변경해야함 -->
 									<input type="hidden" name="boardRef" value="${b.boardNo }">
 									<input type="hidden" name="bcRef" value="${bc.bcNo }">
 									<input type="hidden" name="bcidRef" value=""> 
-									<textarea name="bcContent" class="form-control"></textarea> 
+									<textarea name="bcContent" class="bcContent form-control"></textarea> 
 									<div>
-										<button type="submit" class="btn btn-outline-primary">등록</button>
+										<button type="submit" class="recomment btn btn-outline-primary">등록</button>
 										<button type="reset" class="btn btn-outline-primary recCancel">취소</button>
 									</div>
 								</form>
@@ -207,19 +221,21 @@
 										</c:choose>
 										<textarea name="bcContent" class="form-control" style="display:none;">${bcc.bcContentBr }</textarea>
 										<p class="commentsBtn">
+											<c:if test="${sessionScope.m.memberId eq bc.bcWriter }">
 												<a href="javascript:void(0)" onclick="modifyComment(this,'${bcc.bcNo }','${b.boardNo }');">수정</a>
 												<a href="javascript:void(0)" onclick="deleteComment(this,'${bcc.bcNo }','${b.boardNo }');">삭제</a>
 												<a href="javascript:void(0)" class="recShow">답글달기</a>
+											</c:if>
 										</p>
-										<form action="/insertComment.do" class="recoment"> <!-- recoment 클래스가 안보이게 하는 속성 -->
+										<form action="/insertComment.do?boardType=2" class="recoment" method="post"> <!-- recoment 클래스가 안보이게 하는 속성 -->
 											<input type="hidden" name="bcLevel" value="2">
-											<input type="hidden" name="bcWriter" value="hy01"> <!--로그인 된 아이디로 변경해야함 -->
+											<input type="hidden" name="bcWriter" value="${sessionScope.m.memberId }"> 
 											<input type="hidden" name="boardRef" value="${b.boardNo }">
 											<input type="hidden" name="bcRef" value="${bc.bcNo }">
 											<input type="hidden" name="bcidRef" value="${bcc.bcWriter} "> 
-											<textarea name="bcContent" class="form-control"></textarea> 
+											<textarea name="bcContent" class="bcContent form-control"></textarea> 
 											<div>
-												<button type="submit" class="btn btn-outline-primary">등록</button>
+												<button type="submit" class="recomment btn btn-outline-primary">등록</button>
 												<button type="reset" class="btn btn-outline-primary recCancel">취소</button>
 											</div>
 										</form>
@@ -231,13 +247,23 @@
 				</c:forEach>
 			</div>
 			<div id="buttons">
+				<c:if test="${sessionScope.m.memberId eq b.boardWriter }">
 				<a class="btn" href="/boardDelete.do?boardType=2&boardNo=${b.boardNo }">글삭제</a>
 				<a class="btn" href="/boardUpdate.do?boardNo=${b.boardNo }">글수정</a>
+				</c:if>
 				<a class="btn" onclick="history.go(-1);">이전</a>
 			</div>
 		</div>
 	</div>
 	<script type="text/javascript">
+	$(document).on("click",".recomment",function(){
+		var idx=$(".recomment").index(this);
+		var bcContent=$(".bcContent").eq(idx).val();
+		if(bcContent==""){
+			alert("내용을 입력하세요.");
+			return false;
+		}
+    });
 	
 	//답댓글 등록창 켜기
 	$(".recShow").click(function(){
@@ -296,6 +322,11 @@
 	
 	//수정제출
 	function modifyComplete(obj,bcNo,boardNo){ /* 자바스크립트이용 */
+			var content=$(obj).parent().prev().val();
+			if(content==""){
+				alert("내용을 입력하세요.");
+				return false;
+			}
 			//새로운 form생성
 			var form =$("<form action='/updateComment.do?boardType=2' method='post'></form>");
 			//폼안에 수정댓글번호 설정
@@ -310,7 +341,13 @@
 			form.submit();
 		} 
 	
-	
+	function commentChk(){
+		var comment = $("#comment").val();
+		if(comment == ""){
+			alert("내용을 입력하세요.");
+			return false;
+		}
+	}
 	
 	</script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
