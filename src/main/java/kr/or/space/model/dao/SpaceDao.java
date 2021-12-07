@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import kr.or.space.model.vo.FileVO;
 import kr.or.space.model.vo.Rental;
 import kr.or.space.model.vo.Space;
+import kr.or.space.model.vo.SpaceAdmin;
 import kr.or.space.model.vo.SpaceTime;
 
 @Repository
@@ -84,5 +85,18 @@ public class SpaceDao {
 	public ArrayList<Rental> selectRentalList(String memberId) {
 		List<Rental> list = sqlSession.selectList("space.selectRentalList",memberId);
 		return (ArrayList<Rental>)list;
+	}
+	//모든 대관 리스트 조회
+	public ArrayList<SpaceAdmin> selectAllRental() {
+		List<SpaceAdmin> list = sqlSession.selectList("space.selectAllRental");
+		return (ArrayList<SpaceAdmin>)list;
+	}
+	//이메일
+	public String selectEmail(String memberId) {
+		return sqlSession.selectOne("space.selectEmail",memberId);
+	}
+	//상태 업데이트
+	public int updateRentalStatus(int rentalNo) {
+		return sqlSession.update("space.updateRentalStatus",rentalNo);
 	}
 }
