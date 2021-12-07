@@ -5,14 +5,70 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="resources/hansolCss/hansol_exhibitionView.css" rel="stylesheet">
+<link rel="stylesheet" href="/resources/jquery-ui/jquery-ui.css">
 </head>
 <body>
 
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<script type="text/javascript" src="/resources/jquery-ui/jquery-ui.min.js"></script>
-	<link rel="stylesheet" href="/resources/jquery-ui/jquery-ui-big2.css">
 	<div class="container">
-		 <div id="datepicker"></div>
+		<div class="rightSide">
+        <div class="topSide">
+            <h2>전시 타이틀</h2>
+            <div class="star"></div>
+        </div>
+        <div class="middleSide">
+            <div class="exhibitionPhoto">
+                <img class="photo" src="/resources/academyImage/upload/career.png">
+            </div>
+            <div class="exhibitionSummary">
+                <table class="summaryTable" >
+                    <tr>
+                        <td>John</td>
+                        <td>Doe</td>
+                    </tr>
+                    <tr>
+                        <td>Mary</td>
+                        <td>Moe</td>
+                    </tr>
+                    <tr>
+                        <td>July</td>
+                        <td>Moe</td>
+                    </tr>
+                    <tr>
+                        <td>July</td>
+                        <td>Moe</td>
+                    </tr>
+                    <tr>
+                        <td>July</td>
+                        <td>Moe</td>
+                    </tr>
+                    <tr>
+                        <td>July</td>
+                        <td>Moe</td>
+                    </tr>
+                    <tr>
+                        <td>July</td>
+                        <td>Moe</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="bottomSide">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#">Menu 1</a></li>
+                <li><a href="#">Menu 2</a></li>
+                <li><a href="#">Menu 3</a></li>
+              </ul>
+        </div>
+    </div>
+    <div class="fixed">
+    	 <div id="datepicker"></div>
+    	 <button class="btn">결제하기</button>
+    </div>
+   
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
