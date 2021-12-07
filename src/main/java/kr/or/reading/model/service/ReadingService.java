@@ -37,4 +37,11 @@ public class ReadingService {
 		Reading re2 = dao.selectOneId(re);
 		return re2;
 	}
+
+
+	public int reservationCancel(Reading re) {
+		return dao.reservationCancel(re);
+	}
+
+
 }

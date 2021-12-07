@@ -1,0 +1,15 @@
+.container{
+	margin: 0 auto;
+    text-align: center;
+}
+.container-right{
+	height: 440px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+#datepicker{
+	display: flex;
+    justify-content: center;
+}

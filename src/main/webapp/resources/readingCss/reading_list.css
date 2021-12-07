@@ -1,11 +1,7 @@
-.container-left{
-	display: flex;
-    justify-content: flex-start;
-}
 
 .container-right{
+	height:570px;
     display: flex;
-    width: 600px;
     justify-content: center;
     align-items: center
 }

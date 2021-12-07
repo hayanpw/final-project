@@ -20,18 +20,18 @@
 	<div class="container">
 		<h1>열람실 예약</h1><br>
 		<h3>총 100석</h3><br>
-		<div class="container-left" >
+		<div class="container-left col-sm-7" >
 			<!-- 캘린더 코드 -->
 			<div id="datepicker"></div>
-			<div class="container-right">
-				<form action="/readingSeat.do" method="post">
-				    <input type="hidden" name="readingDay">
-				    <input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
-				    <h2 name="showdate"></h2>
-				    <h2 name="showseat"></h2><!-- 총좌석 - 카운트 = 남은좌석 -->
-					<input type="hidden" name="sub"class="btn btn-success btn-lg" value="좌석 선택하기" style="background-color: #563D39; border-color: #563D39">
-				</form>
-			</div>
+		</div>
+		<div class="container-right col-sm-5">
+			<form action="/readingSeat.do" method="post">
+				<input type="hidden" name="readingDay">
+				<input type="hidden" name="readingId" value="${sessionScope.m.memberId }">
+				<h2 name="showdate"></h2>
+				<h2 name="showseat"></h2><!-- 총좌석 - 카운트 = 남은좌석 -->
+				<input type="hidden" name="sub"class="btn btn-success btn-lg" value="좌석 선택하기" style="background-color: #563D39; border-color: #563D39">
+			</form>
 		</div>
 		
 		

@@ -32,5 +32,11 @@ public class ReadingDao {
 	public Reading selectOneId(Reading re) {
 		return sqlSession.selectOne("reading.selectOneId", re);
 	}
+
+	public int reservationCancel(Reading re) {
+		// 삭제해서 넘기면됌
+		return 0;
+	}
+
 	
 }

@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.google.gson.Gson;
 
 import kr.or.reading.model.service.ReadingService;
 import kr.or.reading.model.vo.Reading;
@@ -86,10 +89,31 @@ public class ReadingController {
 		return "common/msg";
 	}
 	
-	@RequestMapping(value="/readingOption1.do")
-	public String readingOption1(Reading re, Model model) {
-		System.out.println(re);
+	@RequestMapping(value="/reservationDay.do")
+	public String reservationDay(Reading re, Model model) {
 		model.addAttribute("re", re);
+		return "reading/reservation";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/ajaxSearchReservation.do",produces = "application/json;charset=utf-8")
+	public String ajaxSearchReservation(Reading re, Model model) {
+		Reading re1 = service.selectOneId(re);
+		return new Gson().toJson(re1);
+	}
+	
+	@RequestMapping(value="/reservationInfo.do")
+	public String reservationInfo(Reading re, Model model) {
+		Reading re1 = service.selectOneId(re);
+		model.addAttribute("re", re1);
 		return "reading/readingOption";
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="/reservationCancel.do",produces = "application/json;charset=utf-8")
+	public String reservationCancel(Reading re, Model model) {
+		int result = service.reservationCancel(re);
+		return new Gson().toJson(result);
+	}
+	
 }

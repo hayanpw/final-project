@@ -55,13 +55,18 @@
 		</div>
 		<br><br><br><br>
 		<div class="readingList-form">
-			<form action="/readingList.do">
+			<form action="/readingList.do" method="post">
 				<fieldset>
 					<input type="hidden" name="readingId" value="${sessionScope.m.memberId }" readonly>
 					<input type="submit" class="btn btn-success btn-lg" value="열람실 예약하기" style="background-color: #563D39; border-color: #563D39">
 				</fieldset>
 			</form>
-			<a href="/readingOption1.do" class="btn btn-success btn-lg" style="margin-left: 10px; background-color: #BDB19A; border-color: #BDB19A">예약내역보기</a>
+			<form action="/reservationDay.do" method="post">
+				<fieldset>
+					<input type="hidden" name="readingId" value="${sessionScope.m.memberId }" readonly>
+					<input type="submit" class="btn btn-success btn-lg" value="예약내역보기" style="margin-left: 10px; background-color: #BDB19A; border-color: #BDB19A">
+				</fieldset>
+			</form>
 		</div>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
