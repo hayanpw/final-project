@@ -14,9 +14,17 @@
 			<div class="rental-info">
 				<p>${sessionScope.m.memberId }님의 대관 신청 정보입니다.</p>
 				<c:forEach items="${rList }" var="r">
-					<table>
+					<table class="table">
 						<tr>
-							<td></td>
+							<c:forEach items="${fvList }" var="f">
+								<c:if test="${r.spaceNo eq f.spaceNo }">
+									<td>꺄</td>
+								</c:if>
+							</c:forEach>
+						</tr>
+						<tr>
+							<td>예약 날짜</td>
+							<td>${r.rentalDate }</td>
 						</tr>
 					</table>
 				</c:forEach>

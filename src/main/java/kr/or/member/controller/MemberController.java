@@ -1,5 +1,7 @@
 package kr.or.member.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -129,6 +131,20 @@ public class MemberController {
 			model.addAttribute("loc","/");
 			return "common/msg";
 		}
+	
+	@RequestMapping(value="/allMember.do")
+	public String allMember(Model model) {
+		ArrayList<Member> list = service.selectAllMember();
+		model.addAttribute("list",list);
+		return "member/AllMember";
+	}
+		
+	@RequestMapping(value="/updateMemberlist.do")
+	@ResponseBody
+	public int updateMemberLevel(Member member) {
+		int result = service.updateMemberLevel(member);
+		return result;
+	}		
 }
 	
 	
