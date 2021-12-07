@@ -60,4 +60,23 @@
 			ADDRESS_DETAIL = #{addressDetail} 
 		where member_id=#{memberId}
  	</update>
+ 	<select id="selectAllMember" resultType="m">
+ 		select 
+ 			MEMBER_NO as memberNo,
+			MEMBER_ID as memberId,
+			MEMBER_EMAIL as memberEmail,
+			MEMBER_PASSWORD as memberPassword,
+			MEMBER_NAME as memberName,
+			MEMBER_PHONE as memberPhone,
+			MEMBER_BIRTHDAY as memberBirthday,
+			enroll_date as enrollDate,
+			MEMBER_LEVEL as memberLevel
+ 		from member
+ 	</select>
+ 	 	<update id="updateMemberLevel" parameterType="m">
+ 		update member set 	
+			MEMBER_LEVEL = #{memberLevel}
+		where member_no=#{memberNo}
+ 	</update>
+ 	
 </mapper>
