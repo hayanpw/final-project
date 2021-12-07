@@ -1,5 +1,7 @@
 package kr.or.member.sevice;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -43,4 +45,13 @@ public class MemberService {
 		int result = dao.updateMember(member);
 		return result;
 	}
+	public ArrayList<Member> selectAllMember() {	
+		ArrayList<Member> list = dao.selectAllMember();
+		return list;
+	}
+	public int updateMemberLevel(Member member) {
+		int result = dao.updateMemberLevel(member);
+		return result;
+	}
+
 }

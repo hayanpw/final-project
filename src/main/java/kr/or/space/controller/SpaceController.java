@@ -15,17 +15,23 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import kr.or.member.sevice.MemberService;
+import kr.or.member.vo.Member;
+import kr.or.space.model.service.MailSend;
 import kr.or.space.model.service.SpaceService;
 import kr.or.space.model.vo.FileVO;
 import kr.or.space.model.vo.Rental;
 import kr.or.space.model.vo.Space;
+import kr.or.space.model.vo.SpaceAdmin;
 import kr.or.space.model.vo.SpaceTime;
 
 @Controller
 public class SpaceController {
 	@Autowired
 	private SpaceService service;
-
+	@Autowired
+	private MailSend mailService;
+	
 	@RequestMapping(value = "/test.do")
 	public String test() {
 		return "space/test";
@@ -170,6 +176,7 @@ public class SpaceController {
 		model.addAttribute("fv", fv);
 		return "space/spaceInfo";
 	}
+	//대관
 	@RequestMapping(value = "/spaceRental.do")
 	public String spaceRental(Model model, Rental r) {
 		int result = service.insertRental(r);
@@ -180,5 +187,39 @@ public class SpaceController {
 		}
 		model.addAttribute("loc", "/");
 		return "common/msg";
+	}
+	//관리자페이지 - 예약 관리
+	@RequestMapping(value = "/spaceAdmin.do")
+	public String spaceAdmin(Model model) {
+		ArrayList<SpaceAdmin>list = service.selectAllRental();
+		model.addAttribute("list", list);
+		return "space/spaceAdmin";
+	}
+	//마이페이지- 예약내역 관리
+	@RequestMapping(value = "/spaceMypage.do")
+	public String spaceMypage(String memberId, Model model) {
+		ArrayList<Rental> rList = service.selectRentalList(memberId);
+		ArrayList<Space> sList = service.selectAllSpace();
+		ArrayList<FileVO> fvList = service.selectFile();
+		model.addAttribute("rList", rList);
+		model.addAttribute("sList", sList);
+		model.addAttribute("fvList", fvList);
+		return "space/spaceMypage";
+	}
+	//대관 확정 메일 보내기
+	@RequestMapping(value = "/mailSend.do")
+	public String mailSend(String memberId,int rentalNo, Model model) {
+		String email = service.selectEmail(memberId);
+		String result = mailService.mailSend("redsix622@naver.com");
+		int result1 = service.updateRentalStatus(rentalNo);
+		if(result1>0) {
+			ArrayList<SpaceAdmin>list = service.selectAllRental();
+			model.addAttribute("list", list);
+			return "space/spaceAdmin";
+		}else{
+			model.addAttribute("msg", "메일 발송에 실패하였습니다.");
+			model.addAttribute("loc", "/");
+			return "common/msg";
+		}
 	}
 }

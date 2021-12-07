@@ -51,6 +51,7 @@
 }
 .select-btn>button{
 	width : 80px;
+	height : 50px;
 	background-color : #ffffff;
 	border : 1px solid #BDB19A; 
 	border-top-left-radius: 10px;

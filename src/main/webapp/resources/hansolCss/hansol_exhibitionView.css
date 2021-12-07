@@ -1,0 +1,56 @@
+
+    .topSide{
+        margin-bottom: 50px;
+    }
+    
+    .rightSide{
+        width: 850px;
+
+    }
+    .exhibitionPhoto{
+        width: 400px;
+        height :300px;
+        display: inline-block;
+        margin: 0 auto;
+    }
+    .photo{
+        width :300px;
+        height : 200px;
+        margin-left: 50px;
+        margin-top: 40px;
+    }
+    .exhibitionSummary{
+        width: 380px;
+        height : 300px;
+        float: right;
+        
+        display: inline-block;
+    }
+    .bottomSide{
+        margin-top: 100px;
+        width: 850px;
+    }
+    .nav nav-tabs>li{
+        width: 70px;
+    }
+    .exhibitionSummary>table tr td:first-child{
+        width: 120px;
+    }
+    .exhibitionSummary>table tr td{
+        height: 50px;
+    }
+    .exhibitionSummary>table{
+        width: 360px;
+        height: 250px;
+        margin: left 50px;
+        margin-top: 25px;
+        
+    }
+    .table-condensed{
+        border:none;
+    }
+    .fixed{
+    	position: fixed;
+    	top: 150px;
+    	left: 1200px;
+    }
