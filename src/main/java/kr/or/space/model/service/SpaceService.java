@@ -6,10 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import kr.or.member.vo.Member;
 import kr.or.space.model.dao.SpaceDao;
 import kr.or.space.model.vo.FileVO;
 import kr.or.space.model.vo.Rental;
 import kr.or.space.model.vo.Space;
+import kr.or.space.model.vo.SpaceAdmin;
 import kr.or.space.model.vo.SpaceTime;
 
 @Service
@@ -84,5 +86,17 @@ public class SpaceService {
 	//한사람이 예약한 대관 내역 조회
 	public ArrayList<Rental> selectRentalList(String memberId) {
 		return dao.selectRentalList(memberId);
+	}
+	//모든 대관 리스트 조회
+	public ArrayList<SpaceAdmin> selectAllRental() {
+		return dao.selectAllRental();
+	}
+	//이메일
+	public String selectEmail(String memberId) {
+		return dao.selectEmail(memberId);
+	}
+	//상태 업데이트
+	public int updateRentalStatus(int rentalNo) {
+		return dao.updateRentalStatus(rentalNo);
 	}
 }

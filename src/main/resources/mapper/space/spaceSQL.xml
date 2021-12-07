@@ -86,7 +86,8 @@
 	</select>
 	<update id="deleteSpace" parameterType="_int">
 		update
-			space set del_yn = 'Y'
+			space set 
+			del_yn = 'Y'
 			where space_no = #{spaceNo}
 	</update>
 	<select id="selectFileList" parameterType="_int" resultType="fv">
@@ -134,4 +135,34 @@
 		from rental
 		where member_id = #{memberId}	
 	</select>
+	<select id="selectAllRental"  resultType="kr.or.space.model.vo.SpaceAdmin">
+		select
+			rental_no as rentalNo,
+			space_name as spaceName,
+			member_id as memberId,
+			start_time as startTime,
+			end_time as endTime,
+			rental_date as rentalDate,
+			rental_people as rentalPeople,
+			filename,
+			rental_status as rentalStatus,
+			used_board as usedBoard
+		from rental 
+		join space using(space_no) 
+		join space_file using(space_no) 
+		join space_time using(st_no) 
+		where thumbnail = 'Y'
+	</select>
+	<select id="selectEmail" parameterType="string" resultType="string">
+		select
+			member_email as memberEmail
+		from member
+		where member_id = #{memberId}	
+	</select>
+	<update id="updateRentalStatus" parameterType="_int">
+		update
+			rental set
+			rental_status = 2
+		where rental_no = #{rentalNo}	 
+	</update>
 </mapper>
