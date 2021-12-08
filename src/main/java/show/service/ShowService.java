@@ -133,4 +133,13 @@ public class ShowService {
 		dao.payCancel();
 	}
 
+	public HashMap<String, Object> selectAdminList() {
+		ArrayList<Show> curr = dao.selectShowList();
+		ArrayList<Show> last = dao.selectLastList();
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("curr", curr);
+		map.put("last", last);
+		return map;
+	}
+
 }

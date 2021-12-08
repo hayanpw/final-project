@@ -299,4 +299,12 @@ public class ShowController {
 		return seat;
 	}
 
+	
+	@RequestMapping(value = "/showAdmin.do")
+	public String showAdmin(Model model) {
+		HashMap<String, Object> map = service.selectAdminList();
+		model.addAttribute("list", map.get("curr"));
+		model.addAttribute("last", map.get("last"));
+		return "show/showAdmin";
+	}
 }
