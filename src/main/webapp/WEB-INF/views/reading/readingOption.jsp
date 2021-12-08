@@ -65,7 +65,7 @@
 						alert("예약이 취소되었습니다.");
 						location.href = "/readingNotice.do";
 					}else{
-						alert("예약취소가 실패하였습니다. 처음부터 접근해주세요.");
+						alert("예약취소가 실패하였습니다. 처음부터 이동합니다.");
 						location.href = "/readingNotice.do";
 					}
 				}
