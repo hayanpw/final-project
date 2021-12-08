@@ -13,19 +13,19 @@
         <div class="row" style="width: 600px ;margin: 0 auto;">
             <div style="width: 600px;  ">
                 <div class="thumbnail">
-                	<img src="/w3images/nature.jpg" style="width:100%">
+                	<img src=${exbp.exhibitionPhoto } style="width:100%">
                 </div>
             </div>
             <table class="table table-bordered" style="width: 600px; text-align: center;">
                 <tbody>
                     <tr>
-                        <td>전시이름</td>
+                        <td>${exbp.exhibitionTitle }</td>
                     </tr>
                     <tr>
                         <td>예약 날짜</td>
                     </tr>
                     <tr>
-                        <td>결제금액/인원</td>
+                        <td>${exbp.paymentPrice }/${exbp.paymentQuantity }</td>
                     </tr>
                 </tbody>
             </table>

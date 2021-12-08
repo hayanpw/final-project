@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kr.or.exhibition.service.ExhibitionService;
 import kr.or.exhibition.vo.Exhibition;
+import kr.or.exhibition.vo.ExhibitionPayment;
 
 @Controller
 public class ExhibitionController {
@@ -28,9 +29,17 @@ public class ExhibitionController {
 	}
 	//전시 뷰
 	@RequestMapping(value="/exhibitionView.do")
-	public String exhibitionView() {
+	public String exhibitionView(int exhibitionNo, Model model) {
+		Exhibition exb = service.selectOneExhibition(exhibitionNo);
+		model.addAttribute("exb",exb);
 		return "exhibition/exhibitionView";
 	}
+	//전시 결제 페이지로 이동
+		@RequestMapping(value="/exhibitionPaymentFrm.do")
+		public String exhibitionpaymentFrm(ExhibitionPayment exbp,Model model) {
+			model.addAttribute("exbp",exbp);
+			return "exhibition/exhibitionPayment";
+		}
 	//전시 등록
 	@RequestMapping(value="/exhibitionInsert.do")
 	public String exhibitionInsert (Exhibition exb,MultipartFile upfile, HttpServletRequest request, Model model) {
@@ -81,4 +90,5 @@ public class ExhibitionController {
 		model.addAttribute("loc", "/exhibitionView.do");
 		return "common/msg";
 	}
+	
 }

@@ -1,6 +1,7 @@
 package kr.or.space.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,6 +11,7 @@ import kr.or.member.vo.Member;
 import kr.or.space.model.dao.SpaceDao;
 import kr.or.space.model.vo.FileVO;
 import kr.or.space.model.vo.Rental;
+import kr.or.space.model.vo.ResSpace;
 import kr.or.space.model.vo.Space;
 import kr.or.space.model.vo.SpaceAdmin;
 import kr.or.space.model.vo.SpaceTime;
@@ -98,5 +100,16 @@ public class SpaceService {
 	//상태 업데이트
 	public int updateRentalStatus(int rentalNo) {
 		return dao.updateRentalStatus(rentalNo);
+	}
+	//예약한 시간 조회
+	public ArrayList<ResSpace> selectResSpace(int spaceNo) {
+		return dao.selectResSapce(spaceNo);
+	}
+	//예약한 시간 리스트
+	public ArrayList<ResSpace> selectResList(String selectDate, int spaceNo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("selectDate", selectDate);
+		map.put("spaceNo", spaceNo);
+		return dao.selectResList(map);
 	}
 }
