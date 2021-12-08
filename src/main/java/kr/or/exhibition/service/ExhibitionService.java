@@ -16,4 +16,9 @@ public class ExhibitionService {
 		int result = dao.exhibitionInsert(exb);
 		return result;
 	}
+
+	public Exhibition selectOneExhibition(int exhibitionNo) {
+		Exhibition exb = dao.selectOneExhibition(exhibitionNo);
+		return exb;
+	}
 }

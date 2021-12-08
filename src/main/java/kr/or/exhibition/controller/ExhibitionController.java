@@ -28,7 +28,9 @@ public class ExhibitionController {
 	}
 	//전시 뷰
 	@RequestMapping(value="/exhibitionView.do")
-	public String exhibitionView() {
+	public String exhibitionView(int exhibitionNo, Model model) {
+		Exhibition exb = service.selectOneExhibition(exhibitionNo);
+		model.addAttribute("exb",exb);
 		return "exhibition/exhibitionView";
 	}
 	//전시 등록

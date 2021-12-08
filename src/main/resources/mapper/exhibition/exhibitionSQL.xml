@@ -8,4 +8,18 @@
 			#{exhibitionEnd},#{exhibitionPhoto},#{exhibitionTimeStart},#{exhibitionTimeEnd},#{exhibitionAge},
 			#{exhibitionPrice},#{exhibitionDetail})
 	</insert>
+	<select id="selectOneExhibition" parameterType="_int" resultType="exb">
+		select 
+			exhibition_no as exhibitionNo,
+			exhibition_title as exhibitionTitle,
+			exhibition_start as exhibitionStart,
+			exhibition_end as exhibitionEnd,
+			exhibition_photo as exhibitionPhoto,
+			exhibition_time_start as exhibitionTimeStart,
+			exhibition_time_end as exhibitionTimeEnd,
+			exhibition_age as exhibitionAge,
+			exhibition_price as exhibitionPrice,
+			exhibition_detail as exhibitionDetail
+		from exhibition where exhibition_no = #{exhibitionNo} 
+	</select>
 </mapper>
