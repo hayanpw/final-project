@@ -18,7 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
 
-import kr.or.member.sevice.MemberService;
+import kr.or.member.service.MemberService;
 import kr.or.member.vo.Member;
 import kr.or.space.model.service.MailSend;
 import kr.or.space.model.service.SpaceService;
