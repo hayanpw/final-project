@@ -39,13 +39,13 @@
 					<tr>
 						<td id="selectTime" colspan="5">시간 선택</td>
 					</tr>
-						<c:forEach items="${st }" var ="st">
+						<c:forEach items="${st }" var ="st" varStatus="i">
 							<tr>
 								<td>이용시간<input type="hidden" value="${st.stNo }"></td>
-								<td><input type="text" value="${st.startTime }" ></td>
+								<td><input type="text" id ="startTime" value="${st.startTime }" ></td>
 								<td>~</td>
-								<td><input type="text" value="${st.endTime }"></td>
-								<td><button type="button" class="checkBtn">선택</button></td>
+								<td><input type="text" id="endTime" value="${st.endTime }"></td>
+								<td><button id="chkBtn" type="button" class="checkBtn">선택</button><span>마감</span></td>
 							</tr>
 					</c:forEach>
 			</table>
@@ -99,9 +99,42 @@
 	            onSelect : function(data){
 	            	$("#selectDate").val(data);
 	            	$(".time-table").show();
+	            	selectResList(data);
 	            }
 	        });
 	    });
+	    //예약한 시간 값 조회
+	    function selectResList(selectDate){
+	    	var spaceNo = $("[name=spaceNo]").val();
+	    	$.ajax({
+	    		url : "/selectResList.do",
+	    		data : {selectDate:selectDate, spaceNo:spaceNo},
+	    		type : "get",
+	    		success:function(data){
+	    			var btn = $(".checkBtn");
+	    			btn.hide();
+	    			btn.next().hide();
+	    			//예약할 수 있는 시간의 개수
+	    			for(var i=0; i<btn.length; i++){
+	    				//예약마감이 되었는지 체크를 위한 변수
+	    				var bool = true;
+	    				//이미 예약한 시간의 개수
+	    				for(var j=0; j<data.length;j++){
+	    					//만약 예약한 시간과 예약할 수 있는 시간이 같다면
+	    					if(data[j].startTime === btn.eq(i).parent().parent().children().eq(1).children().val()){
+	    						//예약마감 보여주기
+	    						btn.eq(i).next().show();
+	    						bool = false;
+	    					}
+	    				}
+	    				//예약이 가능할 경우
+	    				if(bool){
+	    					btn.eq(i).show();
+	    				}
+	    			}
+	    		}
+	    	});
+	    }
 	   	//월요일 휴무 코드
 	    function noMondays(date) {
 	    	return [date.getDay() != 1, ''];
