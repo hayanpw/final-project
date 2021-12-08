@@ -1,5 +1,15 @@
+<%@page import="show.vo.Seat"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+        <%
+    	Seat s = (Seat)request.getAttribute("seat");
+    	ArrayList<String> levelList = new ArrayList<String>();
+    	for(int i=0; i<s.getLevelList().size(); i++){
+    		levelList.add(s.getLevelList().get(i));
+    	}
+    %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,13 +48,42 @@ h1{
         <h1>${show.showName }</h1>
         <h1>공연일 : ${seat.showDate }</h1>
         <h2>선택 좌석 : ${seat.seatList.size() }석</h2>
-        <h1>결제 금액 : ${seat.seatList.size()*seat.seatPrice} 원</h1>
+        <h1 id="price">결제 금액 : </h1>
+        
         <button id="payment" class="btn btn-danger btn-lg">결제</button><br>
         <a href="/cancelPayment.do?reservNo=${seat.reservNo }" class="btn btn-default" id="cancelPay">예매 취소</a>
 	</div>
 	<script>
+	var totalPrice = 0;
+	$(function() {
+		if(${show.showSeat == 0}){
+			totalPrice = ${seat.seatList.size()*seat.seatPrice};
+		}else{
+			var seatPrice = ${show.showPrice};
+			var levelList = new Array();
+			
+			var count = 0;
+			<%for(String str : levelList){%>
+				levelList[count++] = "<%=str%>";
+			<%}%>
+			
+			
+			for (var i = 0; i < levelList.length; i++) {
+				var seat = levelList[i];
+				if(seat == "vip") {
+					totalPrice += (seatPrice*1.5);
+				}else if(seat == "r") {
+					totalPrice += (seatPrice*1.3);
+				}else if(seat == "s") {
+					totalPrice += seatPrice;
+				}else{
+					totalPrice += (seatPrice*0.7);
+				}
+			}
+		}
+		$("#price").append(totalPrice+" 원");
+	});
 		$("#payment").click(function() {
-			var price = ${seat.seatList.size()*seat.seatPrice};
 			var d = new Date();
 			var date = d.getFullYear()+""+(d.getMonth()+1)+""+d.getDate()+""+d.getHours()+""+d.getMinutes()+""+d.getSeconds();
 			var showName = "${show.showName}";
@@ -52,7 +91,7 @@ h1{
 			IMP.request_pay({
 				merchant_uid : showName+"_"+date,	//거래 아이디
 				name : showName,				//결제 이름 설정
-				amount : price,	//결제 금액
+				amount : totalPrice,	//결제 금액
 				buyer_email : "${sessionScope.m.memberEmail}",	//구매자 이메일
 				buyer_name : "${sessionScope.m.memberName}",	//구매자 이름
 				buyer_phone : "${sessionScope.m.memberPhone}",	//구매자 전화번호
@@ -70,6 +109,7 @@ h1{
 				}
 			});
 		});
+		
 		$(function() {
 			$("#payment").click();
 		});
