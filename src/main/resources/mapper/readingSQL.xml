@@ -38,5 +38,8 @@
 		insert into reading
 			values(reading_seq.nextval,sysdate,#{readingDay},#{readingNum},#{readingId},(select member_name from member where member_id=#{readingId}),0,0)
 	</insert>
+	<delete id="reservationCancel" parameterType="reading">
+		delete from reading where reading_day=#{readingDay} and reading_id=#{readingId}
+	</delete>
 </mapper>
 

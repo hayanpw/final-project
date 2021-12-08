@@ -95,7 +95,7 @@
  			var paymentPrice = Number($("#totalPrice").html()); 
  			var paymentQuantity = Number($("#amount").html()); 
  			var exhibitionNo = Number($("#exhibitionNo").val());
- 			var exhibitionTitle = $("#exhibitionNo").val();
+ 			var exhibitionTitle = $("#exhibitionTitle").val();
  			var exhibitionPhoto = $("#exhibitionPhoto").val();
  			var paymentSelect = 1; // 전시결제는 1 , 강좌결제는 2
  			var form = $("<form action='/exhibitionPaymentFrm.do' method='post'></form>");
@@ -104,8 +104,7 @@
  			form.append($("<input type='text' name='exhibitionNo' value='"+exhibitionNo+"'>"));
  			form.append($("<input type='text' name='paymentSelect' value='"+paymentSelect+"'>"));
  			form.append($("<input type='text' name='exhibitionTitle' value='"+exhibitionTitle+"'>"));
- 			form.append($("<input type='text' name='exhibitionTitle' value='"+exhibitionTitle+"'>"));
- 			form.append($(obj).parent().prev());
+ 			form.append($("<input type='text' name='exhibitionPhoto' value='"+exhibitionPhoto+"'>"));
 			$("body").append(form);
 			form.submit();
  		}

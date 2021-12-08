@@ -51,8 +51,8 @@
     }
     .fixed{
     	position: fixed;
-    	top: 150px;
-    	left: 1200px;
+    	margin-top: -600px;
+    	margin-left: 880px;
     }
     .amount{
 	 width: 35px;
