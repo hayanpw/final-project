@@ -55,3 +55,9 @@ input [type=submit]:hover{
     width: 40px;
     float: left;
 }
+.modal-body>div{
+	display: none;
+}
+.modal-body>div:first-child{
+	display: block;
+}
