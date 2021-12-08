@@ -43,7 +43,7 @@
                            <li><a href="/spaceRes.do?spaceNo=1">대관 현황</a></li>
                            <li><a href="#">대관 신청</a></li>
                            <li><a href="/spaceList.do">대관 안내</a></li>
-                           <li><a href="/usedBoard.do">공간 리뷰</a></li>
+                           <li><a href="/selectSpaceBoardList.do?reqPage=1">공간 리뷰</a></li>
                         </ul>
                    </li>
                    <li><a href="#">전시</a></li>
