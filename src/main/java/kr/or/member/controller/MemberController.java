@@ -158,9 +158,10 @@ public class MemberController {
 	model.addAttribute("loc","/");
 	return "common/msg";
 }
-	@RequestMapping(value="/searchidpwFrm.do")
-	public String searchidpwFrm() {
-		return "member/searchidpw";
+	@RequestMapping(value="/searchId.do")
+	public Member searchId(String memberEmail,Model model) {
+		Member m = service.searchId(memberEmail);
+		return m;
 	}
 }
 	
