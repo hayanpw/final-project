@@ -27,6 +27,7 @@ import kr.or.space.model.vo.Rental;
 import kr.or.space.model.vo.ResSpace;
 import kr.or.space.model.vo.Space;
 import kr.or.space.model.vo.SpaceAdmin;
+import kr.or.space.model.vo.SpaceMypage;
 import kr.or.space.model.vo.SpaceTime;
 
 @Controller
@@ -202,12 +203,8 @@ public class SpaceController {
 	//마이페이지- 예약내역 관리
 	@RequestMapping(value = "/spaceMypage.do")
 	public String spaceMypage(String memberId, Model model) {
-		ArrayList<Rental> rList = service.selectRentalList(memberId);
-		ArrayList<Space> sList = service.selectAllSpace();
-		ArrayList<FileVO> fvList = service.selectFile();
-		model.addAttribute("rList", rList);
-		model.addAttribute("sList", sList);
-		model.addAttribute("fvList", fvList);
+		ArrayList<SpaceMypage> list = service.selectSpaceMypage(memberId);
+		model.addAttribute("list", list);
 		return "space/spaceMypage";
 	}
 	//대관 확정 메일 보내기

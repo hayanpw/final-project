@@ -13,21 +13,39 @@
 		<div class="container">
 			<div class="rental-info">
 				<p>${sessionScope.m.memberId }님의 대관 신청 정보입니다.</p>
-				<c:forEach items="${rList }" var="r">
-					<table class="table">
+				<table class="table">
+					<tr>
+						<th>No.</th>
+						<th>공간 이름</th>
+						<th>예약 시간</th>
+						<th>예약 날짜</th>
+						<th>용도</th>
+						<th>주요 시설</th>
+						<th>주요 물품</th>
+						<th>인원</th>
+						<th>가격</th>
+						<th>상태</th>
+					</tr>
+					<c:forEach items="${list }" var="l" varStatus="i">
 						<tr>
-							<c:forEach items="${fvList }" var="f">
-								<c:if test="${r.spaceNo eq f.spaceNo }">
-									<td>꺄</td>
-								</c:if>
-							</c:forEach>
+							<td>${i.count }</td>
+							<td>${l.spaceName }</td>
+							<td>${l.startTime }~${l.endTime }</td>
+							<td>${l.rentalDate }</td>
+							<td>${l.spacePurpose }</td>
+							<td>${l.mainFaciliy }</td>
+							<td>${l.mainProduct }</td>
+							<td>${l.rentalPeople }/${l.maxPeople }</td>
+							<td>${l.price }</td>
+							<c:if test="${l.rentalStatus eq 1 }">
+								<td>심사중</td>
+							</c:if>
+							<c:if test="${l.rentalStatus eq 2 }">
+								<td>확정</td>
+							</c:if>
 						</tr>
-						<tr>
-							<td>예약 날짜</td>
-							<td>${r.rentalDate }</td>
-						</tr>
-					</table>
-				</c:forEach>
+					</c:forEach>
+				</table>					
 			</div>
 		</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
