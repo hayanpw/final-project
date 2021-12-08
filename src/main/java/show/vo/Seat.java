@@ -14,4 +14,5 @@ public class Seat {
 	private int seatPrice;
 	private int seatLevel;
 	private ArrayList<String> seatList;
+	private ArrayList<String> levelList;
 }

@@ -64,6 +64,11 @@ public class MemberDao {
 		List list = sqlSession.selectList("member.selectAllMember");
 		return (ArrayList<Member>)list;
 	}
+	public int searchidpw(Member member) {
+		int result = sqlSession.update("member.searchidpw",member);
+		return result;
+	}
+	
 	public int updateMemberLevel(Member member) {
 		int result = sqlSession.update("member.updateMemberLevel",member);
 		return result;

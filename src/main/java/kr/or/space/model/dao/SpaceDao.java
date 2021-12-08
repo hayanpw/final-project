@@ -13,6 +13,7 @@ import kr.or.space.model.vo.Rental;
 import kr.or.space.model.vo.ResSpace;
 import kr.or.space.model.vo.Space;
 import kr.or.space.model.vo.SpaceAdmin;
+import kr.or.space.model.vo.SpaceMypage;
 import kr.or.space.model.vo.SpaceTime;
 
 @Repository
@@ -110,5 +111,10 @@ public class SpaceDao {
 	public ArrayList<ResSpace> selectResList(HashMap<String, Object> map) {
 		List<ResSpace> list = sqlSession.selectList("space.selectResList",map);
 		return (ArrayList<ResSpace>)list;
+	}
+	//마이페이지 - 예약 내역 조회
+	public ArrayList<SpaceMypage> selectSpaceMypage(String memberId) {
+		List<SpaceMypage> list = sqlSession.selectList("space.selectSpaceMypage",memberId);
+		return (ArrayList<SpaceMypage>)list;
 	}
 }

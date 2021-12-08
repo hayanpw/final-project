@@ -47,17 +47,16 @@
     border-radius: 10%;
     margin: 2.5px;
 }
-#noSeat {
-    background-color: #818181;
-    font-weight: bold;
-    color: #616161;
-    width: 20px;
-    height: 20px;
+.seatDiv {
     display: flex;
     justify-content: center;
-    align-items: center;
-    border-radius: 10%;
-    margin: 2.5px;
+}
+.seatDiv>div{
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	font-weight: 900;
+	margin:0 2px;
 }
 .reservInfo{
     width: 20%;
