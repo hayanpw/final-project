@@ -34,8 +34,7 @@ public class ReadingDao {
 	}
 
 	public int reservationCancel(Reading re) {
-		// 삭제해서 넘기면됌
-		return 0;
+		return sqlSession.delete("reading.reservationCancel", re);
 	}
 
 	
