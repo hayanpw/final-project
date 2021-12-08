@@ -1,5 +1,8 @@
-.container{
-	margin: 0 auto;
-	border: 1px solid black;
-	width: 1200px;
+.table-box table tr th{
+	text-align: center;
+	background-color: #BDB19A;
+	color: #ffffff;
+}
+.table-box table tr td{
+	text-align: center;
 }

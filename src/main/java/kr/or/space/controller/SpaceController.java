@@ -28,6 +28,7 @@ import kr.or.space.model.vo.ResSpace;
 import kr.or.space.model.vo.Space;
 import kr.or.space.model.vo.SpaceAdmin;
 import kr.or.space.model.vo.SpaceMypage;
+import kr.or.space.model.vo.SpacePageNavi;
 import kr.or.space.model.vo.SpaceTime;
 
 @Controller
@@ -203,8 +204,10 @@ public class SpaceController {
 	//마이페이지- 예약내역 관리
 	@RequestMapping(value = "/spaceMypage.do")
 	public String spaceMypage(String memberId, Model model) {
+		System.out.println(memberId);
 		ArrayList<SpaceMypage> list = service.selectSpaceMypage(memberId);
 		model.addAttribute("list", list);
+		System.out.println(list.size());
 		return "space/spaceMypage";
 	}
 	//대관 확정 메일 보내기
@@ -229,5 +232,14 @@ public class SpaceController {
 	public String selectResList(String selectDate, int spaceNo, Model model) {
 		ArrayList<ResSpace> list = service.selectResList(selectDate, spaceNo);
 		return new Gson().toJson(list); 
+	}
+	//사용게시판 이동
+	@RequestMapping(value = "/selectSpaceBoardList.do")
+	public String selectSpaceBoardList(Model model, int reqPage) {
+		SpacePageNavi page = service.selectSpacePageNavi(reqPage);
+		model.addAttribute("list", page.getList());
+		model.addAttribute("pageNavi", page.getPageNavi());
+		model.addAttribute("start", page.getStart());
+		return "space/spaceBoardList";
 	}
 }

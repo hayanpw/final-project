@@ -22,7 +22,7 @@
 							<img  class="info-img" src="resources/spaceImage/upload/${f.filename }">
 						</c:if> 
 					</c:forEach>
-					<a id="info" href="/spaceRes.do?spaceNo=${s.spaceNo }">>상세보기</a>
+					<a id="info" href="/spaceRes.do?spaceNo=${s.spaceNo }">>신청 바로 가기</a>
 					<p>공간 : ${s.spaceName }</p>
 					<p>용도 : ${s.spacePurpose }</p>
 					<p>수용인원 :${s.maxPeople }</p>

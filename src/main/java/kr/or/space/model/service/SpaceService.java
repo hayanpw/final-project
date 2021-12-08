@@ -15,7 +15,9 @@ import kr.or.space.model.vo.ResSpace;
 import kr.or.space.model.vo.Space;
 import kr.or.space.model.vo.SpaceAdmin;
 import kr.or.space.model.vo.SpaceMypage;
+import kr.or.space.model.vo.SpacePageNavi;
 import kr.or.space.model.vo.SpaceTime;
+import kr.or.space.model.vo.UseBoard;
 
 @Service
 public class SpaceService {
@@ -116,5 +118,62 @@ public class SpaceService {
 	//마이페이지 - 예약내역 조회
 	public ArrayList<SpaceMypage> selectSpaceMypage(String memberId) {
 		return dao.selectSpaceMypage(memberId);
+	}
+	//사용 게시판-페이징
+	public SpacePageNavi selectSpacePageNavi(int reqPage) {
+		int numPerPage = 10;
+		int end = reqPage*numPerPage;
+		int start = end - numPerPage+1;
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("start", start);
+		map.put("end", end);
+		ArrayList<UseBoard> list = dao.selectUseBoardList(map);
+		
+		int totalCount = dao.selectTotalCount();
+		int totalPage = 0;
+		if(totalCount%numPerPage == 0) {
+			totalPage = totalCount/numPerPage;
+		}else {
+			totalPage = totalCount/numPerPage+1;
+		}
+		int pageNaviSize = 5;
+		int pageNo = ((reqPage-1)/pageNaviSize)*pageNaviSize + 1;
+		
+		String pageNavi = "<ul class='pagination'>";
+		//이전버튼
+		if(pageNo != 1) {
+			pageNavi += "<li>";
+			pageNavi += "<a href='/spaceBoardtList.do?reqPage="+(pageNo-1)+"'>";
+			pageNavi += "&lt;</a></li>";
+		}
+		//페이지숫자
+		for(int i=0; i<pageNaviSize; i++) {
+			if(pageNo == reqPage) {
+				pageNavi += "<li class='active'>";
+				pageNavi += "<a href='/spaceBoardtList.do?reqPage="+pageNo+"'>";
+				pageNavi += pageNo+"</a></li>";
+			}else {
+				pageNavi += "<li>";
+				pageNavi += "<a href='/spaceBoardtList.do?reqPage="+pageNo+"'>";
+				pageNavi += pageNo+"</a></li>";
+			}
+			pageNo++;
+			if(pageNo>totalPage) {
+				break;
+			}
+		}
+		//다음버튼
+		if(pageNo <= totalPage) {
+			pageNavi += "<li>";
+			pageNavi += "<a href='/spaceBoardtList.do?reqPage="+pageNo+"'>";
+			pageNavi += "&gt;</a></li>";
+		}
+		pageNavi += "</ul>";
+		
+		SpacePageNavi page = new SpacePageNavi();
+		page.setList(list);
+		page.setPageNavi(pageNavi);
+		page.setStart(start);
+		return page;
 	}
 }

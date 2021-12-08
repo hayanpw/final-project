@@ -15,6 +15,7 @@ import kr.or.space.model.vo.Space;
 import kr.or.space.model.vo.SpaceAdmin;
 import kr.or.space.model.vo.SpaceMypage;
 import kr.or.space.model.vo.SpaceTime;
+import kr.or.space.model.vo.UseBoard;
 
 @Repository
 public class SpaceDao {
@@ -116,5 +117,14 @@ public class SpaceDao {
 	public ArrayList<SpaceMypage> selectSpaceMypage(String memberId) {
 		List<SpaceMypage> list = sqlSession.selectList("space.selectSpaceMypage",memberId);
 		return (ArrayList<SpaceMypage>)list;
+	}
+	//사용게시판 전체 리스트 조회
+	public ArrayList<UseBoard> selectUseBoardList(HashMap<String, Object> map) {
+		List<UseBoard> list = sqlSession.selectList("space.selectUseBoardList",map);
+		return (ArrayList<UseBoard>)list;
+	}
+	//리스트 총 수
+	public int selectTotalCount() {
+		return sqlSession.selectOne("space.selectTotalCount");
 	}
 }
