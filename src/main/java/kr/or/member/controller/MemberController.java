@@ -10,8 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import kr.or.member.sevice.MemberService;
-import kr.or.member.sevice.SendMail;
+import kr.or.member.service.MemberService;
+import kr.or.member.service.SendMail;
 import kr.or.member.vo.Member;
 
 @Controller
@@ -44,7 +44,7 @@ public class MemberController {
 	}
 	@RequestMapping(value="/login.do")
 	public String login(Member member, HttpSession session, Model model ) {
-		Member m = service.selectOneMember(member);
+		Member m = service.selectOneMemberPw(member);
 		if(m != null) {
 			session.setAttribute("m", m);
 			model.addAttribute("msg","로그인성공");
@@ -69,7 +69,7 @@ public class MemberController {
 		String phone = memberPhone1+memberPhone2+memberPhone3;
 		m.setMemberPhone(phone);
 		m.setMemberEmail(email);
-		int result = service.insertMember(m);
+		int result = service.insertMemberPw(m);
 		if(result>0) {
 			model.addAttribute("msg","회원가입성공");
 			model.addAttribute("loc","/");
@@ -102,7 +102,7 @@ public class MemberController {
 	
 	@RequestMapping(value="/pwCheck.do")
 	public String pwchk(Member member, Model model) {
-		Member m = service.selectOneMember(member);
+		Member m = service.selectOneMemberPw(member);
 		if(m != null) {
 			return "member/memberUpdate";
 		}else {
