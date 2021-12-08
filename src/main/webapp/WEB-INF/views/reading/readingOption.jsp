@@ -54,17 +54,19 @@
 		var readingDay = "${re.readingDay }";
 		var readingId = "${sessionScope.m.memberId }";
 		var result = confirm("예약을 취소하시겠습니까?");
-		console.log(result);
 		if(result){
 			$.ajax({
 				url : "/reservationCancel.do",
 				data : {readingDay:readingDay,readingId:readingId},
 				type : "post",
 				success : function(data){
-					if(data != null){
-						
+					console.log(data);
+					if(data > 0){
+						alert("예약이 취소되었습니다.");
+						location.href = "/readingNotice.do";
 					}else{
-						
+						alert("예약취소가 실패하였습니다. 처음부터 접근해주세요.");
+						location.href = "/readingNotice.do";
 					}
 				}
 			});
