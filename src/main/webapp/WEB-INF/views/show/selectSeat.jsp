@@ -255,9 +255,10 @@
         var count=0;
         var arr = new Array();
         var bkColor = new Array();
+        var levelArr = new Array();
         function choose(obj){
         	if(arr.length == 5){
-        		alert("한 아이디에 최대 5좌석만 구매가능합니다.");
+        		alert("한 번에 최대 5좌석만 구매가능합니다.");
         	}else{
         		var seatNo = $(obj).children().val();
         		var showNo = ${s.showNo};
@@ -270,6 +271,15 @@
         			success: function(data) {
 						if(data == ""){
 							bkColor.push($(obj).css("background-color"));
+							if($(obj).css("background-color") == "rgb(227, 196, 255)"){
+								levelArr.push("vip");
+							}else if($(obj).css("background-color") == "rgb(188, 224, 103)"){
+								levelArr.push("r");
+							}else if($(obj).css("background-color") == "rgb(241, 95, 95)"){
+								levelArr.push("a");
+							}else{
+								levelArr.push("s");
+							}
 							$(obj).css("background-color", "#563D39");
 				            $(obj).attr("onclick", "cancel(this);");
 				            count++;
@@ -295,6 +305,7 @@
                     arr.splice(i,1);
                     $(obj).css("background-color", bkColor[i]);
                     bkColor.splice(i,1);
+                    levelArr.splice(i,1);
                 }
                 var h3 = $("<h3>");
                 h3.append(arr[i]);
@@ -320,6 +331,7 @@
 				// 선택한 좌석 번호들 설정
 				for(var i=0; i<arr.length; i++){
 					form.append($("<input type='text' name='seatList' value='"+arr[i]+"'>"));
+					form.append($("<input type='text' name='levelList' value='"+levelArr[i]+"'>"));
 				}
 				//전송할 form태그를 현재 페이지에 추가
 				$("body").append(form);
