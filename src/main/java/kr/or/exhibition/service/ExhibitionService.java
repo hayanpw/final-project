@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import kr.or.exhibition.dao.ExhibitionDao;
 import kr.or.exhibition.vo.Exhibition;
+import kr.or.exhibition.vo.ExhibitionPayment;
 
 @Service
 public class ExhibitionService {
@@ -20,5 +21,10 @@ public class ExhibitionService {
 	public Exhibition selectOneExhibition(int exhibitionNo) {
 		Exhibition exb = dao.selectOneExhibition(exhibitionNo);
 		return exb;
+	}
+
+	public int exhibitionCredit(ExhibitionPayment exbp) {
+		int result = dao.exhibitionCredit(exbp);
+		return result;
 	}
 }

@@ -93,13 +93,12 @@
 </body>
  <script>
  		function payment(){
- 			
+ 			var bookDate = $("#bookDate").val();
  			var paymentPrice = Number($("#totalPrice").html()); 
  			var paymentQuantity = Number($("#amount").html()); 
  			var exhibitionNo = Number($("#exhibitionNo").val());
  			var exhibitionTitle = $("#exhibitionTitle").val();
  			var exhibitionPhoto = $("#exhibitionPhoto").val();
- 			var bookDate = $("#bookDate").val();
  			var paymentSelect = 1; // 전시결제는 1 , 강좌결제는 2
  			console.log(bookDate);
  			var form = $("<form action='/exhibitionPaymentFrm.do' method='post'></form>");

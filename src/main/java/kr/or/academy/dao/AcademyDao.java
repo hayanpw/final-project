@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.or.academy.vo.Academy;
 import kr.or.academy.vo.AcademyPagingVo;
+import kr.or.academy.vo.AcademyPayment;
 
 @Repository
 public class AcademyDao {
@@ -35,5 +36,10 @@ public class AcademyDao {
 	public Academy selectOneAcademy(int academyNo) {
 		Academy a = sqlSession.selectOne("academy.selectOneAcademy",academyNo);
 		return a;
+	}
+
+	public int academyCredit(AcademyPayment acp) {
+		int result = sqlSession.insert("academy.academyCredit",acp);
+		return result;
 	}
 }

@@ -12,7 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.google.gson.Gson;
 
 import kr.or.exhibition.service.ExhibitionService;
 import kr.or.exhibition.vo.Exhibition;
@@ -89,6 +92,13 @@ public class ExhibitionController {
 		}
 		model.addAttribute("loc", "/exhibitionView.do");
 		return "common/msg";
+	}
+	//전시 결제
+	@ResponseBody
+	@RequestMapping(value="exhibitionCredit.do",produces = "application/json;charset=utf-8")
+	public String exhibitionCredit (ExhibitionPayment exbp) {
+		int result = service.exhibitionCredit(exbp);
+		return new Gson().toJson(result);
 	}
 	
 }

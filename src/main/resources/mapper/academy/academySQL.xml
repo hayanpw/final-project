@@ -39,4 +39,10 @@
   			academy_category as academyCategory
   		from academy where academy_no = #{academyNo}
   	</select>
+  	<insert id="academyCredit" parameterType="acp">
+		insert
+			into payment
+			values(#{paymentNo},#{paymentSelect},#{academyNo},0,#{paymentPrice},
+			to_char(sysdate,'YYYY-MM-DD'),0,#{paymentQuantity},null,#{memberNo})
+	</insert>
 </mapper>
