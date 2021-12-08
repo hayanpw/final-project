@@ -81,6 +81,8 @@
     	 <input type="hidden" id="endDay" value="${exb.exhibitionEnd }">
     	 <input type="hidden" class="price" value="${exb.exhibitionPrice }">
     	 <input type="hidden" id="exhibitionNo" value="${exb.exhibitionNo }">
+    	 <input type="hidden" id="exhibitionTitle" value="${exb.exhibitionTitle }">
+    	 <input type="hidden" id="exhibitionPhoto" value="${exb.exhibitionPhoto }">
     	 <span class="totalPrice" id="totalPrice">${exb.exhibitionPrice }</span>원
     	 <button onclick="payment();"class="btn" id="payment">결제하기</button>
     </div>
@@ -93,11 +95,19 @@
  			var paymentPrice = Number($("#totalPrice").html()); 
  			var paymentQuantity = Number($("#amount").html()); 
  			var exhibitionNo = Number($("#exhibitionNo").val());
+ 			var exhibitionTitle = $("#exhibitionNo").val();
+ 			var exhibitionPhoto = $("#exhibitionPhoto").val();
  			var paymentSelect = 1; // 전시결제는 1 , 강좌결제는 2
- 			console.log(paymentPrice);
- 			console.log(paymentQuantity);
- 			console.log(exhibitionNo);
- 			console.log(paymentSelect)
+ 			var form = $("<form action='/exhibitionPaymentFrm.do' method='post'></form>");
+ 			form.append($("<input type='text' name='paymentQuantity' value='"+paymentQuantity+"'>"));
+ 			form.append($("<input type='text' name='paymentPrice' value='"+paymentPrice+"'>"));
+ 			form.append($("<input type='text' name='exhibitionNo' value='"+exhibitionNo+"'>"));
+ 			form.append($("<input type='text' name='paymentSelect' value='"+paymentSelect+"'>"));
+ 			form.append($("<input type='text' name='exhibitionTitle' value='"+exhibitionTitle+"'>"));
+ 			form.append($("<input type='text' name='exhibitionTitle' value='"+exhibitionTitle+"'>"));
+ 			form.append($(obj).parent().prev());
+			$("body").append(form);
+			form.submit();
  		}
  
 	    $(function() {
