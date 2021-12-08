@@ -181,6 +181,14 @@
 	            </div>
 	        </div>
 	        <div class="reservInfo">
+		    <c:if test="${s.showSeat == 1 }">
+		        	<div class="seatDiv">
+		        		<div style="background-color:#E3C4FF; ">VIP</div>
+		        		<div style="background-color:#BCE067; ">R</div>
+		        		<div style="background-color:#EDD200; ">S</div>
+		        		<div style="background-color:#F15F5F; ">A</div>
+		        	</div>	        	
+	        	</c:if>
 	        	<div><h1><strong>선택 좌석</strong></h1></div>
 	            <div class="selectSeat"></div>
 	            <button class="btn btn-danger" onclick="reservation();">예매하기</button>
