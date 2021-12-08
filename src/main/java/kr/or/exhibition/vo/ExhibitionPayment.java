@@ -14,4 +14,5 @@ public class ExhibitionPayment {
 	private int paymentQuantity;
 	private String exhibitionTitle;
 	private String exhibitionPhoto;
+	private String bookDate;
 }

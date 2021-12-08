@@ -42,7 +42,7 @@
                         <td>${exb.exhibitionPrice }</td>
                     </tr>
                     <tr>
-                        <td>수량선택</td>
+                        <td>인원선택</td>
                         <td>
                         <div class="count">
                  	        <button type="button" class="count_btn1">-</button>
@@ -83,8 +83,9 @@
     	 <input type="hidden" id="exhibitionNo" value="${exb.exhibitionNo }">
     	 <input type="hidden" id="exhibitionTitle" value="${exb.exhibitionTitle }">
     	 <input type="hidden" id="exhibitionPhoto" value="${exb.exhibitionPhoto }">
+    	 <input type="hidden" id="bookDate" value="">
     	 <span class="totalPrice" id="totalPrice">${exb.exhibitionPrice }</span>원
-    	 <button onclick="payment();"class="btn" id="payment">결제하기</button>
+    	 <button onclick="payment();"class="btn" id="payment" >결제하기</button>
     </div>
    
 	</div>
@@ -92,12 +93,15 @@
 </body>
  <script>
  		function payment(){
+ 			
  			var paymentPrice = Number($("#totalPrice").html()); 
  			var paymentQuantity = Number($("#amount").html()); 
  			var exhibitionNo = Number($("#exhibitionNo").val());
  			var exhibitionTitle = $("#exhibitionTitle").val();
  			var exhibitionPhoto = $("#exhibitionPhoto").val();
+ 			var bookDate = $("#bookDate").val();
  			var paymentSelect = 1; // 전시결제는 1 , 강좌결제는 2
+ 			console.log(bookDate);
  			var form = $("<form action='/exhibitionPaymentFrm.do' method='post'></form>");
  			form.append($("<input type='text' name='paymentQuantity' value='"+paymentQuantity+"'>"));
  			form.append($("<input type='text' name='paymentPrice' value='"+paymentPrice+"'>"));
@@ -105,6 +109,7 @@
  			form.append($("<input type='text' name='paymentSelect' value='"+paymentSelect+"'>"));
  			form.append($("<input type='text' name='exhibitionTitle' value='"+exhibitionTitle+"'>"));
  			form.append($("<input type='text' name='exhibitionPhoto' value='"+exhibitionPhoto+"'>"));
+ 			form.append($("<input type='text' name='bookDate' value='"+bookDate+"'>"));
 			$("body").append(form);
 			form.submit();
  		}
@@ -124,7 +129,10 @@
 	            dayNamesMin : [ '일', '월', '화', '수', '목', '금', '토' ],
 	            yearSuffix : '년',
  	            minDate: start,
-	            maxDate: endDate
+	            maxDate: endDate,
+	            onSelect : function(data){
+	            	$("#bookDate").val(data);
+	            }
 	        });
 	
 	        $("#datepicker").change(function() {
@@ -138,7 +146,7 @@
 	 		}
 
 	        
-	        $("#datepicker").datepicker("setDate", today);
+	        //$("#datepicker").datepicker("onselect", today);
 	        
 			//$(".ui-datepicker-calendar>tbody>tr>td>a").css("background-color", "black").css("color", "#fff");
 	        
