@@ -89,16 +89,6 @@ public class MemberController {
 			return 1;
 		}
 	}
-	@RequestMapping(value="/ajaxEmailCheck.do")
-	@ResponseBody
-	public int ajaxEmailCheck(String memberEmail) {
-		Member m = service.selectOneMemberEmail(memberEmail);
-		if(m == null) {
-			return 0;
-		}else {
-			return 1;
-		}
-	}
 	
 	@RequestMapping(value="/pwCheck.do")
 	public String pwchk(Member member, Model model) {
@@ -112,6 +102,17 @@ public class MemberController {
 		}
 	}
 	
+	@RequestMapping(value="/ajaxEmailCheck.do")
+	@ResponseBody
+	public int ajaxEmailCheck(String memberEmail) {
+		Member m = service.selectOneMemberEmail(memberEmail);
+		System.out.println(memberEmail);
+		if(m == null) {
+			return 0;
+		}else {
+			return 1;
+		}
+	}
 	
 	@RequestMapping(value="/sendMail.do")
 	@ResponseBody
@@ -145,6 +146,18 @@ public class MemberController {
 		int result = service.updateMemberLevel(member);
 		return result;
 	}		
+	
+	@RequestMapping(value="/searchidpw.do")
+	public String searchidpw(Member member,Model model) {
+	int result = service.searchidpw(member);
+	if(result>0) {
+		model.addAttribute("msg","정보변경 성공");
+	}else {
+		model.addAttribute("msg","정보변경 실패");
+	}
+	model.addAttribute("loc","/");
+	return "common/msg";
+}
 }
 	
 	
