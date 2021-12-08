@@ -53,7 +53,7 @@ public class MemberService {
 		int result = dao.updateMemberLevel(member);
 		return result;
 	}
-	public int searchidpw(Member member) {
+	public int searchidPw(Member member) {
 		int result = dao.searchidpw(member);
 		return result;
 	}

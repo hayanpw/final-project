@@ -149,7 +149,7 @@ public class MemberController {
 	
 	@RequestMapping(value="/searchidpw.do")
 	public String searchidpw(Member member,Model model) {
-	int result = service.searchidpw(member);
+	int result = service.searchidPw(member);
 	if(result>0) {
 		model.addAttribute("msg","정보변경 성공");
 	}else {
@@ -158,6 +158,10 @@ public class MemberController {
 	model.addAttribute("loc","/");
 	return "common/msg";
 }
+	@RequestMapping(value="/searchidpwFrm.do")
+	public String searchidpwFrm() {
+		return "member/searchidpw";
+	}
 }
 	
 	
