@@ -63,15 +63,8 @@
                 </tr>
                 <tr>
                     <th>좌석가격</th>
-                    <td>
-                        <input type="text" class="form-control" name="showPrice" placeholder="숫자만 입력(좌석 구분시 S석 기준)">
-                    </td>
-                    <th>좌석구분</th>
-                    <td>
-                    	<select name="showSeat" class="form-control">
-                    		<option value="0">전좌석</option>
-                    		<option value="1">좌석나누기(VIP/R/S/A)</option>
-                    	</select>
+                    <td colspan="3">
+                        <input type="text" class="form-control" name="showPrice" placeholder="숫자만 입력">
                     </td>
                 </tr>
                 <tr>

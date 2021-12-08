@@ -61,19 +61,7 @@
                         </tr>
                         <tr>
                             <td>가격</td>
-                            <td>
-                            	<c:choose>
-			                		<c:when test="${snr.s.showSeat == 0 }">
-			                			<h4>전좌석 ${snr.s.showPrice } 원</h4>
-			                		</c:when>
-			                		<c:otherwise>
-			                			<h4>VIP석 <%=Math.round(snr.getS().getShowPrice()*1.5) %> 원</h4>
-			                			<h4>R석 <%=Math.round(snr.getS().getShowPrice()*1.3) %> 원</h4>
-			                			<h4>S석 ${snr.s.showPrice } 원</h4>
-			                			<h4>A석 <%=Math.round(snr.getS().getShowPrice()*0.7) %> 원</h4>
-			                		</c:otherwise>
-			                	</c:choose>
-                            </td>
+                            <td>${snr.s.showPrice } 원</td>
                         </tr>
                     </table>
                 </div>
@@ -178,10 +166,8 @@
 	                			<h4>전좌석 ${snr.s.showPrice } 원</h4>
 	                		</c:when>
 	                		<c:otherwise>
-	                			<h4>VIP석 <%=Math.round(snr.getS().getShowPrice()*1.5) %> 원</h4>
-	                			<h4>R석 <%=Math.round(snr.getS().getShowPrice()*1.3) %> 원</h4>
-	                			<h4>S석 ${snr.s.showPrice } 원</h4>
-	                			<h4>A석 <%=Math.round(snr.getS().getShowPrice()*0.7) %> 원</h4>
+	                			<!-- 수정 필요 -->
+	                			<h4>전좌석 ${snr.s.showPrice } 원</h4>
 	                		</c:otherwise>
 	                	</c:choose>
 	                </div>

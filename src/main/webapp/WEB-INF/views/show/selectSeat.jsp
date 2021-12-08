@@ -181,14 +181,6 @@
 	            </div>
 	        </div>
 	        <div class="reservInfo">
-	        	<c:if test="${s.showSeat == 1 }">
-		        	<div class="seatDiv">
-		        		<div style="background-color:#E3C4FF; ">VIP</div>
-		        		<div style="background-color:#BCE067; ">R</div>
-		        		<div style="background-color:#EDD200; ">S</div>
-		        		<div style="background-color:#F15F5F; ">A</div>
-		        	</div>	        	
-	        	</c:if>
 	        	<div><h1><strong>선택 좌석</strong></h1></div>
 	            <div class="selectSeat"></div>
 	            <button class="btn btn-danger" onclick="reservation();">예매하기</button>
@@ -198,35 +190,6 @@
     </div>
     <script>
 		$(function() {
-			var allSeat = $("#seat>input").eq().prevObject.length;
-			
-			var showSeat = ${s.showSeat};
-  			if(showSeat == 1){
-  				for (var i = 0; i < allSeat; i++) {
-					var seat = $("#seat>input").eq(i).val();
-					var col = seat.substring(0,seat.indexOf("-"));
-					var row = seat.substring(seat.indexOf("-")+1, seat.lastIndexOf("-"));
-					var no = seat.substring(seat.lastIndexOf("-")+1);
-					
-					if(row < 8){
-						if(col=="A" && ((row>3 && row<7 && no==1)||(row==7 && no<3)) || col=="C" && ((row>3 && row<7 && no==7)||(row==7 && no>6))){
-							$("#seat>input").eq(i).parent().css("background-color", "#BCE067");
-						}else{
-							$("#seat>input").eq(i).parent().css("background-color", "#E3C4FF");
-						}
-					}else if(row<11){
-						$("#seat>input").eq(i).parent().css("background-color", "#BCE067");
-					}else if(row<14){
-						$("#seat>input").eq(i).parent().css("background-color", "#EDD200");
-					}else{
-						$("#seat>input").eq(i).parent().css("background-color", "#F15F5F");
-					}
-					
-					
-				}
-  			}
-			
-			
 			var seatList = new Array();
 
 			<%if(!seatList.get(0).equals("nope")){%>
@@ -237,6 +200,7 @@
 			<%}%>
 			seatList.sort();
  			
+ 			var allSeat = $("#seat>input").eq().prevObject.length;
  			
   			for(var i=0; i<seatList.length; i++){
  				var seat = seatList[i];
@@ -246,15 +210,13 @@
  						break;
  					}
  				}
+ 				
  			}
-  			
-  			
 		});
 
     
         var count=0;
         var arr = new Array();
-        var bkColor = new Array();
         function choose(obj){
         	if(arr.length == 5){
         		alert("한 아이디에 최대 5좌석만 구매가능합니다.");
@@ -268,8 +230,8 @@
         			type: "post",
         			data: {seatNo:seatNo, showNo:showNo, showDate:showDate},
         			success: function(data) {
+        				console.log(data);
 						if(data == ""){
-							bkColor.push($(obj).css("background-color"));
 							$(obj).css("background-color", "#563D39");
 				            $(obj).attr("onclick", "cancel(this);");
 				            count++;
@@ -287,14 +249,13 @@
         	}
         }
         function cancel(obj){
+            $(obj).css("background-color", "#BDB19A");
             $(obj).attr("onclick", "choose(this);");
             count--;
             $(".selectSeat").empty();
             for(var i=0; i<arr.length; i++){
                 if(arr[i] == $(obj).children().val()){
                     arr.splice(i,1);
-                    $(obj).css("background-color", bkColor[i]);
-                    bkColor.splice(i,1);
                 }
                 var h3 = $("<h3>");
                 h3.append(arr[i]);
@@ -338,7 +299,6 @@
 		        $(window).off('beforeunload');
 		    });
 		});
-		
     </script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>

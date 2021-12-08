@@ -153,16 +153,36 @@
 		join space_time using(st_no) 
 		where thumbnail = 'Y'
 	</select>
-	<select id="selectEmail" parameterType="string" resultType="string">
-		select
-			member_email as memberEmail
-		from member
-		where member_id = #{memberId}	
-	</select>
 	<update id="updateRentalStatus" parameterType="_int">
 		update
 			rental set
 			rental_status = 2
 		where rental_no = #{rentalNo}	 
 	</update>
+	<select id="selectResSpace" parameterType="_int" resultType="kr.or.space.model.vo.ResSpace">
+		 select 
+			 rental.space_no as spaceNo, 
+			 st_no as stNo,
+			 rental_date as rentalDate, 
+			 start_time as startTime, 
+			 end_time as endTime 
+		from rental 
+		join space_time 
+		using (st_no) 
+		where rental.space_no=#{spaceNo} 
+		order by start_time
+	</select>
+	<select id="selectResList" parameterType="map" resultType="kr.or.space.model.vo.ResSpace">
+		select 
+			rental.space_no as spaceNo,
+			st_no as stNo, 
+			rental_date as rentalDate, 
+			start_time as startTime, 
+			end_time as endTime 
+		from rental 
+		join space_time 
+		using (st_no) 
+		where rental.space_no=#{spaceNo} and rental_date=#{selectDate} 
+		order by start_time
+	</select>
 </mapper>
