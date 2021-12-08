@@ -1,4 +1,5 @@
-package kr.or.member.sevice;
+package kr.or.member.service;
+
 
 import java.util.ArrayList;
 

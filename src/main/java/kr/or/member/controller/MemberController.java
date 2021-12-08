@@ -10,8 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import kr.or.member.sevice.MemberService;
-import kr.or.member.sevice.SendMail;
+import kr.or.member.service.MemberService;
+import kr.or.member.service.SendMail;
 import kr.or.member.vo.Member;
 
 @Controller
