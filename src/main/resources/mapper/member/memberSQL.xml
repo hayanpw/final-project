@@ -43,7 +43,7 @@
  	</select>
  	 	<select id="selectOneEmail" parameterType="string" resultType="m">
  		select 
- 			member_id as memberEmail
+ 			member_email as memberEmail
  		from member where member_Email=#{memberEmail}
  	</select>
  	 	<select id="selectOnePw" parameterType="string" resultType="m">
@@ -78,5 +78,10 @@
 			MEMBER_LEVEL = #{memberLevel}
 		where member_no=#{memberNo}
  	</update>
- 	
+ 	<select id="selectEmail" parameterType="string" resultType="string">
+		select
+			member_email as memberEmail
+		from member
+		where member_id = #{memberId}	
+	</select>
 </mapper>

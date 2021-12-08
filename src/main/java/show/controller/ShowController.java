@@ -264,7 +264,6 @@ public class ShowController {
 	public String reservation(Seat s, String memberId, Model model) {
 		Show show = service.reservation(s, memberId);
 		if(show != null) {
-			//예약 정보 넘겨줘야됨
 			//나중에 결제완료시 DB추가로 구현
 			model.addAttribute("seat", s);
 			model.addAttribute("show", show);
@@ -300,4 +299,12 @@ public class ShowController {
 		return seat;
 	}
 
+	
+	@RequestMapping(value = "/showAdmin.do")
+	public String showAdmin(Model model) {
+		HashMap<String, Object> map = service.selectAdminList();
+		model.addAttribute("list", map.get("curr"));
+		model.addAttribute("last", map.get("last"));
+		return "show/showAdmin";
+	}
 }

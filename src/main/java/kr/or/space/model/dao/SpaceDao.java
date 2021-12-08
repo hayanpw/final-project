@@ -1,6 +1,7 @@
 package kr.or.space.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -9,8 +10,10 @@ import org.springframework.stereotype.Repository;
 
 import kr.or.space.model.vo.FileVO;
 import kr.or.space.model.vo.Rental;
+import kr.or.space.model.vo.ResSpace;
 import kr.or.space.model.vo.Space;
 import kr.or.space.model.vo.SpaceAdmin;
+import kr.or.space.model.vo.SpaceMypage;
 import kr.or.space.model.vo.SpaceTime;
 
 @Repository
@@ -93,10 +96,25 @@ public class SpaceDao {
 	}
 	//이메일
 	public String selectEmail(String memberId) {
-		return sqlSession.selectOne("space.selectEmail",memberId);
+		return sqlSession.selectOne("member.selectEmail",memberId);
 	}
 	//상태 업데이트
 	public int updateRentalStatus(int rentalNo) {
 		return sqlSession.update("space.updateRentalStatus",rentalNo);
+	}
+	//예약한 시간 조회
+	public ArrayList<ResSpace> selectResSapce(int spaceNo) {
+		List<ResSpace> list = sqlSession.selectList("space.selectResSpace",spaceNo);
+		return (ArrayList<ResSpace>)list;
+	}
+	//예약한 시간 리스트
+	public ArrayList<ResSpace> selectResList(HashMap<String, Object> map) {
+		List<ResSpace> list = sqlSession.selectList("space.selectResList",map);
+		return (ArrayList<ResSpace>)list;
+	}
+	//마이페이지 - 예약 내역 조회
+	public ArrayList<SpaceMypage> selectSpaceMypage(String memberId) {
+		List<SpaceMypage> list = sqlSession.selectList("space.selectSpaceMypage",memberId);
+		return (ArrayList<SpaceMypage>)list;
 	}
 }

@@ -51,6 +51,16 @@
     }
     .fixed{
     	position: fixed;
-    	top: 150px;
-    	left: 1200px;
+    	margin-top: -600px;
+    	margin-left: 880px;
     }
+    .amount{
+	 width: 35px;
+    display: inline-block;
+    text-align: center;
+}
+.count_btn1{
+	width: 35px;
+    align-self: center;
+    border: 1px solid #eee;
+}

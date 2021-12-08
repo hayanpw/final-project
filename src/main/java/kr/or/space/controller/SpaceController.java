@@ -13,16 +13,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import kr.or.member.sevice.MemberService;
+import com.google.gson.Gson;
+
+import kr.or.member.service.MemberService;
 import kr.or.member.vo.Member;
 import kr.or.space.model.service.MailSend;
 import kr.or.space.model.service.SpaceService;
 import kr.or.space.model.vo.FileVO;
 import kr.or.space.model.vo.Rental;
+import kr.or.space.model.vo.ResSpace;
 import kr.or.space.model.vo.Space;
 import kr.or.space.model.vo.SpaceAdmin;
+import kr.or.space.model.vo.SpaceMypage;
 import kr.or.space.model.vo.SpaceTime;
 
 @Controller
@@ -198,12 +203,8 @@ public class SpaceController {
 	//마이페이지- 예약내역 관리
 	@RequestMapping(value = "/spaceMypage.do")
 	public String spaceMypage(String memberId, Model model) {
-		ArrayList<Rental> rList = service.selectRentalList(memberId);
-		ArrayList<Space> sList = service.selectAllSpace();
-		ArrayList<FileVO> fvList = service.selectFile();
-		model.addAttribute("rList", rList);
-		model.addAttribute("sList", sList);
-		model.addAttribute("fvList", fvList);
+		ArrayList<SpaceMypage> list = service.selectSpaceMypage(memberId);
+		model.addAttribute("list", list);
 		return "space/spaceMypage";
 	}
 	//대관 확정 메일 보내기
@@ -221,5 +222,12 @@ public class SpaceController {
 			model.addAttribute("loc", "/");
 			return "common/msg";
 		}
+	}
+	//예약 된 시간 리스트 ajax
+	@ResponseBody
+	@RequestMapping(value = "/selectResList.do", produces = "application/json;charset=utf-8")
+	public String selectResList(String selectDate, int spaceNo, Model model) {
+		ArrayList<ResSpace> list = service.selectResList(selectDate, spaceNo);
+		return new Gson().toJson(list); 
 	}
 }

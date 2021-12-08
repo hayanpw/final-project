@@ -103,4 +103,9 @@ public class ShowDao {
 		return sqlSession.selectOne("show.selectOneSeat", s);
 	}
 
+	public ArrayList<Show> selectLastList() {
+		List<Show> list = sqlSession.selectList("show.selectLastList");
+		return (ArrayList<Show>)list;
+	}
+
 }

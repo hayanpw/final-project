@@ -13,9 +13,12 @@ public class ExhibitionDao {
 	private SqlSessionTemplate sqlSession;
 
 	public int exhibitionInsert(Exhibition exb) {
-		System.out.println(exb.getExhibitionStart());
-		System.out.println(exb.getExhibitionEnd());
 		int result = sqlSession.insert("exhibition.exhibitionInsert",exb);
 		return result;
+	}
+
+	public Exhibition selectOneExhibition(int exhibitionNo) {
+		Exhibition exb = sqlSession.selectOne("exhibition.selectOneExhibition",exhibitionNo);
+		return exb;
 	}
 }

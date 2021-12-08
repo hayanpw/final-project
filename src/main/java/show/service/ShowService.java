@@ -74,8 +74,19 @@ public class ShowService {
 		int result = dao.insertReserv(sr);
 		s.setReservNo(sr.getReservNo());
 		
+		int seatPrice = s.getSeatPrice();
 		for(int i=0; i<s.getSeatList().size(); i++) {
 			s.setSeatNo(s.getSeatList().get(i));
+			String level = s.getLevelList().get(i);
+			if(level.equals("vip")) {
+				s.setSeatPrice((int) (seatPrice*1.5));
+			}else if(level.equals("r")) {
+				s.setSeatPrice((int) (seatPrice*1.3));
+			}else if(level.equals("a")) {
+				s.setSeatPrice((int) (seatPrice*0.7));
+			}else{
+				s.setSeatPrice(seatPrice);
+			}
 			result = dao.insertSeat(s);
 		}
 		
@@ -120,6 +131,15 @@ public class ShowService {
 
 	public void cancelReserv() {
 		dao.payCancel();
+	}
+
+	public HashMap<String, Object> selectAdminList() {
+		ArrayList<Show> curr = dao.selectShowList();
+		ArrayList<Show> last = dao.selectLastList();
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("curr", curr);
+		map.put("last", last);
+		return map;
 	}
 
 }

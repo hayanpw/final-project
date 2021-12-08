@@ -7,8 +7,9 @@
 			show_name as showName,
 			show_start as showStart,
 			show_end as showEnd,
+			show_hall as showHall,
 			filepath
-		from show order by 1 desc
+		from show where show_end>sysdate order by 1 desc
 	</select>
 	<select id="selectOneShow" parameterType="_int" resultMap="s">
 		select * from show where show_no=#{showNo}
@@ -25,6 +26,18 @@
 	<update id="updateShow" parameterType="show">
 		update show set show_name=#{showName}, show_start=#{showStart}, show_end=#{showEnd}, show_time=#{showTime}, show_age=#{showAge}, show_content=#{showContent}, show_price=#{showPrice}, filepath=#{filepath}, show_hall=#{showHall} where show_no=#{showNo}
 	</update>
+	<select id="selectLastList" resultType="show">
+	<![CDATA[
+		select
+			show_no as showNo,
+			show_name as showName,
+			show_start as showStart,
+			show_end as showEnd,
+			show_hall as showHall,
+			filepath
+		from show where show_end<sysdate order by 1 desc
+		]]>
+	</select>
 	<!-- 관람평 -->
 	<select id="selectReviewList" parameterType="_int" resultType="sReview">
 		select
