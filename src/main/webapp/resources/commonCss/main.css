@@ -1,0 +1,151 @@
+body{
+    display: flex;
+    flex-direction: column;
+    min-height: 200vh;
+    position: relative; 
+}
+
+/*슬라이더*/
+  #section1 {height:700px;color: #fff; background-color: #fff;}
+  #section2 {padding-top:50px;height:600px;color: #fff; background-color: #fff;}
+  #section3 {padding-top:50px;height:120px;color: #fff; background-color: #fff;}
+/*   #section41 {padding-top:50px;height:400px;color: #fff; background-color: #00bcd4;}
+  #section42 {padding-top:50px;height:400px;color: #fff; background-color: #009688;} */
+  .navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav>.active>a:hover {
+    color: #fff;
+    background-color: #080808;
+}
+
+#section1{
+	padding:0px;	
+}
+.s-container{
+ flex:1;
+}
+/*스와이프*/
+.swiper {
+        width: 100%;
+        min-width: 300px;
+        height: 400px;
+      }
+
+      .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: #fff;
+        /* Center slide text vertically */
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+      }
+
+      .swiper-slide img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        position: relative;
+        overflow: hidden;
+      }
+      .cover{
+            position :absolute;
+            margin: auto;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.4);
+            transition-duration: 0.5s;
+            display: none;
+        }
+        .swiper-slide:hover>.cover{
+        display: block;
+        opacity: 1;
+      }
+      /*cover 안에있는 내용*/
+      .cover-content{
+            padding: 50px 10px;
+            font-size: 16px;
+            color:#fff;
+        }
+        .reserve-button{
+            margin: auto;
+            height: 40px;
+            width: 90px;
+            margin-top: 30px;
+            background-color:rgba(167, 127, 120, 0.67);
+        }
+        .reserve-button:hover{
+            margin: auto;
+            height: 40px;
+            width: 90px;
+            margin-top: 30px;
+            transform:  scale(1.1);
+        }
+
+      /*1번슬라이드*/
+      
+      .carousel-inner{
+        width: 100%;
+        height: 100%;
+      }
+
+      /*4번슬라이드*/
+      .up-on-scroll {
+        transition: all 0.7s;
+}
+
+/*부트*/
+
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {height: 550px}
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+        
+    /* On small screens, set height to 'auto' for the grid */
+    @media screen and (max-width: 767px) {
+      .row.content {height: auto;} 
+    }
+
+    /*광고배너*/
+    .banner{
+    display: block;
+    margin: 0 auto;
+    width: 1170px;
+    height: 300px;
+    max-height: 300px;
+
+}
+    .main-content{
+        display: flex;
+        padding-top: 100px;
+        top:50px;
+        width: 1170px;
+        margin: 0 auto;
+    }
+    .m-menu img{
+        width: auto;
+        height: 100%;
+        max-height:500px ;
+    }
+    .m-menu {
+        flex: 1;
+        float: left;
+        height: 500px;
+        border: 1px solid #000;
+    }
+    .m-sub {
+        height: 50%;
+        width: 100%;
+    }
