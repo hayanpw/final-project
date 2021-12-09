@@ -21,6 +21,7 @@ import com.google.gson.Gson;
 import kr.or.academy.service.AcademyService;
 import kr.or.academy.vo.Academy;
 import kr.or.academy.vo.AcademyPagingVo;
+import kr.or.academy.vo.AcademyPayment;
 
 @Controller
 public class AcademyController {
@@ -108,4 +109,17 @@ public class AcademyController {
 		model.addAttribute("a",a);
 		return "academy/academyView";
 	}
+	//전시 결제 페이지로 이동
+	@RequestMapping(value="/academyPaymentFrm.do")
+	public String academyPaymentFrm(AcademyPayment acp,Model model) {
+		model.addAttribute("acp",acp);
+		return "academy/academyPayment";
+	}
+	@ResponseBody
+	@RequestMapping(value="academyCredit.do",produces = "application/json;charset=utf-8")
+	public String academyCredit (AcademyPayment acp) {
+		int result = service.academyCredit(acp);
+		return new Gson().toJson(result);
+	}
+	
 }

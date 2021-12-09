@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.or.exhibition.vo.Exhibition;
+import kr.or.exhibition.vo.ExhibitionPayment;
 
 @Repository
 public class ExhibitionDao {
@@ -20,5 +21,10 @@ public class ExhibitionDao {
 	public Exhibition selectOneExhibition(int exhibitionNo) {
 		Exhibition exb = sqlSession.selectOne("exhibition.selectOneExhibition",exhibitionNo);
 		return exb;
+	}
+
+	public int exhibitionCredit(ExhibitionPayment exbp) {
+		int result = sqlSession.insert("exhibition.exhibitionCredit",exbp);
+		return result;
 	}
 }

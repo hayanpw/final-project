@@ -1,9 +1,9 @@
-package kr.or.exhibition.vo;
+package kr.or.academy.vo;
 
 import lombok.Data;
 
 @Data
-public class ExhibitionPayment {
+public class AcademyPayment {
 	private long paymentNo;
 	private int paymentSelect;
 	private int academyNo;
@@ -12,8 +12,8 @@ public class ExhibitionPayment {
 	private String paymentDate;
 	private int paymentCancel;
 	private int paymentQuantity;
-	private String exhibitionTitle;
-	private String exhibitionPhoto;
-	private String bookDate;
+	private String academyTitle;
+	private String academyPhoto;
+	private String academyTeacher;
 	private int memberNo;
 }

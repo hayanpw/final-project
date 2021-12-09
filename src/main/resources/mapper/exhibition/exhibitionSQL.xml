@@ -22,4 +22,10 @@
 			exhibition_detail as exhibitionDetail
 		from exhibition where exhibition_no = #{exhibitionNo} 
 	</select>
+	<insert id="exhibitionCredit" parameterType="exbp">
+		insert
+			into payment
+			values(#{paymentNo},#{paymentSelect},0,#{exhibitionNo},#{paymentPrice},
+			to_char(sysdate,'YYYY-MM-DD'),0,#{paymentQuantity},#{bookDate},#{memberNo})
+	</insert>
 </mapper>

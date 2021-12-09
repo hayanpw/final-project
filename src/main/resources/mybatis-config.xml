@@ -21,5 +21,7 @@
 		<typeAlias type="kr.or.academy.vo.Academy" alias="ac"/>
 		<typeAlias type="kr.or.academy.vo.AcademyPagingVo" alias="ap"/>
 		<typeAlias type="kr.or.space.model.vo.Rental" alias="rental"/>
+		<typeAlias type="kr.or.exhibition.vo.ExhibitionPayment" alias="exbp"/>
+		<typeAlias type="kr.or.academy.vo.AcademyPayment" alias="acp"/>
 	</typeAliases>
 </configuration>
