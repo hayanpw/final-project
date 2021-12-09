@@ -198,7 +198,7 @@
     </div>
     <script>
 		$(function() {
-			var allSeat = $("#seat>input").eq().prevObject.length;
+			var allSeat = 413;
 			
 			var showSeat = ${s.showSeat};
   			if(showSeat == 1){

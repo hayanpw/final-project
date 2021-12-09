@@ -35,3 +35,6 @@
 	color: #A79078;
 	font-weight: bold;
 }
+.show{
+	overflow: auto;
+}

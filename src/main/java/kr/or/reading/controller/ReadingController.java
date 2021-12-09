@@ -116,4 +116,10 @@ public class ReadingController {
 		return new Gson().toJson(result);
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="/countSeat.do",produces = "application/json;charset=utf-8")
+	public String countSeat(String readingDay, Model model) {
+		int result = service.countSeat(readingDay);
+		return new Gson().toJson(result);
+	}
 }
