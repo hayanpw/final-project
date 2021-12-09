@@ -52,7 +52,7 @@ public class AdditionService {
 			String pageNavi = "<ul class ='pagination pagination-lg'>";
 
 			if(reqPage>=4) {
-				pageNavi += "<li class='page-item'>";
+				pageNavi += "<li id='pageNum' class='page-item'>";
 				if(boardType==1) {
 					pageNavi += "<a class='page-link' href='/additionBoard.do?boardType=1&reqPage="+(reqPage-1)+"'>";
 				}else if(boardType==2) {
@@ -66,7 +66,7 @@ public class AdditionService {
 			//페이지숫자
 			for(int i=0;i<pageNaviSize;i++) {
 					if(pageNo == reqPage) {
-						pageNavi += "<li class ='page-item active'>";
+						pageNavi += "<li id='pageNumAct' class ='page-item active'>";
 						if(boardType==1) {
 							pageNavi += "<a class='page-link' href='/additionBoard.do?boardType=1&reqPage="+pageNo+"'>";
 						}else if(boardType==2) {
@@ -76,7 +76,7 @@ public class AdditionService {
 						}
 						pageNavi += pageNo+"</a></li>";
 					}else {
-						pageNavi += "<li class ='page-item'>";
+						pageNavi += "<li id='pageNum' class ='page-item'>";
 						if(boardType==1) {
 							pageNavi += "<a class='page-link' href='/additionBoard.do?boardType=1&reqPage="+pageNo+"'>";
 						}else if(boardType==2) {
@@ -94,7 +94,7 @@ public class AdditionService {
 			
 			
 			if(pageNo <= totalPage) {
-				pageNavi += "<li class ='page-item'>";
+				pageNavi += "<li id='pageNum' class ='page-item'>";
 				if(boardType==1) {
 					pageNavi += "<a class='page-link' href='/additionBoard.do?boardType=1&reqPage="+(reqPage+1)+"'>";
 				}else if(boardType==2) {

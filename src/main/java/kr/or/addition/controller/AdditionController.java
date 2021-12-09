@@ -158,11 +158,11 @@ public class AdditionController {
 			model.addAttribute("msg", "삭제실패");
 		}
 		if(boardType==1) {
-			model.addAttribute("loc","/additionNotice.do?boardType=1&reqPage=1");
+			model.addAttribute("loc","/additionBoard.do?boardType=1&reqPage=1");
 		}else if(boardType==2) {
-			model.addAttribute("loc","/additionQNA.do?boardType=2&reqPage=1");
+			model.addAttribute("loc","/additionBoard.do?boardType=2&reqPage=1");
 		}else {
-			model.addAttribute("loc","/additionFree.do?boardType=3&reqPage=1");
+			model.addAttribute("loc","/additionBoard.do?boardType=3&reqPage=1");
 		}
 		return "common/msg"; 
 	}

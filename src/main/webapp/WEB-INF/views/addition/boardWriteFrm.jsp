@@ -10,11 +10,13 @@
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <style type="text/css">
 	#title{
-	padding-top:30px;
-	padding-left:30px;
+	width:165px;
+	border-top: 7px solid #563D39;
+	margin-top:70px;
+	margin-left:70px;
 	font-weight:700;
 	font-size: 40px;
-	padding-bottom: 30px;
+	margin-bottom: 50px;
 	}
 	#boardContent{
 	border: 1px white;
@@ -35,13 +37,13 @@
 	<div class="container">
 	<c:choose>
 		<c:when test="${boardType eq 1 }">
-		<p id="title">공지사항</p>
+		<div id="title">공지사항</div>
 		</c:when>
 		<c:when test="${boardType eq 2 }">
-		<p id="title">질문과 답변</p>
+		<div id="title">질문과 답변</div>
 		</c:when>
 		<c:otherwise>
-		<p id="title">소통게시판</p>
+		<div id="title">소통게시판</div>
 		</c:otherwise>
 	</c:choose>
 	<form action="/boardWrite.do" method="post" enctype="multipart/form-data">
@@ -55,13 +57,12 @@
 					</tr>
 					<tr>
 						<td>작성자</td>
-						<td><input type="text" name="boardWriter" value="hy01" readonly></td>
-				   		<!-- 
+						<td><input type="text" name="boardWriter" value="${sessionScope.m.memberId }" readonly></td>
+				   		
 				   		<td>첨부파일</td>
 						<td style="text-align:left;">
 						<input type="file" name="files" multiple>
 						</td> 
-						-->
 					</tr>
 					<tr>
 						<th>내용</th>
@@ -72,7 +73,7 @@
 					</tr>
 					<tr>
 						<th colspan="2">
-							<button type="submit" class="btn btn-block">글등록</button>
+							<button type="submit" class="btn btn-block" onclick="return contentChk();">글등록</button>
 						</th>
 					</tr>
 				</table>
@@ -130,6 +131,17 @@
 		});
 	}
 	
+	function contentChk(){
+		var text = $("#text").val();
+		if(text == "" ){
+			alert("제목을 입력하세요.");
+			return false;
+		}
+		if ($('#summernote').summernote('isEmpty')) {
+			  alert('글내용을 입력하세요');
+			  return false;
+			}
+	}
 	</script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>

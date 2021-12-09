@@ -8,25 +8,36 @@
 <title>Insert title here</title>
 <style type="text/css">
 	#title{
-		padding-top:30px;
-		padding-left:30px;
-		font-weight:700;
-		font-size: 40px;
-		padding-bottom: 30px;
-		}
+	width:165px;
+	border-top: 7px solid #563D39;
+	margin-top:70px;
+	margin-left:70px;
+	font-weight:700;
+	font-size: 40px;
+	margin-bottom: 50px;
+	}
+	#table1 tr:first-child {
+	border-top: 2px solid #563D39;
+    }
+    #table1 tr:nth-child(2) {
+	border-top: 2px solid white;
+    }
+    #boardTitle{
+    font-size: 30px;
+    font-weight: 600;
+    }
 </style>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="container" id="container">
-		<p id="title">공지사항</p>
-		<table class="table">
+		<div id="title">공지사항</div>
+		<table id="table1" class="table">
 			<tr>
-				<td colspan="4">${b.boardTitle }(제목칸)</td>
+				<td id="boardTitle" colspan="3">${b.boardTitle }</td>
 			</tr>
 			<tr>
-				<td>등록일</td>
-				<td>${b.regDate }</td>
+				<td>등록일 &nbsp;&nbsp;&nbsp;&nbsp;  ${b.regDate }</td>
 				<td>첨부파일</td>
 				<td>
 				<c:forEach items="${b.list }" var="f">
@@ -35,8 +46,8 @@
 				</td>
 			</tr>
 			<tr>
-				<td colspan="4">
-				${b.boardContent }(내용칸)
+				<td colspan="3">
+				${b.boardContent }
 				</td>
 			</tr>
 		</table>
