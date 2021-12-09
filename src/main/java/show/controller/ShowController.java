@@ -307,4 +307,30 @@ public class ShowController {
 		model.addAttribute("last", map.get("last"));
 		return "show/showAdmin";
 	}
+	
+	@RequestMapping(value = "/showMypage.do")
+	public String showMypage(String memberId, Model model) {
+		HashMap<String, Object> map = service.myReserv(memberId);
+		model.addAttribute("list", map.get("reservs"));
+		return "show/showMypage";
+	}
+	
+	@RequestMapping(value = "/reservCancel.do")
+	public String reservCancel(int reservNo, String memberId, Model model) {
+		int result = service.reservCancel(reservNo);
+		if(result>1) {
+			model.addAttribute("msg", "예매 취소 완료");			
+		}else {
+			model.addAttribute("msg", "취소 실패");
+		}
+		model.addAttribute("loc", "/showMypage.do?memberId="+memberId);
+		return "common/msg";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/showSeat.do")
+	public ArrayList<Seat> showSeat(int reservNo) {
+		ArrayList<Seat> seats = service.showSeat(reservNo);
+		return seats;
+	}
 }
