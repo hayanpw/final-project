@@ -37,5 +37,9 @@ public class ReadingDao {
 		return sqlSession.delete("reading.reservationCancel", re);
 	}
 
+	public int countSeat(String readingDay) {
+		return sqlSession.selectOne("reading.countSeat", readingDay);
+	}
+
 	
 }

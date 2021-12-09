@@ -108,4 +108,18 @@ public class ShowDao {
 		return (ArrayList<Show>)list;
 	}
 
+	public ArrayList<ShowReserv> selectReservList(String memberId) {
+		List<ShowReserv> list = sqlSession.selectList("show.selectReservList", memberId);
+		return (ArrayList<ShowReserv>)list;
+	}
+
+	public int reservCancel(int reservNo) {
+		return sqlSession.update("show.reservCancel", reservNo);
+	}
+
+	public ArrayList<ShowReserv> checkReserv(ShowReserv sr) {
+		List<ShowReserv> list = sqlSession.selectList("show.checkReserv", sr);
+		return (ArrayList<ShowReserv>)list;
+	}
+
 }
