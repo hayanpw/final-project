@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,12 +20,13 @@
       <div class="form-group">
         <h3><span class="line">지</span>원하시는 공고</h3>
         <input type="hidden" name="requritNo" value="${requritNo }">
-        <input type="text" class="form-control" id="resumeTitle"  name="resumeTitle" value="${requritTitle }" readonly>
+        <input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
+        <input type="text" class="form-control" id="resumeTitle" value="${requritTitle }" readonly>
       </div>
-      <h3><span class="line">관</span>람 연령</h3>
+      <h3><span class="line">성</span>별</h3>
       <div class="radio">
-          <label class="radio-inline"><input type="radio" name="resumeGender" checked>남자</label>
-          <label class="radio-inline"><input type="radio" name="resumegender" >여자</label>
+          <label><input type="radio" name="resumeGender" value="남자">남자</label>
+          <label><input type="radio" name="resumeGender" value="여자" >여자</label>
       </div>
       <div class="form-group">
           <h3><span class="line">연</span>락받으실 연락처</h3>
@@ -32,7 +34,7 @@
       </div>
       <div class="form-group">
         <h3><span class="line">이</span>력서 첨부</h3>
-        <input type="file"  id="resumefile"  name="upfile">
+        <input type="file" name="upfiles" multiple>
       </div>
       <div class="form-group">
         <h3><span class="line">간</span>단 자기소개</h3>
