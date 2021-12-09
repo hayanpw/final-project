@@ -9,4 +9,8 @@ public class ShowReserv {
 	private String memberId;
 	private String showDate;
 	private String reservDate;
+	private int reservCancel;
+	private int ticketNum;
+	private int payment;
+	private String showName;
 }
