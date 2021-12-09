@@ -34,13 +34,15 @@ public class ResumeController {
 		return "resume/resumeInsert";
 	}
 	@RequestMapping(value="/resumeInsert.do")
-	public String resumeInsert(HttpServletRequest request,MultipartFile[] files,Model model,Resume r,ResumeTbl rtbl) {
+	public String resumeInsert(HttpServletRequest request,MultipartFile[] upfiles,Model model,Resume r) {
 		ArrayList<ResumeTbl> list = new ArrayList<ResumeTbl>();
-		if (files[0].isEmpty()) {
+		System.out.println(upfiles.length);
+		if (upfiles[0].isEmpty()) {
 		} else {
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/resume/upload/");
-			for (MultipartFile file : files) {
+			for (MultipartFile file : upfiles) {
 				String filename = file.getOriginalFilename();
+				System.out.println(filename);
 				String onlyFilename = filename.substring(0, filename.indexOf(".")); 
 				String extention = filename.substring(filename.indexOf(".")); 
 				String filepath = null;
@@ -74,7 +76,6 @@ public class ResumeController {
 				rt.setFilename(filename);
 				rt.setFilepath(filepath);
 				list.add(rt);
-				
 			}
 		}
 		int result = service.insertResume(r,list);
@@ -83,8 +84,8 @@ public class ResumeController {
 		}else {
 			model.addAttribute("msg","등록성공");
 		}
-		model.addAttribute("loc","/");
-		return "resume/resumeInsert";
+		model.addAttribute("loc","/requritList.do?reqPage=1");
+		return "common/msg";
 	}
 	
 }

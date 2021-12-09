@@ -23,7 +23,7 @@ public class ResumeDao {
 	}
 
 	public int insertResumeTbl(ResumeTbl rt) {
-		int result = sqlSession.insert("resumeTbl.insertResumeTbl",rt);
+		int result = sqlSession.insert("resume.insertResumeTbl",rt);
 		return result;
 	}
 }
