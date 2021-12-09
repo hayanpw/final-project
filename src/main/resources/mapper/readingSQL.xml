@@ -41,5 +41,8 @@
 	<delete id="reservationCancel" parameterType="reading">
 		delete from reading where reading_day=#{readingDay} and reading_id=#{readingId}
 	</delete>
+	<select id="countSeat" parameterType="string" resultType="_int">
+		select count(*) from reading where reading_day=#{readingDay}
+	</select>
 </mapper>
 

@@ -38,7 +38,9 @@
 	</div>
     <script>
 	    $(function() {
-	        var today = new Date(); //오늘부터
+	        var today = new Date(); //현재날짜
+	        var startDate = new Date(today); //시작날짜
+	        startDate.setDate(startDate.getDate()+1); //오늘제외
 	        var endDate = new Date(today);
 	        endDate.setDate(endDate.getDate()+7); //+7일까지만 예약받음
 	        $("#datepicker").datepicker({
@@ -50,7 +52,7 @@
 	            dayNamesShort : [ '일', '월', '화', '수', '목', '금', '토' ],
 	            dayNamesMin : [ '일', '월', '화', '수', '목', '금', '토' ],
 	            yearSuffix : '년',
-	            minDate: today,
+	            minDate: startDate,
 	            maxDate: endDate,
 	            beforeShowDay: noMondays //월요일은 휴무일
 	        });
@@ -59,15 +61,26 @@
 	    function noMondays(date) {
 	    	return [date.getDay() != 1, ''];
 	    };
-	    
+	    var seat=0;
 	    $("#datepicker").change(function() {
+	    	var total=100;
+	    	
 			selectDate = $(this).val();
 			$("input[name=readingDay]").val(selectDate);
+			var readingDay = $("input[name=readingDay]").val();
 			var month = selectDate.substring(5,7); //몇월
 			var day = selectDate.substring(8,10);  //몇일
-			$("h2[name=showdate]").html(month+"월 "+day+"일");
-			$("h2[name=showseat]").html("남은좌석 : "+ "석");
-			$("input[name=sub]").attr("type","submit"); //좌석선택 hidden에서 submit으로
+			$.ajax({
+				url : "/countSeat.do",
+				data : {readingDay:readingDay},
+				type : "post",
+				success : function(data){
+					seat=total-data;
+					$("h2[name=showdate]").html(month+"월 "+day+"일");
+					$("h2[name=showseat]").html("남은좌석 : "+seat+ "석");
+					$("input[name=sub]").attr("type","submit"); //좌석선택 hidden에서 submit으로
+				}
+			});
         });
     </script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>

@@ -44,4 +44,9 @@ public class ReadingService {
 	}
 
 
+	public int countSeat(String readingDay) {
+		return dao.countSeat(readingDay);
+	}
+
+
 }
