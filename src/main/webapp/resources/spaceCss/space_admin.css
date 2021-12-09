@@ -11,6 +11,7 @@
 	text-align: center;
 }
 .mBtn{
+	border : 1px solid #BDB19A;
 	margin-top: 100px; 
 	background-color: #ffffff;
 	color : #BDB19A;

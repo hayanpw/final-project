@@ -149,7 +149,7 @@ public class SpaceService {
 		//페이지숫자
 		for(int i=0; i<pageNaviSize; i++) {
 			if(pageNo == reqPage) {
-				pageNavi += "<li class='active'>";
+				pageNavi += "<li class='disabled'>";
 				pageNavi += "<a href='/spaceBoardtList.do?reqPage="+pageNo+"'>";
 				pageNavi += pageNo+"</a></li>";
 			}else {
@@ -175,5 +175,20 @@ public class SpaceService {
 		page.setPageNavi(pageNavi);
 		page.setStart(start);
 		return page;
+	}
+	//게시판 작성할 대관
+	public Rental selectRentalNo(int rentalNo) {
+		return dao.selectRentalNo(rentalNo);
+	}
+	//사용게시판 등록
+	public int insertUseBoard(UseBoard ub) {
+		int result = dao.insertUseBoard(ub);
+		if(result>0) {
+			//사용게시판 작성으로 변경
+			int result1 = dao.updatUsedBoard(ub.getRentalNo());
+			return result1;
+		}else {
+			return -1;
+		}
 	}
 }

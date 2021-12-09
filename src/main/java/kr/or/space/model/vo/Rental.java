@@ -6,6 +6,7 @@ import lombok.Data;
 public class Rental {
 	private int rentalNo;
 	private int spaceNo;
+	private String spaceName;
 	private String memberId;
 	private int stNo;
 	private String rentalDate;
