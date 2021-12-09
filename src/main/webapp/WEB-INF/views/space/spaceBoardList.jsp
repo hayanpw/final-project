@@ -58,7 +58,7 @@
 				<c:forEach items="${list }" var="l" varStatus="i">
 					<tr>
 						<td>${i.count }</td>
-						<td>${l.ubTitle }</td>
+						<td><a href="/useBoardView.do?ubNo=${l.ubNo }">${l.ubTitle }</a></td>
 						<td>${l.memberId }</td>
 						<td>${l.ubDate }</td>
 						<td>${l.spaceName }</td>
@@ -80,6 +80,7 @@
 						type : "get",
 						success : function(data) {
 							if(data.length > 0){
+									$(".modal-body").empty();
 								for (var i = 0; i < data.length; i++) {
 									$(".modal-body").append(
 											"<a class='choice' href = '/writeSpaceBoard.do?rentalNo="+data[i].rentalNo + "'>"
@@ -88,6 +89,7 @@
 													+ "</a><br>");
 								}
 							}else{
+								$(".modal-body").append("");
 								$(".modal-body").append("<p>작성할 대관 내역이 없습니다.</p>")
 							}
 						}

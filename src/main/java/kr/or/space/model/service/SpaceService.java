@@ -191,4 +191,9 @@ public class SpaceService {
 			return -1;
 		}
 	}
+	//사용 게시판 조회
+	public UseBoard selectOneBoardView(int ubNo) {
+		UseBoard ub = dao.selectOneBoardView(ubNo);
+		return null;
+	}
 }

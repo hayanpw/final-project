@@ -245,7 +245,7 @@
 	<insert id="insertUseBoard" parameterType="kr.or.space.model.vo.UseBoard">
 		insert
 			into use_board
-			values(ub_seq.nextval,#{rentalNo},#{memberId},#{ubTitle},#{ubContent},sysdate,#{filename},#{filepath})
+			values(ub_seq.nextval,#{rentalNo},#{memberId},#{ubTitle},#{ubContent},to_char(sysdate,'yyyy-mm-dd'),#{filename},#{filepath})
 	</insert>
 	<update id="updateUseBoard" parameterType="_int">
 		update
@@ -253,4 +253,17 @@
 			used_board = 1
 		where rental_no=#{rentalNo}	
 	</update>
+	<select id="selectOneBoardView" parameterType="_int" resultType="kr.or.space.model.vo.UseBoard">
+		select 
+			ub_no as ubNo,
+			rental_no as rentalNo,
+			member_id as memberId,
+			ub_title as ubTitle,
+			ub_content as ubContent,
+			ub_date as ubDate,
+			filename,
+			filepath
+		from use_board
+		where ub_no = #{ubNo}	
+	</select>
 </mapper>

@@ -318,4 +318,11 @@ public class SpaceController {
 		model.addAttribute("loc", "space/spaceBoardList");
 		return "common/msg";
 	}
+	//사용게시판 상세보기
+	@RequestMapping(value = "/useBoardView.do")
+	public String useBoardView(int ubNo, Model model) {
+		UseBoard u = service.selectOneBoardView(ubNo);
+		model.addAttribute("u", u);
+		return "space/useBoardView";
+	}
 }

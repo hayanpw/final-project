@@ -139,4 +139,8 @@ public class SpaceDao {
 	public int updatUsedBoard(int rentalNo) {
 		return sqlSession.update("space.updateUseBoard",rentalNo);
 	}
+	//사용게시판 조회
+	public UseBoard selectOneBoardView(int ubNo) {
+		return sqlSession.selectOne("space.selectOneBoardView",ubNo);
+	}
 }
