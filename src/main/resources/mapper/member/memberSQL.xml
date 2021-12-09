@@ -89,7 +89,7 @@
  			MEMBER_PASSWORD = #{memberPassword}
 		where member_email=#{memberEmail}
  	</update>
-	<select id="searchId" parameterType="string" resultType="string">
+	<select id="searchId" parameterType="m" resultType="m">
 		select
 			member_id as memberId	
 		from member

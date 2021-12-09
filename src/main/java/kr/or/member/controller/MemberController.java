@@ -159,10 +159,14 @@ public class MemberController {
 	return "common/msg";
 }
 	@RequestMapping(value="/searchId.do")
-	public Member searchId(String memberEmail,Model model) {
-		Member m = service.searchId(memberEmail);
-		return m;
+	@ResponseBody
+	public String searchId(Member member,Model model) {
+		Member m = service.searchId(member);
+		
+		String memberId = m.getMemberId();
+		return memberId;
 	}
+	
 }
 	
 	

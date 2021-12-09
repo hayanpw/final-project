@@ -57,8 +57,8 @@ public class MemberService {
 		int result = dao.searchidpw(member);
 		return result;
 	}
-	public Member searchId(String memberEmail) {
-		Member m = dao.searchId(memberEmail);
+	public Member searchId(Member member) {
+		Member m = dao.searchId(member);
 		return m;
 	}
 

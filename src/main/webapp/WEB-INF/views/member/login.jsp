@@ -63,8 +63,10 @@
 						</div>
 						<div>
 						 <!-- 아이디 찾기 -->
-							<div id="searchId">아이디자리</div>
-							<button id="moveLogin" >로그인하러가기</button>
+							<div> <label id="resultId" class="reg"> ID : </label><span id="resultId"></span></div><br><br>
+							
+							<button id="moveLogin">로그인하러가기</button>
+
 							<button id="changePwFrm">비밀번호변경하기</button>
 						</div>
 						<div>
@@ -91,20 +93,16 @@
 	
 	
 	<script>
-	var searchId = '';
-	function searchId(){
-		var memberEmail = $('#memberEmail').val();
-		console.log(searchId);
-		$.ajax({
-			url : "/searchId.do",
-			data : {memberEmail : memberEmail},
-			type : "post",
-			success : searchId = data
-		});
-	}
-	
-	
-	
+ 	//$(".modal").modal("hide");
+	$("#moveLogin").click(function(){
+		$("[name=memberId]").val($('#resultId').html());
+		
+		$(".close").click();
+	});
+	$("#changePwFrm").click(function(){
+		$(".modal-body>div").eq(1).hide();
+		$(".modal-body>div").eq(2).show();
+	});
 	var mailCode = '';
 	function checkMailCode(){
 		
@@ -119,6 +117,26 @@
 			
 			$(".modal-body>div").eq(0).hide();
 			$(".modal-body>div").eq(1).show();
+			
+			(function(){
+				var memberEmail = $('#memberEmail').val();
+				$.ajax({
+					url : "/searchId.do",
+					data : {memberEmail : memberEmail},
+					type : "post",
+					success : function(data) {
+						if(data!=""){
+							var resultId = $('#resultId').html(data);
+							
+							console.log(data+"성공");
+						}else{
+							console.log(data+"실패");
+						}
+					}
+				});
+	        })();
+		
+			
 		} else {
 			alert("틀리자");
 		}
@@ -142,7 +160,6 @@
 								data : {email : email},
 								type : "post",
 								success : function(data) {
-									
 									mailCode = data;
 									authTime();
 								}

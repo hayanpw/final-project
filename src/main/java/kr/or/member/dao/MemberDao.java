@@ -73,8 +73,8 @@ public class MemberDao {
 		int result = sqlSession.update("member.updateMemberLevel",member);
 		return result;
 	}
-	public Member searchId(String memberEmail) {
-		Member m = sqlSession.selectOne("member.searchId",memberEmail);
+	public Member searchId(Member member) {
+		Member m = sqlSession.selectOne("member.searchId",member);
 		if(m == null) {
 			return null;
 		}else {
