@@ -41,8 +41,7 @@
 	        						<h4>공연명 : ${r.showName }</h4>
 	        						<h5>공연일 : ${r.showDate }</h5>
 	        						<h5>예매수 : ${r.ticketNum }</h5>
-	        						<input type="hidden" id="reservNo" value="${r.reservNo }">
-	        						<button id="showSeat" type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal">좌석보기</button>
+	        						<button onclick="showSeat('${r.reservNo}');" type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal">좌석보기</button>
 	        						<button class="btn btn-danger btn-sm" onclick="cancelReserv('${r.reservNo }');">예매취소</button>
 	        					</div>
 	        					<!-- Modal -->
@@ -66,7 +65,7 @@
 									            					<c:forEach begin="1" end="${i.index+3 }" varStatus="j">
 											            				<div class="seats">
 																			
-																			<div id="seat" onclick="choose(this);">
+																			<div id="seat">
 											                        			
 											                        			<input type="hidden" value="A-${i.index }-${j.index}">
 											                        		</div>
@@ -77,7 +76,7 @@
 									            				<c:when test="${i.index < 7 }">
 									            					<c:forEach begin="1" end="7" varStatus="j">
 											            				<div class="seats">
-											                        		<div id="seat" onclick="choose(this);">
+											                        		<div id="seat">
 											                        			
 											                        			<input type="hidden" value="A-${i.index }-${j.index}">
 											                        		</div>
@@ -87,7 +86,7 @@
 									            				<c:when test="${i.index < 9 }">
 									            					<c:forEach begin="1" end="8" varStatus="j">
 											            				<div class="seats">
-											                        		<div id="seat" onclick="choose(this);">
+											                        		<div id="seat">
 											                        			
 											                        			<input type="hidden" value="A-${i.index }-${j.index}">
 											                        		</div>
@@ -97,7 +96,7 @@
 									            				<c:when test="${i.index < 11 }">
 									            					<c:forEach begin="1" end="9" varStatus="j">
 											            				<div class="seats">
-											                        		<div id="seat" onclick="choose(this);">
+											                        		<div id="seat">
 											                        			
 											                        			<input type="hidden" value="A-${i.index }-${j.index}">
 											                        		</div>
@@ -107,7 +106,7 @@
 									            				<c:otherwise>
 									            					<c:forEach begin="1" end="10" varStatus="j">
 											            				<div class="seats">
-											                        		<div id="seat" onclick="choose(this);">
+											                        		<div id="seat">
 											                        			
 											                        			<input type="hidden" value="A-${i.index }-${j.index}">
 											                        		</div>
@@ -125,7 +124,7 @@
 									            				<c:when test="${i.index % 2 ==1 }">
 											            			<c:forEach begin="1" end="12" varStatus="j">
 											            				<div class="seats">
-											                        		<div id="seat" onclick="choose(this);">
+											                        		<div id="seat">
 											                        			
 											                        			<input type="hidden" value="B-${i.index }-${j.index}">
 											                        		</div>
@@ -135,7 +134,7 @@
 									            				<c:otherwise>
 									            					<c:forEach begin="1" end="11" varStatus="j">
 									            						<div class="seats">
-											                        		<div id="seat" onclick="choose(this);">
+											                        		<div id="seat">
 											                        			
 											                        			<input type="hidden" value="B-${i.index }-${j.index}">
 											                        		</div>
@@ -153,7 +152,7 @@
 									            				<c:when test="${i.index < 5 }">
 									            					<c:forEach begin="1" end="${i.index+3 }" varStatus="j">
 											            				<div class="seats">
-											                        		<div id="seat" onclick="choose(this);">
+											                        		<div id="seat">
 											                        			
 											                        			<input type="hidden" value="C-${i.index }-${j.index}">
 											                        		</div>
@@ -163,7 +162,7 @@
 									            				<c:when test="${i.index < 7 }">
 									            					<c:forEach begin="1" end="7" varStatus="j">
 											            				<div class="seats">
-											                        		<div id="seat" onclick="choose(this);">
+											                        		<div id="seat">
 											                        			
 											                        			<input type="hidden" value="C-${i.index }-${j.index}">
 											                        		</div>
@@ -173,7 +172,7 @@
 									            				<c:when test="${i.index < 9 }">
 									            					<c:forEach begin="1" end="8" varStatus="j">
 											            				<div class="seats">
-											                        		<div id="seat" onclick="choose(this);">
+											                        		<div id="seat">
 											                        			
 											                        			<input type="hidden" value="C-${i.index }-${j.index}">
 											                        		</div>
@@ -183,7 +182,7 @@
 									            				<c:when test="${i.index < 11 }">
 									            					<c:forEach begin="1" end="9" varStatus="j">
 											            				<div class="seats">
-											                        		<div id="seat" onclick="choose(this);">
+											                        		<div id="seat">
 											                        			
 											                        			<input type="hidden" value="C-${i.index }-${j.index}">
 											                        		</div>
@@ -193,7 +192,7 @@
 									            				<c:otherwise>
 									            					<c:forEach begin="1" end="10" varStatus="j">
 											            				<div class="seats">
-											                        		<div id="seat" onclick="choose(this);">
+											                        		<div id="seat">
 											                        			<input type="hidden" value="C-${i.index }-${j.index}">
 											                        		</div>
 											                    		</div>
@@ -254,37 +253,39 @@
 			});
 			$(".reservNavi>div").first().click();
 			
-			var allSeat = $("#seat>input").eq().prevObject.length;
-			
-			$("#showSeat").click(function() {
-				var reservNo = $(this).prev().val();
-				$("#mySeat").empty();
-				var arr = new Array();
-				$.ajax({
-					url: "/showSeat.do",
-					data: {reservNo:reservNo},
-					type: "post",
-					success: function(data) {
-						$("#mySeat").append("<h3>선택좌석</h3>");
-						var h4 = $("<h4>");
-						for(var i=0; i<data.length; i++){
-							arr.push(data[i].seatNo);
-							for (var j = 0; j < allSeat; j++) {
-								if(data[i].seatNo == $("#seat>input").eq(j).val()){
-									$("#seat>input").eq(j).parent().css("background-color", "#9354ED");
-									break;
-								}
-							}
-							h4.append(data[i].seatNo);
-							if(i < data.length-1){
-								h4.append(" / ");
-							}
-							$("#mySeat").append(h4);
-						}
-					}
-				});
-			});
 		});
+		
+			var allSeat = $("#seat>input").eq().prevObject.length;
+		function showSeat(reservNo) {
+			$("#mySeat").empty();
+			for (var i= 0; i < allSeat; i++) {
+				$("#seat>input").eq(i).parent().removeAttr("style");
+			}
+			$.ajax({
+				url: "/showSeat.do",
+				data: {reservNo:reservNo},
+				type: "post",
+				success: function(data) {
+					$("#mySeat").append("<h3>선택좌석</h3>");
+					var h4 = $("<h4>");
+					var count = 0;
+					for(var i=0; i<data.length; i++){
+						for (var j = count; j < allSeat; j++) {
+							if(data[i].seatNo == $("#seat>input").eq(j).val()){
+								$("#seat>input").eq(j).parent().css("background-color", "#9354ED");
+								count = j+1;
+								break;
+							}
+						}
+						h4.append(data[i].seatNo);
+						if(i < data.length-1){
+							h4.append(" / ");
+						}
+						$("#mySeat").append(h4);
+					}
+				}
+			});
+		}
 	</script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>

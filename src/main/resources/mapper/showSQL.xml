@@ -88,7 +88,7 @@
 			seat_no as seatNo,
 			seat_price as seatPrice,
 			seat_level as seatLevel
-		from seat where reserv_no=#{reservNo}
+		from seat where reserv_no=#{reservNo} order by 1
 	</select>
 	<select id="selectAllSeat" parameterType="sReserv" resultType="seat">
 		select
