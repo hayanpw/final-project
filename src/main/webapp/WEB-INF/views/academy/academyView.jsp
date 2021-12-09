@@ -55,6 +55,7 @@
               </ul>
               <div class="tab-content">
               		<div id="home" class="tab-pane fate in active" >
+              			<h3>수업 정보</h3>
               			<div class="detail">${a.academyDetail }</div>
              	 	</div>
               		<div id="menu1" class="tab-pane fate in" style="width:850px">
@@ -93,7 +94,6 @@
 			var academyPhoto = $("#academyPhoto").val();
 			var academyTeacher = $("#academyTeacher").val();
 			var paymentSelect = 2; // 전시결제는 1 , 강좌결제는 2
-			console.log(bookDate);
 			var form = $("<form action='/academyPaymentFrm.do' method='post'></form>");
 			form.append($("<input type='text' name='academyStart' value='"+academyStart+"'>"));
 			form.append($("<input type='text' name='academyEnd' value='"+academyEnd+"'>"));

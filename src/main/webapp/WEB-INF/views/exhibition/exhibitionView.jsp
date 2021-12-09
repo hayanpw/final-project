@@ -62,6 +62,7 @@
               </ul>
               <div class="tab-content">
               		<div id="home" class="tab-pane fate in active" >
+              			<h3>전시 정보</h3>
               			<div class="detail">${exb.exhibitionDetail }</div>
              	 	</div>
               		<div id="menu1" class="tab-pane fate in" style="width:850px">

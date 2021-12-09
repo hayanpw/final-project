@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,8 +24,8 @@
       </div>
       <h3><span class="line">관</span>람 연령</h3>
       <div class="radio">
-          <label class="radio-inline"><input type="radio" name="resumeGender" checked>남자</label>
-          <label class="radio-inline"><input type="radio" name="resumegender" >여자</label>
+          <label><input type="radio" name="resumeGender" value="남자">남자</label>
+          <label><input type="radio" name="resumeGender" value="여자" >여자</label>
       </div>
       <div class="form-group">
           <h3><span class="line">연</span>락받으실 연락처</h3>
