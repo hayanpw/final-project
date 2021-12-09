@@ -333,4 +333,11 @@ public class ShowController {
 		ArrayList<Seat> seats = service.showSeat(reservNo);
 		return seats;
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/checkReserv.do")
+	public ArrayList<ShowReserv> checkReserv(ShowReserv sr) {
+		ArrayList<ShowReserv> list = service.checkReserv(sr);
+		return list;
+	}
 }
