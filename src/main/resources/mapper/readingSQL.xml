@@ -47,5 +47,17 @@
 	<select id="chkSeat" parameterType="reading" resultType="_int">
 		select reading_num from reading where reading_day=#{readingDay}
 	</select>
+	<select id="selectAllReading" resultType="reading">
+		select
+			reading_no as readingNo,
+			reading_time as readingTime,
+			reading_day as readingDay,
+			reading_num as readingNum,
+			reading_id as readingId,
+			reading_name as readingName,
+			reading_ty as readingTy,
+			reading_checkout as readingCheckOut
+		from reading
+	</select>
 </mapper>
 

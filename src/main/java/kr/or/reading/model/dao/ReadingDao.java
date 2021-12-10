@@ -46,5 +46,10 @@ public class ReadingDao {
 		return (ArrayList<Integer>)list;
 	}
 
+	public ArrayList<Reading> selectAllReading() {
+		List<Reading> list = sqlSession.selectList("reading.selectAllReading");
+		return (ArrayList<Reading>)list;
+	}
+
 	
 }

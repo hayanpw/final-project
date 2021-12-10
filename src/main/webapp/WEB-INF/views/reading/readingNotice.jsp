@@ -69,7 +69,7 @@
 					<input type="submit" class="btn btn-success btn-lg" value="예약내역보기" style="margin-left: 10px; background-color: #BDB19A; border-color: #BDB19A">
 				</fieldset>
 			</form>
-			
+			<a href="/test222.do">테이블테스트</a>
 		</div>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>

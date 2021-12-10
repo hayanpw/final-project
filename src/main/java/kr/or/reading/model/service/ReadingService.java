@@ -55,4 +55,10 @@ public class ReadingService {
 	}
 
 
+	public ArrayList<Reading> selectAllReading() {
+		ArrayList<Reading> list = dao.selectAllReading();
+		return list;
+	}
+
+
 }

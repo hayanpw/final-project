@@ -60,7 +60,11 @@
 				 	}
 				}
 			})
+			refresh();
 		});
+		function refresh(){  
+		      setTimeout('location.reload()',60000); 
+		}
 	</script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>

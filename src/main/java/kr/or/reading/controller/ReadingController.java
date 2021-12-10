@@ -90,9 +90,15 @@ public class ReadingController {
 	}
 	
 	@RequestMapping(value="/reservationDay.do")
-	public String reservationDay(Reading re, Model model) {
-		model.addAttribute("re", re);
-		return "reading/reservation";
+	public String reservationDay(HttpSession session, Reading re, Model model) {
+		if(session.getAttribute("m")==null) {
+			model.addAttribute("msg","로그인이 필요한 서비스입니다.");
+			model.addAttribute("loc", "/loginFrm.do");
+			return "common/msg";		
+		}else {
+			model.addAttribute("re", re);
+			return "reading/reservation";
+		}
 	}
 	
 	@ResponseBody
@@ -134,5 +140,12 @@ public class ReadingController {
 	@RequestMapping(value="/reservationToday.do")
 	public String reservationToday() {
 		return "reading/reservationToday";
+	}
+	
+	@RequestMapping(value="/test222.do")
+	public String test222(Model model) {
+		ArrayList<Reading> list = service.selectAllReading();
+		model.addAttribute("list",list);
+		return "reading/test";
 	}
 }
