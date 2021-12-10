@@ -167,6 +167,13 @@ public class MemberController {
 		String memberId = m.getMemberId();
 		return memberId;
 	}
+	@RequestMapping(value="/searchMember.do")
+	public String searchMember(String search, Model model) {
+		ArrayList<Member> list = service.searchMember(search);
+		model.addAttribute("list",list);
+		model.addAttribute("search",search);
+		return "member/AllMember";
+	}
 	
 }
 	

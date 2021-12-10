@@ -119,5 +119,48 @@ public class ExhibitionController {
 		ArrayList<Exhibition> list = service.moreExhibition(start);
 		return new Gson().toJson(list);
 	}
+	@ResponseBody
+	@RequestMapping(value = "/uploadImageExhibition.do")
+	public String uploadImage(MultipartFile file, HttpServletRequest request) {
+		String filepath = null;
+		if(file != null) {
+			String savePath = request.getSession().getServletContext().getRealPath("/resources/exhibitionImage/editor/");
+			
+			String filename = file.getOriginalFilename();
+			String onlyFilename = filename.substring(0, filename.indexOf("."));
+			String extention = filename.substring(filename.indexOf("."));
+			
+			
+			int count = 0;
+			while(true) {
+				if(count==0) {
+					filepath = onlyFilename + extention;
+				}else {
+					filepath = onlyFilename+"_"+count+extention;
+				}
+				File checkFile = new File(savePath+filepath);
+				if(!checkFile.exists()) {
+					break;
+				}
+				count++;
+			}
+			
+			try {
+				FileOutputStream fos = new FileOutputStream(new File(savePath+filepath));
+				BufferedOutputStream bos = new BufferedOutputStream(fos);
+				byte[] bytes = file.getBytes();
+				bos.write(bytes);
+				bos.close();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		return "/resources/exhibitionImage/editor/"+filepath;
+	}
 	
 }
