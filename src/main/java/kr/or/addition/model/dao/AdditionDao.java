@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.or.addition.model.vo.Board;
 import kr.or.addition.model.vo.BoardComment;
+import kr.or.addition.model.vo.BoardNext;
 import kr.or.addition.model.vo.FileVO;
 
 @Repository
@@ -86,6 +87,15 @@ public class AdditionDao {
 	
 	public int totalKCount(HashMap<String, Object> map) {
 		return sqlSession.selectOne("addition.totalKCount",map);
+	}
+
+	public int boardUpdate(Board b) {
+		return sqlSession.update("addition.boardUpdate",b);
+		
+	}
+
+	public BoardNext selectNextBoard(HashMap<String, Object> map) {
+		return sqlSession.selectOne("addition.selectNextBoard",map);
 	}
 
 

@@ -64,24 +64,20 @@
 						<div>
 						 <!-- 아이디 찾기 -->
 							<div> <label id="resultId" class="reg"> ID : </label><span id="resultId"></span></div><br><br>
-							
 							<button id="moveLogin">로그인하러가기</button>
-
 							<button id="changePwFrm">비밀번호변경하기</button>
 						</div>
 						<div>
 						<!-- 비밀번호 변경 -->
-							<form action="/searchidpw.do" method="post">
-								<fieldset>
-										<label for ="memberId" class="reg">ID</label><input type="text" name="memberId" value="${memberId}"><br><br>
-										<label for="memberPassword" class="reg"> PW </label>
-										<input type="password" class="input" name="memberPassword" id="memberPassword"> <span id="pw-detail"> 8~12자 이내 영문,숫자,특수문자(“”-+/\:; 제외)</span> <span id="pwChkRule"></span><br><br>
-										<label for="pw_re" class="reg"> 확인 </label>
-										<input type="password" class="input" name="pw_re" id="chkpw"> <span id="pwChk"></span>
-										<input type="submit" value="변경">
-										
-									</fieldset>
-							</form>
+						<form action="/searchidpw.do" method="post">
+							<fieldset>
+									<label for="memberPassword" class="reg"> PW </label>
+									<input type="password" class="input" name="memberPassword" id="memberPassword"><span id="pw-detail"> 8~12자 이내 영문,숫자,특수문자(“”-+/\:; 제외)</span> <span id="pwChkRule"></span><br><br>
+									<label for="pw_re" class="reg"> 확인 </label><input type="password" class="input" name="pw_re" id="chkpw"> <span id="pwChk"></span>
+									<input type="submit" value="변경">
+									<input type="hidden" name="memberId" id="memberId">
+							</fieldset>
+						</form>
 						</div>
 						
 					</div>
@@ -102,6 +98,10 @@
 	$("#changePwFrm").click(function(){
 		$(".modal-body>div").eq(1).hide();
 		$(".modal-body>div").eq(2).show();
+		var memberId = $('#resultId').html();
+		$("#memberId").val(memberId);
+		console.log(memberId);
+	
 	});
 	var mailCode = '';
 	function checkMailCode(){
@@ -237,9 +237,6 @@
 		var pwChk = document.getElementById("pwChk");
 		var pw = document.getElementsByName("memberPassword")[0].value;
 		var pwRe = obj.value;
-	
-		
-			
 		if (pwRe == "") {
 			pwChk.innerHTML = "";
 			pwCheck = false;
@@ -250,8 +247,8 @@
 			pwCheck = false;
 		} else {
 			pwChk.innerHTML = "패스워드가 일치합니다.";
-			pwChk.style.color = "#1f4787";
-			obj.style.border = "1px solid #1f4787";
+			pwChk.style.color = "#563D39";
+			obj.style.border = "1px solid #563D39";
 			pwCheck = true;
 		}
 	}

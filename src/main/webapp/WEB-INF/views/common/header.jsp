@@ -16,7 +16,7 @@
         <a href="#"><img class="search-img" src="/resources/mainImage/upload/search-droopy.jpg" style="width:18px;height:40px"></a>
         </div> 
         <div class="h-logo">
-			Musée d'art
+			<a href="/main.do">Musée d'art</a>
         </div>
 		<div class="h-right">
 		<c:choose>
