@@ -34,7 +34,8 @@
       </div>
       <div class="form-group">
         <h3><span class="line">이</span>력서 첨부</h3>
-        <input type="file" name="upfiles" multiple>
+         <label><input type="file" name="upfiles" >이력서 첨부</label>
+         <label><input type="file" name="upfiles" >경력기술서 첨부</label>
       </div>
       <div class="form-group">
         <h3><span class="line">간</span>단 자기소개</h3>
@@ -50,10 +51,34 @@ $('#summernote').summernote({
 	  height: 300,                 // set editor height
 	  minHeight: null,             // set minimum height of editor
 	  maxHeight: null,             // set maximum height of editor
-	  focus: true                  // set focus to editable area after initializing summernote
+	  focus: true,                  // set focus to editable area after initializing summernote
+	  lang : "ko-KR",
+	  callbacks:{
+			onImageUpload : function(files) {
+				uploadImage(files[0],this);
+			}
+		}
 	});
-$(document).ready(function() {
-	  $('#summernote').summernote();
+	$(document).ready(function() {
+		  $('#summernote').summernote();
+		});
+function uploadImage(file,editor) {
+	//form과 같은 효과를 내는 객체
+	var form = new FormData();
+	form.append("file",file);
+	$.ajax({
+		url : "/uploadImageResume.do",
+		type : "post",
+		data : form,
+		processData : false,
+		contentType : false,
+		success : function(data) {
+			//결과로 받은 업로드 경로를 이용해서 에디터에 이미지 추가
+			$(editor).summernote("insertImage",data, function($image) {
+				$image.css("width", "100%");
+			});
+		}
 	});
+}
 </script>
 </html>

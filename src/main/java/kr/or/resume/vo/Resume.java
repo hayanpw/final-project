@@ -12,5 +12,7 @@ public class Resume {
 	private String resumePhone;
 	private String resumeDetail;
 	private int memberNo;
+	private String memberName;
 	private ArrayList<ResumeTbl> rtList;
+	
 }

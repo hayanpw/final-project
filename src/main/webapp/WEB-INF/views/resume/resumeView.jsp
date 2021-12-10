@@ -12,41 +12,34 @@
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	 <div class="container">
-		
-		<c:choose>	
-			<c:when test="${r.period le 0 }">
-				<p>마감된 공고입니다</p>
-			</c:when>
-		<c:when test="${r.period ge 0 }">
-        <h2 class="title">${r.requritTitle }</h2>
+        <h2 class="title">${r.memberName }님의 이력서</h2>
         <div class="sector">
-                <span class="first"><span class="line">경력</span></span>
-                <span class="second">${r.requritCareer }</span>
+                <span class="first"><span class="line">지원</span>이름</span>
+                <span class="second">${r.memberName }</span>
 				<p class="sectorLine"></p>
         </div>
         <div class="sector">
             <span class="first"><span class="line">성별</span></span>
-            <span class="second">${r.requritGender }</span>
+            <span class="second">${r.resumeGender }</span>
 			<p class="sectorLine"></p>
         </div>
         <div class="sector">
-            <span class="first"><span class="line">직종</span></span>
-            <span class="second">${r.requritField }</span>
+            <span class="first"><span class="line">연락</span>처</span>
+            <span class="second">${r.resumePhone }</span>
 			<p class="sectorLine"></p>
         </div>
+        <c:if test="${not empty r.rtList  }">
         <div class="sector">
-            <span class="first"><span class="line">고용</span>형태</span>
-            <span class="second">${r.employeeType }</span>
+            <span class="first"><span class="line">이력</span>서</span>
+            <c:forEach items="${r.rtList }" var="file">
+            <span class="second">${file.filename }</span><button onclick="download();" class="btn">다운받기</button>
+            </c:forEach>
 			<p class="sectorLine"></p>
         </div>
+        </c:if>
         <div class="sector">
-            <span class="first"><span class="line">모집</span>기간</span>
-            <span class="second">${r.requritStart } ~ ${r.requritEnd }(남은기간${r.period } 일)</span>
-			<p class="sectorLine"></p>
-        </div>
-        <div class="sector">
-            <p><span class="line">상세</span>설명</p>
-            	${r.requritDetail }
+           <p><span class="line">간단</span>소개</p>
+            ${r.resumeDetail }
         </div>
         <c:choose>
         	<c:when test="${empty sessionScope }">
@@ -58,8 +51,6 @@
         		<button type="button" class="btn requritBtn">수정하기</button>
         		
        	 	</c:when>
-        </c:choose>
-		</c:when>
         </c:choose>
         <input type="hidden" id ="hide" value="${r.requritNo }">
     </div>

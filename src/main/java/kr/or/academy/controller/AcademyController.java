@@ -121,5 +121,50 @@ public class AcademyController {
 		int result = service.academyCredit(acp);
 		return new Gson().toJson(result);
 	}
+	@ResponseBody
+	@RequestMapping(value = "/uploadImageAcademy.do")
+	public String uploadImage(MultipartFile file, HttpServletRequest request) {
+		String filepath = null;
+		if(file != null) {
+			String savePath = request.getSession().getServletContext().getRealPath("/resources/academyImage/editor/");
+			
+			String filename = file.getOriginalFilename();
+			String onlyFilename = filename.substring(0, filename.indexOf("."));
+			String extention = filename.substring(filename.indexOf("."));
+			
+			
+			int count = 0;
+			while(true) {
+				if(count==0) {
+					filepath = onlyFilename + extention;
+				}else {
+					filepath = onlyFilename+"_"+count+extention;
+				}
+				File checkFile = new File(savePath+filepath);
+				if(!checkFile.exists()) {
+					break;
+				}
+				count++;
+			}
+			
+			try {
+				FileOutputStream fos = new FileOutputStream(new File(savePath+filepath));
+				BufferedOutputStream bos = new BufferedOutputStream(fos);
+				byte[] bytes = file.getBytes();
+				bos.write(bytes);
+				bos.close();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		return "/resources/academyImage/editor/"+filepath;
+	}
+	
+	
 	
 }
