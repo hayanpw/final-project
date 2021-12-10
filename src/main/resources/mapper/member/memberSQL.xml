@@ -87,7 +87,7 @@
 	 	<update id="searchidpw" parameterType="m">
  		update member set 		
  			MEMBER_PASSWORD = #{memberPassword}
-		where member_email=#{memberEmail}
+		where member_id=#{memberId}
  	</update>
 	<select id="searchId" parameterType="m" resultType="m">
 		select
