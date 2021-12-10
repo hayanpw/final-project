@@ -51,7 +51,7 @@
 				<c:if test="${s.spaceNo eq t.spaceNo }">
 					<input name="files" type="file" id="image" accept="image/*" onchange="setThumbnail(event);" multiple/>
 				</c:if> 
-				 <div id="image_container"></div>
+				 <div id="image_container"> </div>
 			</div>	
 			<div id="updatet-btn">
 				<button class="btn btn-default" type="submit">수정하기</button>

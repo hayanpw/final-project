@@ -89,7 +89,7 @@
 													+ "</a><br>");
 								}
 							}else{
-								$(".modal-body").append("");
+								$(".modal-body").empty();
 								$(".modal-body").append("<p>작성할 대관 내역이 없습니다.</p>")
 							}
 						}

@@ -1,13 +1,18 @@
 package kr.or.space.controller;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -315,7 +320,7 @@ public class SpaceController {
 		}else {
 			model.addAttribute("msg", "등록 실패");
 		}
-		model.addAttribute("loc", "space/spaceBoardList");
+		model.addAttribute("loc", "/selectSpaceBoardList.do?reqPage=1");
 		return "common/msg";
 	}
 	//사용게시판 상세보기
@@ -325,4 +330,118 @@ public class SpaceController {
 		model.addAttribute("u", u);
 		return "space/useBoardView";
 	}
+	//사용게시판 삭제
+	@RequestMapping(value = "/deleteUseBoard.do")
+	public String deleteUseBoard(Model model, int ubNo) {
+		int result = service.deleteUseBoard(ubNo);
+		if(result >0) {
+			model.addAttribute("msg", "삭제 성공");
+		}else {
+			model.addAttribute("msg", "삭제 실패");
+		}
+		model.addAttribute("loc", "/selectSpaceBoardList.do?reqPage=1");
+		return "common/msg";
+	}
+	//시용게시판 수정 폼
+	@RequestMapping(value = "/updateUseBoardFrm.do")
+	public String updateUseBoardFrm(Model model, int ubNo) {
+		UseBoard u = service.selectOneBoardView(ubNo);
+		model.addAttribute("u", u);
+		return "space/updateUseBoardFrm";
+	}
+	//사용게시판 수정
+	@RequestMapping(value = "/updateUseBoard.do")
+	public String updateUseBoard(HttpServletRequest request, UseBoard ub, Model model, MultipartFile upfile) {
+		if(upfile != null) {
+			String savePath = request.getSession().getServletContext().getRealPath("/resources/useBoardFile/upload/");
+			
+			String filename = upfile.getOriginalFilename();
+			String onlyFilename = filename.substring(0, filename.indexOf("."));
+			String extention = filename.substring(filename.indexOf("."));
+			
+			String filepath = null;
+			int count = 0;
+			while(true) {
+				if(count==0) {
+					filepath = onlyFilename + extention;
+				}else {
+					filepath = onlyFilename+"_"+count+extention;
+				}
+				File checkFile = new File(savePath+filepath);
+				if(!checkFile.exists()) {
+					break;
+				}
+				count++;
+			}
+			try {
+				FileOutputStream fos = new FileOutputStream(new File(savePath+filepath));
+				BufferedOutputStream bos = new BufferedOutputStream(fos);
+				byte[] bytes = upfile.getBytes();
+				bos.write(bytes);
+				bos.close();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			ub.setFilepath(filepath);
+			ub.setFilename(filename);
+		}
+		int result = service.updateUseBoard(ub);
+		if(result >0) {
+			model.addAttribute("msg", "수정 성공");
+		}else {
+			model.addAttribute("msg", "수정 실패");
+		}
+		model.addAttribute("loc", "/useBoardView.do?ubNo="+ub.getUbNo());
+		return "common/msg";
+	}
+	//파일 다운로드
+	@RequestMapping(value = "/spaceFileDown.do")
+	//페이지 이동 x -> public void
+	public void spaceFileDown(int ubNo, Model model,HttpServletRequest request, HttpServletResponse response) throws IOException {
+		UseBoard u = service.selectOneBoardView(ubNo);
+		String root = request.getSession().getServletContext().getRealPath("/resources/useBoardFile/upload/");
+		String file = root+u.getFilepath();
+		System.out.println("다운로드 파일 전체 경로 : "+file);
+		//서버의 물리공간에서 서블릿으로 파일을 읽어오는 객체
+		FileInputStream fis = new FileInputStream(file);
+		//파일을 읽어오는 속도를 개선하기위한 보조 스트림
+		BufferedInputStream bis = new BufferedInputStream(fis);
+		
+		//클라이언트로 파일을 보내주는 객체
+		ServletOutputStream sos = response.getOutputStream();
+		//파일 전송 속도를 개선하기위한 보조 스트림
+		BufferedOutputStream bos = new BufferedOutputStream(sos);
+		
+		//브라우저에 따른 이름 처리
+		String resFilename = "";	//최종 다운로드할 파일 이름
+		//브라우저가 IE확인
+		boolean bool = request.getHeader("user-agent").indexOf("MSIE")!=-1 ||
+				       request.getHeader("user-agent").indexOf("Trident") != -1;
+		System.out.println("IE여부 : "+bool);
+		if(bool) {//브라우저가 IE인 경우
+			resFilename = URLEncoder.encode(u.getFilename(),"utf-8");
+			resFilename = resFilename.replace("\\\\", "20%");
+		}else {//그 외 다른 브라우저 인 경우
+			resFilename = new String(u.getFilename().getBytes("UTF-8"),"ISO-8859-1");
+		}
+		//파일 다운로드를 위한 HTTP header설정(사용자 브라우저에 파일다운로드임을 선언)
+		response.setContentType("application/octet-stream");
+		response.setHeader("Content-Disposition", "attachment;filename="+resFilename);
+		
+		//파일 전송
+		while(true) {
+			int read = bis.read();
+			if(read != -1) {
+				bos.write(read);
+			}else {
+				break;
+			}
+		}
+	}
+		
 }
+

@@ -120,6 +120,7 @@ public class SpaceService {
 		return dao.selectSpaceMypage(memberId);
 	}
 	//사용 게시판-페이징
+	@Transactional
 	public SpacePageNavi selectSpacePageNavi(int reqPage) {
 		int numPerPage = 10;
 		int end = reqPage*numPerPage;
@@ -181,6 +182,7 @@ public class SpaceService {
 		return dao.selectRentalNo(rentalNo);
 	}
 	//사용게시판 등록
+	@Transactional
 	public int insertUseBoard(UseBoard ub) {
 		int result = dao.insertUseBoard(ub);
 		if(result>0) {
@@ -194,6 +196,14 @@ public class SpaceService {
 	//사용 게시판 조회
 	public UseBoard selectOneBoardView(int ubNo) {
 		UseBoard ub = dao.selectOneBoardView(ubNo);
-		return null;
+		return ub;
+	}
+	//게시판 삭제
+	public int deleteUseBoard(int ubNo) {
+		return dao.deleteUseBoard(ubNo);
+	}
+	//게시판 수정
+	public int updateUseBoard(UseBoard u) {
+		return dao.updateUseBoard(u);
 	}
 }
