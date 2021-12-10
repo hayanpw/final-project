@@ -12,7 +12,7 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
-	
+	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 	<jsp:include page="/WEB-INF/views/common/mypageMenu.jsp"/>
 	
 	<div class="container">        
@@ -42,8 +42,19 @@
 	        						<h5>공연일 : ${r.showDate }</h5>
 	        						<h5>예매수 : ${r.ticketNum }</h5>
 	        						<h5>결제금액 : ${r.payment }</h5>
-	        						<button onclick="showSeat('${r.reservNo}');" type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal">좌석보기</button>
-	        						<button class="btn btn-danger btn-sm" onclick="cancelReserv('${r.reservNo }');">예매취소</button>
+	        						<c:choose>
+	        							<c:when test="${r.reservPay == 1 }">
+			        						<button onclick="showSeat('${r.reservNo}');" type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal">좌석보기</button>
+			        						<button class="btn btn-danger btn-sm" onclick="cancelReserv('${r.reservNo }');">예매취소</button>	        								
+	        							</c:when>
+	        							<c:otherwise>
+	        								<input type="hidden" value="${r.showName }">
+	        								<input type="hidden" value="${r.payment }">
+	        								<button class="payment btn btn-danger btn-sm">결제하기</button>
+	        								<input type="hidden" value="${r.reservNo }">
+	        								<button class="btn btn-danger btn-sm" onclick="cancelReserv('${r.reservNo }');">예매취소</button>
+	        							</c:otherwise>
+	        						</c:choose>
 	        					</div>
 	        					<!-- Modal -->
 								  <div class="modal fade" id="myModal" role="dialog">
@@ -288,6 +299,33 @@
 				}
 			});
 		}
+		$(".payment").click(function() {
+			var d = new Date();
+			var date = d.getFullYear()+""+(d.getMonth()+1)+""+d.getDate()+""+d.getHours()+""+d.getMinutes()+""+d.getSeconds();
+			var showName = $(this).prev().prev().val();
+			var price = $(this).prev().val();
+			IMP.init("imp76831421");	//결제 API 사용을 위해 가맹점 식별코드 입력
+			IMP.request_pay({
+				merchant_uid : showName+"_"+date,	//거래 아이디
+				name : showName,				//결제 이름 설정
+				amount : price,	//결제 금액
+				buyer_email : "${sessionScope.m.memberEmail}",	//구매자 이메일
+				buyer_name : "${sessionScope.m.memberName}",	//구매자 이름
+				buyer_phone : "${sessionScope.m.memberPhone}",	//구매자 전화번호
+				buyer_addr : "${sessionScope.m.addressRoad}",	//구매자 주소
+				buyer_postcode : "${sessionScope.m.postcode}" 	//구매자 우편번호
+			}, function(rsp) {
+				if(rsp.success){
+					//DB결제정보 update
+					alert("결제 성공");
+					//console.log("카드 승인번호 : "+rsp.apply_num);
+					var reservNo = $(this).next().val();
+					location.href="/paymentSuccess.do?reservNo="+reservNo;
+				}else{
+					alert("결제 실패");
+				}
+			});
+		});
 	</script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
