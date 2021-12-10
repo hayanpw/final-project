@@ -87,6 +87,7 @@ body{
 
 .navi{
     position: relative;
+    z-index: 2;
 }
 .navi ul{
     list-style-type: none;
@@ -140,6 +141,7 @@ body{
 }
 .navi>ul>li:hover>.sub{
     display: block;
+
 }
 .sub>li>a:hover{
     color:#fff;
