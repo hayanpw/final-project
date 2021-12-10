@@ -118,7 +118,7 @@ public class ShowController {
 	}
 	
 	@RequestMapping(value = "/updateShow.do")
-	public String updateShow(Show s, MultipartFile upfile, int status, HttpServletRequest request, Model model) {
+	public String updateShow(Show s, MultipartFile upfile, String oldFilepath, int status, HttpServletRequest request, Model model) {
 		if(status == 2) {
 			if(upfile != null) {
 				String savePath = request.getSession().getServletContext().getRealPath("/resources/showImage/upload/");
@@ -158,6 +158,8 @@ public class ShowController {
 				String showFilepath = "/resources/showImage/upload/"+filepath;
 				s.setFilepath(showFilepath);
 			}
+		}else {
+			s.setFilepath(oldFilepath);
 		}
 		int result = service.updateShow(s);
 		if(result>0) {
@@ -340,4 +342,5 @@ public class ShowController {
 		ArrayList<ShowReserv> list = service.checkReserv(sr);
 		return list;
 	}
+	
 }
