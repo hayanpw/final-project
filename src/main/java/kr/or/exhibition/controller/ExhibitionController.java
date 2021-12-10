@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -99,6 +100,24 @@ public class ExhibitionController {
 	public String exhibitionCredit (ExhibitionPayment exbp) {
 		int result = service.exhibitionCredit(exbp);
 		return new Gson().toJson(result);
+	}
+	//전시 리스트 출력
+	@RequestMapping(value="/exhibitionList.do")
+	public String exhibitionList (Exhibition exb,Model model,int reqPage) {
+		int totalCount = service.exhibitionTotal();
+		ArrayList<Exhibition> list = service.selectExhibitionList(reqPage);
+		int count = list.size();
+		model.addAttribute("list",list);
+		model.addAttribute("totalCount",totalCount);
+		model.addAttribute("count",count);
+		return "exhibition/exhibitionList";
+	}
+	//더보기 버튼
+	@ResponseBody
+	@RequestMapping(value="moreExhibition.do",produces="application/json;charset=utf-8")
+	public String moreExhibition(int start) {
+		ArrayList<Exhibition> list = service.moreExhibition(start);
+		return new Gson().toJson(list);
 	}
 	
 }

@@ -128,6 +128,21 @@
 	<update id="reservCancel" parameterType="_int">
 		update show_reserv set reserv_cancel=1 where reserv_no=#{reservNo}
 	</update>
+	<select id="checkReserv" parameterType="sReserv" resultType="sReserv">
+		select
+            reserv_no as reservNo,
+            member_id as memberId,
+			R.reserv_date as reservDate,
+            count(seat_no) as ticketNum,
+            sum(seat_price) as payment
+		from show_reserv R left join seat S using(reserv_no)
+        where R.show_date = #{showDate} and R.show_no=#{showNo} and R.reserv_pay=1 and R.reserv_cancel=0
+        group by
+            reserv_no,
+            member_id,
+			R.reserv_date
+        order by 1 desc
+	</select>
 	
 	<resultMap type="show" id="s">
 		<result column="show_no" property="showNo"/>

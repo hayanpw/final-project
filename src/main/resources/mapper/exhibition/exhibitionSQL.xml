@@ -28,4 +28,21 @@
 			values(#{paymentNo},#{paymentSelect},0,#{exhibitionNo},#{paymentPrice},
 			to_char(sysdate,'YYYY-MM-DD'),0,#{paymentQuantity},#{bookDate},#{memberNo})
 	</insert>
+	<select id="exhibitionTotal" resultType="_int">
+		select count(*) from exhibition
+	</select>
+	<select id="exhibitionList" parameterType="ep" resultType="exb">
+		select 
+  			nn.exhibition_no as exhibitionNo,
+  			nn.exhibition_title as exhibitionTitle,
+  			nn.exhibition_start as exhibitionStart,
+  			nn.exhibition_end as exhibitionEnd,
+  			nn.exhibition_photo as exhibitionPhoto,
+  			nn.exhibition_time_start as exhibitionTimeStart,
+  			nn.exhibition_time_end as exhibitionTimeEnd,
+  			nn.exhibition_age as exhibitionAge,
+  			nn.exhibition_price as exhibitionPrice,
+  			nn.exhibition_detail as exhibitionDetail
+  		from (select rownum as rnum,n.* from(select * from  exhibition order by exhibition_no desc)n)nn where rnum between  #{start} and #{end}
+	</select>
 </mapper>

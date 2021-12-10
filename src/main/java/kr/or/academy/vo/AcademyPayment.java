@@ -12,6 +12,8 @@ public class AcademyPayment {
 	private String paymentDate;
 	private int paymentCancel;
 	private int paymentQuantity;
+	private String academyStart;
+	private String academyEnd;
 	private String academyTitle;
 	private String academyPhoto;
 	private String academyTeacher;

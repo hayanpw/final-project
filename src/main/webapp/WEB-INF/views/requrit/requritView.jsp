@@ -49,7 +49,7 @@
             	${r.requritDetail }
         </div>
         <c:choose>
-        <c:when test="${empty sessionScope }">
+        <c:when test="${not empty sessionScope }">
         <button type="button" class="btn requritBtn" onclick="goResumeFrm();">지원하기</button>
         </c:when>
          <c:when test="${sessionScope.member.MemberLevel eq 0 }">

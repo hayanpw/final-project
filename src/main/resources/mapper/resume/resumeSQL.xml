@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="resume">
+	<insert id="insertResume" parameterType="r">
+		insert 
+			into resume 
+			values(resume_seq.nextval,#{requritNo},#{resumeGender},
+			#{resumePhone},#{resumeDetail},#{memberNo})
+	</insert>
+	<insert id="insertResumeTbl" parameterType="rt">
+		insert 
+			into resume_tbl
+			values(resume_tbl_seq.nextval,#{resumeNo},#{filepath},#{filename})
+	</insert>
+	<select id="selectResumeNo" resultType="_int">
+		select max(resume_no) from resume
+	</select>
+</mapper>

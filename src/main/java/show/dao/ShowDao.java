@@ -117,4 +117,9 @@ public class ShowDao {
 		return sqlSession.update("show.reservCancel", reservNo);
 	}
 
+	public ArrayList<ShowReserv> checkReserv(ShowReserv sr) {
+		List<ShowReserv> list = sqlSession.selectList("show.checkReserv", sr);
+		return (ArrayList<ShowReserv>)list;
+	}
+
 }

@@ -161,4 +161,10 @@ public class ShowService {
 		return dao.selectSeatList(reservNo);
 	}
 
+	public ArrayList<ShowReserv> checkReserv(ShowReserv sr) {
+		return dao.checkReserv(sr);
+	}
+
+
+
 }

@@ -41,6 +41,7 @@
 	        						<h4>공연명 : ${r.showName }</h4>
 	        						<h5>공연일 : ${r.showDate }</h5>
 	        						<h5>예매수 : ${r.ticketNum }</h5>
+	        						<h5>결제금액 : ${r.payment }</h5>
 	        						<button onclick="showSeat('${r.reservNo}');" type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal">좌석보기</button>
 	        						<button class="btn btn-danger btn-sm" onclick="cancelReserv('${r.reservNo }');">예매취소</button>
 	        					</div>
@@ -224,6 +225,7 @@
 	        						<h4>공연명 : ${r.showName }</h4>
 	        						<h5>공연일 : ${r.showDate }</h5>
 	        						<h5>예매수 : ${r.ticketNum }</h5>
+	        						<h5>결제금액 : ${r.payment }</h5>
 	        					</div>
 	        				</div>
 	        			</c:otherwise>
@@ -255,7 +257,7 @@
 			
 		});
 		
-			var allSeat = $("#seat>input").eq().prevObject.length;
+			var allSeat = 413;
 		function showSeat(reservNo) {
 			$("#mySeat").empty();
 			for (var i= 0; i < allSeat; i++) {

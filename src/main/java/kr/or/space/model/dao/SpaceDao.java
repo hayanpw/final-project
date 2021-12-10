@@ -127,4 +127,20 @@ public class SpaceDao {
 	public int selectTotalCount() {
 		return sqlSession.selectOne("space.selectTotalCount");
 	}
+	//게시판 작성할 대관 
+	public Rental selectRentalNo(int rentalNo) {
+		return sqlSession.selectOne("space.selectRentalNo",rentalNo);
+	}
+	//사용 게시판 등록
+	public int insertUseBoard(UseBoard ub) {
+		return sqlSession.insert("space.insertUseBoard",ub);
+	}
+	//대관- 게시판 작성 여부 작성으로 변경
+	public int updatUsedBoard(int rentalNo) {
+		return sqlSession.update("space.updateUseBoard",rentalNo);
+	}
+	//사용게시판 조회
+	public UseBoard selectOneBoardView(int ubNo) {
+		return sqlSession.selectOne("space.selectOneBoardView",ubNo);
+	}
 }

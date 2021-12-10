@@ -1,11 +1,15 @@
 package kr.or.exhibition.dao;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.or.exhibition.vo.Exhibition;
+import kr.or.exhibition.vo.ExhibitionPagingVo;
 import kr.or.exhibition.vo.ExhibitionPayment;
 
 @Repository
@@ -26,5 +30,15 @@ public class ExhibitionDao {
 	public int exhibitionCredit(ExhibitionPayment exbp) {
 		int result = sqlSession.insert("exhibition.exhibitionCredit",exbp);
 		return result;
+	}
+
+	public int exhibitionTotal() {
+		int totalCount = sqlSession.selectOne("exhibition.exhibitionTotal");
+		return totalCount;
+	}
+
+	public ArrayList<Exhibition> selectExhibition(ExhibitionPagingVo ep) {
+		List<Exhibition> list = sqlSession.selectList("exhibition.exhibitionList",ep);
+		return (ArrayList<Exhibition>)list;
 	}
 }
