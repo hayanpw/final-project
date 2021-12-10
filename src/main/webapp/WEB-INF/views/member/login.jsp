@@ -12,6 +12,7 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="container">
 		<div class="login-title"><span>로그</span>인</div>
+		<!-- 로그인  -->
 		<div class="login-box">
 		<form action="/login.do" method="post">
 			<fieldset>
@@ -25,10 +26,9 @@
 		<a href="/joinFrm.do">회원가입[임시]</a>
 		<hr>
 		
+		<!-- 아이디 비밀번호 찾기 modal -->
 		<div class="login-box" style="width:600px">
-		
 		</div>
-		
 		</div>
 		<div class="modal" id="sModal">
 			<div class="modal-dialog">
@@ -37,6 +37,7 @@
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
 						<h3 class="modal-title">ID · PASSWORD 찾기</h3>
                     </div>
+                    <!-- 이메일인증 modal -->
                     <div class="modal-body">
                        	<div>
 							<fieldset>
@@ -61,14 +62,18 @@
 							</fieldset>
 						</div>
 						<div>
-							<div id="searchId">아이디자리</div>
+						 <!-- 아이디 찾기 -->
+							<div> <label id="resultId" class="reg"> ID : </label><span id="resultId"></span></div><br><br>
+							
 							<button id="moveLogin">로그인하러가기</button>
+
 							<button id="changePwFrm">비밀번호변경하기</button>
 						</div>
 						<div>
+						<!-- 비밀번호 변경 -->
 							<form action="/searchidpw.do" method="post">
 								<fieldset>
-										<label for ="memberId" class="reg">ID</label><input type="text" name="memberId" value="${sessionScope.m.memberId}"><br><br>
+										<label for ="memberId" class="reg">ID</label><input type="text" name="memberId" value="${memberId}"><br><br>
 										<label for="memberPassword" class="reg"> PW </label>
 										<input type="password" class="input" name="memberPassword" id="memberPassword"> <span id="pw-detail"> 8~12자 이내 영문,숫자,특수문자(“”-+/\:; 제외)</span> <span id="pwChkRule"></span><br><br>
 										<label for="pw_re" class="reg"> 확인 </label>
@@ -88,14 +93,23 @@
 	
 	
 	<script>
+ 	//$(".modal").modal("hide");
+	$("#moveLogin").click(function(){
+		$("[name=memberId]").val($('#resultId').html());
+		
+		$(".close").click();
+	});
+	$("#changePwFrm").click(function(){
+		$(".modal-body>div").eq(1).hide();
+		$(".modal-body>div").eq(2).show();
+	});
 	var mailCode = '';
 	function checkMailCode(){
 		
 		//입력값, ajax로 받은 메일코드가 일치하는지 확인
 		//입려값 id="authCode" 받은메일코드 mailCode		
 		var authCode = $('#authCode').val();
-		
-		console.log(mailCode);
+
 		if (authCode == "") {
 			alert("값없음");
 		} else if (mailCode == authCode) {
@@ -103,6 +117,26 @@
 			
 			$(".modal-body>div").eq(0).hide();
 			$(".modal-body>div").eq(1).show();
+			
+			(function(){
+				var memberEmail = $('#memberEmail').val();
+				$.ajax({
+					url : "/searchId.do",
+					data : {memberEmail : memberEmail},
+					type : "post",
+					success : function(data) {
+						if(data!=""){
+							var resultId = $('#resultId').html(data);
+							
+							console.log(data+"성공");
+						}else{
+							console.log(data+"실패");
+						}
+					}
+				});
+	        })();
+		
+			
 		} else {
 			alert("틀리자");
 		}
@@ -110,7 +144,6 @@
 	
 	function checkEmail() {
 		var memberEmail = $('#memberEmail').val();
-		console.log(memberEmail);
 		$.ajax({
 					url : "/ajaxEmailCheck.do",
 					data : {memberEmail : memberEmail},
@@ -127,7 +160,6 @@
 								data : {email : email},
 								type : "post",
 								success : function(data) {
-									
 									mailCode = data;
 									authTime();
 								}

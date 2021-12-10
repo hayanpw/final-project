@@ -56,7 +56,7 @@
 						moreLi += "<img src='"+data[i].academyPhoto+"'></a></div>";
 						moreLi += "<div class='info'>";
 						moreLi += "<p>"+data[i].academyTitle+"</p>";
-						moreLi += "<p>기간: "+data[i].academyStart+"~"+data[i].academyEnd+"</p>";
+						moreLi += "<p>수업 기간: "+data[i].academyStart+"~"+data[i].academyEnd+"</p>";
 						moreLi += "<p>강사: "+data[i].academyTeacher+"</p>";
 						moreLi += "<p>수업료: "+data[i].academyPrice+"</p>";
 						moreLi += "<p>참여인원: 10명  <button id ='studentView'>참여인원보기</button></p>";

@@ -173,7 +173,6 @@
 					<input type='button' value='X' class="close" id='btnClose1' />
 				</div>
 				<div>
-					<h2>작동안합니다아 건들면 무너져요 ~~ - id email 인증 고치러갔습니다! </h2>
 					<!-- 인증 받으면 넘어가는 hidden-->
 					<input type="hidden" id="emailcheck">
 				</div>
@@ -196,57 +195,16 @@
 		</div>
 	</form>
 
-	<div class="contents">
-		<h1 style="text-align: center; margin-top: 100px;">SIGN UP</h1>
+	<div class="container">
 		<hr>
 		<br> <br>
-
 		<div class="wrap">
-
-
 			<div class="content">
-				<form action="/join.do" method="post" class="contentDetail"
-					id="contentDetail-field" name="joinFrm">
-					<legend class="contentDetail-legend">14세 이상 회원 가입 입력양식</legend>
+				<form action="/join.do" method="post" class="contentDetail" id="contentDetail-field" name="joinFrm">
+					<!--legend class="contentDetail-legend">14세 이상 회원 가입 입력양식</legend> -->
 					<div class="contentDetail">
-						<h3 class="title">이용약관 확인 및 동의</h3>
-						<br>
-						<br> <input type="checkbox" id="allAgreement"
-							onclick="allCheck(this);"> <label for="allAgreement">이용약관
-							전체체크</label> <br> <br>
-						<br>
-						<div class='agreebox'>
-							<input type="checkbox" id="privacyAgreement" class="agreeCheck">
-							<label for="privacyAgreement">개인정보 수집 및 이용에 동의 <span
-								class="fcBlue">(필수)</span></label>
-							<div class="agreeContent">
-								<ul>
-									<li>수집항목 : 이름, 휴대전화번호, 생년월일, 비밀번호</li>
-									<li>수집·이용목적 : 회원제 서비스 제공</li>
-									<li>보유 및 이용기간 : 회원탈퇴 시 까지</li>
-								</ul>
-							</div>
-						</div>
-
-						<div class='agreebox'>
-							<input type="checkbox" id="optionalAgreement" class="agreeCheck">
-							<label for="optionalAgreement">개인정보 수집 및 이용에 동의 <span
-								class="fcBlue">(선택)</span></label>
-							<div class="agreeContent">
-								<ul>
-									<li>수집항목 : 이름, 휴대전화번호, 생년월일, 비밀번호</li>
-									<li>수집·이용목적 : 회원제 서비스 제공</li>
-									<li>보유 및 이용기간 : 회원탈퇴 시 까지</li>
-								</ul>
-							</div>
-						</div>
-
-						<br> <br>
-						<hr>
-						<br> <br> <br> <br> <br> <br>
 					</div>
-
-					<h3 class="title">필수정보입력</h3>
+					<div class="login-title"><span>정보</span>입력</div>
 					<div class="contentDetail border">
 						<br>
 						<table class="inputTbl">
@@ -345,7 +303,37 @@
 								</td>
 							</tr>
 						</table>
-						<br> <br>
+						<br>
+						<br> 
+						<input type="checkbox" id="allAgreement"
+							onclick="allCheck(this);"> <label for="allAgreement">이용약관
+							전체체크</label>
+						<br>
+						<div class='agreebox'>
+							<input type="checkbox" id="privacyAgreement" class="agreeCheck">
+							<label for="privacyAgreement">개인정보 수집 및 이용에 동의 <span
+								class="fcBlue">(필수)</span></label>
+							<div class="agreeContent">
+								<ul>
+									<li>수집항목 : 이름, 휴대전화번호, 생년월일, 비밀번호</li>
+									<li>수집·이용목적 : 회원제 서비스 제공</li>
+									<li>보유 및 이용기간 : 회원탈퇴 시 까지</li>
+								</ul>
+							</div>
+						</div>
+
+						<div class='agreebox'>
+							<input type="checkbox" id="optionalAgreement" class="agreeCheck">
+							<label for="optionalAgreement">개인정보 수집 및 이용에 동의 <span
+								class="fcBlue">(선택)</span></label>
+							<div class="agreeContent">
+								<ul>
+									<li>수집항목 : 이름, 휴대전화번호, 생년월일, 비밀번호</li>
+									<li>수집·이용목적 : 회원제 서비스 제공</li>
+									<li>보유 및 이용기간 : 회원탈퇴 시 까지</li>
+								</ul>
+							</div>
+						</div>
 					</div>
 					<div class="btnBox">
 						<button onclick="return join();" class="nextBtn">회원가입</button>
@@ -355,6 +343,8 @@
 		</div>
 
 	</div>
+
+
 
 	<script>
 		$("[name=memberId]").eq(0).keyup(function() {
@@ -529,7 +519,6 @@
 			document.getElementById("emailgreement_hidden").disabled = true;
 
 		}
-		
 		
 	</script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>

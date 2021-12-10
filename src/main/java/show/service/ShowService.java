@@ -142,4 +142,29 @@ public class ShowService {
 		return map;
 	}
 
+	public HashMap<String, Object> myReserv(String memberId) {
+		ArrayList<ShowReserv> reservs = dao.selectReservList(memberId);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("reservs", reservs);
+		return map;
+	}
+
+	public int reservCancel(int reservNo) {
+		int result = dao.reservCancel(reservNo);
+		if(result>0) {
+			result = dao.deleteSeat(reservNo);
+		}
+		return result;
+	}
+
+	public ArrayList<Seat> showSeat(int reservNo) {
+		return dao.selectSeatList(reservNo);
+	}
+
+	public ArrayList<ShowReserv> checkReserv(ShowReserv sr) {
+		return dao.checkReserv(sr);
+	}
+
+
+
 }

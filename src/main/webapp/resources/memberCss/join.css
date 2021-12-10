@@ -47,19 +47,28 @@
     display: inline-block;
 }
 
-.content {
+/* .content {
     width: 1138px;
     padding: 30px;
     border: 1px solid #d8d8d8;
     border-top: none;
     padding-bottom: 200px;
 
+} */
+.login-title{
+    margin: 100px 0 50px 100px;
+    font-size: 28px;
+    font-weight: 900;
+    color : #000;
 }
-
+.login-title span{
+	padding-top : 3px;
+	border-top : 5px solid #BDB19A;
+}
 .agreeContent {
-    width: 98%;
-    margin: 0 auto;
-    border: 1px solid #1f1111;
+    width: 200px;
+    margin: 10px;
+    border: 1px solid (189, 177, 154, 0.78);
     margin-top: 5px;
 }
 
@@ -68,22 +77,30 @@
 }
 
 .agreeContent li {
-    color: #707070;
+	font-size: 10px;
+	list-style: none;
+    color: rgba(189, 177, 154, 0.78);
 }
 
-.agreebox {
-    margin-bottom: 15px;
+.agreebox ul{
+	padding: 0px;
+    margin: 10px;
+    text-style:none;
 }
 
 .nextBtn {
-    width: 180px;
-    height: 50px;
-    background-color: black;
+    width: 100px;
+    height: 40px;
+    background-color: #fff;
     border: none;
-    outline: none;
+    outline: 1px solid;
     cursor: pointer;
-    color: #fff;
-    font-size: 20px;
+    color: #BDB19A;
+    font-size: 14px;
+}
+.nextBtn:hover{
+	color: #fff;
+	background-color: #BDB19A;
 }
 
 .btnBox {
@@ -92,11 +109,13 @@
 }
 
 label {
-    font-size: 20px;
+    font-size: 14px;
+    color:rgba(0, 0, 0, 0.56);
 }
 
 .fcBlue {
-    color: #1f4787;
+	font-size: 12px;
+    color: #BDB19A;
 }
 
 .inputTbl {
@@ -109,14 +128,19 @@ label {
     margin: 0;
     padding: 0;
     height: 35px;
-    border: 1px solid #d8d8d8;
     outline: none;
-    font-size: 15px;
+    font-size: 13px;
     width: 270px;
+    border-style:none;
+    border-bottom:solid 1px #cacaca;
+    border-collapse:collapse;
 }
 
 .input:focus {
-    border: 1px solid #0e77d9;
+ outline: none;
+    padding-bottom : 5px;
+	border-bottom : 2px solid #BDB19A;
+    box-shadow: 0 1px 0 0 #563D39;
 }
 
 .long {
@@ -228,16 +252,17 @@ input[name=gender]:checked+label {
     display: none;
 }
 
-.border {
-    border-top: 2px solid black;
-    border-bottom: 1px solid rgba(99, 95, 95, 0.616);
+.contentDetail{
+	margin: 0px 0px 0px 90px;
 }
 
 #contentDetail-field td {
     margin-top: 20px;
-    padding-top: 30px;
+    padding-top: 20px;
     padding-bottom: 0px;
     vertical-align: 5px;
+    color: rgb(189, 177, 154);
+    font-weight: bold;
 }
 
 #pw-dtail {
