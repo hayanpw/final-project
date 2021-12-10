@@ -42,7 +42,16 @@ body{
     background-color: #fff;
     float: left;
     height: 90px;
-    font-family: d_r; 
+}
+.h-logo>a{
+	text-decoration: none;
+	font-family: d_r; 
+    font-size:50px;
+    color:#563D39;
+}
+.h-logo>a:hover{
+	text-decoration: none;
+	font-family: d_r; 
     font-size:50px;
     color:#563D39;
 }
