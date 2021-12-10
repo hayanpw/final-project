@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import kr.or.addition.model.dao.AdditionDao;
 import kr.or.addition.model.vo.Board;
 import kr.or.addition.model.vo.BoardComment;
+import kr.or.addition.model.vo.BoardNext;
 import kr.or.addition.model.vo.BoardPageData;
 import kr.or.addition.model.vo.BoardViewData;
 import kr.or.addition.model.vo.FileVO;
@@ -272,6 +273,21 @@ public class AdditionService {
 		
 		BoardPageData bpd = new BoardPageData(list, pageNavi, start,totalCount);
 		return bpd;
+	}
+
+	@Transactional
+	public int boardUpdate(Board b) {
+		int result=dao.boardUpdate(b);
+		return result;
+	}
+
+
+	public BoardNext selectNextBoard(int boardNo,int boardType) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("boardNo", boardNo);
+		map.put("boardType", boardType);
+		BoardNext info = dao.selectNextBoard(map);
+		return info;
 	}
 	
 	

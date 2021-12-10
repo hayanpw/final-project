@@ -55,8 +55,34 @@
 		<a class="btn" href="/boardDelete.do?boardType=1&boardNo=${b.boardNo }">글삭제</a>
 		<a class="btn" href="/boardUpdateFrm.do?boardNo=${b.boardNo }">글수정</a>
 		</c:if>
-		<a class="btn" onclick="history.go(-1);">이전</a>
+		<div>
+		<div>다음글&nbsp;
+			<a href="/boardView.do?boardType=1&boardNo=${info.nextNo}" onclick="return chkNext();">
+			<input type="hidden" id="next" value="${info.nextNo }">${info.nextTitle }
+			</a>
+		</div>
+		<div>이전글&nbsp;
+			<a href="/boardView.do?boardType=1&boardNo=${info.prevNo}" onclick="return chkPrev();">
+			<input type="hidden" id="prev" value="${info.prevNo }">${info.prevTitle }
+			</a>
+		</div>
+		<a class="btn" href="/additionBoard.do?boardType=1&reqPage=1">글목록</a>
+		</div>
 	</div>
+	<script>
+	function chkPrev(){
+		var prev = $("#prev").val();
+		if(prev==0){
+			return false;
+		}
+	}
+	function chkNext(){
+		var next = $("#next").val();
+		if(next==0){
+			return false;
+		}
+	}
+	</script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>
