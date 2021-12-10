@@ -46,13 +46,13 @@
 		<div id="title">소통게시판</div>
 		</c:otherwise>
 	</c:choose>
-	<form action="/boardWrite.do" method="post" enctype="multipart/form-data">
+	<form action="/boardUpdate.do" method="post" enctype="multipart/form-data">
 				<table class="table" style="width:100%;">
 					<tr>
 						<td>제목</td>
 						<td colspan="3">
-							<input type="text" id="text" name="boardTitle" class="form-control">
-							<input type="hidden" name="boardType" value="${boardType }">
+							<input type="text" id="text" name="boardTitle" class="form-control" value="${b.boardTitle }">
+							<input type="hidden" name="boardType" value="${b.boardType }">
 						</td>
 					</tr>
 					<tr>
@@ -61,45 +61,47 @@
 				   		
 				   		<td>첨부파일</td>
 						<td style="text-align:left;">
-						<input type="file" name="addFiles" multiple>
+						<input type="hidden" name="boardNo" value="${b.boardNo }">
+						<input type="hidden" name="status" value="1">
+							<c:choose>
+							<c:when test="${not empty b.list }">
+								<c:forEach items="${b.list }" var="f">
+								<span class="delFile">${f.filename }</span>
+								<button type="button" id="delBtn" class="btn btn-primary btn-sm delFile">
+								삭제
+								</button>
+								<input type="file" name="addFiles" multiple style="display:none;"> 
+								<input type="hidden" name="oldFilename" value="${f.filename }">
+								<input type="hidden" name="oldFilepath" value="${f.filepath }>">
+								</c:forEach>
+							</c:when>
+							<c:otherwise>
+							<input type="file" name="addFiles" multiple>
+							</c:otherwise>
+							</c:choose>
 						</td> 
 					</tr>
 					<tr>
 						<td>내용</td>
 						<td id="img" colspan="3">
 							<img id="img-view" width="500px">
-							<textarea id="summernote" name="boardContent" class="form-control"></textarea>
+							<textarea id="summernote" name="boardContent" class="form-control">${b.boardContent }</textarea>
 						</td>
 					</tr>
 					<tr>
 						<td colspan="4">
-							<button type="submit" class="btn btn-block" onclick="return contentChk();">글등록</button>
+							<button type="submit" class="btn btn-block" onclick="return contentChk();">글수정</button>
 						</td>
 					</tr>
 				</table>
 		</form>
 	</div>
 	<script type="text/javascript">
-	/*  function loadImg(obj){
-		var files = obj.files; //input type=file 에서 선택한 파일을 배열로 가져옴 files속성은 무조건 배열
-		console.log(files);
-		if(files.length != 0){ //첨부파일 있는경우
-			for(i=0;i<files.length;i++){
-			var reader =new FileReader();//파일에 대한 정보를 읽어오는 객체
-			reader.readAsDataURL(files[i]); //파일 경로를 읽어옴
-			//경로를 다 읽어오면 실행할 함수 설정
-			reader.onload = function(e) {
-				var img = $('<img>', { 
-                    'src' : e.target.result,
-                     'width' : '500px'}); 			
-				$("#img").prepend(img);
-				$("#img").prepend('<br>');
-			}
-			}
-		}else{  //첨부파일 없는경우
-			$("#img-view").attr("src","");
-		}
-	} */
+	$("#delBtn").click(function(){
+		$(".delFile").hide();
+		$(this).next().show();
+		$("[name=status]").val(2);
+	});
 
 	$(function() {
 		$("#summernote").summernote({

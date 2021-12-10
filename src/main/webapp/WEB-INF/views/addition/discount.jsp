@@ -14,6 +14,9 @@
 		font-size: 40px;
 		padding-bottom: 30px;
 		}
+	#menu>div{
+		float: left;
+	}
 </style>
 </head>
 <body>
@@ -21,8 +24,9 @@
 	<div class="container">
 		<p id="title">할인 및 이벤트</p>
 		<div id="menu">
-		<div><img alt="" src=""></div>
-		<div></div>
+		<div><img src="/resources/additionImage/카페.png" width="100px" height="100px"><div>ㅎㅎ</div></div>
+		<div><img src="/resources/additionImage/박물관.png" width="100px" height="100px"><div>ㅎㅎ</div></div>
+		<div><img src="/resources/additionImage/베카랜드.png" width="100px" height="100px"><div>ㅎㅎ</div></div>
 		<div></div>
 		</div>
 		
