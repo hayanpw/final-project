@@ -122,4 +122,16 @@ public class ReadingController {
 		int result = service.countSeat(readingDay);
 		return new Gson().toJson(result);
 	}
+	
+
+	@ResponseBody
+	@RequestMapping(value="/chkSeat.do",produces = "application/json;charset=utf-8")
+	public String chkSeat(Reading re, Model model) {
+		ArrayList<Integer> list = service.chkSeat(re);
+		re.getReadingDay();
+		for(int i=0;i<list.size(); i++){
+			System.out.println(list.get(i));
+		}
+		return new Gson().toJson(list);
+	}
 }
