@@ -103,16 +103,19 @@ body{
     padding: 0;
     margin: 0 auto;
     height: 50px;
-    width: 900px;
+    width: 100%;
     font-weight: 500;
     color:rgba(86, 61, 57, 0.7);
+    /*padding: 0 px 500px;*/
+    
 }
 .navi>ul{
     position: relative;
     background-color: #fff;
+    display:flex;
+    justify-content:center;
 }
 .navi ul>li{
-    float: left;
     width: 150px;
     height: 50px;
 }
@@ -161,4 +164,7 @@ body{
     position: absolute;
     left:0;
     top:50px;
+}
+.sub>li {
+	float: left;
 }
