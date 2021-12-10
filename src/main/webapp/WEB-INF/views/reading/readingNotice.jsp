@@ -35,7 +35,9 @@
 		</div>
 		<br>
 		<div class="single-title">
-			<h3><span>이</span>용방법</h3>
+			<h3 class="today"><span>이</span>용방법
+				<a href="/reservationToday.do" class="btn btn-primary btn-lg" style="margin-left: 10px; background-color: #4972bc; border-radius: 0px;">좌석현황 확인하기</a>
+			</h3>
 			<ul>
 				<li>예약시간 : 09:00 ~ 23:00 (이용일 일주일 전부터 예약가능 당일예약은 현장 접수만)</li>
 				<li>홈페이지 예약 미달인 경우 당일 현장 접수 후 이용가능</li>
@@ -67,6 +69,7 @@
 					<input type="submit" class="btn btn-success btn-lg" value="예약내역보기" style="margin-left: 10px; background-color: #BDB19A; border-color: #BDB19A">
 				</fieldset>
 			</form>
+			<a href="/test222.do">테이블테스트</a>
 		</div>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>

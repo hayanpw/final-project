@@ -55,8 +55,6 @@
 	$(function(){
 		var redate = new Date($("input[name=readingDay]").val());
 		var today = new Date();
-		console.log(redate);
-		console.log(today);
 		if(redate>today){
 			$("input[name=sub]").attr("type","submit");
 			$("#cancel").attr("class","btn btn-danger btn-lg");

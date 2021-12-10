@@ -42,7 +42,16 @@ body{
     background-color: #fff;
     float: left;
     height: 90px;
-    font-family: d_r; 
+}
+.h-logo>a{
+	text-decoration: none;
+	font-family: d_r; 
+    font-size:50px;
+    color:#563D39;
+}
+.h-logo>a:hover{
+	text-decoration: none;
+	font-family: d_r; 
     font-size:50px;
     color:#563D39;
 }
@@ -87,22 +96,26 @@ body{
 
 .navi{
     position: relative;
+    z-index: 2;
 }
 .navi ul{
     list-style-type: none;
     padding: 0;
     margin: 0 auto;
     height: 50px;
-    width: 900px;
+    width: 100%;
     font-weight: 500;
     color:rgba(86, 61, 57, 0.7);
+    /*padding: 0 px 500px;*/
+    
 }
 .navi>ul{
     position: relative;
     background-color: #fff;
+    display:flex;
+    justify-content:center;
 }
 .navi ul>li{
-    float: left;
     width: 150px;
     height: 50px;
 }
@@ -140,6 +153,7 @@ body{
 }
 .navi>ul>li:hover>.sub{
     display: block;
+
 }
 .sub>li>a:hover{
     color:#fff;
@@ -150,4 +164,7 @@ body{
     position: absolute;
     left:0;
     top:50px;
+}
+.sub>li {
+	float: left;
 }

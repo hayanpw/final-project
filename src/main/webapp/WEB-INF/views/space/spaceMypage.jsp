@@ -11,6 +11,7 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+	<jsp:include page="/WEB-INF/views/common/mypageMenu.jsp"/>
 		<div class="container">
 	 		<p>${sessionScope.m.memberId }님의 대관 신청 정보입니다.</p>
 				<div class="table-box">

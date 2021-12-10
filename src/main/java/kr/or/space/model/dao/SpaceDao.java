@@ -137,10 +137,18 @@ public class SpaceDao {
 	}
 	//대관- 게시판 작성 여부 작성으로 변경
 	public int updatUsedBoard(int rentalNo) {
-		return sqlSession.update("space.updateUseBoard",rentalNo);
+		return sqlSession.update("space.updateUseBoardStatus",rentalNo);
 	}
 	//사용게시판 조회
 	public UseBoard selectOneBoardView(int ubNo) {
 		return sqlSession.selectOne("space.selectOneBoardView",ubNo);
+	}
+	//사용 게시판 삭제
+	public int deleteUseBoard(int ubNo) {
+		return sqlSession.update("space.deleteUseBoard",ubNo);
+	}
+	//사용게시판 수정
+	public int updateUseBoard(UseBoard u) {
+		return sqlSession.update("space.updateUseBoard",u);
 	}
 }

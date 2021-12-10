@@ -16,21 +16,21 @@
 				<c:forEach begin="1" end="100" varStatus="i" >
 					<c:choose>
 						<c:when test="${i.index%20 eq 0}">
-							<div id="seat${i.index}" onclick="chocie(this);">${i.index }</div>
+							<div id="seat${i.index }" class="seat" onclick="chocie(this);">${i.index }</div>
 							<br><br><br><br>
 						</c:when>
 						<c:when test="${i.index%10 eq 0}">
-							<div id="seat${i.index}" onclick="chocie(this);">${i.index }</div>
+							<div id="seat${i.index }" class="seat" onclick="chocie(this);">${i.index }</div>
 							<br>
 						</c:when>
 						<c:when test="${i.count%5 eq 0 }" >
-							<div id="seat${i.index}" onclick="chocie(this);">${i.index }</div>
+							<div id="seat${i.index }" class="seat" onclick="chocie(this);">${i.index }</div>
 							<div id="emptyseat">
 								빈
 							</div>
 						</c:when>
 						<c:otherwise>
-							<div id="seat${i.index}" onclick="chocie(this);">${i.index }</div>
+							<div id="seat${i.index }" class="seat" onclick="chocie(this);">${i.index }</div>
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
@@ -53,9 +53,25 @@
 	<script>
 		$(function(){
 			var selectDate = $("input[name=readingDay]").val();
+			var readingDay = selectDate;
 			var month = selectDate.substring(5,7); //몇월
 			var day = selectDate.substring(8,10);  //몇일
 			$("h3[name=showdate]").html(month+"월 "+day+"일");
+			$.ajax({
+				url : "/chkSeat.do",
+				data : {readingDay:readingDay},
+				type : "post",
+				success : function(data){
+					for(var i=0; i<data.length; i++){
+				 		var seat = data[i];
+				 		for(var j=0; j<100; j++){ //좌석 수 마다 변경
+				 			if($(".seat").eq(j).html() == seat){
+				 				$(".seat").eq(j).removeAttr("onclick").css("background-color", "#6B6C68").css("color", "black");
+				 			}
+				 		}
+				 	}
+				}
+			})
 		});
 	
 		var count = 0;
@@ -82,6 +98,17 @@
 			count--;
 			$("button[name=rollback]").attr("class","btn btn-success btn-lg");
 		}
+		
+		$(document).ready(function() {
+		    $(window).on('beforeunload', function(){
+		        return "Any changes will be lost";
+		    });
+		    // Form Submit
+		    $(document).on("submit", "form", function(event){
+		        // disable warning
+		        $(window).off('beforeunload');
+		    });
+		});
 	</script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>

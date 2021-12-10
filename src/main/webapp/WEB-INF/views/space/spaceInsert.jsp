@@ -46,9 +46,14 @@
 				<table class="table-condensed time-table">
 				</table>
 			</div>
+			
 			<div class="space-img">
 				<input name="files" type="file" id="image" accept="image/*" onchange="setThumbnail(event);" multiple/>
-				 <div id="image_container"></div>
+				 <div id="image_container">
+				 <br>
+				 	<p>※이미지의 최대 개수는 3장입니다.</p>
+				 	<p>※이미지 등록 후 꼭 썸네일 사진을 클릭 해주세요.</p>
+				 </div>
 			</div>	
 			<input type="hidden" name="thumbnail">
 			<div id="insertBtn">
@@ -58,12 +63,17 @@
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 	<script>
+
 	$(function () {
-		
 		$("#plus").click(function () {
+			if($(".time-table tr").length <4){
 			$(".time-table").append("<tr><th>이용시간<th><td><input name = 'startTime'></td><th>~</th><td><input name='endTime'></td></tr>");
+			}else{
+				alert("시간은 4개까지만 등록 가능합니다.");
+				
+			}
 		});
-		$(document).on("click","#image_container>*",function(){
+ 		$(document).on("click","#image_container>*",function(){
 				$(this).addClass("mainImg");
 			if($("#image_container>*").not($(this)).hasClass("mainImg")){
 				$("#image_container>*").not($(this)).removeClass("mainImg");
@@ -73,7 +83,17 @@
 		
 	    });		
 	});
-	function setThumbnail(event) {
+ 	function setThumbnail(event) {
+ 		var fileInput = document.getElementById("image");
+        var files = fileInput.files;
+        var file;
+		if(files.length > 3){
+			alert("사진은 최대 3개까지 업로드 할 수 있습니다.");
+			$("#image").val("");
+
+			return;	
+		}
+ 		$("#image_container>img").remove();
 		for (var image of event.target.files) {
 			var reader = new FileReader();
 			reader.onload = function(event) {
@@ -84,8 +104,7 @@
 				console.log(image);
 				reader.readAsDataURL(image);
 				}
-		
-		}
+		} 
 
 	</script>
 </body>

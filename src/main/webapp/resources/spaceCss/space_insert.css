@@ -56,7 +56,8 @@
 	height: 250px;
 }
 .mainImg{
-	border: 1px solid black;
+	border: 10px solid black;
 }
-
-	
+#plus{
+	cursor: pointer;
+}

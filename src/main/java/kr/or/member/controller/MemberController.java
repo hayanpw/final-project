@@ -149,6 +149,7 @@ public class MemberController {
 	
 	@RequestMapping(value="/searchidpw.do")
 	public String searchidpw(Member member,Model model) {
+		System.out.println(member);
 	int result = service.searchidPw(member);
 	if(result>0) {
 		model.addAttribute("msg","정보변경 성공");

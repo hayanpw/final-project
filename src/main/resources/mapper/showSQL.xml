@@ -109,20 +109,23 @@
 	<select id="selectReservList" parameterType="string" resultType="sReserv">
 		select
             reserv_no as reservNo,
+            R.show_no as showNo,
 			(select show_name from show where show_no=R.show_no) as showName,
 			R.show_date as showDate,
 			R.reserv_date as reservDate,
 			R.reserv_cancel as reservCancel,
+			R.reserv_pay as reservPay,
             count(seat_no) as ticketNum,
             sum(seat_price) as payment
 		from show_reserv R left join seat S using(reserv_no)
-        where R.member_id=#{memberId} and R.reserv_pay=1
+        where R.member_id=#{memberId}
         group by
             reserv_no,
 			R.show_no,
 			R.show_date,
 			R.reserv_date,
-			R.reserv_cancel
+			R.reserv_cancel,
+			R.reserv_pay
         order by 1 desc
 	</select>
 	<update id="reservCancel" parameterType="_int">

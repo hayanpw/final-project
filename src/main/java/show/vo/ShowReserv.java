@@ -10,6 +10,7 @@ public class ShowReserv {
 	private String showDate;
 	private String reservDate;
 	private int reservCancel;
+	private int reservPay;
 	private int ticketNum;
 	private int payment;
 	private String showName;

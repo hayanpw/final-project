@@ -12,11 +12,11 @@
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 		<div class="container">
-			<form action="/writeBoard.do" method="post" enctype="multipart/form-data">
+			<form action="/updateUseBoard.do" method="post" enctype="multipart/form-data">
 				<table class="table table-border" border="1">
 					<tr>
 						<th colspan=2">제목</th>
-						<td colspan="6"><input type="text" name="ubTitle"></td>
+						<td colspan="6"><input type="text" name="ubTitle" value="${u.ubTitle }"></td>
 					</tr>
 					<tr>
 						<th>작성자</th>
@@ -32,13 +32,13 @@
 						<td colspan="8">내용</td>
 					</tr>	
 					<tr>
-						<td colspan="8"><textarea name="ubContent"></textarea></td>
+						<td colspan="8"><textarea name="ubContent" >${u.ubContent }</textarea></td>
 					</tr>	
 				
 				</table>
-				<input type="hidden" name="rentalNo" value="${r.rentalNo }">
 				<input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
-				<button type="submit">등록하기</button>			
+				<input type="hidden" name="ubNo" value="${u.ubNo }">
+				<button type="submit">수정</button>			
 			</form>	
 		</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>

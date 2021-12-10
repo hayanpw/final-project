@@ -29,3 +29,8 @@ body{
 .single-title>ul>li{
 	margin : 2px 2px;
 }
+.today{
+	display: flex;
+    align-items: flex-end;
+    margin-top: 10px;
+}

@@ -161,4 +161,25 @@
 			</when>
 		</choose>
 	</select>
+	
+	<select id="selectNextBoard" parameterType="_int" resultType="kr.or.addition.model.vo.BoardNext">
+	select
+	rnum,
+	board_no as boardNo,
+	board_title as boardTitle,
+	next as nextNo,
+	prev as prevNo,
+	next_title as nextTitle,
+	prev_title as prevTitle
+	from 
+	(select rnum,board_no,board_title,lead(board_no,1,0) over(order by rnum desc) next,lag(board_no,1,0) over(order by rnum desc) prev,
+	lead(board_title,1,'다음글이 없습니다.') over(order by rnum desc) next_title,lag(board_title,1,'이전글이 없습니다.') over(order by rnum desc) prev_title
+	from
+	(select rownum as rnum,n.* from
+	(select board_no,board_title,board_content,boardtype,board_writer,readcount,reg_date,nvl(count, 0) as cnt
+	from(select*from board where boardtype=#{boardType}) 
+	left join (select board_no,count(*) as count from (select board_no,board_ref from board join comment1 on (board_no=board_ref)) group by board_no) 
+	using (board_no) order by board_no desc)n
+	where boardtype=#{boardType}) order by rnum ) where board_no=#{boardNo}
+	</select>
 </mapper>
