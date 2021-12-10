@@ -41,5 +41,15 @@ public class ReadingDao {
 		return sqlSession.selectOne("reading.countSeat", readingDay);
 	}
 
+	public ArrayList<Integer> chkSeat(Reading re) {
+		List<Integer> list = sqlSession.selectList("reading.chkSeat", re);
+		return (ArrayList<Integer>)list;
+	}
+
+	public ArrayList<Reading> selectAllReading() {
+		List<Reading> list = sqlSession.selectList("reading.selectAllReading");
+		return (ArrayList<Reading>)list;
+	}
+
 	
 }

@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import kr.or.addition.model.dao.AdditionDao;
 import kr.or.addition.model.vo.Board;
 import kr.or.addition.model.vo.BoardComment;
+import kr.or.addition.model.vo.BoardNext;
 import kr.or.addition.model.vo.BoardPageData;
 import kr.or.addition.model.vo.BoardViewData;
 import kr.or.addition.model.vo.FileVO;
@@ -52,7 +53,7 @@ public class AdditionService {
 			String pageNavi = "<ul class ='pagination pagination-lg'>";
 
 			if(reqPage>=4) {
-				pageNavi += "<li class='page-item'>";
+				pageNavi += "<li id='pageNum' class='page-item'>";
 				if(boardType==1) {
 					pageNavi += "<a class='page-link' href='/additionBoard.do?boardType=1&reqPage="+(reqPage-1)+"'>";
 				}else if(boardType==2) {
@@ -66,7 +67,7 @@ public class AdditionService {
 			//페이지숫자
 			for(int i=0;i<pageNaviSize;i++) {
 					if(pageNo == reqPage) {
-						pageNavi += "<li class ='page-item active'>";
+						pageNavi += "<li id='pageNumAct' class ='page-item active'>";
 						if(boardType==1) {
 							pageNavi += "<a class='page-link' href='/additionBoard.do?boardType=1&reqPage="+pageNo+"'>";
 						}else if(boardType==2) {
@@ -76,7 +77,7 @@ public class AdditionService {
 						}
 						pageNavi += pageNo+"</a></li>";
 					}else {
-						pageNavi += "<li class ='page-item'>";
+						pageNavi += "<li id='pageNum' class ='page-item'>";
 						if(boardType==1) {
 							pageNavi += "<a class='page-link' href='/additionBoard.do?boardType=1&reqPage="+pageNo+"'>";
 						}else if(boardType==2) {
@@ -94,7 +95,7 @@ public class AdditionService {
 			
 			
 			if(pageNo <= totalPage) {
-				pageNavi += "<li class ='page-item'>";
+				pageNavi += "<li id='pageNum' class ='page-item'>";
 				if(boardType==1) {
 					pageNavi += "<a class='page-link' href='/additionBoard.do?boardType=1&reqPage="+(reqPage+1)+"'>";
 				}else if(boardType==2) {
@@ -272,6 +273,21 @@ public class AdditionService {
 		
 		BoardPageData bpd = new BoardPageData(list, pageNavi, start,totalCount);
 		return bpd;
+	}
+
+	@Transactional
+	public int boardUpdate(Board b) {
+		int result=dao.boardUpdate(b);
+		return result;
+	}
+
+
+	public BoardNext selectNextBoard(int boardNo,int boardType) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("boardNo", boardNo);
+		map.put("boardType", boardType);
+		BoardNext info = dao.selectNextBoard(map);
+		return info;
 	}
 	
 	

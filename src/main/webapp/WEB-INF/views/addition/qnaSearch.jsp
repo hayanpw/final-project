@@ -8,11 +8,22 @@
 <title>Insert title here</title>
 <style type="text/css">
 	#title{
-	padding-top:30px;
-	padding-left:30px;
+	width:165px;
+	border-top: 7px solid #563D39;
+	margin-top:70px;
+	margin-left:70px;
 	font-weight:700;
 	font-size: 40px;
-	padding-bottom: 30px;
+	margin-bottom: 50px;
+	}
+	#title2{
+	width:220px;
+	border-top: 7px solid #563D39;
+	margin-top:70px;
+	margin-left:70px;
+	font-weight:700;
+	font-size: 40px;
+	margin-bottom: 50px;
 	}
 	#table{
 	margin-left: 50px;
@@ -54,9 +65,9 @@
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="container" id="container">
-		<p id="title">FAQ</p>
+		<div id="title">FAQ</div>
 		<div>챗봇자리</div>
-		<p id="title">질문과 답변</p>
+		<div id="title2">질문과 답변</div>
 		<div id="table">
 			<table class="table">
 				<tr id="firtr">

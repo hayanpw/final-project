@@ -49,4 +49,16 @@ public class ReadingService {
 	}
 
 
+	public ArrayList<Integer> chkSeat(Reading re) {
+		ArrayList<Integer> list = dao.chkSeat(re);
+		return list;
+	}
+
+
+	public ArrayList<Reading> selectAllReading() {
+		ArrayList<Reading> list = dao.selectAllReading();
+		return list;
+	}
+
+
 }
