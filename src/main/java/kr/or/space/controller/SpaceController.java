@@ -181,7 +181,7 @@ public class SpaceController {
 		return "common/msg";
 	}
 
-	// 공간 상세보기
+	// 공간 예약
 	@RequestMapping(value = "/spaceInfo.do")
 	public String spaceInfo(int spaceNo, int stNo, String rentalDate, Model model) {
 		Space s = service.selectOneSpace(spaceNo);
@@ -192,6 +192,15 @@ public class SpaceController {
 		model.addAttribute("rentalDate", rentalDate);
 		model.addAttribute("fv", fv);
 		return "space/spaceInfo";
+	}
+	//공간 상세보기
+	@RequestMapping(value = "/spaceView.do")
+	public String spaceView(int spaceNo,Model model) {
+		Space s = service.selectOneSpace(spaceNo);
+		ArrayList<FileVO> fv = service.selectFileList(spaceNo);
+		model.addAttribute("s", s);
+		model.addAttribute("fv", fv);
+		return "space/spaceView";
 	}
 
 	// 대관
