@@ -16,16 +16,16 @@
         <div class="mypage-title"><span>회</span>원관리</div>
         <div class="mypage-container">
 	    	<div class="group-member">
-		    	<input type="checkbox" id="c1" name="cc" />
+		    	<input type="checkbox" id="c1" name="cc" value=0 />
 	   			<label for="c1"><span></span>관리자</label>
-	   			<input type="checkbox" id="c2" name="cc" />
+	   			<input type="checkbox" id="c2" name="cc" value=1 />
 	   			<label for="c2"><span></span>일반</label>
-	   			<input type="checkbox" id="c3" name="cc" />
+	   			<input type="checkbox" id="c3" name="cc" value=2/>
 	   			<label for="c3"><span></span>강사</label>
-	   			<input type="checkbox" id="c4" name="cc" />
+	   			<input type="checkbox" id="c4" name="cc" value=3/>
 	   			<label for="c4"><span></span>블랙</label>
 	   		</div>
-	   	<form class="navbar-form navbar-right" action="/memberListSearchProduct.do">
+	   	<form class="navbar-form navbar-right" action="/searchMember.do">
 	      <div class="input-group ">
 	        <input type="text" class="form-control" placeholder="검색" name="search" value="${search }">
 	        <div class="input-group-btn">

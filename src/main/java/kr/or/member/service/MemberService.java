@@ -61,6 +61,10 @@ public class MemberService {
 		Member m = dao.searchId(member);
 		return m;
 	}
+	public ArrayList<Member> searchMember(String search) {
+		ArrayList<Member> list = dao.searchMember(search);
+		return list;
+	}
 
 
 }
