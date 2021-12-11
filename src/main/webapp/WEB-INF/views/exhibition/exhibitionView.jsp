@@ -134,7 +134,7 @@
 	            	$("#bookDate").val(data);
 	            }
 	        });
-	
+	        $("#bookDate").val($("#datepicker").datepicker("setDate", today).val());
 	        $("#datepicker").change(function() {
 				selectDate = $(this).val();
 				$(".slide").fadeOut();
@@ -144,6 +144,7 @@
 			 function noMondays(date) {
 	    		return [date.getDay() != 1, ''];
 	 		}
+			
 
 	        
 	        //$("#datepicker").datepicker("onselect", today);

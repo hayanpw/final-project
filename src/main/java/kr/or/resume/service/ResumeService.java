@@ -42,4 +42,9 @@ public class ResumeService {
 		return r;
 	}
 
+	public ResumeTbl selectOneResumeTbl(int fileNo) {
+		ResumeTbl rt = dao.selectOneResumeTbl(fileNo);
+		return rt;
+	}
+
 }

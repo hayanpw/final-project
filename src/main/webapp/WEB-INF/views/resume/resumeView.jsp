@@ -30,9 +30,9 @@
         </div>
         <c:if test="${not empty r.rtList  }">
         <div class="sector">
-            <span class="first"><span class="line">이력</span>서</span>
+            <span class="first"><span class="line">이력</span>서</span><br>
             <c:forEach items="${r.rtList }" var="file">
-            <span class="second">${file.filename }</span><button onclick="download();" class="btn">다운받기</button>
+            <span class="second">${file.filename }</span><button onclick="download(${file.fileNo });" class="btn">다운받기</button>
             </c:forEach>
 			<p class="sectorLine"></p>
         </div>
@@ -67,6 +67,9 @@
 	function goResumeList(){
 		var requritNo = $("#hide").val();
 		location.href="/resumeList.do?requritNo="+requritNo;
+	}
+	function download(fileNo){
+		location.href="/resumeFileDown.do?fileNo="+fileNo;
 	}
 	</script>
 </body>

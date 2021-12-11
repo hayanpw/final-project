@@ -44,4 +44,9 @@ public class ResumeDao {
 		List<ResumeTbl> list = sqlSession.selectList("resume.selectFileList",resumeNo);
 		return (ArrayList<ResumeTbl>)list;
 	}
+
+	public ResumeTbl selectOneResumeTbl(int fileNo) {
+		ResumeTbl rt = sqlSession.selectOne("resume.selectOneFile", fileNo);
+		return rt;
+	}
 }

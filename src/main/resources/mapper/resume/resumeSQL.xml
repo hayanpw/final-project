@@ -44,4 +44,12 @@
 			filename as filename
 		from resume_tbl where resume_no=#{resumeNo}
 	</select>
+	<select id="selectOneFile" parameterType="_int" resultType="rt">
+		select 
+			file_no as fileNo,
+			resume_no as resumeNo,
+			filepath as filepath,
+			filename as filename
+		from resume_tbl where file_no=#{fileNo}
+	</select>
 </mapper>
