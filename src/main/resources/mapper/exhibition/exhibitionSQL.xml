@@ -45,4 +45,7 @@
   			nn.exhibition_detail as exhibitionDetail
   		from (select rownum as rnum,n.* from(select * from  exhibition order by exhibition_no desc)n)nn where rnum between  #{start} and #{end}
 	</select>
+	<insert id="insertExReview" parameterType="exr">
+		insert into exhibition_review values(exhibition_review_seq.nextval, #{exNo}, #{exReviewWriter}, #{exReviewContent}, #{exReviewstar}, to_char(sysdate, 'yyyy-mm-dd'))
+	</insert>
 </mapper>

@@ -21,6 +21,7 @@ import com.google.gson.Gson;
 import kr.or.exhibition.service.ExhibitionService;
 import kr.or.exhibition.vo.Exhibition;
 import kr.or.exhibition.vo.ExhibitionPayment;
+import kr.or.exhibition.vo.ExhibitionReview;
 
 @Controller
 public class ExhibitionController {
@@ -162,5 +163,15 @@ public class ExhibitionController {
 		}
 		return "/resources/exhibitionImage/editor/"+filepath;
 	}
-	
+	@RequestMapping(value = "/insertExReview.do")
+	public String insertExReview(ExhibitionReview exr,Model model) {
+		int result = service.insertExReview(exr);
+		if(result>0) {
+			model.addAttribute("msg", "등록 성공");			
+		}else {
+			model.addAttribute("msg", "등록 실패");
+		}
+		model.addAttribute("loc", "/exhibitionView.do?exhibitionNo="+exr.getExNo());
+		return "common/msg";
+	}
 }

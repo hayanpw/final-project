@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import kr.or.exhibition.vo.Exhibition;
 import kr.or.exhibition.vo.ExhibitionPagingVo;
 import kr.or.exhibition.vo.ExhibitionPayment;
+import kr.or.exhibition.vo.ExhibitionReview;
 
 @Repository
 public class ExhibitionDao {
@@ -40,5 +41,10 @@ public class ExhibitionDao {
 	public ArrayList<Exhibition> selectExhibition(ExhibitionPagingVo ep) {
 		List<Exhibition> list = sqlSession.selectList("exhibition.exhibitionList",ep);
 		return (ArrayList<Exhibition>)list;
+	}
+
+	public int insertExReview(ExhibitionReview exr) {
+		int result = sqlSession.insert("exhibition.insertExReview",exr);
+		return result;
 	}
 }

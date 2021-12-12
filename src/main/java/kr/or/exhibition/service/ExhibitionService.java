@@ -9,6 +9,7 @@ import kr.or.exhibition.dao.ExhibitionDao;
 import kr.or.exhibition.vo.Exhibition;
 import kr.or.exhibition.vo.ExhibitionPagingVo;
 import kr.or.exhibition.vo.ExhibitionPayment;
+import kr.or.exhibition.vo.ExhibitionReview;
 
 @Service
 public class ExhibitionService {
@@ -53,5 +54,10 @@ public class ExhibitionService {
 		ep.setEnd(end);
 		ArrayList<Exhibition> list = dao.selectExhibition(ep);
 		return list;
+	}
+
+	public int insertExReview(ExhibitionReview exr) {
+		int result = dao.insertExReview(exr);
+		return result;
 	}
 }
