@@ -268,6 +268,7 @@
 			
 		}
 		function deleteReview(obj,exReviewNo,showNo){
+			var exReviewStatus = 1;
 			if(confirm("관람평을 삭제하시겠습니까?")){
 				location.href="/deleteExReview.do?reviewNo="+exReviewNo+"&showNo="+exNo;
 			}

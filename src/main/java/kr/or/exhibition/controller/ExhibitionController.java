@@ -36,7 +36,9 @@ public class ExhibitionController {
 	@RequestMapping(value="/exhibitionView.do")
 	public String exhibitionView(int exhibitionNo, Model model) {
 		Exhibition exb = service.selectOneExhibition(exhibitionNo);
+		ArrayList<ExhibitionReview> list = service.selectListExReview(exhibitionNo);
 		model.addAttribute("exb",exb);
+		model.addAttribute("list",list);
 		return "exhibition/exhibitionView";
 	}
 	//전시 결제 페이지로 이동
@@ -166,6 +168,28 @@ public class ExhibitionController {
 	@RequestMapping(value = "/insertExReview.do")
 	public String insertExReview(ExhibitionReview exr,Model model) {
 		int result = service.insertExReview(exr);
+		if(result>0) {
+			model.addAttribute("msg", "등록 성공");			
+		}else {
+			model.addAttribute("msg", "등록 실패");
+		}
+		model.addAttribute("loc", "/exhibitionView.do?exhibitionNo="+exr.getExNo());
+		return "common/msg";
+	}
+	@RequestMapping(value ="/deleteExReview.do")
+	public String deleteExReview(ExhibitionReview exr,Model model) {
+		int result = service.insertExReview(exr);
+		if(result>0) {
+			model.addAttribute("msg", "등록 성공");			
+		}else {
+			model.addAttribute("msg", "등록 실패");
+		}
+		model.addAttribute("loc", "/exhibitionView.do?exhibitionNo="+exr.getExNo());
+		return "common/msg";
+	}
+	@RequestMapping(value ="updateExReview.do")
+	public String updateExReview(ExhibitionReview exr,Model model) {
+		int result = service.updateExReview(exr);
 		if(result>0) {
 			model.addAttribute("msg", "등록 성공");			
 		}else {

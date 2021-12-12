@@ -10,6 +10,7 @@ public class ExhibitionReview {
 	private String exReviewContent;
 	private int exReviewStar;
 	private String exReviewDate;
+	private int exReviewStatus;
 	
 	public String getexReviewContentBr() {
 		return exReviewContent.replaceAll("\r\n", "<br>");

@@ -60,4 +60,18 @@ public class ExhibitionService {
 		int result = dao.insertExReview(exr);
 		return result;
 	}
+	public int deleteExReview(ExhibitionReview exr) {
+		int result = dao.deleteExReview(exr);
+		return result;
+	}
+
+	public int updateExReview(ExhibitionReview exr) {
+		int result = dao.updateExReview(exr);
+		return result;
+	}
+
+	public ArrayList<ExhibitionReview> selectListExReview(int exhibitionNo) {
+		ArrayList<ExhibitionReview> list = dao.selectExReview(exhibitionNo);
+		return list;
+	}
 }

@@ -47,4 +47,19 @@ public class ExhibitionDao {
 		int result = sqlSession.insert("exhibition.insertExReview",exr);
 		return result;
 	}
+
+	public int deleteExReview(ExhibitionReview exr) {
+		int result = sqlSession.update("exhibition.deleteExReview",exr);
+		return result;
+	}
+
+	public int updateExReview(ExhibitionReview exr) {
+		int result = sqlSession.update("exhibition.updateExReveiw",exr);
+		return result;
+	}
+
+	public ArrayList<ExhibitionReview> selectExReview(int exhibitionNo) {
+		List<ExhibitionReview> list =sqlSession.selectList("exhibition.selectExReviewList", exhibitionNo);
+		return  (ArrayList<ExhibitionReview>)list;
+	}
 }
