@@ -166,5 +166,54 @@
 			$("#amount").val(currAmount);
 			
 		});
+	    function modifyReview(obj,reviewNo,showNo) {
+			//textarea를 화면에 표현
+			$(obj).parents("li").children().filter(".updateContent").show();
+			//기존 본문 내용을 숨김
+			$(obj).parents("li").children().first().hide();
+			$(obj).parents("li").children().filter(".starBox").hide();
+			//수정 -> 수정완료
+			$(obj).html('수정완료');
+			$(obj).attr("onclick", "modifyComplete(this, '"+reviewNo+"', '"+showNo+"')");
+			//삭제 -> 취소
+			$(obj).next().html('취소');
+			$(obj).next().attr("onclick", "modifyCancel(this, '"+reviewNo+"', '"+showNo+"');");
+			//답글달기 버튼 숨기기
+			$(obj).next().next().hide();
+		}
+		function modifyCancel(obj,reviewNo,showNo) {
+			//textarea 숨김
+			$(obj).parents("li").children().first().show();
+			$(obj).parents("li").children().filter(".starBox").show();
+			//기존 본문내용을 화면에 다시 표현
+			$(obj).parents("li").children().filter(".updateContent").hide();
+			//수정완료 -> 수정
+			$(obj).prev().html('수정');
+			$(obj).prev().attr("onclick", "modifyReview(this, '"+reviewNo+"', '"+showNo+"');");
+			//취소 -> 삭제
+			$(obj).html('삭제');
+			$(obj).attr("onclick", "deleteReview(this, '"+reviewNo+"', '"+showNo+"');");
+			//답글달기 버튼 보이기
+			$(obj).next().show();
+		}
+		function modifyComplete(obj,reviewNo,showNo){
+			var form = $("<form action='/updateReview.do' method='post'></form>");
+			//form안에 수정 번호 설정
+			form.append($("<input type='text' name='reviewNo' value='"+reviewNo+"'>"));
+			//form에 공연 번호 설정
+			form.append($("<input type='text' name='showNo' value='"+showNo+"'>"));
+			//수정한 내용을 설정
+			form.append($(obj).parents("li").children().filter(".updateContent"));
+			//전송할 form태그를 현재 페이지에 추가
+			$("body").append(form);
+			//form태그 전송
+			form.submit();
+			
+		}
+		function deleteReview(obj,reviewNo,showNo){
+			if(confirm("관람평을 삭제하시겠습니까?")){
+				location.href="/deleteReview.do?reviewNo="+reviewNo+"&showNo="+showNo;
+			}
+		}
     </script>
 </html>
