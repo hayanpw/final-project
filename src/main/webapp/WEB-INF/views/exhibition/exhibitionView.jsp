@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -71,7 +72,63 @@
               		</div>
               		<div id="menu2" class="tab-pane fate in" >
               			<h3>관람평이</h3>
-		    			<p>Some content in menu 2.</p>
+		    			<div class="reviewBox hideContent">
+                
+			        <c:if test="${sessionScope.m != null }">
+			        	<div class="inputReviewBox">
+							<form action="/insertExReview.do" method="post">
+								<input type="hidden" name="reviewWriter" value="${sessionScope.m.memberId }">
+								<input type="hidden" name="showNo" value="${snr.s.showNo }">
+								<div class="selectStar">
+									<p>평점선택</p>
+									<select name="star">
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
+									</select>
+								</div>
+								<textarea name="reviewContent" class="form-control" style="width: 90%;resize: none;"></textarea>
+								<button type="submit" class="btn btn-defualt">등록</button>
+							</form>
+						</div>
+			        </c:if>
+					
+					<div class="reviewList">
+						<c:forEach items="${exr.list }" var="exr" varStatus="i">
+							<ul class="reviews">
+								<li>
+									<p>${exr.exReviewWriter }</p>
+									<p>${exr.exReviewDate }</p>
+								</li>
+								<li>
+									<p>${exr.exReviewContentBr }</p>
+									<textarea name="reviewContent" class="form-control updateContent" style="display: none;">${exr.exReviewContent }</textarea>
+									<div class="starBox">
+										<c:forEach begin="1" end="${exr.exReviewStar }" >
+											<span><img src="resources/showImage/star-on.png" style="height: 10px;"></span>											
+										</c:forEach>									
+									</div>
+									<p class="reviewsBtn">
+										<c:if test="${sessionScope.m != null }">
+											<c:choose>
+												<c:when test="${sessionScope.m.memberId == sr.reviewWriter}">
+													<a href="javascript:void(0)" onclick="modifyReview(this,'${exr.exReviewNo }','${exr.exNo }');">수정</a>
+													<a href="javascript:void(0)" onclick="deleteReview(this,'${exr.exReviewNo }','${exr.exNo }');">삭제</a>
+												</c:when>
+												<c:when test="${sessionScope.m.memberLevel == 0 }">
+													<a href="javascript:void(0)" onclick="deleteReview(this,'${exr.exReviewNo }','${exr.exNo }');">삭제</a>
+												</c:when>
+											</c:choose>
+										</c:if>
+									</p>
+								</li>
+							</ul>
+						</c:forEach>
+					</div>
+					
+                </div>
               		</div>
               </div>
         </div>
@@ -166,7 +223,7 @@
 			$("#amount").val(currAmount);
 			
 		});
-	    function modifyReview(obj,reviewNo,showNo) {
+	    function modifyReview(obj,exReviewNo,exNo) {
 			//textarea를 화면에 표현
 			$(obj).parents("li").children().filter(".updateContent").show();
 			//기존 본문 내용을 숨김
@@ -174,14 +231,14 @@
 			$(obj).parents("li").children().filter(".starBox").hide();
 			//수정 -> 수정완료
 			$(obj).html('수정완료');
-			$(obj).attr("onclick", "modifyComplete(this, '"+reviewNo+"', '"+showNo+"')");
+			$(obj).attr("onclick", "modifyComplete(this, '"+exReviewNo+"', '"+exNo+"')");
 			//삭제 -> 취소
 			$(obj).next().html('취소');
-			$(obj).next().attr("onclick", "modifyCancel(this, '"+reviewNo+"', '"+showNo+"');");
+			$(obj).next().attr("onclick", "modifyCancel(this, '"+exReviewNo+"', '"+exNo+"');");
 			//답글달기 버튼 숨기기
 			$(obj).next().next().hide();
 		}
-		function modifyCancel(obj,reviewNo,showNo) {
+		function modifyCancel(obj,exReviewNo,exNo) {
 			//textarea 숨김
 			$(obj).parents("li").children().first().show();
 			$(obj).parents("li").children().filter(".starBox").show();
@@ -189,19 +246,19 @@
 			$(obj).parents("li").children().filter(".updateContent").hide();
 			//수정완료 -> 수정
 			$(obj).prev().html('수정');
-			$(obj).prev().attr("onclick", "modifyReview(this, '"+reviewNo+"', '"+showNo+"');");
+			$(obj).prev().attr("onclick", "modifyReview(this, '"+exReviewNo+"', '"+exNo+"');");
 			//취소 -> 삭제
 			$(obj).html('삭제');
-			$(obj).attr("onclick", "deleteReview(this, '"+reviewNo+"', '"+showNo+"');");
+			$(obj).attr("onclick", "deleteReview(this, '"+exReviewNo+"', '"+exNo+"');");
 			//답글달기 버튼 보이기
 			$(obj).next().show();
 		}
-		function modifyComplete(obj,reviewNo,showNo){
-			var form = $("<form action='/updateReview.do' method='post'></form>");
+		function modifyComplete(obj,exReviewNo,exNo){
+			var form = $("<form action='/updateExReview.do' method='post'></form>");
 			//form안에 수정 번호 설정
-			form.append($("<input type='text' name='reviewNo' value='"+reviewNo+"'>"));
+			form.append($("<input type='text' name='reviewNo' value='"+exReviewNo+"'>"));
 			//form에 공연 번호 설정
-			form.append($("<input type='text' name='showNo' value='"+showNo+"'>"));
+			form.append($("<input type='text' name='showNo' value='"+exNo+"'>"));
 			//수정한 내용을 설정
 			form.append($(obj).parents("li").children().filter(".updateContent"));
 			//전송할 form태그를 현재 페이지에 추가
@@ -210,9 +267,9 @@
 			form.submit();
 			
 		}
-		function deleteReview(obj,reviewNo,showNo){
+		function deleteReview(obj,exReviewNo,showNo){
 			if(confirm("관람평을 삭제하시겠습니까?")){
-				location.href="/deleteReview.do?reviewNo="+reviewNo+"&showNo="+showNo;
+				location.href="/deleteExReview.do?reviewNo="+exReviewNo+"&showNo="+exNo;
 			}
 		}
     </script>
