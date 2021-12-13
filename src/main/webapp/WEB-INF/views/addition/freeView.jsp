@@ -136,6 +136,16 @@
 				</a>
 			</div>
 			<a class="btn" href="/additionBoard.do?boardType=3&reqPage=1">글목록</a>
+			<c:if test="${sessionScope.m.memberLevel eq 0 }">
+			<c:choose>
+				<c:when test="${b.boardLevel eq 2 }">
+				<a class="btn" href="/removeRegulationBoard.do?boardNo=${b.boardNo }">규제풀기</a>
+				</c:when>
+				<c:otherwise>
+				<a class="btn" href="/regulationBoard.do?boardNo=${b.boardNo }">규제하기</a>
+				</c:otherwise>
+			</c:choose>
+			</c:if>
 		</div>
 			<table class="table">
 				<tr>
@@ -274,6 +284,9 @@
 			<c:if test="${sessionScope.m.memberId == b.boardWriter}">
 			<a class="btn" href="/boardDelete.do?boardType=3&boardNo=${b.boardNo }">글삭제</a>
 			<a class="btn" href="/boardUpdate.do?boardNo=${b.boardNo }">글수정</a>
+			</c:if>
+			<c:if test="${sessionScope.m.memberLevel ==0 }">
+			<a class="btn" href="/boardDelete.do?boardType=3&boardNo=${b.boardNo }">글삭제</a>
 			</c:if>
 			<a class="btn" onclick="history.go(-1);">이전</a>
 		</div>

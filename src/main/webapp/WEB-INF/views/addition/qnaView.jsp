@@ -253,6 +253,9 @@
 				<a class="btn" href="/boardDelete.do?boardType=2&boardNo=${b.boardNo }">글삭제</a>
 				<a class="btn" href="/boardUpdate.do?boardNo=${b.boardNo }">글수정</a>
 				</c:if>
+				<c:if test="${sessionScope.m.memberLevel ==0 }">
+				<a class="btn" href="/boardDelete.do?boardType=2&boardNo=${b.boardNo }">글삭제</a>
+				</c:if>
 				<a class="btn" onclick="history.go(-1);">이전</a>
 			</div>
 		</div>

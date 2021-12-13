@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import kr.or.member.service.MemberService;
 import kr.or.member.service.SendMail;
 import kr.or.member.vo.Member;
+import kr.or.member.vo.MemberPage;
 
 @Controller
 public class MemberController {
@@ -132,21 +133,6 @@ public class MemberController {
 			model.addAttribute("loc","/");
 			return "common/msg";
 		}
-	
-	@RequestMapping(value="/allMember.do")
-	public String allMember(Model model) {
-		ArrayList<Member> list = service.selectAllMember();
-		model.addAttribute("list",list);
-		return "member/AllMember";
-	}
-		
-	@RequestMapping(value="/updateMemberlist.do")
-	@ResponseBody
-	public int updateMemberLevel(Member member) {
-		int result = service.updateMemberLevel(member);
-		return result;
-	}		
-	
 	@RequestMapping(value="/searchidpw.do")
 	public String searchidpw(Member member,Model model) {
 		System.out.println(member);
@@ -173,7 +159,23 @@ public class MemberController {
 		model.addAttribute("list",list);
 		model.addAttribute("search",search);
 		return "member/AllMember";
+	}		
+	@RequestMapping(value="/updateMemberlist.do")
+	@ResponseBody
+	public int updateMemberLevel(Member member) {
+		int result = service.updateMemberLevel(member);
+		return result;
 	}
+	@RequestMapping(value="/allMember.do")
+	public String allMember(int reqPage, Model model) {
+		MemberPage mpg = service.selectAllMember(reqPage);
+		model.addAttribute("totalCount", mpg.getTotalCount());
+		model.addAttribute("list",mpg.getList());
+		model.addAttribute("pageNavi", mpg.getPageNavi());
+		model.addAttribute("start", mpg.getStart());
+		return "member/AllMember";
+	}
+	
 	
 }
 	

@@ -107,5 +107,12 @@ public class AdditionDao {
 		return (ArrayList<Board>)fixlist;
 	}
 
+	public int regulationBoard(int boardNo) {
+		return sqlSession.update("addition.regulationBoard",boardNo);
+	}
+	
+	public int removeRegulationBoard(int boardNo) {
+		return sqlSession.update("addition.removeRegulationBoard",boardNo);
+	}
 
 }
