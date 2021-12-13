@@ -173,8 +173,8 @@
         <!-- <div class="banner">
           <div class="slide-right up-on-scroll">
           <img src="/resources/mainImage/upload/m-banner.jpg">
-        </div> -->
-        </div>
+        </div> 
+        </div>-->
 
         <div class="m-notice">
           <div class="slide-right up-on-scroll">
@@ -194,6 +194,7 @@
                         <span class="date">2021.12.08</span>
                       </li>
                   </ul>
+               </li>
 
                 <li class="r-popup">
                   <div class="tit-main">

@@ -167,7 +167,7 @@
             </div>
             <div class="reserv">
                 <div id="datepicker"></div>
-                <form action="/selectSeat.do" method="post">
+                <form action="/selectSeat.do" method="post" onsubmit="return check()">
 	                <input type="hidden" name="showDate">
 	                <input type="hidden" name="showNo" value="${snr.s.showNo }">
 	                <input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
@@ -197,6 +197,15 @@
         <button class="scrollZero" onclick="goTop();" style="display: none">TOP</button>
     </div>
     <script>
+    	function check() {
+			if($("input[name=showDate]").val() == ""){
+				alert("날짜를 선택해주세요");
+				return false;
+			}else{
+				return true;
+			}
+		}
+    
 	    $(window).on("scroll", function(){
 	        if($(window).scrollTop() > 400){
 	            $(".scrollZero").show();
@@ -250,7 +259,7 @@
 				$("input[name=showDate]").val(selectDate);
 	        });
 	        
-	        $("input[name=showDate]").val($("#datepicker").datepicker("setDate", today).val());
+//	        $("input[name=showDate]").val($("#datepicker").datepicker("setDate", today).val());
 
 	    });
 	    

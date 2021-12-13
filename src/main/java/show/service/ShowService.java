@@ -100,7 +100,7 @@ public class ShowService {
 
 	public int deleteReserv(int reservNo) {
 		int result = dao.deleteReserv(reservNo);
-		result = dao.deleteSeat(reservNo);
+		result += dao.deleteSeat(reservNo);
 		return result;
 	}
 
