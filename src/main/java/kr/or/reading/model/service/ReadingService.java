@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.reading.model.dao.ReadingDao;
 import kr.or.reading.model.vo.Reading;
@@ -16,8 +17,8 @@ public class ReadingService {
 	private ReadingDao dao;
 
 
-	public ReadingBlack selectOneBlackList(String memberId) {
-		ReadingBlack rb = dao.selectOneBlackList(memberId);
+	public ReadingBlack selectOneBlackList(String readingId) {
+		ReadingBlack rb = dao.selectOneBlackList(readingId);
 		return rb;
 	}
 
@@ -55,10 +56,51 @@ public class ReadingService {
 	}
 
 
-	public ArrayList<Reading> selectAllReading() {
-		ArrayList<Reading> list = dao.selectAllReading();
+	public ArrayList<Reading> selectWeekReading() {
+		ArrayList<Reading> list = dao.selectWeekReading();
 		return list;
 	}
+
+	@Transactional	//두가지가 다 처리되야 커밋을 해야됌 하나라도 안될시 롤백
+	public int outAndBlackList(Reading re) {
+		int count=0;
+		for(int i=0; i<re.getIdList().size(); i++) {
+			re.setReadingDay(re.getDayList().get(i));
+			re.setReadingId(re.getIdList().get(i));
+			
+			int result = dao.expulsion(re);
+			if(result>0) {
+				int result1 = dao.insertBlackList(re);
+				if(result1>0) {
+					count++;
+				}else {
+					return -2;
+				}
+			}else {
+				return -1;
+			}
+		}
+		return count;
+	}
+
+	@Transactional	//두가지가 다 처리되야 커밋을 해야됌 하나라도 안될시 롤백
+	public int earlyOut(Reading re) {
+		int count=0;
+		for(int i=0; i<re.getIdList().size(); i++) {
+			re.setReadingDay(re.getDayList().get(i));
+			re.setReadingId(re.getIdList().get(i));
+			
+			int result = dao.earlyOut(re);
+			if(result>0) {
+				count++;
+			}else {
+				return -1;
+			}
+		}
+		return count;
+	}
+
+
 
 
 }
