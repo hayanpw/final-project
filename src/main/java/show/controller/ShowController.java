@@ -343,4 +343,16 @@ public class ShowController {
 		return list;
 	}
 	
+	@RequestMapping(value = "/deleteReserv.do")
+	public String deleteReserv(int reservNo, String memberId, Model model) {
+		int result = service.deleteReserv(reservNo);
+		if(result>0) {
+			model.addAttribute("msg", "예매내역 삭제 완료");			
+		}else {
+			model.addAttribute("msg", "삭제 실패");
+		}
+		model.addAttribute("loc", "/showMypage.do?memberId="+memberId);
+		return "common/msg";
+	}
+	
 }

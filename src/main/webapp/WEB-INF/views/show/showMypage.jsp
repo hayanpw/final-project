@@ -32,6 +32,7 @@
 	        					<div class="reservBox">
 	        						<h4>공연명 : ${r.showName }</h4>
 	        						<h5>공연일 : ${r.showDate }</h5>
+	        						<button class="btn btn-default btn-sm" onclick="deleteReserv('${r.reservNo }');">내역삭제</button>
 	        					</div>
 	        				</div>
 	        			</c:when>
@@ -45,7 +46,7 @@
 	        						<c:choose>
 	        							<c:when test="${r.reservPay == 1 }">
 			        						<button onclick="showSeat('${r.reservNo}');" type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal">좌석보기</button>
-			        						<button class="btn btn-danger btn-sm" onclick="cancelReserv('${r.reservNo }');">예매취소</button>	        								
+			        						<button class="btn btn-danger btn-sm" onclick="cancelReserv('${r.reservNo }');">예매취소</button>
 	        							</c:when>
 	        							<c:otherwise>
 	        								<input type="hidden" value="${r.showName }">
@@ -237,6 +238,7 @@
 	        						<h5>공연일 : ${r.showDate }</h5>
 	        						<h5>예매수 : ${r.ticketNum }</h5>
 	        						<h5>결제금액 : ${r.payment }</h5>
+	        						<button class="btn btn-default btn-sm" onclick="deleteReserv('${r.reservNo }');">내역삭제</button>
 	        					</div>
 	        				</div>
 	        			</c:otherwise>
@@ -248,6 +250,11 @@
 		function cancelReserv(reservNo) {
 	    	if(confirm("예매를 취소하시겠습니까?")){
 				location.href="/reservCancel.do?reservNo="+reservNo+"&memberId=${sessionScope.m.memberId}";
+			}
+		}
+		function deleteReserv(reservNo) {
+	    	if(confirm("내역을 삭제하시겠습니까?")){
+				location.href="/deleteReserv.do?reservNo="+reservNo+"&memberId=${sessionScope.m.memberId}";
 			}
 		}
 		$(function() {
