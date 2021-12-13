@@ -14,6 +14,7 @@
 <link href="resources/readingCss/test.css" rel="stylesheet">
 </head>
 <body>
+	<h1>최근 1주일 예약 내역</h1>
 	<table id="table_id" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
@@ -30,7 +31,11 @@
         <tbody>
         	<c:forEach	items="${list }" var="re" varStatus="i">
 				<tr>
-					<td class="chktd"><input type="checkbox" class="chk"></td>
+					<td class="chktd">
+						<c:if test="${re.readingCheckOut eq 0}">
+							<input type="checkbox" class="chk">
+						</c:if>
+					</td>
 					<td>${re.readingTime }</td>
 					<td>${re.readingDay }</td>
 					<td>${re.readingNum }</td>
@@ -57,6 +62,9 @@
 							<c:when test="${re.readingCheckOut eq 1}">
 								퇴실
 							</c:when>
+							<c:when test="${re.readingCheckOut eq 2}">
+								강제퇴실
+							</c:when>
 						</c:choose>
 					</td>
 				</tr>
@@ -65,8 +73,9 @@
         <tfoot>
         	<tr>
         		<th colspan="8">
-        			<button style="float:right; margin-right:10px">강제퇴실</button>
-        			<button style="float:right; margin-right:10px">조기퇴실</button>
+        			
+        			<button onclick="out();" style="float:right; margin-right:10px">강제퇴실</button>
+        			<button onclick="early();" style="float:right; margin-right:10px">조기퇴실</button>
         		</th>
         	</tr>
         	
@@ -75,8 +84,8 @@
 	<script>
 	    $(document).ready(function() {
 	        $("#table_id").DataTable({
-	        	 order: [[ 1, "asc" ]],
-	        	 "language": {
+	        	 order: [[ 2, "asc" ],[ 3, "asc" ]], //정렬
+	        	 "language": { //메뉴한글화
 		        		"decimal" : "",
 		                "emptyTable" : "데이터가 없습니다.",
 		                "info" : "총 _TOTAL_명   _START_에서 _END_까지 표시",
@@ -102,6 +111,63 @@
 		            }
 	        });
 	    } );
+	    
+	    function out(){
+			var inputs = $(".chk:checked");
+	    	var readingDay = new Array();
+	    	var readingId = new Array();
+	    	
+			var today = new Date();
+			var year = today.getFullYear();
+		    var month = ("0" + (1 + today.getMonth())).slice(-2);
+		    var day = ("0" + today.getDate()).slice(-2);
+			var str = year+"-"+month+"-"+day;
+			
+			var form = $("<form action='/outAndBlackList.do' method='post'></form>");
+		    inputs.each(function(idx,item){
+				var day = $(item).parent().next().next().html();
+				readingDay.push(day);
+				form.append($("<input type='hidden' name='dayList' value='"+day+"'>"));
+				var id = $(item).parent().next().next().next().next().html();
+				readingId.push(id);
+				form.append($("<input type='hidden' name='idList' value='"+id+"'>"));
+			});
+			$("body").append(form);
+			if(str!=readingDay[0]){
+				alert("오늘 내역만 수정할 수 있습니다.")
+			}else{
+		   		form.submit();
+			}
+	    };
+
+	    function early(){
+			var inputs = $(".chk:checked");
+	    	var readingDay = new Array();
+	    	var readingId = new Array();
+	    	
+			var today = new Date();
+			var year = today.getFullYear();
+		    var month = ("0" + (1 + today.getMonth())).slice(-2);
+		    var day = ("0" + today.getDate()).slice(-2);
+			var str = year+"-"+month+"-"+day;
+
+			var form = $("<form action='/earlyOut.do' method='post'></form>");
+	    	inputs.each(function(idx,item){
+				var day = $(item).parent().next().next().html();
+				readingDay.push(day);
+				form.append($("<input type='hidden' name='dayList' value='"+day+"'>"));
+				var id = $(item).parent().next().next().next().next().html();
+				readingId.push(id);
+				form.append($("<input type='hidden' name='idList' value='"+id+"'>"));
+			});
+			$("body").append(form);
+			if(str!=readingDay[0]){
+				alert("오늘 내역만 수정할 수 있습니다.")
+			}else{
+		   		form.submit();
+			}
+	    };
+	    
 	</script>
 </body>
 </html>

@@ -15,9 +15,9 @@ public class ReadingDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
-	public ReadingBlack selectOneBlackList(String memberId) {
+	public ReadingBlack selectOneBlackList(String readingId) {
 		
-		return sqlSession.selectOne("reading.selectOneBlackList", memberId);
+		return sqlSession.selectOne("reading.selectOneBlackList", readingId);
 	}
 
 	public Reading selectOneNum(Reading re) {
@@ -46,9 +46,22 @@ public class ReadingDao {
 		return (ArrayList<Integer>)list;
 	}
 
-	public ArrayList<Reading> selectAllReading() {
-		List<Reading> list = sqlSession.selectList("reading.selectAllReading");
+	public ArrayList<Reading> selectWeekReading() {
+		List<Reading> list = sqlSession.selectList("reading.selectWeekReading");
 		return (ArrayList<Reading>)list;
+	}
+
+
+	public int expulsion(Reading re) {
+		return sqlSession.update("reading.expulsion", re);
+	}
+
+	public int insertBlackList(Reading re) {
+		return sqlSession.insert("reading.insertBlackList", re);
+	}
+
+	public int earlyOut(Reading re) {
+		return sqlSession.update("reading.earlyOut", re);
 	}
 
 	
