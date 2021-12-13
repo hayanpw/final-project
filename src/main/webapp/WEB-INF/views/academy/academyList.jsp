@@ -12,6 +12,39 @@
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	 <div class="container">
+	 <!-- 카테고리  -->
+		<div class="category">
+			<ul id="gnb">
+				<li class="cate_btn all">
+					<a href="/academyList.do?reqPage=4">
+						# 전체
+					</a>
+				</li>
+				<c:forEach items="${acList}" var="acc">
+					<li class="cate_btn">
+						<a class="categorysearch" category="${acc.academyCategory }">																	
+	                    	# ${acc.academyCategory}
+	                    </a>
+					</li>
+				</c:forEach>
+			</ul>
+		</div>
+		<div class="search">
+			<div class="search_text">
+				<c:choose>
+				<c:when test="${not empty sessionScope.member }">
+				<h2>${sessionScope.member.memberName}님 원하시는 분야의 수업을 찾아보세요.</h2>
+				</c:when>
+				<c:otherwise>
+				<h2>원하시는 분야의 수업을 찾아보세요.</h2>
+				</c:otherwise>
+				</c:choose>
+			</div>
+				<div class="search_bar">
+					<input type="text" id="keyWord" placeholder="원하는 상품 및 주요 키워드를 검색해보세요.">
+					<button id="search" type="button" class="search_btn"><img src="/resources/exhibitionImage/icon/search.png"></button>
+				</div>
+		</div>
 		<ul class="mainmenu">
 		<c:forEach items="${list  }" var="a" >
 			<li class="academy">
@@ -80,6 +113,17 @@
 					
 				}
 			});
+		});
+		$(document).ready(function(){
+			$("#gnb li").removeClass("on");
+			$(".all").closest("li").addClass("on");
+		});
+		$(".categorysearch").click(function(){
+			var category = $(this).attr("category");
+			console.log(this);
+			$("#gnb li").removeClass("on");
+			$(this).closest("li").addClass("on");
+			console.log(category);
 		});
 	</script>
 </body>
