@@ -46,10 +46,10 @@
                            <li><a href="/selectSpaceBoardList.do?reqPage=1">공간 리뷰</a></li>
                         </ul>
                    </li>
-                   <li><a href="#">전시</a></li>
+                   <li><a href="/exhibitionList.do?reqPage=4">전시</a></li>
                    <li><a href="/readingNotice.do">열람실</a></li>
                    <li>
-                       <a href="#">아카데미</a>
+                       <a href="/academyList.do?reqPage=4">아카데미</a>
                        <ul class="sub">
                            <li><a href="/academyList.do?reqPage=4">수강 신청</a></li>
                            <li><a href="/requritList.do?reqPage=1">강사 모집</a></li>
