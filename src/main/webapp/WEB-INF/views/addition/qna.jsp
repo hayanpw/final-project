@@ -146,9 +146,21 @@
 					<td>번호</td><td>제목</td><td>작성자</td><td>작성일</td><td>답변상태</td>
 				</tr>
 				<c:forEach	items="${list }" var="b" varStatus="i">
+				<c:if test="${b.bnum != 0 }">
 				<tr>
 					<td>${b.bnum }</td>
-					<td id="btitle"><a href="/boardView.do?boardType=2&boardNo=${b.boardNo}">${b.boardTitle }</a></td>
+					<c:choose>
+						<c:when test="${b.boardLevel eq 1}">
+							<td id="btitle"><a href="/boardView.do?boardType=2&boardNo=${b.boardNo}" class="chk"><i class="fas fa-lock"></i>${b.boardTitle }</a></td>
+							<input type="hidden" class="boardLevel" value="${b.boardLevel }">
+							<input type="hidden" class="memberId" value="${sessionScope.m.memberId }">
+							<input type="hidden" class="memberLevel" value="${sessionScope.m.memberLevel }">
+							<input type="hidden" class="boardWriter" value="${b.boardWriter }">
+						</c:when>
+						<c:otherwise>
+							<td id="btitle"><a href="/boardView.do?boardType=2&boardNo=${b.boardNo}">${b.boardTitle }</a></td>
+						</c:otherwise>
+					</c:choose>
 					<td>${b.boardWriter }</td>
 					<td>${b.regDate }</td>
 					<c:choose>
@@ -160,6 +172,7 @@
 						</c:otherwise>
 					</c:choose>
 				</tr>
+				</c:if>
 				</c:forEach>
 			</table>
 		</div>
@@ -174,6 +187,28 @@
 		</c:if>
 	</div>
 	<script type="text/javascript">
+	$(document).on("click",".chk",function(){
+		var idx=$(".chk").index(this);
+		var boardWriter = $(".boardWriter").eq(idx).val();
+		var boardLevel = $(".boardLevel").eq(idx).val();
+		var memberId = $(".memberId").eq(idx).val();
+		var memberLevel = $(".memberLevel").eq(idx).val();
+		if(memberId ==""){
+			alert("읽기 권한이 없습니다.");
+			return false;
+		}
+		if(boardLevel==1){
+			if(memberLevel == 0){
+				return true;
+			}else if(boardWriter == memberId){
+				return true;
+			}else{
+				alert("읽기 권한이 없습니다.");
+				return false;
+			}
+		}
+    });
+	
 	$("#submit").click(function(){
 		var keyword = $("#keyword").val();
 		if(keyword == ""){
@@ -181,6 +216,7 @@
 			return false;
 		}
 	});
+	
 	</script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>

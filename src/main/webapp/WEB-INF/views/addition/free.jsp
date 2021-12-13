@@ -125,6 +125,7 @@
 					<td>번호</td><td>제목</td><td>작성자</td><td>작성일</td><td>조회수</td>
 				</tr>
 				<c:forEach	items="${list }" var="b" varStatus="i">
+				<c:if test="${b.bnum != 0 }">
 				<tr>
 					<td>${b.bnum }</td>
 					<td id="btitle"><a href="/boardView.do?boardType=3&boardNo=${b.boardNo}">${b.boardTitle }[${b.commentCount }]</a></td>
@@ -132,6 +133,7 @@
 					<td>${b.regDate }</td>
 					<td>${b.readCount }</td>
 				</tr>
+				</c:if>
 				</c:forEach>
 			</table>
 		</div>
