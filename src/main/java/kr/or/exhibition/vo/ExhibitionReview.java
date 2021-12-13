@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class ExhibitionReview {
 	private int exReviewNo;
-	private int exNo;
+	private int exhibitionNo;
 	private String exReviewWriter;
 	private String exReviewContent;
 	private int exReviewStar;

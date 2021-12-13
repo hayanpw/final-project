@@ -24,6 +24,8 @@ public class ExhibitionService {
 
 	public Exhibition selectOneExhibition(int exhibitionNo) {
 		Exhibition exb = dao.selectOneExhibition(exhibitionNo);
+		double starAvg = dao.selectStarAvg(exhibitionNo);
+		exb.setStarAvg(starAvg);
 		return exb;
 	}
 

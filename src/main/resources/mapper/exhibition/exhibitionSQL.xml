@@ -46,7 +46,7 @@
   		from (select rownum as rnum,n.* from(select * from  exhibition order by exhibition_no desc)n)nn where rnum between  #{start} and #{end}
 	</select>
 	<insert id="insertExReview" parameterType="exr">
-		insert into exhibition_review values(exhibition_review_seq.nextval, #{exNo}, #{exReviewWriter}, #{exReviewContent}, #{exReviewstar}, to_char(sysdate, 'yyyy-mm-dd'),0)
+		insert into exhibition_review values(exhibition_review_seq.nextval, #{exhibitionNo}, #{exReviewWriter}, #{exReviewContent}, #{exReviewStar}, to_char(sysdate, 'yyyy-mm-dd'),0)
 	</insert>
 	<update id="deleteExReview" parameterType="exr">
 		update exhibitioin_review set ex_review_status=1 where ex_review_no=#{exReviewNo}
@@ -56,13 +56,18 @@
 	</update>
 	<select id="selectExReviewList" parameterType="_int" resultType="exr">
 		select
-			ex_review_no as reviewNo,
-			exhibiton_no as showNo,
-			ex_review_writer as reviewWriter,
-			ex_review_content as reviewContent,
-			ex_star,
-			ex_review_date as reviewDate,
+			ex_review_no as exReviewNo,
+			exhibition_no as getExhibitionNo,
+			ex_review_writer as exReviewWriter,
+			ex_review_content as exReviewContent,
+			ex_review_star as exReviewStar,
+			ex_review_date as exReviewDate,
 			ex_review_status as exReviewStatus
-		from show_review where show_no=#{showNo} and ex_review_status = 0 order by 1 desc
+		from exhibition_review where exhibition_no=#{getExhibitionNo} and ex_review_status = 0 order by 1 desc
+	</select>
+	<select id="selectAvgStar" parameterType="_int" resultType="_double">
+		select 
+			round(nvl(avg(ex_review_star),0),1) from exhibition_review 
+		where exhibition_no = #{exhibitionNo}
 	</select>
 </mapper>
