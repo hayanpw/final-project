@@ -22,6 +22,8 @@ public class AdditionService {
 	
 	//글 리스트 조회
 		public BoardPageData selectNoticeList(int boardType, int reqPage) {
+			//고정공지
+			ArrayList<Board> fixlist = dao.selectFixlist();
 			// 한페이지에 보여줄 게시물 수
 			int numPerPage = 10;
 			int end = reqPage * numPerPage;
@@ -108,8 +110,8 @@ public class AdditionService {
 			}
 			pageNavi +="</ul>";
 			
-
-			BoardPageData bpd = new BoardPageData(list, pageNavi, start,totalCount);
+			fixlist.addAll(list);
+			BoardPageData bpd = new BoardPageData(fixlist, pageNavi, start,totalCount);
 			return bpd;
 		}
 
@@ -271,6 +273,7 @@ public class AdditionService {
 		}
 		pageNavi +="</ul>";
 		
+		int fixCount = dao.fixCount();
 		BoardPageData bpd = new BoardPageData(list, pageNavi, start,totalCount);
 		return bpd;
 	}

@@ -50,7 +50,7 @@
 				<table class="table" style="width:100%;">
 					<tr>
 						<td>제목</td>
-						<td colspan="3">
+						<td colspan="6">
 							<input type="text" id="text" name="boardTitle" class="form-control">
 							<input type="hidden" name="boardType" value="${boardType }">
 						</td>
@@ -58,7 +58,26 @@
 					<tr>
 						<td>작성자</td>
 						<td><input type="text" id="boardWriter" name="boardWriter" value="${sessionScope.m.memberId }" readonly></td>
-				   		
+						<c:choose>
+							<c:when test="${boardType eq 2}">
+							<td>
+							<input type="checkbox" id="boardLevel" name="boardLevel">비밀글
+							<input type="hidden" id="boardFix" name="boardFix" value="0">
+							<td>
+							</c:when>
+							<c:when test="${boardType eq 1}">
+							<td>
+							<input type="checkbox" id="boardFix" name="boardFix">고정공지
+							<input type="hidden" id="boardLevel" name="boardLevel" value="0">
+							<td>
+							</c:when>
+							<c:otherwise>
+							<td>
+							<input type="hidden" id="boardFix" name="boardFix" value="0">
+							<input type="hidden" id="boardLevel" name="boardLevel" value="0">
+							<td>
+							</c:otherwise>
+						</c:choose>
 				   		<td>첨부파일</td>
 						<td style="text-align:left;">
 						<input type="file" name="addFiles" multiple>
@@ -66,13 +85,13 @@
 					</tr>
 					<tr>
 						<td>내용</td>
-						<td id="img" colspan="3">
+						<td id="img" colspan="5">
 							<img id="img-view" width="500px">
 							<textarea id="summernote" name="boardContent" class="form-control"></textarea>
 						</td>
 					</tr>
 					<tr>
-						<td colspan="4">
+						<td colspan="6">
 							<button type="submit" class="btn btn-block" onclick="return contentChk();">글등록</button>
 						</td>
 					</tr>
@@ -131,7 +150,18 @@
 		});
 	}
 	
+	
 	function contentChk(){
+		if($("#boardLevel").is(":checked")){
+			$("#boardLevel").val(1);
+		}else{
+			$("#boardLevel").val(0);
+		}
+		if($("#boardFix").is(":checked")){
+			$("#boardFix").val(1);
+		}else{
+			$("#boardFix").val(0);
+		}
 		var text = $("#text").val();
 		var login = $("#boardWriter").val();
 		if(login== ""){
