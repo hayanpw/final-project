@@ -218,7 +218,7 @@ public class AdditionService {
 		String pageNavi = "<ul class ='pagination pagination-lg'>";
 
 		if(reqPage>=4) {
-			pageNavi += "<li class='page-item'>";
+			pageNavi += "<li id='pageNum' class='page-item'>";
 			if(boardType==1) {
 				pageNavi += "<a class='page-link' href='/searchKeyword.do?type="+type+"&keyword="+keyword+"&boardType=1&reqPage="+(reqPage-1)+"'>";
 			}else if(boardType==2) {
@@ -232,7 +232,7 @@ public class AdditionService {
 		//페이지숫자
 		for(int i=0;i<pageNaviSize;i++) {
 				if(pageNo == reqPage) {
-					pageNavi += "<li class ='page-item active'>";
+					pageNavi += "<li id='pageNumAct' class ='page-item active'>";
 					if(boardType==1) {
 						pageNavi += "<a class='page-link' href='/searchKeyword.do?type="+type+"&keyword="+keyword+"&boardType=1&reqPage="+pageNo+"'>";
 					}else if(boardType==2) {
@@ -242,7 +242,7 @@ public class AdditionService {
 					}
 					pageNavi += pageNo+"</a></li>";
 				}else {
-					pageNavi += "<li class ='page-item'>";
+					pageNavi += "<li id='pageNum' class ='page-item'>";
 					if(boardType==1) {
 						pageNavi += "<a class='page-link' href='/searchKeyword.do?type="+type+"&keyword="+keyword+"&boardType=1&reqPage="+pageNo+"'>";
 					}else if(boardType==2) {
@@ -260,7 +260,7 @@ public class AdditionService {
 		
 		
 		if(pageNo <= totalPage) {
-			pageNavi += "<li class ='page-item'>";
+			pageNavi += "<li id='pageNum' class ='page-item'>";
 			if(boardType==1) {
 				pageNavi += "<a class='page-link' href='/searchKeyword.do?type="+type+"&keyword="+keyword+"&boardType=1&reqPage="+(reqPage+1)+"'>";
 			}else if(boardType==2) {
@@ -273,7 +273,6 @@ public class AdditionService {
 		}
 		pageNavi +="</ul>";
 		
-		int fixCount = dao.fixCount();
 		BoardPageData bpd = new BoardPageData(list, pageNavi, start,totalCount);
 		return bpd;
 	}
@@ -284,13 +283,25 @@ public class AdditionService {
 		return result;
 	}
 
-
+	
 	public BoardNext selectNextBoard(int boardNo,int boardType) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("boardNo", boardNo);
 		map.put("boardType", boardType);
 		BoardNext info = dao.selectNextBoard(map);
 		return info;
+	}
+
+	@Transactional
+	public int regulationBoard(int boardNo) {
+		int result=dao.regulationBoard(boardNo);
+		return result;
+	}
+	
+	@Transactional
+	public int removeRegulationBoard(int boardNo) {
+		int result=dao.removeRegulationBoard(boardNo);
+		return result;
 	}
 	
 	

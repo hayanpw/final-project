@@ -71,7 +71,6 @@
 	font-weight:100;
 	height: 40px;
 	font-size:18px;
-	color: black;
 	line-height: 40px;
 	}
 	#firtr>td{
@@ -122,6 +121,15 @@
     color: black;
     border: none;
     }
+    #answerAfter{
+    color: #563D39;
+    }
+    #answerBefore{
+    color: #A79078;
+    }
+    i{
+    color: #74655E;
+    }
 </style>
 </head>
 <body>
@@ -151,7 +159,7 @@
 					<td>${b.bnum }</td>
 					<c:choose>
 						<c:when test="${b.boardLevel eq 1}">
-							<td id="btitle"><a href="/boardView.do?boardType=2&boardNo=${b.boardNo}" class="chk"><i class="fas fa-lock"></i>${b.boardTitle }</a></td>
+							<td id="btitle"><a href="/boardView.do?boardType=2&boardNo=${b.boardNo}" class="chk"><i class="fas fa-lock"></i>&nbsp;&nbsp;${b.boardTitle }</a></td>
 							<input type="hidden" class="boardLevel" value="${b.boardLevel }">
 							<input type="hidden" class="memberId" value="${sessionScope.m.memberId }">
 							<input type="hidden" class="memberLevel" value="${sessionScope.m.memberLevel }">
@@ -165,10 +173,10 @@
 					<td>${b.regDate }</td>
 					<c:choose>
 						<c:when test="${b.commentCount ne 0}">
-						<td>답변완료</td>
+						<td id="answerAfter">답변완료</td>
 						</c:when>
 						<c:otherwise>
-						<td>미답변</td>
+						<td id="answerBefore">미답변</td>
 						</c:otherwise>
 					</c:choose>
 				</tr>

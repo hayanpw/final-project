@@ -18,6 +18,24 @@
 	font-size: 40px;
 	margin-bottom: 50px;
 	}
+	#qnaTitle{
+	width:220px;
+	border-top: 7px solid #563D39;
+	margin-top:70px;
+	margin-left:70px;
+	font-weight:700;
+	font-size: 40px;
+	margin-bottom: 50px;
+	}
+	#freeTitle{
+	width:205px;
+	border-top: 7px solid #563D39;
+	margin-top:70px;
+	margin-left:70px;
+	font-weight:700;
+	font-size: 40px;
+	margin-bottom: 50px;
+	}
 	#boardContent{
 	border: 1px white;
 	}
@@ -40,10 +58,10 @@
 		<div id="title">공지사항</div>
 		</c:when>
 		<c:when test="${boardType eq 2 }">
-		<div id="title">질문과 답변</div>
+		<div id="qnaTitle">질문과 답변</div>
 		</c:when>
 		<c:otherwise>
-		<div id="title">소통게시판</div>
+		<div id="freeTitle">소통게시판</div>
 		</c:otherwise>
 	</c:choose>
 	<form action="/boardWrite.do" method="post" enctype="multipart/form-data">
