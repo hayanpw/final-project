@@ -20,6 +20,7 @@ import com.google.gson.Gson;
 
 import kr.or.academy.service.AcademyService;
 import kr.or.academy.vo.Academy;
+import kr.or.academy.vo.AcademyCategory;
 import kr.or.academy.vo.AcademyPagingVo;
 import kr.or.academy.vo.AcademyPayment;
 
@@ -39,9 +40,11 @@ public class AcademyController {
 		int totalCount = service.academyTotal();
 		ArrayList<Academy> list = service.selectAcademyList(reqPage);
 		int count = list.size();
+		ArrayList<AcademyCategory> acList = service.selectAcademyCategory();
 		model.addAttribute("list",list);
 		model.addAttribute("totalCount",totalCount);
 		model.addAttribute("count",count);
+		model.addAttribute("acList",acList);
 		return "academy/academyList";
 	}
 	//수업 등록

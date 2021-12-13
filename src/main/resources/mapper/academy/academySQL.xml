@@ -45,4 +45,7 @@
 			values(#{paymentNo},#{paymentSelect},#{academyNo},0,#{paymentPrice},
 			to_char(sysdate,'YYYY-MM-DD'),0,#{paymentQuantity},null,#{memberNo})
 	</insert>
+	<select id="academyCategory" resultType="acc">
+		select distinct(academy_category) as academyCategory from academy
+	</select>
 </mapper>

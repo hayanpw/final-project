@@ -5,7 +5,7 @@
     
     .rightSide{
         width: 850px;
-
+		display: inline-block;
     }
     .academyPhoto{
         width: 400px;
@@ -49,8 +49,13 @@
     .table-condensed{
         border:none;
     }
+     .leftSide{
+    	width: 290px;
+    	float: right;
+    	display: inline-block;
+    }
     .fixed{
     	position: fixed;
-    	margin-top: -600px;
-    	margin-left: 880px;
+    	margin-top: 100px;
+    	margin-left: 30px;
     }

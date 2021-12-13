@@ -9,6 +9,7 @@ import kr.or.exhibition.dao.ExhibitionDao;
 import kr.or.exhibition.vo.Exhibition;
 import kr.or.exhibition.vo.ExhibitionPagingVo;
 import kr.or.exhibition.vo.ExhibitionPayment;
+import kr.or.exhibition.vo.ExhibitionReview;
 
 @Service
 public class ExhibitionService {
@@ -23,6 +24,8 @@ public class ExhibitionService {
 
 	public Exhibition selectOneExhibition(int exhibitionNo) {
 		Exhibition exb = dao.selectOneExhibition(exhibitionNo);
+		double starAvg = dao.selectStarAvg(exhibitionNo);
+		exb.setStarAvg(starAvg);
 		return exb;
 	}
 
@@ -52,6 +55,25 @@ public class ExhibitionService {
 		ep.setStart(start+1);
 		ep.setEnd(end);
 		ArrayList<Exhibition> list = dao.selectExhibition(ep);
+		return list;
+	}
+
+	public int insertExReview(ExhibitionReview exr) {
+		int result = dao.insertExReview(exr);
+		return result;
+	}
+	public int deleteExReview(ExhibitionReview exr) {
+		int result = dao.deleteExReview(exr);
+		return result;
+	}
+
+	public int updateExReview(ExhibitionReview exr) {
+		int result = dao.updateExReview(exr);
+		return result;
+	}
+
+	public ArrayList<ExhibitionReview> selectListExReview(int exhibitionNo) {
+		ArrayList<ExhibitionReview> list = dao.selectExReview(exhibitionNo);
 		return list;
 	}
 }

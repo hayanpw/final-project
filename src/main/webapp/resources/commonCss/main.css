@@ -5,32 +5,20 @@ body{
     position: relative; 
     z-index: 1;
 }
-
-/*슬라이더*/
-  #section1 {height:700px;color: #fff; background-color: #fff;}
-  #section2 {padding-top:50px;height:600px;color: #fff; background-color: #fff;}
-  #section3 {padding-top:50px;height:120px;color: #fff; background-color: #fff;}
-/*   #section41 {padding-top:50px;height:400px;color: #fff; background-color: #00bcd4;}
-  #section42 {padding-top:50px;height:400px;color: #fff; background-color: #009688;} */
-  .navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav>.active>a:hover {
-    color: #fff;
-    background-color: #080808;
-}
-
-#section1{
-	padding:0px;	
-}
-.s-container{
- flex:1;
-}
 /*스와이프*/
+.showslide{
+    position: relative;
+    margin: 100px 50px 0px 50px;
+    height: auto;
+}
 .swiper {
         width: 100%;
-        min-width: 300px;
-        height: 400px;
+        height: auto;
       }
-
       .swiper-slide {
+        display: block;
+        width: 250px;
+        height: 350px;
         text-align: center;
         font-size: 18px;
         background: #fff;
@@ -48,10 +36,9 @@ body{
         -webkit-align-items: center;
         align-items: center;
       }
-
       .swiper-slide img {
         display: block;
-        width: 100%;
+        width: auto;
         height: 100%;
         object-fit: cover;
         position: relative;
@@ -60,7 +47,7 @@ body{
       .cover{
             position :absolute;
             margin: auto;
-            width: 100%;
+            width: auto;
             height: 100%;
             background-color: rgba(0,0,0,0.4);
             transition-duration: 0.5s;
@@ -73,26 +60,26 @@ body{
       /*cover 안에있는 내용*/
       .cover-content{
             padding: 50px 10px;
-            font-size: 16px;
+            font-size: 14px;
             color:#fff;
         }
         .reserve-button{
             margin: auto;
             height: 40px;
             width: 90px;
-            margin-top: 30px;
-            background-color:rgba(167, 127, 120, 0.67);
+            margin-top: 10px;
+            font-weight: bold;
+            color:#fff;
+            background-color:rgba(167, 127, 120, 0.8);
         }
         .reserve-button:hover{
             margin: auto;
             height: 40px;
             width: 90px;
-            margin-top: 30px;
+            margin-top: 10px;
             transform:  scale(1.1);
         }
-
       /*1번슬라이드*/
-      
       .carousel-inner{
         width: 100%;
         height: 100%;
@@ -103,36 +90,25 @@ body{
         transition: all 0.7s;
 }
 
-/*부트*/
-
-    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-    .row.content {height: 550px}
-    
-    /* Set gray background color and 100% height */
-    .sidenav {
-      background-color: #f1f1f1;
-      height: 100%;
-    }
-        
-    /* On small screens, set height to 'auto' for the grid */
-    @media screen and (max-width: 767px) {
-      .row.content {height: auto;} 
-    }
 
     /*광고배너*/
     .banner{
-    display: block;
+    position: relative;
+    top:100px;
     margin: 0 auto;
     width: 1170px;
-    height: 300px;
-    max-height: 300px;
-
+    height: 600px;
 }
+    .banner img{
+    height: auto;
+    width: 100%;
+    }
     .main-content{
         display: flex;
         padding-top: 100px;
         top:50px;
         width: 1170px;
+        height: 500px;
         margin: 0 auto;
     }
     .m-menu img{
@@ -150,3 +126,119 @@ body{
         height: 50%;
         width: 100%;
     }
+
+
+
+
+    /*slick*/
+    .slider-for>div{
+        width: 100%;
+        height: 800px;
+        margin: 0 auto;
+    }
+    .d1 {
+        height: 615px;
+        z-index: 1;
+    }
+    .d2 {
+        display: flex;
+        width: 700px;
+        z-index: 3;
+    }
+    .sn{
+        margin: 15px;
+        height: 150px;
+        width: 70px;
+        overflow: hidden;
+    }
+    .sn img{
+        height: 100%;
+        width: auto;
+        max-width: 250px;
+    }
+    .sf img{
+        height: 800px;
+        width: 100%;
+        
+    }
+    .slick-dots{
+        display: none;
+    }
+    .slick-arrow{
+        opacity: 0;
+    }
+    .sliderbg{
+        background-color: rgba(0,0,0,0.2);
+        width: 100%;
+        height: 185px;
+        z-index: 2;
+    }
+    .sf :hover{
+        display: block;
+
+    }
+
+    /*notice menu*/
+    .m-notice{
+        position: relative;
+        top: 200px;
+        width: 100%;
+        height: 800px;
+        padding: 60px 0px 60px 0px;
+    }
+    
+    .lnc-box{
+        font-size: 18px;
+        margin: 10px;
+        padding: 10px;
+border: solid 1px #BDB19A;
+display: inline-block; 
+width: 200px; 
+height: 270px;
+overflow: hidden; 
+
+    }
+    .notice-menu > li {
+        float: left;
+        width: 50%;
+        list-style: none;
+    }
+    .notice-menu{
+        padding: 0px 60px 0px 200px;
+    }
+.ln-content > li {
+    float:left;
+}
+.lnc-box >a{
+    text-decoration: none;
+    color:#000;
+}
+.tit-main .small:before {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 37px;
+    height: 1px;
+    background: #474747;
+    content: '';
+}
+.tit-main .small {
+    display: block;
+    position: relative;
+    padding-top: 10px;
+    font-size: 13px;
+    letter-spacing: 0;
+}
+
+.rpc-box{
+    margin: 10px;
+border: solid 1px #563D39;
+display: inline-block; 
+width: 200px; 
+height: 270px;
+overflow: hidden; 
+}
+.rpc-box img{
+    width: 200px;
+    height: 270px;
+}

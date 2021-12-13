@@ -16,5 +16,7 @@ public class Board {
 	private int boardType;
 	private int bnum;
 	private int commentCount;
+	private int boardLevel;
+	private int boardFix;
 	private ArrayList<FileVO> list;
 }
