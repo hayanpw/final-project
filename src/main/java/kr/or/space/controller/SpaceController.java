@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
 
+import kr.or.academy.vo.Academy;
 import kr.or.member.service.MemberService;
 import kr.or.member.vo.Member;
 import kr.or.space.model.service.MailSend;
@@ -34,6 +35,7 @@ import kr.or.space.model.vo.Space;
 import kr.or.space.model.vo.SpaceAdmin;
 import kr.or.space.model.vo.SpaceMypage;
 import kr.or.space.model.vo.SpacePageNavi;
+import kr.or.space.model.vo.SpaceReview;
 import kr.or.space.model.vo.SpaceTime;
 import kr.or.space.model.vo.UseBoard;
 
@@ -195,12 +197,28 @@ public class SpaceController {
 	}
 	//공간 상세보기
 	@RequestMapping(value = "/spaceView.do")
-	public String spaceView(int spaceNo,Model model) {
+	public String spaceView(int spaceNo,Model model, int reqPage) {
 		Space s = service.selectOneSpace(spaceNo);
 		ArrayList<FileVO> fv = service.selectFileList(spaceNo);
+		ArrayList<SpaceReview> list = service.selectSpaceReviewList(spaceNo, reqPage);
+		int totalCount = service.selectTotalReviewCount(spaceNo);
+		int count = list.size();
+		model.addAttribute("totalCount", totalCount);
+		model.addAttribute("count", count);
 		model.addAttribute("s", s);
 		model.addAttribute("fv", fv);
+		model.addAttribute("srList", list);
 		return "space/spaceView";
+	}
+	
+	//더보기
+	@ResponseBody
+	@RequestMapping(value ="/moreSpaceReview.do",produces = "application/json;charset=utf-8")
+	public String moreSpaceReview(int start, int spaceNo) {
+		//아작스 data start 값 strat 받아옴
+		ArrayList<SpaceReview> list = service.moreSpaceReview(start,spaceNo);
+		System.out.println(list.size());
+		return new Gson().toJson(list);
 	}
 
 	// 대관
@@ -451,6 +469,24 @@ public class SpaceController {
 			}
 		}
 	}
-		
+	//리뷰 입력
+	@ResponseBody
+	@RequestMapping(value = "/selectRentalInfo.do", produces = "application/json;charset=utf-8")
+	public String selectRentalInfo(int rentalNo) {
+		Rental r = service.selectRentalInfo(rentalNo);
+		return new Gson().toJson(r);
+	}
+	//리뷰 등록
+	@RequestMapping(value = "/insertSpaceReview.do")
+	public String insertSpaceReview(SpaceReview sr, Model model) {
+		int result = service.insertReview(sr);
+		if(result>0) {
+			model.addAttribute("msg", "등록 성공");
+		}else {
+			model.addAttribute("msg", "등록 실패");
+		}
+		model.addAttribute("loc", "/spaceMypage.do?memberId="+sr.getMemberId());
+		return "common/msg";
+	}
 }
 
