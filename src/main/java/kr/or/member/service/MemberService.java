@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.member.dao.MemberDao;
 import kr.or.member.vo.Member;
+import kr.or.member.vo.MemberPage;
 
 @Service
 public class MemberService {
@@ -45,10 +46,6 @@ public class MemberService {
 		int result = dao.updateMember(member);
 		return result;
 	}
-	public ArrayList<Member> selectAllMember() {	
-		ArrayList<Member> list = dao.selectAllMember();
-		return list;
-	}
 	public int updateMemberLevel(Member member) {
 		int result = dao.updateMemberLevel(member);
 		return result;
@@ -65,6 +62,60 @@ public class MemberService {
 		ArrayList<Member> list = dao.searchMember(search);
 		return list;
 	}
-
-
+	public MemberPage selectAllMember(int reqPage) {
+		int numPerPage = 10;
+		int end = reqPage*numPerPage;
+		int start = end - numPerPage +1;
+		MemberPage paging = new MemberPage();
+		paging.setStart(start);
+		paging.setEnd(end);
+		ArrayList<Member> list = dao.selectAllMember(paging);
+		int totalCount = dao.selectTotalCount();
+		int totalPage = 0;
+		if(totalCount%numPerPage == 0) {
+			totalPage = totalCount/numPerPage;
+		} else {
+			totalPage = totalCount/numPerPage+1;
+		}
+		int pageNaviSize = 5;
+		int pageNo = ((reqPage-1)/pageNaviSize)*pageNaviSize + 1;
+		//페이지네비 태그 제작 시작
+		String pageNavi = "<ul class='pagination'>";
+		//이전버튼
+		if(pageNo != 1) {
+			pageNavi += "<li>";
+			pageNavi += "<a href='/allMember.do?reqPage="+(pageNo-1)+"'>";
+			pageNavi += "&lt;</a></li>";
+		}
+		//페이지숫자
+		for(int i=0; i<pageNaviSize; i++) {
+			if(pageNo == reqPage) {
+				pageNavi += "<li class='active'>";
+				pageNavi += "<a href='/allMember.do?reqPage="+pageNo+"'>";
+				pageNavi += pageNo+"</a></li>";
+			}else {
+				pageNavi += "<li>";
+				pageNavi += "<a href='/allMember.do?reqPage="+pageNo+"'>";
+				pageNavi += pageNo+"</a></li>";
+			}
+			pageNo++;
+			if(pageNo>totalPage) {
+				break;
+			}
+		}
+		//다음버튼
+		if(pageNo <= totalPage) {
+			pageNavi += "<li>";
+			pageNavi += "<a href='/allMember.do?reqPage="+pageNo+"'>";
+			pageNavi += "&gt;</a></li>";
+		}
+		pageNavi += "</ul>";
+		
+		//게시물목록(ArrayList), 페이지네비(String), start(번호 표시용)
+		MemberPage mpg = new MemberPage();
+		mpg.setList(list);
+		mpg.setPageNavi(pageNavi);
+		mpg.setStart(start);
+		return mpg;
+	}
 }

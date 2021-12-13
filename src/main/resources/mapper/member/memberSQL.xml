@@ -60,19 +60,6 @@
 			ADDRESS_DETAIL = #{addressDetail} 
 		where member_id=#{memberId}
  	</update>
- 	<select id="selectAllMember" resultType="m">
- 		select 
- 			MEMBER_NO as memberNo,
-			MEMBER_ID as memberId,
-			MEMBER_EMAIL as memberEmail,
-			MEMBER_PASSWORD as memberPassword,
-			MEMBER_NAME as memberName,
-			MEMBER_PHONE as memberPhone,
-			MEMBER_BIRTHDAY as memberBirthday,
-			enroll_date as enrollDate,
-			MEMBER_LEVEL as memberLevel
- 		from member
- 	</select>
  	 	<update id="updateMemberLevel" parameterType="m">
  		update member set 	
 			MEMBER_LEVEL = #{memberLevel}
@@ -109,4 +96,23 @@
  		from member where member_id like '%'||#{search}||'%' or member_email like '%'||#{search}||'%' or 
  						  member_name like '%'||#{search}||'%' or member_id like '%'||#{search}||'%'
  	</select>
+ 	 <select id="selectAllMember" parameterType="map" resultType="m">
+ 		select 
+ 			nn.MEMBER_NO as memberNo,
+			nn.MEMBER_ID as memberId,
+			nn.MEMBER_EMAIL as memberEmail,
+			nn.MEMBER_PASSWORD as memberPassword,
+			nn.MEMBER_NAME as memberName,
+			nn.MEMBER_PHONE as memberPhone,
+			nn.MEMBER_BIRTHDAY as memberBirthday,
+			nn.enroll_date as enrollDate,
+			nn.MEMBER_LEVEL as memberLevel
+ 		from
+ 		(select rownum as rnum, n.* from 
+		( select * from member order by member_no desc)n)nn where rnum BETWEEN #{start} and #{end}
+ 	</select>
+ 		<!--전체멤버 수-->
+	<select id="selectTotalCount" resultType="_int">
+		select count(*) from member
+	</select>
 </mapper>
