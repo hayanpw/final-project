@@ -69,7 +69,7 @@
 						<button class="btn btn-default" type="button"  onclick="location.href='/loginFrm.do'">로그인 후 예약하기</button>
 					</c:when>
 					<c:otherwise>
-						<button class="btn btn-default" type="submit">신청하기</button>
+						<button class="btn btn-default" id="resBtn" type="submit">신청하기</button>
 					</c:otherwise>				
 				</c:choose>
 			</div>

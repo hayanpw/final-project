@@ -1,11 +1,11 @@
-
+ 
     .topSide{
         margin-bottom: 50px;
     }
     
     .rightSide{
         width: 850px;
-
+		display: inline-block;
     }
     .exhibitionPhoto{
         width: 400px;
@@ -49,10 +49,15 @@
     .table-condensed{
         border:none;
     }
+    .leftSide{
+    	width: 290px;
+    	float: right;
+    	display: inline-block;
+    }
     .fixed{
     	position: fixed;
-    	margin-top: -600px;
-    	margin-left: 880px;
+    	margin-top: 100px;
+    	margin-left: 30px;
     }
     .amount{
 	 width: 35px;
@@ -63,4 +68,47 @@
 	width: 35px;
     align-self: center;
     border: 1px solid #eee;
+}
+.inputReviewBox>form{
+	display: flex;
+}
+.selectStar{
+	width: 90px;
+}
+.selectStar>*{
+	margin: 0;
+	width: 90%;
+}
+.reviewList{
+	margin: 15px 0;
+}
+.reviews{
+	list-style: none;
+	border-radius: 10px;
+	padding-left: 0;
+	display: flex;
+	flex-direction: row;
+	overflow: hidden;
+	border: 2px solid #BDB19A;
+}
+.reviews>li{
+	padding-top: 10px;
+}
+.reviews>li:first-child {
+	width: 20%;
+	padding-bottom: 10px;
+}
+.reviews>li:first-child>p:first-child{
+	margin-bottom: 3px;
+}
+.reviews>li:last-child {
+	width: 80%;
+}
+.reviews>li>p{
+	margin: 0;
+	padding-left: 10px;
+}
+.reviewsBtn{
+	text-align: right;
+	padding-right: 20px;
 }

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,36 +10,27 @@
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	 <div class="container">
-        <h2>지원자 현황</h2>
+        <h2>강사모집 공고 리스트</h2>
        
         <table class="table table-hover">
             <thead>
               <tr>
                   <th>#번호</th>
-                  <th>지원자 이름</th>
+                  <th>이름 </th>
                   <th>성별</th>
                   <th>연락처</th>
               </tr>
           </thead>
+          
           <tbody>
-              <tr>
-                  <td>f</td>
-                  <td>o</td>
-                  <td>r</td>
-                  <td>e</td>
-              </tr>
-              <tr>
-                  <td>c</td>
-                  <td>h</td>
-                  <td>써</td>
-                  <td>서</td>
-              </tr>
-              <tr>
-                  <td>한페이지</td>
-                  <td>10</td>
-                  <td>개</td>
-                  <td>씩</td>
-              </tr>
+          	<c:forEach items="${list }" var="rs" varStatus="i">
+             	<tr>
+				   <td>${i.index +1 }</td>
+				   <td><a href="/resumeView.do?resumeNo=${rs.resumeNo }">${rs.memberName }</a></td>
+				   <td>${rs.resumeGender }</td>
+				   <td>${rs.resumePhone }</td>
+			   </tr>
+			 </c:forEach>
             </tbody>
           </table>
         </div>

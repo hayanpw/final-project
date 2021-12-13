@@ -13,9 +13,9 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	 <div class="container">
 		
-			<c:choose>	
+		<c:choose>	
 			<c:when test="${r.period le 0 }">
-			<p>마감된 공고입니다</p>
+				<p>마감된 공고입니다</p>
 			</c:when>
 		<c:when test="${r.period ge 0 }">
         <h2 class="title">${r.requritTitle }</h2>
@@ -49,16 +49,18 @@
             	${r.requritDetail }
         </div>
         <c:choose>
-        <c:when test="${not empty sessionScope }">
-        <button type="button" class="btn requritBtn" onclick="goResumeFrm();">지원하기</button>
-        </c:when>
-         <c:when test="${sessionScope.member.MemberLevel eq 0 }">
-        <button type="button" class="btn requritBtn">삭제하기</button>
-        <button type="button" class="btn requritBtn">수정하기</button>
-        <button type="button" class="btn requritBtn">지원자보기</button>
-        </c:when>
+        	<c:when test="${empty sessionScope }">
+       			 <button type="button" class="btn requritBtn" onclick="goResumeFrm();">지원하기</button>
+       			 <button type="button" class="btn requritBtn" onclick="goResumeList();">지원자보기</button>
+        	</c:when>
+         	<c:when test="${sessionScope.member.MemberLevel eq 0 }">
+        		<button type="button" class="btn requritBtn">삭제하기</button>
+        		<button type="button" class="btn requritBtn">수정하기</button>
+        		
+       	 	</c:when>
         </c:choose>
-        </c:when></c:choose>
+		</c:when>
+        </c:choose>
         <input type="hidden" id ="hide" value="${r.requritNo }">
     </div>
   	
@@ -70,6 +72,10 @@
 		if(confirm(requritTitle+"에지원 하시겠습니까")){
 			location.href="/resumeFrm.do?requritNo="+requritNo+"&requritTitle="+requritTitle;
 		}
+	}
+	function goResumeList(){
+		var requritNo = $("#hide").val();
+		location.href="/resumeList.do?requritNo="+requritNo;
 	}
 	</script>
 </body>

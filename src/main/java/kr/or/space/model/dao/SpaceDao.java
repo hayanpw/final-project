@@ -14,6 +14,7 @@ import kr.or.space.model.vo.ResSpace;
 import kr.or.space.model.vo.Space;
 import kr.or.space.model.vo.SpaceAdmin;
 import kr.or.space.model.vo.SpaceMypage;
+import kr.or.space.model.vo.SpaceReview;
 import kr.or.space.model.vo.SpaceTime;
 import kr.or.space.model.vo.UseBoard;
 
@@ -137,10 +138,41 @@ public class SpaceDao {
 	}
 	//대관- 게시판 작성 여부 작성으로 변경
 	public int updatUsedBoard(int rentalNo) {
-		return sqlSession.update("space.updateUseBoard",rentalNo);
+		return sqlSession.update("space.updateUseBoardStatus",rentalNo);
 	}
 	//사용게시판 조회
 	public UseBoard selectOneBoardView(int ubNo) {
 		return sqlSession.selectOne("space.selectOneBoardView",ubNo);
+	}
+	//사용 게시판 삭제
+	public int deleteUseBoard(int ubNo) {
+		return sqlSession.update("space.deleteUseBoard",ubNo);
+	}
+	//사용게시판 수정
+	public int updateUseBoard(UseBoard u) {
+		return sqlSession.update("space.updateUseBoard",u);
+	}
+	//공간에 따른 리뷰 조회
+	public ArrayList<SpaceReview> selectSpaceReview(HashMap<String, Object> map) {
+		List<SpaceReview> list = sqlSession.selectList("space.selectSpaceReview",map);
+		return (ArrayList<SpaceReview>)list;
+				
+	}
+	//렌탈 정보
+	public Rental selectRentalInfo(int rentalNo) {
+		return sqlSession.selectOne("space.selectRentalInfo",rentalNo);
+	}
+	//리뷰 등록
+	public int insertReview(SpaceReview sr) {
+		return sqlSession.insert("space.insertSpaceReview",sr);
+	}
+	//리뷰 개수
+	public int selectTotalReviewCount(int spaceNo) {
+		return sqlSession.selectOne("space.selectTotalReviewCount",spaceNo);
+	}
+	//리뷰 더보기
+	public ArrayList<SpaceReview> moreSpaceReview(HashMap<String, Object> map) {
+		List<SpaceReview> list = sqlSession.selectList("space.selectSpaceReview",map);
+		return (ArrayList<SpaceReview>)list;
 	}
 }

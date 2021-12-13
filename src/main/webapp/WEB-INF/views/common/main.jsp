@@ -15,181 +15,223 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"/>
   <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
   <link rel="stylesheet" href="/resources/commonCss/main.css">  
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.css"/>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.css"/>
+
+  
     <title>Document</title>
 </head>
 <body data-spy="scroll" data-target=".navbar" data-offset="50">
   <jsp:include page="/WEB-INF/views/common/header.jsp"/>
-    <div class="s-container">
-        <div id="section1" class="container-fluid">
-            <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                <!-- Indicators -->
-                <ol class="carousel-indicators">
-                  <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                  <li data-target="#myCarousel" data-slide-to="1"></li>
-                  <li data-target="#myCarousel" data-slide-to="2"></li>
-                </ol>
-            
-                <!-- Wrapper for slides -->
-                <div class="carousel-inner">
-                  <div class="item active">
-                    <img src="/resources/mainImage/upload/m-main4.jpg" alt="Los Angeles" style="width:100%; height:700px">
-                  </div>
-            
-                  <div class="item">
-                    <img src="/resources/mainImage/upload/m-main2.jpg" alt="Chicago" style="width:100%; height:700px;">
-                  </div>
-                
-                  <div class="item">
-                    <img src="/resources/mainImage/upload/m-main3.jpg" alt="New york" style="width:100%; height:700px;">
-                  </div>
-                </div>
-            
-                <!-- Left and right controls -->
-                <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-                  <span class="glyphicon glyphicon-chevron-left"></span>
-                  <span class="sr-only">Previous</span>
-                </a>
-                <a class="right carousel-control" href="#myCarousel" data-slide="next">
-                  <span class="glyphicon glyphicon-chevron-right"></span>
-                  <span class="sr-only">Next</span>
-                </a>
-              </div>
-          </div>
-
-        <div id="section2" class="container-fluid">
-          <!-- Swiper -->
-          <div class="swiper mySwiper" >
-            <div class="swiper-wrapper">
-              <div class="swiper-slide"><img src="/resources/mainImage/upload/m-show2.jpg">
-              <div class="cover">
-                <div class="cover-content">
-                    <h5>호두까기 인형</h5>
-                    <hr>
-                    <p>크리스마스 이브 , 마리의 집에서 크리스마스 파티가 열리고 마리의 대부
-                        드로셀마이어가 마리에게 호두까기 인형을 선물합니다. 
-                        호두까지 인형을 품에 안고 잠이 든 마리,
-                        꿈속에서 거실의 트리가 켜지고,  각나라의 ...
-                    </p>
-                    <button class="reserve-button">예매</button>
-                </div>
-            </div>
-          </div>
-              <div class="swiper-slide"><img src="/resources/mainImage/upload/m-show2.gif">
-              <div class="cover">
-                <div class="cover-content">
-                    <h5>프랑켄슈타인</h5>
-                    <hr>
-                    <p>크리스마스 이브 , 마리의 집에서 크리스마스 파티가 열리고 마리의 대부
-                        드로셀마이어가 마리에게 호두까기 인형을 선물합니다. 
-                        호두까지 인형을 품에 안고 잠이 든 마리,
-                        꿈속에서 거실의 트리가 켜지고,  각나라의 ...
-                    </p>
-                    <button class="reserve-button">예매</button>
-                </div>
-              </div>
-            </div>
-              <div class="swiper-slide"><img src="/resources/mainImage/upload/m-show3.gif">
-                <div class="cover">
-                  <div class="cover-content">
-                      <h5>라이언킹</h5>
-                      <hr>
-                      <p>크리스마스 이브 , 마리의 집에서 크리스마스 파티가 열리고 마리의 대부
-                          드로셀마이어가 마리에게 호두까기 인형을 선물합니다. 
-                          호두까지 인형을 품에 안고 잠이 든 마리,
-                          꿈속에서 거실의 트리가 켜지고,  각나라의 ...
-                      </p>
-                      <button class="reserve-button">예매</button>
-                  </div>
-                </div>
-              </div>
-              <div class="swiper-slide"><img src="/resources/mainImage/upload/m-show4.JPG"></div>
-              <div class="swiper-slide"><img src="/resources/mainImage/upload/m-show5.gif"></div>
-              <div class="swiper-slide"><img src="/resources/mainImage/upload/show6.jpg"></div>
-              <div class="swiper-slide"><img src="/resources/mainImage/upload/m-show7.gif"></div>
-              <div class="swiper-slide"><img src="/resources/mainImage/upload/m-show5.gif">
-                <div class="cover">
-                  <div class="cover-content">
-                      <h5>지킬앤하이드</h5>
-                      <hr>
-                      <p>크리스마스 이브 , 마리의 집에서 크리스마스 파티가 열리고 마리의 대부
-                          드로셀마이어가 마리에게 호두까기 인형을 선물합니다. 
-                          호두까지 인형을 품에 안고 잠이 든 마리,
-                          꿈속에서 거실의 트리가 켜지고,  각나라의 ...
-                      </p>
-                      <button class="reserve-button">예매</button>
-                  </div>
-                </div>
-              </div>
-              <div class="swiper-slide"><img src="/resources/mainImage/upload/droopy.gif">
-                <div class="cover">
-                  <div class="cover-content">
-                      <h5>드루피와함께 춤을</h5>
-                      <hr>
-                      <p>크리스마스 이브 , 마리의 집에서 크리스마스 파티가 열리고 마리의 대부
-                          드로셀마이어가 마리에게 호두까기 인형을 선물합니다. 
-                          호두까지 인형을 품에 안고 잠이 든 마리,
-                          꿈속에서 거실의 트리가 켜지고,  각나라의 ...
-                      </p>
-                      <button class="reserve-button">예매</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-pagination"></div>
-          </div>
-        
-          <!-- Swiper JS -->
-          <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-        
-          <!-- Initialize Swiper -->
-          <script>
-            var swiper = new Swiper(".mySwiper", {
-              slidesPerView: 5,
-              spaceBetween: 30,
-              slidesPerGroup: 3,
-              loop: true,
-              loopFillGroupWithBlank: true,
-              pagination: {
-                el: ".swiper-pagination",
-                clickable: true,
-              },
-              navigation: {
-                nextEl: ".swiper-button-next",
-                prevEl: ".swiper-button-prev",
-              },
-            });
-          </script>
+     <!-- <div class="container" style="width: 100%;"> -->
+        <div class="slider-for d1">
+            <div class="sf"><img src="/resources/mainImage/upload/m-main1.jpg"></div>
+            <div class="sf"><img src="/resources/mainImage/upload/m-main2.jpg"></div>
+            <div class="sf"><img src="/resources/mainImage/upload/m-main3.jpg"></div>
+            <div class="sf"><img src="/resources/mainImage/upload/m-main4.jpg"></div>
+            <div class="sf"><img src="/resources/mainImage/upload/m-main5.jpg"></div>
         </div>
-      <!--   <div id="section3" class="container-fluid">
-          <div class="slide-right up-on-scroll">
-                <div class="slide-right up-on-scroll">
-                  <div class="banner" style="border: 1px solid #000;"></div>
-                </div>
-                <div class="slide-right up-on-scroll">
-                  <div class="main-content">
-                  <div class="m-menu"><img src="/resources/mainImage/upload/m-gifimage.gif"></div>
-                  <div class="m-menu"><img src="/resources/mainImage/upload/m-sub1.JPG"></div>
-                  <div class="m-menu">
-                    <div class="m-sub"><img src="/resources/mainImage/upload/m-sub2.JPG"></div>
-                    <div class="m-sub"><img src="/resources/mainImage/upload/m-sub2.JPG"></div>
-                  </div>
-                  </div>
-                </div>
-          </div> -->
-        </div> 
-<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
-</body>
+        <div class="sliderbg">
+        <div class="slider-nav d2">
+            <div class="sn"><img src="/resources/mainImage/upload/m-show1.jpg"></div>
+            <div class="sn"><img src="/resources/mainImage/upload/m-show2.jpg"></div>
+            <div class="sn"><img src="/resources/mainImage/upload/m-show3.jpg"></div>
+            <div class="sn"><img src="/resources/mainImage/upload/m-show4.jpg"></div>
+            <div class="sn"><img src="/resources/mainImage/upload/m-show5.jpg"></div>
+        </div>
+        </div>
+        <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.js"></script>
+      
+        <script type="text/javascript">
+       $('.slider-for').slick({
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        arrows: false,
+        fade: true,
+        asNavFor: '.slider-nav'
+      });
+      $('.slider-nav').slick({
+        autoplay: true,
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        asNavFor: '.slider-for',
+        dots: false,
+        centerMode: true,
+        focusOnSelect: true
+      });
+        </script>
 
-<script>
-    function isElementUnderBottom(elem, triggerDiff) {
+
+         <div class="showslide">
+         <!-- Swiper -->
+         <div class="swiper mySwiper" >
+          <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="/resources/mainImage/upload/m-art1.jpg">
+            <div class="cover">
+              <div class="cover-content">
+                  <h5>호두까기 인형</h5>
+                  <hr>
+                  <p>크리스마스 이브 , 마리의 집에서 크리스마스 파티가 열리고 마리의 대부
+                      드로셀마이어가 마리에게 호두까기 인형을 선물합니다. 
+                      호두까지 인형을 품에 안고 잠이 든 마리,
+                      꿈속에서 거실의 트리가 켜지고,  각나라의 ...
+                  </p>
+                  <button class="reserve-button">예매</button>
+              </div>
+          </div>
+        </div>
+            <div class="swiper-slide"><img src="/resources/mainImage/upload/m-art2.jpg">
+            <div class="cover">
+              <div class="cover-content">
+                  <h5>프랑켄슈타인</h5>
+                  <hr>
+                  <p>크리스마스 이브 , 마리의 집에서 크리스마스 파티가 열리고 마리의 대부
+                      드로셀마이어가 마리에게 호두까기 인형을 선물합니다. 
+                      호두까지 인형을 품에 안고 잠이 든 마리,
+                      꿈속에서 거실의 트리가 켜지고,  각나라의 ...
+                  </p>
+                  <button class="reserve-button">예매</button>
+              </div>
+            </div>
+          </div>
+            <div class="swiper-slide"><img src="/resources/mainImage/upload/m-art3.jpg">
+              <div class="cover">
+                <div class="cover-content">
+                    <h5>라이언킹</h5>
+                    <hr>
+                    <p>크리스마스 이브 , 마리의 집에서 크리스마스 파티가 열리고 마리의 대부
+                        드로셀마이어가 마리에게 호두까기 인형을 선물합니다. 
+                        호두까지 인형을 품에 안고 잠이 든 마리,
+                        꿈속에서 거실의 트리가 켜지고,  각나라의 ...
+                    </p>
+                    <button class="reserve-button">예매</button>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide"><img src="/resources/mainImage/upload/m-art4.jpg"></div>
+            <div class="swiper-slide"><img src="/resources/mainImage/upload/m-art5.jpg"></div>
+            <div class="swiper-slide"><img src="/resources/mainImage/upload/m-art6.jpg"></div>
+            <div class="swiper-slide"><img src="/resources/mainImage/upload/m-art4.jpg"></div>
+            <div class="swiper-slide"><img src="/resources/mainImage/upload/m-art5.jpg">
+              <div class="cover">
+                <div class="cover-content">
+                    <h5>지킬앤하이드</h5>
+                    <hr>
+                    <p>크리스마스 이브 , 마리의 집에서 크리스마스 파티가 열리고 마리의 대부
+                        드로셀마이어가 마리에게 호두까기 인형을 선물합니다. 
+                        호두까지 인형을 품에 안고 잠이 든 마리,
+                        꿈속에서 거실의 트리가 켜지고,  각나라의 ...
+                    </p>
+                    <button class="reserve-button">예매</button>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide"><img src="/resources/mainImage/upload/m-art6.jpg">
+              <div class="cover">
+                <div class="cover-content">
+                    <h5>드루피와함께 춤을</h5>
+                    <hr>
+                    <p>크리스마스 이브 , 마리의 집에서 크리스마스 파티가 열리고 마리의 대부
+                        드로셀마이어가 마리에게 호두까기 인형을 선물합니다. 
+                        호두까지 인형을 품에 안고 잠이 든 마리,
+                        꿈속에서 거실의 트리가 켜지고,  각나라의 ...
+                    </p>
+                    <button class="reserve-button">예매</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-pagination"></div>
+        </div>
+      </div>
+        <!-- Swiper JS -->
+        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+      
+        <!-- Initialize Swiper -->
+        <script>
+          var swiper = new Swiper(".mySwiper", {
+            slidesPerView: 5,
+            spaceBetween: 30,
+            slidesPerGroup: 3,
+            loop: true,
+            loopFillGroupWithBlank: true,
+            pagination: {
+              el: ".swiper-pagination",
+              clickable: true,
+            },
+            navigation: {
+              nextEl: ".swiper-button-next",
+              prevEl: ".swiper-button-prev",
+            },
+          });
+        </script>
+
+        <!-- <div class="banner">
+          <div class="slide-right up-on-scroll">
+          <img src="/resources/mainImage/upload/m-banner.jpg">
+        </div> 
+        </div>-->
+
+        <div class="m-notice">
+          <div class="slide-right up-on-scroll">
+          <div class="notice-menu">
+            <li class="l-notice">
+                  <div class="tit-main">
+                    <span class="small">Notice</span>
+                    <h2 class="t">최신소식</h2>
+                  </div>
+                  <ul class="ln-content">
+                    <li class="lnc-box">
+                      <a href="#"><span class="t">제목칸 : [안내] 코로나19 특별방역 대처</span></a>
+                      <span class="date">2021.11.30</span>
+                    </li>
+                      <li class="lnc-box">
+                        <a href="#"><span class="t">제목칸 : [채용공고] 아카데미'첼로' 선생모집 </span></a>
+                        <span class="date">2021.12.08</span>
+                      </li>
+                  </ul>
+               </li>
+
+                <li class="r-popup">
+                  <div class="tit-main">
+                    <span class="small">Popup Zone</span>
+                    <h2 class="t">팝업존</h2>
+                  </div>
+                  <div class="w">
+                    <ul class="ln-content">
+                        <li class="rpc-box">
+                          <a href="#"><img src="/resources/mainImage/upload/m-popup1.jpg"></a>
+                          <span class="date">2021.11.30</span>
+                        </li>
+                          <li class="rpc-box">
+                            <a href="#"><img src="/resources/mainImage/upload/m-popup2.jpg"></a>
+                            <span class="date">2021.12.08</span>
+                          </li>
+                      </ul>
+                  </div>
+                </li>
+            </div>
+          </div>
+        </div>
+          <script>
+		   $('.autoplay').slick({
+			  slidesToShow: 3,
+			  slidesToScroll: 1,
+			  autoplay: true,
+			  autoplaySpeed: 2000,
+			});
+</script>
+        <script>
+        function isElementUnderBottom(elem, triggerDiff) {
       const { top } = elem.getBoundingClientRect();
       const { innerHeight } = window;
       return top > innerHeight + (triggerDiff || 0);
     }
-    
-    function handleScroll() {
+          function handleScroll() {
       const elems = document.querySelectorAll('.up-on-scroll');
       elems.forEach(elem => {
         if (isElementUnderBottom(elem, -20)) {
@@ -203,5 +245,7 @@
     }
     
     window.addEventListener('scroll', handleScroll);
-    </script>
+        </script>
+    	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+</body>
 </html>

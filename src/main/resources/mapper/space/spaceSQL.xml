@@ -135,11 +135,28 @@
 		from rental r 
 		join space s using(space_no)  
 		join space_time st using(st_no) 
-		where rental_date < to_char(sysdate,'yyyy-mm-dd') 
-		and end_time < to_char(sysdate , 'HH24:mm') 
-		and member_id = #{memberId} 
+		where rental_date < to_char(sysdate,'yyyy-mm-dd')
+        and member_id = #{memberId} 
 		and used_board = 0 
 		and rental_status =2
+		union 
+        select * from (select 
+			r.rental_no as rentalNo,
+			r.member_id as memberId,
+			r.rental_date as rentalDate,
+			r.rental_status as rentalStatus, 
+			s.space_name as spaceName, 
+			r.used_board as usedBoard, 
+			st.end_time 
+		from rental r 
+		join space s using(space_no)  
+		join space_time st using(st_no) 
+		where rental_date = to_char(sysdate,'yyyy-mm-dd')
+        and member_id = 'hy01' 
+		and used_board = 0 
+		and rental_status =2
+        )        
+		where end_time < to_char(sysdate , 'HH24:mi')
 	]]>
 	</select>
 	<select id="selectRentalNo" parameterType="_int" resultType="rental">
@@ -224,18 +241,21 @@
 		where member_id =#{memberId}
 	</select>
 	<select id="selectUseBoardList" parameterType="map" resultType="kr.or.space.model.vo.UseBoard">
-		 select 
+		  select 
 		 	ub_no as ubNo, 
-		 	space_name as spaceName, 
-		 	use_board.member_id as memberId, 
+            space_name as spaceName,
+		 	ub.member_id as memberId, 
 		 	ub_title as ubTitle, 
-		 	ub_content ubContent, 
-		 	ub_date ubDate, 
-		 	filename 
-		 	filepath
-		 from use_board 
-		join rental using(rental_no) 
-		join space using(space_no)
+		 	ub_content as ubContent, 
+		 	ub_date as ubDate, 
+		 	filename, 
+		 	filepath,
+            ub.del_yn
+		 from(select rownum as rnum, b.* 
+		 from(SELECT * FROM use_board order by ub_no desc)b) ub 
+         join rental using(rental_no) 
+         join space using(space_no) 
+         where rnum between #{start} and #{end} and ub.del_yn='N'
 	</select>
 	<select id="selectTotalCount" resultType="_int">
 		select 
@@ -245,9 +265,9 @@
 	<insert id="insertUseBoard" parameterType="kr.or.space.model.vo.UseBoard">
 		insert
 			into use_board
-			values(ub_seq.nextval,#{rentalNo},#{memberId},#{ubTitle},#{ubContent},to_char(sysdate,'yyyy-mm-dd'),#{filename},#{filepath})
+			values(ub_seq.nextval,#{rentalNo},#{memberId},#{ubTitle},#{ubContent},to_char(sysdate,'yyyy-mm-dd'),#{filename},#{filepath},'N')
 	</insert>
-	<update id="updateUseBoard" parameterType="_int">
+	<update id="updateUseBoardStatus" parameterType="_int">
 		update
 			rental set
 			used_board = 1
@@ -265,5 +285,56 @@
 			filepath
 		from use_board
 		where ub_no = #{ubNo}	
+	</select>
+	<update id="deleteUseBoard" parameterType="_int">
+		update
+			use_board set
+			del_yn = 'Y'
+		where ub_no = #{ubNo}	
+	</update>
+	<update id="updateUseBoard" parameterType="kr.or.space.model.vo.UseBoard">
+		update
+			use_board set
+			ub_title = #{ubTitle},
+			ub_content = #{ubContent},
+			filename = #{filename},
+			filepath = #{filepath}
+		where ub_no = #{ubNo}		
+	</update>
+	<select id="selectSpaceReview" parameterType="map" resultType="kr.or.space.model.vo.SpaceReview">
+		select 
+			sr_no as srNo, 
+			srr.member_id as memberId, 
+			rental_no as rentalNo,
+			sr_content as srContent,
+			sr_date as srDate 
+		from(select rownum as rnum, sr.* 
+		from(SELECT * FROM space_review order by sr_no desc)sr)srr 
+		join rental using (rental_no) 
+		where rnum between #{start} and #{end} and del_yn='N' and space_no=#{spaceNo}
+	</select>
+	<select id="selectRentalInfo" parameterType="_int" resultType="rental">
+		select
+			rental_no as rentalNo,
+			space_no as spaceNo,
+			member_id as memberId,
+			st_no as stNo,
+			rental_date as rentalDate,
+			rental_people as rentalPeople,
+			used_board as usedBoard
+		from rental
+		where rental_no = #{rentalNo}	
+	</select>
+	<insert id="insertSpaceReview" parameterType="kr.or.space.model.vo.SpaceReview">
+		insert
+			into space_review
+			values(sr_seq.nextval,#{rentalNo},#{memberId},#{srContent},to_char(sysdate,'yyyy-mm-dd'),'N')
+	</insert>
+	<select id="selectTotalReviewCount" parameterType="_int" resultType="_int">
+		select 
+			count(*) 
+		from space_review 
+		join rental using(rental_no) 
+		where space_no = #{spaceNo}
 	</select>
 </mapper>

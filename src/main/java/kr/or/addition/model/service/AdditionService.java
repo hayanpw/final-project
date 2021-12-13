@@ -22,6 +22,8 @@ public class AdditionService {
 	
 	//글 리스트 조회
 		public BoardPageData selectNoticeList(int boardType, int reqPage) {
+			//고정공지
+			ArrayList<Board> fixlist = dao.selectFixlist();
 			// 한페이지에 보여줄 게시물 수
 			int numPerPage = 10;
 			int end = reqPage * numPerPage;
@@ -108,8 +110,8 @@ public class AdditionService {
 			}
 			pageNavi +="</ul>";
 			
-
-			BoardPageData bpd = new BoardPageData(list, pageNavi, start,totalCount);
+			fixlist.addAll(list);
+			BoardPageData bpd = new BoardPageData(fixlist, pageNavi, start,totalCount);
 			return bpd;
 		}
 
@@ -216,7 +218,7 @@ public class AdditionService {
 		String pageNavi = "<ul class ='pagination pagination-lg'>";
 
 		if(reqPage>=4) {
-			pageNavi += "<li class='page-item'>";
+			pageNavi += "<li id='pageNum' class='page-item'>";
 			if(boardType==1) {
 				pageNavi += "<a class='page-link' href='/searchKeyword.do?type="+type+"&keyword="+keyword+"&boardType=1&reqPage="+(reqPage-1)+"'>";
 			}else if(boardType==2) {
@@ -230,7 +232,7 @@ public class AdditionService {
 		//페이지숫자
 		for(int i=0;i<pageNaviSize;i++) {
 				if(pageNo == reqPage) {
-					pageNavi += "<li class ='page-item active'>";
+					pageNavi += "<li id='pageNumAct' class ='page-item active'>";
 					if(boardType==1) {
 						pageNavi += "<a class='page-link' href='/searchKeyword.do?type="+type+"&keyword="+keyword+"&boardType=1&reqPage="+pageNo+"'>";
 					}else if(boardType==2) {
@@ -240,7 +242,7 @@ public class AdditionService {
 					}
 					pageNavi += pageNo+"</a></li>";
 				}else {
-					pageNavi += "<li class ='page-item'>";
+					pageNavi += "<li id='pageNum' class ='page-item'>";
 					if(boardType==1) {
 						pageNavi += "<a class='page-link' href='/searchKeyword.do?type="+type+"&keyword="+keyword+"&boardType=1&reqPage="+pageNo+"'>";
 					}else if(boardType==2) {
@@ -258,7 +260,7 @@ public class AdditionService {
 		
 		
 		if(pageNo <= totalPage) {
-			pageNavi += "<li class ='page-item'>";
+			pageNavi += "<li id='pageNum' class ='page-item'>";
 			if(boardType==1) {
 				pageNavi += "<a class='page-link' href='/searchKeyword.do?type="+type+"&keyword="+keyword+"&boardType=1&reqPage="+(reqPage+1)+"'>";
 			}else if(boardType==2) {
@@ -281,13 +283,25 @@ public class AdditionService {
 		return result;
 	}
 
-
+	
 	public BoardNext selectNextBoard(int boardNo,int boardType) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("boardNo", boardNo);
 		map.put("boardType", boardType);
 		BoardNext info = dao.selectNextBoard(map);
 		return info;
+	}
+
+	@Transactional
+	public int regulationBoard(int boardNo) {
+		int result=dao.regulationBoard(boardNo);
+		return result;
+	}
+	
+	@Transactional
+	public int removeRegulationBoard(int boardNo) {
+		int result=dao.removeRegulationBoard(boardNo);
+		return result;
 	}
 	
 	

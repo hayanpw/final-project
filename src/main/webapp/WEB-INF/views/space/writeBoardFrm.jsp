@@ -12,7 +12,7 @@
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 		<div class="container">
-			<form action="/writeBoard.do" method="get" enctype="multipart/form-data">
+			<form action="/writeBoard.do" method="post" enctype="multipart/form-data">
 				<table class="table table-border" border="1">
 					<tr>
 						<th colspan=2">제목</th>

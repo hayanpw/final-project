@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import kr.or.academy.vo.Academy;
+import kr.or.academy.vo.AcademyPagingVo;
 import kr.or.member.vo.Member;
 import kr.or.space.model.dao.SpaceDao;
 import kr.or.space.model.vo.FileVO;
@@ -16,6 +18,7 @@ import kr.or.space.model.vo.Space;
 import kr.or.space.model.vo.SpaceAdmin;
 import kr.or.space.model.vo.SpaceMypage;
 import kr.or.space.model.vo.SpacePageNavi;
+import kr.or.space.model.vo.SpaceReview;
 import kr.or.space.model.vo.SpaceTime;
 import kr.or.space.model.vo.UseBoard;
 
@@ -120,6 +123,7 @@ public class SpaceService {
 		return dao.selectSpaceMypage(memberId);
 	}
 	//사용 게시판-페이징
+	@Transactional
 	public SpacePageNavi selectSpacePageNavi(int reqPage) {
 		int numPerPage = 10;
 		int end = reqPage*numPerPage;
@@ -128,7 +132,6 @@ public class SpaceService {
 		map.put("start", start);
 		map.put("end", end);
 		ArrayList<UseBoard> list = dao.selectUseBoardList(map);
-		
 		int totalCount = dao.selectTotalCount();
 		int totalPage = 0;
 		if(totalCount%numPerPage == 0) {
@@ -181,6 +184,7 @@ public class SpaceService {
 		return dao.selectRentalNo(rentalNo);
 	}
 	//사용게시판 등록
+	@Transactional
 	public int insertUseBoard(UseBoard ub) {
 		int result = dao.insertUseBoard(ub);
 		if(result>0) {
@@ -194,6 +198,106 @@ public class SpaceService {
 	//사용 게시판 조회
 	public UseBoard selectOneBoardView(int ubNo) {
 		UseBoard ub = dao.selectOneBoardView(ubNo);
-		return null;
+		return ub;
+	}
+	//게시판 삭제
+	public int deleteUseBoard(int ubNo) {
+		return dao.deleteUseBoard(ubNo);
+	}
+	//게시판 수정
+	public int updateUseBoard(UseBoard u) {
+		return dao.updateUseBoard(u);
+	}
+	//공간에 따른 리뷰 조회
+	public SpacePageNavi selectSpaceReview(int spaceNo, int reqPage) {
+		int numPerPage = 5;
+		int end = reqPage*numPerPage;
+		int start = end - numPerPage+1;
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("start", start);
+		map.put("end", end);
+		map.put("spaceNo", spaceNo);
+		ArrayList<SpaceReview> srList = dao.selectSpaceReview(map);;
+		
+		int totalCount = dao.selectTotalReviewCount(spaceNo);
+		int totalPage = 0;
+		if(totalCount%numPerPage == 0) {
+			totalPage = totalCount/numPerPage;
+		}else {
+			totalPage = totalCount/numPerPage+1;
+		}
+		int pageNaviSize = 5;
+		int pageNo = ((reqPage-1)/pageNaviSize)*pageNaviSize + 1;
+		
+		String pageNavi = "<ul class='pagination'>";
+		//이전버튼
+		if(pageNo != 1) {
+			pageNavi += "<li>";
+			pageNavi += "<a href='/spaceView.do?reqPage="+(pageNo-1)+"&spaceNo="+spaceNo+"'>";
+			pageNavi += "&lt;</a></li>";
+		}
+		//페이지숫자
+		for(int i=0; i<pageNaviSize; i++) {
+			if(pageNo == reqPage) {
+				pageNavi += "<li class='disabled'>";
+				pageNavi += "<a href='/spaceView.do?reqPage="+pageNo+"&spaceNo="+spaceNo+"'>";
+				pageNavi += pageNo+"</a></li>";
+			}else {
+				pageNavi += "<li>";
+				pageNavi += "<a href='/spaceView.do?reqPage="+pageNo+"&spaceNo="+spaceNo+"'>";
+				pageNavi += pageNo+"</a></li>";
+			}
+			pageNo++;
+			if(pageNo>totalPage) {
+				break;
+			}
+		}
+		//다음버튼
+		if(pageNo <= totalPage) {
+			pageNavi += "<li>";
+			pageNavi += "<a href='/spaceView.do?reqPage="+pageNo+"&spaceNo="+spaceNo+"'>";
+			pageNavi += "&gt;</a></li>";
+		}
+		pageNavi += "</ul>";
+		
+		SpacePageNavi page = new SpacePageNavi();
+		page.setSrList(srList);
+		page.setPageNavi(pageNavi);
+		page.setStart(start);
+		return page;
+		
+	}
+	//렌탈 정보
+	public Rental selectRentalInfo(int rentalNo) {
+		return dao.selectRentalInfo(rentalNo);
+	}
+	//리뷰 등록
+	public int insertReview(SpaceReview sr) {
+		return dao.insertReview(sr);
+	}
+	//리뷰 더보기
+	public ArrayList<SpaceReview> moreSpaceReview(int start, int spaceNo) {
+		int end = start +5;
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("start", start+1);
+		map.put("end", end);
+		map.put("spaceNo", spaceNo);
+		ArrayList<SpaceReview> list = dao.moreSpaceReview(map);
+		return list;
+	}
+	//리뷰총개수
+	public int selectTotalReviewCount(int spaceNo) {
+		return dao.selectTotalReviewCount(spaceNo);
+	}
+	//리뷰 리스트 조회
+	public ArrayList<SpaceReview> selectSpaceReviewList(int spaceNo, int reqPage) {
+		int start = reqPage;
+		int end = start + 3;
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("start", start);
+		map.put("end", end);
+		map.put("spaceNo", spaceNo);
+		ArrayList<SpaceReview> list = dao.selectSpaceReview(map);
+		return list;
 	}
 }

@@ -98,5 +98,21 @@ public class AdditionDao {
 		return sqlSession.selectOne("addition.selectNextBoard",map);
 	}
 
+	public int fixCount() {
+		return sqlSession.selectOne("addition.fixCount");
+	}
+
+	public ArrayList<Board> selectFixlist() {
+		List<Board> fixlist = sqlSession.selectList("addition.selectFixlist");
+		return (ArrayList<Board>)fixlist;
+	}
+
+	public int regulationBoard(int boardNo) {
+		return sqlSession.update("addition.regulationBoard",boardNo);
+	}
+	
+	public int removeRegulationBoard(int boardNo) {
+		return sqlSession.update("addition.removeRegulationBoard",boardNo);
+	}
 
 }

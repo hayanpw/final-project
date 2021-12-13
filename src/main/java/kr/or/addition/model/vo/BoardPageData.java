@@ -43,7 +43,6 @@ public class BoardPageData {
 	public void setTotalCount(int totalCount) {
 		this.totalCount = totalCount;
 	}
-	
-	
+
 	
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import kr.or.academy.dao.AcademyDao;
 import kr.or.academy.vo.Academy;
+import kr.or.academy.vo.AcademyCategory;
 import kr.or.academy.vo.AcademyPagingVo;
 import kr.or.academy.vo.AcademyPayment;
 
@@ -53,5 +54,10 @@ public class AcademyService {
 	public int academyCredit(AcademyPayment acp) {
 		int result = dao.academyCredit(acp);
 		return result;
+	}
+
+	public ArrayList<AcademyCategory> selectAcademyCategory() {
+		ArrayList<AcademyCategory> acList = dao.selectAcademyCategory();
+		return acList;
 	}
 }

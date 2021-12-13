@@ -11,6 +11,7 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+	<jsp:include page="/WEB-INF/views/common/adminpageMenu.jsp"/>
 		<div class="container">
 			<div class="title">
 				<h3>대관신청 관리</h3>

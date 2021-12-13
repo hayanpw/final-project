@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.or.academy.vo.Academy;
+import kr.or.academy.vo.AcademyCategory;
 import kr.or.academy.vo.AcademyPagingVo;
 import kr.or.academy.vo.AcademyPayment;
 
@@ -41,5 +42,10 @@ public class AcademyDao {
 	public int academyCredit(AcademyPayment acp) {
 		int result = sqlSession.insert("academy.academyCredit",acp);
 		return result;
+	}
+
+	public ArrayList<AcademyCategory> selectAcademyCategory() {
+		List<AcademyCategory> acList = sqlSession.selectList("academy.academyCategory");
+		return (ArrayList<AcademyCategory>)acList;
 	}
 }

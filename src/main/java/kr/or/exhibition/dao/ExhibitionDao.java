@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import kr.or.exhibition.vo.Exhibition;
 import kr.or.exhibition.vo.ExhibitionPagingVo;
 import kr.or.exhibition.vo.ExhibitionPayment;
+import kr.or.exhibition.vo.ExhibitionReview;
 
 @Repository
 public class ExhibitionDao {
@@ -40,5 +41,30 @@ public class ExhibitionDao {
 	public ArrayList<Exhibition> selectExhibition(ExhibitionPagingVo ep) {
 		List<Exhibition> list = sqlSession.selectList("exhibition.exhibitionList",ep);
 		return (ArrayList<Exhibition>)list;
+	}
+
+	public int insertExReview(ExhibitionReview exr) {
+		int result = sqlSession.insert("exhibition.insertExReview",exr);
+		return result;
+	}
+
+	public int deleteExReview(ExhibitionReview exr) {
+		int result = sqlSession.update("exhibition.deleteExReview",exr);
+		return result;
+	}
+
+	public int updateExReview(ExhibitionReview exr) {
+		int result = sqlSession.update("exhibition.updateExReveiw",exr);
+		return result;
+	}
+
+	public ArrayList<ExhibitionReview> selectExReview(int exhibitionNo) {
+		List<ExhibitionReview> list =sqlSession.selectList("exhibition.selectExReviewList", exhibitionNo);
+		return  (ArrayList<ExhibitionReview>)list;
+	}
+
+	public double selectStarAvg(int exhibitionNo) {
+		double starAvg = sqlSession.selectOne("exhibition.selectAvgStar",exhibitionNo);
+		return starAvg;
 	}
 }

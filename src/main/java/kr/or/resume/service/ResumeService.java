@@ -29,4 +29,22 @@ public class ResumeService {
 		}	
 		return fileResult;
 	}
+
+	public ArrayList<Resume> selectResumeList(int requritNo) {
+		ArrayList<Resume> list = dao.selectResumeList(requritNo);
+		return list;
+	}
+
+	public Resume selectOneResume(int resumeNo) {
+		Resume r = dao.selectOneResume(resumeNo);
+		ArrayList<ResumeTbl> list = dao.selectFileList(resumeNo);
+		r.setRtList(list);
+		return r;
+	}
+
+	public ResumeTbl selectOneResumeTbl(int fileNo) {
+		ResumeTbl rt = dao.selectOneResumeTbl(fileNo);
+		return rt;
+	}
+
 }

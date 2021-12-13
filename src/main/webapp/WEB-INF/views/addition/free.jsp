@@ -61,7 +61,6 @@
 	font-weight:100;
 	height: 40px;
 	font-size:18px;
-	color: black;
 	line-height: 40px;
 	}
 	#firtr>td{
@@ -73,9 +72,12 @@
 	line-height: 40px;
 	}
 	
-	#table1 td>a {
+	#noRegulation{
 	color: black;
 	}
+	#regulation{
+    color: #A79078;
+    }
 	#table1 td>a:hover {
 	text-decoration: none;
 	}
@@ -112,6 +114,7 @@
     color: black;
     border: none;
     }
+    
 </style>
 </head>
 <body>
@@ -125,13 +128,24 @@
 					<td>번호</td><td>제목</td><td>작성자</td><td>작성일</td><td>조회수</td>
 				</tr>
 				<c:forEach	items="${list }" var="b" varStatus="i">
+				<c:if test="${b.bnum != 0 }">
 				<tr>
 					<td>${b.bnum }</td>
-					<td id="btitle"><a href="/boardView.do?boardType=3&boardNo=${b.boardNo}">${b.boardTitle }[${b.commentCount }]</a></td>
+					<c:choose>
+						<c:when test="${b.boardLevel==2 }">
+						<td id="btitle"><a href="/boardView.do?boardType=3&boardNo=${b.boardNo}" id="regulation" class="chk">관리자에 의해 규제된 글입니다.</a></td>
+						<input type="hidden" class="memberId" value="${sessionScope.m.memberId }">
+						<input type="hidden" class="memberLevel" value="${sessionScope.m.memberLevel }">
+						</c:when>
+						<c:otherwise>
+						<td id="btitle"><a href="/boardView.do?boardType=3&boardNo=${b.boardNo}" id="noRegulation">${b.boardTitle }&nbsp;[${b.commentCount }]</a></td>
+						</c:otherwise>
+					</c:choose>
 					<td>${b.boardWriter }</td>
 					<td>${b.regDate }</td>
 					<td>${b.readCount }</td>
 				</tr>
+				</c:if>
 				</c:forEach>
 			</table>
 		</div>
@@ -161,6 +175,15 @@
 			return false;
 		}
 	});
+	$(document).on("click",".chk",function(){
+		var idx=$(".chk").index(this);
+		var memberLevel = $(".memberLevel").eq(idx).val();
+		var memberId = $(".memberId").eq(idx).val();
+		if(!memberId=="" && memberLevel==0){
+			return true;
+		}
+		return false;
+    });
 	</script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>

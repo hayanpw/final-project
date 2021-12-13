@@ -81,5 +81,9 @@ public class MemberDao {
 			return m;
 		}
 	}
+	public ArrayList<Member> searchMember(String search) {
+		List list = sqlSession.selectList("member.searchMember",search);
+		return (ArrayList<Member>)list;
+	}
 }
 

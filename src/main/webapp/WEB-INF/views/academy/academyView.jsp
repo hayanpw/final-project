@@ -69,6 +69,7 @@
               </div>
         </div>
     </div>
+    <div class="leftSide">
     <div class="fixed">
     	 <div id="datepicker"></div>
     	 <button onclick="payment();" class="btn">결제하기</button>
@@ -80,7 +81,7 @@
     	 <input type="hidden" id="academyNo" value="${a.academyNo }">
     	 <input type="hidden" id="academyTeacher" value="${a.academyTeacher }">
     </div>
-   
+   </div>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>

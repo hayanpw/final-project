@@ -15,4 +15,41 @@
 	<select id="selectResumeNo" resultType="_int">
 		select max(resume_no) from resume
 	</select>
+	<select id="selectResumeList" parameterType="_int" resultType="r">
+	select a.resume_no as resumeNo,
+       a.requrit_no as requritNo,
+       a.resume_gender as resumeGender,
+       a.resume_detail as resumeDetail,
+       a.member_no as memberNo,
+       a.resume_phone as resumePhone,
+       b.member_name as memberName
+      from resume a join member b on a.member_no = b.member_no where requrit_no =#{requritNo}
+	</select>
+	<select id="selectOneResume" parameterType="_int" resultType="r">
+	select a.resume_no as resumeNo,
+       	a.requrit_no as requritNo,
+       	a.resume_gender as resumeGender,
+       	a.resume_detail as resumeDetail,
+       	a.resume_phone as resumePhone,
+       	a.member_no as memberNo,
+       	b.member_name as memberName
+	from resume a 
+	join member b on a.member_no = b.member_no where resume_no = #{resumeNo}
+	</select>
+	<select id="selectFileList" parameterType="_int" resultType="rt">
+		select 
+			file_no as fileNo,
+			resume_no as resumeNo,
+			filepath as filepath,
+			filename as filename
+		from resume_tbl where resume_no=#{resumeNo}
+	</select>
+	<select id="selectOneFile" parameterType="_int" resultType="rt">
+		select 
+			file_no as fileNo,
+			resume_no as resumeNo,
+			filepath as filepath,
+			filename as filename
+		from resume_tbl where file_no=#{fileNo}
+	</select>
 </mapper>
