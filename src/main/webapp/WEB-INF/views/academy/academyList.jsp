@@ -33,7 +33,7 @@
 			</li>
 		</c:forEach>
 		</ul>
-		<c:if test="${count <= totalCount}">
+		<c:if test="${count < totalCount}">
 		<button class="moreBtn" id="more" currentCount="4" totalCount="${totalCount }" value="4">더보기 </button>
 		</c:if>
 		<input type="hidden" id="totalCount" value="${totalCount }">

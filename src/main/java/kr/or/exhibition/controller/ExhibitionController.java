@@ -173,7 +173,7 @@ public class ExhibitionController {
 		}else {
 			model.addAttribute("msg", "등록 실패");
 		}
-		model.addAttribute("loc", "/exhibitionView.do?exhibitionNo="+exr.getExNo());
+		model.addAttribute("loc", "/exhibitionView.do?exhibitionNo="+exr.getExhibitionNo());
 		return "common/msg";
 	}
 	@RequestMapping(value ="/deleteExReview.do")
@@ -184,7 +184,7 @@ public class ExhibitionController {
 		}else {
 			model.addAttribute("msg", "등록 실패");
 		}
-		model.addAttribute("loc", "/exhibitionView.do?exhibitionNo="+exr.getExNo());
+		model.addAttribute("loc", "/exhibitionView.do?exhibitionNo="+exr.getExhibitionNo());
 		return "common/msg";
 	}
 	@RequestMapping(value ="updateExReview.do")
@@ -195,7 +195,7 @@ public class ExhibitionController {
 		}else {
 			model.addAttribute("msg", "등록 실패");
 		}
-		model.addAttribute("loc", "/exhibitionView.do?exhibitionNo="+exr.getExNo());
+		model.addAttribute("loc", "/exhibitionView.do?exhibitionNo="+exr.getExhibitionNo());
 		return "common/msg";
 	}
 }

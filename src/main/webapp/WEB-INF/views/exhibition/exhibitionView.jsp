@@ -18,7 +18,16 @@
 		<div class="rightSide">
         <div class="topSide">
             <h2>${exb.exhibitionTitle }</h2>
-            <div class="star"></div>
+            <div class="star">
+				<span><img src="resources/showImage/star-on.png" style="height: 13px;"></span>
+				<span><img src="resources/showImage/star-on.png" style="height: 13px;"></span>
+				<span><img src="resources/showImage/star-on.png" style="height: 13px;"></span>
+				<span><img src="resources/showImage/star-on.png" style="height: 13px;"></span>
+				<span><img src="resources/showImage/star-on.png" style="height: 13px;"></span>
+				<c:forEach begin="1" end="${exb.starAvg }" >
+				</c:forEach>
+				<span>${exb.starAvg }</span>											
+            </div>
         </div>
         <div class="middleSide">
             <div class="exhibitionPhoto">
@@ -68,7 +77,15 @@
              	 	</div>
               		<div id="menu1" class="tab-pane fate in" style="width:850px">
               			<h3>취소 환불 규정</h3>
-		    			<p>Some content in menu 1.</p>
+		    			<p>예매는 PC, 모바일, 고객센터 를 통해 신용카드, 카카오페이, 네이버페이 등으로 예매하실 수 있습니다.<br>
+                        (단, 상품마다 사용 가능한 결제 수단이 다르게 적용될 수 있으니 상품 상세페이지 안내 사항을 확인해주세요.)<br>
+                        	결제 취소시 예매와 선택 좌석이 자동 취소되므로 유의하시기 바랍니다.</p>
+                    <h3>티켓수령방법</h3>
+                    <p><strong>현장수령</strong><br>
+                        티켓은 예매자 본인 수령이 기본 원칙입니다.<br>
+                        공연 당일 예매확인서와 예매자의 신분증 을 지참하신 후 공연장 매표소에서 티켓을 수령하시면 됩니다.</p>
+                    <h3>환불</h3>
+                    <p>예매수수료는 예매 당일 밤 12시 이전까지 환불되며, 그 이후 기간에는 환불되지 않습니다.</p>
               		</div>
               		<div id="menu2" class="tab-pane fate in" >
               			<h3>관람평이</h3>
@@ -77,11 +94,11 @@
 			        <c:if test="${sessionScope.m != null }">
 			        	<div class="inputReviewBox">
 							<form action="/insertExReview.do" method="post">
-								<input type="hidden" name="reviewWriter" value="${sessionScope.m.memberId }">
-								<input type="hidden" name="showNo" value="${snr.s.showNo }">
+								<input type="hidden" name="exReviewWriter" value="${sessionScope.m.memberId }">
+								<input type="hidden" name="exhibitionNo" value="${exb.exhibitionNo }">
 								<div class="selectStar">
 									<p>평점선택</p>
-									<select name="star">
+									<select name="exReviewStar">
 										<option value="1">1</option>
 										<option value="2">2</option>
 										<option value="3">3</option>
@@ -89,14 +106,14 @@
 										<option value="5">5</option>
 									</select>
 								</div>
-								<textarea name="reviewContent" class="form-control" style="width: 90%;resize: none;"></textarea>
+								<textarea name="exReviewContent" class="form-control" style="width: 90%;resize: none;"></textarea>
 								<button type="submit" class="btn btn-defualt">등록</button>
 							</form>
 						</div>
 			        </c:if>
 					
 					<div class="reviewList">
-						<c:forEach items="${exr.list }" var="exr" varStatus="i">
+						<c:forEach items="${list }" var="exr" varStatus="i">
 							<ul class="reviews">
 								<li>
 									<p>${exr.exReviewWriter }</p>
@@ -113,12 +130,12 @@
 									<p class="reviewsBtn">
 										<c:if test="${sessionScope.m != null }">
 											<c:choose>
-												<c:when test="${sessionScope.m.memberId == sr.reviewWriter}">
-													<a href="javascript:void(0)" onclick="modifyReview(this,'${exr.exReviewNo }','${exr.exNo }');">수정</a>
-													<a href="javascript:void(0)" onclick="deleteReview(this,'${exr.exReviewNo }','${exr.exNo }');">삭제</a>
+												<c:when test="${sessionScope.m.memberId == exr.exReviewWriter}">
+													<a href="javascript:void(0)" onclick="modifyReview(this,'${exr.exReviewNo }','${exr.exhibitionNo }');">수정</a>
+													<a href="javascript:void(0)" onclick="deleteReview(this,'${exr.exReviewNo }','${exr.exhibitionNo }');">삭제</a>
 												</c:when>
 												<c:when test="${sessionScope.m.memberLevel == 0 }">
-													<a href="javascript:void(0)" onclick="deleteReview(this,'${exr.exReviewNo }','${exr.exNo }');">삭제</a>
+													<a href="javascript:void(0)" onclick="deleteReview(this,'${exr.exReviewNo }','${exr.exhibitionNo }');">삭제</a>
 												</c:when>
 											</c:choose>
 										</c:if>
@@ -133,6 +150,7 @@
               </div>
         </div>
     </div>
+    <div class="leftSide">
     <div class="fixed">
     	 <div id="datepicker"></div>
     	 <input type="hidden" id="startDay" value="${exb.exhibitionStart }">
@@ -144,6 +162,7 @@
     	 <input type="hidden" id="bookDate" value="">
     	 <span class="totalPrice" id="totalPrice">${exb.exhibitionPrice }</span>원
     	 <button onclick="payment();"class="btn" id="payment" >결제하기</button>
+    </div>
     </div>
    
 	</div>
@@ -223,7 +242,7 @@
 			$("#amount").val(currAmount);
 			
 		});
-	    function modifyReview(obj,exReviewNo,exNo) {
+	    function modifyReview(obj,exReviewNo,exhibitionNo) {
 			//textarea를 화면에 표현
 			$(obj).parents("li").children().filter(".updateContent").show();
 			//기존 본문 내용을 숨김
@@ -231,14 +250,14 @@
 			$(obj).parents("li").children().filter(".starBox").hide();
 			//수정 -> 수정완료
 			$(obj).html('수정완료');
-			$(obj).attr("onclick", "modifyComplete(this, '"+exReviewNo+"', '"+exNo+"')");
+			$(obj).attr("onclick", "modifyComplete(this, '"+exReviewNo+"', '"+exhibitionNo+"')");
 			//삭제 -> 취소
 			$(obj).next().html('취소');
-			$(obj).next().attr("onclick", "modifyCancel(this, '"+exReviewNo+"', '"+exNo+"');");
+			$(obj).next().attr("onclick", "modifyCancel(this, '"+exReviewNo+"', '"+exhibitionNo+"');");
 			//답글달기 버튼 숨기기
 			$(obj).next().next().hide();
 		}
-		function modifyCancel(obj,exReviewNo,exNo) {
+		function modifyCancel(obj,exReviewNo,exhibitionNo) {
 			//textarea 숨김
 			$(obj).parents("li").children().first().show();
 			$(obj).parents("li").children().filter(".starBox").show();
@@ -246,19 +265,19 @@
 			$(obj).parents("li").children().filter(".updateContent").hide();
 			//수정완료 -> 수정
 			$(obj).prev().html('수정');
-			$(obj).prev().attr("onclick", "modifyReview(this, '"+exReviewNo+"', '"+exNo+"');");
+			$(obj).prev().attr("onclick", "modifyReview(this, '"+exReviewNo+"', '"+exhibitionNo+"');");
 			//취소 -> 삭제
 			$(obj).html('삭제');
-			$(obj).attr("onclick", "deleteReview(this, '"+exReviewNo+"', '"+exNo+"');");
+			$(obj).attr("onclick", "deleteReview(this, '"+exReviewNo+"', '"+exhibitionNo+"');");
 			//답글달기 버튼 보이기
 			$(obj).next().show();
 		}
-		function modifyComplete(obj,exReviewNo,exNo){
+		function modifyComplete(obj,exReviewNo,exhibitionNo){
 			var form = $("<form action='/updateExReview.do' method='post'></form>");
 			//form안에 수정 번호 설정
-			form.append($("<input type='text' name='reviewNo' value='"+exReviewNo+"'>"));
+			form.append($("<input type='text' name='exReviewNo' value='"+exReviewNo+"'>"));
 			//form에 공연 번호 설정
-			form.append($("<input type='text' name='showNo' value='"+exNo+"'>"));
+			form.append($("<input type='text' name='exhibitionNo' value='"+exhibitionNo+"'>"));
 			//수정한 내용을 설정
 			form.append($(obj).parents("li").children().filter(".updateContent"));
 			//전송할 form태그를 현재 페이지에 추가
@@ -270,7 +289,7 @@
 		function deleteReview(obj,exReviewNo,showNo){
 			var exReviewStatus = 1;
 			if(confirm("관람평을 삭제하시겠습니까?")){
-				location.href="/deleteExReview.do?reviewNo="+exReviewNo+"&showNo="+exNo;
+				location.href="/deleteExReview.do?exReviewNo="+exReviewNo+"&exhibitionNo="+exhibitionNo;
 			}
 		}
     </script>

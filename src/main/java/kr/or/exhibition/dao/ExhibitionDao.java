@@ -62,4 +62,9 @@ public class ExhibitionDao {
 		List<ExhibitionReview> list =sqlSession.selectList("exhibition.selectExReviewList", exhibitionNo);
 		return  (ArrayList<ExhibitionReview>)list;
 	}
+
+	public double selectStarAvg(int exhibitionNo) {
+		double starAvg = sqlSession.selectOne("exhibition.selectAvgStar",exhibitionNo);
+		return starAvg;
+	}
 }
