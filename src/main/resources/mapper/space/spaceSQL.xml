@@ -243,18 +243,19 @@
 	<select id="selectUseBoardList" parameterType="map" resultType="kr.or.space.model.vo.UseBoard">
 		  select 
 		 	ub_no as ubNo, 
-		 	space_name as spaceName, 
-		 	use_board.member_id as memberId, 
+            space_name as spaceName,
+		 	ub.member_id as memberId, 
 		 	ub_title as ubTitle, 
-		 	ub_content ubContent, 
-		 	ub_date ubDate, 
+		 	ub_content as ubContent, 
+		 	ub_date as ubDate, 
 		 	filename, 
 		 	filepath,
-            use_board.del_yn
-		 from use_board 
-		join rental using(rental_no) 
-		join space using(space_no)
-        where use_board.del_yn = 'N'
+            ub.del_yn
+		 from(select rownum as rnum, b.* 
+		 from(SELECT * FROM use_board order by ub_no desc)b) ub 
+         join rental using(rental_no) 
+         join space using(space_no) 
+         where rnum between #{start} and #{end} and ub.del_yn='N'
 	</select>
 	<select id="selectTotalCount" resultType="_int">
 		select 
@@ -300,4 +301,40 @@
 			filepath = #{filepath}
 		where ub_no = #{ubNo}		
 	</update>
+	<select id="selectSpaceReview" parameterType="map" resultType="kr.or.space.model.vo.SpaceReview">
+		select 
+			sr_no as srNo, 
+			srr.member_id as memberId, 
+			rental_no as rentalNo,
+			sr_content as srContent,
+			sr_date as srDate 
+		from(select rownum as rnum, sr.* 
+		from(SELECT * FROM space_review order by sr_no desc)sr)srr 
+		join rental using (rental_no) 
+		where rnum between #{start} and #{end} and del_yn='N' and space_no=#{spaceNo}
+	</select>
+	<select id="selectRentalInfo" parameterType="_int" resultType="rental">
+		select
+			rental_no as rentalNo,
+			space_no as spaceNo,
+			member_id as memberId,
+			st_no as stNo,
+			rental_date as rentalDate,
+			rental_people as rentalPeople,
+			used_board as usedBoard
+		from rental
+		where rental_no = #{rentalNo}	
+	</select>
+	<insert id="insertSpaceReview" parameterType="kr.or.space.model.vo.SpaceReview">
+		insert
+			into space_review
+			values(sr_seq.nextval,#{rentalNo},#{memberId},#{srContent},to_char(sysdate,'yyyy-mm-dd'),'N')
+	</insert>
+	<select id="selectTotalReviewCount" parameterType="_int" resultType="_int">
+		select 
+			count(*) 
+		from space_review 
+		join rental using(rental_no) 
+		where space_no = #{spaceNo}
+	</select>
 </mapper>

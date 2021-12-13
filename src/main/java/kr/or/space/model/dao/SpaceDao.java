@@ -14,6 +14,7 @@ import kr.or.space.model.vo.ResSpace;
 import kr.or.space.model.vo.Space;
 import kr.or.space.model.vo.SpaceAdmin;
 import kr.or.space.model.vo.SpaceMypage;
+import kr.or.space.model.vo.SpaceReview;
 import kr.or.space.model.vo.SpaceTime;
 import kr.or.space.model.vo.UseBoard;
 
@@ -150,5 +151,28 @@ public class SpaceDao {
 	//사용게시판 수정
 	public int updateUseBoard(UseBoard u) {
 		return sqlSession.update("space.updateUseBoard",u);
+	}
+	//공간에 따른 리뷰 조회
+	public ArrayList<SpaceReview> selectSpaceReview(HashMap<String, Object> map) {
+		List<SpaceReview> list = sqlSession.selectList("space.selectSpaceReview",map);
+		return (ArrayList<SpaceReview>)list;
+				
+	}
+	//렌탈 정보
+	public Rental selectRentalInfo(int rentalNo) {
+		return sqlSession.selectOne("space.selectRentalInfo",rentalNo);
+	}
+	//리뷰 등록
+	public int insertReview(SpaceReview sr) {
+		return sqlSession.insert("space.insertSpaceReview",sr);
+	}
+	//리뷰 개수
+	public int selectTotalReviewCount(int spaceNo) {
+		return sqlSession.selectOne("space.selectTotalReviewCount",spaceNo);
+	}
+	//리뷰 더보기
+	public ArrayList<SpaceReview> moreSpaceReview(HashMap<String, Object> map) {
+		List<SpaceReview> list = sqlSession.selectList("space.selectSpaceReview",map);
+		return (ArrayList<SpaceReview>)list;
 	}
 }
