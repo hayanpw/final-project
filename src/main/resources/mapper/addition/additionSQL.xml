@@ -239,7 +239,12 @@
 	FROM likenum GROUP BY board_ref) where board_ref=#{boardNo}
 	</select>
 	
-	<select id="selectLikeChk" parameterType="map">
-	
+	<select id="selectLikeChk" parameterType="map" resultType="kr.or.addition.model.vo.LikeNo">
+	select
+	member_id as memberId,
+	board_ref as boardRef,
+	like_num as likeSum,
+	dislike_num as dislikeSum
+	from likenum where board_ref=#{boardNo} and member_id=#{memberId}
 	</select>
 </mapper>

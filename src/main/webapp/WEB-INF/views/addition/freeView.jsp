@@ -320,23 +320,33 @@
 	</div>
 	
 	<script type="text/javascript">
-	var checkNum;
-	$(function() {
-		var loginId = $("#loginId").val();
-		$.ajax({
-			url : "/selectLikeChk.do",
-			data : {boardNo:boardNo,memberId:loginId},
-			success : function(data){
-				$("#likeResult").empty();
-				$("#dislikeResult").empty();
-				$("#likeResult").append("&nbsp;"+data.likeSum);
-				$("#dislikeResult").append("&nbsp;"+data.dislikeSum);
+		 var checkNum;
+		 var alreadyLike;
+	 $(document).ready(function() {
+			var loginId = $("#loginId").val();
+			var boardNo = $("#boardNo").val();
+			if(loginId != ""){
+				$.ajax({
+					url : "/selectLikeChk.do",
+					data : {boardNo:boardNo,memberId:loginId},
+					success : function(data){
+							if(data.likeSum==1){
+								checkNum=0;
+								alreadyLike=1;
+								$("#like").prop('checked',true);
+							}else if(data.dislikeSum==1){
+								checkNum=1;
+								alreadyLike=1;
+								$("#dislike").prop('checked',true);
+							}
+					}
+				});	   
 			}
-		});	   
-	});
+			
+	    });
+	
 	function check(num){
 		var loginId = $("#loginId").val();
-		$("#likeResult").empty();
 		if(loginId == ""){
 			alert("로그인 후 이용하실 수 있습니다.");
 			return false;
@@ -346,6 +356,7 @@
 		if(checkNum==num){//취소함
 		obj.eq(num).prop('checked',false);
 		checkNum = null;
+		alreadyLike=0;
 			$.ajax({
 				url : "/boardDislike.do",
 				data : {memberId:loginId,boardNo:boardNo},
@@ -362,8 +373,10 @@
 						success : function(data){
 							$("#likeResult").empty();
 							$("#dislikeResult").empty();
+							if(data!="0"){
 							$("#likeResult").append("&nbsp;"+data.likeSum);
 							$("#dislikeResult").append("&nbsp;"+data.dislikeSum);
+							}
 						}
 					});
 					
@@ -372,6 +385,9 @@
 		
 		
 		}else{ //새로 누름
+		if(alreadyLike==1){
+			return false;
+		}
 		checkNum = num;
 			$.ajax({
 				url : "/boardLike.do",
@@ -379,6 +395,7 @@
 				success : function(data){
 					if(data=="0"){
 						console.log("성공");
+						alreadyLike=1;
 					}else if(data=="1"){
 						console.log("실패");
 					}

@@ -468,7 +468,11 @@ public class AdditionController {
 	@RequestMapping(value = "/selectLikeSum.do",produces = "application/json;charset=utf-8")
 	public String selectLikeSum(int boardNo) {
 		LikeNo l = service.selectLikeSum(boardNo);
-		return new Gson().toJson(l);
+		if(l==null) {
+			return "0";
+		}else {
+			return new Gson().toJson(l);
+		}
 	
 	}
 	
@@ -476,8 +480,11 @@ public class AdditionController {
 	@RequestMapping(value = "/selectLikeChk.do",produces = "application/json;charset=utf-8")
 	public String selectLikeChk(int boardNo,String memberId) {
 		LikeNo chk = service.selectLikeChk(boardNo,memberId);
-		return new Gson().toJson(l);
-	
+		if(chk==null) {
+			return "0";
+		}else {
+			return new Gson().toJson(chk);
+		}
 	}
 	
 	
