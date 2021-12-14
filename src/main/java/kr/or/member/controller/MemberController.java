@@ -67,7 +67,7 @@ public class MemberController {
 	@RequestMapping(value="/join.do")
 	public String join(Member m,String email1, String email2, String memberPhone1,String memberPhone2,String memberPhone3,Model model) {
 		String email = email1+"@"+email2;
-		String phone = memberPhone1+memberPhone2+memberPhone3;
+		String phone = memberPhone1+"-"+memberPhone2+"-"+memberPhone3;
 		m.setMemberPhone(phone);
 		m.setMemberEmail(email);
 		int result = service.insertMemberPw(m);
