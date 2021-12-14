@@ -134,7 +134,6 @@
 </head>
 <body>
 
-<!-- 챗봇
 <script>
   (function() {
     var w = window;
@@ -175,7 +174,6 @@
     "pluginKey": "30646173-f05a-4c55-9818-46a0543b5882"
   });
 </script>
-  -->
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="container" id="container">
 		<div id="title">FAQ</div>
