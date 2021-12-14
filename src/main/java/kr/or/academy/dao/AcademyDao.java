@@ -29,13 +29,22 @@ public class AcademyDao {
 		int totalCount = sqlSession.selectOne("academy.acadeyTotal");
 		return totalCount;
 	}
-
-	public ArrayList<Academy> selectAcademy(HashMap<String, Object> map) {
-		//System.out.println("dao에서 찍히는 ap 에있는 카테고리:"+ap.getCategory());
-		//System.out.println(ap.getStart());
-		//System.out.println(ap.getEnd());
-		List<Academy> list = sqlSession.selectList("academy.academyList",map);
-		System.out.println("sql지나온 곧바로"+list.size());
+	//전체 리스트 최신순 출력
+	public ArrayList<Academy> selectAcademy(AcademyPagingVo ap) {
+		System.out.println("전체 리스트  출력 dao");
+		System.out.println("카테고리:"+ap.getCategory());
+		System.out.println("스타트:"+ap.getStart()+"엔드"+ap.getEnd());
+		List<Academy> list = sqlSession.selectList("academy.academyList",ap);
+		System.out.println("조회해온 list 길이"+list.size());
+		return (ArrayList<Academy>)list;
+	}
+	//카테고리별 최신순 출력
+	public ArrayList<Academy> selectCategoryAcademy(AcademyPagingVo ap) {
+		System.out.println("카테고리 리스트  출력 dao");
+		System.out.println("카테고리:"+ap.getCategory());
+		System.out.println("스타트:"+ap.getStart()+"엔드"+ap.getEnd());
+		List<Academy> list = sqlSession.selectList("academy.selectCategoryList",ap);
+		System.out.println("조회해온 list 길이"+list.size());
 		return (ArrayList<Academy>)list;
 	}
 
@@ -55,12 +64,23 @@ public class AcademyDao {
 	}
 
 	public int totalCountAcademy(String category) {
+		System.out.println("카테고리별 전체 개시글 조회");
 		int totalCount = sqlSession.selectOne("academy.totalCountAcademy",category);
 		return totalCount;
 	}
 
-	public ArrayList<Academy> selectCategoryAcademy(String category) {
-		List<Academy> list = sqlSession.selectList("academy.selectCategoryList",category);
+	public ArrayList<Academy> searchAcademyList(AcademyPagingVo ap) {
+		System.out.println("검색 최신순 실행");
+		System.out.println("검색어:"+ap.getCategory());
+		System.out.println("스타트:"+ap.getStart()+"엔드"+ap.getEnd());
+		List<Academy> list = sqlSession.selectList("academy.searchAcademyList",ap);
 		return (ArrayList<Academy>)list;
+	}
+
+	public int searchAcademyTotal(String keyWord) {
+		System.out.println(keyWord);
+		int totalCount = sqlSession.selectOne("academy.searchAcademyTotal",keyWord);
+		System.out.println(totalCount);
+		return totalCount;
 	}
 }
