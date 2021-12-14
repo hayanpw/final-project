@@ -107,6 +107,17 @@ public class ReadingService {
 	}
 
 
+	public ArrayList<ReadingBlack> selectReadingBlackList() {
+		ArrayList<ReadingBlack> black = dao.selectReadingBlackList();
+		return black;
+	}
+
+
+	public void timeOutBlackList(String time1) {
+		dao.timeOutBlackList(time1);
+	}
+
+
 
 
 }

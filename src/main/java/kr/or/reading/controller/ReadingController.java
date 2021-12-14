@@ -147,8 +147,10 @@ public class ReadingController {
 	public String test222(Model model) {
 		ArrayList<Reading> list = service.selectWeekReading();
 		ArrayList<Reading> alllist = service.selectAllReading();
+		ArrayList<ReadingBlack> black = service.selectReadingBlackList();
 		model.addAttribute("list",list);
 		model.addAttribute("alllist",alllist);
+		model.addAttribute("black",black);
 		return "reading/readingMypage";
 	}
 	

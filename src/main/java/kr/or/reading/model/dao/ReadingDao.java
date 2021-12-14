@@ -16,7 +16,6 @@ public class ReadingDao {
 	private SqlSessionTemplate sqlSession;
 
 	public ReadingBlack selectOneBlackList(String readingId) {
-		
 		return sqlSession.selectOne("reading.selectOneBlackList", readingId);
 	}
 
@@ -67,6 +66,15 @@ public class ReadingDao {
 	public ArrayList<Reading> selectAllReading() {
 		List<Reading> alllist = sqlSession.selectList("reading.selectAllReading");
 		return (ArrayList<Reading>)alllist;
+	}
+
+	public ArrayList<ReadingBlack> selectReadingBlackList() {
+		List<ReadingBlack> black = sqlSession.selectList("reading.selectReadingBlackList");
+		return (ArrayList<ReadingBlack>)black;
+	}
+
+	public void timeOutBlackList(String time1) {
+		sqlSession.delete("reading.timeOutBlackList", time1);
 	}
 
 	

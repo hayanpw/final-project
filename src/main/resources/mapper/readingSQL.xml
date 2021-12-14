@@ -87,6 +87,17 @@
 			reading_checkout as readingCheckOut
 		from reading
 	</select>
+	<select id="selectReadingBlackList" resultType="black">
+		select
+			black_start as blackStart,
+			black_end as blackEnd,
+			black_id as blackId,
+			member_name as memberName
+		from reading_black join member on reading_black.black_id = member.member_id where black_ty=0
+	</select>
+	<delete id="timeOutBlackList" parameterType="string">
+		delete from reading_black where black_end=#{time1} and black_ty=0
+	</delete>
 </mapper>
 		
 

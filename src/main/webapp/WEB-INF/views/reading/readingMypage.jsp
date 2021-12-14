@@ -91,7 +91,7 @@
 		        </tfoot>
 			</table>
 			
-			<br><br><br>
+			<br><br>
 			<h4>예약 내역 조회(전체+기간)</h4>
 				<table border="0" cellspacing="5" cellpadding="5">
 					<tbody>
@@ -153,6 +153,29 @@
 					</c:forEach>
 		        </tbody>
 			</table>
+			
+			<br><br>
+			<h4>블랙리스트 조회</h4>
+			<table id="table_black" class="table table-striped table-bordered" style="width:100%">
+		        <thead>
+		            <tr>
+		                <th>등록일자</th>
+		                <th>해제일자</th>
+		                <th>등록ID</th>
+		                <th>등록이름</th>
+		            </tr>
+		        </thead>
+		        <tbody>
+		        	<c:forEach	items="${black }" var="bl" varStatus="i">
+						<tr>
+							<td>${bl.blackStart }</td>
+							<td>${bl.blackEnd }</td>
+							<td>${bl.blackId }</td>
+							<td>${bl.memberName }</td>
+						</tr>
+					</c:forEach>
+		        </tbody>
+			</table>
 			<script>
 			    $(document).ready(function() {
 			        $("#table_week").DataTable({
@@ -184,6 +207,33 @@
 			        });
 			        $("#table_period").DataTable({
 			        	 order: [[ 1, "asc" ],[ 2, "asc" ]], //정렬
+			        	 "language": { //메뉴한글화
+				        		"decimal" : "",
+				                "emptyTable" : "데이터가 없습니다.",
+				                "info" : "총 _TOTAL_명   _START_에서 _END_까지 표시",
+				                "infoEmpty" : "0명",
+				                "infoFiltered" : "(전체 _MAX_ 명 중 검색결과)",
+				                "infoPostFix" : "",
+				                "thousands" : ",",
+				                "lengthMenu" : "_MENU_ 개씩 보기",
+				                "loadingRecords" : "로딩중...",
+				                "processing" : "처리중...",
+				                "search" : "검색 : ",
+				                "zeroRecords" : "검색된 데이터가 없습니다.",
+				                "paginate" : {
+				                    "first" : "첫 페이지",
+				                    "last" : "마지막 페이지",
+				                    "next" : "다음",
+				                    "previous" : "이전"
+				                },
+				                "aria" : {
+				                    "sortAscending" : " :  오름차순 정렬",
+				                    "sortDescending" : " :  내림차순 정렬"
+				                }
+				            }
+			        });
+			        $("#table_black").DataTable({
+			        	 order: [[ 1, "asc" ]],
 			        	 "language": { //메뉴한글화
 				        		"decimal" : "",
 				                "emptyTable" : "데이터가 없습니다.",
