@@ -48,6 +48,9 @@
     background: #BDB19A;
     color:#fff;
 }
+input {
+	color: #BDB19A;
+}
 .mgt10 {
     margin-top: 30px !important;
 }

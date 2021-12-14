@@ -3,3 +3,14 @@ table {
   border: 1px solid #444444;
   border-collapse: collapse;
 }
+
+#pageNumAct a{
+background-color: #563D39;
+border-color: #563D39;
+color: white;
+border: none;
+}
+#pageNum a{
+color: black;
+border: none;
+}

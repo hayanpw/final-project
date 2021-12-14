@@ -152,13 +152,6 @@ public class MemberController {
 		
 		String memberId = m.getMemberId();
 		return memberId;
-	}
-	@RequestMapping(value="/searchMember.do")
-	public String searchMember(String search, Model model) {
-		ArrayList<Member> list = service.searchMember(search);
-		model.addAttribute("list",list);
-		model.addAttribute("search",search);
-		return "member/AllMember";
 	}		
 	@RequestMapping(value="/updateMemberlist.do")
 	@ResponseBody
@@ -166,6 +159,7 @@ public class MemberController {
 		int result = service.updateMemberLevel(member);
 		return result;
 	}
+	
 	@RequestMapping(value="/allMember.do")
 	public String allMember(int reqPage, Model model) {
 		MemberPage mpg = service.selectAllMember(reqPage);
@@ -175,7 +169,17 @@ public class MemberController {
 		model.addAttribute("start", mpg.getStart());
 		return "member/AllMember";
 	}
-	
+	@RequestMapping(value="/searchMember.do")
+	public String searchMember(int[] memberLevel,String search, Model model, int reqPage) {
+		ArrayList<Member> list = service.searchMember(search);
+		model.addAttribute("reqPage",reqPage);
+		model.addAttribute("list",list);
+		model.addAttribute("search",search);
+		System.out.println("reqPage : " +reqPage);
+		System.out.println("memberLevel : " +memberLevel.length);
+		System.out.println("search : " +search);
+		return "member/AllMember";
+	}
 	
 }
 	
