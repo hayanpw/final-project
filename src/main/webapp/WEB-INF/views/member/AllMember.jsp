@@ -94,6 +94,7 @@
 				</tr>
 			</c:forEach>
 		</table>
+		<div id="pageNavi">${pageNavi }</div>
 			<script>
 			$("[name=memberLevelSelect]").change(function(){
 				var memberNo = $(this).parent().parent().children().first().html();

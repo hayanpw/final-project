@@ -16,7 +16,7 @@
 		<div class="category">
 			<ul id="gnb">
 				<li class="cate_btn all">
-					<a href="/academyList.do?reqPage=4">
+					<a href="/academyList.do?reqPage=4&category='all'">
 						# 전체
 					</a>
 				</li>
@@ -36,17 +36,17 @@
 				<h2>${sessionScope.member.memberName}님 원하시는 분야의 수업을 찾아보세요.</h2>
 				</c:when>
 				<c:otherwise>
-				<h2>원하시는 분야의 수업을 찾아보세요.</h2>
+				<h2>수업을 찾아보아요~~~</h2>
 				</c:otherwise>
 				</c:choose>
 			</div>
 				<div class="search_bar">
-					<input type="text" id="keyWord" placeholder="원하는 상품 및 주요 키워드를 검색해보세요.">
+					<input type="text" id="keyWord" placeholder="원하는 수업명 또는 내용을 입력해주세요.">
 					<button id="search" type="button" class="search_btn"><img src="/resources/exhibitionImage/icon/search.png"></button>
 				</div>
 		</div>
 		<ul class="mainmenu">
-		<c:forEach items="${list  }" var="a" >
+		<c:forEach items="${list }" var="a" >
 			<li class="academy">
 				<div class="academyImg">
 					<a href="/academyView.do?academyNo=${a.academyNo }"> 
@@ -67,7 +67,7 @@
 		</c:forEach>
 		</ul>
 		<c:if test="${count < totalCount}">
-		<button class="moreBtn" id="more" currentCount="4" totalCount="${totalCount }" value="4">더보기 </button>
+		<button class="moreBtn" id="more" currentCount="4" totalCount="${totalCount }" value="4" search="all">더보기 </button>
 		</c:if>
 		<input type="hidden" id="totalCount" value="${totalCount }">
 	</div>
@@ -77,6 +77,8 @@
 		
 		$("#more").click(function(){
 			var start = $(this).val();
+			var category = $("#more").attr("search");
+			console.log(category);
 			$.ajax({
 				url : "/moreAcademy.do",
 				data : {start:start},
@@ -107,6 +109,43 @@
 					console.log(totalCount);
 					console.log(currCount);
 					if(currCount == totalCount){
+						$("#more").css("display","none");
+						$("#more").prop("diabled",true);
+					}
+					
+				}
+			});
+		});
+		$(".categorysearch").click(function(){
+			var category = $(this).attr("category");
+			$.ajax({
+				url : "/categoryAcademy.do",
+				data : {category:category},
+				success : function(data){
+					$(".mainmenu").empty();
+					var moreLi = "";
+					for(var i=0;i<data.length;i++){
+						moreLi += "<li class='academy'>";
+						moreLi += "<div class='academyImg'>"
+						moreLi += "<a href='/academyView.do?academyNo="+data[i].academyNo+"'>";
+						moreLi += "<img src='"+data[i].academyPhoto+"'></a></div>";
+						moreLi += "<div class='info'>";
+						moreLi += "<p>"+data[i].academyTitle+"</p>";
+						moreLi += "<p>수업 기간: "+data[i].academyStart+"~"+data[i].academyEnd+"</p>";
+						moreLi += "<p>강사: "+data[i].academyTeacher+"</p>";
+						moreLi += "<p>수업료: "+data[i].academyPrice+"</p>";
+						moreLi += "<p>참여인원: 10명  <button id ='studentView'>참여인원보기</button></p>";
+						moreLi += "<div class = 'infoButton'>";
+						moreLi += "<button class='btn1'>상세보기</button><button class='btn1'>수정하기</button><button class='btn1'>삭제하기</button>";
+						moreLi += "</div></div></li>";
+						$(".mainmenu").append(moreLi);
+					}
+					console.log(start);
+					var totalCount = data[0].totalCount;
+					$("#more").attr("totalCount",totalCount);
+					$("#more").attr("search",category);
+					console.log(totalCount);
+					if(totalCount < 4){
 						$("#more").css("display","none");
 						$("#more").prop("diabled",true);
 					}
