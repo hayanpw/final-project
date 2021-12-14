@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import kr.or.member.service.MemberService;
 import kr.or.member.service.SendMail;
 import kr.or.member.vo.Member;
+import kr.or.member.vo.MemberPage;
 
 @Controller
 public class MemberController {
@@ -66,7 +67,7 @@ public class MemberController {
 	@RequestMapping(value="/join.do")
 	public String join(Member m,String email1, String email2, String memberPhone1,String memberPhone2,String memberPhone3,Model model) {
 		String email = email1+"@"+email2;
-		String phone = memberPhone1+memberPhone2+memberPhone3;
+		String phone = memberPhone1+"-"+memberPhone2+"-"+memberPhone3;
 		m.setMemberPhone(phone);
 		m.setMemberEmail(email);
 		int result = service.insertMemberPw(m);
@@ -132,21 +133,6 @@ public class MemberController {
 			model.addAttribute("loc","/");
 			return "common/msg";
 		}
-	
-	@RequestMapping(value="/allMember.do")
-	public String allMember(Model model) {
-		ArrayList<Member> list = service.selectAllMember();
-		model.addAttribute("list",list);
-		return "member/AllMember";
-	}
-		
-	@RequestMapping(value="/updateMemberlist.do")
-	@ResponseBody
-	public int updateMemberLevel(Member member) {
-		int result = service.updateMemberLevel(member);
-		return result;
-	}		
-	
 	@RequestMapping(value="/searchidpw.do")
 	public String searchidpw(Member member,Model model) {
 		System.out.println(member);
@@ -166,12 +152,32 @@ public class MemberController {
 		
 		String memberId = m.getMemberId();
 		return memberId;
+	}		
+	@RequestMapping(value="/updateMemberlist.do")
+	@ResponseBody
+	public int updateMemberLevel(Member member) {
+		int result = service.updateMemberLevel(member);
+		return result;
+	}
+	
+	@RequestMapping(value="/allMember.do")
+	public String allMember(int reqPage, Model model) {
+		MemberPage mpg = service.selectAllMember(reqPage);
+		model.addAttribute("totalCount", mpg.getTotalCount());
+		model.addAttribute("list",mpg.getList());
+		model.addAttribute("pageNavi", mpg.getPageNavi());
+		model.addAttribute("start", mpg.getStart());
+		return "member/AllMember";
 	}
 	@RequestMapping(value="/searchMember.do")
-	public String searchMember(String search, Model model) {
+	public String searchMember(int[] memberLevel,String search, Model model, int reqPage) {
 		ArrayList<Member> list = service.searchMember(search);
+		model.addAttribute("reqPage",reqPage);
 		model.addAttribute("list",list);
 		model.addAttribute("search",search);
+		System.out.println("reqPage : " +reqPage);
+		System.out.println("memberLevel : " +memberLevel.length);
+		System.out.println("search : " +search);
 		return "member/AllMember";
 	}
 	

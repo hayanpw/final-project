@@ -407,5 +407,32 @@ public class AdditionController {
 
 	}
 	*/
+	
+	//규제하기
+	@RequestMapping(value = "/regulationBoard.do")
+	public String updateBoardLevel(int boardNo,Model model) {
+		int result = service.regulationBoard(boardNo);
+		if(result>0) {
+			model.addAttribute("msg", "규제성공");
+		}else {
+			model.addAttribute("msg", "규제실패");
+		}
+		model.addAttribute("loc", "/additionBoard.do?boardType=3&reqPage=1");
+		return "common/msg";
+	}
+	
+	//규제풀기
+	@RequestMapping(value = "/removeRegulationBoard.do")
+	public String removeRegulationBoard(int boardNo,Model model) {
+		int result = service.removeRegulationBoard(boardNo);
+		if(result>0) {
+			model.addAttribute("msg", "해제성공");
+		}else {
+			model.addAttribute("msg", "해제실패");
+		}
+		model.addAttribute("loc", "/additionBoard.do?boardType=3&reqPage=1");
+		return "common/msg";
+	}
+	
 
 }

@@ -133,13 +133,10 @@
 			pwCheck = false;
 		} else if (pw != pwRe) {
 			pwChk.innerHTML = "패스워드가 일치하지 않습니다.";
-			pwChk.style.color = "red";
-			obj.style.border = "1px solid red";
+			pwChk.style.color = "#BDB19A";
 			pwCheck = false;
 		} else {
-			pwChk.innerHTML = "패스워드가 일치합니다.";
-			pwChk.style.color = "#1f4787";
-			obj.style.border = "1px solid #1f4787";
+			pwChk.innerHTML = "";
 			pwCheck = true;
 		}
 	}
@@ -189,22 +186,19 @@
 			</div>
 			<div class="modal_window_btn">
 				<div>
-					<input type='button' value='조회' id='btnCheck1' class="search_btn" />
+					<input type='button' value='조회' id='btnCheck1' class="nextBtn" />
 				</div>
 			</div>
 		</div>
 	</form>
-
 	<div class="container">
-		<hr>
-		<br> <br>
+	<div class="login-title"><span>정보</span>입력</div>
 		<div class="wrap">
 			<div class="content">
 				<form action="/join.do" method="post" class="contentDetail" id="contentDetail-field" name="joinFrm">
 					<!--legend class="contentDetail-legend">14세 이상 회원 가입 입력양식</legend> -->
 					<div class="contentDetail">
 					</div>
-					<div class="login-title"><span>정보</span>입력</div>
 					<div class="contentDetail border">
 						<br>
 						<table class="inputTbl">
@@ -216,8 +210,7 @@
 							<tr>
 								<td>비밀번호</td>
 								<td><input type="password" class="input" name="memberPassword"
-									id="memberPassword"> <span id="pw-detail"> 8~12자 이내 
-										영문,숫자,특수문자(“”-+/\:; 제외)</span> <span id="pwChkRule"></span></td> 
+									id="memberPassword"> <span id="pw-detail">특수문자(“”-+/\:; 제외)</span> <span id="pwChkRule"></span></td> 
 							</tr>
 							<tr>
 								<td>비밀번호 확인</td>
@@ -289,7 +282,7 @@
 										<option value="gmail.com">gmail.com</option>
 										<option value="hanmail.net">hanmail.net</option>
 								</select>
-								<button type="button" onclick="checkEmail();" id="btnOpen1">중복체크</button>
+								<button type="button" onclick="checkEmail();" id="btnOpen1" class="nextBtn">중복체크</button>
 									<span id="ajaxEmailcheck"></span>
 									<div class="agreebox adcheck">
 										<span id="authMsg"></span><input type="hidden" id="emailchk">
@@ -358,38 +351,36 @@
 					type : "post",
 					success : function(data) {
 						if (data == 0) {
-							$("#ajaxCheck").html("사용 가능한 아이디 입니다.");
-							$("#ajaxCheck").css("color", "blue");
+							$("#ajaxCheck").html("");
 							$("#idchk").val('1');
 							//console.log(data);
 						} else if (data == 1) {
 							$("#ajaxCheck").html("이미 사용중인 아이디 입니다.");
-							$("#ajaxCheck").css("color", "red");
+							$("#ajaxCheck").css("color", "#BDB19A");
 							$("#idchk").val('2');
 						}
 
 					}
 				});
 			} else {
-				$("#ajaxCheck").html("아이디는 영문+숫자로 4글자 이상입니다.")
-				$("#ajaxCheck").css("color", "red");
+				$("#ajaxCheck").html("영문+숫자로 4글자 이상입니다.")
+				$("#ajaxCheck").css("color", "#BDB19A");
 			}
 		});
 			var memberPwchk = true;
 		$("[name=memberPassword]").eq(0).keyup(function() {
 			var memberPassword = $(this).val();
 			// (알파벳 하나)(숫자 하나)(특수문자 하나)(문자열)
-			 var regExpPw = /(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,12}/; 
+			 var regExpPw = /(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{5,20}/; 
 			/*  var regExpPw = /^[a-zA-Z0-9]{8,12}$/; */
 			 
 			if (regExpPw.test(memberPassword)){
-				$('#pwChkRule').html("사용가능한 비밀번호입니다.");
-				$('#pwChkRule').css('color' ,"#1f4787");
+				$('#pwChkRule').html("");
 				memberPwchk = true;
 				
 			}else{
-				$('#pwChkRule').html("비밀번호는  8~12자 이내 영문,숫자,특수문자로 입력해주세요.");
-				$('#pwChkRule').css('color' ,"red");
+				$('#pwChkRule').html("비밀번호는  5~20자 이내 영문,숫자,특수문자로 입력해주세요.");
+				$('#pwChkRule').css('color' ,"#BDB19A");
 				memberPwchk = false;
 			}
 		});
@@ -402,8 +393,7 @@
 						type : "post",
 						success : function(data) {
 							if (data == 0) {
-								$("#ajaxEmailcheck").html("사용 가능한 이메일 입니다.");
-								$("#ajaxEmailcheck").css("color", "blue");
+								$("#ajaxEmailcheck").html("");
 								$("#emailchk").val('1');
 								console.log(memberEmail);
 								//아이디 사용가능시 MODAL창 인증버튼시 팝업
@@ -479,12 +469,12 @@
 
 									if (mailCode == null) {
 										$("#authMsg").html("인증 실패");
-										$("#authMsg").css("color", "red");
+										$("#authMsg").css("color", "#BDB19A");
 										$("#emailchk").val('2');
 									} else {
 										if ($("#authCode").val() == mailCode) {
 											$("#authMsg").html("인증성공");
-											$("#authMsg").css("color", "blue"); //여기다가 인증추가를 해야함
+											$("#authMsg").css("color", "#BDB19A"); //여기다가 인증추가를 해야함
 											$("#emailchk").val('1');
 											clearInterval(intervalId);
 											$("#timeZone").empty();
@@ -492,7 +482,7 @@
 
 										} else {
 											$("#authMsg").html("인증코드를 확인하세요");
-											$("#authMsg").css("color", "red");
+											$("#authMsg").css("color", "#BDB19A");
 											$("#emailchk").val('2');
 										}
 									}
@@ -501,7 +491,7 @@
 
 							} else if (data == 1) {
 								$("#ajaxEmailcheck").html("이미 사용중인 이메일 입니다.");
-								$("#ajaxEmailcheck").css("color", "red");
+								$("#ajaxEmailcheck").css("color", "#BDB19A");
 							}
 
 						}

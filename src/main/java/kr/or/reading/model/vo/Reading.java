@@ -1,5 +1,7 @@
 package kr.or.reading.model.vo;
 
+import java.util.List;
+
 import lombok.Data;
 
 @Data
@@ -13,6 +15,8 @@ public class Reading {
 	private String readingName;
 	private int readingTy;
 	private int readingCheckOut;
+	private List<String> dayList;
+	private List<String> idList;
 	
 //	READING_NO	        number	        primary key,
 //  READING_TIME        date            default sysdate not null,

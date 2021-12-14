@@ -15,17 +15,17 @@
 	<div class="container">        
         <div class="mypage-title"><span>회</span>원관리</div>
         <div class="mypage-container">
-	    	<div class="group-member">
-		    	<input type="checkbox" id="c1" name="cc" value=0 />
-	   			<label for="c1"><span></span>관리자</label>
-	   			<input type="checkbox" id="c2" name="cc" value=1 />
-	   			<label for="c2"><span></span>일반</label>
-	   			<input type="checkbox" id="c3" name="cc" value=2/>
-	   			<label for="c3"><span></span>강사</label>
-	   			<input type="checkbox" id="c4" name="cc" value=3/>
-	   			<label for="c4"><span></span>블랙</label>
-	   		</div>
 	   	<form class="navbar-form navbar-right" action="/searchMember.do">
+	   	  <div class="group-member">
+	   			<input type="checkbox" id="memberLevel1" name="memberLevel" value=1 />
+	   			<label for="memberLevel"><span></span>일반</label>
+	   			<input type="checkbox" id="memberLevel2" name="memberLevel" value=2/>
+	   			<label for="memberLevel"><span></span>강사</label>
+	   			<input type="checkbox" id="memberLevel3" name="memberLevel" value=3/>
+	   			<label for="memberLevel"><span></span>블랙</label>
+ 	   			<input type="hidden" name="reqPage" value=1>
+	   			
+	   		</div>
 	      <div class="input-group ">
 	        <input type="text" class="form-control" placeholder="검색" name="search" value="${search }">
 	        <div class="input-group-btn">
@@ -94,6 +94,7 @@
 				</tr>
 			</c:forEach>
 		</table>
+		<div id="pageNavi">${pageNavi }</div>
 			<script>
 			$("[name=memberLevelSelect]").change(function(){
 				var memberNo = $(this).parent().parent().children().first().html();
@@ -115,6 +116,7 @@
 				});
 	        })
 		   </script>
+		   
 	</div>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>

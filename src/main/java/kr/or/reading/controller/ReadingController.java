@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 
+import javafx.scene.control.Alert;
 import kr.or.reading.model.service.ReadingService;
 import kr.or.reading.model.vo.Reading;
 import kr.or.reading.model.vo.ReadingBlack;
@@ -28,7 +29,7 @@ public class ReadingController {
 	}
 	
 	@RequestMapping(value="/readingList.do")
-	public String readingList(HttpSession session, String memberId, HttpSession seesion, Model model) {
+	public String readingList(HttpSession session, String readingId, HttpSession seesion, Model model) {
 		//안내->예약 넘어갈때
 		//로그인부터 확인
 		//넘어가기전에 블랙리스트에 등록되어있는지 확인
@@ -39,7 +40,7 @@ public class ReadingController {
 			model.addAttribute("loc", "/loginFrm.do");
 			return "common/msg";		
 		}else {
-			ReadingBlack rb = service.selectOneBlackList(memberId);
+			ReadingBlack rb = service.selectOneBlackList(readingId);
 			if(rb==null) {
 				return "reading/readingList";
 			}else {
@@ -142,10 +143,47 @@ public class ReadingController {
 		return "reading/reservationToday";
 	}
 	
-	@RequestMapping(value="/test222.do")
+	@RequestMapping(value="/readingMypage.do")
 	public String test222(Model model) {
-		ArrayList<Reading> list = service.selectAllReading();
+		ArrayList<Reading> list = service.selectWeekReading();
+		ArrayList<Reading> alllist = service.selectAllReading();
+		ArrayList<ReadingBlack> black = service.selectReadingBlackList();
 		model.addAttribute("list",list);
-		return "reading/test";
+		model.addAttribute("alllist",alllist);
+		model.addAttribute("black",black);
+		return "reading/readingMypage";
 	}
+	
+	@RequestMapping(value="/outAndBlackList.do")
+	public String outAndBlackList(Reading re, Model model) {
+		int result = service.outAndBlackList(re);
+		if(result==-2) {
+			model.addAttribute("msg","블랙리스트 처리가 실패하였습니다.");
+			model.addAttribute("loc", "/test222.do");
+			return "common/msg";
+		}else if(result==-1) {
+			model.addAttribute("msg","강제퇴실 처리가 실패하였습니다.");
+			model.addAttribute("loc", "/test222.do");
+			return "common/msg";
+		}else {
+			model.addAttribute("msg","강제퇴실 처리가 완료되었습니다.");
+			model.addAttribute("loc", "/test222.do");
+			return "common/msg";
+		}
+	}
+	
+	@RequestMapping(value="/earlyOut.do")
+	public String earlyOut(Reading re, Model model) {
+		int result = service.earlyOut(re);
+		if(result>0) {
+			model.addAttribute("msg","조기퇴실 처리가 완료되었습니다.");
+			model.addAttribute("loc", "/test222.do");
+			return "common/msg";
+		}else {
+			model.addAttribute("msg","조기퇴실 처리가 실패하였습니다.");
+			model.addAttribute("loc", "/test222.do");
+			return "common/msg";
+		}
+	}
+
 }

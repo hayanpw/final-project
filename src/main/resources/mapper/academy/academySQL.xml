@@ -12,19 +12,33 @@
   		select count(*) from academy
   	</select>
   	<select id="academyList" parameterType="ap" resultType="ac">
-  		select 
-  			nn.academy_no as academyNo,
-  			nn.academy_title as academyTitle,
-  			nn.academy_start as academyStart,
-  			nn.academy_end as academyEnd,
-  			nn.academy_photo as academyPhoto,
-  			nn.academy_teacher as academyTeacher,
-  			nn.academy_place as academyPlace,
-  			nn.academy_price as academyPrice,
-  			nn.academy_detail as academyDetail,
-  			nn.academy_category as academyCategory
-  		from (select rownum as rnum,n.* from(select * from  academy order by academy_no desc)n)nn where rnum between  #{start} and #{end}
-  	</select>
+		  		select 
+		  			nn.academy_no as academyNo,
+		  			nn.academy_title as academyTitle,
+		  			nn.academy_start as academyStart,
+		  			nn.academy_end as academyEnd,
+		  			nn.academy_photo as academyPhoto,
+		  			nn.academy_teacher as academyTeacher,
+		  			nn.academy_place as academyPlace,
+		  			nn.academy_price as academyPrice,
+		  			nn.academy_detail as academyDetail,
+		  			nn.academy_category as academyCategory
+		  		from (select rownum as rnum,n.* from(select * from  academy order by academy_no desc)n)nn where rnum between  #{start} and #{end}
+	</select>
+	<select id ="selectCategoryList" parameterType="ap" resultType="ac">	
+  				select 
+		  			nn.academy_no as academyNo,
+		  			nn.academy_title as academyTitle,
+		  			nn.academy_start as academyStart,
+		  			nn.academy_end as academyEnd,
+		  			nn.academy_photo as academyPhoto,
+		  			nn.academy_teacher as academyTeacher,
+		  			nn.academy_place as academyPlace,
+		  			nn.academy_price as academyPrice,
+		  			nn.academy_detail as academyDetail,
+		  			nn.academy_category as academyCategory
+		  		from (select rownum as rnum,n.* from(select * from  academy where academy_category=#{category}  order by academy_no desc)n)nn where rnum between  #{start} and #{end}
+	</select>
   	<select id="selectOneAcademy" parameterType="_int" resultType="ac">
   	 	select 
   			academy_no as academyNo,
@@ -39,6 +53,21 @@
   			academy_category as academyCategory
   		from academy where academy_no = #{academyNo}
   	</select>
+  	<select id="searchAcademyList" parameterType="ap" resultType="ac">
+  		select 
+		  			nn.academy_no as academyNo,
+		  			nn.academy_title as academyTitle,
+		  			nn.academy_start as academyStart,
+		  			nn.academy_end as academyEnd,
+		  			nn.academy_photo as academyPhoto,
+		  			nn.academy_teacher as academyTeacher,
+		  			nn.academy_place as academyPlace,
+		  			nn.academy_price as academyPrice,
+		  			nn.academy_detail as academyDetail,
+		  			nn.academy_category as academyCategory
+	from (select rownum as rnum,n.* from(select * from  academy where academy_title like '%'||#{category}||'%' or academy_detail like '%'||#{category}||'%' order by academy_no desc)n)nn 
+	where rnum between  #{start} and #{end}
+  	</select>
   	<insert id="academyCredit" parameterType="acp">
 		insert
 			into payment
@@ -47,5 +76,11 @@
 	</insert>
 	<select id="academyCategory" resultType="acc">
 		select distinct(academy_category) as academyCategory from academy
+	</select>
+	<select id="totalCountAcademy" parameterType="string" resultType="_int">
+		select count(*) from academy where academy_category=#{category}
+	</select>
+	<select id="searchAcademyTotal" parameterType="string" resultType="_int">
+		select count(*) from academy where academy_title like '%'||#{keyWord}||'%' or academy_detail like '%'||#{keyWord}||'%'
 	</select>
 </mapper>

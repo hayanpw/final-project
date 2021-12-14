@@ -71,7 +71,6 @@
 	font-weight:100;
 	height: 40px;
 	font-size:18px;
-	color: black;
 	line-height: 40px;
 	}
 	#firtr>td{
@@ -122,9 +121,59 @@
     color: black;
     border: none;
     }
+    #answerAfter{
+    color: #563D39;
+    }
+    #answerBefore{
+    color: #A79078;
+    }
+    i{
+    color: #74655E;
+    }
 </style>
 </head>
 <body>
+
+<script>
+  (function() {
+    var w = window;
+    if (w.ChannelIO) {
+      return (window.console.error || window.console.log || function(){})('ChannelIO script included twice.');
+    }
+    var ch = function() {
+      ch.c(arguments);
+    };
+    ch.q = [];
+    ch.c = function(args) {
+      ch.q.push(args);
+    };
+    w.ChannelIO = ch;
+    function l() {
+      if (w.ChannelIOInitialized) {
+        return;
+      }
+      w.ChannelIOInitialized = true;
+      var s = document.createElement('script');
+      s.type = 'text/javascript';
+      s.async = true;
+      s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
+      s.charset = 'UTF-8';
+      var x = document.getElementsByTagName('script')[0];
+      x.parentNode.insertBefore(s, x);
+    }
+    if (document.readyState === 'complete') {
+      l();
+    } else if (window.attachEvent) {
+      window.attachEvent('onload', l);
+    } else {
+      window.addEventListener('DOMContentLoaded', l, false);
+      window.addEventListener('load', l, false);
+    }
+  })();
+  ChannelIO('boot', {
+    "pluginKey": "30646173-f05a-4c55-9818-46a0543b5882"
+  });
+</script>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="container" id="container">
 		<div id="title">FAQ</div>
@@ -151,7 +200,7 @@
 					<td>${b.bnum }</td>
 					<c:choose>
 						<c:when test="${b.boardLevel eq 1}">
-							<td id="btitle"><a href="/boardView.do?boardType=2&boardNo=${b.boardNo}" class="chk"><i class="fas fa-lock"></i>${b.boardTitle }</a></td>
+							<td id="btitle"><a href="/boardView.do?boardType=2&boardNo=${b.boardNo}" class="chk"><i class="fas fa-lock"></i>&nbsp;&nbsp;${b.boardTitle }</a></td>
 							<input type="hidden" class="boardLevel" value="${b.boardLevel }">
 							<input type="hidden" class="memberId" value="${sessionScope.m.memberId }">
 							<input type="hidden" class="memberLevel" value="${sessionScope.m.memberLevel }">
@@ -165,10 +214,10 @@
 					<td>${b.regDate }</td>
 					<c:choose>
 						<c:when test="${b.commentCount ne 0}">
-						<td>답변완료</td>
+						<td id="answerAfter">답변완료</td>
 						</c:when>
 						<c:otherwise>
-						<td>미답변</td>
+						<td id="answerBefore">미답변</td>
 						</c:otherwise>
 					</c:choose>
 				</tr>

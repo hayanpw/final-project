@@ -15,9 +15,8 @@ public class ReadingDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
-	public ReadingBlack selectOneBlackList(String memberId) {
-		
-		return sqlSession.selectOne("reading.selectOneBlackList", memberId);
+	public ReadingBlack selectOneBlackList(String readingId) {
+		return sqlSession.selectOne("reading.selectOneBlackList", readingId);
 	}
 
 	public Reading selectOneNum(Reading re) {
@@ -46,9 +45,36 @@ public class ReadingDao {
 		return (ArrayList<Integer>)list;
 	}
 
-	public ArrayList<Reading> selectAllReading() {
-		List<Reading> list = sqlSession.selectList("reading.selectAllReading");
+	public ArrayList<Reading> selectWeekReading() {
+		List<Reading> list = sqlSession.selectList("reading.selectWeekReading");
 		return (ArrayList<Reading>)list;
+	}
+
+
+	public int expulsion(Reading re) {
+		return sqlSession.update("reading.expulsion", re);
+	}
+
+	public int insertBlackList(Reading re) {
+		return sqlSession.insert("reading.insertBlackList", re);
+	}
+
+	public int earlyOut(Reading re) {
+		return sqlSession.update("reading.earlyOut", re);
+	}
+
+	public ArrayList<Reading> selectAllReading() {
+		List<Reading> alllist = sqlSession.selectList("reading.selectAllReading");
+		return (ArrayList<Reading>)alllist;
+	}
+
+	public ArrayList<ReadingBlack> selectReadingBlackList() {
+		List<ReadingBlack> black = sqlSession.selectList("reading.selectReadingBlackList");
+		return (ArrayList<ReadingBlack>)black;
+	}
+
+	public void timeOutBlackList(String time1) {
+		sqlSession.delete("reading.timeOutBlackList", time1);
 	}
 
 	

@@ -11,6 +11,6 @@
                 <div><a href="#">강좌관리</a></div>
                 <div><a href="/spaceAdmin.do?reqPage=1">대관관리</a></div>
                 <div><a href="#">열람실 관리</a></div>
-                <div><a href="/allMember.do">회원 관리</a></div>
+                <div><a href="/allMember.do?reqPage=1">회원 관리</a></div>
             </div>
         </div>

@@ -8,7 +8,7 @@
 			black_end as blackEnd,
 			black_id as blackId,
 			black_ty as blackTy
-		from reading_black where black_id=#{memberId} and black_ty=0
+		from reading_black where black_id=#{readingId} and black_ty=0
 	</select>
 	<select id="selectOneNum" parameterType="reading" resultType="reading">
 		select
@@ -45,8 +45,36 @@
 		select count(*) from reading where reading_day=#{readingDay}
 	</select>
 	<select id="chkSeat" parameterType="reading" resultType="_int">
-		select reading_num from reading where reading_day=#{readingDay}
+		<![CDATA[
+		select reading_num from reading where reading_day=#{readingDay} and reading_checkout = 0
+		]]> 
 	</select>
+	<select id="selectWeekReading" resultType="reading">
+		<![CDATA[
+		select
+			reading_no as readingNo,
+			reading_time as readingTime,
+			reading_day as readingDay,
+			reading_num as readingNum,
+			reading_id as readingId,
+			reading_name as readingName,
+			reading_ty as readingTy,
+			reading_checkout as readingCheckOut
+		from reading where reading_day >= TO_CHAR(SYSDATE-7,'YYYY-MM-DD')
+		]]> 
+	</select>
+	<update id="expulsion" parameterType="reading">
+		update reading set reading_checkout=2 where reading_day=#{readingDay} and reading_id=#{readingId}
+	</update>
+	<insert id="insertBlackList" parameterType="reading">
+		<![CDATA[
+		insert into reading_black 
+			values(reading_black_seq.nextval,to_char(sysdate,'yy/mm/dd hh24:mi:ss'),to_date(to_char(sysdate+8,'yymmdd'))||' 00:00:00',#{readingId},0)
+		]]> 
+	</insert>
+	<update id="earlyOut" parameterType="reading">
+		update reading set reading_checkout=1 where reading_day=#{readingDay} and reading_id=#{readingId}
+	</update>
 	<select id="selectAllReading" resultType="reading">
 		select
 			reading_no as readingNo,
@@ -59,5 +87,17 @@
 			reading_checkout as readingCheckOut
 		from reading
 	</select>
+	<select id="selectReadingBlackList" resultType="black">
+		select
+			black_start as blackStart,
+			black_end as blackEnd,
+			black_id as blackId,
+			member_name as memberName
+		from reading_black join member on reading_black.black_id = member.member_id where black_ty=0
+	</select>
+	<delete id="timeOutBlackList" parameterType="string">
+		delete from reading_black where black_end=#{time1} and black_ty=0
+	</delete>
 </mapper>
+		
 

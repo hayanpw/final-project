@@ -48,7 +48,7 @@
 	
 	<!--글보기-->
 	<select id="selectOneBoard" parameterType="_int" resultMap="board">
-		select board_no,board_title,board_content,board_writer,readcount,reg_date,nvl(count,0) as cnt
+		select board_no,board_title,board_content,board_writer,readcount,reg_date,nvl(count,0) as cnt,boardLevel
 		from (select *from board where board_no =#{boardNo})
 		left join (select board_ref,count(*) as count from comment1 group by board_ref)
 		on (board_no=board_ref)
@@ -71,6 +71,7 @@
 		<result column="readcount" property="readCount"/>
 		<result column="reg_date" property="regDate"/>
 		<result column="cnt" property="commentCount"/>
+		<result column="boardlevel" property="boardLevel"/>
 		<collection property="list" column="board_no" javaType="java.util.ArrayList" ofType="kr.or.addition.model.vo.FileVO" select="selectFileList"></collection>
 	</resultMap>
 	
@@ -132,10 +133,11 @@
 			board_writer as boardWriter,
 			readcount as readCount,
 			reg_date as regDate,
-			cnt as commentCount
+			cnt as commentCount,
+			boardlevel as boardLevel
 	from
 	(select rownum as rnum,n.* from
-	(select board_no,board_title,board_content,boardtype,board_writer,readcount,reg_date,nvl(count, 0) as cnt
+	(select board_no,board_title,board_content,boardtype,board_writer,readcount,reg_date,nvl(count, 0) as cnt,boardlevel
 	from(select*from board where boardtype=#{boardType}) 
 	left join (select board_no,count(*) as count from (select board_no,board_ref from board join comment1 on (board_no=board_ref)) group by board_no) 
 	using (board_no) order by board_no desc)n
@@ -180,7 +182,7 @@
 	from
 	(select rownum as rnum,n.* from
 	(select board_no,board_title,board_content,boardtype,board_writer,readcount,reg_date,nvl(count, 0) as cnt
-	from(select*from board where boardtype=#{boardType}) 
+	from(select*from board where boardtype=#{boardType} and (boardlevel=1 or boardlevel=0)) 
 	left join (select board_no,count(*) as count from (select board_no,board_ref from board join comment1 on (board_no=board_ref)) group by board_no) 
 	using (board_no) order by board_no desc)n
 	where boardtype=#{boardType}) order by rnum ) where board_no=#{boardNo}
@@ -202,4 +204,13 @@
 			boardfix as boardFix
 	from board where boardtype=1 and boardfix=1 order by board_no desc
 	</select>
+	<!--글규제-->
+	<update id="regulationBoard" parameterType="_int">
+	 update board set boardLevel=2 where board_no=#{boardNo}
+	</update>
+	
+	<!--글규제해제-->
+	<update id="removeRegulationBoard" parameterType="_int">
+	 update board set boardLevel=0 where board_no=#{boardNo}
+	</update>
 </mapper>
