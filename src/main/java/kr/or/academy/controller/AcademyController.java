@@ -101,16 +101,31 @@ public class AcademyController {
 	//더보기
 	@ResponseBody
 	@RequestMapping(value ="/moreAcademy.do",produces = "application/json;charset=utf-8")
-	public String moreAcademy(int start) {
+	public String moreAcademy(int start, String category) {
 		//아작스 data start 값 strat 받아옴
-		ArrayList<Academy> list = service.moreAcademy(start);
+		ArrayList<Academy> list = service.moreAcademy(start,category);
 		return new Gson().toJson(list);
 	}
 	//카테고리로 조회
 	@ResponseBody
 	@RequestMapping(value ="/categoryAcademy.do",produces = "application/json;charset=utf-8")
-	public String moreAcademy(String category) {
-		ArrayList<Academy> list = service.categoryAcademy(category);
+	public String moreAcademy(String category,int reqPage) {
+		ArrayList<Academy> list = service.selectAcademyList(reqPage,category);
+		return new Gson().toJson(list);
+	}
+	//검색으로 조회
+	@ResponseBody
+	@RequestMapping(value ="/searchAcademy.do",produces = "application/json;charset=utf-8")
+	public String searchAcademyList(String keyWord,int reqPage) {
+		ArrayList<Academy> list = service.searchAcademyList(reqPage,keyWord);
+		return new Gson().toJson(list);
+	}
+	//검색결과 더보기
+	@ResponseBody
+	@RequestMapping(value ="/searchMoreAcademy.do",produces = "application/json;charset=utf-8")
+	public String searchMoreAcademy(int start, String category) {
+		//아작스 data start 값 strat 받아옴
+		ArrayList<Academy> list = service.searchMoreAcademy(start,category);
 		return new Gson().toJson(list);
 	}
 	//상세보기 로 이동
