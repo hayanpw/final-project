@@ -51,7 +51,7 @@
                    <li>
                        <a href="/academyList.do?reqPage=4">아카데미</a>
                        <ul class="sub">
-                           <li><a href="/academyList.do?reqPage=4">수강 신청</a></li>
+                           <li><a href="/academyList.do?reqPage=4&category=all">수강 신청</a></li>
                            <li><a href="/requritList.do?reqPage=1">강사 모집</a></li>
 	                     	<c:choose>
 						    	<c:when test="${not empty sessionScope.m && sessionScope.m.memberLevel == 1 }">
