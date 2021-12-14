@@ -133,7 +133,12 @@
 					<td>${b.bnum }</td>
 					<c:choose>
 						<c:when test="${b.boardLevel==2 }">
+						<c:if test="${sessionScope.m.memberLevel==0 }">
+						<td id="btitle"><a href="/boardView.do?boardType=3&boardNo=${b.boardNo}" id="regulation" class="chk">(규제중)&nbsp;${b.boardTitle }&nbsp;[${b.commentCount }]</a></td>
+						</c:if>
+						<c:if test="${sessionScope.m.memberLevel!=0 }">
 						<td id="btitle"><a href="/boardView.do?boardType=3&boardNo=${b.boardNo}" id="regulation" class="chk">관리자에 의해 규제된 글입니다.</a></td>
+						</c:if>
 						<input type="hidden" class="memberId" value="${sessionScope.m.memberId }">
 						<input type="hidden" class="memberLevel" value="${sessionScope.m.memberLevel }">
 						</c:when>
