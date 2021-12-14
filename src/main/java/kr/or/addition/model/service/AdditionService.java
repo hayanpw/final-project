@@ -14,6 +14,7 @@ import kr.or.addition.model.vo.BoardNext;
 import kr.or.addition.model.vo.BoardPageData;
 import kr.or.addition.model.vo.BoardViewData;
 import kr.or.addition.model.vo.FileVO;
+import kr.or.addition.model.vo.LikeNo;
 
 @Service
 public class AdditionService {
@@ -141,7 +142,8 @@ public class AdditionService {
 		ArrayList<FileVO> flist = dao.selectFileList(boardNo);
 		b.setList(flist);
 		ArrayList<BoardComment> list = dao.selectCommentList(boardNo);//댓글정보
-		BoardViewData bvd = new BoardViewData(list,b);
+		LikeNo l = dao.selectLikeSum(boardNo);
+		BoardViewData bvd = new BoardViewData(list,l,b);
 		return bvd;
 	}
 	
@@ -302,6 +304,40 @@ public class AdditionService {
 	public int removeRegulationBoard(int boardNo) {
 		int result=dao.removeRegulationBoard(boardNo);
 		return result;
+	}
+
+
+	public int boardLike(int checkNum,int boardNo, String memberId) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("boardNo", boardNo);
+		map.put("memberId", memberId);
+		map.put("checkNum", checkNum);
+		int result = dao.boardLike(map);
+		return result;
+	}
+
+
+	public int boardDislike(int boardNo, String memberId) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("boardNo", boardNo);
+		map.put("memberId", memberId);
+		int result = dao.boardDislike(map);
+		return result;
+	}
+
+
+	public LikeNo selectLikeSum(int boardNo) {
+		LikeNo l = dao.selectLikeSum(boardNo);
+		return l;
+	}
+
+
+	public LikeNo selectLikeChk(int boardNo, String memberId) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("boardNo", boardNo);
+		map.put("memberId", memberId);
+		LikeNo chk= dao.selectLikeChk(map);
+		return chk;
 	}
 	
 	

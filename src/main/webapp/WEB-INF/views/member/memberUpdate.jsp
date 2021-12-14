@@ -41,15 +41,15 @@
 							</tr>
 							<tr>
 								<td>주소입력</td>
-								<td><input type="text" id="postcode" class="input short3" name="postcode" readonly>
+								<td><input type="text" id="postcode" class="input short3" name="postcode" value="${m.postcode}" readonly>
 									<button onclick="addrSearch();" type="button" class="nextBtn">주소검색</button></td>
 							</tr>
 							<tr>
 								<td></td>
 								<td style="padding-top: 5px;"><input type="text"
-									id="addressRoad" class="input long" name="addressRoad" readonly>
+									id="addressRoad" class="input long" name="addressRoad" value="${m.addressRoad}" readonly>
 									<input type="text" id="addressDetail" class="input long"
-									name="addressDetail" placeholder="상세주소"></td>
+									name="addressDetail" value="${m.addressDetail}" ></td>
 							</tr>
 							<tr>
 								<td>이메일</td>
