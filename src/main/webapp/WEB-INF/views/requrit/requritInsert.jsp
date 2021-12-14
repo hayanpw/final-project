@@ -36,20 +36,24 @@
         <h3><span class="line">경</span>력 사항</h3>
         <input type="text" class="form-control" id="resumecareer" placeholder="경력사항을 입력해주세요" name="requritCareer">
       </div>
-      <h3><span class="line">성</span>별</h3>
-       <div class="radio">
-                <label class="radio-inline"><input type="radio" name="requritGender" value="남자">남자</label>
-                <label class="radio-inline"><input type="radio" name="requritGender" value="여자">여자</label>
-          </div>
+       <div class="form-group">
+        <h3><span class="line">고</span>용 형태</h3>
+        <select class="form-control" id="requritGender" name="requritGender">
+          <option value="남자">남자</option>
+          <option value="여자">여자</option>
+        </select>
+      </div>
          <div class="form-group">
           <h3>직종</h3>
           <input type="text" class="form-control" id="requritField" placeholder="직종을 입력해주세요" name="requritField">
         </div>
-        <h3><span class="line">고</span>용형태</h3>
-       <div class="radio">
-                <label class="radio-inline"><input type="radio" name="employeeType" value="정규직">정규직</label>
-                <label class="radio-inline"><input type="radio" name="employeeType" value="계약직">계약직</label>
-       </div>
+     <div class="form-group">
+        <h3><span class="line">고</span>용 형태</h3>
+        <select class="form-control" id="employeeType" name="employeeType">
+          <option value="정규직">정규직</option>
+          <option value="계약직">계약직</option>
+        </select>
+      </div>
       <div>
         <h3><span class="line">상</span>세 설명</h3>
        <textarea id="summernote" class="form-control" name="requritDetail"></textarea>

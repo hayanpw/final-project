@@ -32,8 +32,8 @@
 		<div class="search">
 			<div class="search_text">
 				<c:choose>
-				<c:when test="${not empty sessionScope.member }">
-				<h2>${sessionScope.member.memberName}님 원하시는 분야의 수업을 찾아보세요.</h2>
+				<c:when test="${not empty sessionScope.m }">
+				<h3>${sessionScope.m.memberName}님이 원하는 수업을 찾아보세요.</h2>
 				</c:when>
 				<c:otherwise>
 				<h2>수업을 찾아보아요~~~</h2>
@@ -58,10 +58,16 @@
 					<p>기간: ${a.academyStart } ~ ${a.academyEnd }</p>
 					<p>강사 : ${a.academyTeacher }</p>
 					<p>수업료 : ${a.academyPrice }</p>
-					<p>참여 인원 : 10명  <button id="studentView">참여인원보기</button></p>
+					<p>참여 인원 : 10명
+					<c:if test="${sessionScope.m.memberLevel eq 0 }"> 
+						 <button id="studentView" academyNo="${a.academyNo }">참여인원보기</button>
+					</c:if>
+					</p>
+					<c:if test="${sessionScope.m.memberLevel eq 0 }"> 
 					<div class="infoButton">
-						<button class="btn1">상세보기</button><button class="btn1">수정하기</button><button class="btn1">삭제하기</button>
+						<button class="btn1" id="academyView" academyNo="${a.academyNo }">상세보기</button><button class="btn1" id="academyUpdate" academyNo="${a.academyNo }">수정하기</button><button class="btn1" id="academyDelete" academyNo="${a.academyNo }">삭제하기</button>
 					</div>
+					</c:if>
 				</div>	
 			</li>
 		</c:forEach>
@@ -70,13 +76,31 @@
 		<button class="moreBtn" id="more" currentCount="4" totalCount="${totalCount }" value="4" search="all">더보기</button>
 		</c:if>
 		<input type="hidden" id="totalCount" value="${totalCount }">
+		<input type="hidden" id="memberLevel" value="${sessionScope.m.memberLevel }">
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 	<script>
 		var totalCount = $("#totalCount");
-		
+		var memberLevel = $("#memberLevel").val();
+		$("#studentView").click(function(){
+			var academyNo = $(this).attr("academyNo");
+			location.href="/studentView.do?academyNo="+academyNo;
+		});
+		$("#academyView").click(function(){
+			var academyNo = $(this).attr("academyNo");
+			location.href="/academyView.do?academyNo="+academyNo;
+		});
+		$("#academyUpdate").click(function(){
+			var academyNo = $(this).attr("academyNo");
+			location.href="/academyUpdate.do?academyNo="+academyNo;
+		});
+		$("#academyDelete").click(function(){
+			var academyNo = $(this).attr("academyNo");
+			location.href="/academyDelete.do?academyNo="+academyNo;
+		});
 		$("#more").click(function(){
 			console.log("더보기 클릭시 실행");
+			var memberLevel = $("#memberLevel");
 			var start = $(this).val();
 			var category = $("#more").attr("search");
 			var type = $("#more").attr("class");
@@ -97,9 +121,14 @@
 						moreLi += "<p>수업 기간: "+data[i].academyStart+"~"+data[i].academyEnd+"</p>";
 						moreLi += "<p>강사: "+data[i].academyTeacher+"</p>";
 						moreLi += "<p>수업료: "+data[i].academyPrice+"</p>";
-						moreLi += "<p>참여인원: 10명  <button id ='studentView'>참여인원보기</button></p>";
-						moreLi += "<div class = 'infoButton'>";
-						moreLi += "<button class='btn1'>상세보기</button><button class='btn1'>수정하기</button><button class='btn1'>삭제하기</button>";
+						moreLi += "<p>참여인원: 10명  "
+						if(memberLevel == 0 || memberLevel == 2){
+						moreLi += "<button id ='studentView' academyNo='"+data[i].academyNo+"'>참여인원보기</button>";
+						}
+						moreLi += "</p><div class = 'infoButton'>";
+						if(memberLevel == 0){
+						moreLi += "<button class='btn1' id='academyView' academyNo='"+data[i].academyNo+"'>상세보기</button><button class='btn1' id='academyUpdate' academyNo='"+data[i].academyNo+"'>수정하기</button><button class='btn1' id='academyDelete' academyNo='"+data[i].academyNo+"'>삭제하기</button>";
+						}
 						moreLi += "</div></div></li>";
 						$(".mainmenu").append(moreLi);
 					}
@@ -136,9 +165,14 @@
 						moreLi += "<p>수업 기간: "+data[i].academyStart+"~"+data[i].academyEnd+"</p>";
 						moreLi += "<p>강사: "+data[i].academyTeacher+"</p>";
 						moreLi += "<p>수업료: "+data[i].academyPrice+"</p>";
-						moreLi += "<p>참여인원: 10명  <button id ='studentView'>참여인원보기</button></p>";
-						moreLi += "<div class = 'infoButton'>";
-						moreLi += "<button class='btn1'>상세보기</button><button class='btn1'>수정하기</button><button class='btn1'>삭제하기</button>";
+						moreLi += "<p>참여인원: 10명  "
+						if(memberLevel == 0 || memberLevel == 2){
+						moreLi += "<button id ='studentView'>참여인원보기</button>";
+						}
+						moreLi += "</p><div class = 'infoButton'academyNo='"+data[i].academyNo+"'>";
+						if(memberLevel == 0){
+						moreLi += "<button class='btn1' id='academyView' academyNo='"+data[i].academyNo+"'>상세보기</button><button class='btn1' id='academyUpdate' academyNo='"+data[i].academyNo+"'>수정하기</button><button class='btn1' id='academyDelete' academyNo='"+data[i].academyNo+"'>삭제하기</button>";
+						}
 						moreLi += "</div></div></li>";
 						$(".mainmenu").append(moreLi);
 					}
@@ -187,9 +221,14 @@
 						moreLi += "<p>수업 기간: "+data[i].academyStart+"~"+data[i].academyEnd+"</p>";
 						moreLi += "<p>강사: "+data[i].academyTeacher+"</p>";
 						moreLi += "<p>수업료: "+data[i].academyPrice+"</p>";
-						moreLi += "<p>참여인원: 10명  <button id ='studentView'>참여인원보기</button></p>";
-						moreLi += "<div class = 'infoButton'>";
-						moreLi += "<button class='btn1'>상세보기</button><button class='btn1'>수정하기</button><button class='btn1'>삭제하기</button>";
+						moreLi += "<p>참여인원: 10명  "
+						if(memberLevel == 0 || memberLevel == 2){
+						moreLi += "<button id ='studentView' academyNo='"+data[i].academyNo+"'>참여인원보기</button>";
+						}
+						moreLi += "</p><div class = 'infoButton'>";
+						if(memberLevel == 0){
+						moreLi += "<button class='btn1' id='academyView' academyNo='"+data[i].academyNo+"'>상세보기</button><button class='btn1' id='academyUpdate' academyNo='"+data[i].academyNo+"'>수정하기</button><button class='btn1' id='academyDelete' academyNo='"+data[i].academyNo+"'>삭제하기</button>";
+						}
 						moreLi += "</div></div></li>";
 						$(".mainmenu").append(moreLi);
 					}
@@ -233,9 +272,14 @@
 						moreLi += "<p>수업 기간: "+data[i].academyStart+"~"+data[i].academyEnd+"</p>";
 						moreLi += "<p>강사: "+data[i].academyTeacher+"</p>";
 						moreLi += "<p>수업료: "+data[i].academyPrice+"</p>";
-						moreLi += "<p>참여인원: 10명  <button id ='studentView'>참여인원보기</button></p>";
-						moreLi += "<div class = 'infoButton'>";
-						moreLi += "<button class='btn1'>상세보기</button><button class='btn1'>수정하기</button><button class='btn1'>삭제하기</button>";
+						moreLi += "<p>참여인원: 10명  "
+						if(memberLevel == 0 || memberLevel == 2){
+						moreLi += "<button id ='studentView' academyNo='"+data[i].academyNo+"'>참여인원보기</button>";
+						}
+						moreLi += "</p><div class = 'infoButton'>";
+						if(memberLevel == 0){
+						moreLi += "<button class='btn1' id='academyView' academyNo='"+data[i].academyNo+"'>상세보기</button><button class='btn1' id='academyUpdate' academyNo='"+data[i].academyNo+"'>수정하기</button><button class='btn1' id='academyDelete' academyNo='"+data[i].academyNo+"'>삭제하기</button>";
+						}
 						moreLi += "</div></div></li>";
 						$(".mainmenu").append(moreLi);
 					}

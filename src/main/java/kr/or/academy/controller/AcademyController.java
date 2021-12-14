@@ -190,7 +190,18 @@ public class AcademyController {
 		}
 		return "/resources/academyImage/editor/"+filepath;
 	}
-	
-	
-	
+//	@RequestMapping(value="/studentView.do")
+//	public String studentView (int academyNo,Model model) {
+//		
+//	}
+	@RequestMapping(value="/academyUpdate.do")
+	public String academyUpdate (int academyNo,Model model) {
+		Academy a = service.selectOneAcademy(academyNo);
+		model.addAttribute("a",a);
+		return "academy/academyUpdate";
+	}
+//	@RequestMapping(value="/academyDelete.do")
+//	public String academyDelete (int academyNo,Model model) {
+//		
+//	}
 }
