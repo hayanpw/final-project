@@ -16,4 +16,5 @@ public class SpaceMypage {
 	private int price;
 	private int rentalPeople;
 	private int rentalStatus;
+	private int usedBoard;
 }

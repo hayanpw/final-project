@@ -70,6 +70,7 @@
 					</c:when>
 					<c:otherwise>
 						<button class="btn btn-default" id="resBtn" type="submit">신청하기</button>
+
 					</c:otherwise>				
 				</c:choose>
 			</div>
@@ -159,6 +160,42 @@
            $("[name=endTime]").val(endTime);
            $("[name=stNo]").val(stNo);
        });
+	    $("#payment").click(function () {
+	    	var chkCheck = checkAgree();
+	    	if(chkCheck){
+	    		
+				var price = $("#price").val();
+				var d = new Date();	//고유식별값을 위한 날짜
+				var date = d.getFullYear()+""+(d.getMonth()+1)+""+d.getDate()+""+d.getHours()+""+d.getMinutes()+""+d.getSeconds();
+				IMP.init("imp48594047");	//결제 API 사용을 위한 가맹점 식별코드 입력
+				IMP.request_pay({
+					merchant_uid : "상품명_"+date,		//거래 아이디
+					name : "결제 테스트",					//결제 이름 설정
+					amount : price,						//걀제금액
+					buyer_email : "redsix622@naver.com",//구매자 이메일 
+					buyer_name : "김주연",				//구매자 이름
+					buyer_phone : "010-2676-3481",		//구매자 전화번호
+					buyer_addr	: "경기도 수원시 영통구",		//구매자 주소
+					buyer_postcode : "16543"			//구매자 우편번호
+				},function(rsp){
+					console.log(rsp);
+					if(rsp.success){
+						$.ajax({
+							url : "/insertRes",
+							type : "get",
+							data :{resDate:$("[name=resDate]").val(),resTime:$("[name=resTime]").val(),resPeople:$("[name=resPeople]").val(),lfNo:$("[name=lfNo]").val(),memberId:$("[name=memberId]").val(),price:$("[name=price]").val()},
+							success : function () {
+								alert("결제가 완료되었습니다.");
+								location.href="/mypageBookingFitnessFrm?memberId="+$("[name=memberId]").val()+"&reqPage=1";
+							}
+						});
+						
+					}else{
+						alert("결제실패");
+					}
+				});
+	    	}
+		});
     </script>
 </body>
 </html>
