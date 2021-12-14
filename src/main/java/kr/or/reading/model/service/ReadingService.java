@@ -101,6 +101,12 @@ public class ReadingService {
 	}
 
 
+	public ArrayList<Reading> selectAllReading() {
+		ArrayList<Reading> alllist = dao.selectAllReading();
+		return alllist;
+	}
+
+
 
 
 }
