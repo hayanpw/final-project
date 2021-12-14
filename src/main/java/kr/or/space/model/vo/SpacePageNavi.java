@@ -8,6 +8,7 @@ import lombok.Data;
 public class SpacePageNavi {
 	private ArrayList<UseBoard> list;
 	private ArrayList<SpaceReview> srList;
+	private ArrayList<SpaceAdmin> rList;
 	private String pageNavi;
 	private int start;
 }

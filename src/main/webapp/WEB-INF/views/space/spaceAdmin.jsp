@@ -1,21 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-    <link href="resources/spaceCss/space_default.css" rel="stylesheet">
     <link href="resources/spaceCss/space_admin.css" rel="stylesheet">
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+	
 	<jsp:include page="/WEB-INF/views/common/adminpageMenu.jsp"/>
-		<div class="container">
-			<div class="title">
-				<h3>대관신청 관리</h3>
-			</div>
+	<div class="container">        
+        <div class="mypage-title"><span>대</span>관관리</div>
+        <div class="mypage-container" >
 			<div class="table-box">
 				<table class="table table-bordered" >
 					<tr>
@@ -49,7 +48,9 @@
 					</c:forEach>
 				</table>
 			</div>	
-		</div>
+			<div class="page-box">${pageNavi }</div>
+        </div>
+	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>

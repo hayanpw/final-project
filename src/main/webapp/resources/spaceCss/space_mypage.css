@@ -6,3 +6,8 @@
 .table-box table tr td{
 	text-align: center;
 }
+[name=srContent]{
+	width: 300px;
+	height: 100px;
+	margin: 10px;
+}

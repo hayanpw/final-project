@@ -92,8 +92,8 @@ public class SpaceDao {
 		return (ArrayList<Rental>)list;
 	}
 	//모든 대관 리스트 조회
-	public ArrayList<SpaceAdmin> selectAllRental() {
-		List<SpaceAdmin> list = sqlSession.selectList("space.selectAllRental");
+	public ArrayList<SpaceAdmin> selectAllRental(HashMap<String, Object> map) {
+		List<SpaceAdmin> list = sqlSession.selectList("space.selectAllRental",map);
 		return (ArrayList<SpaceAdmin>)list;
 	}
 	//이메일
@@ -174,5 +174,27 @@ public class SpaceDao {
 	public ArrayList<SpaceReview> moreSpaceReview(HashMap<String, Object> map) {
 		List<SpaceReview> list = sqlSession.selectList("space.selectSpaceReview",map);
 		return (ArrayList<SpaceReview>)list;
+	}
+	//내가 쓴 리뷰 보기
+	public ArrayList<SpaceReview> selectMyReview(String memberId) {
+		List<SpaceReview> rList = sqlSession.selectList("space.selectMyReview",memberId);
+		return (ArrayList<SpaceReview>) rList;
+	}
+	//전체 대관 수
+	public int selectTotalRentalCount() {
+		return sqlSession.selectOne("space.selectTotalRentalCount");
+	}
+	//게시판 작성을 하지 않은 아이디 조회
+	public ArrayList<String> selectBlackId() {
+		List<String> list =  sqlSession.selectList("space.selectBlackId");
+		return (ArrayList<String>)list; 
+	}
+	//블랙리스트 등록
+	public int insertSpaceBlack(String memberId) {
+		return sqlSession.insert("space.insertSpaceBlack",memberId);
+	}
+	//블랙리스트가 예약했던 내역 삭제
+	public int deleteRental(String memberId) {
+		return sqlSession.delete("space.deleteRental",memberId);
 	}
 }

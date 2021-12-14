@@ -96,8 +96,61 @@ public class SpaceService {
 		return dao.selectRentalList(memberId);
 	}
 	//모든 대관 리스트 조회
-	public ArrayList<SpaceAdmin> selectAllRental() {
-		return dao.selectAllRental();
+	public SpacePageNavi selectAllRental(int reqPage) {
+		int numPerPage = 5;
+		int end = reqPage*numPerPage;
+		int start = end - numPerPage+1;
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("start", start);
+		map.put("end", end);
+		ArrayList<SpaceAdmin> rental = dao.selectAllRental(map);
+		
+		int totalCount = dao.selectTotalRentalCount();
+		int totalPage = 0;
+		if(totalCount%numPerPage == 0) {
+			totalPage = totalCount/numPerPage;
+		}else {
+			totalPage = totalCount/numPerPage+1;
+		}
+		int pageNaviSize = 5;
+		int pageNo = ((reqPage-1)/pageNaviSize)*pageNaviSize + 1;
+		
+		String pageNavi = "<ul class='pagination'>";
+		//이전버튼
+		if(pageNo != 1) {
+			pageNavi += "<li>";
+			pageNavi += "<a href='/spaceAdmin.do?reqPage="+(pageNo-1)+"'>";
+			pageNavi += "&lt;</a></li>";
+		}
+		//페이지숫자
+		for(int i=0; i<pageNaviSize; i++) {
+			if(pageNo == reqPage) {
+				pageNavi += "<li class='disabled'>";
+				pageNavi += "<a href='/spaceAdmin.do?reqPage="+pageNo+"'>";
+				pageNavi += pageNo+"</a></li>";
+			}else {
+				pageNavi += "<li>";
+				pageNavi += "<a href='/spaceAdmin.do?reqPage="+pageNo+"'>";
+				pageNavi += pageNo+"</a></li>";
+			}
+			pageNo++;
+			if(pageNo>totalPage) {
+				break;
+			}
+		}
+		//다음버튼
+		if(pageNo <= totalPage) {
+			pageNavi += "<li>";
+			pageNavi += "<a href='/spaceAdmin.do?reqPage="+pageNo+"'>";
+			pageNavi += "&gt;</a></li>";
+		}
+		pageNavi += "</ul>";
+		
+		SpacePageNavi page = new SpacePageNavi();
+		page.setRList(rental);
+		page.setPageNavi(pageNavi);
+		page.setStart(start);
+		return page;
 	}
 	//이메일
 	public String selectEmail(String memberId) {
@@ -299,5 +352,24 @@ public class SpaceService {
 		map.put("spaceNo", spaceNo);
 		ArrayList<SpaceReview> list = dao.selectSpaceReview(map);
 		return list;
+	}
+	//내가 쓴 리뷰 보기
+	public ArrayList<SpaceReview> selectMyReview(String memberId) {
+		return dao.selectMyReview(memberId);
+	}
+	//블랙리스트 추가
+	@Transactional
+	public void insertSpaceBlack() {
+		//게시판 작성을 하지 않은 아이디 조회
+		ArrayList<String> memberId= dao.selectBlackId();
+		if(memberId.size() > 0) {
+			for(String m : memberId) {
+				//블랙리스트에 등록
+				int result = dao.insertSpaceBlack(m);
+				//블랙리스트에 등록 된 아이디가 예약했던 내역 삭제
+				int result1 = dao.deleteRental(m);
+			}
+		}
+		
 	}
 }

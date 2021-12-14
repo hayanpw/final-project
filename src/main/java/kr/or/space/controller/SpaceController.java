@@ -222,23 +222,20 @@ public class SpaceController {
 	}
 
 	// 대관
-	@RequestMapping(value = "/spaceRental.do")
+	@ResponseBody
+	@RequestMapping(value = "/spaceRental.do", produces = "application/json;charset=utf-8")
 	public String spaceRental(Model model, Rental r) {
 		int result = service.insertRental(r);
-		if (result > 0) {
-			model.addAttribute("msg", "신청이 완료되었습니다.");
-		} else {
-			model.addAttribute("msg", "신청이 실패하였습니다.");
-		}
-		model.addAttribute("loc", "/");
-		return "common/msg";
+		return new Gson().toJson(result);
 	}
 
 	// 관리자페이지 - 예약 관리
 	@RequestMapping(value = "/spaceAdmin.do")
-	public String spaceAdmin(Model model) {
-		ArrayList<SpaceAdmin> list = service.selectAllRental();
-		model.addAttribute("list", list);
+	public String spaceAdmin(Model model, int reqPage) {
+		SpacePageNavi spn = service.selectAllRental(reqPage);
+		model.addAttribute("list", spn.getRList());
+		model.addAttribute("pageNavi", spn.getPageNavi());
+		model.addAttribute("start", spn.getStart());
 		return "space/spaceAdmin";
 	}
 
@@ -247,20 +244,24 @@ public class SpaceController {
 	public String spaceMypage(String memberId, Model model) {
 		System.out.println(memberId);
 		ArrayList<SpaceMypage> list = service.selectSpaceMypage(memberId);
+		ArrayList<SpaceReview> rList = service.selectMyReview(memberId);
 		model.addAttribute("list", list);
-		System.out.println(list.size());
+		model.addAttribute("rList", rList);
 		return "space/spaceMypage";
 	}
 
 	// 대관 확정 메일 보내기
 	@RequestMapping(value = "/mailSend.do")
 	public String mailSend(String memberId, int rentalNo, Model model) {
+		int reqPage = 1;
 		String email = service.selectEmail(memberId);
 		String result = mailService.mailSend("redsix622@naver.com");
 		int result1 = service.updateRentalStatus(rentalNo);
 		if (result1 > 0) {
-			ArrayList<SpaceAdmin> list = service.selectAllRental();
-			model.addAttribute("list", list);
+			SpacePageNavi spn = service.selectAllRental(reqPage);
+			model.addAttribute("list", spn.getRList());
+			model.addAttribute("pageNavi", spn.getPageNavi());
+			model.addAttribute("start", spn.getStart());
 			return "space/spaceAdmin";
 		} else {
 			model.addAttribute("msg", "메일 발송에 실패하였습니다.");

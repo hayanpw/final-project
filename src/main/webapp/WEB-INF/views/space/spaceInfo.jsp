@@ -8,11 +8,11 @@
 <title>Insert title here</title>
     <link href="resources/spaceCss/space_default.css" rel="stylesheet">
     <link href="resources/spaceCss/space_info.css" rel="stylesheet">
+    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="container">
-		<form action="/spaceRental.do" method="post">
 			<input type="hidden" value="${s.spaceNo }" name="spaceNo">
 			<input type="hidden" value="${st.stNo }" name="stNo">
 			<h3>${s.spaceName }예약하기</h3>
@@ -74,6 +74,7 @@
 						<tr>
 							<th>가격</th>
 							<td>${s.price } / 2시간</td>
+							<input type="hidden" value="100" id="price">
 						</tr>
 					</table>
 					<p>  ※ 대관으로 인한 직접적인 수익이 발생하는 경우, 대관이 불가합니다.<br> 규정에 따라 대관이 취소될 수 있습니다.</p>
@@ -109,7 +110,7 @@
 					<input type="hidden" value="${sessionScope.m.memberId }" name="memberId">
 					<input type="hidden" value="${rentalDate }" name="rentalDate">
 					<div class="btn-box">
-						<button class="insert-btn" type="submit">신청하기</button>
+						<button type="button" id="payment" class="btn btn-default">결제하기</button> 						
 					</div>
 				</div>
 			<div class="big-img">
@@ -121,6 +122,43 @@
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 	<script>
+    $("#payment").click(function () {
+			var price = $("#price").val();
+			var d = new Date();	//고유식별값을 위한 날짜
+			var spaceName = "${s.spaceName}";
+			var date = d.getFullYear()+""+(d.getMonth()+1)+""+d.getDate()+""+d.getHours()+""+d.getMinutes()+""+d.getSeconds();
+			IMP.init('imp48594047');	//결제 API 사용을 위한 가맹점 식별코드 입력
+			IMP.request_pay({
+				merchant_uid : "상품명_"+date,		//거래 아이디
+				name : spaceName,					//결제 이름 설정
+				amount : price,						//걀제금액
+				buyer_email : "${sessionScope.m.memberEmail}",//구매자 이메일 
+				buyer_name : "${sessionScope.m.memberName}",				//구매자 이름
+				buyer_phone : "${sessionScope.m.memberPhone}",		//구매자 전화번호
+				buyer_addr	: "${sessionScope.m.addressRoad}",		//구매자 주소
+				buyer_postcode : "${sessionScope.m.postcode}"			//구매자 우편번호
+			},function(rsp){
+				console.log(rsp);
+				if(rsp.success){
+					$.ajax({
+						url : "/spaceRental.do",
+						type : "post",
+						data :{spaceNo : $("[name=spaceNo]").val() ,memberId :$("[name=memberId]").val() ,stNo :$("[name=stNo]").val() ,rentalDate :$("[name=rentalDate]").val() ,rentalPeople : $("[name=rentalPeople]").val()},
+						success : function (data) {
+							if(data>0){
+							alert("결제가 완료되었습니다.");
+							location.href="/spaceMypage.do?memberId=${sessionScope.m.memberId}";
+							}else{
+								alert("결제 실패");
+							}
+						}
+					});
+					
+				}else{
+					alert("결제실패");
+				}
+			});
+	});
 	</script>
 </body>
 </html>
