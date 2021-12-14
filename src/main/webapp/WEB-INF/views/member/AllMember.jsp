@@ -17,12 +17,12 @@
         <div class="mypage-container">
 	   	<form class="navbar-form navbar-right" action="/searchMember.do">
 	   	  <div class="group-member">
-	   			<input type="checkbox" id="memberLevel1" name="memberLevel" value=1 />
-	   			<label for="memberLevel"><span></span>일반</label>
+	   			<input type="checkbox" id="memberLevel1" name="memberLevel" value=1/>
+	   			<label for="memberLevel1"><span></span>일반</label>
 	   			<input type="checkbox" id="memberLevel2" name="memberLevel" value=2/>
-	   			<label for="memberLevel"><span></span>강사</label>
+	   			<label for="memberLevel2"><span></span>강사</label>
 	   			<input type="checkbox" id="memberLevel3" name="memberLevel" value=3/>
-	   			<label for="memberLevel"><span></span>블랙</label>
+	   			<label for="memberLevel3"><span></span>블랙</label>
  	   			<input type="hidden" name="reqPage" value=1>
 	   			
 	   		</div>
