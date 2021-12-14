@@ -213,4 +213,33 @@
 	<update id="removeRegulationBoard" parameterType="_int">
 	 update board set boardLevel=0 where board_no=#{boardNo}
 	</update>
+	
+	<!--좋아요-->
+	<insert id="boardLike" parameterType="map">
+		<if test="checkNum == 0">
+		insert into likenum values(#{memberId},#{boardNo},1,0)
+		</if>
+		<if test="checkNum == 1">
+		insert into likenum values(#{memberId},#{boardNo},0,1)
+		</if>
+	</insert>
+	
+	<!--좋아요 취소-->
+	<delete id="boardDislike" parameterType="map">
+		delete from likenum where board_ref=#{boardNo} and member_id=#{memberId}
+	</delete>
+	
+	<!--좋아요 수 들고오기-->
+	<select id="selectLikeSum" parameterType="_int" resultType="kr.or.addition.model.vo.LikeNo">
+	select
+	board_ref as boardRef,
+	likesum as likeSum,
+	dislikesum as dislikeSum
+	from (SELECT board_ref , sum(like_num) as likesum , sum(dislike_num)  as dislikesum
+	FROM likenum GROUP BY board_ref) where board_ref=#{boardNo}
+	</select>
+	
+	<select id="selectLikeChk" parameterType="map">
+	
+	</select>
 </mapper>

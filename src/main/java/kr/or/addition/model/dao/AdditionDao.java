@@ -12,6 +12,7 @@ import kr.or.addition.model.vo.Board;
 import kr.or.addition.model.vo.BoardComment;
 import kr.or.addition.model.vo.BoardNext;
 import kr.or.addition.model.vo.FileVO;
+import kr.or.addition.model.vo.LikeNo;
 
 @Repository
 public class AdditionDao {
@@ -113,6 +114,22 @@ public class AdditionDao {
 	
 	public int removeRegulationBoard(int boardNo) {
 		return sqlSession.update("addition.removeRegulationBoard",boardNo);
+	}
+
+	public int boardLike(HashMap<String, Object> map) {
+		return sqlSession.update("addition.boardLike",map);
+	}
+
+	public int boardDislike(HashMap<String, Object> map) {
+		return sqlSession.delete("addition.boardDislike",map);
+	}
+
+	public LikeNo selectLikeSum(int boardNo) {
+		return sqlSession.selectOne("addition.selectLikeSum",boardNo);
+	}
+
+	public LikeNo selectLikeChk(HashMap<String, Object> map) {
+		return sqlSession.selectOne("addition.selectLikeChk",map);
 	}
 
 }

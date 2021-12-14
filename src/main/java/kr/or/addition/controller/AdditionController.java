@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.google.gson.Gson;
+
 import kr.or.addition.model.service.AdditionService;
 import kr.or.addition.model.vo.Board;
 import kr.or.addition.model.vo.BoardComment;
@@ -28,6 +30,7 @@ import kr.or.addition.model.vo.BoardNext;
 import kr.or.addition.model.vo.BoardPageData;
 import kr.or.addition.model.vo.BoardViewData;
 import kr.or.addition.model.vo.FileVO;
+import kr.or.addition.model.vo.LikeNo;
 
 @Controller
 public class AdditionController {
@@ -134,6 +137,7 @@ public class AdditionController {
 		model.addAttribute("b", bvd.getB());
 		model.addAttribute("list", bvd.getList());
 		model.addAttribute("info",info);
+		model.addAttribute("l",bvd.getLikeList());
 		if (boardType == 1) {
 			return "addition/noticeView";
 		} else if (boardType == 2) {
@@ -433,6 +437,50 @@ public class AdditionController {
 		model.addAttribute("loc", "/additionBoard.do?boardType=3&reqPage=1");
 		return "common/msg";
 	}
+	
+	//좋아요
+	@ResponseBody
+	@RequestMapping(value = "/boardLike.do")
+	public String boardLike(int checkNum,int boardNo,String memberId) {
+		int result = service.boardLike(checkNum,boardNo,memberId);
+		if(result>0) {
+			return "0";
+		}else {
+			return "1";
+		}
+	
+	}
+	
+	//좋아요취소
+	@ResponseBody
+	@RequestMapping(value = "/boardDislike.do")
+	public String boardDislike(int boardNo,String memberId) {
+		int result = service.boardDislike(boardNo,memberId);
+		if(result>0) {
+			return "0";
+		}else {
+			return "1";
+		}
+	
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/selectLikeSum.do",produces = "application/json;charset=utf-8")
+	public String selectLikeSum(int boardNo) {
+		LikeNo l = service.selectLikeSum(boardNo);
+		return new Gson().toJson(l);
+	
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/selectLikeChk.do",produces = "application/json;charset=utf-8")
+	public String selectLikeChk(int boardNo,String memberId) {
+		LikeNo chk = service.selectLikeChk(boardNo,memberId);
+		return new Gson().toJson(l);
+	
+	}
+	
+	
 	
 
 }
