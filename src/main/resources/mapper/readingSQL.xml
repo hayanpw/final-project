@@ -75,6 +75,18 @@
 	<update id="earlyOut" parameterType="reading">
 		update reading set reading_checkout=1 where reading_day=#{readingDay} and reading_id=#{readingId}
 	</update>
+	<select id="selectAllReading" resultType="reading">
+		select
+			reading_no as readingNo,
+			reading_time as readingTime,
+			reading_day as readingDay,
+			reading_num as readingNum,
+			reading_id as readingId,
+			reading_name as readingName,
+			reading_ty as readingTy,
+			reading_checkout as readingCheckOut
+		from reading
+	</select>
 </mapper>
 		
 

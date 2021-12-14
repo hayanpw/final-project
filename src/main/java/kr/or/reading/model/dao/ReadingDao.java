@@ -64,5 +64,10 @@ public class ReadingDao {
 		return sqlSession.update("reading.earlyOut", re);
 	}
 
+	public ArrayList<Reading> selectAllReading() {
+		List<Reading> alllist = sqlSession.selectList("reading.selectAllReading");
+		return (ArrayList<Reading>)alllist;
+	}
+
 	
 }

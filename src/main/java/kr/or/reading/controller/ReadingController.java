@@ -143,11 +143,13 @@ public class ReadingController {
 		return "reading/reservationToday";
 	}
 	
-	@RequestMapping(value="/test222.do")
+	@RequestMapping(value="/readingMypage.do")
 	public String test222(Model model) {
 		ArrayList<Reading> list = service.selectWeekReading();
+		ArrayList<Reading> alllist = service.selectAllReading();
 		model.addAttribute("list",list);
-		return "reading/test";
+		model.addAttribute("alllist",alllist);
+		return "reading/readingMypage";
 	}
 	
 	@RequestMapping(value="/outAndBlackList.do")
