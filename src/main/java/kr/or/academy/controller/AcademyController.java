@@ -35,10 +35,11 @@ public class AcademyController {
 	}
 	//리스트 페이지 출력
 	@RequestMapping(value="/academyList.do")
-	public String academyList(Academy a,Model model,int reqPage) {
+	public String academyList(Academy a,Model model,int reqPage,String category) {
 		//전체 페이지 겟수 출력 
+		System.out.println(category);
 		int totalCount = service.academyTotal();
-		ArrayList<Academy> list = service.selectAcademyList(reqPage);
+		ArrayList<Academy> list = service.selectAcademyList(reqPage,category);
 		int count = list.size();
 		ArrayList<AcademyCategory> acList = service.selectAcademyCategory();
 		model.addAttribute("list",list);
@@ -103,6 +104,13 @@ public class AcademyController {
 	public String moreAcademy(int start) {
 		//아작스 data start 값 strat 받아옴
 		ArrayList<Academy> list = service.moreAcademy(start);
+		return new Gson().toJson(list);
+	}
+	//카테고리로 조회
+	@ResponseBody
+	@RequestMapping(value ="/categoryAcademy.do",produces = "application/json;charset=utf-8")
+	public String moreAcademy(String category) {
+		ArrayList<Academy> list = service.categoryAcademy(category);
 		return new Gson().toJson(list);
 	}
 	//상세보기 로 이동

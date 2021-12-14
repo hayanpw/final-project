@@ -1,6 +1,7 @@
 package kr.or.academy.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,13 +28,20 @@ public class AcademyService {
 		return totalCount;
 	}
 
-	public ArrayList<Academy> selectAcademyList(int reqPage) {
+	public ArrayList<Academy> selectAcademyList(int reqPage ,String category) {
 		int end = reqPage;
 		int start = end - 3;
 		AcademyPagingVo ap = new AcademyPagingVo();
 		ap.setStart(start);
 		ap.setEnd(end);
-		ArrayList<Academy> list = dao.selectAcademy(ap);
+		ap.setCategory(category);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("start", start);
+		map.put("end", end);
+		map.put("category", category);
+		System.out.println("시스템에서 마지막 카테고리:"+ap.getCategory());
+		ArrayList<Academy> list = dao.selectAcademy(map);
+		System.out.println("출력되는 리스트 길이:"+list.size());
 		return list;
 	}
 
@@ -59,5 +67,15 @@ public class AcademyService {
 	public ArrayList<AcademyCategory> selectAcademyCategory() {
 		ArrayList<AcademyCategory> acList = dao.selectAcademyCategory();
 		return acList;
+	}
+
+	public ArrayList<Academy> categoryAcademy(String category) {
+		AcademyPagingVo ap = new AcademyPagingVo();
+		ap.setStart(1);
+		ap.setStart(2);
+		ap.setCategory(category);
+		int totalCount = dao.totalCountAcademy(category);
+		ArrayList<Academy> list = dao.selectCategoryAcademy(category);
+		return list;
 	}
 }

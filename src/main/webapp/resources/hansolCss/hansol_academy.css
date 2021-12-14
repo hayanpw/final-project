@@ -100,13 +100,13 @@
 	width:100px;
 }
 .category a{
-	border: 1px solid #eee;
+	border: 2px solid #eee;
     padding: 10px 30px;
     border-radius: 50px;
     transition: 0.5s;
 }
 .on a{
-	border: 1px solid #563D39;
+	border: 2px solid #563D39;
     color: #000000;
 }
 .search{
@@ -122,7 +122,7 @@
     border-bottom:2px solid #563D39;
     transition: 0.5s;
     padding: 5px;
-    width: 480px;
+    width: 350px;
 }
 .search_bar input{
     outline: none;

@@ -134,6 +134,9 @@ label {
     border-style:none;
     border-bottom:solid 1px #cacaca;
     border-collapse:collapse;
+    color: rgba(0, 0, 0, 0.56);
+    font-weight: 400;
+    
 }
 
 .input:focus {
@@ -181,14 +184,14 @@ input[name=gender]+label {
     display: inline-block;
     height: 37px;
     line-height: 37px;
-    width: 130px;
+    width: 140px;
     text-align: center;
     border: 1px solid #1f4787;
     color: #1f4787;
 }
 
 input[name=gender]:checked+label {
-    background-color: #1f4787;
+    background-color: #BDB19A;
     color: #fff;
 }
 
@@ -199,10 +202,6 @@ input[name=gender]:checked+label {
     border: 1px solid #d8d8d8;
     outline: none;
     font-size: 20px;
-}
-
-#introduce:focus {
-    border: 1px solid #1f4787;
 }
 
 #loginFrm {
@@ -253,7 +252,7 @@ input[name=gender]:checked+label {
 }
 
 .contentDetail{
-	margin: 0px 0px 0px 90px;
+	margin: 0px 0px 0px 100px;
 }
 
 #contentDetail-field td {
@@ -298,9 +297,11 @@ input[name=gender]:checked+label {
 }
 
 .search_input {
+    border: solid 1px #BDB19A;
     height: 25px;
-    width: 60%;
-    margin-top: 10px;
+    width: 40%;
+    margin: 0px 10px 10px 0px;
+    color:#000;
 }
 
 #content>fieldset:first-child {
@@ -349,7 +350,7 @@ input[name=gender]:checked+label {
     display: none;
 }
 
-#modal2 {
+/* #modal2 {
     z-index: 1;
     background-color: rgba(0, 0, 0, .3);
     position: fixed;
@@ -360,13 +361,13 @@ input[name=gender]:checked+label {
 }
 
 
-/* #modal2>#content {
+#modal2>#content {
     width: 300px;
     margin: 100px auto;
     padding: 20px;
     position: relative;
     background-color: #fff;
-} */
+}
 
 #modal2 .close {
     position: absolute;
@@ -387,7 +388,7 @@ input[name=gender]:checked+label {
 #modal2 {
     display: none;
 }
-
+ */
 .modal_search_btn {
     color: white;
     background-color: rgb(95, 117, 90);
@@ -399,4 +400,7 @@ input[name=gender]:checked+label {
 
 .modal_window_text {
     height: 60%;
+}
+#timeZone{
+	color:#BDB19A;
 }

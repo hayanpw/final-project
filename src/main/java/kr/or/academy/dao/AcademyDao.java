@@ -2,6 +2,7 @@ package kr.or.academy.dao;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -29,8 +30,12 @@ public class AcademyDao {
 		return totalCount;
 	}
 
-	public ArrayList<Academy> selectAcademy(AcademyPagingVo ap) {
-		List<Academy> list = sqlSession.selectList("academy.academyList",ap);
+	public ArrayList<Academy> selectAcademy(HashMap<String, Object> map) {
+		//System.out.println("dao에서 찍히는 ap 에있는 카테고리:"+ap.getCategory());
+		//System.out.println(ap.getStart());
+		//System.out.println(ap.getEnd());
+		List<Academy> list = sqlSession.selectList("academy.academyList",map);
+		System.out.println("sql지나온 곧바로"+list.size());
 		return (ArrayList<Academy>)list;
 	}
 
@@ -47,5 +52,15 @@ public class AcademyDao {
 	public ArrayList<AcademyCategory> selectAcademyCategory() {
 		List<AcademyCategory> acList = sqlSession.selectList("academy.academyCategory");
 		return (ArrayList<AcademyCategory>)acList;
+	}
+
+	public int totalCountAcademy(String category) {
+		int totalCount = sqlSession.selectOne("academy.totalCountAcademy",category);
+		return totalCount;
+	}
+
+	public ArrayList<Academy> selectCategoryAcademy(String category) {
+		List<Academy> list = sqlSession.selectList("academy.selectCategoryList",category);
+		return (ArrayList<Academy>)list;
 	}
 }

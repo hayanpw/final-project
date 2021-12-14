@@ -6,4 +6,5 @@ import lombok.Data;
 public class AcademyPagingVo {
 	private int start;
 	private int end;
+	private String category;
 }

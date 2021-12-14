@@ -3,16 +3,15 @@ package kr.or.member.dao;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Repository;
-
-
-
 import kr.or.member.vo.Member;
+import kr.or.member.vo.MemberPage;
 
 
 @Repository
@@ -60,10 +59,6 @@ public class MemberDao {
 		int result = sqlSession.update("member.updateMember",member);
 		return result;
 	}
-	public ArrayList<Member> selectAllMember() {
-		List list = sqlSession.selectList("member.selectAllMember");
-		return (ArrayList<Member>)list;
-	}
 	public int searchidpw(Member member) {
 		int result = sqlSession.update("member.searchidpw",member);
 		return result;
@@ -83,6 +78,17 @@ public class MemberDao {
 	}
 	public ArrayList<Member> searchMember(String search) {
 		List list = sqlSession.selectList("member.searchMember",search);
+		return (ArrayList<Member>)list;
+	}
+	public int totalCount(HashMap<String, Object> map) {
+		return sqlSession.selectOne("addition.totalCount",map);
+	}
+	public int selectTotalCount() {
+		int totalCount = sqlSession.selectOne("member.selectTotalCount");
+		return totalCount;
+	}
+	public ArrayList<Member> selectAllMember(MemberPage paging) {
+		List<Member> list = sqlSession.selectList("member.selectAllMember",paging);
 		return (ArrayList<Member>)list;
 	}
 }
