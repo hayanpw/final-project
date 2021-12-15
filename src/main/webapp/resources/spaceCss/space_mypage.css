@@ -1,6 +1,6 @@
 .table-box table tr th{
 	text-align: center;
-	background-color: #BDB19A;
+	background-color: #A79078 ;
 	color: #ffffff;
 }
 .table-box table tr td{
@@ -11,3 +11,51 @@
 	height: 100px;
 	margin: 10px;
 }
+.container{
+	
+}
+.mypage-title{
+	width: 500px;
+	display: inline-block;
+}
+.pop{
+	border: 1px solid #BDB19A;
+	width: 400px;
+	margin-top: 15px;
+	margin-right : 50px;
+	padding : 5px;
+	float: right;
+	font-size: 13px;
+}
+.pop p:last-child {
+	color: red;
+}
+.pop span{
+	font-weight: bold;
+}
+.d-review{
+	display : inline-block;
+	cursor: pointer;
+}
+.writeBtn{
+	width: 100px;
+}
+.writeBtn{
+	background-color: #A79078 ;
+	color: white;
+	border: 1px solid white;
+	border-radius: 10px;
+} .updateBtn{
+	color: #A79078 ;
+	background-color: white;
+	border: 1px solid #A79078; 
+	border-radius: 10px;
+}
+#ckList{
+	color: #563D39;
+	text-decoration: none;
+}
+#ckList:hover{
+	font-weight: bold;
+
+	}

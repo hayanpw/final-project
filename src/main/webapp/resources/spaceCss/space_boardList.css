@@ -1,1 +1,10 @@
-
+.mypage-title span{
+	padding-top : 3px;
+	border-top : 5px solid #563D39;
+}
+.mypage-title{
+    margin: 100px 0 50px 100px;
+    font-size: 28px;
+    font-weight: 900;
+    color : #BDB19A;
+}
