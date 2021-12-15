@@ -17,14 +17,38 @@
         <div class="mypage-container">
 	   	<form class="navbar-form navbar-right" action="/searchMember.do">
 	   	  <div class="group-member">
-	   			<input type="checkbox" id="memberLevel1" name="memberLevel" value=1/>
+	   	  		<c:choose>
+					<c:when test="${not empty memberLevel1 }">
+						<input type="checkbox" id="memberLevel1" name="memberLevel" value='1' checked/>
+					</c:when>
+					<c:otherwise>
+						<input type="checkbox" id="memberLevel1" name="memberLevel" value='1'/>
+					</c:otherwise>	   	  		
+	   	  		</c:choose>	   			
 	   			<label for="memberLevel1"><span></span>일반</label>
-	   			<input type="checkbox" id="memberLevel2" name="memberLevel" value=2/>
+	   			
+	   			<c:choose>
+					<c:when test="${not empty memberLevel2 }">
+					<input type="checkbox" id="memberLevel2" name="memberLevel" value='2' checked/>
+					</c:when>
+					<c:otherwise>
+					<input type="checkbox" id="memberLevel2" name="memberLevel" value='2'/>
+					</c:otherwise>
+				</c:choose>
+	   			
 	   			<label for="memberLevel2"><span></span>강사</label>
-	   			<input type="checkbox" id="memberLevel3" name="memberLevel" value=3/>
+	   			
+	   			<c:choose>
+					<c:when test="${not empty memberLevel3 }">
+					<input type="checkbox" id="memberLevel3" name="memberLevel" value='3' checked/>
+					</c:when>
+					<c:otherwise>
+					<input type="checkbox" id="memberLevel3" name="memberLevel" value='3' />
+					</c:otherwise>
+				</c:choose>
+	   			
 	   			<label for="memberLevel3"><span></span>블랙</label>
  	   			<input type="hidden" name="reqPage" value=1>
-	   			
 	   		</div>
 	      <div class="input-group ">
 	        <input type="text" class="form-control" placeholder="검색" name="search" value="${search }">
