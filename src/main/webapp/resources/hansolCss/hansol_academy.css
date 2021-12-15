@@ -174,4 +174,15 @@
 	list-style: none;
 	padding: 0;
 }
-	
+.nonebox{
+	width: 100%;
+    margin: 0 auto;
+    display: block;
+    text-align: center;
+}
+.nonebox h3{
+	font-size:28px;
+}
+.nonebox img{
+	width: 600px;
+}	
