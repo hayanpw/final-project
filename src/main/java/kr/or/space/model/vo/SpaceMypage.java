@@ -17,4 +17,6 @@ public class SpaceMypage {
 	private int rentalPeople;
 	private int rentalStatus;
 	private int usedBoard;
+	private int srNo;
+	private String delYn;
 }

@@ -12,6 +12,7 @@
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="container">
+	<div class="mypage-title"><span>사</span>용 게시판</div>
 		<input type="hidden" id="memberId" value="${sessionScope.m.memberId }">
 		<button class="writeBtn" type="button" class="btn btn-info btn-lg"
 			data-toggle="modal" data-target="#myModal">글쓰기</button>
