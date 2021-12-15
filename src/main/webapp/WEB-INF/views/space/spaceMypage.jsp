@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,16 +11,22 @@
 <link href="resources/spaceCss/space_mypage.css" rel="stylesheet">
 </head>
 <body>
+<jsp:useBean id="now" class="java.util.Date" />
+<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today" />
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	
 	<jsp:include page="/WEB-INF/views/common/mypageMenu.jsp" />
 	<div class="container">        
         <div class="mypage-title"><span>대</span>관신청내역</div>
+		<div class="pop">
+			<span>☞체크리스트란?</span>
+			<p>공간 사용 후 작성하는 체크리스트</p>
+			<span>☞작성방법</span>
+			<p>공지사항 -> 양식 다운로드 -> 양식 작성 후 pdf 변경 -> 사용게시판에 pdf 업로드</p>
+			<p>※주의 : 대관 후 일주일 이상 체크리스트 미작성시 일주일간 모든 공간 대관 불가. 작성 한 후 일주일 후 부터 사용 가능</p>
+		</div>
         <div class="mypage-container" >
-<jsp:useBean id="now" class="java.util.Date" />
-<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today" />
-<c:set var="sevenDayAfter" value="<%=new Date(new Date().getTime() + 60*60*24*1000*7)%>"/>
-<fmt:formatDate value="${sevenDayAfter}" pattern="yyyy-MM-dd" var="sevenDayAfterStr"/>
+<!--         체크리스트 미작성<input type="checkbox" value="on" name="ub"> -->
 		<div class="table-box">
 			<table class="table table-bordered">
 				<tr>
@@ -33,7 +39,7 @@
 					<th>가격</th>
 					<th>상태</th>
 					<th>리뷰</th>
-					<th>체크리스트 작성 여부</th>
+					<th>체크리스트 작성 여부  <img id="q-img" src="resources/spaceImage/ask.png" style="width: 20px;"></th>
 				</tr>
 				<c:forEach items="${list }" var="l" varStatus="i">
 					<tr>
@@ -51,21 +57,23 @@
 							<td>확정</td>
 						</c:if>
 						<td>
-							<c:if test="${l.rentalDate < today && l.rentalStatus eq 2 }">		
-								<c:forEach items="${rList }" var="r">
-									<c:if test="${l.rentalNo eq r.rentalNo }">
-											<p>이미 리뷰를 작성했슴</p>
-									</c:if>		
-									<c:if test="${l.rentalNo ne r.rentalNo }">
-										<button class="writeBtn" type="button"
-											class="btn btn-info btn-lg" data-toggle="modal"
-											data-target="#myModal">리뷰 작성</button>
-									</c:if>		
-								</c:forEach>		
-							</c:if>
-							<c:if test="${l.rentalDate > today }">
-								사용 전 입니다.
-							</c:if>			
+							<c:choose>
+								<c:when test="${l.srNo eq 0 || l.delYn eq 'Y' }">
+									<button class="writeBtn" type="button"
+									class="btn btn-info btn-lg" data-toggle="modal"
+									data-target="#myModal">리뷰 작성</button>
+									<input type="hidden" id="rentalNo" value="${l.rentalNo }">
+									
+								</c:when>
+								<c:otherwise>
+									<button  class="updateBtn" type="button" class="btn btn-info btn-lg" data-toggle="modal"
+							data-target="#rModal">리뷰 수정</button>
+							<input type="hidden" id="rentalNo" value="${l.rentalNo }">
+								<div class="d-review">
+										<img   src="resources/spaceImage/x.png" style="width: 20px; opacity: 0.8;">
+									</div>
+								</c:otherwise>
+							</c:choose>							
 						</td>
 						<td>
 							<c:choose>
@@ -76,32 +84,142 @@
 									-
 								</c:when>
 								<c:when test="${l.usedBoard eq 0 && l.rentalDate<today}">
-									<a href="/selectSpaceBoardList.do?reqPage=1">작성하러가기</a>
-								</c:when>
-								<c:when test="${l.usedBoard eq 0 && l.rentalDate < sevenDayAfterStr}">
-									작성안함
+									<a id="ckList" href="/selectSpaceBoardList.do?reqPage=1">☞작성하러가기</a>
 								</c:when>
 							</c:choose>
 						</td>
 					</tr>
 				</c:forEach>
 			</table>
+			<!-- 리뷰 작성 모달 -->
+		<div class="modal fade" id="myModal" role="dialog">
+			<div class="modal-dialog">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">리뷰를 작성 해주세요.</h4>
+						</div>
+
+						<div class="modal-body">
+							<form action="/insertSpaceReview.do">
+								<input type="hidden" value="${sessionScope.m.memberId }" name="memberId">
+								<input placeholder="☞리뷰를 작성해주세요." name="srContent">
+								<div class="modal-b"></div>
+								<button type="submit">리뷰 등록</button>
+							</form>
+						</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+			<!-- 리뷰 수정 모달 -->
+		<div class="modal fade" id="rModal" role="dialog">
+			<div class="modal-dialog">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">수정할 리뷰를 작성해주세요.</h4>
+						</div>
+
+						<div class="modal-body">
+							<form action="/updateSpaceReview.do">
+								<input type="hidden" value="${sessionScope.m.memberId }" name="memberId">
+								<input type="text" name="srContent">
+								<div class="modal-bb"></div>
+								<button type="submit">리뷰 수정</button>
+							</form>
+						</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
 		</div>
         </div>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 	<script >
+	$(function () {
+		$(".pop").hide();
+		$("#q-img").hover(function() {
+			$(".pop").show();
+		},function(){
+			$(".pop").hide();	
+		});
+		/* 체크 한 내용 출력  */
+/* 		$("[name=ub]").change(function(){
+	        if($("[name=ub]").is(":checked")){
+	     	   $.ajax({
+					url : "/spaceMypageAjax.do",
+					data : {memberId : $("[name=memberId]").val(), ub : $("[name=ub]").val() },
+					type : "post",
+					success : function(data) {
+						 location.href = "/spaceMypage.do?memberId=${sessionScope.m.memberId}&ub='on'"; 
+					}
+			   });
+	        }else{
+	        	$(".table").show();
+	        }
+	    }); */
+	});
+		$(".d-review").click(function () {
+			var delConfirm = confirm('리뷰를 삭제하시겠습니까?');
+			var rentalNo = $(this).prev().val();
+			console.log(rentalNo);
+			   if (delConfirm) {
+				   $.ajax({
+						url : "/deleteSpaceReview.do",
+						data : {rentalNo :rentalNo},
+						type : "post",
+						success : function(data) {
+							if(data>0){
+							 location.href = "/spaceMypage.do?memberId=${sessionScope.m.memberId}"; 
+							}else{
+								alert("삭제 실패");
+							}
+						}
+				   });
+			      alert('삭제되었습니다.');
+			   }
+			   else {
+			      alert('삭제가 취소되었습니다.');
+			   }
+		});
 	$(".writeBtn").click(
 			function() {
 				$.ajax({
 					url : "/selectRentalInfo.do",
-					data : {rentalNo : $(this).next().val()},
+					data : {rentalNo :$(this).next().val()},
 					type : "post",
 					success : function(data) {
+						console.log(data);
 						$(".modal-b").empty();
-						$(".modal-b").append("<input type = 'text' name='rentalNo' value='"+data.rentalNo +"'>");
+						$(".modal-b").append("<input type = 'hidden' name='rentalNo' value='"+data.rentalNo +"'>");
 					}
 				});
-			});</script>
+			});
+	$(".updateBtn").click(
+			function() {
+				$.ajax({
+					url : "/selectReviewInfo.do",
+					data : {rentalNo :$(this).next().val()},
+					type : "post",
+					success : function(data) {
+						console.log(data);
+						$(".modal-bb").empty();
+						$(".modal-bb").append("<input type = 'hidden' name='rentalNo' value='"+data.rentalNo +"'>");
+						$("[name=srContent]").empty();
+						$("[name=srContent]").attr("value",data.srContent);
+					}
+				});
+			});
+	</script>
 </body>
 </html>

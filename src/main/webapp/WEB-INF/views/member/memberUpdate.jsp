@@ -53,14 +53,7 @@
 							</tr>
 							<tr>
 								<td>이메일</td>
-								<td><input type="text" class="input" id="email1" name="email1"> @ <input type="text" class="input" id="email2" name="email2"> 
-								<select name="emailSelect" id="emailSelect" onchange="mailSelect(this);">
-										<option value="">직접입력</option>
-										<option value="naver.com">naver.com</option>
-										<option value="nate.com">nate.com</option>
-										<option value="gmail.com">gmail.com</option>
-										<option value="hanmail.net">hanmail.net</option>
-								</select>
+								<td><input type="text" class="input" id="email1" name="email1" value="${email1}"> @ <input type="text" class="input" id="email2" name="email2" value="${email2}"> 
 								<button type="button" onclick="checkEmail();" id="btnOpen1" class="nextBtn">중복체크</button>
 									<span id="ajaxEmailcheck"></span>
 									<div class="agreebox adcheck">

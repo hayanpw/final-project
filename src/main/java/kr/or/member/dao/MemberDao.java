@@ -76,8 +76,8 @@ public class MemberDao {
 			return m;
 		}
 	}
-	public ArrayList<Member> searchMember(String search) {
-		List list = sqlSession.selectList("member.searchMember",search);
+	public ArrayList<Member> searchMember(HashMap<String,Object> map) {
+		List<Member> list = sqlSession.selectList("member.searchMember",map);
 		return (ArrayList<Member>)list;
 	}
 	public int totalCount(HashMap<String, Object> map) {
@@ -90,6 +90,10 @@ public class MemberDao {
 	public ArrayList<Member> selectAllMember(MemberPage paging) {
 		List<Member> list = sqlSession.selectList("member.selectAllMember",paging);
 		return (ArrayList<Member>)list;
+	}
+	public int searchTotalCount(HashMap<String, Object> map) {
+		int totalCount = sqlSession.selectOne("member.searchTotalCount",map);
+		return totalCount;
 	}
 }
 
