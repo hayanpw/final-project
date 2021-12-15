@@ -92,17 +92,23 @@ public class AcademyService {
 			System.out.println("검색어가 없습니다.");
 			return list;
 		}else {
-			int totalCount = dao.searchAcademyTotal(keyWord);
 			AcademyPagingVo ap = new AcademyPagingVo();
 			ap.setStart(start);
 			ap.setEnd(end);
 			ap.setCategory(keyWord);
 			System.out.println("검색 실행");
 			list = dao.searchAcademyList(ap);
-			for(Academy a : list) {
-				a.setTotalCount(totalCount);
+			if(list.size() < 1) {
+				System.out.println("검색결과 없음");
+				return list;
+			}else {
+				System.out.println("검색결과 있음");
+				int totalCount = dao.searchAcademyTotal(keyWord);
+				for(Academy a : list) {
+					a.setTotalCount(totalCount);
+				}
+				return list;
 			}
-			return list;
 		}
 	}
 	public Academy selectOneAcademy(int academyNo) {
