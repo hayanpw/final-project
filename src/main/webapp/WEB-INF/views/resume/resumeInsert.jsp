@@ -23,10 +23,12 @@
         <input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
         <input type="text" class="form-control" id="resumeTitle" value="${requritTitle }" readonly>
       </div>
-      <h3><span class="line">성</span>별</h3>
-      <div class="radio">
-          <label><input type="radio" name="resumeGender" value="남자">남자</label>
-          <label><input type="radio" name="resumeGender" value="여자" >여자</label>
+      <div class="form-group">
+        <h3><span class="line">성</span>별</h3>
+        <select class="form-control" id="resumeGender" name="resumeGender">
+          <option value="남자">남자</option>
+          <option value="여자">여자</option>
+        </select>
       </div>
       <div class="form-group">
           <h3><span class="line">연</span>락받으실 연락처</h3>

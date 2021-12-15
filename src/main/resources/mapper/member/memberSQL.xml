@@ -82,7 +82,7 @@
 		from member
 		where member_email = #{memberEmail}	
 	</select>
-	<select id="searchMember" parameterType="string" resultType="m">
+	<select id="searchMember" parameterType="map" resultType="m">
  		select 
  			MEMBER_NO as memberNo,
 			MEMBER_ID as memberId,
@@ -93,26 +93,50 @@
 			MEMBER_BIRTHDAY as memberBirthday,
 			enroll_date as enrollDate,
 			MEMBER_LEVEL as memberLevel
- 		from member where member_id like '%'||#{search}||'%' or member_email like '%'||#{search}||'%' or 
- 						  member_name like '%'||#{search}||'%' or member_id like '%'||#{search}||'%'
+		from
+ 		(select rownum as rnum, m.* from 
+		( select * from 
+		member where 
+		(member_id like '%'||#{search}||'%' or member_email like '%'||#{search}||'%' or member_name like '%'||#{search}||'%' or member_id like '%'||#{search}||'%')
+		<if test="memberLevel != null">
+		and member_level in
+		<foreach collection="memberLevel" item="level" open="(" close=")" separator=",">
+		#{level}
+		</foreach>
+		</if>
+		
+		 order by member_no )m)mn where rnum BETWEEN #{start} and #{end}
  	</select>
  	 <select id="selectAllMember" parameterType="map" resultType="m">
  		select 
- 			nn.MEMBER_NO as memberNo,
-			nn.MEMBER_ID as memberId,
-			nn.MEMBER_EMAIL as memberEmail,
-			nn.MEMBER_PASSWORD as memberPassword,
-			nn.MEMBER_NAME as memberName,
-			nn.MEMBER_PHONE as memberPhone,
-			nn.MEMBER_BIRTHDAY as memberBirthday,
-			nn.enroll_date as enrollDate,
-			nn.MEMBER_LEVEL as memberLevel
+ 			mn.MEMBER_NO as memberNo,
+			mn.MEMBER_ID as memberId,
+			mn.MEMBER_EMAIL as memberEmail,
+			mn.MEMBER_PASSWORD as memberPassword,
+			mn.MEMBER_NAME as memberName,
+			mn.MEMBER_PHONE as memberPhone,
+			mn.MEMBER_BIRTHDAY as memberBirthday,
+			mn.enroll_date as enrollDate,
+			mn.MEMBER_LEVEL as memberLevel
  		from
- 		(select rownum as rnum, n.* from 
-		( select * from member order by member_no desc)n)nn where rnum BETWEEN #{start} and #{end}
+ 		(select rownum as rnum, m.* from 
+		( select * from member order by member_no )m)mn where rnum BETWEEN #{start} and #{end}
  	</select>
  		<!--전체멤버 수-->
 	<select id="selectTotalCount" resultType="_int">
 		select count(*) from member
 	</select>
+	
+	<select id="searchTotalCount" resultType="_int">
+		select count(*) from member  where 
+		(member_id like '%'||#{search}||'%' or member_email like '%'||#{search}||'%' or member_name like '%'||#{search}||'%' or member_id like '%'||#{search}||'%')
+		<if test="memberLevel != null">
+		and member_level in
+			<foreach collection="memberLevel" item="level" open="(" close=")" separator=",">
+			#{level}
+			</foreach>
+		</if>
+			
+	</select>
+	
 </mapper>

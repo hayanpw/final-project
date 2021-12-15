@@ -116,6 +116,27 @@
 		flex-flow:column;
 		justify-content: space-between;	
 	}
+	#likechk {
+	  display: flex;
+	  justify-content: center;
+	}
+	
+	input[type=radio] {
+	display: none;
+	margin: 50px;
+	}
+	input[type=radio]+label{
+	display: inline-block;
+	margin: 10px;
+	background-color: #fff;
+	border: 2px solid #74655E;
+	padding: 10px;
+	}
+	
+	input[type=radio]:checked+label{
+	background-color: #74655E;
+	color: #fff;
+	}
 </style>
 </head>
 <body>
@@ -123,6 +144,7 @@
 	<div class="container" id="container">
 		<div id="title">소통게시판</div>
 		<input id="loginId" type="hidden" value="${sessionScope.m.memberId }">
+		<input type="hidden" id="boardNo" value="${b.boardNo }">
 		<div id="table">
 		<div>
 			<div>다음글&nbsp;
@@ -169,7 +191,12 @@
 					</td>
 				</tr>
 				<tr>
-					<td colspan="7">${b.boardContent }(내용자리)</td>
+					<td colspan="6">${b.boardContent }(내용자리)
+						<div id="likechk">
+					    <input type="radio" value="like" name="likechk" id="like" onclick="return check(0);"><label for="like" ><i class="fas fa-thumbs-up"><span id="likeResult" >&nbsp;${l.likeSum }</span>&nbsp;&nbsp;좋아요</i></label>
+					    <input type="radio" value="dislike" name="likechk" id="dislike" onclick="return check(1);"><label for="dislike"><i class="fas fa-thumbs-down"><span id="dislikeResult">&nbsp;${l.dislikeSum }</span>&nbsp;&nbsp;싫어요</i></label>
+					    </div>
+					</td>
 				</tr>
 			</table>
 			
@@ -293,6 +320,102 @@
 	</div>
 	
 	<script type="text/javascript">
+		 var checkNum;
+		 var alreadyLike;
+	 $(document).ready(function() {
+			var loginId = $("#loginId").val();
+			var boardNo = $("#boardNo").val();
+			if(loginId != ""){
+				$.ajax({
+					url : "/selectLikeChk.do",
+					data : {boardNo:boardNo,memberId:loginId},
+					success : function(data){
+							if(data.likeSum==1){
+								checkNum=0;
+								alreadyLike=1;
+								$("#like").prop('checked',true);
+							}else if(data.dislikeSum==1){
+								checkNum=1;
+								alreadyLike=1;
+								$("#dislike").prop('checked',true);
+							}
+					}
+				});	   
+			}
+			
+	    });
+	
+	function check(num){
+		var loginId = $("#loginId").val();
+		if(loginId == ""){
+			alert("로그인 후 이용하실 수 있습니다.");
+			return false;
+		}
+		var boardNo = $("#boardNo").val();
+		var obj = $('input:radio[name="likechk"]');
+		if(checkNum==num){//취소함
+		obj.eq(num).prop('checked',false);
+		checkNum = null;
+		alreadyLike=0;
+			$.ajax({
+				url : "/boardDislike.do",
+				data : {memberId:loginId,boardNo:boardNo},
+				success : function(data){
+					if(data=="0"){
+						console.log("성공");
+					}else if(data=="1"){
+						console.log("실패");
+					}
+					
+					$.ajax({
+						url : "/selectLikeSum.do",
+						data : {boardNo:boardNo},
+						success : function(data){
+							$("#likeResult").empty();
+							$("#dislikeResult").empty();
+							if(data!="0"){
+							$("#likeResult").append("&nbsp;"+data.likeSum);
+							$("#dislikeResult").append("&nbsp;"+data.dislikeSum);
+							}
+						}
+					});
+					
+				}
+			});
+		
+		
+		}else{ //새로 누름
+		if(alreadyLike==1){
+			return false;
+		}
+		checkNum = num;
+			$.ajax({
+				url : "/boardLike.do",
+				data : {memberId:loginId,boardNo:boardNo,checkNum:checkNum},
+				success : function(data){
+					if(data=="0"){
+						console.log("성공");
+						alreadyLike=1;
+					}else if(data=="1"){
+						console.log("실패");
+					}
+					
+					$.ajax({
+						url : "/selectLikeSum.do",
+						data : {boardNo:boardNo},
+						success : function(data){
+							$("#likeResult").empty();
+							$("#dislikeResult").empty();
+							$("#likeResult").append("&nbsp;"+data.likeSum);
+							$("#dislikeResult").append("&nbsp;"+data.dislikeSum);
+						}
+					});
+				}
+			});
+		}
+	}
+	
+	
 	$(document).on("click",".recomment",function(){
 		var idx=$(".recomment").index(this);
 		var bcContent=$(".bcContent").eq(idx).val();

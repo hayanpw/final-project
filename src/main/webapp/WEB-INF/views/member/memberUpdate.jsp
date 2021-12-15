@@ -41,26 +41,19 @@
 							</tr>
 							<tr>
 								<td>주소입력</td>
-								<td><input type="text" id="postcode" class="input short3" name="postcode" readonly>
+								<td><input type="text" id="postcode" class="input short3" name="postcode" value="${m.postcode}" readonly>
 									<button onclick="addrSearch();" type="button" class="nextBtn">주소검색</button></td>
 							</tr>
 							<tr>
 								<td></td>
 								<td style="padding-top: 5px;"><input type="text"
-									id="addressRoad" class="input long" name="addressRoad" readonly>
+									id="addressRoad" class="input long" name="addressRoad" value="${m.addressRoad}" readonly>
 									<input type="text" id="addressDetail" class="input long"
-									name="addressDetail" placeholder="상세주소"></td>
+									name="addressDetail" value="${m.addressDetail}" ></td>
 							</tr>
 							<tr>
 								<td>이메일</td>
-								<td><input type="text" class="input" id="email1" name="email1"> @ <input type="text" class="input" id="email2" name="email2"> 
-								<select name="emailSelect" id="emailSelect" onchange="mailSelect(this);">
-										<option value="">직접입력</option>
-										<option value="naver.com">naver.com</option>
-										<option value="nate.com">nate.com</option>
-										<option value="gmail.com">gmail.com</option>
-										<option value="hanmail.net">hanmail.net</option>
-								</select>
+								<td><input type="text" class="input" id="email1" name="email1" value="${email1}"> @ <input type="text" class="input" id="email2" name="email2" value="${email2}"> 
 								<button type="button" onclick="checkEmail();" id="btnOpen1" class="nextBtn">중복체크</button>
 									<span id="ajaxEmailcheck"></span>
 									<div class="agreebox adcheck">

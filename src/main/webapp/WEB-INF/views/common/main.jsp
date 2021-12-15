@@ -170,11 +170,11 @@
           });
         </script>
 
-        <!-- <div class="banner">
+        <div class="banner">
           <div class="slide-right up-on-scroll">
-          <img src="/resources/mainImage/upload/m-banner.jpg">
+          <img src="/resources/mainImage/upload/m-newbanner.jpg">
         </div> 
-        </div>-->
+        </div>
 
         <div class="m-notice">
           <div class="slide-right up-on-scroll">

@@ -9,7 +9,6 @@
 <!-- include summernote css/js -->
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <link href="resources/hansolCss/hansol_default.css" rel="stylesheet">
-<link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
@@ -18,63 +17,84 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 	<div class="container">
-  		 <h2>수업 등록하기</h2>
-    <form action="/academyInsert.do" method="post" enctype="multipart/form-data">
+  		 <h2>수업 수정하기</h2>
+    <form action="/academyUpdate.do" method="post" enctype="multipart/form-data">
       <div class="form-group">
         <h3><span class="line">수</span>업명</h3>
-        <input type="text" class="form-control" id="academyTitle" placeholder="수업명을 입력해주세요" name="academyTitle">
+        <input type="text" class="form-control" id="academyTitle" name="academyTitle" value="${a.academyTitle }">
       </div>
        <div class="form-group">
         <h3><span class="line">수</span>업 대표사진</h3>
         <input type="file"  id="academyfile"  name="upfile" accept="image/*">
-        <div id="imageArea" style="margin-top: 10px; display: none">
-        	<img id="thumbnail" style="width: 200px;">
+        <div id="imageArea" style="margin-top: 10px;">
+        	<img id="thumbnail" src="${a.academyPhoto }" style="width: 200px;">
         </div>
       </div>
       <h3><span class="line">수</span>업 기간</h3>
       <div class="form-group col-sm-6">
         <h4>시작일</h4>
-        <input type="text" class="form-control" id="datepicker" name="academyStart">
+        <input type="date" class="form-control" id="datepicker" name="academyStart" value="${a.academyStart }">
       </div>
       <div class="form-group col-sm-6">
         <h4>종료일</h4>
-        <input type="text" class="form-control" id="datepicker2" name="academyEnd">
+        <input type="date" class="form-control" id="datepicker2" name="academyEnd" value="${a.academyEnd }">
       </div>
       <div class="form-group">
         <h3><span class="line">카</span>테고리</h3>
         <select class="form-control" id="category" name="academyCategory">
-          <option>음악</option>
-          <option>미술</option>
-          <option>독서</option>
+          <option value="음악">음악</option>
+          <option value="미술">미술</option>
+          <option value="독서">독서</option>
         </select>
       </div>
-       <div class="form-group">
+      <div class="form-group">
         <h3><span class="line">장</span>소</h3>
         <select class="form-control" id="place" name="academyPlace">
           <option value="A">A</option>
           <option value="B">B</option>
-          <option value="C">C</option>
+          <option value="on">on</option>
           <option value="D">D</option>
         </select>
       </div>
          <div class="form-group">
           <h3><span class="line">담</span>당 강사</h3>
-          <input type="text" class="form-control" id="academyTeacher" placeholder="담당 강사이름을 입력해주세요" name="academyTeacher">
+          <input type="text" class="form-control" id="academyTeacher"  name="academyTeacher" value="${a.academyTeacher }">
         </div>
       <div class="form-group">
         <h3><span class="line">수</span>업료</h3>
-        <input type="text" class="form-control" id="academyPrice" placeholder="수업료를 입력해주세요" name="academyPrice">
+        <input type="text" class="form-control" id="academyPrice" name="academyPrice" value="${a.academyPrice }" readonly>
       </div>
       <div class="form-group">
         <h3><span class="line">상</span>세 설명</h3>
-         <textarea id="summernote" class="form-control" name="academyDetail"></textarea>
+         <textarea id="summernote" class="form-control" name="academyDetail">${a.academyDetail }</textarea>
       </div>
-      <input type="submit" class="btn btn-info" style="float:right" value="수업 등록하기">
+      <input type="submit" class="btn btn-info" style="float:right" value="수업 수정하기">
     </form>
+    <input type="hidden" id="selectCategory" value="${a.academyCategory }">
+    <input type="hidden" id="selectPlace" value="${a.academyPlace }">
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 <script>
+$(document).ready(function(){
+	var category = $("#selectCategory").val();
+	var place = $("#selectPlace").val();
+	$("#category").val(category).prop("selected",true);
+	$("#place").val(place).prop("selected",true);
+});
+/*function setThumbnail(event) { 
+	var reader = new FileReader(); 
+	reader.onload = function(event) {
+		console.log(event.target.result);
+		$("#thumbnail").attr("src",event.target.result);
+		var img = document.createElement("img"); 
+		img.setAttribute("src", event.target.result);
+		img.setAttribute("css", event.target.result);
+		document.querySelector("div#image_container").appendChild(img);
+		}; 
+		reader.readAsDataURL(event.target.files[0]); 
+	}
+*/
 function readURL(input) {
 	if (input.files && input.files[0]) {
 		var reader = new FileReader();
@@ -89,7 +109,7 @@ $(":input[name='upfile']").change(function() {
 	if( $(":input[name='upfile']").val() == '' ) {
 		$('#thumbnail').attr('src' , '');  
 	}
-	$('#imageArea').css({ 'display' : '' });
+	$('#thumbnail').css({ 'display' : '' });
 	readURL(this);
 });
 $('#summernote').summernote({

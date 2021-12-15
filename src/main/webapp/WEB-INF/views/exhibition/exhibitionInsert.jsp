@@ -26,7 +26,11 @@
     </div>
      <div class="form-group">
         <h3><span class="line">전</span>시 대표사진</h3>
-        <input type="file"  id="exhibitionPhoto"  name="upfile">
+        <input type="file"  id="exhibitionPhoto"  name="upfile" accept="image/*">
+        <div id="imageArea" style="margin-top: 10px; display: none">
+        	<img id="thumbnail" style="width: 200px;">
+        </div>
+
       </div>
     <h3><span class="line">전</span>시 기간</h3>
     <div class="form-group col-sm-6">
@@ -37,21 +41,31 @@
       <h4>종료일</h4>
       <input type="text" class="form-control" id="datepicker2" name="exhibitionEnd">
     </div>
-    <h3><span class="line">관</span>람 연령</h3>
-     <div class="radio">
-      		<label><input type="radio" name="exhibitionAge" value="전체 관람">전체 관람</label>
-      		<label><input type="radio" name="exhibitionAge" value="12세 이상">12세 이상</label>
-      		<label><input type="radio" name="exhibitionAge" value="15세 이상">15세 이상</label>
-      		<label><input type="radio" name="exhibitionAge" value="19세 이상">19세 이상</label>
-    	</div>
+    <div class="form-group">
+        <h3><span class="line">관</span>람 연령</h3>
+        <select class="form-control" id="exhibitionAge" name="exhibitionAge">
+          <option value="전체관람">전체관람</option>
+          <option value="12세 이상">12세 이상</option>
+          <option value="15세 이상">15세 이상</option>
+          <option value="19세 이상">19세 이상</option>
+        </select>
+      </div>
        <h3><span class="line">전</span>시 시간</h3>
     <div class="form-group col-sm-6">
       <h4>시작시간</h4>
-      <input type="time" class="form-control" id="startTime" name="exhibitionTimeStart">
+      <select class="form-control" id="exhibitionTimeStart" name="exhibitionTimeStart">
+      	  <option value="08:00">08:00</option>
+          <option value="09:00">09:00</option>
+          <option value="10:00">10:00</option>
+        </select>
     </div>
     <div class="form-group col-sm-6">
       <h4>종료시간</h4>
-      <input type="time" class="form-control" id="endTime" name="exhibitionTimeEnd">
+      <select class="form-control" id="exhibitionTimeEnd" name="exhibitionTimeEnd">
+          <option value="16:00">16:00</option>
+          <option value="17:00">17:00</option>
+          <option value="18:00">18:00</option>
+        </select>
     </div>
     <div class="form-group">
       <h3><span class="line">가</span>격</h3>
@@ -67,6 +81,23 @@
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 <script>
+function readURL(input) {
+	if (input.files && input.files[0]) {
+		var reader = new FileReader();
+		reader.onload = function(e) {
+			$('#thumbnail').attr('src', e.target.result); 
+		}
+		reader.readAsDataURL(input.files[0]);
+	}
+}
+
+$(":input[name='upfile']").change(function() {
+	if( $(":input[name='upfile']").val() == '' ) {
+		$('#thumbnail').attr('src' , '');  
+	}
+	$('#imageArea').css({ 'display' : '' });
+	readURL(this);
+});
 $('#summernote').summernote({
 	  height: 300,                 // set editor height
 	  minHeight: null,             // set minimum height of editor
