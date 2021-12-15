@@ -198,4 +198,11 @@ public class ExhibitionController {
 		model.addAttribute("loc", "/exhibitionView.do?exhibitionNo="+exr.getExhibitionNo());
 		return "common/msg";
 	}
+	@RequestMapping(value="/exhibitionUpdateFrm.do")
+	public String exhibitionUpdateFrm (int exhibitionNo, Model model) {
+		Exhibition ex = service.selectOneExhibition(exhibitionNo);
+		model.addAttribute("ex",ex);
+		return "exhibition/exhibitionUpdateFrm";
+	}
+		
 }

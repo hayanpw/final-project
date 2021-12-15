@@ -83,4 +83,8 @@
 	<select id="searchAcademyTotal" parameterType="string" resultType="_int">
 		select count(*) from academy where academy_title like '%'||#{keyWord}||'%' or academy_detail like '%'||#{keyWord}||'%'
 	</select>
+	<update id="academyUpdate" parameterType="ac">
+		update academy set academy_title = #{academyTitle},academy_start = #{academyStart}, academy_end = #{academyEnd}, academy_photo=#{academyPhoto}, academy_teacher=#{academyTeacher}
+			,academy_place = #{academyPlace}, academy_price=#{academyPrice},academy_detail=#{academyDetail},academy_category=#{academyCategory} where academy_no=#{academyNo}
+	</update>
 </mapper>
