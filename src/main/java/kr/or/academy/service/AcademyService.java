@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.academy.dao.AcademyDao;
 import kr.or.academy.vo.Academy;
@@ -92,17 +93,23 @@ public class AcademyService {
 			System.out.println("검색어가 없습니다.");
 			return list;
 		}else {
-			int totalCount = dao.searchAcademyTotal(keyWord);
 			AcademyPagingVo ap = new AcademyPagingVo();
 			ap.setStart(start);
 			ap.setEnd(end);
 			ap.setCategory(keyWord);
 			System.out.println("검색 실행");
 			list = dao.searchAcademyList(ap);
-			for(Academy a : list) {
-				a.setTotalCount(totalCount);
+			if(list.size() < 1) {
+				System.out.println("검색결과 없음");
+				return list;
+			}else {
+				System.out.println("검색결과 있음");
+				int totalCount = dao.searchAcademyTotal(keyWord);
+				for(Academy a : list) {
+					a.setTotalCount(totalCount);
+				}
+				return list;
 			}
-			return list;
 		}
 	}
 	public Academy selectOneAcademy(int academyNo) {
@@ -119,7 +126,6 @@ public class AcademyService {
 		ArrayList<AcademyCategory> acList = dao.selectAcademyCategory();
 		return acList;
 	}
-
 	public ArrayList<Academy> searchMoreAcademy(int start, String category) {
 		System.out.println("검색결과 더보기");
 		start = start+1;
@@ -130,5 +136,10 @@ public class AcademyService {
 		ap.setStart(start);
 		ArrayList<Academy> list = dao.searchAcademyList(ap);
 		return list;
+	}
+
+	public int academyUpdate(Academy a) {
+		int result = dao.academyUpdate(a);
+		return result;
 	}
 }

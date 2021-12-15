@@ -11,6 +11,7 @@ import kr.or.academy.vo.Academy;
 import kr.or.academy.vo.AcademyPagingVo;
 import kr.or.member.vo.Member;
 import kr.or.space.model.dao.SpaceDao;
+import kr.or.space.model.vo.Black;
 import kr.or.space.model.vo.FileVO;
 import kr.or.space.model.vo.Rental;
 import kr.or.space.model.vo.ResSpace;
@@ -172,8 +173,8 @@ public class SpaceService {
 		return dao.selectResList(map);
 	}
 	//마이페이지 - 예약내역 조회
-	public ArrayList<SpaceMypage> selectSpaceMypage(String memberId) {
-		return dao.selectSpaceMypage(memberId);
+	public ArrayList<SpaceMypage> selectSpaceMypage(HashMap<String, Object> map) {
+		return dao.selectSpaceMypage(map);
 	}
 	//사용 게시판-페이징
 	@Transactional
@@ -371,5 +372,21 @@ public class SpaceService {
 			}
 		}
 		
+	}
+	//수정할 리뷰 조회
+	public SpaceReview selectReviewInfo(int rentalNo) {
+		return dao.selectReviewInfo(rentalNo);
+	}
+	//리뷰 수정
+	public int updatetReview(SpaceReview sr) {
+		return dao.updateReview(sr);
+	}
+	//블랙리스트 아이디 조회
+	public ArrayList<Black> selectBalckList() {
+		return dao.selectBlackList();
+	}
+	//리뷰삭제
+	public int deleteReview(int rentalNo) {
+		return dao.deleteReview(rentalNo);
 	}
 }

@@ -235,20 +235,38 @@
 	        });
 	        $(".showNavi>div").first().click();
 	        
-	        var today = new Date();
+	        var d = new Date();
+	        var today = d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate();
 	        var endDate = "${snr.s.showEnd}";
-	        $("#datepicker").datepicker({
-	            dateFormat: "yy-mm-dd",
-	            monthNames : [ '1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월','9월', '10월', '11월', '12월' ],
-	            monthNamesShort : [ '1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월','9월', '10월', '11월', '12월' ],
-	            dayNames : [ '일', '월', '화', '수', '목', '금', '토' ],
-	            dayNamesShort : [ '일', '월', '화', '수', '목', '금', '토' ],
-	            dayNamesMin : [ '일', '월', '화', '수', '목', '금', '토' ],
-	            yearSuffix : '년',
-	            minDate: today,
-	            maxDate: endDate,
-	            beforeShowDay: noMondays //월요일은 휴무일
-	        });
+	        var startDate = "${snr.s.showStart}";
+	        if(today<startDate){
+	        	$("#datepicker").datepicker({
+		            dateFormat: "yy-mm-dd",
+		            monthNames : [ '1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월','9월', '10월', '11월', '12월' ],
+		            monthNamesShort : [ '1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월','9월', '10월', '11월', '12월' ],
+		            dayNames : [ '일', '월', '화', '수', '목', '금', '토' ],
+		            dayNamesShort : [ '일', '월', '화', '수', '목', '금', '토' ],
+		            dayNamesMin : [ '일', '월', '화', '수', '목', '금', '토' ],
+		            yearSuffix : '년',
+		            minDate: startDate,
+		            maxDate: endDate,
+		            beforeShowDay: noMondays //월요일은 휴무일
+		        });
+	        }else{
+	        	$("#datepicker").datepicker({
+		            dateFormat: "yy-mm-dd",
+		            monthNames : [ '1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월','9월', '10월', '11월', '12월' ],
+		            monthNamesShort : [ '1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월','9월', '10월', '11월', '12월' ],
+		            dayNames : [ '일', '월', '화', '수', '목', '금', '토' ],
+		            dayNamesShort : [ '일', '월', '화', '수', '목', '금', '토' ],
+		            dayNamesMin : [ '일', '월', '화', '수', '목', '금', '토' ],
+		            yearSuffix : '년',
+		            minDate: today,
+		            maxDate: endDate,
+		            beforeShowDay: noMondays //월요일은 휴무일
+		        });
+	        }
+	        
 		    function noMondays(date) {
 		    	return [date.getDay() != 1, ''];
 		    };

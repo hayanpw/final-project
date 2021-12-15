@@ -35,7 +35,7 @@
 			<button onclick="location.href='/deleteUseBoard.do?ubNo=${u.ubNo}'">삭제</button>
 			<button onclick="location.href='/updateUseBoardFrm.do?ubNo=${u.ubNo}'">수정</button>
 		</c:if>
-		<c:if test="${sessionScope.m.memberLever eq 0 }">
+		<c:if test="${sessionScope.m.memberLevel eq 0 }">
 			<button onclick="location.href='/deleteUseBoard.do?ubNo=${u.ubNo}'">삭제</button>
 		</c:if>
 	</div>
