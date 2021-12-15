@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,64 +18,71 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 	<div class="container">
-  		 <h2>수업 수정하기</h2>
-    <form action="/academyUpdate.do" method="post" enctype="multipart/form-data">
-      <div class="form-group">
-        <h3><span class="line">수</span>업명</h3>
-        <input type="hidden" name="academyNo" value="${a.academyNo }">
-        <input type="text" class="form-control" id="academyTitle" name="academyTitle" value="${a.academyTitle }">
-      </div>
-       <div class="form-group">
-        <h3><span class="line">수</span>업 대표사진</h3>
-        <input type="file"  id="academyfile"  name="upfile" accept="image/*">
-        <input type="hidden" name="academyPhoto" value="${a.academyPhoto }">
-        <div id="imageArea" style="margin-top: 10px;">
-        	<img id="thumbnail" src="${a.academyPhoto }" style="width: 200px;">
+		  <h2>전시 등록하기</h2>
+  <form action="/exhibitionInsert.do" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+      <h3><span class="line">전</span>시제목</h3>
+      <input type="hidden" name="exhibitionNo" value="${ex.exhibitionNo }">
+      <input type="text" class="form-control" id="exhibitionTitle" value="${ex.exhibitionTitle }" name="exhibitionTitle">
+    </div>
+     <div class="form-group">
+        <h3><span class="line">전</span>시 대표사진</h3>
+        <input type="file"  id="exhibitionPhoto"  name="upfile" accept="image/*">
+        <input type="hidden" name="exhibitionPhoto" value="${ex.exhibitioniPhoto }">
+        <div id="imageArea" style="margin-top: 10px; display: none">
+        	<img id="thumbnail" src="${ex.exhibitionPhoto }" style="width: 200px;">
         </div>
+
       </div>
-      <h3><span class="line">수</span>업 기간</h3>
-      <div class="form-group col-sm-6">
-        <h4>시작일</h4>
-        <input type="text" class="form-control" id="datepicker" name="academyStart" value="${a.academyStart }">
-      </div>
-      <div class="form-group col-sm-6">
-        <h4>종료일</h4>
-        <input type="text" class="form-control" id="datepicker2" name="academyEnd" value="${a.academyEnd }">
-      </div>
-      <div class="form-group">
-        <h3><span class="line">카</span>테고리</h3>
-        <select class="form-control" id="category" name="academyCategory">
-          <option value="음악">음악</option>
-          <option value="미술">미술</option>
-          <option value="독서">독서</option>
+    <h3><span class="line">전</span>시 기간</h3>
+    <div class="form-group col-sm-6">
+      <h4>시작일</h4>
+      <input type="text" class="form-control" id="datepicker" name="exhibitionStart" value="${ex.exhibitioinStart }">
+    </div>
+    <div class="form-group col-sm-6">
+      <h4>종료일</h4>
+      <input type="text" class="form-control" id="datepicker2" name="exhibitionEnd" value="${ex.exhibitionEnd }">
+    </div>
+    <div class="form-group">
+        <h3><span class="line">관</span>람 연령</h3>
+        <select class="form-control" id="exhibitionAge" name="exhibitionAge">
+          <option value="전체관람">전체관람</option>
+          <option value="12세 이상">12세 이상</option>
+          <option value="15세 이상">15세 이상</option>
+          <option value="19세 이상">19세 이상</option>
         </select>
       </div>
-      <div class="form-group">
-        <h3><span class="line">장</span>소</h3>
-        <select class="form-control" id="place" name="academyPlace">
-          <option value="A">A</option>
-          <option value="B">B</option>
-          <option value="on">on</option>
-          <option value="D">D</option>
+       <h3><span class="line">전</span>시 시간</h3>
+    <div class="form-group col-sm-6">
+      <h4>시작시간</h4>
+      <select class="form-control" id="exhibitionTimeStart" name="exhibitionTimeStart">
+      	  <option value="08:00">08:00</option>
+          <option value="09:00">09:00</option>
+          <option value="10:00">10:00</option>
         </select>
-      </div>
-         <div class="form-group">
-          <h3><span class="line">담</span>당 강사</h3>
-          <input type="text" class="form-control" id="academyTeacher"  name="academyTeacher" value="${a.academyTeacher }">
-        </div>
-      <div class="form-group">
-        <h3><span class="line">수</span>업료</h3>
-        <input type="text" class="form-control" id="academyPrice" name="academyPrice" value="${a.academyPrice }" readonly>
-      </div>
-      <div class="form-group">
-        <h3><span class="line">상</span>세 설명</h3>
-         <textarea id="summernote" class="form-control" name="academyDetail">${a.academyDetail }</textarea>
-      </div>
-      <input type="submit" class="btn btn-info" style="float:right" value="수업 수정하기">
-    </form>
-    <input type="hidden" id="selectCategory" value="${a.academyCategory }">
-    <input type="hidden" id="selectPlace" value="${a.academyPlace }">
-	</div>
+    </div>
+    <div class="form-group col-sm-6">
+      <h4>종료시간</h4>
+      <select class="form-control" id="exhibitionTimeEnd" name="exhibitionTimeEnd">
+          <option value="16:00">16:00</option>
+          <option value="17:00">17:00</option>
+          <option value="18:00">18:00</option>
+        </select>
+    </div>
+    <div class="form-group">
+      <h3><span class="line">가</span>격</h3>
+      <input type="text" class="form-control" id="exhibitionPrice" placeholder="가격을 입력해주세요" name="exhibitionPrice">
+    </div>
+    <div class="form-group">
+      <h3><span class="line">상</span>세설명</h3>
+     <textarea id="summernote" class="form-control" name="exhibitionDetail"></textarea>
+    </div>
+       <input type="submit" class="btn btn-info" style="float:right" value="등록하기">
+  </form>
+</div>
+<input type="hidden" id="startTime" value="${ex.exhibitionTimeStart }">
+<input type="hidden" id="endTime" value="${ex.exhibitionTimeEnd }">
+<input type="hidden" id="startTime" value="${ex.exhibitionTimeStart }">
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 <script>
@@ -85,21 +92,8 @@ $(document).ready(function(){
 	$("#category").val(category).prop("selected",true);
 	$("#place").val(place).prop("selected",true);
 });
-/*function setThumbnail(event) { 
-	var reader = new FileReader(); 
-	reader.onload = function(event) {
-		console.log(event.target.result);
-		$("#thumbnail").attr("src",event.target.result);
-		var img = document.createElement("img"); 
-		img.setAttribute("src", event.target.result);
-		img.setAttribute("css", event.target.result);
-		document.querySelector("div#image_container").appendChild(img);
-		}; 
-		reader.readAsDataURL(event.target.files[0]); 
-	}
-*/
+
 function readURL(input) {
-	console.log("readURL");
 	if (input.files && input.files[0]) {
 		var reader = new FileReader();
 		reader.onload = function(e) {
@@ -110,8 +104,10 @@ function readURL(input) {
 }
 
 $(":input[name='upfile']").change(function() {
-	$('#thumbnail').attr('src' , '');  
-	$('#thumbnail').css({ 'display' : '' });
+	if( $(":input[name='upfile']").val() == '' ) {
+		$('#thumbnail').attr('src' , '');  
+	}
+	$('#imageArea').css({ 'display' : '' });
 	readURL(this);
 });
 $('#summernote').summernote({
@@ -119,6 +115,7 @@ $('#summernote').summernote({
 	  minHeight: null,             // set minimum height of editor
 	  maxHeight: null,             // set maximum height of editor
 	  focus: true,                  // set focus to editable area after initializing summernote
+	  lang : "ko-KR",
 	  callbacks:{
 			onImageUpload : function(files) {
 				uploadImage(files[0],this);
@@ -133,7 +130,7 @@ function uploadImage(file,editor) {
 	var form = new FormData();
 	form.append("file",file);
 	$.ajax({
-		url : "/uploadImageAcademy.do",
+		url : "/uploadImageExhibition.do",
 		type : "post",
 		data : form,
 		processData : false,
@@ -145,7 +142,7 @@ function uploadImage(file,editor) {
 			});
 		}
 	});
-}	
+}
 $(function() {
 	
     var date = new Date();

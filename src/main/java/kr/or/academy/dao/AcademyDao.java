@@ -83,4 +83,14 @@ public class AcademyDao {
 		System.out.println(totalCount);
 		return totalCount;
 	}
+
+	public int academyUpdate(Academy a) {
+		int result = sqlSession.update("academy.academyUpdate",a);
+		return result;
+	}
+
+	//public int academyUpdate(Academy a) {
+	//	int result = sqlSession.update("academy.academyUpdate",a);
+	//	return result;
+	//}
 }
