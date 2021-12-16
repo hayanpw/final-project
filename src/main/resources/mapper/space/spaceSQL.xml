@@ -226,9 +226,11 @@
 		where rental.space_no=#{spaceNo} and rental_date=#{selectDate} 
 		order by start_time
 	</select>
-	<select id="selectSpaceMypage" parameterType="string" resultType="kr.or.space.model.vo.SpaceMypage">
+	<select id="selectSpaceMypage" parameterType="map" resultType="kr.or.space.model.vo.SpaceMypage">
 		select  
 			rental_no as rentalNo, 
+            sr_no as srNo,
+            sr.del_yn as delYn,
 			space_name as spaceName,  
 			start_time as startTime, 
 			end_time as endTime,
@@ -239,11 +241,20 @@
 			max_people as maxPeople, 
 			price,
 			rental_people as rentalPeople,
-			rental_status as rentalStatus 
-		from rental 
+			rental_status as rentalStatus,
+			used_board as usedBoard 
+		from rental r 
 		join space using(space_no) 
 		join space_time using (st_no)  
-		where member_id =#{memberId}
+        left join space_review sr  using (rental_no)
+		<choose>
+			<when test="ub.equals('on')">
+		where r.member_id =#{memberId} and used_board = 0	
+			</when>
+			<otherwise>
+		where r.member_id =#{memberId}
+			</otherwise>
+		</choose>
 		order by rental_date desc
 	</select>
 	<select id="selectUseBoardList" parameterType="map" resultType="kr.or.space.model.vo.UseBoard">
@@ -341,25 +352,25 @@
 			count(*) 
 		from space_review 
 		join rental using(rental_no) 
-		where space_no = #{spaceNo}
+		where space_no = #{spaceNo} and del_yn = 'N'
 	</select>
-	<select id="selectMyReview" parameterType="string" resultType="kr.or.space.model.vo.SpaceReview">
+	<select id="selectMyReview" parameterType="_int" resultType="kr.or.space.model.vo.SpaceReview">
 		select
 			sr_no as srNo,
 			rental_no as rentalNo,
 			member_id as memberId,
 			sr_content as srContent,
 			sr_date as srDate 
-			from space_review 
-			where member_id=#{memberId}	
+		from space_review 
+		where rental_no = #{rentalNo} and del_yn = 'N'
 	</select>
 	<select id="selectBlackId" resultType="string">
 	<![CDATA[
 		select
 			member_id as memberId 
-			from rental 
-			where used_board = 0 
-			and to_date(rental_date,'yyyy-mm-dd')+7 < sysdate
+		from rental 
+		where used_board = 0 
+		and to_date(rental_date,'yyyy-mm-dd')+7 < sysdate
 		]]>	
 	</select>
 	<insert id="insertSpaceBlack" parameterType="string">
@@ -368,9 +379,28 @@
 			values(reading_black_seq.nextval,to_char(sysdate,'yy/mm/dd hh24:mi:ss'),to_date(to_char(sysdate+8,'yymmdd'))||' 00:00:00',#{memberId},1)
 	</insert>
 	<delete id="deleteRental" parameterType="string">
+	<![CDATA[
 		delete 
 			from rental 
 			where member_id = #{memberId} 
 			and rental_date >sysdate
+		]]>				
+	</delete>
+	<update id="updateReview" parameterType="kr.or.space.model.vo.SpaceReview">
+		update
+			space_review set
+			sr_content = #{srContent}
+		where rental_no = #{rentalNo}
+	</update>
+	<select id="selectBlackList" resultType="kr.or.space.model.vo.Black">
+		select
+			black_id as blackId
+		from reading_black
+		where black_ty = 1	
+	</select>
+	<delete id="deleteReview" parameterType="_int">
+		delete 
+			from space_review 
+			where rental_no = #{rentalNo}	
 	</delete>
 </mapper>

@@ -93,7 +93,7 @@
 		});
 		$(document).on("click",".academyUpdate",function(){
 			var academyNo = $(this).attr("academyNo");
-			location.href="/academyUpdate.do?academyNo="+academyNo;
+			location.href="/academyUpdateFrm.do?academyNo="+academyNo;
 		});
 		$(document).on("click",".academyDelete",function(){
 			var academyNo = $(this).attr("academyNo");

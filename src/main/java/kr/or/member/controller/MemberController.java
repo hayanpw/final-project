@@ -95,6 +95,12 @@ public class MemberController {
 	public String pwchk(Member member, Model model) {
 		Member m = service.selectOneMemberPw(member);
 		if(m != null) {
+			String memberEmail = m.getMemberEmail();
+			String[] email = memberEmail.split("@");
+			System.out.println(email);
+			model.addAttribute("email1",email[0]);
+			model.addAttribute("email2",email[1]);
+			
 			return "member/memberUpdate";
 		}else {
 			model.addAttribute("msg","비밀번호를 확인 하세요");
@@ -123,8 +129,14 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/memberUpdate.do")
-		public String updateMember(Member member,Model model) {
+		public String updateMember(Member member,Model model,String email1, String email2) {
+			//앞에서 받아오는값
+			String memberEmail = email1+"@"+email2;
+			Member m = service.selectOneMemberEmail(memberEmail);
+			m.setMemberEmail(memberEmail); 
 			int result = service.updateMember(member);
+			//데이터를 불러오는값
+		
 			if(result>0) {
 				model.addAttribute("msg","정보변경 성공");
 			}else {
@@ -171,12 +183,21 @@ public class MemberController {
 	}
 	@RequestMapping(value="/searchMember.do")
 	public String searchMember(int[] memberLevel,String search, Model model, int reqPage) {
-		ArrayList<Member> list = service.searchMember(search);
-		model.addAttribute("reqPage",reqPage);
-		model.addAttribute("list",list);
+		MemberPage mpg  = service.searchMember(search,memberLevel,reqPage);
+		
+		model.addAttribute("totalCount", mpg.getTotalCount());
+		model.addAttribute("pageNavi", mpg.getPageNavi());
+		model.addAttribute("list",mpg.getList());
 		model.addAttribute("search",search);
+		model.addAttribute("start", mpg.getStart());
+		if(memberLevel != null) {
+			for(int i=0;i<memberLevel.length;i++) {
+				model.addAttribute("memberLevel"+memberLevel[i],0);
+			}
+		}
+
 		System.out.println("reqPage : " +reqPage);
-		System.out.println("memberLevel : " +memberLevel.length);
+		System.out.println("memberLevel : " +memberLevel);
 		System.out.println("search : " +search);
 		return "member/AllMember";
 	}

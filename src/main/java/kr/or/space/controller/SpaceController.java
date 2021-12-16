@@ -9,6 +9,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -28,6 +29,7 @@ import kr.or.member.service.MemberService;
 import kr.or.member.vo.Member;
 import kr.or.space.model.service.MailSend;
 import kr.or.space.model.service.SpaceService;
+import kr.or.space.model.vo.Black;
 import kr.or.space.model.vo.FileVO;
 import kr.or.space.model.vo.Rental;
 import kr.or.space.model.vo.ResSpace;
@@ -96,10 +98,12 @@ public class SpaceController {
 		Space s = service.selectOneSpace(spaceNo);
 		ArrayList<SpaceTime> st = service.selectSpaceTime(spaceNo);
 		ArrayList<FileVO> fv = service.selectFileList(spaceNo);
+		ArrayList<Black> b = service.selectBalckList();
 		model.addAttribute("list", list);
 		model.addAttribute("s", s);
 		model.addAttribute("st", st);
 		model.addAttribute("fv", fv);
+		model.addAttribute("b", b);
 		return "space/spaceRes";
 	}
 
@@ -241,12 +245,17 @@ public class SpaceController {
 
 	// 마이페이지- 예약내역 관리
 	@RequestMapping(value = "/spaceMypage.do")
-	public String spaceMypage(String memberId, Model model) {
-		System.out.println(memberId);
-		ArrayList<SpaceMypage> list = service.selectSpaceMypage(memberId);
-		ArrayList<SpaceReview> rList = service.selectMyReview(memberId);
+	public String spaceMypage(String memberId, Model model, String ub) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("memberId", memberId);
+		System.out.println(ub);
+		if(ub == null) {
+			map.put("ub", "");
+		}else {
+			map.put("ub", ub);
+		}
+		ArrayList<SpaceMypage> list = service.selectSpaceMypage(map);
 		model.addAttribute("list", list);
-		model.addAttribute("rList", rList);
 		return "space/spaceMypage";
 	}
 
@@ -470,7 +479,7 @@ public class SpaceController {
 			}
 		}
 	}
-	//리뷰 입력
+	//리뷰 모달 창 열기 
 	@ResponseBody
 	@RequestMapping(value = "/selectRentalInfo.do", produces = "application/json;charset=utf-8")
 	public String selectRentalInfo(int rentalNo) {
@@ -489,5 +498,43 @@ public class SpaceController {
 		model.addAttribute("loc", "/spaceMypage.do?memberId="+sr.getMemberId());
 		return "common/msg";
 	}
+	//리뷰수정 모달 창 열기 
+	@ResponseBody
+	@RequestMapping(value = "/selectReviewInfo.do", produces = "application/json;charset=utf-8")
+	public String selectReviewInfo(int rentalNo) {
+		SpaceReview s = service.selectReviewInfo(rentalNo);
+		return new Gson().toJson(s);
+	}
+	//리뷰 수정
+	@RequestMapping(value = "/updateSpaceReview.do")
+	public String updateSpaceReview(SpaceReview sr, Model model) {
+		System.out.println(sr.getSrContent());
+		int result = service.updatetReview(sr);
+		if(result>0) {
+			model.addAttribute("msg", "수정 성공");
+		}else {
+			model.addAttribute("msg", "수정 실패");
+		}
+		model.addAttribute("loc", "/spaceMypage.do?memberId="+sr.getMemberId());
+		return "common/msg";
+	}
+	//리뷰 삭제
+	@ResponseBody
+	@RequestMapping(value = "/deleteSpaceReview.do", produces = "application/json;charset=utf-8")
+	public String deleteReview(int rentalNo) {
+		int result = service.deleteReview(rentalNo);
+		return new Gson().toJson(result);
+	}
+	//마이페이지 조회 아작스
+	@ResponseBody
+	@RequestMapping(value = "/spaceMypageAjax.do", produces = "application/json;charset=utf-8")
+	public String spaceMypageAjax(String memberId, Model model, String ub) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("memberId", memberId);
+		map.put("ub", ub);
+		ArrayList<SpaceMypage> list = service.selectSpaceMypage(map);
+		return new Gson().toJson(list);
+	}
+	
 }
 

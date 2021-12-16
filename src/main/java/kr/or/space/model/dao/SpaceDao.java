@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.or.space.model.vo.Black;
 import kr.or.space.model.vo.FileVO;
 import kr.or.space.model.vo.Rental;
 import kr.or.space.model.vo.ResSpace;
@@ -115,8 +116,8 @@ public class SpaceDao {
 		return (ArrayList<ResSpace>)list;
 	}
 	//마이페이지 - 예약 내역 조회
-	public ArrayList<SpaceMypage> selectSpaceMypage(String memberId) {
-		List<SpaceMypage> list = sqlSession.selectList("space.selectSpaceMypage",memberId);
+	public ArrayList<SpaceMypage> selectSpaceMypage(HashMap<String, Object> map) {
+		List<SpaceMypage> list = sqlSession.selectList("space.selectSpaceMypage",map);
 		return (ArrayList<SpaceMypage>)list;
 	}
 	//사용게시판 전체 리스트 조회
@@ -196,5 +197,22 @@ public class SpaceDao {
 	//블랙리스트가 예약했던 내역 삭제
 	public int deleteRental(String memberId) {
 		return sqlSession.delete("space.deleteRental",memberId);
+	}
+	//리뷰 업데이트
+	public int updateReview(SpaceReview sr) {
+		return sqlSession.update("space.updateReview",sr);
+	}
+	//수정할 리뷰 조회
+	public SpaceReview selectReviewInfo(int rentalNo) {
+		return sqlSession.selectOne("space.selectMyReview",rentalNo);
+	}
+	//블랙리스트 아이디 조회
+	public ArrayList<Black> selectBlackList() {
+		List<Black> b =	sqlSession.selectList("space.selectBlackList");
+		return (ArrayList<Black>)b;
+	}
+	//리뷰삭제
+	public int deleteReview(int rentalNo) {
+		return sqlSession.delete("space.deleteReview", rentalNo);
 	}
 }

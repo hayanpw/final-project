@@ -77,5 +77,10 @@ public class ReadingDao {
 		sqlSession.delete("reading.timeOutBlackList", time1);
 	}
 
+	public ArrayList<Reading> selectMyReading(String memberId) {
+		List<Reading> re = sqlSession.selectList("reading.selectMyReading", memberId);
+		return (ArrayList<Reading>)re;
+	}
+
 	
 }
