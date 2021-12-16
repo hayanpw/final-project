@@ -10,7 +10,7 @@
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <style type="text/css">
 	#title{
-	width:165px;
+	width:205px;
 	border-top: 7px solid #563D39;
 	margin-top:70px;
 	margin-left:70px;
@@ -47,6 +47,7 @@
 		</c:otherwise>
 	</c:choose>
 	<form action="/boardUpdate.do" method="post" enctype="multipart/form-data">
+		
 				<table class="table" style="width:100%;">
 					<tr>
 						<td>제목</td>
@@ -66,14 +67,14 @@
 							<c:choose>
 							<c:when test="${not empty b.list }">
 								<c:forEach items="${b.list }" var="f">
-								<span class="delFile">${f.filename }</span>
+								<span>${f.filename }</span>
 								<button type="button" id="delBtn" class="btn btn-primary btn-sm delFile">
 								삭제
 								</button>
-								<input type="file" name="addFiles" multiple style="display:none;"> 
-								<input type="hidden" name="oldFilename" value="${f.filename }">
-								<input type="hidden" name="oldFilepath" value="${f.filepath }>">
+								<input type="hidden" class="oldFilename" name="oldFilename" value="${f.filename }">
+								<input type="hidden" class="oldFilepath" name="oldFilepath" value="${f.filepath }>">
 								</c:forEach>
+								<input type="file" id="addFiles" name="addFiles" multiple style="display:none;">
 							</c:when>
 							<c:otherwise>
 							<input type="file" name="addFiles" multiple>
@@ -97,12 +98,15 @@
 		</form>
 	</div>
 	<script type="text/javascript">
-	$("#delBtn").click(function(){
-		$(".delFile").hide();
-		$(this).next().show();
+	$(document).on("click",".delFile",function(){
+		var idx=$(".delFile").index(this);
+		var bcContent=$(".oldFilename").eq(idx).val();
+		var bcContent=$(".oldFilepath").eq(idx).val();
+		$(this).prev().hide();
+		$(this).hide();
+		$("#addFiles").show();
 		$("[name=status]").val(2);
-	});
-
+    });
 	$(function() {
 		$("#summernote").summernote({
 			height:400,
