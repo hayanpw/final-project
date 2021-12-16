@@ -7,11 +7,12 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="resources/spaceCss/space_default.css" rel="stylesheet">
-<link href="resources/spaceCss/space_info.css" rel="stylesheet">
+<link href="resources/spaceCss/space_view.css" rel="stylesheet">
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="container">
+	<h3><img class="i-img" src="resources/spaceImage/search.png" style="width: 40px; ">상세보기-${s.spaceName } </h3>
 		<form action="/spaceRental.do" method="post">
 			<input type="hidden" value="${s.spaceNo }" name="spaceNo"
 				id="spaceNo"> <input type="hidden" value="${st.stNo }"
@@ -79,8 +80,10 @@
 					있습니다.
 				</p>
 				<p>※ 회원가입 및 로그인 후, 대관신청이 가능합니다.</p>
-				<a href="/spaceRes.do?spaceNo=${s.spaceNo }" class="btn3">신청 하러
+				<div class="goRes">
+				<a href="/spaceRes.do?spaceNo=${s.spaceNo }" id="goRes">신청 하러
 					가기</a>
+				</div>
 			</div>
 			<div class="btn-box">
 				<button type="button" class="open-img">이미지 보기</button>
@@ -97,7 +100,7 @@
 			</div>
 			<!-- 리뷰 보기  -->
 			<div class="review-box">
-				<p>${s.spaceName }리뷰</p>
+				<h1>Review</h1>
 				<c:forEach items="${srList }" var="sr">
 					<table class="review-table">
 						<tr>
@@ -110,13 +113,13 @@
 						</tr>
 					</table>
 				</c:forEach>
-			</div>
 				<div>
-				<c:if test="${count <= totalCount}">
+				<c:if test="${count < totalCount}">
 					<button type="button" class="moreBtn" id="more" currentCount="5"
 						totalCount="${totalCount }" value="5">더보기</button>
 				</c:if>
 				</div>
+			</div>
 		</form>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
@@ -161,7 +164,8 @@
 			$(".close-img").hide();
 			$(".review-box").hide();
 			$(".close-review").hide();
-			$("#more").hide();
+			/* $("#more").hide(); */
+			/*이미지 보기  */
 			$(".open-img").click(function() {
 				$(".close-img").show();
 				$(".big-img").show();
@@ -172,17 +176,18 @@
 				$(".open-img").show();
 				$(".close-img").hide();
 			});
+			/* 리뷰보기 */
 			$(".open-review").click(function() {
 				$(".close-review").show();
 				$(".review-box").show();
 				$(".open-review").hide();
-				$("#more").show();
+				/* $("#more").show(); */
 			});
 			$(".close-review").click(function() {
 				$(".review-box").hide();
 				$(".open-review").show();
 				$(".close-review").hide();
-				$("#more").hide();
+				/* $("#more").hide(); */
 			});
 		});
 	</script>

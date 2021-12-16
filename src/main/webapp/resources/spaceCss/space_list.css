@@ -1,18 +1,22 @@
 .space-list{
+	border : 1px solid #BDB19A;
 	margin-top : 20px;
-	width: 50%;
+	width: 550px;
+	margin-left : 10px;
 	float: left;
 }
 .space-list p{
+	padding-left : 20px;
 	margin-top : 20px;
 	margin : 15px;
-	border-bottom: 1px solid #BDB19A;
+	border-bottom: 1px solid #A79078 ;
 }
 .space-list img{
 	padding : 10px;
-	width: 100%;
+	width: 500px;
 	height: 400px;
 	margin: 0 auto;
+	margin-left: 20px;
 }
 .space-list p>input{
 	border: none;

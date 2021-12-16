@@ -1,32 +1,50 @@
+.insert-main{
+	border: 1px solid #BDB19A; 
+	border-radius: 50px;
+	padding: 10px;
+}
 .container h3{
-	text-align: center;
 	margin: 50px;
 }
 .space-img{
-	margin-top : 200px;
+	margin-top : 50px;
+	margin-left: 30px;
 }
 .space-img>img{
 	margin-bottom: 10px;	
 }
 .space-info{
-	margin: 0 auto;
+	margin-left : 35px;
+	float : left;
+	width : 500px;
+	border: 1px double #A79078 ;
+	padding: 10px;
 }
-.info-table{
-	margin-left : 130px;
-	margin-right: 50px;
-	float: left;
+.space-time{
+	border: 1px double #A79078; 
+	margin-left : 10px;
+	display : inline-block;
+	width : 550px;
+	height : 340px;
+	padding: 10px;
 }
-.info-table input{
-	border: none;
-	border-bottom: 1px solid #BDB19A ;
-	width: 350px;
-	outline: none;
+.space-info input{
+	border : 1px solid #74655E ;
+	box-shadow : 1px 1px gray;
+	margin-bottom : 5px;
+	border-radius : 10px;
+	height: 30px;
+	width: 300px;
+	margin-left: 30px;
 }
 .time-table input{
-	border: none;
-	border-bottom: 1px solid #BDB19A ;
-	width: 150px;
-	outline: none;
+	border : none;
+	border-bottom : 1px solid #74655E ;
+	margin-bottom : 10px;
+	height: 30px;
+	margin-left: 10px;
+	text-align: center;
+	width: 180px;
 }
 #time-table tr{
 	margin-bottom: 30px;
@@ -60,4 +78,9 @@
 }
 #plus{
 	cursor: pointer;
+	margin-left: 20px;
 }
+.i-img{
+	color: #A79078;
+	margin-right: 5px;
+}	

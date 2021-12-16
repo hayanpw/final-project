@@ -17,7 +17,13 @@
     <link href="resources/spaceCss/space_default.css" rel="stylesheet">	
     <link href="resources/spaceCss/space_res.css" rel="stylesheet">	
 	<div class="container">
-			<h3>신청 현황-${s.spaceName } </h3>
+		<div class="cal">
+			<c:if test="${ !empty s.spaceName  }">
+				<h3><img class="i-img" src="resources/spaceImage/appointment.png" style="width: 40px; ">  신청 현황-${s.spaceName } </h3>
+			</c:if>
+			<c:if test="${ empty s.spaceName  }">
+				<h3><img class="i-img" src="resources/spaceImage/appointment.png" style="width: 40px; ">  공간을 선택해주세요. </h3>
+			</c:if>
 		<form action="/spaceInfo.do" method="post">
 			<input type="hidden" value="${s.spaceNo  }" name="spaceNo">
 			<div class="select-btn">
@@ -34,6 +40,7 @@
 			</div>
 		<!-- 캘린더 코드 -->
 		<div id="datepicker"></div>
+	</div>	
 		<div class="time-table">
 			<table class="table table-hover">
 					<tr>

@@ -215,4 +215,16 @@ public class SpaceDao {
 	public int deleteReview(int rentalNo) {
 		return sqlSession.delete("space.deleteReview", rentalNo);
 	}
+	//공간 수정
+	public int updateSpace(Space s) {
+		return sqlSession.update("space.updateSpace",s);
+	}
+	//공간 시간 수정
+	public int updateSpaceTime(SpaceTime st) {
+		return sqlSession.update("space.updateSpaceTime",st);
+	}
+	//이미지 삭제
+	public int deleteSpaceFile(int spaceNo) {
+		return sqlSession.delete("space.deleteSpaceFile",spaceNo);
+	}
 }

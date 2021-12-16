@@ -278,6 +278,7 @@
 		select 
 			count(*) as cnt 
 		from use_board
+		where del_yn = 'N'
 	</select>
 	<insert id="insertUseBoard" parameterType="kr.or.space.model.vo.UseBoard">
 		insert
@@ -403,4 +404,27 @@
 			from space_review 
 			where rental_no = #{rentalNo}	
 	</delete>
+	<update id="updateSpace" parameterType="space">
+		update
+			space set
+			space_name = #{spaceName},
+			space_purpose = #{spacePurpose},
+			main_facility = #{mainFacility},
+			main_product = #{mainProduct},
+			max_people = #{maxPeople},
+			price = #{price}
+		where space_no = #{spaceNo}	
+	</update>
+	<update id="deleteSpaceFile" parameterType="fv">
+		delete
+			from space_file
+			where space_no = #{spaceNo}	
+	</update>
+	<update id="updateSpaceTime" parameterType="kr.or.space.model.vo.SpaceTime">
+		update
+			space_time set
+			start_time = #{startTime},
+			end_time = #{endTime}
+		where st_no = #{stNo}
+	</update>
 </mapper>

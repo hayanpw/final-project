@@ -126,7 +126,7 @@ public class SpaceService {
 		//페이지숫자
 		for(int i=0; i<pageNaviSize; i++) {
 			if(pageNo == reqPage) {
-				pageNavi += "<li class='disabled'>";
+				pageNavi += "<li class='active'>";
 				pageNavi += "<a href='/spaceAdmin.do?reqPage="+pageNo+"'>";
 				pageNavi += pageNo+"</a></li>";
 			}else {
@@ -200,18 +200,18 @@ public class SpaceService {
 		//이전버튼
 		if(pageNo != 1) {
 			pageNavi += "<li>";
-			pageNavi += "<a href='/spaceBoardtList.do?reqPage="+(pageNo-1)+"'>";
+			pageNavi += "<a href='/selectSpaceBoardList.do?reqPage="+(pageNo-1)+"'>";
 			pageNavi += "&lt;</a></li>";
 		}
 		//페이지숫자
 		for(int i=0; i<pageNaviSize; i++) {
 			if(pageNo == reqPage) {
-				pageNavi += "<li class='disabled'>";
-				pageNavi += "<a href='/spaceBoardtList.do?reqPage="+pageNo+"'>";
+				pageNavi += "<li class='click'>";
+				pageNavi += "<a href='/selectSpaceBoardList.do?reqPage="+pageNo+"'>";
 				pageNavi += pageNo+"</a></li>";
 			}else {
 				pageNavi += "<li>";
-				pageNavi += "<a href='/spaceBoardtList.do?reqPage="+pageNo+"'>";
+				pageNavi += "<a href='/selectSpaceBoardList.do?reqPage="+pageNo+"'>";
 				pageNavi += pageNo+"</a></li>";
 			}
 			pageNo++;
@@ -222,7 +222,7 @@ public class SpaceService {
 		//다음버튼
 		if(pageNo <= totalPage) {
 			pageNavi += "<li>";
-			pageNavi += "<a href='/spaceBoardtList.do?reqPage="+pageNo+"'>";
+			pageNavi += "<a href='/selectSpaceBoardList.do?reqPage="+pageNo+"'>";
 			pageNavi += "&gt;</a></li>";
 		}
 		pageNavi += "</ul>";
@@ -293,7 +293,7 @@ public class SpaceService {
 		//페이지숫자
 		for(int i=0; i<pageNaviSize; i++) {
 			if(pageNo == reqPage) {
-				pageNavi += "<li class='disabled'>";
+				pageNavi += "<li class='active'>";
 				pageNavi += "<a href='/spaceView.do?reqPage="+pageNo+"&spaceNo="+spaceNo+"'>";
 				pageNavi += pageNo+"</a></li>";
 			}else {
@@ -388,5 +388,31 @@ public class SpaceService {
 	//리뷰삭제
 	public int deleteReview(int rentalNo) {
 		return dao.deleteReview(rentalNo);
+	}
+	//공간 수정
+	@Transactional
+	public int updateSpace(Space s, ArrayList<FileVO> list, ArrayList<SpaceTime> stList) {
+		int result1 = dao.updateSpace(s);
+		int stResult = 0;
+		int result=0;
+		if(result1>0) {
+			int fResult = dao.deleteSpaceFile(s.getSpaceNo());
+			if(fResult>0) {
+				for(FileVO fv : list) {
+					fv.setSpaceNo(s.getSpaceNo());
+					result += dao.insertFile(fv);
+				}
+				for(SpaceTime st : stList) {
+					stResult = dao.updateSpaceTime(st);
+				}
+			}
+		}else {
+			return -1;
+		}
+		System.out.println("서비스 - 공간 업데이트 : "+result1);
+		System.out.println("서비스 - 파일 업데이트 : "+result);
+		System.out.println("서비스 - 시간 업데이트 : "+stResult);
+		
+		return result;		
 	}
 }
