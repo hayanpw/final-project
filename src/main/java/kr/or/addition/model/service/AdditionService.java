@@ -339,6 +339,12 @@ public class AdditionService {
 		LikeNo chk= dao.selectLikeChk(map);
 		return chk;
 	}
+
+
+	public ArrayList<Board> myFree(String memberId) {
+		ArrayList<Board> myList = dao.myFree(memberId);
+		return myList;
+	}
 	
 	
 

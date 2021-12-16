@@ -118,6 +118,12 @@ public class ReadingService {
 	}
 
 
+	public ArrayList<Reading> selectMyReading(String memberId) {
+		ArrayList<Reading> re = dao.selectMyReading(memberId);
+		return re;
+	}
+
+
 
 
 }

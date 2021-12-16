@@ -6,7 +6,7 @@
 			into academy
 			values(academy_seq.nextval,#{academyTitle},#{academyStart},
 			#{academyEnd},#{academyPhoto},#{academyTeacher},#{academyPlace},#{academyPrice},
-			#{academyDetail},#{academyCategory})
+			#{academyDetail},#{academyCategory},0)
 	</insert>
 	<select id="acadeyTotal" resultType="_int">
   		select count(*) from academy
@@ -22,7 +22,8 @@
 		  			nn.academy_place as academyPlace,
 		  			nn.academy_price as academyPrice,
 		  			nn.academy_detail as academyDetail,
-		  			nn.academy_category as academyCategory
+		  			nn.academy_category as academyCategory,
+		  			nn.academy_cancel as academyCancel
 		  		from (select rownum as rnum,n.* from(select * from  academy order by academy_no desc)n)nn where rnum between  #{start} and #{end}
 	</select>
 	<select id ="selectCategoryList" parameterType="ap" resultType="ac">	
@@ -36,7 +37,8 @@
 		  			nn.academy_place as academyPlace,
 		  			nn.academy_price as academyPrice,
 		  			nn.academy_detail as academyDetail,
-		  			nn.academy_category as academyCategory
+		  			nn.academy_category as academyCategory,
+		  			nn.academy_cancel as academyCancel
 		  		from (select rownum as rnum,n.* from(select * from  academy where academy_category=#{category}  order by academy_no desc)n)nn where rnum between  #{start} and #{end}
 	</select>
   	<select id="selectOneAcademy" parameterType="_int" resultType="ac">
@@ -50,7 +52,8 @@
   			academy_place as academyPlace,
   			academy_price as academyPrice,
   			academy_detail as academyDetail,
-  			academy_category as academyCategory
+  			academy_category as academyCategory,
+  			academy_cancel as academyCancel
   		from academy where academy_no = #{academyNo}
   	</select>
   	<select id="searchAcademyList" parameterType="ap" resultType="ac">
@@ -64,7 +67,8 @@
 		  			nn.academy_place as academyPlace,
 		  			nn.academy_price as academyPrice,
 		  			nn.academy_detail as academyDetail,
-		  			nn.academy_category as academyCategory
+		  			nn.academy_category as academyCategory,
+		  			nn.academy_cancel as academyCancel
 	from (select rownum as rnum,n.* from(select * from  academy where academy_title like '%'||#{category}||'%' or academy_detail like '%'||#{category}||'%' order by academy_no desc)n)nn 
 	where rnum between  #{start} and #{end}
   	</select>
@@ -72,7 +76,7 @@
 		insert
 			into payment
 			values(#{paymentNo},#{paymentSelect},#{academyNo},0,#{paymentPrice},
-			to_char(sysdate,'YYYY-MM-DD'),0,#{paymentQuantity},null,#{memberNo})
+			to_char(sysdate,'YYYY-MM-DD'),0,#{paymentQuantity},#{academyEnd},#{memberNo},0)
 	</insert>
 	<select id="academyCategory" resultType="acc">
 		select distinct(academy_category) as academyCategory from academy
@@ -83,4 +87,8 @@
 	<select id="searchAcademyTotal" parameterType="string" resultType="_int">
 		select count(*) from academy where academy_title like '%'||#{keyWord}||'%' or academy_detail like '%'||#{keyWord}||'%'
 	</select>
+	<update id="academyUpdate" parameterType="ac">
+		update academy set academy_title = #{academyTitle},academy_start = #{academyStart}, academy_end = #{academyEnd}, academy_photo=#{academyPhoto}, academy_teacher=#{academyTeacher}
+			,academy_place = #{academyPlace}, academy_price=#{academyPrice},academy_detail=#{academyDetail},academy_category=#{academyCategory} where academy_no=#{academyNo}
+	</update>
 </mapper>

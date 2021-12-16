@@ -27,7 +27,7 @@
 					<p>장소 : 무지다 미술관 </p>
 					<p>수업료 : ${ex.exhibitionPrice }</p>
 					<div class="infoButton">
-						<button class="btn1">상세보기</button><button class="btn1">수정하기</button><button class="btn1">삭제하기</button>
+						<button class="btn1 exhibitionView" exhibitionNo="${ex.exhibitionNo }">상세보기</button><button class="btn1 exhibitionUpdate" exhibitionNo="${ex.exhibitionNo }">수정하기</button><button class="btn1 exhibitionDelete" exhibitionNo="${ex.exhibitionNo }">삭제하기</button>
 					</div>
 				</div>	
 			</li>
@@ -41,7 +41,18 @@
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 	<script>
 		var totalCount = $("#totalCount");
-		
+		$(document).on("click",".exhibitionView",function(){
+			var exhibitionNo = $(this).attr("exhibitionNo");
+			location.href="/exhibitionView.do?exhibitionNo="+exhibitionNo;
+		});
+		$(document).on("click",".exhibitionUpdate",function(){
+			var exhibitionNo = $(this).attr("exhibitionNo");
+			location.href="/exhibitionUpdateFrm.do?exhibitionNo="+exhibitionNo;
+		});
+		$(document).on("click",".exhibitionDelete",function(){
+			var exhibitionNo = $(this).attr("exhibitionNo");
+			location.href="/exhibitionDelete.do?exhibitionNo="+exhibitionNo;
+		});
 		$("#more").click(function(){
 			var start = $(this).val();
 			$.ajax({
@@ -61,7 +72,7 @@
 						moreLi += "<p>장소: 무지다 미술관</p>";
 						moreLi += "<p>금액: "+data[i].exhibitionPrice+"</p>";
 						moreLi += "<div class = 'infoButton'>";
-						moreLi += "<button class='btn1'>상세보기</button><button class='btn1'>수정하기</button><button class='btn1'>삭제하기</button>";
+						moreLi += "<button class='btn1 exhibitioinView' exhibitionNo='"+data[i].exhibitionNo+"'>상세보기</button><button class='btn1 exhibitionUpdate' exhibitionNo='"+data[i].exhibitionNo+"'>수정하기</button><button class='btn1 exhibitionDelete'exhibitionNo='"+data[i].exhibitionNo+"'>삭제하기</button>";
 						moreLi += "</div></div></li>";
 						$(".mainmenu").append(moreLi);
 					}

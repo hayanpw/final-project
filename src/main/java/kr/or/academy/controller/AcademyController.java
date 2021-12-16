@@ -53,7 +53,7 @@ public class AcademyController {
 	public String academyInsert(Academy a,MultipartFile upfile, HttpServletRequest request,Model model) {
 		if(upfile != null) {
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/academyImage/upload/");
-			
+			System.out.println(upfile.getSize());
 			String filename = upfile.getOriginalFilename();
 			String onlyFilename = filename.substring(0, filename.indexOf("."));
 			String extention = filename.substring(filename.indexOf("."));
@@ -95,7 +95,7 @@ public class AcademyController {
 		}else {
 			model.addAttribute("msg", "수업 등록 실패");
 		}
-		model.addAttribute("loc", "/academyList.do");
+		model.addAttribute("loc", "/academyList.do?reqPage=4&category=all");
 		return "common/msg";
 	}
 	//더보기
@@ -194,14 +194,63 @@ public class AcademyController {
 //	public String studentView (int academyNo,Model model) {
 //		
 //	}
-	@RequestMapping(value="/academyUpdate.do")
-	public String academyUpdate (int academyNo,Model model) {
+	@RequestMapping(value="/academyUpdateFrm.do")
+	public String academyUpdateFrm (int academyNo,Model model) {
 		Academy a = service.selectOneAcademy(academyNo);
 		model.addAttribute("a",a);
 		return "academy/academyUpdate";
 	}
-//	@RequestMapping(value="/academyDelete.do")
-//	public String academyDelete (int academyNo,Model model) {
-//		
-//	}
+	@RequestMapping(value="/academyUpdate.do")
+	public String academyUpdate(Academy a,MultipartFile upfile, HttpServletRequest request,Model model) {
+		if(upfile.getSize() > 0) {
+			String savePath = request.getSession().getServletContext().getRealPath("/resources/academyImage/upload/");
+			System.out.println(upfile.getSize());
+			String filename = upfile.getOriginalFilename();
+			String onlyFilename = filename.substring(0, filename.indexOf("."));
+			String extention = filename.substring(filename.indexOf("."));
+			
+			String filepath = null;
+			int count = 0;
+			while(true) {
+				if(count==0) {
+					filepath = onlyFilename + extention;
+				}else {
+					filepath = onlyFilename+"_"+count+extention;
+				}
+				File checkFile = new File(savePath+filepath);
+				if(!checkFile.exists()) {
+					break;
+				}
+				count++;
+			}
+			
+			try {
+				FileOutputStream fos = new FileOutputStream(new File(savePath+filepath));
+				BufferedOutputStream bos = new BufferedOutputStream(fos);
+				byte[] bytes = upfile.getBytes();
+				bos.write(bytes);
+				bos.close();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			String academyPhoto = "/resources/academyImage/upload/"+filepath;
+			a.setAcademyPhoto(academyPhoto);
+		}
+		int result = service.academyUpdate(a);
+		if(result>0) {
+			model.addAttribute("msg", "수업 수정 성공");			
+		}else {
+			model.addAttribute("msg", "수업 수정 실패");
+		}
+		model.addAttribute("loc", "/academyView.do?academyNo="+a.getAcademyNo());
+		return "common/msg";
+	}
+	//@RequestMapping(value="/academyDelete.do")
+	//public String academyDelete (int academyNo,Model model) {
+	//	
+	//}
 }

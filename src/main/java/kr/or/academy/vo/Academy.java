@@ -15,4 +15,5 @@ public class Academy {
 	private String academyDetail;
 	private String academyCategory;
 	private int totalCount;
+	private int academyCancel;
 }

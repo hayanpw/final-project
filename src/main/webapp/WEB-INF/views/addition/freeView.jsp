@@ -310,7 +310,7 @@
 			
 			<c:if test="${sessionScope.m.memberId == b.boardWriter}">
 			<a class="btn" href="/boardDelete.do?boardType=3&boardNo=${b.boardNo }">글삭제</a>
-			<a class="btn" href="/boardUpdate.do?boardNo=${b.boardNo }">글수정</a>
+			<a class="btn" href="/boardUpdateFrm.do?boardNo=${b.boardNo }">글수정</a>
 			</c:if>
 			<c:if test="${sessionScope.m.memberLevel ==0 }">
 			<a class="btn" href="/boardDelete.do?boardType=3&boardNo=${b.boardNo }">글삭제</a>

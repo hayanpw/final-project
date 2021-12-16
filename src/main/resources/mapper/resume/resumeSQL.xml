@@ -5,7 +5,7 @@
 		insert 
 			into resume 
 			values(resume_seq.nextval,#{requritNo},#{resumeGender},
-			#{resumePhone},#{resumeDetail},#{memberNo})
+			#{resumePhone},#{resumeDetail},#{memberNo},0)
 	</insert>
 	<insert id="insertResumeTbl" parameterType="rt">
 		insert 
@@ -22,6 +22,7 @@
        a.resume_detail as resumeDetail,
        a.member_no as memberNo,
        a.resume_phone as resumePhone,
+       a.resume_cancel as resumeCancel,
        b.member_name as memberName
       from resume a join member b on a.member_no = b.member_no where requrit_no =#{requritNo}
 	</select>
@@ -32,6 +33,7 @@
        	a.resume_detail as resumeDetail,
        	a.resume_phone as resumePhone,
        	a.member_no as memberNo,
+       	a.resume_cancel as resumeCancel,
        	b.member_name as memberName
 	from resume a 
 	join member b on a.member_no = b.member_no where resume_no = #{resumeNo}

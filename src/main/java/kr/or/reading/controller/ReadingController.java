@@ -143,15 +143,15 @@ public class ReadingController {
 		return "reading/reservationToday";
 	}
 	
-	@RequestMapping(value="/readingMypage.do")
-	public String test222(Model model) {
+	@RequestMapping(value="/readingAdmin.do")
+	public String readingAdmin(Model model) {
 		ArrayList<Reading> list = service.selectWeekReading();
 		ArrayList<Reading> alllist = service.selectAllReading();
 		ArrayList<ReadingBlack> black = service.selectReadingBlackList();
 		model.addAttribute("list",list);
 		model.addAttribute("alllist",alllist);
 		model.addAttribute("black",black);
-		return "reading/readingMypage";
+		return "reading/readingAdmin";
 	}
 	
 	@RequestMapping(value="/outAndBlackList.do")
@@ -159,15 +159,15 @@ public class ReadingController {
 		int result = service.outAndBlackList(re);
 		if(result==-2) {
 			model.addAttribute("msg","블랙리스트 처리가 실패하였습니다.");
-			model.addAttribute("loc", "/test222.do");
+			model.addAttribute("loc", "/readingAdmin.do");
 			return "common/msg";
 		}else if(result==-1) {
 			model.addAttribute("msg","강제퇴실 처리가 실패하였습니다.");
-			model.addAttribute("loc", "/test222.do");
+			model.addAttribute("loc", "/readingAdmin.do");
 			return "common/msg";
 		}else {
 			model.addAttribute("msg","강제퇴실 처리가 완료되었습니다.");
-			model.addAttribute("loc", "/test222.do");
+			model.addAttribute("loc", "/readingAdmin.do");
 			return "common/msg";
 		}
 	}
@@ -177,13 +177,20 @@ public class ReadingController {
 		int result = service.earlyOut(re);
 		if(result>0) {
 			model.addAttribute("msg","조기퇴실 처리가 완료되었습니다.");
-			model.addAttribute("loc", "/test222.do");
+			model.addAttribute("loc", "/readingAdmin.do");
 			return "common/msg";
 		}else {
 			model.addAttribute("msg","조기퇴실 처리가 실패하였습니다.");
-			model.addAttribute("loc", "/test222.do");
+			model.addAttribute("loc", "/readingAdmin.do");
 			return "common/msg";
 		}
+	}
+	
+	@RequestMapping(value="/readingMypage.do")
+	public String readingMypage(String memberId, Model model) {
+		ArrayList<Reading> mylist = service.selectMyReading(memberId);
+		model.addAttribute("mylist", mylist);
+		return "reading/readingMypage";
 	}
 
 }

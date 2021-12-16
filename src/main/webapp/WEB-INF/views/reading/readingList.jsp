@@ -40,7 +40,7 @@
 	    $(function() {
 	        var today = new Date(); //현재날짜
 	        var startDate = new Date(today); //시작날짜
-	        startDate.setDate(startDate.getDate()+1); //오늘제외
+	        startDate.setDate(startDate.getDate()); //오늘제외
 	        var endDate = new Date(today);
 	        endDate.setDate(endDate.getDate()+7); //+7일까지만 예약받음
 	        $("#datepicker").datepicker({

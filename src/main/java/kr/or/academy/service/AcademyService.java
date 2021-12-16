@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.academy.dao.AcademyDao;
 import kr.or.academy.vo.Academy;
@@ -125,7 +126,6 @@ public class AcademyService {
 		ArrayList<AcademyCategory> acList = dao.selectAcademyCategory();
 		return acList;
 	}
-
 	public ArrayList<Academy> searchMoreAcademy(int start, String category) {
 		System.out.println("검색결과 더보기");
 		start = start+1;
@@ -136,5 +136,10 @@ public class AcademyService {
 		ap.setStart(start);
 		ArrayList<Academy> list = dao.searchAcademyList(ap);
 		return list;
+	}
+
+	public int academyUpdate(Academy a) {
+		int result = dao.academyUpdate(a);
+		return result;
 	}
 }
