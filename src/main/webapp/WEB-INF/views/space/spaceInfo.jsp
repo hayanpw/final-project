@@ -15,7 +15,7 @@
 	<div class="container">
 			<input type="hidden" value="${s.spaceNo }" name="spaceNo">
 			<input type="hidden" value="${st.stNo }" name="stNo">
-			<h3>${s.spaceName }예약하기</h3>
+			<h3><img class="i-img" src="resources/spaceImage/reserve.png" style="width: 40px; ">  ${s.spaceName } 예약하기 </h3>
 				<div class="space-img">
 				  <div id="myCarousel" class="carousel slide" data-ride="carousel">
 				    <!-- Indicators -->
@@ -28,13 +28,13 @@
 				    <!-- Wrapper for slides -->
 				    <div class="carousel-inner">
 				      <div class="item active">
-							<img class="info-img" src="resources/spaceImage/upload/${fv[0].filename }">
+							<img class="img-slide" src="resources/spaceImage/upload/${fv[0].filename }">
 				      </div>
 				      <div class="item">
-							<img class="info-img" src="resources/spaceImage/upload/${fv[1].filename }">
+							<img class="img-slide" src="resources/spaceImage/upload/${fv[1].filename }">
 				      </div>
 				      <div class="item">
-							<img class="info-img" src="resources/spaceImage/upload/${fv[2].filename }">
+							<img class="img-slide" src="resources/spaceImage/upload/${fv[2].filename }">
 				      </div>
 				    </div>
 				
@@ -109,10 +109,10 @@
 					<input type="hidden" value="${st.endTime }" name="endTime">
 					<input type="hidden" value="${sessionScope.m.memberId }" name="memberId">
 					<input type="hidden" value="${rentalDate }" name="rentalDate">
+				</div>
 					<div class="btn-box">
 						<button type="button" id="payment" class="btn btn-default">결제하기</button> 						
 					</div>
-				</div>
 			<div class="big-img">
 				<c:forEach items="${fv }" var="fv">
 					<img class="info-img" src="resources/spaceImage/upload/${fv.filename }">

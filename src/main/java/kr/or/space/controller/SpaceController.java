@@ -85,9 +85,11 @@ public class SpaceController {
 		Space space = service.selectOneSpace(spaceNo);
 		ArrayList<FileVO> fv = service.selectSpaceFile(spaceNo);
 		FileVO t = service.selectThumbnail(spaceNo);
+		ArrayList<SpaceTime> st = service.selectSpaceTime(spaceNo);
 		model.addAttribute("s", space);
 		model.addAttribute("fv", fv);
 		model.addAttribute("t", t);
+		model.addAttribute("st", st);
 		return "space/spaceUpdateFrm";
 	}
 
@@ -173,6 +175,73 @@ public class SpaceController {
 		return "common/msg";
 
 	}
+	// 공간 수정
+	@RequestMapping(value = "/updateSpace.do")
+	public String spaceUpdate(Space s, MultipartFile[] files, int thumbnail,int[] stNo, String[] startTime, String[] endTime,
+			HttpServletRequest request, Model model) {
+		ArrayList<FileVO> list = new ArrayList<FileVO>();
+		ArrayList<SpaceTime> stList = new ArrayList<SpaceTime>();
+		if (files[0].isEmpty()) {
+		} else {
+			String savePath = request.getSession().getServletContext().getRealPath("/resources/spaceImage/upload/");
+			for (MultipartFile file : files) {
+				String filename = file.getOriginalFilename();
+				String onlyFilename = filename.substring(0, filename.indexOf("."));
+				String extention = filename.substring(filename.indexOf("."));
+				String filepath = null;
+				int count = 0;
+				while (true) {
+					if (count == 0) {
+						filepath = onlyFilename + extention;
+					} else {
+						filepath = onlyFilename + "_" + count + extention;
+					}
+					File checkFile = new File(savePath + filepath);
+					if (!checkFile.exists()) {
+						break;
+					}
+					count++;
+				}
+				try {
+					FileOutputStream fos = new FileOutputStream(new File(savePath + filepath));
+					BufferedOutputStream bos = new BufferedOutputStream(fos);
+					byte[] bytes = file.getBytes();
+					bos.write(bytes);
+					bos.close();
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				FileVO fv = new FileVO();
+				fv.setFilename(filename);
+				fv.setFilepath(filepath);
+				
+				list.add(fv);
+				
+			}
+		}
+		list.get(thumbnail).setThumbnail("Y");
+		// 시간 셋팅
+		for (int i = 0; i < startTime.length; i++) {
+			SpaceTime st = new SpaceTime();
+			st.setStartTime(startTime[i]);
+			st.setEndTime(endTime[i]);
+			st.setStNo(stNo[i]);
+			stList.add(st);
+		}
+		int result = service.updateSpace(s, list, stList);
+		if (result == -1 || result != list.size()) {
+			model.addAttribute("msg", "수정 실패");
+		} else {
+			model.addAttribute("msg", "수정 성공");
+		}
+		model.addAttribute("loc", "/");
+		return "common/msg";
+		
+	}
 
 	// 공간 삭제
 	@RequestMapping(value = "/spaceDelete.do")
@@ -183,7 +252,7 @@ public class SpaceController {
 		} else {
 			model.addAttribute("msg", "삭제를 실패하였습니다.");
 		}
-		model.addAttribute("loc", "/");
+		model.addAttribute("loc", "/spaceList.do");
 		return "common/msg";
 	}
 
@@ -525,16 +594,25 @@ public class SpaceController {
 		int result = service.deleteReview(rentalNo);
 		return new Gson().toJson(result);
 	}
-	//마이페이지 조회 아작스
-	@ResponseBody
-	@RequestMapping(value = "/spaceMypageAjax.do", produces = "application/json;charset=utf-8")
+	//마이페이지 조회 아작스 (다른 페이지에 로드)
+	@RequestMapping(value = "/spaceMypageAjax.do")
 	public String spaceMypageAjax(String memberId, Model model, String ub) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("memberId", memberId);
 		map.put("ub", ub);
 		ArrayList<SpaceMypage> list = service.selectSpaceMypage(map);
-		return new Gson().toJson(list);
+		model.addAttribute("list", list);
+		return "space/testt";
 	}
-	
+	/*
+	  //마이페이지 조회 아작스
+	  @ResponseBody
+	  @RequestMapping(value = "/spaceMypageAjax.do", produces =
+	  "application/json;charset=utf-8") public String spaceMypageAjax(String
+	  memberId, Model model, String ub) { HashMap<String, Object> map = new
+	 HashMap<String, Object>(); map.put("memberId", memberId); map.put("ub", ub);
+	  ArrayList<SpaceMypage> list = service.selectSpaceMypage(map); return new
+	  Gson().toJson(list); }
+	 */	
 }
 
