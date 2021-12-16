@@ -464,6 +464,7 @@ public class AdditionController {
 	
 	}
 	
+	//좋아요 수 불러오기
 	@ResponseBody
 	@RequestMapping(value = "/selectLikeSum.do",produces = "application/json;charset=utf-8")
 	public String selectLikeSum(int boardNo) {
@@ -476,6 +477,7 @@ public class AdditionController {
 	
 	}
 	
+	//좋아요 확인
 	@ResponseBody
 	@RequestMapping(value = "/selectLikeChk.do",produces = "application/json;charset=utf-8")
 	public String selectLikeChk(int boardNo,String memberId) {
@@ -487,7 +489,12 @@ public class AdditionController {
 		}
 	}
 	
-	
+	@RequestMapping(value = "/myFree.do")
+	public String myFree(String memberId,Model model) {
+		ArrayList<Board> list = service.myFree(memberId);
+		model.addAttribute("list",list);
+		return "addition/myFree";
+	}
 	
 
 }

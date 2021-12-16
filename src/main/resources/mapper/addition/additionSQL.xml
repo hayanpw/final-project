@@ -247,4 +247,13 @@
 	dislike_num as dislikeSum
 	from likenum where board_ref=#{boardNo} and member_id=#{memberId}
 	</select>
+	
+	<select id="myFree" parameterType="string" resultType="board">
+	select 
+	board_no as boardNo,
+	board_writer as boardWriter,
+	board_title as boardTitle,
+	reg_date as regDate 
+	from board where boardtype=1 and board_writer=#{memberId} order by board_no desc
+	</select>
 </mapper>

@@ -157,7 +157,7 @@
 		<c:if test="${not empty sessionScope.m }">
 			<div id="table">	
 				<a class="btn" id="write" href="/boardWriteFrm.do?boardType=3">글작성</a>
-				<a class="btn" id="my" href="/myFree.do">내글보기</a>
+				<a class="btn" id="my" href="/myFree.do?memberId=${sessionScope.m.memberId }">내글보기</a>
 			</div>
 		</c:if>
 		<div id="page">
