@@ -19,11 +19,17 @@
 	<jsp:include page="/WEB-INF/views/common/mypageMenu.jsp" />
 	<div class="container">        
         <div class="mypage-title"><span>대</span>관신청내역</div>
+        <c:if test="${empty list }">
+        	<div class="noRental">
+        		<p>대관 내역이 없습니다.</p>
+        	</div>
+        </c:if>
+        <c:if test="${!empty list }">
 		<div class="pop">
 			<span>☞체크리스트란?</span>
 			<p>공간 사용 후 작성하는 체크리스트</p>
 			<span>☞작성방법</span>
-			<p>공지사항 -> 양식 다운로드 -> 양식 작성 후 pdf로 변경 -> 사용게시판에 pdf 업로드</p>
+			<p>공지사항 -> 양식 다운로드 -> 양식 작성 후 저장 -> 사용게시판에 체크리스트 업로드</p>
 			<p>※주의 : 대관 후 일주일 이상 체크리스트 미작성시 일주일간 모든 공간 대관 불가. 작성 한 후 일주일 후 부터 사용 가능</p>
 		</div>
         <div class="mypage-container" >
@@ -145,6 +151,7 @@
 		</div>
 		</div>
         </div>
+        </c:if>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 	<script >

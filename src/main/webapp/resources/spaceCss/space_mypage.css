@@ -65,8 +65,11 @@
 }
 #ckList:hover{
 	font-weight: bold;
-
 }
 #ub{
 	background: #A79078;
+}
+.noRental{
+	margin-top : 100px;
+	text-align: center;
 }

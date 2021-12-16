@@ -12,7 +12,7 @@
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="container">
-		<h3><img class="i-img" src="resources/spaceImage/townhouse.png" style="width: 40px; ">  공간 보기 </h3>
+		<h3><img class="i-img" src="resources/spaceImage/townhouse.png" style="width: 40px; ">    공간 소개 </h3>
 		<c:if test="${sessionScope.m.memberLevel eq 0 }">
 			<button id="insert-btn" class="btn btn-default" onclick="location.href='/spaceInsertFrm.do'">새 공간 등록하기</button>
 		</c:if>		

@@ -51,6 +51,7 @@
 }
 .spaceRes{
 	float: right;
+	margin-bottom: 10px;
 }
 .spaceRes>a{
 	color: #563D39;
@@ -71,5 +72,11 @@
 	background: #BDB19A;	
 	
 }
+.space-img p{
+	margin-top : 40px;
+	margin-bottom : 40px;
+	line-height: 250%;
+}
 .ckeckL{
+	margin-bottom: 40px;
 }

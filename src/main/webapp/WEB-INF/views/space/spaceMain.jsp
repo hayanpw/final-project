@@ -28,10 +28,10 @@
 		</div>
 			<div class="ckeckL">
 			<h3><img class="i-img" src="resources/spaceImage/information.png" style="width: 40px; ">  주의사항</h3>
-				<p>★사용 후 체크리스트 작성 </p>
+				<p><img class="i-img" src="resources/spaceImage/star.png" style="width: 20px; ">  사용 후 체크리스트 작성 </p>
 				<p>1. 공지사항에서 양식 다운로드</p>
 				<p>2. 양식 작성 후 저장</p>
-				<p>3. 무지다 홈페이지 접속 -> 로그인 -> 공간대관 -> 사용게시판 -> 글쓰기 -> 파일 업로드 </p>
+				<p>3. 무지다 홈페이지 접속 > 로그인 > 공간대관 > 사용게시판 > 글쓰기 > 파일 업로드 </p>
 				<p>- 공간 사용 후 일주일 이후 까지 체크리스트 업로드가 없으면 공간 대관이 일주일간 불가능 해집니다. 또한 작성을 완료하지 않으면 누적 되니 주의하시길 바랍니다.</p>
 			</div>
 		<div class="rental-price">

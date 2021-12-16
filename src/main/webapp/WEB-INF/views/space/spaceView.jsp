@@ -12,7 +12,7 @@
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="container">
-	<h3><img class="i-img" src="resources/spaceImage/search.png" style="width: 40px; ">상세보기-${s.spaceName } </h3>
+	<h3><img class="i-img" src="resources/spaceImage/search.png" style="width: 40px; ">   상세보기-${s.spaceName } </h3>
 		<form action="/spaceRental.do" method="post">
 			<input type="hidden" value="${s.spaceNo }" name="spaceNo"
 				id="spaceNo"> <input type="hidden" value="${st.stNo }"
