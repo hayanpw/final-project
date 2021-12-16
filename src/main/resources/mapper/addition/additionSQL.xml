@@ -253,7 +253,8 @@
 	board_no as boardNo,
 	board_writer as boardWriter,
 	board_title as boardTitle,
-	reg_date as regDate 
-	from board where boardtype=1 and board_writer=#{memberId} order by board_no desc
+	reg_date as regDate,
+	boardtype as boardType 
+	from board where board_writer=#{memberId} order by board_no desc
 	</select>
 </mapper>

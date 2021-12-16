@@ -346,7 +346,6 @@ public class AdditionController {
 		return "addition/boardUpdateFrm";
 	}
 
-	
 	/*
 	// 글수정
 	@RequestMapping(value = "/boardUpdate.do")
@@ -410,7 +409,8 @@ public class AdditionController {
 		return "common/msg";
 
 	}
-	*/
+	
+	 */
 	
 	//규제하기
 	@RequestMapping(value = "/regulationBoard.do")
