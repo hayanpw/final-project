@@ -72,4 +72,14 @@ public class ExhibitionDao {
 		int result = sqlSession.update("exhibition.exhibitionUpdate",ex);
 		return result;
 	}
+
+	public ArrayList<Exhibition> selectExhibitionAdmin() {
+		List<Exhibition> list = sqlSession.selectList("exhibition.selectExhibitionAdmin");
+		return (ArrayList<Exhibition>)list;
+	}
+
+	public ArrayList<Exhibition> selectExhibitionAdminLast() {
+		List<Exhibition> last = sqlSession.selectList("exhibition.selectExhibitionAdminLast");
+		return (ArrayList<Exhibition>)last;
+	}
 }

@@ -43,7 +43,7 @@
 		var totalCount = $("#totalCount");
 		$(document).on("click",".exhibitionView",function(){
 			var exhibitionNo = $(this).attr("exhibitionNo");
-			location.href="/exhibitionView.do?academyNo="+exhibitionNo;
+			location.href="/exhibitionView.do?exhibitionNo="+exhibitionNo;
 		});
 		$(document).on("click",".exhibitionUpdate",function(){
 			var exhibitionNo = $(this).attr("exhibitionNo");

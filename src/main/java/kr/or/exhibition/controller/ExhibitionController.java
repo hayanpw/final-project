@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -205,6 +206,7 @@ public class ExhibitionController {
 		model.addAttribute("ex",ex);
 		return "exhibition/exhibitionUpdateFrm";
 	}
+	@RequestMapping(value="/exhibitionUpdate.do")
 	public String academyUpdate(Exhibition ex,MultipartFile upfile, HttpServletRequest request,Model model) {
 		if(upfile.getSize() > 0) {
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/academyImage/upload/");
@@ -252,6 +254,14 @@ public class ExhibitionController {
 		}
 		model.addAttribute("loc", "/exhibitionView.do?exhibitionNo="+ex.getExhibitionNo());
 		return "common/msg";
+	}
+	//전시 관리자 페이지로 이동
+	@RequestMapping(value="/exhibitionAdmin.do")
+	public String exhibitionAdmin (Model model) {
+		HashMap<String, Object> map  = service.selectExhibitionAdmin();
+		model.addAttribute("list", map.get("list"));
+		model.addAttribute("last", map.get("last"));
+		return "exhibition/exhibitionAdmin";
 	}
 		
 }

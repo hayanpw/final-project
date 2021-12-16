@@ -1,0 +1,40 @@
+@charset "UTF-8";
+
+.exhibitionList{
+	display: flex;
+	align-content: center;
+	justify-content: flex-start;
+	border: 2px solid #BDB19A;
+	margin-bottom: 10px;
+	padding: 5px;
+}
+.poster{
+	width: 120px;
+	height: 150px;
+}
+.exhibitionList>div{
+	margin-left: 20px;
+	width: 455px;
+}
+.exhibitionList>div:last-child{
+	display: flex;
+	align-items: flex-end;
+	justify-content: flex-end;
+}
+.listNavi{
+    display: flex;
+    margin-bottom: 30px;
+}
+.listNavi>div{
+    width: 50%;
+    border-bottom: 2px solid #A79078;
+    text-align: center;
+    cursor: pointer;
+}
+.selec{
+	color: #A79078;
+	font-weight: bold;
+}
+.exhibition{
+	overflow: auto;
+}

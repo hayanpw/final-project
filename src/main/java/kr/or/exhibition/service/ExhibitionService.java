@@ -1,6 +1,7 @@
 package kr.or.exhibition.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -81,5 +82,14 @@ public class ExhibitionService {
 	public int exhibitionUpdate(Exhibition ex) {
 		int result = dao.exhibitionUpdate(ex);
 		return result;
+	}
+
+	public HashMap<String, Object> selectExhibitionAdmin() {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		ArrayList<Exhibition> list = dao.selectExhibitionAdmin();
+		ArrayList<Exhibition> last = dao.selectExhibitionAdminLast();
+		map.put("list", list);
+		map.put("last", last);
+		return map;
 	}
 }
