@@ -92,4 +92,13 @@ public class ExhibitionService {
 		map.put("last", last);
 		return map;
 	}
+
+	public int checkTotalCount(String exhibitionDate, int exhibitionNo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("exhibitionDate", exhibitionDate);
+		map.put("exhibitionNo", exhibitionNo);
+		int totalCount = dao.checkTotalCount(map);
+		System.out.println(totalCount);
+		return totalCount;
+	}
 }

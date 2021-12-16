@@ -2,6 +2,7 @@ package kr.or.exhibition.dao;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -81,5 +82,10 @@ public class ExhibitionDao {
 	public ArrayList<Exhibition> selectExhibitionAdminLast() {
 		List<Exhibition> last = sqlSession.selectList("exhibition.selectExhibitionAdminLast");
 		return (ArrayList<Exhibition>)last;
+	}
+
+	public int checkTotalCount(HashMap<String, Object> map) {
+		int totalCount = sqlSession.selectOne("exhibition.checkTotalCount",map);
+		return totalCount;
 	}
 }

@@ -109,4 +109,7 @@
 		from exhibition where exhibition_end < sysdate order by 1 desc
 	]]>	
 	</select>
+	<select id="checkTotalCount" parameterType="hashmap" resultType="_int">
+		select nvl(sum(payment_quantity),0) from payment where exhibition_no=#{exhibitionNo} and book_date=#{exhibitionDate}
+	</select>
 </mapper>

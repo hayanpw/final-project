@@ -100,19 +100,13 @@
 					data: {exhibitionDate:exhibitionDate, exhibitionNo:exhibitionNo},
 					type: "post",
 					success: function(data) {
-						var seats = 413;
-						if(data[0] != null){
-							for (var i = 0; i < data.length; i++) {
-								var p = $("<p>");
-								p.append("예매자 : "+data[i].memberId);
-								p.append(" 예매수 : "+data[i].ticketNum);
-								seats -= data[i].ticketNum;
-								$(".show").eq(idx).append(p);
-								$(".show").scrollTop(innerHeight);
-							}
-							$(".show").eq(idx).append("<h4>잔여좌석 : "+seats+"</h4>");
+						if(data == "0"){
+							$(".exhibition").eq(idx).append("<h4>전시예매정보가 없습니다.</h4>");
 						}else{
-							$(".show").eq(idx).append("<h4>예매정보가 없습니다.</h4>");
+							var p = $("<p>");
+							p.append(" 예매수 : "+data);
+							$(".exhibition").eq(idx).append(p);
+							$(".exhibition").scrollTop(innerHeight);
 						}
 						
 					}

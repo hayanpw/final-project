@@ -263,5 +263,16 @@ public class ExhibitionController {
 		model.addAttribute("last", map.get("last"));
 		return "exhibition/exhibitionAdmin";
 	}
+	@ResponseBody
+	@RequestMapping(value="/checkPaymentExhibition.do")
+	public String checkTotalCount(String exhibitionDate, int exhibitionNo) {
+		int totalCount = service.checkTotalCount(exhibitionDate,exhibitionNo);
+		if(totalCount == 0) {
+			return "0";
+		}else {
+			String count = Integer.toString(totalCount);
+			return count;
+		}
+	}
 		
 }
