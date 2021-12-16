@@ -70,4 +70,9 @@
 			round(nvl(avg(ex_review_star),0),1) from exhibition_review 
 		where exhibition_no = #{exhibitionNo}
 	</select>
+	<update id="exhibitionUpdate" parameterType="exb">
+		update exhibition set exhibition_title = #{exhibitionTitle}, exhibition_start = #{exhibitionStart}, exhibition_end = #{exhibitionEnd}, exhibition_photo = #{exhibitionPhoto},
+		exhibition_time_start = #{exhibitionTimeStart}, exhibition_time_end = #{exhibitionTimeEnd}, exhibition_age=#{exhibitionAge}, exhibition_detail=#{exhibitionDetail}
+		where exhibition_no = #{exhibitionNo}
+	</update>
 </mapper>

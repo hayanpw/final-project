@@ -67,4 +67,9 @@ public class ExhibitionDao {
 		double starAvg = sqlSession.selectOne("exhibition.selectAvgStar",exhibitionNo);
 		return starAvg;
 	}
+
+	public int exhibitionUpdate(Exhibition ex) {
+		int result = sqlSession.update("exhibition.exhibitionUpdate",ex);
+		return result;
+	}
 }

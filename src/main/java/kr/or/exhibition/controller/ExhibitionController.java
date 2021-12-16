@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
 
+import kr.or.academy.vo.Academy;
 import kr.or.exhibition.service.ExhibitionService;
 import kr.or.exhibition.vo.Exhibition;
 import kr.or.exhibition.vo.ExhibitionPayment;
@@ -203,6 +204,54 @@ public class ExhibitionController {
 		Exhibition ex = service.selectOneExhibition(exhibitionNo);
 		model.addAttribute("ex",ex);
 		return "exhibition/exhibitionUpdateFrm";
+	}
+	public String academyUpdate(Exhibition ex,MultipartFile upfile, HttpServletRequest request,Model model) {
+		if(upfile.getSize() > 0) {
+			String savePath = request.getSession().getServletContext().getRealPath("/resources/academyImage/upload/");
+			System.out.println(upfile.getSize());
+			String filename = upfile.getOriginalFilename();
+			String onlyFilename = filename.substring(0, filename.indexOf("."));
+			String extention = filename.substring(filename.indexOf("."));
+			
+			String filepath = null;
+			int count = 0;
+			while(true) {
+				if(count==0) {
+					filepath = onlyFilename + extention;
+				}else {
+					filepath = onlyFilename+"_"+count+extention;
+				}
+				File checkFile = new File(savePath+filepath);
+				if(!checkFile.exists()) {
+					break;
+				}
+				count++;
+			}
+			
+			try {
+				FileOutputStream fos = new FileOutputStream(new File(savePath+filepath));
+				BufferedOutputStream bos = new BufferedOutputStream(fos);
+				byte[] bytes = upfile.getBytes();
+				bos.write(bytes);
+				bos.close();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			String exhibitionPhoto = "/resources/academyImage/upload/"+filepath;
+			ex.setExhibitionPhoto(exhibitionPhoto);
+		}
+		int result = service.exhibitionUpdate(ex);
+		if(result>0) {
+			model.addAttribute("msg", "전시 수정 성공");			
+		}else {
+			model.addAttribute("msg", "전시 수정 실패");
+		}
+		model.addAttribute("loc", "/exhibitionView.do?exhibitionNo="+ex.getExhibitionNo());
+		return "common/msg";
 	}
 		
 }

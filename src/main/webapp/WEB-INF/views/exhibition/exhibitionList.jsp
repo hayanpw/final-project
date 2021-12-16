@@ -27,7 +27,7 @@
 					<p>장소 : 무지다 미술관 </p>
 					<p>수업료 : ${ex.exhibitionPrice }</p>
 					<div class="infoButton">
-						<button class="btn1 exhibitionView" exhibitionNo="${ex.exhibitionNo }">상세보기</button><button class="btn1 exhibitioinUpdate" exhibitionNo="${ex.exhibitionNo }">수정하기</button><button class="btn1 exhibitionDelete" exhibitionNo="${ex.exhibitionNo }">삭제하기</button>
+						<button class="btn1 exhibitionView" exhibitionNo="${ex.exhibitionNo }">상세보기</button><button class="btn1 exhibitionUpdate" exhibitionNo="${ex.exhibitionNo }">수정하기</button><button class="btn1 exhibitionDelete" exhibitionNo="${ex.exhibitionNo }">삭제하기</button>
 					</div>
 				</div>	
 			</li>
@@ -42,15 +42,15 @@
 	<script>
 		var totalCount = $("#totalCount");
 		$(document).on("click",".exhibitionView",function(){
-			var academyNo = $(this).attr("exhibitionNo");
+			var exhibitionNo = $(this).attr("exhibitionNo");
 			location.href="/exhibitionView.do?academyNo="+exhibitionNo;
 		});
-		$(document).on("click",".academyUpdate",function(){
-			var academyNo = $(this).attr("exhibitionNo");
+		$(document).on("click",".exhibitionUpdate",function(){
+			var exhibitionNo = $(this).attr("exhibitionNo");
 			location.href="/exhibitionUpdateFrm.do?exhibitionNo="+exhibitionNo;
 		});
-		$(document).on("click",".academyDelete",function(){
-			var academyNo = $(this).attr("exhibitionNo");
+		$(document).on("click",".exhibitionDelete",function(){
+			var exhibitionNo = $(this).attr("exhibitionNo");
 			location.href="/exhibitionDelete.do?exhibitionNo="+exhibitionNo;
 		});
 		$("#more").click(function(){
