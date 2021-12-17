@@ -11,7 +11,7 @@
 <meta charset="UTF-8">
 <title>예약 내역 조회</title>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="/resources/jquery-ui/jquery-ui.css">
+<link rel="stylesheet" href="/resources/jquery-ui/jquery-ui-big.css">
 <link href="resources/readingCss/reservation.css" rel="stylesheet">
 </head>
 <body>
@@ -24,7 +24,7 @@
 	<br>
 	<br>
 	<div class="container">
-		<div class="container-left col-sm-6">
+		<div class="container-left col-sm-7">
 			<h1>예약 내역 조회</h1>
 			<br>
 			<h3>날짜를 선택해주세요</h3>
@@ -32,7 +32,7 @@
 			<!-- 캘린더 코드 -->
 			<div id="datepicker"></div>
 		</div>
-		<div class="container-right col-sm-6">
+		<div class="container-right col-sm-5">
 			<h2 class="reservationInfo"></h2>
 			<div id="result"></div>
 		</div>

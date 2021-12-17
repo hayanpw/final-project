@@ -29,7 +29,7 @@ public class ReadingController {
 	}
 	
 	@RequestMapping(value="/readingList.do")
-	public String readingList(HttpSession session, String readingId, HttpSession seesion, Model model) {
+	public String readingList(HttpSession session, String readingId, Model model) {
 		//안내->예약 넘어갈때
 		//로그인부터 확인
 		//넘어가기전에 블랙리스트에 등록되어있는지 확인
@@ -49,14 +49,26 @@ public class ReadingController {
 				return "common/msg";
 			}
 		}
-		
 	}
 	
 	@RequestMapping(value="/readingSeat.do")
-	public String readingSeat(Reading re, Model model) {
+	public String readingSeat(HttpSession session, Reading re, Model model) {
 		//날짜 넘겨줌
-		model.addAttribute("re", re);
-		return "reading/readingSeat";
+		if(session.getAttribute("m")==null) {
+			model.addAttribute("msg","로그인이 필요한 서비스입니다.");
+			model.addAttribute("loc", "/loginFrm.do");
+			return "common/msg";		
+		}else {
+			ReadingBlack rb = service.selectOneBlackList(re.getReadingId());
+			if(rb==null) {
+				model.addAttribute("re", re);
+				return "reading/readingSeat";
+			}else {
+				model.addAttribute("msg","당신은 "+rb.getBlackEnd()+"까지 열람실 예약을 이용할 수 없습니다.");
+				model.addAttribute("loc", "/");
+				return "common/msg";
+			}
+		}
 	}
 	
 	@RequestMapping(value="/readingOption.do")

@@ -3,7 +3,7 @@
     text-align: center;
 }
 .container-right{
-	height: 440px;
+	height: 735px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -12,4 +12,13 @@
 #datepicker{
 	display: flex;
     justify-content: center;
+}
+#datepicker>div>div{
+	height: 120px;
+}
+#datepicker>div>div>a{
+	padding: 40px 0;
+}
+#datepicker>div{
+	margin-top: 0;
 }
