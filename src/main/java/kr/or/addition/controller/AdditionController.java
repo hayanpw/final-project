@@ -410,7 +410,7 @@ public class AdditionController {
 
 	}
 	
-	 */
+	*/
 	
 	//규제하기
 	@RequestMapping(value = "/regulationBoard.do")
