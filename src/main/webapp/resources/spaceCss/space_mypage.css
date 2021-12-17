@@ -3,7 +3,15 @@
 	background-color: #A79078 ;
 	color: #ffffff;
 }
+.table-bb table tr th{
+	text-align: center;
+	background-color: #A79078 ;
+	color: #ffffff;
+}
 .table-box table tr td{
+	text-align: center;
+}
+.table-bb table tr td{
 	text-align: center;
 }
 [name=srContent]{
@@ -57,5 +65,11 @@
 }
 #ckList:hover{
 	font-weight: bold;
-
-	}
+}
+#ub{
+	background: #A79078;
+}
+.noRental{
+	margin-top : 100px;
+	text-align: center;
+}

@@ -12,10 +12,16 @@
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="container">
-	<div class="mypage-title"><span>사</span>용 게시판</div>
+		<h3>
+			<img class="i-img" src="resources/spaceImage/board.png"
+				style="width: 40px;"> 사용게시판 
+							<c:if test="${!empty sessionScope.m }">
+			<button class="writeBtn" type="button" class="btn btn-info btn-lg"
+				data-toggle="modal" data-target="#myModal">글쓰기</button>
+		</c:if>
+		</h3>
 		<input type="hidden" id="memberId" value="${sessionScope.m.memberId }">
-		<button class="writeBtn" type="button" class="btn btn-info btn-lg"
-			data-toggle="modal" data-target="#myModal">글쓰기</button>
+
 		<!-- Modal -->
 		<div class="modal fade" id="myModal" role="dialog">
 			<div class="modal-dialog">
@@ -48,13 +54,13 @@
 
 
 		<div class="table-box">
-			<table class="table table-border">
+			<table class="table ">
 				<tr>
 					<th>No.</th>
-					<th>제목</th>
-					<th>작성자</th>
-					<th>작성일</th>
-					<th>사용공간</th>
+					<th style="width: 450px;">제목</th>
+					<th style="width: 200px;">작성자</th>
+					<th style="width: 150px;">작성일</th>
+					<th style="width: 150px;">사용공간</th>
 				</tr>
 				<c:forEach items="${list }" var="l" varStatus="i">
 					<tr>
@@ -68,6 +74,7 @@
 			</table>
 		</div>
 		<div class="page-box">${pageNavi }</div>
+	
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 	<script>
@@ -80,18 +87,20 @@
 						},
 						type : "get",
 						success : function(data) {
-							if(data.length > 0){
-									$(".modal-body").empty();
+							if (data.length > 0) {
+								$(".modal-body").empty();
 								for (var i = 0; i < data.length; i++) {
 									$(".modal-body").append(
-											"<a class='choice' href = '/writeSpaceBoard.do?rentalNo="+data[i].rentalNo + "'>"
+											"<a class='choice' href = '/writeSpaceBoard.do?rentalNo="
+													+ data[i].rentalNo + "'>"
 													+ data[i].spaceName + "/"
 													+ data[i].rentalDate
 													+ "</a><br>");
 								}
-							}else{
+							} else {
 								$(".modal-body").empty();
-								$(".modal-body").append("<p>작성할 대관 내역이 없습니다.</p>")
+								$(".modal-body").append(
+										"<p>작성할 대관 내역이 없습니다.</p>")
 							}
 						}
 					});

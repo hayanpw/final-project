@@ -142,4 +142,5 @@ public class AcademyService {
 		int result = dao.academyUpdate(a);
 		return result;
 	}
+
 }

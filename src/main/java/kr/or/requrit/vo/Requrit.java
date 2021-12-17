@@ -14,4 +14,5 @@ public class Requrit {
 	private String requritDetail;
 	private String employeeType;
 	private long period; 
+	private int requritCancel;
 }

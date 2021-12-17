@@ -16,4 +16,5 @@ public class Exhibition {
 	private int exhibitionPrice;
 	private String exhibitionDetail;
 	private double starAvg;
+	private int exhibitionCancel;
 }

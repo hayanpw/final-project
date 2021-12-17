@@ -132,4 +132,9 @@ public class AdditionDao {
 		return sqlSession.selectOne("addition.selectLikeChk",map);
 	}
 
+	public ArrayList<Board> myFree(String memberId) {
+		List<Board> myList = sqlSession.selectList("addition.myFree",memberId);
+		return (ArrayList<Board>)myList;
+	}
+
 }

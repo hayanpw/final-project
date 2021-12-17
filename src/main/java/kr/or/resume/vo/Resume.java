@@ -14,5 +14,6 @@ public class Resume {
 	private int memberNo;
 	private String memberName;
 	private ArrayList<ResumeTbl> rtList;
+	private int resumeCancel;
 	
 }
