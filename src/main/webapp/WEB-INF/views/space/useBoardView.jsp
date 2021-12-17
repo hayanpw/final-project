@@ -7,10 +7,12 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="resources/spaceCss/space_default.css" rel="stylesheet">
+<link href="resources/spaceCss/space_boardWrite.css" rel="stylesheet">
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="container">
+	<h3><img class="i-img" src="resources/spaceImage/search.png" style="width: 40px; "> 게시판 상세보기 </h3>
 		<table class="table table-border" border="1">
 			<tr>
 				<th colspan=2">제목</th>
@@ -28,15 +30,19 @@
 				<td colspan="8">내용</td>
 			</tr>
 			<tr>
-				<td colspan="8">${u.ubContent }</textarea></td>
+				<td colspan="8"><div id="content" name="ubContent"> ${u.ubContent }</div></td>
 			</tr>
 		</table>
 		<c:if test="${sessionScope.m.memberId eq u.memberId }">
+		<div class="view-btn">
 			<button onclick="location.href='/deleteUseBoard.do?ubNo=${u.ubNo}'">삭제</button>
 			<button onclick="location.href='/updateUseBoardFrm.do?ubNo=${u.ubNo}'">수정</button>
+			</div>
 		</c:if>
 		<c:if test="${sessionScope.m.memberLevel eq 0 }">
+		<div class="view-btn">
 			<button onclick="location.href='/deleteUseBoard.do?ubNo=${u.ubNo}'">삭제</button>
+		</div>	
 		</c:if>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />

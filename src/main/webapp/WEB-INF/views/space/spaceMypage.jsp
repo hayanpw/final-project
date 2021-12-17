@@ -66,12 +66,14 @@
 						</c:if>
 						<td>
 							<c:choose>
-								<c:when test="${l.srNo eq 0 || l.delYn eq 'Y' }">
+								<c:when test="${l.srNo eq 0 && l.rentalDate<today|| l.delYn eq 'Y'  }">
 									<button class="writeBtn" type="button"
 									class="btn btn-info btn-lg" data-toggle="modal"
 									data-target="#myModal">리뷰 작성</button>
 									<input type="hidden" id="rentalNo" value="${l.rentalNo }">
-									
+								</c:when>
+								<c:when test="${ l.rentalDate>today  }">
+									리뷰 작성 기간이 아닙니다.
 								</c:when>
 								<c:otherwise>
 									<button  class="updateBtn" type="button" class="btn btn-info btn-lg" data-toggle="modal"
