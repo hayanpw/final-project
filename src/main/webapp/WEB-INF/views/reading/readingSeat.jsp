@@ -6,10 +6,10 @@
 <head>
 <meta charset="UTF-8">
 <title>좌석 선택</title>
-    <link href="resources/readingCss/reading_seat.css" rel="stylesheet">
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+    <link href="resources/readingCss/reading_seat.css" rel="stylesheet">
 		<div class="container">
 			<div class="container-left">
 			
