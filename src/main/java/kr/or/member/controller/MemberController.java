@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.or.member.service.MemberService;
 import kr.or.member.service.SendMail;
+import kr.or.member.vo.DeleteMember;
 import kr.or.member.vo.Member;
 import kr.or.member.vo.MemberPage;
 
@@ -181,25 +182,76 @@ public class MemberController {
 		model.addAttribute("start", mpg.getStart());
 		return "member/AllMember";
 	}
-	@RequestMapping(value="/searchMember.do")
-	public String searchMember(int[] memberLevel,String search, Model model, int reqPage) {
-		MemberPage mpg  = service.searchMember(search,memberLevel,reqPage);
-		
+	@RequestMapping(value = "/searchMember.do")
+	public String searchMember(int[] memberLevel, String search, Model model, int reqPage) {
+		MemberPage mpg = service.searchMember(search, memberLevel, reqPage);
+
 		model.addAttribute("totalCount", mpg.getTotalCount());
 		model.addAttribute("pageNavi", mpg.getPageNavi());
-		model.addAttribute("list",mpg.getList());
-		model.addAttribute("search",search);
+		model.addAttribute("list", mpg.getList());
+		model.addAttribute("search", search);
 		model.addAttribute("start", mpg.getStart());
-		if(memberLevel != null) {
-			for(int i=0;i<memberLevel.length;i++) {
-				model.addAttribute("memberLevel"+memberLevel[i],0);
+		if (memberLevel != null) {
+			for (int i = 0; i < memberLevel.length; i++) {
+				model.addAttribute("memberLevel" + memberLevel[i], 0);
 			}
 		}
 
-		System.out.println("reqPage : " +reqPage);
-		System.out.println("memberLevel : " +memberLevel);
-		System.out.println("search : " +search);
+		System.out.println("reqPage : " + reqPage);
+		System.out.println("memberLevel : " + memberLevel);
+		System.out.println("search : " + search);
 		return "member/AllMember";
+	}
+
+	@RequestMapping(value = "/deleteMemberFrm.do")
+	public String deleteMemberFrm(int memberNo, Model model) {
+		ArrayList<DeleteMember> list = service.deleteMemberFrm(memberNo);
+		model.addAttribute("list", list);
+		model.addAttribute("count", list.size());
+		System.out.println(list);
+		return "member/deleteMember";
+	}
+
+	@RequestMapping(value = "/deletemShow.do")
+	@ResponseBody
+	public int deletmShow(int reserveNo, Model model) {
+		System.out.println(reserveNo);
+		// int result = showService.reservCancel(reservNo);
+		// int result = 0;
+		int result = 1;
+		return result;
+	}
+
+	@RequestMapping(value = "/deletemSpace.do")
+	@ResponseBody
+	public int deletmSpace(int reserveNo, Model model) {
+		System.out.println(reserveNo);
+		int result = 1;
+		return result;
+	}
+
+	@RequestMapping(value = "/deletemRead.do")
+	@ResponseBody
+	public int deletemRead(int reserveNo, Model model) {
+		System.out.println(reserveNo);
+		int result = 1;
+		return result;
+	}
+
+	@RequestMapping(value = "/deletemAcademy.do")
+	@ResponseBody
+	public int deletemAcademy(int reserveNo, Model model) {
+		int result = 1;
+		System.out.println(reserveNo);
+		return result;
+	}
+
+	@RequestMapping(value = "/deletemExhibition.do")
+	@ResponseBody
+	public int deletemExhibition(int reserveNo, Model model) {
+		System.out.println(reserveNo);
+		int result = 1;
+		return result;
 	}
 	
 }
