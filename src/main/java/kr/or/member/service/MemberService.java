@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.member.dao.MemberDao;
+import kr.or.member.vo.DeleteMember;
 import kr.or.member.vo.Member;
 import kr.or.member.vo.MemberPage;
 
@@ -210,5 +211,10 @@ public class MemberService {
 		mpg.setPageNavi(pageNavi);
 		mpg.setStart(start);
 		return mpg;
+	}
+	
+	public ArrayList<DeleteMember> deleteMemberFrm(int memberNo) {
+		ArrayList<DeleteMember> list = dao.deleteMember(memberNo);
+		return list;
 	}
 }

@@ -12,7 +12,7 @@
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="container">
-		<h4 class="s-title">대관 안내</h4>
+	<h3><img class="i-img" src="resources/spaceImage/information.png" style="width: 40px; ">  대관안내 </h3>
 		<div class="space-img">
 			<img src="resources/spaceImage/연습실1.png">
 			<p>
@@ -23,11 +23,19 @@
 			</p>
 		</div>
 		<div class="rental-sequence">
-			<h4 class="s-title">대관 절차</h4>
+			<h3><img class="i-img" src="resources/spaceImage/information.png" style="width: 40px; ">  대관절차</h3>
 			<img src="resources/spaceImage/대관절차.png">
 		</div>
+			<div class="ckeckL">
+			<h3><img class="i-img" src="resources/spaceImage/information.png" style="width: 40px; ">  주의사항</h3>
+				<p><img class="i-img" src="resources/spaceImage/star.png" style="width: 20px; ">  사용 후 체크리스트 작성 </p>
+				<p>1. 공지사항에서 양식 다운로드</p>
+				<p>2. 양식 작성 후 저장</p>
+				<p>3. 무지다 홈페이지 접속 > 로그인 > 공간대관 > 사용게시판 > 글쓰기 > 파일 업로드 </p>
+				<p>- 공간 사용 후 일주일 이후 까지 체크리스트 업로드가 없으면 공간 대관이 일주일간 불가능 해집니다. 또한 작성을 완료하지 않으면 누적 되니 주의하시길 바랍니다.</p>
+			</div>
 		<div class="rental-price">
-			<h4 class="s-title">대관료 안내</h4>
+			<h3><img class="i-img" src="resources/spaceImage/information.png" style="width: 40px; ">  대관료 안내 </h3>
 			<div class="spaceRes"><a href="/spaceList.do">>공간보기</a></div>
 			<div>
 				<c:forEach items="${list }" var ="s">

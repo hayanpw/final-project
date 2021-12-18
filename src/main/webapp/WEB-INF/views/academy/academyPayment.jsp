@@ -39,6 +39,7 @@
             <input type="hidden" id="paymentSelect" value="${acp.paymentSelect }">
             <input type="hidden" id="academyNo" value="${acp.academyNo }">
             <input type="hidden" id="paymentPrice" value="${acp.paymentPrice }">
+            <input type="hidden" id="academyEnd" value="${acp.academyEnd }">
         </div>
     </div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
@@ -50,6 +51,7 @@
 		var academyNo = Number($("#academyNo").val());
 		var memberNo = Number($("#memberNo").val());
 		var paymentSelect = Number($("#paymentSelect").val()); // 전시결제는 1 , 강좌결제는 2
+		var academyEnd = $("#academyEnd").val();
 		var d = new Date(); // Date 객체 생성
 		var date = d.getFullYear()+""+(d.getMonth()+1)+""+d.getDate()+""+d.getHours()+""+d.getMinutes()+""+d.getSeconds(); 
 		//Date 객체로 고유식별 번호 생성
@@ -70,6 +72,7 @@
 				var academyNo = Number($("#academyNo").val());
 				var memberNo = Number($("#memberNo").val());
 				var paymentSelect = Number($("#paymentSelect").val()); // 전시결제는 1 , 강좌결제는 2
+				var academyEnd = $("#academyEnd").val();
 				var paymentQuantity = 1;
 				 $.ajax({
 		          	  url: "/academyCredit.do", //예: https://www.myservice.com/payments/complete
@@ -82,14 +85,15 @@
 		             	   paymentPrice:paymentPrice,
 		             	   paymentQuantity:paymentQuantity,
 		             	   academyNo:academyNo,
-		             	   paymentSelect:paymentSelect
+		             	   paymentSelect:paymentSelect,
+		             	   academyEnd:academyEnd
 		        	},
 		            success : function(){//비동기 요청 성공시 수행
 					}
 			 });
 			alert("결제성공");
 			console.log("카드승인번호:"+rsp.apply_num);
-			location.href="/academyView.do?exhibitionNo="+academyNo;
+			location.href="/academyView.do?academyNo="+academyNo;
 		}else{
 			alert("결제실패");
 		}

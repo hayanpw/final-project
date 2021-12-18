@@ -288,9 +288,8 @@
 				success: function(data) {
 					$("#mySeat").append("<h3>선택좌석</h3>");
 					var h4 = $("<h4>");
-					var count = 0;
 					for(var i=0; i<data.length; i++){
-						for (var j = count; j < allSeat; j++) {
+						for (var j = 0; j < allSeat; j++) {
 							if(data[i].seatNo == $("#seat>input").eq(j).val()){
 								$("#seat>input").eq(j).parent().css("background-color", "#9354ED");
 								count = j+1;

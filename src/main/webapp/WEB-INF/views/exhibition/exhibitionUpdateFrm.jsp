@@ -19,7 +19,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 	<div class="container">
 		  <h2>전시 등록하기</h2>
-  <form action="/exhibitionInsert.do" method="post" enctype="multipart/form-data">
+  <form action="/exhibitionUpdate.do" method="post" enctype="multipart/form-data">
     <div class="form-group">
       <h3><span class="line">전</span>시제목</h3>
       <input type="hidden" name="exhibitionNo" value="${ex.exhibitionNo }">
@@ -28,8 +28,8 @@
      <div class="form-group">
         <h3><span class="line">전</span>시 대표사진</h3>
         <input type="file"  id="exhibitionPhoto"  name="upfile" accept="image/*">
-        <input type="hidden" name="exhibitionPhoto" value="${ex.exhibitioniPhoto }">
-        <div id="imageArea" style="margin-top: 10px; display: none">
+        <input type="hidden" name="exhibitionPhoto" value="${ex.exhibitionPhoto }">
+        <div id="imageArea" style="margin-top: 10px;">
         	<img id="thumbnail" src="${ex.exhibitionPhoto }" style="width: 200px;">
         </div>
 
@@ -37,7 +37,7 @@
     <h3><span class="line">전</span>시 기간</h3>
     <div class="form-group col-sm-6">
       <h4>시작일</h4>
-      <input type="text" class="form-control" id="datepicker" name="exhibitionStart" value="${ex.exhibitioinStart }">
+      <input type="text" class="form-control" id="datepicker" name="exhibitionStart" value="${ex.exhibitionStart }">
     </div>
     <div class="form-group col-sm-6">
       <h4>종료일</h4>
@@ -71,26 +71,30 @@
     </div>
     <div class="form-group">
       <h3><span class="line">가</span>격</h3>
-      <input type="text" class="form-control" id="exhibitionPrice" placeholder="가격을 입력해주세요" name="exhibitionPrice">
+      <input type="text" class="form-control" id="exhibitionPrice" name="exhibitionPrice" value="${ex.exhibitionPrice }" readonly>
     </div>
     <div class="form-group">
       <h3><span class="line">상</span>세설명</h3>
-     <textarea id="summernote" class="form-control" name="exhibitionDetail"></textarea>
+     <textarea id="summernote" class="form-control" name="exhibitionDetail">
+     ${ex.exhibitionDetail }
+     </textarea>
     </div>
        <input type="submit" class="btn btn-info" style="float:right" value="등록하기">
   </form>
 </div>
-<input type="hidden" id="startTime" value="${ex.exhibitionTimeStart }">
-<input type="hidden" id="endTime" value="${ex.exhibitionTimeEnd }">
-<input type="hidden" id="startTime" value="${ex.exhibitionTimeStart }">
+<input type="hidden" id="selectStartTime" value="${ex.exhibitionTimeStart }">
+<input type="hidden" id="selectEndTime" value="${ex.exhibitionTimeEnd }">
+<input type="hidden" id="selectAge" value="${ex.exhibitionAge }">
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 <script>
 $(document).ready(function(){
-	var category = $("#selectCategory").val();
-	var place = $("#selectPlace").val();
-	$("#category").val(category).prop("selected",true);
-	$("#place").val(place).prop("selected",true);
+	var startTime = $("#selectStartTime").val();
+	var endTime = $("#selectEndTime").val();
+	var age = $("#selectAge").val();
+	$("#exhibitionTimeStart").val(startTime).prop("selected",true);
+	$("#exhibitionTimeEnd").val(endTime).prop("selected",true);
+	$("#exhibitionAge").val(age).prop("selected",true);
 });
 
 function readURL(input) {

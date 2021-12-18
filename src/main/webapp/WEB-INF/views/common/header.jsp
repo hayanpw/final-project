@@ -40,10 +40,10 @@
                    <li><a href="/showList.do">공연 · 예매</a></li>
                    <li><a href="/spaceMain.do">공간 · 대관</a>
                    		<ul class="sub">
+                           <li><a href="/spaceMain.do">대관 안내</a></li>
+                           <li><a href="/spaceList.do">공간 소개</a></li>
                            <li><a href="/spaceRes.do?spaceNo=1">대관 현황</a></li>
-                           <li><a href="#">대관 신청</a></li>
-                           <li><a href="/spaceList.do">대관 안내</a></li>
-                           <li><a href="/selectSpaceBoardList.do?reqPage=1">공간 리뷰</a></li>
+                           <li><a href="/selectSpaceBoardList.do?reqPage=1">사용 게시판</a></li>
                         </ul>
                    </li>
                    <li><a href="/exhibitionList.do?reqPage=4">전시</a></li>

@@ -15,6 +15,7 @@
 	<div class="container">        
         <div class="mypage-title"><span>대</span>관관리</div>
         <div class="mypage-container" >
+        <div class="rental-mgr">
 			<div class="table-box">
 				<table class="table table-bordered" >
 					<tr>
@@ -49,6 +50,10 @@
 				</table>
 			</div>	
 			<div class="page-box">${pageNavi }</div>
+			</div>
+			<div class="del-space">
+			
+			</div>
         </div>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>

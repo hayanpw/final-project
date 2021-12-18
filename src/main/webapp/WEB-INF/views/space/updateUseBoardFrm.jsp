@@ -7,11 +7,12 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
     <link href="resources/spaceCss/space_default.css" rel="stylesheet">
-    <link href="resources/spaceCss/space_boardWirte.css" rel="stylesheet">
+    <link href="resources/spaceCss/space_boardWrite.css" rel="stylesheet">
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 		<div class="container">
+		<h3><img class="i-img" src="resources/spaceImage/edit.png" style="width: 40px; "> 게시판 수정 </h3>
 			<form action="/updateUseBoard.do" method="post" enctype="multipart/form-data">
 				<table class="table table-border" border="1">
 					<tr>

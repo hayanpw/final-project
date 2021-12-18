@@ -16,4 +16,5 @@ public class ExhibitionPayment {
 	private String exhibitionPhoto;
 	private String bookDate;
 	private int memberNo;
+	private int check_email;
 }
