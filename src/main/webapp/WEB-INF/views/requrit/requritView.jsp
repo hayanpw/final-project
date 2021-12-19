@@ -79,11 +79,11 @@
 	}
 	$("#deleteRequrit").click(function(){
 		var requritNo = $("#hide").val();
-		console.log(requritNo);
+		location.href ="/deleteRequrit2.do?requritNo="+requritNo;
 	});
 	$("#updateRequrit").click(function(){
 		var requritNo = $("#hide").val();
-		console.log(requritNo);
+		location.href ="/updateRequritFrm.do?requritNo="+requritNo;
 	});
 	</script>
 </body>

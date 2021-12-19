@@ -18,25 +18,27 @@
 	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 	<div class="container">
     <h2>공고 등록하기</h2>
-    <form action="/requritInsert.do" method="post">
+    <form action="/requritUpdate.do" method="post">
       <div class="form-group">
         <h3><span class="line">공</span>고명</h3>
-        <input type="text" class="form-control" id="requritTitle" placeholder="공고명을 입력해주세요" name="requritTitle">
+        <input type="text" class="form-control" id="requritTitle" value="${r.requritTitle }" name="requritTitle">
+        <input type="hidden" id="requritNo" name="requritNo" value="${r.requritNo }">
       </div>
       <h3><span class="line">공</span>고 기간</h3>
       <div class="form-group col-sm-6">
         <h4>시작일</h4>
-        <input type="text" class="form-control" id="datepicker" name="requritStart">
+        <input type="text" class="form-control" id="datepicker" name="requritStart" value="${r.requritStart }">
       </div>
       <div class="form-group col-sm-6">
         <h4>종료일</h4>
-        <input type="text" class="form-control" id="datepicker2" name="requritEnd">
+        <input type="text" class="form-control" id="datepicker2" name="requritEnd" value="${r.requritEnd }">
       </div>
       <div class="form-group">
         <h3><span class="line">경</span>력 사항</h3>
-        <input type="text" class="form-control" id="resumecareer" placeholder="경력사항을 입력해주세요" name="requritCareer">
+        <input type="text" class="form-control" id="resumecareer" name="requritCareer" value="${r.requritCareer }">
       </div>
        <div class="form-group">
+       <input type="hidden" id="selectRequritGender" value="${r.requritGender}">
         <h3><span class="line">성</span>별</h3>
         <select class="form-control" id="requritGender" name="requritGender">
           <option value="남자">남자</option>
@@ -45,10 +47,11 @@
       </div>
          <div class="form-group">
           <h3>직종</h3>
-          <input type="text" class="form-control" id="requritField" placeholder="직종을 입력해주세요" name="requritField">
+          <input type="text" class="form-control" id="requritField" name="requritField" value="${r.requritField }">
         </div>
      <div class="form-group">
         <h3><span class="line">고</span>용 형태</h3>
+        <input type="hidden" id="selectEmployeeType" value="${r.employeeType}">
         <select class="form-control" id="employeeType" name="employeeType">
           <option value="정규직">정규직</option>
           <option value="계약직">계약직</option>
@@ -56,9 +59,11 @@
       </div>
       <div>
         <h3><span class="line">상</span>세 설명</h3>
-       <textarea id="summernote" class="form-control" name="requritDetail"></textarea>
+       <textarea id="summernote" class="form-control" name="requritDetail">
+       ${r.requritDetail }
+       </textarea>
       </div><br>
-      <input type="submit" class="btn btn-info" style="float:right" value="공고 등록하기">
+      <input type="submit" class="btn btn-info" style="float:right" value="공고 수정하기">
     </form>
   </div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
@@ -78,6 +83,10 @@ $('#summernote').summernote({
 	});
 $(document).ready(function() {
 	  $('#summernote').summernote();
+	  var employeeType = $("#selectEmployeeType").val();
+	  var requritGender = $("#selectRequritGender").val();
+	  $("#employeeType").val(employeeType).prop("selected",true);
+	  $("#requritGender").val(requritGender).prop("selected",true);
 	});
 function uploadImage(file,editor) {
 	//form과 같은 효과를 내는 객체

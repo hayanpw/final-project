@@ -105,4 +105,19 @@ public class RequritService {
 		r.setPeriod(period);
 		return r;
 	}
+
+	public int deleteRequrit2(int requritNo) {
+		int result = dao.deleteRequrit2(requritNo);
+		return result;
+	}
+
+	public Requrit updateRequritFrm(int requritNo) {
+		Requrit r = dao.selectOneRequrit(requritNo);
+		return r;
+	}
+
+	public int updateRequritFrm(Requrit r) {
+		int result = dao.updateRequrit(r);
+		return result;
+	}
 }

@@ -54,4 +54,10 @@
 			filename as filename
 		from resume_tbl where file_no=#{fileNo}
 	</select>
+	<update id="updateMemberLevel" parameterType="_int">
+		update member set member_level = 2 where member_no = #{memberNo}
+	</update>
+	<update id="deleteRequrit" parameterType="_int">
+		update teacher_requrit set requrit_cancel = 1 where requrit_no = #{requritNo}
+	</update>
 </mapper>

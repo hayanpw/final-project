@@ -48,7 +48,7 @@ public class RequritController {
 		}else {
 			model.addAttribute("msg", "공고 등록 실패");
 		}
-		model.addAttribute("loc", "/requritList.do");
+		model.addAttribute("loc", "/requritList.do?reqPage=1");
 		return "common/msg";
 	}
 	@RequestMapping(value="/requritView.do")
@@ -100,4 +100,33 @@ public class RequritController {
 		}
 		return "/resources/requritimage/editor/"+filepath;
 	}
+	@RequestMapping(value="/deleteRequrit2.do")
+		public String deleteRequrit2(int requritNo,Model model) {
+			int result = service.deleteRequrit2(requritNo);
+			if(result>0) {
+				model.addAttribute("msg", "삭제 성공");			
+			}else {
+				model.addAttribute("msg", "삭제 실패");
+			}
+			model.addAttribute("loc", "/requritList.do?reqPage=1");
+			return "common/msg";
+		}
+	@RequestMapping(value="/updateRequritFrm.do")
+	public String updateRequritFrm(int requritNo,Model model) {
+		Requrit r = service.updateRequritFrm(requritNo);
+		model.addAttribute("r",r);
+		return "requrit/requritUpdateFrm";
+	}
+	@RequestMapping(value="/requritUpdate.do")
+	public String requritUpdate(Requrit r,Model model) {
+		int result = service.updateRequritFrm(r);
+		if(result>0) {
+			model.addAttribute("msg", "수정 성공");			
+		}else {
+			model.addAttribute("msg", "수정 실패");
+		}
+		model.addAttribute("loc", "/requritView.do?requritNo="+r.getRequritNo());
+		return "common/msg";
+	}
+	
 }

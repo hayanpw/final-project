@@ -194,4 +194,15 @@ public class ResumeController {
 			}
 		}
 	}
+	@RequestMapping(value="/updateMemberLevel.do")
+	public String updateMemberLevel(int memberNo, int requritNo ,Model model) {
+		int result = service.updateMemberLevel(memberNo,requritNo);
+		if(result>0) {
+			model.addAttribute("msg", "회원 등급 변경 성공 공고 수정 완료");			
+		}else {
+			model.addAttribute("msg", "실패");
+		}
+		model.addAttribute("loc","/requritList.do?reqPage=1");
+		return "common/msg";
+	}
 }
