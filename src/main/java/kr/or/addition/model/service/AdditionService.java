@@ -15,6 +15,7 @@ import kr.or.addition.model.vo.BoardPageData;
 import kr.or.addition.model.vo.BoardViewData;
 import kr.or.addition.model.vo.FileVO;
 import kr.or.addition.model.vo.LikeNo;
+import kr.or.addition.model.vo.MyPageData;
 
 @Service
 public class AdditionService {
@@ -340,10 +341,18 @@ public class AdditionService {
 		return chk;
 	}
 
-
-	public ArrayList<Board> myFree(String memberId) {
-		ArrayList<Board> myList = dao.myFree(memberId);
-		return myList;
+	public MyPageData myFree(String memberId) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("memberId", memberId);
+		map.put("boardType", 1);
+		ArrayList<Board> noticeList=dao.myList(map);
+		map.put("boardType", 3);
+		ArrayList<Board> freeList=dao.myList(map);
+		map.put("boardType", 2);
+		ArrayList<Board> qnaList=dao.myList(map);
+		ArrayList<BoardComment> commentList=dao.myCommentList(memberId);
+		MyPageData mpd= new MyPageData(commentList,noticeList,freeList,qnaList);
+		return mpd;
 	}
 	
 	

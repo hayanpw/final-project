@@ -17,6 +17,18 @@
 	font-size: 40px;
 	margin-bottom: 50px;
 	}
+	#table tr:nth-child(1){
+	border-top: 2px solid #563D39;
+	}
+	#table1 tr:nth-child(2) {
+	border-top: 2px solid #f3efe6;
+    }
+    #table1 tr:nth-child(3) {
+	border-top: 2px solid #f3efe6;
+    }
+     #table1 tr:nth-child(4) {
+	border-top: 2px solid #f3efe6;
+    }
 	#table{
 	margin-left: 50px;
 	margin-right: 50px;
@@ -54,7 +66,7 @@
 		list-style-type: none;
 		padding : 0;
 		display: flex;
-		background-color: #f2f2f2;
+		background-color: #f3efe6 ;
 	}
 	.comments>li>p,.recomments>li>p{
 		margin: 0;
@@ -90,6 +102,7 @@
 	textarea.form-control{
 		height:100%;
 		resize:none;
+		border: 1px solid #f3efe6;
 	}
 	.recoment>div{
 		width:10%;
@@ -137,6 +150,47 @@
 	background-color: #74655E;
 	color: #fff;
 	}
+	.nextTitle{
+	display:inline-block;
+	background-color: #563D39;
+	color:white;
+	font-size:16px;
+	width: 20%;
+	height:40px;
+	line-height:40px;
+	text-align: center;
+	margin-bottom: 3px;
+	}
+	.nextTitle+a{
+	color: #563D39;
+	font-size:18px;
+	}
+	.nextTitle+a:hover{
+	text-decoration: none;
+	color: #563D39;
+	}
+	#boardTitle{
+	font-size: 30px;
+	}
+	.btnColor{
+	color: #563D39;
+	}
+	.btnColor:hover{
+	text-decoration:none;
+	color: #563D39;
+	}
+	#submitBtn{
+	margin-left:7px;
+	background-color: #563D39;
+	border: none;
+	}
+	#bcContent:focus{
+	outline: none;
+	}
+	#tag{
+	font-weight: bold;
+	}
+	
 </style>
 </head>
 <body>
@@ -147,31 +201,21 @@
 		<input type="hidden" id="boardNo" value="${b.boardNo }">
 		<div id="table">
 		<div>
-			<div>다음글&nbsp;
-				<a href="/boardView.do?boardType=3&boardNo=${info.nextNo}" onclick="return chkNext();">
-				<input type="hidden" id="next" value="${info.nextNo }">${info.nextTitle }
-				</a>
-			</div>
-			<div>이전글&nbsp;
-				<a href="/boardView.do?boardType=3&boardNo=${info.prevNo}" onclick="return chkPrev();">
-				<input type="hidden" id="prev" value="${info.prevNo }">${info.prevTitle }
-				</a>
-			</div>
-			<a class="btn" href="/additionBoard.do?boardType=3&reqPage=1">글목록</a>
+			<a class="btn btnColor" href="/additionBoard.do?boardType=3&reqPage=1">글목록</a>
 			<c:if test="${sessionScope.m.memberLevel eq 0 }">
 			<c:choose>
 				<c:when test="${b.boardLevel eq 2 }">
-				<a class="btn" href="/removeRegulationBoard.do?boardNo=${b.boardNo }">규제풀기</a>
+				<a class="btn btnColor" href="/removeRegulationBoard.do?boardNo=${b.boardNo }">규제풀기</a>
 				</c:when>
 				<c:otherwise>
-				<a class="btn" href="/regulationBoard.do?boardNo=${b.boardNo }">규제하기</a>
+				<a class="btn btnColor" href="/regulationBoard.do?boardNo=${b.boardNo }">규제하기</a>
 				</c:otherwise>
 			</c:choose>
 			</c:if>
 		</div>
-			<table class="table">
+			<table id="table1" class="table">
 				<tr>
-					<td colspan="7">${b.boardTitle }(제목자리)</td>
+					<td id="boardTitle" colspan="7">${b.boardTitle }</td>
 				</tr>
 				<tr>
 					<td>${b.boardWriter }</td>
@@ -182,16 +226,18 @@
 					<td>댓글수</td>
 					<td>${b.commentCount }</td>
 				</tr>
+				<c:if test="${not empty b.list }">
 				<tr>
 					<td>첨부파일</td>
 					<td colspan="6">
 						<c:forEach items="${b.list }" var="f">
-							<a href="/fileDown.do?filename=${f.filename }&filepath=${f.filepath }">${f.filename }</a>
+							<a class="btnColor" href="/fileDown.do?filename=${f.filename }&filepath=${f.filepath }">${f.filename }</a>
 						</c:forEach>
 					</td>
 				</tr>
+				</c:if>
 				<tr>
-					<td colspan="6">${b.boardContent }(내용자리)
+					<td colspan="7">${b.boardContent }
 						<div id="likechk">
 					    <input type="radio" value="like" name="likechk" id="like" onclick="return check(0);"><label for="like" ><i class="fas fa-thumbs-up"><span id="likeResult" >&nbsp;${l.likeSum }</span>&nbsp;&nbsp;좋아요</i></label>
 					    <input type="radio" value="dislike" name="likechk" id="dislike" onclick="return check(1);"><label for="dislike"><i class="fas fa-thumbs-down"><span id="dislikeResult">&nbsp;${l.dislikeSum }</span>&nbsp;&nbsp;싫어요</i></label>
@@ -206,7 +252,7 @@
 					<form action="/insertComment.do?boardType=3" method="post">
 						<ul>
 							<li>
-								<i class="far fa-user fa-5x"></i>
+								<i class="far fa-comment-dots fa-3x"></i>
 							</li>
 							<li>
 								<input type="hidden" name="bcLevel" value="1">
@@ -217,7 +263,7 @@
 								<textarea id="comment" name="bcContent" class="form-control"></textarea>
 							</li>
 							<li>
-								<button type="submit" class="btn btn-primary btn-lg btn-block" onclick="return commentChk();">등록</button>
+								<button type="submit" id="submitBtn" class="btn btn-primary btn-lg btn-block" onclick="return commentChk();">등록</button>
 							</li>
 						</ul>
 					</form>
@@ -239,10 +285,10 @@
 								<textarea name="bcContent" class="form-control" style="display:none;">${bc.bcContentBr }</textarea><!-- 수정시보임 -->
 								<p class="commentsBtn">
 									<c:if test="${sessionScope.m.memberId eq bc.bcWriter }">
-										<a href="javascript:void(0)"  onclick="modifyComment(this,'${bc.bcNo }','${b.boardNo }');">수정</a>
-										<a href="javascript:void(0)" onclick="deleteComment(this,'${bc.bcNo }','${b.boardNo }');">삭제</a>
+										<a href="javascript:void(0)"  class="btnColor" onclick="modifyComment(this,'${bc.bcNo }','${b.boardNo }');">수정</a>
+										<a href="javascript:void(0)" class="btnColor" onclick="deleteComment(this,'${bc.bcNo }','${b.boardNo }');">삭제</a>
 									</c:if>
-									<a href="javascript:void(0)" class="recShow">답글달기</a>
+									<a href="javascript:void(0)" class="recShow btnColor">답글달기</a>
 								</p>
 								<form action="/insertComment.do?boardType=3" class="recoment" method="post"> <!-- recoment 클래스가 안보이게 하는 속성 -->
 									<input type="hidden" name="bcLevel" value="2">
@@ -250,7 +296,7 @@
 									<input type="hidden" name="boardRef" value="${b.boardNo }">
 									<input type="hidden" name="bcRef" value="${bc.bcNo }">
 									<input type="hidden" name="bcidRef" value=""> 
-									<textarea name="bcContent" class="bcContent form-control"></textarea> 
+									<textarea id="bcContent" name="bcContent" class="bcContent form-control"></textarea> 
 									<div>
 										<button type="submit" class="recomment btn btn-outline-primary">등록</button>
 										<button type="reset" class="btn btn-outline-primary recCancel">취소</button>
@@ -272,7 +318,7 @@
 									<li>
 										<c:choose>
 											<c:when test="${not empty bcc.bcidRef }">
-											<p>@${bcc.bcidRef} ${bcc.bcContentBr }</p>
+											<p><span id="tag">@${bcc.bcidRef}</span> ${bcc.bcContentBr }</p>
 											</c:when>
 											<c:otherwise>
 											<p>${bcc.bcContentBr }</p>
@@ -281,10 +327,10 @@
 										<textarea name="bcContent" class="form-control" style="display:none;">${bcc.bcContentBr }</textarea>
 										<p class="commentsBtn">
 											<c:if test="${sessionScope.m.memberId eq bcc.bcWriter }">
-												<a href="javascript:void(0)" onclick="modifyComment(this,'${bcc.bcNo }','${b.boardNo }');">수정</a>
-												<a href="javascript:void(0)" onclick="deleteComment(this,'${bcc.bcNo }','${b.boardNo }');">삭제</a>
+												<a href="javascript:void(0)" class="btnColor" onclick="modifyComment(this,'${bcc.bcNo }','${b.boardNo }');">수정</a>
+												<a href="javascript:void(0)" class="btnColor"class="btn btnColor" onclick="deleteComment(this,'${bcc.bcNo }','${b.boardNo }');">삭제</a>
 											</c:if>	
-												<a href="javascript:void(0)" class="recShow">답글달기</a>
+												<a href="javascript:void(0)" class="recShow btnColor">답글달기</a>
 										</p>
 										<form action="/insertComment.do?boardType=3" class="recoment" method="post"> <!-- recoment 클래스가 안보이게 하는 속성 -->
 											<input type="hidden" name="bcLevel" value="2">
@@ -309,13 +355,24 @@
 			
 			
 			<c:if test="${sessionScope.m.memberId == b.boardWriter}">
-			<a class="btn" href="/boardDelete.do?boardType=3&boardNo=${b.boardNo }">글삭제</a>
-			<a class="btn" href="/boardUpdateFrm.do?boardNo=${b.boardNo }">글수정</a>
+			<a class="btn btnColor" href="/boardDelete.do?boardType=3&boardNo=${b.boardNo }">글삭제</a>
+			<a class="btn btnColor" href="/boardUpdateFrm.do?boardNo=${b.boardNo }">글수정</a>
 			</c:if>
 			<c:if test="${sessionScope.m.memberLevel ==0 }">
-			<a class="btn" href="/boardDelete.do?boardType=3&boardNo=${b.boardNo }">글삭제</a>
+			<a class="btn btnColor" href="/boardDelete.do?boardType=3&boardNo=${b.boardNo }">글삭제</a>
 			</c:if>
-			<a class="btn" onclick="history.go(-1);">이전</a>
+			<a class="btn btnColor" onclick="history.go(-1);">이전</a>
+			
+			<div><span class="nextTitle">다음글</span>&nbsp;
+				<a href="/boardView.do?boardType=3&boardNo=${info.nextNo}" onclick="return chkNext();">
+				<input type="hidden" id="next" value="${info.nextNo }">${info.nextTitle }
+				</a>
+			</div>
+			<div><span class="nextTitle">이전글</span>&nbsp;
+				<a href="/boardView.do?boardType=3&boardNo=${info.prevNo}" onclick="return chkPrev();">
+				<input type="hidden" id="prev" value="${info.prevNo }">${info.prevTitle }
+				</a>
+			</div>
 		</div>
 	</div>
 	

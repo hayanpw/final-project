@@ -84,7 +84,7 @@
 	#table1 tr:hover {
 	background-color: #f3efe6 ;
 	}
-	#write:hover {
+	#write:hover ,#my:hover {
 	text-decoration: none;
 	color: white;
 	font-weight: bold;
