@@ -260,7 +260,6 @@ public class AcademyController {
 	@ResponseBody
 	@RequestMapping(value="/countingStar.do")
 	public String countingStar(int academyNo) {
-		System.out.println("컨트롤러");
 		int studentCount = service.countingStar(academyNo);
 		if(studentCount == 0) {
 			System.out.println(studentCount);
@@ -270,6 +269,25 @@ public class AcademyController {
 			String count = Integer.toString(studentCount);
 			return count;
 		}
+	}
+	@RequestMapping(value="/academyMypage.do")
+	public String academyMyPage(int memberNo, Model model) {
+		HashMap<String, Object> map = service.academyMypage(memberNo);
+		model.addAttribute("list",map.get("list"));
+		model.addAttribute("last",map.get("last"));
+		model.addAttribute("totalCount",map.get("totalCount"));
+		return "academy/academyMypage";
+	}
+	@RequestMapping(value="/deleteAcPayment.do")
+	public String deleteAcPayment(int memberNo,long paymentNo, Model model) {
+		int result = service.deleteAcPayment(paymentNo);
+		if(result>0) {
+			model.addAttribute("msg", "수업 취소 성공");			
+		}else {
+			model.addAttribute("msg", "수업 취소 실패");
+		}
+		model.addAttribute("loc", "/academyMypage.do?memberNo="+memberNo);
+		return "common/msg";
 	}
 	//@RequestMapping(value="/academyDelete.do")
 	//public String academyDelete (int academyNo,Model model) {

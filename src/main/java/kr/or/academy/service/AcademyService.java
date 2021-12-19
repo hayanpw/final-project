@@ -158,4 +158,20 @@ public class AcademyService {
 		return studentCount;
 	}
 
+	public HashMap<String, Object> academyMypage(int memberNo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		ArrayList<AcademyPayment> list = dao.selecAcademtPaymentList(memberNo);
+		ArrayList<AcademyPayment> last = dao.selecAcademtPaymentListLast(memberNo);
+		int totalCount = last.size();
+		map.put("list",list);
+		map.put("last",last);
+		map.put("totalCount",totalCount);
+		return map;
+	}
+	@Transactional
+	public int deleteAcPayment(long paymentNo) {
+		int result = dao.deleteAcPayment(paymentNo);
+		return result;
+	}
+
 }
