@@ -60,19 +60,19 @@ public class RequritService {
 		String pageNavi = "<ul class='pagination'>";
 		//이전버튼
 		if(pageNo != 1) {
-			pageNavi += "<li>";
-			pageNavi += "<a href='/requritList.do?reqPage="+(pageNo-1)+"'>";
+			pageNavi += "<li id='pageNum' class ='page-item'>";
+			pageNavi += "<a class='page-link' href='/requritList.do?reqPage="+(pageNo-1)+"'>";
 			pageNavi += "&lt;</a></li>";
 		}
 		//페이지숫자
 		for(int i=0; i<pageNaviSize; i++) {
 			if(pageNo == reqPage) {
-				pageNavi += "<li class='active'>";
-				pageNavi += "<a href='/requritList.do?reqPage="+pageNo+"'>";
+				pageNavi += "<li id='pageNumAct' class ='page-item active'>";
+				pageNavi += "<a class='page-link' href='/requritList.do?reqPage="+pageNo+"'>";
 				pageNavi += pageNo+"</a></li>";
 			}else {
-				pageNavi += "<li>";
-				pageNavi += "<a href='/requritList.do?reqPage="+pageNo+"'>";
+				pageNavi += "<li id='pageNum' class ='page-item'>";
+				pageNavi += "<a class='page-link' href='/requritList.do?reqPage="+pageNo+"'>";
 				pageNavi += pageNo+"</a></li>";
 			}
 			pageNo++;
@@ -82,8 +82,8 @@ public class RequritService {
 		}
 		//다음버튼
 		if(pageNo <= totalPage) {
-			pageNavi += "<li>";
-			pageNavi += "<a href='/requritList.do?reqPage="+pageNo+"'>";
+			pageNavi += "<li id='pageNum' class ='page-item'>";
+			pageNavi += "<a class='page-link' href='/requritList.do?reqPage="+pageNo+"'>";
 			pageNavi += "&gt;</a></li>";
 		}
 		pageNavi += "</ul>";

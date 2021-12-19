@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -248,6 +249,27 @@ public class AcademyController {
 		}
 		model.addAttribute("loc", "/academyView.do?academyNo="+a.getAcademyNo());
 		return "common/msg";
+	}
+	@RequestMapping(value="/academyAdminList.do")
+	public String academyAdminList(Model model) {
+		HashMap<String, Object> map = service.academyAdminList();
+		model.addAttribute("list", map.get("list"));
+		model.addAttribute("last", map.get("last"));
+		return "academy/academyAdmin";
+	}
+	@ResponseBody
+	@RequestMapping(value="/countingStar.do")
+	public String countingStar(int academyNo) {
+		System.out.println("컨트롤러");
+		int studentCount = service.countingStar(academyNo);
+		if(studentCount == 0) {
+			System.out.println(studentCount);
+			return "0";
+		}else {
+			System.out.println(studentCount);
+			String count = Integer.toString(studentCount);
+			return count;
+		}
 	}
 	//@RequestMapping(value="/academyDelete.do")
 	//public String academyDelete (int academyNo,Model model) {

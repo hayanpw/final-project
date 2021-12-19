@@ -143,4 +143,19 @@ public class AcademyService {
 		return result;
 	}
 
+	public HashMap<String, Object> academyAdminList() {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		ArrayList<Academy> list = dao.acadeyAdminList();
+		ArrayList<Academy> last = dao.academyAdminListLast();
+		map.put("list", list);
+		map.put("last", last);
+		return map;
+	}
+
+	public int countingStar(int academyNo) {
+		int studentCount = dao.countingStar(academyNo);
+		System.out.println(studentCount);
+		return studentCount;
+	}
+
 }

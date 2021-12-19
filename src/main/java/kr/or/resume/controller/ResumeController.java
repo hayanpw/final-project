@@ -137,9 +137,10 @@ public class ResumeController {
 		return "/resources/resume/img/editor/"+filepath;
 	}
 	@RequestMapping(value="/resumeList.do")
-	public String resumeList(Model model, int requritNo) {
+	public String resumeList(Model model, int requritNo, String requritTitle) {
 		ArrayList<Resume> list = service.selectResumeList(requritNo);
 		model.addAttribute("list",list);
+		model.addAttribute("requritTltle",requritTitle);
 		return "resume/resumeList";
 	}
 	@RequestMapping(value="/resumeView.do")

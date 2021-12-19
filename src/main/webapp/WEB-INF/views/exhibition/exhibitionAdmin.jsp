@@ -94,6 +94,7 @@
 				var exhibitionDate = $(this).val();
 				var exhibitionNo = $(this).next().next().next().val();
 				var idx = $(".datepicker").index(this);
+				console.log(idx);
 				$(".exhibition").eq(idx).empty();
 				$.ajax({
 					url: "/checkPaymentExhibition.do",
@@ -103,10 +104,11 @@
 						if(data == "0"){
 							$(".exhibition").eq(idx).append("<h4>전시예매정보가 없습니다.</h4>");
 						}else{
-							var p = $("<p>");
-							p.append(" 예매수 : "+data);
-							$(".exhibition").eq(idx).append(p);
-							$(".exhibition").scrollTop(innerHeight);
+							$(".exhibition").eq(idx).append("<h4>예매수:"+data+"명</h4>");
+							//var p = $("<p>");
+							//p.append(" 예매수 : "+data);
+							//$(".exhibition").eq(idx).append(p);
+							//$(".exhibition").scrollTop(innerHeight);
 						}
 						
 					}

@@ -6,27 +6,25 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="resources/hansolCss/hansol_default.css" rel="stylesheet">
+<link href="resources/hansolCss/hansol_requritList.css" rel="stylesheet">
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	 <div class="container">
-        <h2>강사모집 공고 리스트</h2>
+        <h2><span class="line">강사</span>모집 공고</h2>
        
-        <table class="table table-hover">
-            <thead>
-              <tr>
+        <table id="tableee" class="table table-hover table-bordered" >
+              <tr id="firstTr">
                   <th>#번호</th>
                   <th>공고명</th>
                   <th>올린사람</th>
                   <th>모집 기간</th>
               </tr>
-          </thead>
-          
-          <tbody>
           	<c:forEach items="${list }" var="r" varStatus="i">
-             	<tr>
+             	<tr id ="secTr">
 				   <td>${start + i.index }</td>
-				   <td><a href="/requritView.do?requritNo=${r.requritNo }">${r.requritTitle }</a></td>
+				   <td><a href="/requritView.do?requritNo=${r.requritNo }" style="text-decoration: none;">${r.requritTitle }</a></td>
 				   <td>관리자</td>
 				   <c:choose>
 				   <c:when test="${r.period ge 0 }">
@@ -41,7 +39,6 @@
 				   </c:choose>
 			   </tr>
 			 </c:forEach>
-            </tbody>
           </table>
           <div id="pageNavi">${pageNavi }</div>
         </div>

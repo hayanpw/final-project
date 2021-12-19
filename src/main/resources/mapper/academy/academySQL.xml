@@ -91,4 +91,43 @@
 		update academy set academy_title = #{academyTitle},academy_start = #{academyStart}, academy_end = #{academyEnd}, academy_photo=#{academyPhoto}, academy_teacher=#{academyTeacher}
 			,academy_place = #{academyPlace}, academy_price=#{academyPrice},academy_detail=#{academyDetail},academy_category=#{academyCategory} where academy_no=#{academyNo}
 	</update>
+	<select id="academtAdminList" resultType="ac">
+	<![CDATA[
+		select 
+  			academy_no as academyNo,
+  			academy_title as academyTitle,
+  			academy_start as academyStart,
+  			academy_end as academyEnd,
+  			academy_photo as academyPhoto,
+  			academy_teacher as academyTeacher,
+  			academy_place as academyPlace,
+  			academy_price as academyPrice,
+  			academy_detail as academyDetail,
+  			academy_category as academyCategory,
+  			academy_cancel as academyCancel
+  		from academy 
+  			where academy_end > sysdate order by 1 desc
+  	]]>	
+	</select>
+	<select id="academtAdminListLast" resultType="ac">
+		<![CDATA[
+		select 
+  			academy_no as academyNo,
+  			academy_title as academyTitle,
+  			academy_start as academyStart,
+  			academy_end as academyEnd,
+  			academy_photo as academyPhoto,
+  			academy_teacher as academyTeacher,
+  			academy_place as academyPlace,
+  			academy_price as academyPrice,
+  			academy_detail as academyDetail,
+  			academy_category as academyCategory,
+  			academy_cancel as academyCancel
+  		from academy
+  			where academy_end < sysdate order by 1 desc
+  	]]>	
+	</select>
+	<select id="countingStar" parameterType="_int" resultType="_int">
+		select nvl(sum(payment_quantity),0) from payment where academy_no=#{academyNo} and payment_cancel=0
+	</select>
 </mapper>

@@ -42,14 +42,10 @@
             ${r.resumeDetail }
         </div>
         <c:choose>
-        	<c:when test="${empty sessionScope }">
-       			 <button type="button" class="btn requritBtn" onclick="goResumeFrm();">지원하기</button>
-       			 <button type="button" class="btn requritBtn" onclick="goResumeList();">지원자보기</button>
+        	<c:when test="${empty sessionScope.m }">
         	</c:when>
-         	<c:when test="${sessionScope.member.MemberLevel eq 0 }">
-        		<button type="button" class="btn requritBtn">삭제하기</button>
-        		<button type="button" class="btn requritBtn">수정하기</button>
-        		
+         	<c:when test="${sessionScope.m.memberLevel eq 0 }">
+        		<button type="button" class="btn requritBtn" id="updateMemberLevel">선생님 으로</button>
        	 	</c:when>
         </c:choose>
         <input type="hidden" id ="hide" value="${r.requritNo }">

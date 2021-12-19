@@ -101,4 +101,20 @@ public class ExhibitionService {
 		System.out.println(totalCount);
 		return totalCount;
 	}
+
+	public HashMap<String, Object> selectExhibitionPaymentList(int memberNo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		ArrayList<ExhibitionPayment>  list = dao.selectExhibitionPaymentList(memberNo);
+		ArrayList<ExhibitionPayment> last = dao.selectExhibitionPaymentListLast(memberNo);
+		int totalCount = last.size();
+		map.put("list", list);
+		map.put("last", last);
+		map.put("totalCount", totalCount);
+		return map;
+	}
+	@Transactional
+	public int deletePayment(long paymentNo) {
+		int result = dao.deletePayment(paymentNo);
+		return result;
+	}
 }
