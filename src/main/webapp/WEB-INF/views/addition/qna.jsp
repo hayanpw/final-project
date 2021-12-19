@@ -91,7 +91,7 @@
 	#table1 tr:hover {
 	background-color: #f3efe6 ;
 	}
-	#write:hover {
+	#write:hover,#my:hover {
 	text-decoration: none;
 	color: white;
 	font-weight: bold;
@@ -231,7 +231,7 @@
 		<c:if test="${not empty sessionScope.m }">
 			<div id="table">
 				<a class="btn" id="write" href="/boardWriteFrm.do?boardType=2">글작성</a>
-				<a class="btn" id="my" href="#">내문의보기</a>
+				<a class="btn" id="my" href="/myFree.do?memberId=${sessionScope.m.memberId }">내글 보기</a>
 			</div>	
 		</c:if>
 	</div>

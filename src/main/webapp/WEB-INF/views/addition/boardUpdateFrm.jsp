@@ -100,8 +100,14 @@
 	<script type="text/javascript">
 	$(document).on("click",".delFile",function(){
 		var idx=$(".delFile").index(this);
-		var bcContent=$(".oldFilename").eq(idx).val();
-		var bcContent=$(".oldFilepath").eq(idx).val();
+		var oldFilename=$(".oldFilename").eq(idx).val();
+		var oldFilepath=$(".oldFilepath").eq(idx).val();
+		var input   = document.createElement('input'); 
+		input.type   = 'hidden'; 
+		input.name  = 'delOldFilename'; 
+		input.id  = 'delOldFilename'; 
+		input.value  = value; 
+		theForm.appendChild(input); 
 		$(this).prev().hide();
 		$(this).hide();
 		$("#addFiles").show();

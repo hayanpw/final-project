@@ -109,6 +109,9 @@
     color: black;
     border: none;
     }
+    #fix{
+    color: #563D39;
+    }
 </style>
 </head>
 <body>
@@ -134,7 +137,7 @@
 				<c:choose>
 					<c:when test="${b.boardFix ==1 and b.bnum==0 }">
 						<tr>
-							<td><i class="fas fa-exclamation-circle"></i></td>
+							<td><i id="fix" class="fas fa-exclamation-circle"></i></td>
 							<td id="btitle"><a href="/boardView.do?boardType=1&boardNo=${b.boardNo}">${b.boardTitle }</a></td>
 							<td>${b.regDate }</td>
 							<td>${b.readCount }</td>

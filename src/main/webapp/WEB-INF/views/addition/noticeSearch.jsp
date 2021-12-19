@@ -75,7 +75,7 @@
 	#table1 tr:hover {
 	background-color: #f3efe6 ;
 	}
-	#write:hover {
+	#write:hover,#back:hover {
 	text-decoration: none;
 	color: white;
 	font-weight: bold;
@@ -140,7 +140,7 @@
 			<div id="pageNavi">${pageNavi }</div>
 		</div>
 		<div>
-			<a class="btn" href="/additionBoard.do?boardType=1&reqPage=1">목록</a>
+			<a id="back" class="btn" href="/additionBoard.do?boardType=1&reqPage=1">목록</a>
 		</div>
 	</div>	
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>

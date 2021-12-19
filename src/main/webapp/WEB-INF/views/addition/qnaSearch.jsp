@@ -91,7 +91,7 @@
 	#table1 tr:hover {
 	background-color: #f3efe6 ;
 	}
-	#write:hover {
+	#write:hover,#back:hover {
 	text-decoration: none;
 	color: white;
 	font-weight: bold;
@@ -187,7 +187,7 @@
 			<div id="pageNavi">${pageNavi }</div>
 		</div>
 		<div>
-			<a class="btn" href="/additionBoard.do?boardType=2&reqPage=1">목록</a>
+			<a id="back" class="btn" href="/additionBoard.do?boardType=2&reqPage=1">목록</a>
 		</div>
 	</div>
 	<script type="text/javascript">
