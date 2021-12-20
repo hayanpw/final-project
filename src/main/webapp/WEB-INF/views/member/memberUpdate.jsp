@@ -18,7 +18,7 @@
 	<div class="container">        
         <div class="mypage-title"><span>개</span>인정보관리</div>
         <div class="mypage-container">
-				<form action="/memberUpdate.do" method="post" style="padding-left: 200px; padding-top:50px">
+				<form action="/memberUpdate.do" method="post" style="padding-left: 200px; padding-top:50px" onsubmit="return emailChk()">
 						<table class="inputTbl">
 							<tr>
 								<td>아이디</td>
@@ -54,6 +54,7 @@
 							<tr>
 								<td>이메일</td>
 								<td><input type="text" class="input" id="email1" name="email1" value="${email1}"> @ <input type="text" class="input" id="email2" name="email2" value="${email2}"> 
+								<input type="hidden" id="memberEmail" name="memberEmail" value="${m.memberEmail}">
 								<button type="button" onclick="checkEmail();" id="btnOpen1" class="nextBtn">중복체크</button>
 									<span id="ajaxEmailcheck"></span>
 									<div class="agreebox adcheck">
@@ -99,6 +100,14 @@
 			</form>
 			</div>
 	<script>
+	function emailChk() {
+		if ($("#emailchk").val() == '1' && $("#email1") != '') {
+				return true;
+			} else {
+				return false;
+			}
+		}
+
 	function addrSearch() {
 		new daum.Postcode({
 			oncomplete : function(data) {
@@ -222,8 +231,6 @@
 				});
 	};
 	</script>
-        </div>
-	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>

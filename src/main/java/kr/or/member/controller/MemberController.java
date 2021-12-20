@@ -133,11 +133,9 @@ public class MemberController {
 		public String updateMember(Member member,Model model,String email1, String email2) {
 			//앞에서 받아오는값
 			String memberEmail = email1+"@"+email2;
-			Member m = service.selectOneMemberEmail(memberEmail);
-			m.setMemberEmail(memberEmail); 
+			member.setMemberEmail(memberEmail); 
 			int result = service.updateMember(member);
 			//데이터를 불러오는값
-		
 			if(result>0) {
 				model.addAttribute("msg","정보변경 성공");
 			}else {
