@@ -4,7 +4,7 @@
 
 	<meta charset="UTF-8">
 	<!-- 기본css -->
-	<link rel="stylesheet" href="/resources/commonCss/default.css">
+	<link rel="stylesheet" href="/resources/commonCss/mainhf.css">
 	<!-- 부트스트랩 -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -12,11 +12,29 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 		
 	<div class="header-title">
+		<div class="h-left">
+        <a href="#"><img class="search-img" src="/resources/mainImage/upload/search-droopy.jpg" style="width:18px;height:40px"></a>
+        </div> 
         <div class="h-logo">
 			<a href="/main.do">Musée d'art</a>
         </div>
-		<div class="h-left">
-        <nav class="header-nav">
+		<div class="h-right">
+		<c:choose>
+	    	<c:when test="${empty sessionScope.m }">
+				<a href="/loginFrm.do">Sign in <span>></span></a>
+			</c:when>
+			<c:when test="${not empty sessionScope.m && sessionScope.m.memberLevel == 0}">
+			    <a href="/adminpage.do">My Page[관리] <span>></span></a>
+			    <a href="/logout.do">로그아웃</a>
+			</c:when>
+			<c:when test="${not empty sessionScope.m && sessionScope.m.memberLevel == 1 || sessionScope.m.memberLevel == 2}">
+			    <a href="/mypage.do?memberNo=${sessionScope.m.memberNo }">My Page[일반] <span>></span></a>
+			    <a href="/logout.do"> 로그아웃</a>
+			</c:when>
+		</c:choose>
+		</div>   
+	</div>
+	<nav class="header-nav">
            <div class="navi">
                <ul>
                    <li><a href="/showList.do">공연 · 예매</a></li>
@@ -58,20 +76,3 @@
                </ul>
            </div>
 	</nav>
-        </div>  
-        <div class="h-right">
-		<c:choose>
-	    	<c:when test="${empty sessionScope.m }">
-				<a href="/loginFrm.do">Sign in <span>></span></a>
-			</c:when>
-			<c:when test="${not empty sessionScope.m && sessionScope.m.memberLevel == 0}">
-			    <a href="/adminpage.do">My Page[관리] <span>></span></a>
-			    <a href="/logout.do">로그아웃</a>
-			</c:when>
-			<c:when test="${not empty sessionScope.m && sessionScope.m.memberLevel == 1 || sessionScope.m.memberLevel == 2}">
-			    <a href="/mypage.do?memberNo=${sessionScope.m.memberNo }">My Page[일반] <span>></span></a>
-			    <a href="/logout.do"> 로그아웃</a>
-			</c:when>
-		</c:choose>
-		</div>  
-	</div>
