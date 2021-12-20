@@ -26,9 +26,11 @@
 					<p>전시 시간 : ${ex.exhibitionTimeStart } ~ ${ex.exhibitionTimeEnd }</p>
 					<p>장소 : 무지다 미술관 </p>
 					<p>수업료 : ${ex.exhibitionPrice }</p>
+					<c:if test="${sessionScope.m.memberLevel eq 0 }"> 
 					<div class="infoButton">
 						<button class="btn1 exhibitionView" exhibitionNo="${ex.exhibitionNo }">상세보기</button><button class="btn1 exhibitionUpdate" exhibitionNo="${ex.exhibitionNo }">수정하기</button><button class="btn1 exhibitionDelete" exhibitionNo="${ex.exhibitionNo }">삭제하기</button>
 					</div>
+					</c:if>
 				</div>	
 			</li>
 		</c:forEach>
@@ -37,6 +39,7 @@
 		<button class="moreBtn" id="more" currentCount="4" totalCount="${totalCount }" value="4">더보기 </button>
 		</c:if>
 		<input type="hidden" id="totalCount" value="${totalCount }">
+		<input type="hidden" id="memberLevel" value="${sessionScope.m.memberLevel }">
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 	<script>
@@ -55,6 +58,7 @@
 		});
 		$("#more").click(function(){
 			var start = $(this).val();
+			var memberLevel = $("#memberLevel").val();
 			$.ajax({
 				url : "/moreExhibition.do",
 				data : {start:start},
@@ -71,9 +75,13 @@
 						moreLi += "<p>전시 시간: "+data[i].exhibitionTimeStart+"~"+data[i].exhibitionTimeEnd+"</p>";
 						moreLi += "<p>장소: 무지다 미술관</p>";
 						moreLi += "<p>금액: "+data[i].exhibitionPrice+"</p>";
-						moreLi += "<div class = 'infoButton'>";
-						moreLi += "<button class='btn1 exhibitioinView' exhibitionNo='"+data[i].exhibitionNo+"'>상세보기</button><button class='btn1 exhibitionUpdate' exhibitionNo='"+data[i].exhibitionNo+"'>수정하기</button><button class='btn1 exhibitionDelete'exhibitionNo='"+data[i].exhibitionNo+"'>삭제하기</button>";
-						moreLi += "</div></div></li>";
+						if(memberLevel == 0){
+							moreLi += "<div class = 'infoButton'>";
+							moreLi += "<button class='btn1 exhibitioinView' exhibitionNo='"+data[i].exhibitionNo+"'>상세보기</button><button class='btn1 exhibitionUpdate' exhibitionNo='"+data[i].exhibitionNo+"'>수정하기</button><button class='btn1 exhibitionDelete'exhibitionNo='"+data[i].exhibitionNo+"'>삭제하기</button>";
+							moreLi += "</div></div></li>";
+						}else{
+							moreLi += "</div></div></li>";
+						}
 						$(".mainmenu").append(moreLi);
 					}
 					console.log(start);
