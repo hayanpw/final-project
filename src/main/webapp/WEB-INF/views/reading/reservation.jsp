@@ -76,7 +76,7 @@
 						result+='<form action="/reservationInfo.do" method="post">';
 						result+='<input type="hidden" name="readingDay" value="'+readingDay+'">';
 						result+='<input type="hidden" name="readingId" value="${sessionScope.m.memberId }">';
-						result+='<input type="submit" name="sub" class="btn btn-success btn-lg" value="상세내역보기" style="background-color: #563D39; border-color: #563D39">';
+						result+='<input type="submit" name="sub" class="btn btn-success btn-lg" value="상세내역보기" style="background-color: #064663; border-color: #064663">';
 						result+='</form>';
 						$("#result").html(result);
 					}else{
