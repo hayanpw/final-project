@@ -46,7 +46,7 @@
 					<th>인원</th>
 					<th>가격</th>
 					<th>상태</th>
-					<th>리뷰</th>
+					<th>리뷰/예매</th>
 					<th>체크리스트 작성 여부  <img id="q-img" src="resources/spaceImage/ask.png" style="width: 20px; "></th>
 				</tr>
 				<c:forEach items="${list }" var="l" varStatus="i">
@@ -73,7 +73,7 @@
 									<input type="hidden" id="rentalNo" value="${l.rentalNo }">
 								</c:when>
 								<c:when test="${ l.rentalDate>today  }">
-									리뷰 작성 기간이 아닙니다.
+									<button type="button" onclick="location.href='/deleteRes.do?rentalNo=${l.rentalNo}'">예매 삭제</button>
 								</c:when>
 								<c:otherwise>
 									<button  class="updateBtn" type="button" class="btn btn-info btn-lg" data-toggle="modal"

@@ -415,4 +415,12 @@ public class SpaceService {
 		
 		return result;		
 	}
+	//삭제 공간 조회
+	public ArrayList<Space> selectDelSpace() {
+		return dao.selectDelSpace();
+	}
+	//예매 취소
+	public int deleteRental(int rentalNo) {
+		return dao.deleteRetnalNo(rentalNo);
+	}
 }

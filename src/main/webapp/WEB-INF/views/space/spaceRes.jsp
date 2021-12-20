@@ -49,9 +49,9 @@
 						<c:forEach items="${st }" var ="st" varStatus="i">
 							<tr>
 								<td>이용시간<input type="hidden" value="${st.stNo }"></td>
-								<td><input type="text" id ="startTime" value="${st.startTime }" ></td>
+								<td><input type="text" id ="startTime" value="${st.startTime }" disabled="disabled" ></td>
 								<td>~</td>
-								<td><input type="text" id="endTime" value="${st.endTime }"></td>
+								<td><input type="text" id="endTime" value="${st.endTime }" disabled="disabled"></td>
 								<td><button id="chkBtn" type="button" class="checkBtn">선택</button><span>마감</span></td>
 							</tr>
 					</c:forEach>
@@ -63,35 +63,58 @@
 					</tr>
 					<tr>
 						<td>▶선택시간</td>
-						<td><input type="text" name="startTime"></td>
+						<td><input type="text" name="startTime" disabled="disabled"></td>
 						<td>~</td>
-						<td><input type="text" name="endTime"></td>
+						<td><input type="text" name="endTime" disabled="disabled"></td>
 					</tr>	
 			</table >		
 			<input type="hidden" name="stNo">
 		</div>
 			<div id="insert-btn">
-				<c:forEach items="${b }" var="b">
-					<c:choose>
-					<c:when test="${b.blackId eq sessionScope.m.memberId }">
-						<p>현재 예약이 불가능한 아이디 입니다.</p>
-					</c:when>
-					<c:when test="${empty sessionScope.m }">
-						<button class="btn btn-default" type="button"  onclick="location.href='/loginFrm.do'">로그인 후 예약하기</button>
-					</c:when>
-					<c:otherwise>
-						<button class="btn btn-default" id="resBtn" type="submit">신청하기</button>
-					</c:otherwise>				
-					</c:choose>
-				
-				</c:forEach>
+			<c:set var="black" value="false" />
+			<c:set var="logout" value="false" />
+			<c:set var="res" value="false" />
+			<c:forEach	items="${b }" var="b">
+				<c:if test="${not black }">
+			        <c:if test="${b.blackId eq sessionScope.m.memberId }">
+			        <div class="box" >현재 예약이 불가능한 아이디 입니다.</div>
+			            <c:set var="black" value="true" />
+			        </c:if>
+			    </c:if>
+				<c:if test="${not logout }">
+			        <c:if test="${empty sessionScope.m  }">
+			        	<button class="btn btn-default" type="button"  onclick="location.href='/loginFrm.do'">로그인 후 예약하기</button>
+			            <c:set var="logout" value="true" />
+			        </c:if>
+			    </c:if>
+				<c:if test="${not res }">
+			        <c:if test="${not empty sessionScope.m && b.blackId ne sessionScope.m.memberId }">
+			        <button onclick="return checkAgree();" class="btn btn-default" id="resBtn" type="submit">신청하기</button>
+			            <c:set var="res" value="true" />
+			        </c:if>
+			    </c:if>
+			</c:forEach>
 			</div>
 		</form>
 	</div>
 		<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
     <script>
+    function checkAgree() {
+	      if ($("[name=rentalDate]").val() == "") {
+	         alert("날짜를 선택 하세요.");
+	         $("[name=rentalDate]").focus();
+	         return false;
+	      }
+	      if ($("[name=startTime]").val() == "") {
+	         alert("시간을 선택 하세요.");
+	         $("[name=startTime]").focus();
+	         return false;
+	      }
+	   }
    		$(function () {
 			 $(".time-table").hide();
+			 
+			 
 		});
 	    $(function() {
 	        var today = new Date(); //오늘부터
