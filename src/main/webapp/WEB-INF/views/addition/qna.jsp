@@ -130,85 +130,6 @@
     i{
     color: #74655E;
     }
-   .collapsible {
-	  background-color: #777;
-	  color: white;
-	  cursor: pointer;
-	  padding: 18px;
-	  width: 100%;
-	  border: none;
-	  text-align: left;
-	  outline: none;
-	  font-size: 15px;
-	}
-	
-	.active, .collapsible:hover {
-	  background-color: #555;
-	}
-	
-	.collapsible:after {
-	  content: '\002B';
-	  color: white;
-	  font-weight: bold;
-	  float: right;
-	  margin-left: 5px;
-	}
-	
-	.active:after {
-	  content: "\2212";
-	}
-	
-	.content {
-	  padding: 0 18px;
-	  max-height: 0;
-	  overflow: hidden;
-	  transition: max-height 0.2s ease-out;
-	  background-color: #f1f1f1;
-	}
-	/* Dropdown Button */
-	.dropbtn {
-	  background-color: #3498DB;
-	  color: white;
-	  padding: 16px;
-	  font-size: 16px;
-	  border: none;
-	  cursor: pointer;
-	}
-	
-	/* Dropdown button on hover & focus */
-	.dropbtn:hover, .dropbtn:focus {
-	  background-color: #2980B9;
-	}
-	
-	/* The container <div> - needed to position the dropdown content */
-	.dropdown {
-	  position: relative;
-	  display: inline-block;
-	}
-	
-	/* Dropdown Content (Hidden by Default) */
-	.dropdown-content {
-	  display: none;
-	  position: absolute;
-	  background-color: #f1f1f1;
-	  min-width: 160px;
-	  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-	  z-index: 1;
-	}
-	
-	/* Links inside the dropdown */
-	.dropdown-content a {
-	  color: black;
-	  padding: 12px 16px;
-	  text-decoration: none;
-	  display: block;
-	}
-	
-	/* Change color of dropdown links on hover */
-	.dropdown-content a:hover {background-color: #ddd}
-	
-	/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
-	.show {display:block;}
 </style>
 </head>
 <body>
@@ -256,67 +177,12 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="container" id="container">
 		<div id="title">FAQ</div>
-		<div class="dropdown">
-		  <button onclick="myFunction()" class="dropbtn">Dropdown</button>
-		  <div id="myDropdown" class="dropdown-content">
-		    <a href="#home">Link 1</a>
-		    <a href="#">Link 2</a>
-		    <a href="#">Link 3</a>
-		  </div>
-		</div>
-		
-		<div class="tab-content">
-		  <div id="home" class="tab-pane fade in active" >
-		  	<button class="collapsible">Open Section 1</button>
-			<div class="content">
-			  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-			</div>
-			<button class="collapsible">Open Section 2</button>
-			<div class="content">
-			  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-			</div>
-			<button class="collapsible">Open Section 3</button>
-			<div class="content">
-			  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-			</div>
-		  </div>
-		  <div id="show" class="tab-pane fade">
-		    <img src="/resources/additionImage/전시실.jpg" width="100%" height="300px">
-		    <div class="content-text">
-		    <span>Musée d'art <span id="line">전시실</span>은</span><br>
-		    첨단 시설을 갖춘  공연장으로 413석의 객석을 갖추고 있으며 극장전면 LCD 모니터를 통해 공연자막과 동영상 서비스를 제공하고 있습니다. 특히 최신 음향 장치를 설치하여 객석 구석구석까지 소리가 잘 전달되는 탁월한 음향 수준을 구현했습니다. 또한 무대 전환을 도와주는 배튼이 총 102개로 전환 속도가 빨라 역동적인 무대를 만들어 낼 수 있습니다. 클래식뿐만 아니라 다양한 장르를 소화해 낼 수 있는 다목적공연장입니다.
-		    </div>
-		  </div>
-		  <div id="reading" class="tab-pane fade">
-			<img src="/resources/additionImage/열람실1.jpg" width="100%" height="300px">				    
-		    <div class="content-text">
-		    <span>Musée d'art <span id="line">열람실</span>은</span><br>
-		    첨단 시설을 갖춘  공연장으로 413석의 객석을 갖추고 있으며 극장전면 LCD 모니터를 통해 공연자막과 동영상 서비스를 제공하고 있습니다. 특히 최신 음향 장치를 설치하여 객석 구석구석까지 소리가 잘 전달되는 탁월한 음향 수준을 구현했습니다. 또한 무대 전환을 도와주는 배튼이 총 102개로 전환 속도가 빨라 역동적인 무대를 만들어 낼 수 있습니다. 클래식뿐만 아니라 다양한 장르를 소화해 낼 수 있는 다목적공연장입니다.
-		    </div>
-		  </div>
-		  <div id="space" class="tab-pane fade">
-		    <img src="/resources/additionImage/연습실.png" width="100%" height="300px">	
-		    <div class="content-text">
-		  <span>Musée d'art <span id="line">기타공간</span>은</span><br> 
-		    첨단 시설을 갖춘  공연장으로 413석의 객석을 갖추고 있으며 극장전면 LCD 모니터를 통해 공연자막과 동영상 서비스를 제공하고 있습니다. 특히 최신 음향 장치를 설치하여 객석 구석구석까지 소리가 잘 전달되는 탁월한 음향 수준을 구현했습니다. 또한 무대 전환을 도와주는 배튼이 총 102개로 전환 속도가 빨라 역동적인 무대를 만들어 낼 수 있습니다. 클래식뿐만 아니라 다양한 장르를 소화해 낼 수 있는 다목적공연장입니다.
-		    </div>
-		 </div>
-		</div>
-		
-		<button class="collapsible">Open Section 1</button>
-		<div class="content">
-		  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-		</div>
-		<button class="collapsible">Open Section 2</button>
-		<div class="content">
-		  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-		</div>
-		<button class="collapsible">Open Section 3</button>
-		<div class="content">
-		  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-		</div>
-		
-		
+		<ul id="titlemenu" class="nav nav-pills nav-justified">
+					<li class="active"><a data-toggle="pill" href="#home">공연장</a></li>
+					<li><a data-toggle="pill" href="#show">전시실</a></li>
+					<li><a data-toggle="pill" href="#reading">열람실</a></li>
+					<li><a data-toggle="pill" href="#space">기타공간</a></li>
+				</ul>
 		
 		
 		<div id="title2">질문과 답변</div>
@@ -407,37 +273,7 @@
 		}
 	});
 	
-	var coll = document.getElementsByClassName("collapsible");
-	var i;
-
-	for (i = 0; i < coll.length; i++) {
-	  coll[i].addEventListener("click", function() {
-	    this.classList.toggle("active");
-	    var content = this.nextElementSibling;
-	    if (content.style.maxHeight){
-	      content.style.maxHeight = null;
-	    } else {
-	      content.style.maxHeight = content.scrollHeight + "px";
-	    } 
-	  });
-	}
-	function myFunction() {
-		  document.getElementById("myDropdown").classList.toggle("show");
-		}
-
-		// Close the dropdown menu if the user clicks outside of it
-		window.onclick = function(event) {
-		  if (!event.target.matches('.dropbtn')) {
-		    var dropdowns = document.getElementsByClassName("dropdown-content");
-		    var i;
-		    for (i = 0; i < dropdowns.length; i++) {
-		      var openDropdown = dropdowns[i];
-		      if (openDropdown.classList.contains('show')) {
-		        openDropdown.classList.remove('show');
-		      }
-		    }
-		  }
-		}
+	
 	</script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
