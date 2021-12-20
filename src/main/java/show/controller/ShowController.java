@@ -33,6 +33,8 @@ public class ShowController {
 	public String showList(Model model) {
 		ArrayList<Show> list = service.selectShowList();
 		model.addAttribute("list", list);
+		model.addAttribute("headerImg", "/resources/uplaod/mianimg.jpg");
+		model.addAttribute("headerText", "오시는길");
 		return "show/showList";
 	}
 	
@@ -40,6 +42,7 @@ public class ShowController {
 	public String showView(int showNo, Model model) {
 		ShowAndReview snr = service.selectShowView(showNo);
 		model.addAttribute("snr",snr);
+		
 		return "show/showView";
 	}
 	

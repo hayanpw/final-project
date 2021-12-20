@@ -22,7 +22,7 @@
     <title>Document</title>
 </head>
 <body data-spy="scroll" data-target=".navbar" data-offset="50">
-  <jsp:include page="/WEB-INF/views/common/header.jsp"/>
+  <jsp:include page="/WEB-INF/views/common/header2.jsp"/>
      <!-- <div class="container" style="width: 100%;"> -->
         <div class="slider-for d1">
             <div class="sf"><img src="/resources/mainImage/upload/m-main1.jpg"></div>
