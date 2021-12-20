@@ -71,6 +71,7 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+	<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=igxqlbwr6x"></script>
 			<div id="back"></div>
 			<div class="container">
 			<div id="title">시설안내</div>
@@ -112,10 +113,41 @@
 				 </div>
 				</div>
 				
-				<p id="title2">찾아오시는 길</p>
+				<p id="title2">찾아오시는 길</p> <!--서버주소등록 새로해야함  -->
 				<div id="map" style="width:100%;height:500px;"></div>
 			</div>
-		
+	<script type="text/javascript">
+	window.onload=function(){
+		var map = new naver.maps.Map("map",{
+			center : new naver.maps.LatLng(37.8932925,127.6908453), //시작위치
+			zoom : 17, //배율
+			zoomControl : true
+		});
+		var marker = new naver.maps.Marker({ //위치마커
+			position : new naver.maps.LatLng(37.8932925,127.6908453),
+			map : map //어느 지도에 추가할지
+		});
+		var contentString = [
+			"<div class='iw_inner'>",
+			" 	<h3>Musée d'art</h3>",
+			" 	<p>강원도 춘천시 서면 박사로 854</p>",
+			"</div>"
+		].join("");
+		var infoWindow = new naver.maps.InfoWindow();
+		naver.maps.Event.addListener(marker,"click",function(e){
+			if(infoWindow.getMap()){ //infoWindow가 지도에 존재하면
+				infoWindow.close(); //infoWindow닫기
+			}else{ //infoWindow가 지도에 존재하지 않으면 
+				//미리 만들어둔 주소로 infoWindow를 생성
+				infoWindow = new naver.maps.InfoWindow({
+					content : contentString
+				});
+				//생성된 infoWindow를 map의 marker의 위치에 생성
+				infoWindow.open(map,marker);
+			}
+		});
+	}
+	</script>	
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>
