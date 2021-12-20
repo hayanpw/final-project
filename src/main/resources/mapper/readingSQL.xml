@@ -110,6 +110,23 @@
 			reading_checkout as readingCheckOut
 		from reading where reading_id=#{memberId}
 	</select>
+	<insert id="fixturesInsert" parameterType="fixtures">
+		insert into fixtures values(fixtures_seq.nextval,#{readingNo},sysdate,#{fixturesDay},#{fixturesNum},#{fixturesId},(select member_name from member where member_id='hy01'),#{fixturesCharger},#{fixturesTable},#{fixturesBlanket})
+	</insert>
+	<select id="selectOneFixtures" parameterType="reading" resultType="fixtures">
+		select
+			fixtures_no as fixturesNo,
+			reading_no as readingNo,
+			fixtures_time as fixturesTime,
+			fixtures_day as fixturesDay,
+			fixtures_num as fixturesNum,
+			fixtures_id as fixturesId,
+			fixtures_name as fixturesName,
+			fixtures_charger as fixturesCharger,
+			fixtures_table as fixturesTable,
+			fixtures_blanket as fixturesBlanket
+		from fixtures where fixtures_day=#{readingDay} and fixtures_id=#{readingId}
+	</select>
 </mapper>
 		
 

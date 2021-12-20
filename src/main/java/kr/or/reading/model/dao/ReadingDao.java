@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.or.reading.model.vo.Fixtures;
 import kr.or.reading.model.vo.Reading;
 import kr.or.reading.model.vo.ReadingBlack;
 
@@ -80,6 +81,14 @@ public class ReadingDao {
 	public ArrayList<Reading> selectMyReading(String memberId) {
 		List<Reading> re = sqlSession.selectList("reading.selectMyReading", memberId);
 		return (ArrayList<Reading>)re;
+	}
+
+	public int fixturesInsert(Fixtures fi) {
+		return sqlSession.insert("reading.fixturesInsert", fi);
+	}
+
+	public Fixtures selectOneFixtures(Reading re) {
+		return sqlSession.selectOne("reading.selectOneFixtures", re);
 	}
 
 	

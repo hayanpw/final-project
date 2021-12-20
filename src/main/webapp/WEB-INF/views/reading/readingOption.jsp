@@ -12,7 +12,7 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 		<div class="container">
 			<div class="info">
-				<h1>예약 내역</h1>
+				<h1>예약 내역 & 비품 대여</h1>
 				<h3>예약일 : ${re.readingTime}</h3>
 				<h3>예약일자 : ${re.readingDay}</h3>
 				<h3>좌석번호 : ${re.readingNum}</h3>
@@ -28,18 +28,38 @@
 						<h3>이용시간 : 오후 14:00 ~ 19:00</h3>
 					</c:when>
 				</c:choose>
+				<c:choose>
+					<c:when test="${(fi.fixturesCharger eq 1 and fi.fixturesTable eq 1) and fi.fixturesBlanket eq 1 }">
+						<h3>비품대여 : 충전기, 독서대, 담요</h3>
+					</c:when>
+					<c:when test="${fi.fixturesCharger eq 1 and fi.fixturesTable eq 1 }">
+						<h3>비품대여 : 충전기, 독서대</h3>
+					</c:when>
+					<c:when test="${fi.fixturesCharger eq 1 and fi.fixturesBlanket eq 1 }">
+						<h3>비품대여 : 충전기, 담요</h3>
+					</c:when>
+					<c:when test="${fi.fixturesTable eq 1 and fi.fixturesBlanket eq 1 }">
+						<h3>비품대여 : 독서대, 담요</h3>
+					</c:when>
+					<c:when test="${fi.fixturesCharger eq 1 }">
+						<h3>비품대여 : 충전기</h3>
+					</c:when>
+					<c:when test="${fi.fixturesTable eq 1 }">
+						<h3>비품대여 : 독서대</h3>
+					</c:when>
+					<c:when test="${fi.fixturesBlanket eq 1 }">
+						<h3>비품대여 : 담요</h3>
+					</c:when>
+					<c:otherwise>
+						<h3>비품대여 : 없음</h3>
+					</c:otherwise>
+				</c:choose>
 			</div>
 			<br>
 			
 			<div class="form-box">
-				<form action="/fixtuers.do" method="post">
-					<input type="hidden" name="readingNo" value="${re.readingNo }">
-					<input type="hidden" name="readingDay" value="${re.readingDay }">
-					<input type="hidden" name="readingNum" value="${re.readingNum }">
-					<input type="hidden" name="readingId" value="${sessionScope.m.memberId }">
-					<input type="hidden" name="readingName" value="${re.readingName }">
-					<input type="hidden" name="sub" class="btn btn-success btn-lg" value="비품대여" style="background-color: #BDB19A; border-color: #BDB19A">
-				</form>
+				<input type="hidden" name="readingDay" value="${re.readingDay }">
+				<input type="hidden" name="modals" class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal" value="비품대여" style="background-color: #BDB19A; border-color: #BDB19A">
 	<%-- 		<a href="/readingOption1.do" class="btn btn-success btn-lg">수정하기-미구현(다 구현후 좌석선택을 오전/오후/종일로 나누고 이용시간 수정만 확장예정)</a>--%>
 	
 				<button class="hidden" id="cancel" style="margin-left: 10px;">예약취소</button>
@@ -51,12 +71,45 @@
 			<h3 style="color : red">신청 외의 좌석 이용적발시</h3>
 			<h3 style="color : red">즉시 퇴실 + 1주일 열람실 이용 제한</h3>
 		</div>
+		
+		<!-- Modal -->
+		<div id="myModal" class="modal fade" role="dialog">
+		  <div class="modal-dialog">
+		
+		    <!-- Modal content-->
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal">&times;</button>
+		        <h2 class="modal-title">비품대여</h2>
+		      </div>
+		      <div class="modal-body">
+		        <form action="/fixturesInsert.do" method="post" class="modal-form">
+					<input type="hidden" name="readingNo" value="${re.readingNo }">
+					<input type="hidden" name="fixturesDay" value="${re.readingDay }">
+					<input type="hidden" name="fixturesNum" value="${re.readingNum }">
+					<input type="hidden" name="fixturesId" value="${sessionScope.m.memberId }">
+					<input type="hidden" name="fixturesName" value="${re.readingName }">
+					<label><h4><input type="checkbox" name="fixturesCharger" value="1"> 충전기</h4></label><br>
+					<label><h4><input type="checkbox" name="fixturesTable" value="1"> 독서대</h4></label><br>
+					<label><h4><input type="checkbox" name="fixturesBlanket" value="1"> 담요</h4></label><br>
+					<div><input type="hidden" name="sub" class="btn btn-success btn-lg" value="비품대여" style="background-color: #BDB19A; border-color: #BDB19A"></div>
+				</form>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+		      </div>
+		    </div>
+		
+		  </div>
+		</div>	
+	
 	<script>
 	$(function(){
 		var redate = new Date($("input[name=readingDay]").val());
 		var today = new Date();
 		if(redate>today){
 			$("input[name=sub]").attr("type","submit");
+			$("input[name=modals]").attr("type","button");
 			$("#cancel").attr("class","btn btn-danger btn-lg");
 		}
 	});

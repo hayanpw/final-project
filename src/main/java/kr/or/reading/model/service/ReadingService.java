@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.reading.model.dao.ReadingDao;
+import kr.or.reading.model.vo.Fixtures;
 import kr.or.reading.model.vo.Reading;
 import kr.or.reading.model.vo.ReadingBlack;
 
@@ -121,6 +122,17 @@ public class ReadingService {
 	public ArrayList<Reading> selectMyReading(String memberId) {
 		ArrayList<Reading> re = dao.selectMyReading(memberId);
 		return re;
+	}
+
+
+	public int fixturesInsert(Fixtures fi) {
+		return dao.fixturesInsert(fi);
+	}
+
+
+	public Fixtures selectOneFixtures(Reading re) {
+		Fixtures fi = dao.selectOneFixtures(re);
+		return fi;
 	}
 
 
