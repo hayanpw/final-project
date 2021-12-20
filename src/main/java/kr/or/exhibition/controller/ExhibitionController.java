@@ -274,5 +274,25 @@ public class ExhibitionController {
 			return count;
 		}
 	}
+	@RequestMapping(value="/exhibitionMypage.do")
+	public String exhibitionMyPage(int memberNo,Model model) {
+		HashMap<String, Object> map = service.selectExhibitionPaymentList(memberNo);
+		model.addAttribute("list",map.get("list"));
+		model.addAttribute("last",map.get("last"));
+		model.addAttribute("totalCount",map.get("totalCount"));
+		return "exhibition/exhibitionMypage";
+	}
+	
+	@RequestMapping(value="/deletePayment.do")
+	public String deletePayment(int memberNo, long paymentNo,Model model) {
+		int result = service.deletePayment(paymentNo);
+		if(result>0) {
+			model.addAttribute("msg", "결제 취소 성공");			
+		}else {
+			model.addAttribute("msg", "결제 취소 실패");
+		}
+		model.addAttribute("loc", "/exhibitionMypage.do?memberNo="+memberNo);
+		return "common/msg";
+	}
 		
 }

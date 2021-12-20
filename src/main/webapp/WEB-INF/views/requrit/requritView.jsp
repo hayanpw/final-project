@@ -14,10 +14,10 @@
 	 <div class="container">
 		
 		<c:choose>	
-			<c:when test="${r.period le 0 }">
+			<c:when test="${r.period ge 0 }">
 				<p>마감된 공고입니다</p>
 			</c:when>
-		<c:when test="${r.period ge 0 }">
+		<c:when test="${r.period le 0 }">
         <h2 class="title">${r.requritTitle }</h2>
         <div class="sector">
                 <span class="first"><span class="line">경력</span></span>
@@ -49,14 +49,13 @@
             	${r.requritDetail }
         </div>
         <c:choose>
-        	<c:when test="${empty sessionScope }">
+        	<c:when test="${sessionScope.m.memberLevel eq 1 || sessionScope.m.memberLevel eq 2 }">
        			 <button type="button" class="btn requritBtn" onclick="goResumeFrm();">지원하기</button>
-       			 <button type="button" class="btn requritBtn" onclick="goResumeList();">지원자보기</button>
         	</c:when>
-         	<c:when test="${sessionScope.member.MemberLevel eq 0 }">
-        		<button type="button" class="btn requritBtn">삭제하기</button>
-        		<button type="button" class="btn requritBtn">수정하기</button>
-        		
+         	<c:when test="${sessionScope.m.memberLevel eq 0 }">
+        		<button type="button" class="btn requritBtn" id="deleteRequrit">삭제하기</button>
+        		<button type="button" class="btn requritBtn" id="updateRequrit">수정하기</button>
+        		<button type="button" class="btn requritBtn" onclick="goResumeList();">지원자보기</button>
        	 	</c:when>
         </c:choose>
 		</c:when>
@@ -75,8 +74,17 @@
 	}
 	function goResumeList(){
 		var requritNo = $("#hide").val();
-		location.href="/resumeList.do?requritNo="+requritNo;
+		var requritTitle = $(".title").html();
+		location.href="/resumeList.do?requritNo="+requritNo+"&requritTitle="+requritTitle;
 	}
+	$("#deleteRequrit").click(function(){
+		var requritNo = $("#hide").val();
+		location.href ="/deleteRequrit2.do?requritNo="+requritNo;
+	});
+	$("#updateRequrit").click(function(){
+		var requritNo = $("#hide").val();
+		location.href ="/updateRequritFrm.do?requritNo="+requritNo;
+	});
 	</script>
 </body>
 </html>

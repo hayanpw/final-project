@@ -112,4 +112,49 @@
 	<select id="checkTotalCount" parameterType="hashmap" resultType="_int">
 		select nvl(sum(payment_quantity),0) from payment where exhibition_no=#{exhibitionNo} and book_date=#{exhibitionDate}
 	</select>
+	<select id="selectExhibitionPaymenyt" parameterType="_int" resultType="exbpm">
+		select 
+			payment_no as paymentNo,
+			payment_select as paymenySelect,
+			academy_no as academyNo,
+			exhibition_no as exhibitionNo,
+			payment_price as paymentPrice,
+			payment_date as paymentDate,
+			payment_cancel as paymentCancel,
+			payment_quantity as paymentQuantity,
+			book_date as bookDate,
+			member_no as memberNo,
+			check_email as checkEmail,
+			exhibition_title as exhibitionTitle,
+            exhibition_start as exhibitionStart,
+            exhibition_end as exhibitionEnd,
+            exhibition_time_start as exhibitionTimeStart,
+            exhibition_time_end as exhibitionTimeEnd
+		from payment join exhibition using(exhibition_no) where member_no=#{memberNo} and payment_select = 1  and book_date > sysdate
+	</select>
+	<select id="selectExhibitionPaymenytLast" parameterType="_int" resultType="exbpm">
+	<![CDATA[
+		select 
+			payment_no as paymentNo,
+			payment_select as paymenySelect,
+			academy_no as academyNo,
+			exhibition_no as exhibitionNo,
+			payment_price as paymentPrice,
+			payment_date as paymentDate,
+			payment_cancel as paymentCancel,
+			payment_quantity as paymentQuantity,
+			book_date as bookDate,
+			member_no as memberNo,
+			check_email as checkEmail,
+			exhibition_title as exhibitionTitle,
+            exhibition_start as exhibitionStart,
+            exhibition_end as exhibitionEnd,
+            exhibition_time_start as exhibitionTimeStart,
+            exhibition_time_end as exhibitionTimeEnd
+		from payment join exhibition using(exhibition_no) where member_no=#{memberNo} and payment_select = 1  and book_date < sysdate
+	]]>	
+	</select>
+	<update id="deletePayment" parameterType="_long">
+		update payment set payment_cancel = 1 where payment_no = #{paymentNo}
+	</update>
 </mapper>

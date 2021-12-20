@@ -91,4 +91,90 @@
 		update academy set academy_title = #{academyTitle},academy_start = #{academyStart}, academy_end = #{academyEnd}, academy_photo=#{academyPhoto}, academy_teacher=#{academyTeacher}
 			,academy_place = #{academyPlace}, academy_price=#{academyPrice},academy_detail=#{academyDetail},academy_category=#{academyCategory} where academy_no=#{academyNo}
 	</update>
+	<select id="academtAdminList" resultType="ac">
+	<![CDATA[
+		select 
+  			academy_no as academyNo,
+  			academy_title as academyTitle,
+  			academy_start as academyStart,
+  			academy_end as academyEnd,
+  			academy_photo as academyPhoto,
+  			academy_teacher as academyTeacher,
+  			academy_place as academyPlace,
+  			academy_price as academyPrice,
+  			academy_detail as academyDetail,
+  			academy_category as academyCategory,
+  			academy_cancel as academyCancel
+  		from academy 
+  			where academy_end > sysdate order by 1 desc
+  	]]>	
+	</select>
+	<select id="academtAdminListLast" resultType="ac">
+		<![CDATA[
+		select 
+  			academy_no as academyNo,
+  			academy_title as academyTitle,
+  			academy_start as academyStart,
+  			academy_end as academyEnd,
+  			academy_photo as academyPhoto,
+  			academy_teacher as academyTeacher,
+  			academy_place as academyPlace,
+  			academy_price as academyPrice,
+  			academy_detail as academyDetail,
+  			academy_category as academyCategory,
+  			academy_cancel as academyCancel
+  		from academy
+  			where academy_end < sysdate order by 1 desc
+  	]]>	
+	</select>
+	<select id="countingStar" parameterType="_int" resultType="_int">
+		select nvl(sum(payment_quantity),0) from payment where academy_no=#{academyNo} and payment_cancel=0
+	</select>
+	<select id="selecAcademtPaymentList" parameterType="_int" resultType="acp">
+	select 
+			payment_no as paymentNo,
+			payment_select as paymenySelect,
+			academy_no as academyNo,
+			exhibition_no as exhibitionNo,
+			payment_price as paymentPrice,
+			payment_date as paymentDate,
+			payment_cancel as paymentCancel,
+			payment_quantity as paymentQuantity,
+			book_date as bookDate,
+			member_no as memberNo,
+			check_email as checkEmail,
+			academy_title as academyTitle,
+            academy_start as academyStart,
+            academy_end as academyEnd,
+            academy_place as academyPlace,
+            academy_teacher as academyTeacher,
+            academy_category as academyCategory
+		from payment join academy using(academy_no) where member_no=#{memberNo} and payment_select = 2  and academy_end > sysdate
+	</select>
+	<select id="selecAcademtPaymentListLast" parameterType="_int" resultType="acp">
+	<![CDATA[
+		select 
+			payment_no as paymentNo,
+			payment_select as paymenySelect,
+			academy_no as academyNo,
+			exhibition_no as exhibitionNo,
+			payment_price as paymentPrice,
+			payment_date as paymentDate,
+			payment_cancel as paymentCancel,
+			payment_quantity as paymentQuantity,
+			book_date as bookDate,
+			member_no as memberNo,
+			check_email as checkEmail,
+			academy_title as academyTitle,
+            academy_start as academyStart,
+            academy_end as academyEnd,
+            academy_place as academyPlace,
+            academy_teacher as academyTeacher,
+            academy_category as academyCategory
+		from payment join academy using(academy_no) where member_no=#{memberNo} and payment_select = 2  and academy_end < sysdate
+	]]>	
+	</select>
+	<update id="deleteAcPayment" parameterType="_long">
+		update payment set payment_cancel = 1 where payment_no = #{paymentNo}
+	</update>
 </mapper>

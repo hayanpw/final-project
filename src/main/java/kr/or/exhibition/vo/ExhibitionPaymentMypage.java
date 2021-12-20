@@ -3,7 +3,7 @@ package kr.or.exhibition.vo;
 import lombok.Data;
 
 @Data
-public class ExhibitionPayment {
+public class ExhibitionPaymentMypage {
 	private long paymentNo;
 	private int paymentSelect;
 	private int academyNo;
@@ -12,9 +12,12 @@ public class ExhibitionPayment {
 	private String paymentDate;
 	private int paymentCancel;
 	private int paymentQuantity;
-	private String exhibitionTitle;
-	private String exhibitionPhoto;
 	private String bookDate;
 	private int memberNo;
 	private int checkEmail;
+	private String exhibitionTitle;
+	private String exhibitionStart;
+	private String exhibitionEnd;
+	private String exhibitionTimeStart;
+	private String exhibitionTimeEnd;
 }

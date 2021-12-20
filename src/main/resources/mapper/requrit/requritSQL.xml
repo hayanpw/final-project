@@ -39,4 +39,12 @@
 			requrit_cancel as requritCancel 
 			from teacher_requrit where requrit_no=#{requritNo}
    	</select>
+   	<update id="deleteRequrit2" parameterType="_int">
+		update teacher_requrit set requrit_cancel = 1 where requrit_no = #{requritNo}
+	</update>
+	<update id="updateRequrit" parameterType="rq">
+		update teacher_requrit set requrit_title = #{requritTitle},requrit_start = #{requritStart},requrit_end = #{requritEnd},requrit_career = #{requritCareer}
+		,requrit_gender = #{requritGender}, requrit_field = #{requritField}, requrit_detail = #{requritDetail}, employee_type = #{employeeType}
+		where requrit_no = #{requritNo}
+	</update>
 </mapper>

@@ -49,4 +49,14 @@ public class ResumeDao {
 		ResumeTbl rt = sqlSession.selectOne("resume.selectOneFile", fileNo);
 		return rt;
 	}
+
+	public int updateMemberLevel(int memberNo) {
+		int result = sqlSession.update("resume.updateMemberLevel",memberNo);
+		return result;
+	}
+
+	public int deleteRequrit(int requritNo) {
+		int result = sqlSession.update("resume.deleteRequrit",requritNo);
+		return result;
+	}
 }
