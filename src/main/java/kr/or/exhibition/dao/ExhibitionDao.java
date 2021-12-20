@@ -88,4 +88,19 @@ public class ExhibitionDao {
 		int totalCount = sqlSession.selectOne("exhibition.checkTotalCount",map);
 		return totalCount;
 	}
+
+	public ArrayList<ExhibitionPayment> selectExhibitionPaymentList(int memberNo) {
+		List<ExhibitionPayment> list = sqlSession.selectList("exhibition.selectExhibitionPaymenyt",memberNo);
+		return (ArrayList<ExhibitionPayment>)list;
+	}
+
+	public ArrayList<ExhibitionPayment> selectExhibitionPaymentListLast(int memberNo) {
+		List<ExhibitionPayment> last = sqlSession.selectList("exhibition.selectExhibitionPaymenytLast",memberNo);
+		return (ArrayList<ExhibitionPayment>)last;
+	}
+
+	public int deletePayment(long paymentNo) {
+		int result = sqlSession.update("exhibition.deletePayment",paymentNo);
+		return result;
+	}
 }

@@ -89,6 +89,9 @@
                     </td>
                 </tr>
             </table>
+            <div style="text-align: right;">
+	            <button class="btn btn-default">메인으로</button>
+            </div>
         </div>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>

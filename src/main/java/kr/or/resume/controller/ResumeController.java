@@ -137,9 +137,10 @@ public class ResumeController {
 		return "/resources/resume/img/editor/"+filepath;
 	}
 	@RequestMapping(value="/resumeList.do")
-	public String resumeList(Model model, int requritNo) {
+	public String resumeList(Model model, int requritNo, String requritTitle) {
 		ArrayList<Resume> list = service.selectResumeList(requritNo);
 		model.addAttribute("list",list);
+		model.addAttribute("requritTltle",requritTitle);
 		return "resume/resumeList";
 	}
 	@RequestMapping(value="/resumeView.do")
@@ -192,5 +193,16 @@ public class ResumeController {
 				break;
 			}
 		}
+	}
+	@RequestMapping(value="/updateMemberLevel.do")
+	public String updateMemberLevel(int memberNo, int requritNo ,Model model) {
+		int result = service.updateMemberLevel(memberNo,requritNo);
+		if(result>0) {
+			model.addAttribute("msg", "회원 등급 변경 성공 공고 수정 완료");			
+		}else {
+			model.addAttribute("msg", "실패");
+		}
+		model.addAttribute("loc","/requritList.do?reqPage=1");
+		return "common/msg";
 	}
 }

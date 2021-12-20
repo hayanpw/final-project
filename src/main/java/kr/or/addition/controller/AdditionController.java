@@ -9,6 +9,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -31,6 +32,7 @@ import kr.or.addition.model.vo.BoardPageData;
 import kr.or.addition.model.vo.BoardViewData;
 import kr.or.addition.model.vo.FileVO;
 import kr.or.addition.model.vo.LikeNo;
+import kr.or.addition.model.vo.MyPageData;
 
 @Controller
 public class AdditionController {
@@ -185,14 +187,19 @@ public class AdditionController {
 	public String insertComment(int boardType, BoardComment bc, Model model) {
 		int result = service.insertComment(bc);
 		if (result > 0) {
-			model.addAttribute("msg", "댓글등록성공");
-		} else {
-			model.addAttribute("msg", "댓글등록실패");
-		}
-		if (boardType == 2) {
-			model.addAttribute("loc", "/boardView.do?boardType=2&boardNo=" + bc.getBoardRef());
-		} else {
-			model.addAttribute("loc", "/boardView.do?boardType=3&boardNo=" + bc.getBoardRef());
+			if (boardType == 2) {
+				return "redirect:/boardView.do?boardType=2&boardNo=" + bc.getBoardRef();
+			} else {
+				return "redirect:/boardView.do?boardType=3&boardNo=" + bc.getBoardRef();
+			}
+		}else {
+			model.addAttribute("msg", "등록실패");
+			if (boardType == 2) {
+				model.addAttribute("loc", "/boardView.do?boardType=2&boardNo=" + bc.getBoardRef());
+			} else {
+				model.addAttribute("loc", "/boardView.do?boardType=3&boardNo=" + bc.getBoardRef());
+			}
+			
 		}
 		return "common/msg";
 	}
@@ -410,7 +417,7 @@ public class AdditionController {
 
 	}
 	
-	 */
+	*/
 	
 	//규제하기
 	@RequestMapping(value = "/regulationBoard.do")
@@ -489,10 +496,14 @@ public class AdditionController {
 		}
 	}
 	
+	//마이페이지
 	@RequestMapping(value = "/myFree.do")
 	public String myFree(String memberId,Model model) {
-		ArrayList<Board> list = service.myFree(memberId);
-		model.addAttribute("list",list);
+		MyPageData mpd=service.myFree(memberId);
+		model.addAttribute("noticeList",mpd.getNoticeList());
+		model.addAttribute("freeList",mpd.getFreeList());
+		model.addAttribute("qnaList",mpd.getQnaList());
+		model.addAttribute("commentList",mpd.getCommentList());
 		return "addition/myFree";
 	}
 	

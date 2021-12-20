@@ -17,5 +17,7 @@ public class AcademyPayment {
 	private String academyTitle;
 	private String academyPhoto;
 	private String academyTeacher;
+	private String academyPlace;
+	private String academyCategory;
 	private int memberNo;
 }

@@ -10,6 +10,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Repository;
+
+import kr.or.member.vo.DeleteMember;
 import kr.or.member.vo.Member;
 import kr.or.member.vo.MemberPage;
 
@@ -94,6 +96,11 @@ public class MemberDao {
 	public int searchTotalCount(HashMap<String, Object> map) {
 		int totalCount = sqlSession.selectOne("member.searchTotalCount",map);
 		return totalCount;
+	}
+	public ArrayList<DeleteMember> deleteMember(int memberNo) {
+		List<DeleteMember> list = sqlSession.selectList("member.selectDeleteMember",memberNo);
+
+		return (ArrayList<DeleteMember>)list;
 	}
 }
 

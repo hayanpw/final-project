@@ -113,6 +113,7 @@
 				</div>
 				
 				<p id="title2">찾아오시는 길</p>
+				<div id="map" style="width:100%;height:500px;"></div>
 			</div>
 		
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>

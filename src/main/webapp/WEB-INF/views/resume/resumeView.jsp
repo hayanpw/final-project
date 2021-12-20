@@ -41,36 +41,21 @@
            <p><span class="line">간단</span>소개</p>
             ${r.resumeDetail }
         </div>
-        <c:choose>
-        	<c:when test="${empty sessionScope }">
-       			 <button type="button" class="btn requritBtn" onclick="goResumeFrm();">지원하기</button>
-       			 <button type="button" class="btn requritBtn" onclick="goResumeList();">지원자보기</button>
-        	</c:when>
-         	<c:when test="${sessionScope.member.MemberLevel eq 0 }">
-        		<button type="button" class="btn requritBtn">삭제하기</button>
-        		<button type="button" class="btn requritBtn">수정하기</button>
-        		
-       	 	</c:when>
-        </c:choose>
+        		<button type="button" class="btn requritBtn" id="updateMemberLevel" memberNo=${r.memberNo }>선생님 으로</button>
         <input type="hidden" id ="hide" value="${r.requritNo }">
     </div>
   	
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 	<script>
-	function goResumeFrm(){
-		var requritTitle = $(".title").html();
-		var requritNo = $("#hide").val();
-		if(confirm(requritTitle+"에지원 하시겠습니까")){
-			location.href="/resumeFrm.do?requritNo="+requritNo+"&requritTitle="+requritTitle;
-		}
-	}
-	function goResumeList(){
-		var requritNo = $("#hide").val();
-		location.href="/resumeList.do?requritNo="+requritNo;
-	}
 	function download(fileNo){
 		location.href="/resumeFileDown.do?fileNo="+fileNo;
 	}
+	
+	$("#updateMemberLevel").click(function(){
+		var memberNo = $(this).attr("memberNo");
+		var requritNo = $("#hide").val();
+		lacation.href="/updateMemberLevel.do?memberNo="+memberNo+"&requritNo="+requritNo;
+	});
 	</script>
 </body>
 </html>

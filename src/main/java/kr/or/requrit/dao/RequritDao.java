@@ -38,4 +38,14 @@ public class RequritDao {
 		Requrit r = sqlSession.selectOne("requrit.selectOneRequrit",requritNo);
 		return r;
 	}
+
+	public int deleteRequrit2(int requritNo) {
+		int result = sqlSession.update("requrit.deleteRequrit2",requritNo);
+		return result;
+	}
+
+	public int updateRequrit(Requrit r) {
+		int result = sqlSession.update("requrit.updateRequrit",r);
+		return result;
+	}
 }

@@ -136,7 +136,29 @@
 			#{level}
 			</foreach>
 		</if>
-			
 	</select>
+	<select id="selectDeleteMember" parameterType="_int" resultType="md">
+		select '1' as selectNo,reserv_no as reserveNo,show_name as reserveTitle,show_date as reserveDate 
+		from show_reserv
+		join show using(show_no)
+		where member_id=(select member_id from member where member_no=#{memberNo}) and show_date > to_char(sysdate,'yyyy-mm-dd')
+		union
+		select '2',rental_no,space_name,rental_date 
+		from rental 
+		join space using (space_no)
+		where member_id=(select member_id from member where member_no=#{memberNo}) and used_board = 0
+		union
+		select '3', reading_no,'열람',reading_day from reading where reading_id=(select member_id from member where member_no=#{memberNo}) and  reading_day > to_char(sysdate,'yyyy-mm-dd')
+		union
+		select '4',payment_no, academy_title,academy_start||'~'||academy_end 
+		from payment 
+		join academy using (academy_no)
+		where payment_select=2 and member_no=#{memberNo} and  book_date > to_char(sysdate,'yyyy-mm-dd')
+		union
+		select '5', payment_no,exhibition_title,book_date
+		from payment
+		join exhibition using (exhibition_no)
+		where payment_select=1 and member_no=#{memberNo} and  book_date > to_char(sysdate,'yyyy-mm-dd')
+ 	</select>
 	
 </mapper>

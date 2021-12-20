@@ -1,9 +1,11 @@
 package kr.or.resume.service;
 
+import java.beans.Transient;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.resume.dao.ResumeDao;
 import kr.or.resume.vo.Resume;
@@ -45,6 +47,16 @@ public class ResumeService {
 	public ResumeTbl selectOneResumeTbl(int fileNo) {
 		ResumeTbl rt = dao.selectOneResumeTbl(fileNo);
 		return rt;
+	}
+	@Transactional
+	public int updateMemberLevel(int memberNo, int requritNo) {
+		int result = dao.updateMemberLevel(memberNo);
+		if(result >0) {
+			return dao.deleteRequrit(requritNo);
+		}else {
+			return 0;
+		}
+		
 	}
 
 }

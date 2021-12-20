@@ -101,7 +101,7 @@
 	
 	<!--댓글등록-->
 	<insert id="insertComment" parameterType="kr.or.addition.model.vo.BoardComment" >
-		insert into comment1 values (comment1_seq.nextval,#{bcLevel},#{bcWriter},#{bcContent},to_char(sysdate,'yyyy-mm-dd hh:mi:ss'),#{boardRef},#{bcRef,jdbcType=INTEGER},#{bcidRef})
+		insert into comment1 values (comment1_seq.nextval,#{bcLevel},#{bcWriter},#{bcContent},to_char(sysdate,'yyyy-mm-dd hh24:mi:ss'),#{boardRef},#{bcRef,jdbcType=INTEGER},#{bcidRef})
 	</insert>
 	
 	<!--댓글삭제  -->
@@ -248,13 +248,35 @@
 	from likenum where board_ref=#{boardNo} and member_id=#{memberId}
 	</select>
 	
-	<select id="myFree" parameterType="string" resultType="board">
-	select 
+	<!--내가 쓴 글 조회-->
+	<select id="myList" parameterType="map" resultType="board">
+	select
+	rnum as bnum,
 	board_no as boardNo,
-	board_writer as boardWriter,
 	board_title as boardTitle,
+	board_writer as boardWriter,
+	readcount as readCount,
 	reg_date as regDate,
-	boardtype as boardType 
-	from board where board_writer=#{memberId} order by board_no desc
+	cnt as commentCount
+	from(
+	select rownum as rnum,n.* from
+	(select board_no,board_title,board_writer,readcount,reg_date,nvl(count, 0) as cnt
+	from(select*from board where boardtype=#{boardType} and board_writer =#{memberId}) 
+	left join (select board_no,count(*) as count from (select board_no,board_ref from board join comment1 on (board_no=board_ref)) group by board_no) 
+	using (board_no) order by board_no desc)n)
+	</select>
+	
+	<!--내가 쓴 댓글 조회-->
+	<select id="myCommentList" parameterType="string" resultType="kr.or.addition.model.vo.BoardComment">
+	select 
+	bc_writer as bcWriter,
+	bc_content as bcContent,
+	board_ref as boardRef,
+	board_title as boardTitle,
+	boardtype as boardType,
+	comment1.reg_date as regDate
+	from comment1 
+	join board on (board_no=board_ref)
+	where bc_writer=#{memberId} order by comment1.reg_date desc
 	</select>
 </mapper>

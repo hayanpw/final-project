@@ -12,6 +12,8 @@ public class BoardComment {
 	private int boardRef;
 	private Integer bcRef;
 	private String bcidRef;
+	private String boardTitle;
+	private int boardType;
 	
 	public String getBcContentBr() {
 		return bcContent.replace("\r\n", "<br>");

@@ -89,6 +89,37 @@ public class AcademyDao {
 		return result;
 	}
 
+	public ArrayList<Academy> acadeyAdminList() {
+		List<Academy> list = sqlSession.selectList("academy.academtAdminList");
+		return (ArrayList<Academy>)list;
+	}
+
+	public ArrayList<Academy> academyAdminListLast() {
+		List<Academy> last = sqlSession.selectList("academy.academtAdminListLast");
+		return (ArrayList<Academy>)last;
+	}
+
+	public int countingStar(int academyNo) {
+		int studentCount = sqlSession.selectOne("academy.countingStar",academyNo);
+		System.out.println(studentCount);
+		return studentCount;
+	}
+
+	public ArrayList<AcademyPayment> selecAcademtPaymentList(int memberNo) {
+		List<AcademyPayment> list = sqlSession.selectList("academy.selecAcademtPaymentList",memberNo);
+		return (ArrayList<AcademyPayment>)list;
+	}
+
+	public ArrayList<AcademyPayment> selecAcademtPaymentListLast(int memberNo) {
+		List<AcademyPayment> last = sqlSession.selectList("academy.selecAcademtPaymentListLast",memberNo);
+		return (ArrayList<AcademyPayment>)last;
+	}
+
+	public int deleteAcPayment(long paymentNo) {
+		int result = sqlSession.update("academy.deleteAcPayment",paymentNo);
+		return result;
+	}
+
 	//public int academyUpdate(Academy a) {
 	//	int result = sqlSession.update("academy.academyUpdate",a);
 	//	return result;

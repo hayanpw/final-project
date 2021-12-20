@@ -8,20 +8,28 @@
 <title>Insert title here</title>
 <style type="text/css">
 #title {
-	width: 190px;
+	width: 220px;
 	border-top: 7px solid #563D39;
 	margin-top: 70px;
 	margin-left: 70px;
 	font-weight: 700;
-	font-size: 40px;
+	font-size: 30px;
 	margin-bottom: 50px;
 }
+.boardName{
+	margin-top: 70px;
+	margin-left: 30px;
+	margin-bottom:20px;
+	font-weight: 700;
+	font-size: 30px;
+	color: #563D39;
+}
 
-#table_id {
+.display {
 	text-align: center;
 }
 
-#table, #nav {
+#table, #nav, .table{
 	margin-left: 50px;
 	margin-right: 50px;
 	margin-bottom: 50px;
@@ -31,15 +39,15 @@
 	width: 100px;
 }
 
-#table_id td>a:hover {
+.display td>a:hover {
 	text-decoration: none;
 }
 
-#table_id tr:hover {
+.display tr:hover {
 	background-color: #f3efe6;
 }
 
-#table_id td {
+.display td {
 	border-top: 1px solid #f3efe6;
 	font-weight: 100;
 	height: 40px;
@@ -67,7 +75,9 @@
 	background-color: #563D39;
 	color: white;
 }
-
+#firtr>td:first-child {
+	width: 50px;
+}
 
 </style>
 </head>
@@ -76,150 +86,117 @@
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
 	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
 	<div class="container" id="container">
-		<div id="title">내가 쓴 글</div>
-		<div id="nav">
-			<ul id="mymenu" class="nav nav-pills nav-justified">
-				<c:choose>
-					<c:when test="${sessionScope.m.memberLevel eq 0 }">
-					<li class="active"><a data-toggle="pill" href="#notice">공지사항</a></li>
-					<li><a data-toggle="pill" href="#free">소통게시판</a></li>
-					</c:when>
-					<c:otherwise>
-					<li class="active"><a data-toggle="pill" href="#free">소통게시판</a></li>
-					</c:otherwise>
-				</c:choose>
-					<li><a data-toggle="pill" href="#qna">1대1문의</a></li>
-					<li><a data-toggle="pill" href="#comment">댓글</a></li>
-			</ul>
-		</div>
-		<div class="tab-content">
-			<c:choose>
-			<c:when test="${sessionScope.m.memberLevel eq 0 }">
-				<div id="notice" class="tab-pane fade in active">
-					<table id="noticeb" class="display" style="width:100%">
-						<thead>
-							<tr id="firtr">
-								<td>번호</td>
-								<td>제목</td>
-								<td id="date">작성일</td>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach items="${list }" var="b" varStatus="i">
-								<tr>
-									<td>${i.count }</td>
-									<td id="btitle"><a
-										href="/boardView.do?boardType=3&boardNo=${b.boardNo}">${b.boardTitle }&nbsp;</a></td>
-									<td>${b.regDate }</td>
-								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
-				</div>
-				<div id="free" class="tab-pane fade">
-					<table id="freeb" class="display" style="width:100%">
-						<thead>
-							<tr id="firtr">
-								<td class="bnum">번호</td>
-								<td>제목</td>
-								<td id="date">작성일</td>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach items="${list }" var="b" varStatus="i">
-								<tr>
-									<td>${i.count }왜이래</td>
-									<td id="btitle"><a
-										href="/boardView.do?boardType=3&boardNo=${b.boardNo}">왜이러냐고ㅗㅗㅗㅗㅗㅗㅗㅗㅗㅗㅗㅗ${b.boardTitle }&nbsp;</a></td>
-									<td>${b.regDate }아아아ㅏ아아아아ㅏ아아</td>
-								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
-				</div>
-			</c:when>
-			<c:otherwise>
-			<div id="free" class="tab-pane fade in active">
-				<table id="freeb" class="display" style="width:100%">
+		<div id="title">내가 쓴 글/댓글</div>
+			<c:if test="${sessionScope.m.memberLevel eq 0 }">
+			<div class="boardName">공지게시판</div>
+			<div class="table">
+				<table id="noticeb" class="display" style="width:100%">
 					<thead>
 						<tr id="firtr">
-							<td class="bnum">번호</td>
+							<td>번호</td>
 							<td>제목</td>
-							<td id="date">작성일</td>
+							<td>작성일</td>
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach items="${list }" var="b" varStatus="i">
+						<c:forEach items="${noticeList }" var="b" varStatus="i">
 							<tr>
 								<td>${i.count }</td>
 								<td id="btitle"><a
-									href="/boardView.do?boardType=3&boardNo=${b.boardNo}">${b.boardTitle }&nbsp;</a></td>
+									href="/boardView.do?boardType=1&boardNo=${b.boardNo}">${b.boardTitle }&nbsp;</a></td>
 								<td>${b.regDate }</td>
 							</tr>
 						</c:forEach>
 					</tbody>
 				</table>
-			</div>
-			</c:otherwise>
-			</c:choose>
-			<div id="qna" class="tab-pane fade">
-				<table id="qnab" class="display" style="width:100%">
+			</div>	
+			</c:if>	
+			<div class="boardName">소통게시판</div>
+			<div class="table">
+				<table id="freeb" class="display table" style="width:100%">
+					<thead>
+						<tr id="firtr">
+							<td>번호</td>
+							<td>제목</td>
+							<td>작성일</td>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${freeList }" var="b" varStatus="i">
+							<tr>
+								<td>${i.count }</td>
+								<td id="btitle"><a
+									href="/boardView.do?boardType=3&boardNo=${b.boardNo}">${b.boardTitle }&nbsp;[${b.commentCount }]</a></td>
+								<td>${b.regDate }</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+				</div>
+				<div class="boardName">문의게시판</div>
+				<div class="table">
+				<table id="qnab" class="display table" style="width:100%">
 						<thead>
 							<tr id="firtr">
-								<td class="bnum">번호</td>
+								<td>번호</td>
 								<td>제목</td>
-								<td id="date">작성일</td>
+								<td>답변상태</td>
+								<td>작성일</td>
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach items="${list }" var="b" varStatus="i">
+							<c:forEach items="${qnaList }" var="b" varStatus="i">
 								<tr>
 									<td>${i.count }</td>
 									<td id="btitle"><a
-										href="/boardView.do?boardType=3&boardNo=${b.boardNo}">${b.boardTitle }&nbsp;</a></td>
+										href="/boardView.do?boardType=2&boardNo=${b.boardNo}">${b.boardTitle }&nbsp;</a></td>
+									<c:choose>
+										<c:when test="${b.commentCount ne 0}">
+										<td id="answerAfter">답변완료</td>
+										</c:when>
+										<c:otherwise>
+										<td id="answerBefore">미답변</td>
+										</c:otherwise>
+									</c:choose>
 									<td>${b.regDate }</td>
 								</tr>
 							</c:forEach>
 						</tbody>
 					</table>
-			</div>
-			<div id="comment" class="tab-pane fade">
-				<table id="commentb" class="display" style="width:100%">
+					</div>
+					<div class="boardName">댓글</div>
+					<div class="table">
+					<table id="commentb" class="display table" style="width:100%">
 						<thead>
 							<tr id="firtr">
-								<td class="bnum">번호</td>
-								<td>제목</td>
-								<td id="date">작성일</td>
+								<td>번호</td>
+								<td>댓글</td>
+								<td>글제목</td>
+								<td>작성일</td>
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach items="${list }" var="b" varStatus="i">
+							<c:forEach items="${commentList }" var="b" varStatus="i">
 								<tr>
 									<td>${i.count }</td>
-									<td id="btitle"><a
-										href="/boardView.do?boardType=3&boardNo=${b.boardNo}">${b.boardTitle }&nbsp;</a></td>
+									<td>${b.bcContent }</td>
+									<td id="btitle"><a href="/boardView.do?boardType=${b.boardType }&boardNo=${b.boardRef }">${b.boardTitle }</a></td>
 									<td>${b.regDate }</td>
 								</tr>
 							</c:forEach>
 						</tbody>
 					</table>
-			</div>
+					</div>
 		</div>
-
-	<div id="">
-		
-	</div>
-	</div>
-
 	<script type="text/javascript">
-		$(document).ready(function() {
-			 $("#noticeb").DataTable({
+	 $(document).ready(function() {
+	        $("#noticeb").DataTable({
 	        	 "language": { //메뉴한글화
 		        		"decimal" : "",
-		                "emptyTable" : "데이터가 없습니다.",
-		                "info" : "총 _TOTAL_  _START_에서 _END_까지 표시",
-		                "infoEmpty" : "0명",
-		                "infoFiltered" : "(전체 _MAX_ 개 중 검색결과)",
+		                "emptyTable" : "쓴 공지글이 없습니다.",
+		                "info" : "총 _TOTAL_개   _START_에서 _END_까지 표시",
+		                "infoEmpty" : "총 0개",
+		                "infoFiltered" : "(전체 _MAX_  중 검색결과)",
 		                "infoPostFix" : "",
 		                "thousands" : ",",
 		                "lengthMenu" : "_MENU_ 개씩 보기",
@@ -232,17 +209,23 @@
 		                    "last" : "마지막 페이지",
 		                    "next" : "다음",
 		                    "previous" : "이전"
+		                },
+		                "aria" : {
+		                    "sortAscending" : " :  오름차순 정렬",
+		                    "sortDescending" : " :  내림차순 정렬"
 		                }
 		            }
-	       	 });
-			 
-			 $("#freeb").DataTable({
+	 	});
+	        $("#freeb").DataTable({
+	        	columnDefs:[
+	        		{targets:[1],width:"70%"}
+	        	],
 	        	 "language": { //메뉴한글화
 		        		"decimal" : "",
-		                "emptyTable" : "데이터가 없습니다.",
-		                "info" : "총 _TOTAL_  _START_에서 _END_까지 표시",
-		                "infoEmpty" : "0명",
-		                "infoFiltered" : "(전체 _MAX_ 개 중 검색결과)",
+		                "emptyTable" : "쓴 소통게시글이 없습니다.",
+		                "info" : "총 _TOTAL_개   _START_에서 _END_까지 표시",
+		                "infoEmpty" : "총 0개",
+		                "infoFiltered" : "(전체 _MAX_  중 검색결과)",
 		                "infoPostFix" : "",
 		                "thousands" : ",",
 		                "lengthMenu" : "_MENU_ 개씩 보기",
@@ -255,16 +238,23 @@
 		                    "last" : "마지막 페이지",
 		                    "next" : "다음",
 		                    "previous" : "이전"
+		                },
+		                "aria" : {
+		                    "sortAscending" : " :  오름차순 정렬",
+		                    "sortDescending" : " :  내림차순 정렬"
 		                }
 		            }
-	       	 });
-			 $("#qnab").DataTable({
+	 	});
+	        $("#qnab").DataTable({
+	        	columnDefs:[
+	        		{targets:[1],width:"55%"}
+	        	],
 	        	 "language": { //메뉴한글화
 		        		"decimal" : "",
-		                "emptyTable" : "데이터가 없습니다.",
-		                "info" : "총 _TOTAL_  _START_에서 _END_까지 표시",
-		                "infoEmpty" : "0명",
-		                "infoFiltered" : "(전체 _MAX_ 개 중 검색결과)",
+		                "emptyTable" : "문의내역이 없습니다.",
+		                "info" : "총 _TOTAL_개   _START_에서 _END_까지 표시",
+		                "infoEmpty" : "총 0개",
+		                "infoFiltered" : "(전체 _MAX_  중 검색결과)",
 		                "infoPostFix" : "",
 		                "thousands" : ",",
 		                "lengthMenu" : "_MENU_ 개씩 보기",
@@ -277,16 +267,20 @@
 		                    "last" : "마지막 페이지",
 		                    "next" : "다음",
 		                    "previous" : "이전"
+		                },
+		                "aria" : {
+		                    "sortAscending" : " :  오름차순 정렬",
+		                    "sortDescending" : " :  내림차순 정렬"
 		                }
 		            }
-	       	 });
-			 $("#commentb").DataTable({
+	 	});
+	        $("#commentb").DataTable({
 	        	 "language": { //메뉴한글화
 		        		"decimal" : "",
-		                "emptyTable" : "데이터가 없습니다.",
-		                "info" : "총 _TOTAL_   _START_에서 _END_까지 표시",
-		                "infoEmpty" : "0명",
-		                "infoFiltered" : "(전체 _MAX_ 개 중 검색결과)",
+		                "emptyTable" : "쓴 댓글이 없습니다.",
+		                "info" : "총 _TOTAL_개   _START_에서 _END_까지 표시",
+		                "infoEmpty" : "총 0개",
+		                "infoFiltered" : "(전체 _MAX_  중 검색결과)",
 		                "infoPostFix" : "",
 		                "thousands" : ",",
 		                "lengthMenu" : "_MENU_ 개씩 보기",
@@ -299,10 +293,15 @@
 		                    "last" : "마지막 페이지",
 		                    "next" : "다음",
 		                    "previous" : "이전"
+		                },
+		                "aria" : {
+		                    "sortAscending" : " :  오름차순 정렬",
+		                    "sortDescending" : " :  내림차순 정렬"
 		                }
 		            }
-	       	 });
-		});
+	 	});
+	 });
 	</script>
+	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>
