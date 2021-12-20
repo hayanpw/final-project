@@ -249,7 +249,9 @@
         left join space_review sr  using (rental_no)
 		<choose>
 			<when test="ub.equals('on')">
-		where r.member_id =#{memberId} and used_board = 0	
+	<![CDATA[
+		where r.member_id =#{memberId} and used_board = 0 and rental_date < sysdate	
+		]]>	
 			</when>
 			<otherwise>
 		where r.member_id =#{memberId}
@@ -377,7 +379,7 @@
 	<insert id="insertSpaceBlack" parameterType="string">
 		insert 
 			into reading_black 
-			values(reading_black_seq.nextval,to_char(sysdate,'yy/mm/dd hh24:mi:ss'),to_date(to_char(sysdate+8,'yymmdd'))||' 00:00:00',#{memberId},1)
+			values(reading_black_seq.nextval,to_char(sysdate,'yy/mm/dd hh24:mi:ss'),to_date(to_char(sysdate+8,'yymmdd'))||' 00:00:00',#{memberId},1,'N')
 	</insert>
 	<delete id="deleteRental" parameterType="string">
 	<![CDATA[
@@ -397,7 +399,7 @@
 		select
 			black_id as blackId
 		from reading_black
-		where black_ty = 1	
+		where black_ty = 1	and black_del = 'N'
 	</select>
 	<delete id="deleteReview" parameterType="_int">
 		delete 
@@ -427,4 +429,33 @@
 			end_time = #{endTime}
 		where st_no = #{stNo}
 	</update>
+	<select id="selectDelSpace" resultType="space">
+		select
+			space_no as spaceNo,
+			space_name as spaceName,
+			space_purpose as spacePurpose,
+			main_facility as mainFacility,
+			main_product as mainProduct,
+			max_people as maxPeople,
+			price
+		from space
+		where del_yn like 'Y' 	
+	</select>
+	<delete id="deleteRentalNo" parameterType="_int">
+		delete
+			from rental
+			where rental_no = #{rentalNo}
+	</delete>
+	<update id="cancleBlackList" parameterType="string">
+		update
+			set reading_black 
+			black_del ='Y'
+			where black_end=#{time1} and black_ty=1
+	</update>
+	<select id="selectDelBlack" resultType="kr.or.space.model.vo.Black">
+		select
+			black_id as blackId
+		from reading_black
+		where black_ty=1 and black_del = 'Y'	
+	</select>
 </mapper>

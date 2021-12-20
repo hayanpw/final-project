@@ -9,4 +9,5 @@ public class Black {
 	private String blackEnd;
 	private String blackId;
 	private int blackTy;
+	private String blackDel;
 }

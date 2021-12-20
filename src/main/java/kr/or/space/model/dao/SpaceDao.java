@@ -227,4 +227,22 @@ public class SpaceDao {
 	public int deleteSpaceFile(int spaceNo) {
 		return sqlSession.delete("space.deleteSpaceFile",spaceNo);
 	}
+	//삭제공간 조회
+	public ArrayList<Space> selectDelSpace() {
+		List<Space> list = sqlSession.selectList("space.selectDelSpace");
+		return (ArrayList<Space>)list;
+	}
+	//예매 취소
+	public int deleteRetnalNo(int rentalNo) {
+		return sqlSession.delete("space.deleteRentalNo",rentalNo);
+	}
+	//블랙리스트 소멸
+	public void cancleBlackList(String time1) {
+		sqlSession.update("space.cancleBlackList",time1);
+	}
+	//삭제 된 블랙리스트
+	public ArrayList<Black> selectDelBlack() {
+		List<Black> list = sqlSession.selectList("space.selectDelBlack");
+		return (ArrayList<Black>) list;
+	}
 }

@@ -97,6 +97,9 @@ public class SpaceController {
 	@RequestMapping(value = "/spaceRes.do")
 	public String spaceRes(int spaceNo, Model model) {
 		ArrayList<Space> list = service.selectAllSpace();
+		if(spaceNo == 0) {
+			spaceNo = list.get(0).getSpaceNo();
+		}
 		Space s = service.selectOneSpace(spaceNo);
 		ArrayList<SpaceTime> st = service.selectSpaceTime(spaceNo);
 		ArrayList<FileVO> fv = service.selectFileList(spaceNo);
@@ -306,9 +309,14 @@ public class SpaceController {
 	@RequestMapping(value = "/spaceAdmin.do")
 	public String spaceAdmin(Model model, int reqPage) {
 		SpacePageNavi spn = service.selectAllRental(reqPage);
+		ArrayList<Space> space = service.selectAllSpace();
+		ArrayList<Space> delSpace = service.selectDelSpace();
+		ArrayList<Black> black = service.selectDelBlack();
 		model.addAttribute("list", spn.getRList());
 		model.addAttribute("pageNavi", spn.getPageNavi());
 		model.addAttribute("start", spn.getStart());
+		model.addAttribute("space", space);
+		model.addAttribute("delSpace", delSpace);
 		return "space/spaceAdmin";
 	}
 
@@ -614,5 +622,16 @@ public class SpaceController {
 	  ArrayList<SpaceMypage> list = service.selectSpaceMypage(map); return new
 	  Gson().toJson(list); }
 	 */	
+	@RequestMapping(value = "/deleteRes.do")
+	public String deleteRes(int rentalNo, Model model ) {
+		int result = service.deleteRental(rentalNo);
+		if(result > 0) {
+			model.addAttribute("msg", "삭제하였습니다.");
+		}else {
+			model.addAttribute("msg", "삭제 실패");
+		}
+		model.addAttribute("loc", "/spaceAdmin.do");
+		return "common/msg";
+	}
 }
 

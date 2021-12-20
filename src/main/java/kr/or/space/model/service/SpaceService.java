@@ -415,4 +415,20 @@ public class SpaceService {
 		
 		return result;		
 	}
+	//삭제 공간 조회
+	public ArrayList<Space> selectDelSpace() {
+		return dao.selectDelSpace();
+	}
+	//예매 취소
+	public int deleteRental(int rentalNo) {
+		return dao.deleteRetnalNo(rentalNo);
+	}
+	//블랙리스트 소멸
+	public void cancleBlackList(String time1) {
+		dao.cancleBlackList(time1);
+	}
+	//삭제 된 블랙리스트
+	public ArrayList<Black> selectDelBlack() {
+		return dao.selectDelBlack();
+	}
 }

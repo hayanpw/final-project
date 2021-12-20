@@ -126,6 +126,10 @@ public class ReadingController {
 		Reading re1 = service.selectOneId(re);
 		Fixtures fi = service.selectOneFixtures(re);
 		model.addAttribute("re", re1);
+		if(fi == null) {
+			fi = new Fixtures();
+			fi.setFixturesNo(0);
+		}
 		model.addAttribute("fi", fi);
 		return "reading/readingOption";
 	}

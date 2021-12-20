@@ -46,7 +46,7 @@
 					<th>인원</th>
 					<th>가격</th>
 					<th>상태</th>
-					<th>리뷰</th>
+					<th>리뷰/예매</th>
 					<th>체크리스트 작성 여부  <img id="q-img" src="resources/spaceImage/ask.png" style="width: 20px; "></th>
 				</tr>
 				<c:forEach items="${list }" var="l" varStatus="i">
@@ -73,7 +73,7 @@
 									<input type="hidden" id="rentalNo" value="${l.rentalNo }">
 								</c:when>
 								<c:when test="${ l.rentalDate>today  }">
-									리뷰 작성 기간이 아닙니다.
+									<button type="button" onclick="location.href='/deleteRes.do?rentalNo=${l.rentalNo}'">예매 삭제</button>
 								</c:when>
 								<c:otherwise>
 									<button  class="updateBtn" type="button" class="btn btn-info btn-lg" data-toggle="modal"
@@ -175,35 +175,6 @@
 						$(".table").hide();
 						$(".table-bb").show();
 						$(".table-bb").empty();
-			/* 			$(".table-box").append("<table class='table table-bordered'><tr>"
-								+"<th>No.</th>"
-								+"<th>예약 공간</th>"
-								+"<th>예약 시간</th>"
-								+"<th>예약 날짜</th>"
-								+"<th>용도</th>"
-								+"<th>인원</th>"
-								+"<th>가격</th>"
-								+"<th>상태</th>"
-								+"<th>리뷰</th>"
-								+"<th>체크리스트 작성 여부  <img id='q-img' src='resources/spaceImage/ask.png' style='width: 20px;'></th></tr><tr>" */
-								/* +"<td>"+(i+1)+"</td>"
-								+"<td>"+data[i].spaceName+"</td>"
-								+"<td>"+data[i].startTime+"~"+data[i].endTime+"</td>"
-								+"<td>"+data[i].rentalDate+"</td>"
-								+"<td>"+data[i].rentalPeople+"/"+data[i].maxPeople+"명</td>"
-								+"<td>"+data[i].price+"원</td>"
-								+"<td>확정</td>"
-								+"<td>"
-								+"<button class='writeBtn' type='button'class='btn btn-info btn-lg' data-toggle='modal'"
-								+"data-target=''#myModal'>리뷰 작성</button><input type='hidden' id='rentalNo' value="+data[i].rentalNo+">"	
-								+"</td></tr></table>"
-									 +"<td>"
-									+"<button class='updateBtn' calss='btn btn-info btn-lg' data-toggle='modal' data-target='#rModal'>리뷰수정</button>"
-									+"<input type='hidden' value="+data[i].rentalNo+"><div class='d-review'>"
-									+	"<img src='resources/spaceImage/x.png' style='width: 20px; opacity: 0.8;'></div>"
-									+"</td></tr></table>"
-							);
-						*/
 						$(".table-bb").append(data);
 					}
 			   });
