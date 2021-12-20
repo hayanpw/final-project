@@ -1,4 +1,3 @@
-@charset "UTF-8";
 @font-face {
   font-family: "NotoSansKR";
   src: local("NotoSansKR"), url(/resources/font/NotoSansKR-Regular.otf);
@@ -12,17 +11,6 @@
   src: url(/resources/font/DMSerifDisplay-Regular.ttf);
 }
 
-.header-title{
-    height: 300px;
-    width: 100%;
-	background-image: url("/resources/additionImage/시설.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-.container{
-    width: 1170px;
-    margin: 0 auto;
-}
 body{
     display: flex;
     flex-direction: column;
@@ -30,16 +18,17 @@ body{
     font-family: "NotoSansKR";
   	color:black;
 }
-.header-title img{
-    height: 300px;
-    overflow: hidden;
-
+.container{
+    width: 1170px;
+    margin: 0 auto;
+}
+.header-title{
+    background-color: #fff;
 }
 .h-left{
-    width: 70%;
+    width: 20%;
     float: left;
-    height: 55px;
-    background-color: rgba(0,0,0,0.4);
+    height: 90px;
 }
 .search-img {
     width: auto;
@@ -48,8 +37,9 @@ body{
     max-height: 50px;
 }
 .h-logo{
-    width: 20%;
+    width: 60%;
     text-align: center;
+    background-color: #fff;
     float: left;
     height: 90px;
 }
@@ -57,22 +47,22 @@ body{
 	text-decoration: none;
 	font-family: d_r; 
     font-size:50px;
-    color:#fff;
+    color:#563D39;
 }
 .h-logo>a:hover{
 	text-decoration: none;
 	font-family: d_r; 
     font-size:50px;
-    color:#fff;
+    color:#563D39;
 }
 .h-right{
-    width: 10%;
+    width: 20%;
     float: left;
 	height: 90px;
 }
 .h-right>a{
 	text-decoration: none;
-    color:#fff;
+    color:#563D39;
 }
 .h-right>a:hover {
     text-decoration: none;
@@ -87,8 +77,8 @@ body{
     text-align: center;
     height: 500px;
     width: 100%;
-	background-color: #563D39;
 }
+
 .footer-menu{
     height: 100px;
     width: 100%;
@@ -103,8 +93,6 @@ body{
 }
 
 /*navi 진행중*/
-
-    /*navi 진행중*/
 
 .navi{
     position: relative;
@@ -123,6 +111,7 @@ body{
 }
 .navi>ul{
     position: relative;
+    background-color: #fff;
     display:flex;
     justify-content:center;
 }
@@ -139,7 +128,7 @@ body{
     text-decoration: none;
 }
 .navi>ul>li>a{
-    color : #fff;  
+    color : #563D39;  
 }
 /* .navi>ul>li:hover>a{
     font-weight: 900;
@@ -153,7 +142,7 @@ body{
     position: absolute;
     text-align: center;
     content: '';
-    border-bottom: solid 2px #fff;
+    border-bottom: solid 2px #563D39;
     width: 150px;
     transform: scaleX(0);  
     transition: transform 250ms ease-in-out;

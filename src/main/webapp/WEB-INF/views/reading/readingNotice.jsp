@@ -77,10 +77,9 @@
 				<form action="/reservationDay.do" method="post">
 					<fieldset>
 						<input type="hidden" name="readingId" value="${sessionScope.m.memberId }" readonly>
-						<input type="submit" class="btn btn-success btn-lg" value="예약내역보기" style="margin-left: 10px; background-color: #BDB19A; border-color: #BDB19A">
+						<input type="submit" class="btn btn-success btn-lg" value="예약내역보기  & 비품 대여" style="margin-left: 10px; background-color: #BDB19A; border-color: #BDB19A">
 					</fieldset>
 				</form>
-				<a href="/readingAdmin.do">관리자페이지</a>
 			</div>
 		</div>
 	<script>
