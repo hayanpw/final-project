@@ -12,6 +12,7 @@ import kr.or.academy.vo.Academy;
 import kr.or.academy.vo.AcademyCategory;
 import kr.or.academy.vo.AcademyPagingVo;
 import kr.or.academy.vo.AcademyPayment;
+import kr.or.academy.vo.StudentList;
 
 @Service
 public class AcademyService {
@@ -172,6 +173,11 @@ public class AcademyService {
 	public int deleteAcPayment(long paymentNo) {
 		int result = dao.deleteAcPayment(paymentNo);
 		return result;
+	}
+
+	public ArrayList<StudentList> studentViewList(int academyNo) {
+		ArrayList<StudentList> list = dao.studentViewList(academyNo);
+		return list;
 	}
 
 }

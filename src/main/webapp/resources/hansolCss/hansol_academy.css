@@ -186,3 +186,14 @@
 .nonebox img{
 	width: 600px;
 }	
+.modal-body table tr th{
+	text-align: center;
+	background-color: #563D39 ;
+	color: #ffffff;
+}
+.modal-body table tr td{
+	text-align: center;
+}
+.modal-body{
+	text-align: center;
+}

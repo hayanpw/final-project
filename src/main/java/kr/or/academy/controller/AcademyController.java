@@ -24,6 +24,7 @@ import kr.or.academy.vo.Academy;
 import kr.or.academy.vo.AcademyCategory;
 import kr.or.academy.vo.AcademyPagingVo;
 import kr.or.academy.vo.AcademyPayment;
+import kr.or.academy.vo.StudentList;
 
 @Controller
 public class AcademyController {
@@ -288,6 +289,12 @@ public class AcademyController {
 		}
 		model.addAttribute("loc", "/academyMypage.do?memberNo="+memberNo);
 		return "common/msg";
+	}
+	@ResponseBody
+	@RequestMapping(value="/studentView.do",produces = "application/json;charset=utf-8")
+	public String studentView(int academyNo) {
+		ArrayList<StudentList> list = service.studentViewList(academyNo);
+		return new Gson().toJson(list);
 	}
 	//@RequestMapping(value="/academyDelete.do")
 	//public String academyDelete (int academyNo,Model model) {

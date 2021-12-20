@@ -78,15 +78,14 @@
 		<input type="hidden" id="totalCount" value="${totalCount }">
 		<input type="hidden" id="memberLevel" value="${sessionScope.m.memberLevel }">
 		<div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
+    <div class="modal-dialog" style="width: 700px;">
     
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Modal Header</h4>
+          <h4 class="modal-title">수강중인 학생 목록</h4>
         </div>
         <div class="modal-body">
-          <p>Some text in the modal.</p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
@@ -107,13 +106,30 @@
 				url : "/studentView.do",
 				data : {academyNo:academyNo},
 				success : function(data){
-					var moreModel = "";
+					$(".modal-body").empty();
+					var modal = "";
 					if(data.length < 1){
-						
+						modal += "<p>아직 수강중인 학생이 없습니다</p>";
+						$(".modal-body").append(modal);
+					}else{
+						modal += "<table class='table table-bordered table-hover'><tr><th>No.</th><th>학생이름</th><th>연락처</th><th>상태</th></tr>";
+						for( var i=0; i<data.length; i++ ){
+							modal += "<tr><td>"+data[i].count+"</td>";
+							modal += "<td>"+data[i].memberName+"</td>";
+							modal += "<td>"+data[i].memberEmail+"</td>";
+							if(data[i].paymentCancel == 1){
+								modal += "<td>수강 취소</td>";
+							}else{
+								modal += "<td>진행중</td>";
+							}
+							modal += "</tr>";
+						}
+						modal += "</table>";
+						$(".modal-body").append(modal);
 					}
 				}			
+			});
 		});
-		}
 		$(document).on("click",".btn",function(){
 		});
 		$(document).on("click",".academyView",function(){
