@@ -109,8 +109,11 @@
 		var today = new Date();
 		if(redate>today){
 			$("input[name=sub]").attr("type","submit");
-			$("input[name=modals]").attr("type","button");
 			$("#cancel").attr("class","btn btn-danger btn-lg");
+		}
+		
+		if(${fi.fixturesNo eq "0"}){
+			$("input[name=modals]").attr("type","button");
 		}
 	});
 	
