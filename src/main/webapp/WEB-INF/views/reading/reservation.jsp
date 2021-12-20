@@ -25,7 +25,7 @@
 	<br>
 	<div class="container">
 		<div class="container-left col-sm-7">
-			<h1>예약 내역 조회</h1>
+			<h1>예약 내역 조회  & 비품 대여</h1>
 			<br>
 			<h3>날짜를 선택해주세요</h3>
 			<br>

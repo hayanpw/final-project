@@ -28,5 +28,6 @@
 		<typeAlias type="kr.or.resume.vo.ResumeTbl" alias="rt"/>
 		<typeAlias type="kr.or.exhibition.vo.ExhibitionReview" alias="exr"/>
 		<typeAlias type="kr.or.academy.vo.AcademyCategory" alias="acc"/>
+		<typeAlias type="kr.or.reading.model.vo.Fixtures" alias="fixtures"/>
 	</typeAliases>
 </configuration>

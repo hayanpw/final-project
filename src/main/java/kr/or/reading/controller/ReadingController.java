@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 
-import javafx.scene.control.Alert;
 import kr.or.reading.model.service.ReadingService;
+import kr.or.reading.model.vo.Fixtures;
 import kr.or.reading.model.vo.Reading;
 import kr.or.reading.model.vo.ReadingBlack;
 
@@ -124,7 +124,9 @@ public class ReadingController {
 	@RequestMapping(value="/reservationInfo.do")
 	public String reservationInfo(Reading re, Model model) {
 		Reading re1 = service.selectOneId(re);
+		Fixtures fi = service.selectOneFixtures(re);
 		model.addAttribute("re", re1);
+		model.addAttribute("fi", fi);
 		return "reading/readingOption";
 	}
 	
@@ -203,6 +205,21 @@ public class ReadingController {
 		ArrayList<Reading> mylist = service.selectMyReading(memberId);
 		model.addAttribute("mylist", mylist);
 		return "reading/readingMypage";
+	}
+	
+	@RequestMapping(value="/fixturesInsert.do")
+	public String fixtuersInsert(Fixtures fi, Model model) {
+		int result = service.fixturesInsert(fi);
+		if(result>0) {
+			model.addAttribute("msg","비품 대여에 성공했습니다.");
+			model.addAttribute("loc", "/reservationDay.do");
+			return "common/msg";
+		}else {
+			model.addAttribute("msg","비품 대여에 실패하였습니다.");
+			model.addAttribute("loc", "/reservationDay.do");
+			return "common/msg";
+		}
+		
 	}
 
 }
