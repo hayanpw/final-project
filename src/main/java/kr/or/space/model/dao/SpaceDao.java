@@ -227,4 +227,13 @@ public class SpaceDao {
 	public int deleteSpaceFile(int spaceNo) {
 		return sqlSession.delete("space.deleteSpaceFile",spaceNo);
 	}
+	//삭제공간 조회
+	public ArrayList<Space> selectDelSpace() {
+		List<Space> list = sqlSession.selectList("space.selectDelSpace");
+		return (ArrayList<Space>)list;
+	}
+	//예매 취소
+	public int deleteRetnalNo(int rentalNo) {
+		return sqlSession.delete("space.deleteRentalNo",rentalNo);
+	}
 }

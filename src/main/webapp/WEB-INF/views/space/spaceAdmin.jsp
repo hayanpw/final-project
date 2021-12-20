@@ -51,8 +51,15 @@
 			</div>	
 			<div class="page-box">${pageNavi }</div>
 			</div>
+			<div class="noDel-space">
+				<c:forEach items="${space }" var="s">
+					
+				</c:forEach>
+			</div>
 			<div class="del-space">
-			
+				<c:forEach items="${delSpace }" var="d">
+					
+				</c:forEach>
 			</div>
         </div>
 	</div>

@@ -427,4 +427,21 @@
 			end_time = #{endTime}
 		where st_no = #{stNo}
 	</update>
+	<select id="selectDelSpace" resultType="space">
+		select
+			space_no as spaceNo,
+			space_name as spaceName,
+			space_purpose as spacePurpose,
+			main_facility as mainFacility,
+			main_product as mainProduct,
+			max_people as maxPeople,
+			price
+		from space
+		where del_yn like 'Y' 	
+	</select>
+	<delete id="deleteRentalNo" parameterType="_int">
+		delete
+			from rental
+			where rental_no = #{rentalNo}
+	</delete>
 </mapper>
