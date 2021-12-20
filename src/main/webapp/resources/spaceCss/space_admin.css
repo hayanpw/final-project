@@ -24,3 +24,21 @@
 .page-box{
 	text-align: center;
 }
+.choice span{
+	margin-right: 30px;
+	font-size: 17px;
+}
+.noDel-space{
+	float: left;
+	border: 1px solid black;
+	width: 400px;
+	height: 400px;
+	margin-left: 10px;
+}
+.del-space{
+	float: left;
+	border: 1px solid black;
+}
+#sl{
+	cursor: pointer;
+}

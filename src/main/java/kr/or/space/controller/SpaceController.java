@@ -311,6 +311,7 @@ public class SpaceController {
 		SpacePageNavi spn = service.selectAllRental(reqPage);
 		ArrayList<Space> space = service.selectAllSpace();
 		ArrayList<Space> delSpace = service.selectDelSpace();
+		ArrayList<Black> black = service.selectDelBlack();
 		model.addAttribute("list", spn.getRList());
 		model.addAttribute("pageNavi", spn.getPageNavi());
 		model.addAttribute("start", spn.getStart());
