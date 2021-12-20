@@ -66,7 +66,6 @@
 		list-style-type: none;
 		padding : 0;
 		display: flex;
-		background-color: #f3efe6 ;
 	}
 	.comments>li>p,.recomments>li>p{
 		margin: 0;

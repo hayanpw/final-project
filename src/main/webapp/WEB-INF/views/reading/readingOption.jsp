@@ -59,7 +59,7 @@
 			
 			<div class="form-box">
 				<input type="hidden" name="readingDay" value="${re.readingDay }">
-				<input type="hidden" name="modals" class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal" value="비품대여" style="background-color: #BDB19A; border-color: #BDB19A">
+				<input type="hidden" name="modals" class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal" value="비품대여" style="background-color: #e79b36; border-color: #e79b36">
 	<%-- 		<a href="/readingOption1.do" class="btn btn-success btn-lg">수정하기-미구현(다 구현후 좌석선택을 오전/오후/종일로 나누고 이용시간 수정만 확장예정)</a>--%>
 	
 				<button class="hidden" id="cancel" style="margin-left: 10px;">예약취소</button>
@@ -92,7 +92,7 @@
 					<label><h4><input type="checkbox" name="fixturesCharger" value="1"> 충전기</h4></label><br>
 					<label><h4><input type="checkbox" name="fixturesTable" value="1"> 독서대</h4></label><br>
 					<label><h4><input type="checkbox" name="fixturesBlanket" value="1"> 담요</h4></label><br>
-					<div><input type="hidden" name="sub" class="btn btn-success btn-lg" value="비품대여" style="background-color: #BDB19A; border-color: #BDB19A"></div>
+					<div><input type="hidden" name="sub" class="btn btn-success btn-lg" value="비품대여" style="background-color: #e79b36; border-color: #e79b36;"></div>
 				</form>
 		      </div>
 		      <div class="modal-footer">
@@ -109,8 +109,11 @@
 		var today = new Date();
 		if(redate>today){
 			$("input[name=sub]").attr("type","submit");
-			$("input[name=modals]").attr("type","button");
 			$("#cancel").attr("class","btn btn-danger btn-lg");
+		}
+		
+		if(${fi.fixturesNo eq 0}){
+			$("input[name=modals]").attr("type","button");
 		}
 	});
 	

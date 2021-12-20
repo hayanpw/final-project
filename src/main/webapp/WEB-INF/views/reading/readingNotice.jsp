@@ -70,14 +70,14 @@
 					<input type="hidden" name="readingId" value="${sessionScope.m.memberId }">
 					<h2 name="showdate"></h2>
 					<h2 name="showseat" style="margin-bottom:20px"></h2><!-- 총좌석 - 카운트 = 남은좌석 -->
-					<input type="hidden" name="sub"class="btn btn-success btn-lg" value="좌석 선택하기" style="background-color: #563D39; border-color: #563D39">
+					<input type="hidden" name="sub"class="btn btn-success btn-lg" value="좌석 선택하기" style="background-color: #e79b36; border-color: #e79b36">
 				</form>
 			</div>
 			<div class="readingList-form col-sm-12">
 				<form action="/reservationDay.do" method="post">
 					<fieldset>
 						<input type="hidden" name="readingId" value="${sessionScope.m.memberId }" readonly>
-						<input type="submit" class="btn btn-success btn-lg" value="예약내역보기  & 비품 대여" style="margin-left: 10px; background-color: #BDB19A; border-color: #BDB19A">
+						<input type="submit" class="btn btn-success btn-lg" value="예약내역보기  & 비품 대여" style="margin-left: 10px; background-color: #064663; border-color: #064663">
 					</fieldset>
 				</form>
 			</div>
