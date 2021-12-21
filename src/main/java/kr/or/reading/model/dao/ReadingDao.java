@@ -91,5 +91,9 @@ public class ReadingDao {
 		return sqlSession.selectOne("reading.selectOneFixtures", re);
 	}
 
+	public int fixturesCancel(Reading re) {
+		return sqlSession.delete("reading.fixturesCancel", re);
+	}
+
 	
 }

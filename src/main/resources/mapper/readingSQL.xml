@@ -7,7 +7,8 @@
 			black_start as blackStart,
 			black_end as blackEnd,
 			black_id as blackId,
-			black_ty as blackTy
+			black_ty as blackTy,
+			black_del as blackDel
 		from reading_black where black_id=#{readingId} and black_ty=0
 	</select>
 	<select id="selectOneNum" parameterType="reading" resultType="reading">
@@ -69,7 +70,7 @@
 	<insert id="insertBlackList" parameterType="reading">
 		<![CDATA[
 		insert into reading_black 
-			values(reading_black_seq.nextval,to_char(sysdate,'yy/mm/dd hh24:mi:ss'),to_date(to_char(sysdate+8,'yymmdd'))||' 00:00:00',#{readingId},0)
+			values(reading_black_seq.nextval,to_char(sysdate,'yy/mm/dd hh24:mi:ss'),to_date(to_char(sysdate+8,'yymmdd'))||' 00:00:00',#{readingId},0,'N')
 		]]> 
 	</insert>
 	<update id="earlyOut" parameterType="reading">
@@ -127,6 +128,9 @@
 			fixtures_blanket as fixturesBlanket
 		from fixtures where fixtures_day=#{readingDay} and fixtures_id=#{readingId}
 	</select>
+	<delete id="fixturesCancel" parameterType="reading">
+		delete from fixtures where fixtures_day=#{readingDay} and fixtures_id=#{readingId}
+	</delete>
 </mapper>
 		
 

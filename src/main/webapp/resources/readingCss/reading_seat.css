@@ -1,13 +1,15 @@
 body{
-	
+}
+.main-title{
+	border-bottom : 1px solid #d6d6d6;
+}
+.main-title>h1{
+	font-weight : 900;
 }
 .container{
-    display: flex;
-    align-items: center;
 }
 .container-left{
     text-align:center;
-	width:900px;
 }
 .container-left>div{
 	width:calc(700px/12);
@@ -29,11 +31,12 @@ body{
     border: 1px solid #fff;
 }
 .container-right{
-	width: 300px;
+	height:850px;
     display: flex;
     flex-direction: column;
     align-items: center;
     align-content: center;
+    justify-content: center;
 }
 .container-right>h2{
 	text-align:center;
@@ -44,7 +47,7 @@ body{
 .readingInfo{
 	width: 147px;
 	height: 117px;
-    background-color: #BDB19A;
+    background-color: #A79078;
     margin-top: 5px;
     margin-bottom: 10px;
 }

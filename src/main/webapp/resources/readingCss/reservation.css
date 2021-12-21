@@ -1,6 +1,13 @@
-.container{
-	margin: 0 auto;
-    text-align: center;
+
+.main-title{
+	width:1170px;
+	border-bottom : 1px solid #d6d6d6;
+}
+.main-title>h1{
+	font-weight : 900;
+}
+.container-left>h3{
+	text-align: center;
 }
 .container-right{
 	height: 735px;

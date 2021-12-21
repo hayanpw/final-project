@@ -136,6 +136,11 @@ public class ReadingService {
 	}
 
 
+	public int fixturesCancel(Reading re) {
+		return dao.fixturesCancel(re);
+	}
+
+
 
 
 }
