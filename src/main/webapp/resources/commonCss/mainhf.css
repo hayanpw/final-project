@@ -109,8 +109,9 @@ body{
 }
 
 .f-container {
-  float: left;
-  width: 80%;
+	position: relative;
+    margin: 0 auto;
+    width: 80%;
 }
 .f-con{
   font-family: d_r; 
@@ -124,6 +125,7 @@ body{
     /*navi 진행중*/
 
 .navi{
+	margin-top:10px;
     position: relative;
 }
 .navi ul{
@@ -208,7 +210,6 @@ body{
   color: #fff;
   text-align: center;
   margin: 0 auto;
-  margin-top: 50px;
   animation: fadein 2s;
   -moz-animation: fadein 2s; /* Firefox */
   -webkit-animation: fadein 2s; /* Safari and Chrome */
