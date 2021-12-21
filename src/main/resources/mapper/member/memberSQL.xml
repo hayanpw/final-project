@@ -159,5 +159,7 @@
 		join exhibition using (exhibition_no)
 		where payment_select=1 and member_no=#{memberNo} and  book_date > to_char(sysdate,'yyyy-mm-dd')
  	</select>
-	
+	<delete id="deleteMember" parameterType="m">
+		delete from member where member_no=#{memberNo}
+	</delete>
 </mapper>

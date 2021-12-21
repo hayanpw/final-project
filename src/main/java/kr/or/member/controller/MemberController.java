@@ -252,6 +252,20 @@ public class MemberController {
 		return result;
 	}
 	
+	@RequestMapping(value="/deleteMember.do")
+	public String deleteMember(int memberNo,HttpSession session,Model model) {
+		int result = service.deleteMember(memberNo);
+		if(result>0) {
+			model.addAttribute("msg", "삭제성공");			
+			session.invalidate();
+			return "redirect:/";
+		}else {
+			model.addAttribute("msg", "삭제실패");
+		}
+		model.addAttribute("loc","/");
+		return "common/msg";
+	}
+	
 }
 	
 	

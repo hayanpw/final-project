@@ -64,11 +64,11 @@
 								</td>
 							</tr>
 						</table>
-					</div>
-					<div class="btnBox">
-						<button  type="submit" class="nextBtn">정보수정</button>
-					</div>		
-				</form>
+				</form>	
+		</div>
+		<div class="btnBox">
+				<button  type="submit" class="nextBtn">정보수정</button>
+		</div>		
 				<a href="/deleteMemberFrm.do?memberNo=${m.memberNo}" >탈퇴하기<span>></span></a>
 				<form action="" id="modal1">
 				<div id='content' class="modal_window">
