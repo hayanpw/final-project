@@ -70,7 +70,7 @@ body{
             margin-top: 10px;
             font-weight: bold;
             color:#fff;
-            background-color:rgba(167, 127, 120, 0.8);
+            background-color:#041C32; 
         }
         .reserve-button:hover{
             margin: auto;
@@ -191,7 +191,7 @@ body{
         font-size: 18px;
         margin: 10px;
         padding: 10px;
-border: solid 1px #BDB19A;
+border: solid 1px #041C32; 
 display: inline-block; 
 width: 200px; 
 height: 270px;
@@ -232,7 +232,7 @@ overflow: hidden;
 
 .rpc-box{
     margin: 10px;
-border: solid 1px #563D39;
+border: solid 1px #041C32; 
 display: inline-block; 
 width: 200px; 
 height: 270px;
