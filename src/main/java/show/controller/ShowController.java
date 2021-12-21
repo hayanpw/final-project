@@ -272,9 +272,9 @@ public class ShowController {
 	public String reservation(Seat s, String memberId, Model model) {
 		Show show = service.reservation(s, memberId);
 		if(show != null) {
-			//나중에 결제완료시 DB추가로 구현
 			model.addAttribute("seat", s);
 			model.addAttribute("show", show);
+			model.addAttribute("headerText", "공연예매");
 			return "show/payment";
 		}else {
 			model.addAttribute("msg", "예매 실패");
@@ -295,6 +295,7 @@ public class ShowController {
 		model.addAttribute("sr", map.get("sr"));
 		model.addAttribute("show", map.get("show"));
 		model.addAttribute("list", map.get("list"));
+		model.addAttribute("headerText", "공연예매");
 		return "show/paymentSuccess";
 	}
 	
