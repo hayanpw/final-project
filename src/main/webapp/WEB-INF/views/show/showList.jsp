@@ -6,13 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <title>공연 목록</title>
-    <link href="resources/showCss/show_default.css" rel="stylesheet">
     <link href="resources/showCss/show_list.css" rel="stylesheet">
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
     <div class="container">
-        <h1><strong>공연 일정</strong></h1>
         <div class="showSearchBox">
 	        <c:if test="${sessionScope.m.memberLevel == 0 }">
 	            <a href="/insertShowFrm.do" class="btn btn-danger">공연 추가</a>

@@ -10,6 +10,7 @@ public class ShowReview {
 	private String reviewContent;
 	private int star;
 	private String reviewDate;
+	private int reservNo;
 	
 	public String getReviewContentBr() {
 		return reviewContent.replaceAll("\r\n", "<br>");
