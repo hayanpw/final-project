@@ -2,6 +2,7 @@ package kr.or.addition.model.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.StringTokenizer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -150,8 +151,23 @@ public class AdditionService {
 	
 	//글삭제
 	@Transactional
-	public int boardDelete(int boardNo) {
-		int result = dao.boardDelete(boardNo);
+	public int boardDelete(int boardNo,String num) {
+		int result=-1;
+		if(!num.isEmpty()) {
+			StringTokenizer sT1 = new StringTokenizer(num,"/");
+			while(sT1.hasMoreTokens()) {
+				boardNo =Integer.parseInt(sT1.nextToken());
+				int result1 = dao.boardDelete(boardNo);
+				result=1;
+				if(result1 == 0) { 
+					result=0; 
+					break;
+				}
+			}
+		}else if(boardNo!=0){
+			result = dao.boardDelete(boardNo);
+		}
+		
 		return result;
 	}
 
@@ -164,9 +180,35 @@ public class AdditionService {
 
 	//댓글삭제
 	@Transactional
-	public int deleteComment(int bcNo) {
-		int result = dao.deleteComment(bcNo);
-		return result;
+	public int deleteComment(int bcNo,int bcRef) {
+		ArrayList<BoardComment> list=dao.chkReComment(bcNo);
+		if(list.isEmpty()) { //대댓글없을때 or 대댓글일때
+			if(bcRef!=0 ) { //대댓글일때 
+				int result=-1;
+				ArrayList<BoardComment> rlist=dao.chkReComment(bcRef);
+				BoardComment bc=dao.chkDelComment(bcRef);
+				if(rlist.size()==1 && bc.getBcDel()==1) { //다른 대댓없을때
+					result = dao.deleteComment(bcNo);
+					int result1 = dao.deleteComment(bcRef);
+					if(result1 <= 0) {
+						result=-1;
+					}
+				}else { //다른 대댓 있을때
+					result = dao.deleteComment(bcNo);
+				}
+				return result;
+			}else { //대댓글 없을때
+				int result = dao.deleteComment(bcNo);
+				return result;
+			}
+		}else {//대댓글있을때
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("del",1);
+			map.put("bcNo", bcNo);
+			map.put("bcContent", "삭제된 댓글입니다.");
+			int result = dao.updateComment(map);
+			return result;
+		}
 	}
 
 

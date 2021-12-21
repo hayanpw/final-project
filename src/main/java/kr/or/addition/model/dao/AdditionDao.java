@@ -142,4 +142,13 @@ public class AdditionDao {
 		return (ArrayList<BoardComment>)bcList;
 	}
 
+	public ArrayList<BoardComment> chkReComment(int bcNo) {
+		List<BoardComment> list = sqlSession.selectList("addition.chkReComment",bcNo);
+		return (ArrayList<BoardComment>)list;
+	}
+
+	public BoardComment chkDelComment(int bcRef) {
+		return sqlSession.selectOne("addition.chkDelComment",bcRef);
+	}
+
 }

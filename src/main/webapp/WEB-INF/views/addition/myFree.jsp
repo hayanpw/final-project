@@ -93,6 +93,7 @@
 				<table id="noticeb" class="display" style="width:100%">
 					<thead>
 						<tr id="firtr">
+							<td>선택</td>
 							<td>번호</td>
 							<td>제목</td>
 							<td>작성일</td>
@@ -101,7 +102,8 @@
 					<tbody>
 						<c:forEach items="${noticeList }" var="b" varStatus="i">
 							<tr>
-								<td>${i.count }</td>
+								<td><input type="checkbox"  class="chkn"></td>
+								<td><input type="hidden" value="${b.boardNo }">${i.count }</td>
 								<td id="btitle"><a
 									href="/boardView.do?boardType=1&boardNo=${b.boardNo}">${b.boardTitle }&nbsp;</a></td>
 								<td>${b.regDate }</td>
@@ -109,6 +111,7 @@
 						</c:forEach>
 					</tbody>
 				</table>
+				<button class="btn btn-danger chkDeleteNotice">공지글삭제</button>
 			</div>	
 			</c:if>	
 			<div class="boardName">소통게시판</div>
@@ -116,6 +119,7 @@
 				<table id="freeb" class="display table" style="width:100%">
 					<thead>
 						<tr id="firtr">
+							<td>선택</td>
 							<td>번호</td>
 							<td>제목</td>
 							<td>작성일</td>
@@ -124,7 +128,8 @@
 					<tbody>
 						<c:forEach items="${freeList }" var="b" varStatus="i">
 							<tr>
-								<td>${i.count }</td>
+								<td><input type="checkbox" class="chkf"></td>
+								<td><input type="hidden" value="${b.boardNo }">${i.count }</td>
 								<td id="btitle"><a
 									href="/boardView.do?boardType=3&boardNo=${b.boardNo}">${b.boardTitle }&nbsp;[${b.commentCount }]</a></td>
 								<td>${b.regDate }</td>
@@ -132,12 +137,14 @@
 						</c:forEach>
 					</tbody>
 				</table>
+				<button class="btn btn-danger chkDeleteFree">소통글삭제</button>
 				</div>
 				<div class="boardName">문의게시판</div>
 				<div class="table">
 				<table id="qnab" class="display table" style="width:100%">
 						<thead>
 							<tr id="firtr">
+							 	<td>선택</td>
 								<td>번호</td>
 								<td>제목</td>
 								<td>답변상태</td>
@@ -147,7 +154,8 @@
 						<tbody>
 							<c:forEach items="${qnaList }" var="b" varStatus="i">
 								<tr>
-									<td>${i.count }</td>
+									<td><input type="checkbox" class="chkq"></td>
+									<td><input type="hidden" value="${b.boardNo }">${i.count }</td>
 									<td id="btitle"><a
 										href="/boardView.do?boardType=2&boardNo=${b.boardNo}">${b.boardTitle }&nbsp;</a></td>
 									<c:choose>
@@ -163,12 +171,14 @@
 							</c:forEach>
 						</tbody>
 					</table>
+					<button class="btn btn-danger chkDeleteQna">문의글삭제</button>
 					</div>
 					<div class="boardName">댓글</div>
 					<div class="table">
 					<table id="commentb" class="display table" style="width:100%">
 						<thead>
 							<tr id="firtr">
+								<td>선택</td>
 								<td>번호</td>
 								<td>댓글</td>
 								<td>글제목</td>
@@ -178,6 +188,7 @@
 						<tbody>
 							<c:forEach items="${commentList }" var="b" varStatus="i">
 								<tr>
+									<td><input type="checkbox"></td>
 									<td>${i.count }</td>
 									<td>${b.bcContent }</td>
 									<td id="btitle"><a href="/boardView.do?boardType=${b.boardType }&boardNo=${b.boardRef }">${b.boardTitle }</a></td>
@@ -186,6 +197,7 @@
 							</c:forEach>
 						</tbody>
 					</table>
+					<button class="btn btn-danger">댓글삭제</button>
 					</div>
 		</div>
 	<script type="text/javascript">
@@ -218,7 +230,9 @@
 	 	});
 	        $("#freeb").DataTable({
 	        	columnDefs:[
-	        		{targets:[1],width:"70%"}
+	        		{targets:[0],width:"30px"},
+	        		{targets:[1],width:"30px"},
+	        		{targets:[2],width:"70%"}
 	        	],
 	        	 "language": { //메뉴한글화
 		        		"decimal" : "",
@@ -247,7 +261,9 @@
 	 	});
 	        $("#qnab").DataTable({
 	        	columnDefs:[
-	        		{targets:[1],width:"55%"}
+	        		{targets:[0],width:"35px"},
+	        		{targets:[1],width:"35px"},
+	        		{targets:[2],width:"600px"}
 	        	],
 	        	 "language": { //메뉴한글화
 		        		"decimal" : "",
@@ -275,6 +291,11 @@
 		            }
 	 	});
 	        $("#commentb").DataTable({
+	        	columnDefs:[
+	        		{targets:[0],width:"35px"},
+	        		{targets:[1],width:"35px"},
+	        		{targets:[4],width:"100px"}
+	        	],
 	        	 "language": { //메뉴한글화
 		        		"decimal" : "",
 		                "emptyTable" : "쓴 댓글이 없습니다.",
@@ -301,6 +322,46 @@
 		            }
 	 	});
 	 });
+	   
+	 $(".chkDeleteNotice").click(function(){
+			var inputs=$(".chkn:checked");
+			var num = new Array(); 
+			inputs.each(function(idx,item){
+				var boardNo = $(item).parent().next().children().val();
+				num.push(boardNo);
+			});
+			if(!inputs.length){
+				alert("삭제할 글을 선택해 주세요");
+			}else{
+			location.href="/boardDelete.do?boardNo=0&boardType=4&num="+num.join("/");
+			}
+		});
+	 $(".chkDeleteFree").click(function(){
+			var inputs=$(".chkf:checked");
+			var num = new Array(); 
+			inputs.each(function(idx,item){
+				var boardNo = $(item).parent().next().children().val();
+				num.push(boardNo);
+			});
+			if(!inputs.length){
+				alert("삭제할 글을 선택해 주세요");
+			}else{
+			location.href="/boardDelete.do?boardNo=0&boardType=4&num="+num.join("/");
+			}
+		});
+	 $(".chkDeleteQna").click(function(){
+			var inputs=$(".chkq:checked");
+			var num = new Array(); 
+			inputs.each(function(idx,item){
+				var boardNo = $(item).parent().next().children().val();
+				num.push(boardNo);
+			});
+			if(!inputs.length){
+				alert("삭제할 글을 선택해 주세요");
+			}else{
+			location.href="/boardDelete.do?boardNo=0&boardType=4&num="+num.join("/");
+			}
+		});
 	</script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
