@@ -53,11 +53,16 @@
 		delete from show_review where review_no=#{reviewNo} and show_no=#{showNo}
 	</delete>
 	<insert id="insertReview" parameterType="sReview">
-		insert into show_review values(sreview_seq.nextval, #{showNo}, #{reviewWriter}, #{reviewContent}, #{star}, to_char(sysdate, 'yyyy-mm-dd'))
+		insert into show_review values(sreview_seq.nextval, #{showNo}, #{reviewWriter}, #{reviewContent}, #{star}, to_char(sysdate, 'yyyy-mm-dd'), #{reservNo})
 	</insert>
 	<update id="updateReview" parameterType="sReview">
 		update show_review set review_content=#{reviewContent} where review_no=#{reviewNo} and show_no=#{showNo}
 	</update>
+	<select id="selectOneReview" parameterType="_int" resultType="sReview">
+		select
+			review_no as reviewNo
+		from show_review where reserv_no=#{reservNo}
+	</select>
 	<!-- 예약 -->
 	<insert id="insertReserv" parameterType="sReserv">
 		insert into show_reserv values(sreserv_seq.nextval, #{showNo}, #{memberId}, #{showDate}, to_char(sysdate, 'yyyy-mm-dd'), 0, 0)
@@ -78,10 +83,11 @@
 		select
 			show_no as showNo,
 			member_id as memberId,
+			(select show_name from show where show_no=R.show_no) as showName,
 			show_date as showDate,
 			reserv_date as reservDate,
 			reserv_cancel as reservCancel
-		from show_reserv where reserv_no=#{reservNo}
+		from show_reserv R where reserv_no=#{reservNo}
 	</select>
 	<select id="selectSeatList" parameterType="_int" resultType="seat">
 		select
@@ -115,6 +121,7 @@
 			R.reserv_date as reservDate,
 			R.reserv_cancel as reservCancel,
 			R.reserv_pay as reservPay,
+			R.review_status as reviewStatus,
             count(seat_no) as ticketNum,
             sum(seat_price) as payment
 		from show_reserv R left join seat S using(reserv_no)
@@ -125,7 +132,8 @@
 			R.show_date,
 			R.reserv_date,
 			R.reserv_cancel,
-			R.reserv_pay
+			R.reserv_pay,
+			R.review_status
         order by 1 desc
 	</select>
 	<update id="reservCancel" parameterType="_int">
@@ -146,6 +154,9 @@
 			R.reserv_date
         order by 1 desc
 	</select>
+	<update id="updateReviewStatus" parameterType="_int">
+		update show_reserv set review_status=1 where reserv_no=#{reservNo}
+	</update>
 	
 	<resultMap type="show" id="s">
 		<result column="show_no" property="showNo"/>

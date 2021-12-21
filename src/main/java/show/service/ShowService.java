@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import show.dao.ShowDao;
 import show.vo.Seat;
@@ -58,8 +59,13 @@ public class ShowService {
 		return dao.deleteReview(sr);
 	}
 
+	@Transactional
 	public int insertReview(ShowReview sr) {
-		return dao.insertReview(sr);
+		int result = dao.insertReview(sr);
+		if(result>0) {
+			result = dao.updateReviewStatus(sr.getReservNo());
+		}
+		return result;
 	}
 
 	public int updateReview(ShowReview sr) {
@@ -163,6 +169,15 @@ public class ShowService {
 
 	public ArrayList<ShowReserv> checkReserv(ShowReserv sr) {
 		return dao.checkReserv(sr);
+	}
+
+	public ShowReserv writeReview(int reservNo) {
+		ShowReview sr = dao.selectOneReview(reservNo);
+		if(sr == null) {
+			return dao.selectReserv(reservNo);
+		}else {
+			return null;
+		}
 	}
 
 
