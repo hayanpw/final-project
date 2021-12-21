@@ -65,7 +65,7 @@
 	</select>
 	<!-- 예약 -->
 	<insert id="insertReserv" parameterType="sReserv">
-		insert into show_reserv values(sreserv_seq.nextval, #{showNo}, #{memberId}, #{showDate}, to_char(sysdate, 'yyyy-mm-dd'), 0, 0)
+		insert into show_reserv values(sreserv_seq.nextval, #{showNo}, #{memberId}, #{showDate}, to_char(sysdate, 'yyyy-mm-dd'), 0, 0, 0)
 		<selectKey resultType="_int" order="AFTER" keyProperty="reservNo">
 			select max(reserv_no) from show_reserv
 		</selectKey>
