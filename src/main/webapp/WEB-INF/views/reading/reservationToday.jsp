@@ -10,9 +10,13 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+	<br><br><br>
 		<div class="container">
+			<div class="main-title">
+				<h1 class="todaySeat"></h1>
+			</div>
+			<br><br><br>
 			<div class="container-left">
-				<h1 class="todaySeat"></h1><br>
 				<c:forEach begin="1" end="100" varStatus="i" >
 					<c:choose>
 						<c:when test="${i.index%20 eq 0}">

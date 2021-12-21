@@ -11,6 +11,7 @@ public class ReadingBlack {
 	private String blackId;
 	private int blackTy;
 	private String memberName;
+	private String blackDel;
 	
 //	BLACK_NO	    number	        primary key,
 //	BLACK_START	    char(17)        NOT NULL,	-- '관리자에 의해 등록된 시점'

@@ -31,6 +31,11 @@
 								value="${sessionScope.m.memberName}" readonly></td>
 							</tr>
 							<tr>
+								<td>비밀번호변경</td>
+								<td>[휴업]</td>
+							</tr>
+							
+							<tr>
 								<td>휴대전화번호</td>
 								<td><input type="text" name="memberPhone" value="${sessionScope.m.memberPhone}" readonly>
 								</td>
@@ -53,22 +58,22 @@
 							</tr>
 							<tr>
 								<td>이메일</td>
-								<td><input type="text" class="input" id="email1" name="email1" value="${email1}"> @ <input type="text" class="input" id="email2" name="email2" value="${email2}"> 
-								<input type="hidden" id="memberEmail" name="memberEmail" value="${m.memberEmail}">
+								<td>
+								<input type="text" class="input" id="email1" name="email1" value="${email1}"> @ <input type="text" class="input" id="email2" name="email2" value="${email2}"> 		
 								<button type="button" onclick="checkEmail();" id="btnOpen1" class="nextBtn">중복체크</button>
 									<span id="ajaxEmailcheck"></span>
 									<div class="agreebox adcheck">
-										<span id="authMsg"></span><input type="hidden" id="emailchk">
+										<span id="authMsg"></span><input type="hidden"  value='1' id="emailchk">
 										<div></div>
 									</div>
 								</td>
 							</tr>
 						</table>
+						<div class="btnBox">
+							<button  type="submit" class="nextBtn">정보수정</button>
+						</div>	
 				</form>	
-		</div>
-		<div class="btnBox">
-				<button  type="submit" class="nextBtn">정보수정</button>
-		</div>		
+
 				<a href="/deleteMemberFrm.do?memberNo=${m.memberNo}" >탈퇴하기<span>></span></a>
 				<form action="" id="modal1">
 				<div id='content' class="modal_window">
@@ -97,17 +102,24 @@
 						</div>
 					</div>
 				</div>
-			</form>
-			</div>
+				</form>
+	</div>	
+</div>
 	<script>
 	function emailChk() {
+		console.log($("#emailchk").val()); 
 		if ($("#emailchk").val() == '1' && $("#email1") != '') {
 				return true;
 			} else {
 				return false;
 			}
 		}
-
+	$('#email1').change(function (){
+		$("#emailchk").val('0');
+	});
+	$('#email2').change(function (){
+		$("#emailchk").val('0');
+	});
 	function addrSearch() {
 		new daum.Postcode({
 			oncomplete : function(data) {
@@ -119,6 +131,7 @@
 	}
 	
 	function checkEmail() {
+		if ($('#emailchk').val() != '1'){
 		var memberEmail = $('#email1').val() + '@' + $('#email2').val();
 		$.ajax({
 					url : "/ajaxEmailCheck.do",
@@ -226,11 +239,28 @@
 							$("#ajaxEmailcheck").html("이미 사용중인 이메일 입니다.");
 							$("#ajaxEmailcheck").css("color", "#BDB19A");
 						}
-
 					}
 				});
+		}
 	};
+
 	</script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </body>
 </html>

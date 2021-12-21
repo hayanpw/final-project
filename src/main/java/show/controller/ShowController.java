@@ -34,7 +34,7 @@ public class ShowController {
 		ArrayList<Show> list = service.selectShowList();
 		model.addAttribute("list", list);
 		model.addAttribute("headerImg", "/resources/uplaod/mianimg.jpg");
-		model.addAttribute("headerText", "오시는길");
+		model.addAttribute("headerText", "공연일정");
 		return "show/showList";
 	}
 	
@@ -42,12 +42,13 @@ public class ShowController {
 	public String showView(int showNo, Model model) {
 		ShowAndReview snr = service.selectShowView(showNo);
 		model.addAttribute("snr",snr);
-		
+		model.addAttribute("headerText", snr.getS().getShowName());
 		return "show/showView";
 	}
 	
 	@RequestMapping(value = "/insertShowFrm.do")
-	public String insertShowFrm() {
+	public String insertShowFrm(Model model) {
+		model.addAttribute("headerText", "공연등록");
 		return "show/insertShowFrm";
 	}
 	
@@ -105,6 +106,7 @@ public class ShowController {
 	public String updateShow(int showNo, Model model) {
 		Show show = service.selectOneShow(showNo);
 		model.addAttribute("s",show);
+		model.addAttribute("headerText", "공연수정");
 		return "show/showUpdateFrm";
 	}
 	
@@ -182,8 +184,8 @@ public class ShowController {
 		}else {
 			model.addAttribute("msg", "등록 실패");
 		}
-		model.addAttribute("loc", "/showView.do?showNo="+sr.getShowNo());
-		return "common/msg";
+		model.addAttribute("result", 2);
+		return "show/reviewWriteFrm";
 	}
 	
 	@RequestMapping(value = "/deleteReview.do")
@@ -262,6 +264,7 @@ public class ShowController {
 		model.addAttribute("s", map.get("show"));
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("sr",sr);
+		model.addAttribute("headerText", "공연예매");
 		return "show/selectSeat";
 	}
 	
@@ -269,9 +272,9 @@ public class ShowController {
 	public String reservation(Seat s, String memberId, Model model) {
 		Show show = service.reservation(s, memberId);
 		if(show != null) {
-			//나중에 결제완료시 DB추가로 구현
 			model.addAttribute("seat", s);
 			model.addAttribute("show", show);
+			model.addAttribute("headerText", "공연예매");
 			return "show/payment";
 		}else {
 			model.addAttribute("msg", "예매 실패");
@@ -292,6 +295,7 @@ public class ShowController {
 		model.addAttribute("sr", map.get("sr"));
 		model.addAttribute("show", map.get("show"));
 		model.addAttribute("list", map.get("list"));
+		model.addAttribute("headerText", "공연예매");
 		return "show/paymentSuccess";
 	}
 	
@@ -317,6 +321,7 @@ public class ShowController {
 	public String showMypage(String memberId, Model model) {
 		HashMap<String, Object> map = service.myReserv(memberId);
 		model.addAttribute("list", map.get("reservs"));
+		model.addAttribute("headerText", "마이페이지");
 		return "show/showMypage";
 	}
 	
@@ -358,4 +363,17 @@ public class ShowController {
 		return "common/msg";
 	}
 	
+	@RequestMapping(value = "/checkReview.do")
+	public String checkReview(int reservNo, Model model) {
+		ShowReserv sr = service.writeReview(reservNo);
+		int result = 0;
+		if(sr == null) {
+			result = 1;
+		}else {
+			sr.setReservNo(reservNo);
+		}
+		model.addAttribute("sr", sr);
+		model.addAttribute("result", result);
+		return "show/reviewWriteFrm";
+	}
 }

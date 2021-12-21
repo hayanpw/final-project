@@ -33,11 +33,13 @@ public class MemberController {
 		return "common/main";
 	}
 	@RequestMapping(value="/loginFrm.do")
-	public String loginFrm() {
+	public String loginFrm(Model model) {
+		model.addAttribute("headerText", "로그인");
 		return "member/login";
 	}
 	@RequestMapping(value="/mypage.do")
-	public String mypage() {
+	public String mypage(Model model) {
+		model.addAttribute("headerText", "마이페이지");
 		return "member/mypage";
 	}
 	@RequestMapping(value="/adminpage.do")
@@ -62,7 +64,8 @@ public class MemberController {
 		return "redirect:/";
 	}
 	@RequestMapping(value="/joinFrm.do")
-	public String joinFrm() {
+	public String joinFrm(Model model) {
+		model.addAttribute("headerText", "회원가입");
 		return "member/joinFrm";
 	}
 	@RequestMapping(value="/join.do")
@@ -101,13 +104,15 @@ public class MemberController {
 			System.out.println(email);
 			model.addAttribute("email1",email[0]);
 			model.addAttribute("email2",email[1]);
-			
+			model.addAttribute("headerText", "개인정보관리");
 			return "member/memberUpdate";
 		}else {
+			model.addAttribute("headerText", "개인정보관리");
 			model.addAttribute("msg","비밀번호를 확인 하세요");
 			model.addAttribute("loc","/");
 			return "common/msg";
 		}
+		
 	}
 	
 	@RequestMapping(value="/ajaxEmailCheck.do")
@@ -153,7 +158,7 @@ public class MemberController {
 	}else {
 		model.addAttribute("msg","정보변경 실패");
 	}
-	model.addAttribute("loc","/");
+	model.addAttribute("loc", "/");
 	return "common/msg";
 }
 	@RequestMapping(value="/searchId.do")
@@ -258,9 +263,19 @@ public class MemberController {
 		if(result>0) {
 			model.addAttribute("msg", "삭제성공");			
 			session.invalidate();
-			return "redirect:/";
 		}else {
 			model.addAttribute("msg", "삭제실패");
+		}
+		model.addAttribute("loc","/");
+		return "common/msg";
+	}
+	@RequestMapping(value="/updatePassword.do")
+	public String updatePassword(Member m,Model model) {
+		int result = service.updatePasswordPw(m);
+		if(result>0) {
+			model.addAttribute("msg","정보변경 성공");
+		}else {
+			model.addAttribute("msg","정보변경 실패");
 		}
 		model.addAttribute("loc","/");
 		return "common/msg";

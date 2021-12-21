@@ -238,7 +238,10 @@
 	        						<h5>공연일 : ${r.showDate }</h5>
 	        						<h5>예매수 : ${r.ticketNum }</h5>
 	        						<h5>결제금액 : ${r.payment }</h5>
-	        						<button class="btn btn-default btn-sm" onclick="deleteReserv('${r.reservNo }');">내역삭제</button>
+	        						<c:if test="${r.reviewStatus == 0 }">
+		        						<button class="btn btn-default btn-sm" onclick="writeReview('${r.reservNo}');">관람평작성</button>
+	        						</c:if>
+	        						<button class="btn btn-danger btn-sm" onclick="deleteReserv('${r.reservNo }');">내역삭제</button>
 	        					</div>
 	        				</div>
 	        			</c:otherwise>
@@ -247,6 +250,10 @@
         </div>
     </div>
     <script>
+    	function writeReview(reservNo) {
+			var newWindow = open("/checkReview.do?reservNo="+reservNo,"review", "height=500,width=580,top=200,left=200,location=no,toolbars=no");
+		}
+    
 		function cancelReserv(reservNo) {
 	    	if(confirm("예매를 취소하시겠습니까?")){
 				location.href="/reservCancel.do?reservNo="+reservNo+"&memberId=${sessionScope.m.memberId}";

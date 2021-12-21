@@ -223,7 +223,12 @@ public class ReadingController {
 			model.addAttribute("loc", "/reservationDay.do");
 			return "common/msg";
 		}
-		
 	}
-
+	
+	@ResponseBody
+	@RequestMapping(value="/fixturesCancel.do",produces = "application/json;charset=utf-8")
+	public String fixturesCancel(Reading re, Model model) {
+		int result = service.fixturesCancel(re);
+		return new Gson().toJson(result);
+	}
 }

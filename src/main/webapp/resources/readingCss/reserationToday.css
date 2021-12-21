@@ -1,6 +1,12 @@
+
+.main-title{
+	width:1170px;
+	border-bottom : 1px solid #d6d6d6;
+}
+.main-title>h1{
+	font-weight : 900;
+}
 .container{
-    display: flex;
-    align-items: center;
 }
 .container-left{
     text-align:center;

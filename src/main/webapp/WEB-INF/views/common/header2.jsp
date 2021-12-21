@@ -13,7 +13,7 @@
 		
 	<div class="header-title">
 		<div class="h-left">
-        <a href="#"><img class="search-img" src="/resources/mainImage/upload/search-droopy.jpg" style="width:18px;height:40px"></a>
+        <a href="#"></a>
         </div> 
         <div class="h-logo">
 			<a href="/main.do">Musée d'art</a>

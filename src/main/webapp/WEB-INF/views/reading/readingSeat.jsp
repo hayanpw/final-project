@@ -10,8 +10,12 @@
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
     <link href="resources/readingCss/reading_seat.css" rel="stylesheet">
+	<br><br><br>
 		<div class="container">
-			<div class="container-left">
+			<div class="main-title">
+				<h1 class="todaySeat"></h1>
+			</div><br><br><br>
+			<div class="container-left col-sm-9">
 			
 				<c:forEach begin="1" end="100" varStatus="i" >
 					<c:choose>
@@ -35,7 +39,7 @@
 					</c:choose>
 				</c:forEach>
 			</div>
-			<div class="container-right">
+			<div class="container-right col-sm-3">
 				<h2>선택 내역</h2>
 				<div class="readingInfo">
 					<h3 name="showdate"></h3>
@@ -52,10 +56,16 @@
 		</div>
 	<script>
 		$(function(){
+			var today = new Date();
+			var year = today.getFullYear();
+			
 			var selectDate = $("input[name=readingDay]").val();
 			var readingDay = selectDate;
 			var month = selectDate.substring(5,7); //몇월
 			var day = selectDate.substring(8,10);  //몇일
+			var str = year+"-"+month+"-"+day;
+			var readingDay = str;
+			$(".todaySeat").html(str+" 좌석 현황");
 			$("h3[name=showdate]").html(month+"월 "+day+"일");
 			$.ajax({
 				url : "/chkSeat.do",
