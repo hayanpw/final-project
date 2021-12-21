@@ -39,7 +39,7 @@ body{
       .swiper-slide img {
         display: block;
         width: auto;
-        height: 100%;
+        height: 800px;
         object-fit: cover;
         position: relative;
         overflow: hidden;
@@ -133,17 +133,19 @@ body{
     /*slick*/
     .slider-for>div{
         width: 100%;
-        height: 800px;
+        height: 700px;
         margin: 0 auto;
     }
     .d1 {
-        height: 615px;
+        height: 515px;
         z-index: 1;
     }
     .d2 {
         display: flex;
-        width: 700px;
+        width: 750px;
         z-index: 3;
+        margin:0 auto;
+        z-index:3;
     }
     .sn{
         margin: 15px;
@@ -157,9 +159,10 @@ body{
         max-width: 250px;
     }
     .sf img{
-        height: 800px;
-        width: 100%;
-        
+    	margin: 0 auto;
+        height: 700px;
+        width: auto;
+        z-index:3;
     }
     .slick-dots{
         display: none;
@@ -191,12 +194,11 @@ body{
         font-size: 18px;
         margin: 10px;
         padding: 10px;
-border: solid 1px #041C32; 
-display: inline-block; 
-width: 200px; 
-height: 270px;
-overflow: hidden; 
-
+		border: solid 1px #041C32; 
+		display: inline-block; 
+		width: 200px; 
+		height: 270px;
+		overflow: hidden; 
     }
     .notice-menu > li {
         float: left;
