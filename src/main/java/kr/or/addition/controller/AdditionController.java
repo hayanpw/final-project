@@ -56,10 +56,13 @@ public class AdditionController {
 		model.addAttribute("start", bpd.getStart());
 		model.addAttribute("nCount", nCount);
 		if (boardType == 1) {
+			model.addAttribute("headerText", "공지사항");
 			return "addition/notice";
 		} else if (boardType == 2) {
+			model.addAttribute("headerText", "FAQ & 질문과 답변");
 			return "addition/qna";
 		} else {
+			model.addAttribute("headerText", "소통게시판");
 			return "addition/free";
 		}
 	}
