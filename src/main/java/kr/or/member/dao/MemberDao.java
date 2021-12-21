@@ -105,5 +105,9 @@ public class MemberDao {
 	public int deleteMember(int memberNo) {
 		return sqlSession.delete("deleteMember", memberNo);
 	}
+	public int updatePassword(Member m) {
+		int result = sqlSession.update("member.updatePassword",m);
+		return result;
+	}
 }
 

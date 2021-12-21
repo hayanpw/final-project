@@ -37,7 +37,8 @@ public class MemberController {
 		return "member/login";
 	}
 	@RequestMapping(value="/mypage.do")
-	public String mypage() {
+	public String mypage(Model model) {
+		model.addAttribute("headerText", "마이페이지");
 		return "member/mypage";
 	}
 	@RequestMapping(value="/adminpage.do")
@@ -153,7 +154,7 @@ public class MemberController {
 	}else {
 		model.addAttribute("msg","정보변경 실패");
 	}
-	model.addAttribute("loc","/");
+	model.addAttribute("loc", "/");
 	return "common/msg";
 }
 	@RequestMapping(value="/searchId.do")
@@ -258,9 +259,19 @@ public class MemberController {
 		if(result>0) {
 			model.addAttribute("msg", "삭제성공");			
 			session.invalidate();
-			return "redirect:/";
 		}else {
 			model.addAttribute("msg", "삭제실패");
+		}
+		model.addAttribute("loc","/");
+		return "common/msg";
+	}
+	@RequestMapping(value="/updatePassword.do")
+	public String updatePassword(Member m,Model model) {
+		int result = service.updatePasswordPw(m);
+		if(result>0) {
+			model.addAttribute("msg","정보변경 성공");
+		}else {
+			model.addAttribute("msg","정보변경 실패");
 		}
 		model.addAttribute("loc","/");
 		return "common/msg";

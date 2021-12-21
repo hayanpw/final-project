@@ -162,4 +162,7 @@
 	<delete id="deleteMember" parameterType="m">
 		delete from member where member_no=#{memberNo}
 	</delete>
+	 <update id="updatePassword" parameterType="m">
+ 		update member set member_password=#{memberPassword} where member_id=#{memberId}
+ 	</update>
 </mapper>

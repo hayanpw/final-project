@@ -223,4 +223,9 @@ public class MemberService {
 		result += dao.deleteMember(memberNo);
 		return result;
 	}
+
+	public int updatePasswordPw(Member m) {
+		int result = dao.updatePassword(m);
+		return result;
+	}
 }

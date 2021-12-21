@@ -72,7 +72,7 @@
 						<form action="/searchidpw.do" method="post">
 							<fieldset>
 									<label for="memberPassword" class="reg"> PW </label>
-									<input type="password" class="input" name="memberPassword" id="memberPassword"><span id="pw-detail"> 8~12자 이내 영문,숫자,특수문자(“”-+/\:; 제외)</span> <span id="pwChkRule"></span><br><br>
+									<input type="password" class="input" name="memberPassword" id="memberPassword"><span id="pw-detail">(“”-+/\:; 제외)</span> <span id="pwChkRule"></span><br><br>
 									<label for="pw_re" class="reg"> 확인 </label><input type="password" class="input" name="pw_re" id="chkpw"> <span id="pwChk"></span>
 									<input type="submit" value="변경">
 									<input type="hidden" name="memberId" id="memberId">
@@ -256,7 +256,7 @@
 	$("[name=memberPassword]").eq(0).keyup(function() {
 		var memberPassword = $(this).val();
 		// (알파벳 하나)(숫자 하나)(특수문자 하나)(문자열)
-		 var regExpPw = /(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,12}/; 
+		 var regExpPw = /(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{5,20}/; 
 		/*  var regExpPw = /^[a-zA-Z0-9]{8,12}$/; */
 		 
 		if (regExpPw.test(memberPassword)){
@@ -265,7 +265,7 @@
 			memberPwchk = true;
 			
 		}else{
-			$('#pwChkRule').html("비밀번호는  8~12자 이내 영문,숫자,특수문자로 입력해주세요.");
+			$('#pwChkRule').html("비밀번호는  5~20자 이내 영문,숫자,특수문자로 입력해주세요.");
 			$('#pwChkRule').css('color' ,"red");
 			memberPwchk = false;
 		}

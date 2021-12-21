@@ -73,5 +73,8 @@
 			    <a href="/logout.do"> 로그아웃</a>
 			</c:when>
 		</c:choose>
-		</div>  
+		</div>
+		<div class="headerText" style="text-shadow: 2px 2px 2px gray;">	
+ 			<strong>${headerText}</strong>
+		</div>
 	</div>
