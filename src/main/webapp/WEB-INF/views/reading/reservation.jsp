@@ -20,15 +20,14 @@
 	<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
 	<script type="text/javascript" src="/resources/jquery-ui/jquery-ui.min.js"></script>
 
-	<br>
-	<br>
-	<br>
+	<br><br><br>
 	<div class="container">
+		<div class="main-title">
+			<h1>예약 내역 조회  & 비품 대여</h1><br>
+		</div>
+		<br><br><br>
 		<div class="container-left col-sm-7">
-			<h1>예약 내역 조회  & 비품 대여</h1>
-			<br>
-			<h3>날짜를 선택해주세요</h3>
-			<br>
+			<h3>날짜를 선택해주세요</h3><br>
 			<!-- 캘린더 코드 -->
 			<div id="datepicker"></div>
 		</div>

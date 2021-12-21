@@ -19,7 +19,6 @@
 <head>
 <meta charset="UTF-8">
 <title>좌석 선택</title>
-<link href="resources/showCss/show_default.css" rel="stylesheet">
 <link href="resources/showCss/show_seat.css" rel="stylesheet">
 </head>
 <body>
