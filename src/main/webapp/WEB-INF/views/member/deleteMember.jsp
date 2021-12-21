@@ -17,7 +17,7 @@
 		<c:choose>
 			<c:when test="${count eq 0 }">
 				탈퇴하시겠습니까?
-				<a href="/deleteMember.do">넹 바로할래요</a>
+				<a href="/deleteMember.do?memberNo=${m.memberNo}">넹 바로할래요</a>
 				<a href="/">아뇨,다시생각해볼래요</a>
 			</c:when>
 			<c:otherwise>

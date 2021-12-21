@@ -97,10 +97,17 @@ public class MemberDao {
 		int totalCount = sqlSession.selectOne("member.searchTotalCount",map);
 		return totalCount;
 	}
-	public ArrayList<DeleteMember> deleteMember(int memberNo) {
+	public ArrayList<DeleteMember> deleteMemberList(int memberNo) {
 		List<DeleteMember> list = sqlSession.selectList("member.selectDeleteMember",memberNo);
 
 		return (ArrayList<DeleteMember>)list;
+	}
+	public int deleteMember(int memberNo) {
+		return sqlSession.delete("deleteMember", memberNo);
+	}
+	public int updatePassword(Member m) {
+		int result = sqlSession.update("member.updatePassword",m);
+		return result;
 	}
 }
 

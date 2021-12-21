@@ -11,18 +11,18 @@
 .time-table{
 	display : inline-block;
 	margin-left: 30px;
+	margin-bottom: 20px;
 }
 #insert-btn{
-	display: block;
-	margin-top: 200px;
+	display: inline-block;
+	text-align: center;
+	margin-top: 20px;
+	margin-bottom: 20px;
 }
 #insert-btn>button{
 	border : 1px solid #BDB19A; 
 	width : 250px;
 	height : 50px;
-	margin-top : 30px;
-	margin-bottom : 10px;
-	margin-left: 40%;
 }
 #insert-btn>button:hover{
 	border : 1px solid white;
@@ -79,7 +79,11 @@
 .cal{
 	margin-left: 50px;
 }
+#insert-btn{
+	width: 420px;
+	float: right;
+	margin-right: 25px;
+}
 .box{
-	border: 1px solid black;
-	margin-left: 800px;
+	font-size: 20px;
 }

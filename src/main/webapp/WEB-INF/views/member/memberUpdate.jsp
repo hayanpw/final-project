@@ -18,7 +18,7 @@
 	<div class="container">        
         <div class="mypage-title"><span>개</span>인정보관리</div>
         <div class="mypage-container">
-				<form action="/memberUpdate.do" method="post" style="padding-left: 200px; padding-top:50px">
+				<form action="/memberUpdate.do" method="post" style="padding-left: 200px; padding-top:50px" onsubmit="return emailChk()">
 						<table class="inputTbl">
 							<tr>
 								<td>아이디</td>
@@ -30,6 +30,11 @@
 								<td><input type="text" class="input short3" name="memberName" 
 								value="${sessionScope.m.memberName}" readonly></td>
 							</tr>
+							<tr>
+								<td>비밀번호변경</td>
+								<td>[휴업]</td>
+							</tr>
+							
 							<tr>
 								<td>휴대전화번호</td>
 								<td><input type="text" name="memberPhone" value="${sessionScope.m.memberPhone}" readonly>
@@ -53,21 +58,22 @@
 							</tr>
 							<tr>
 								<td>이메일</td>
-								<td><input type="text" class="input" id="email1" name="email1" value="${email1}"> @ <input type="text" class="input" id="email2" name="email2" value="${email2}"> 
+								<td>
+								<input type="text" class="input" id="email1" name="email1" value="${email1}"> @ <input type="text" class="input" id="email2" name="email2" value="${email2}"> 		
 								<button type="button" onclick="checkEmail();" id="btnOpen1" class="nextBtn">중복체크</button>
 									<span id="ajaxEmailcheck"></span>
 									<div class="agreebox adcheck">
-										<span id="authMsg"></span><input type="hidden" id="emailchk">
+										<span id="authMsg"></span><input type="hidden"  value='1' id="emailchk">
 										<div></div>
 									</div>
 								</td>
 							</tr>
 						</table>
-					</div>
-					<div class="btnBox">
-						<button  type="submit" class="nextBtn">정보수정</button>
-					</div>		
-				</form>
+						<div class="btnBox">
+							<button  type="submit" class="nextBtn">정보수정</button>
+						</div>	
+				</form>	
+
 				<a href="/deleteMemberFrm.do?memberNo=${m.memberNo}" >탈퇴하기<span>></span></a>
 				<form action="" id="modal1">
 				<div id='content' class="modal_window">
@@ -96,9 +102,24 @@
 						</div>
 					</div>
 				</div>
-			</form>
-			</div>
+				</form>
+	</div>	
+</div>
 	<script>
+	function emailChk() {
+		console.log($("#emailchk").val()); 
+		if ($("#emailchk").val() == '1' && $("#email1") != '') {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	$('#email1').change(function (){
+		$("#emailchk").val('0');
+	});
+	$('#email2').change(function (){
+		$("#emailchk").val('0');
+	});
 	function addrSearch() {
 		new daum.Postcode({
 			oncomplete : function(data) {
@@ -110,6 +131,7 @@
 	}
 	
 	function checkEmail() {
+		if ($('#emailchk').val() != '1'){
 		var memberEmail = $('#email1').val() + '@' + $('#email2').val();
 		$.ajax({
 					url : "/ajaxEmailCheck.do",
@@ -217,13 +239,28 @@
 							$("#ajaxEmailcheck").html("이미 사용중인 이메일 입니다.");
 							$("#ajaxEmailcheck").css("color", "#BDB19A");
 						}
-
 					}
 				});
+		}
 	};
+
 	</script>
-        </div>
-	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </body>
 </html>

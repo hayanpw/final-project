@@ -214,7 +214,18 @@ public class MemberService {
 	}
 	
 	public ArrayList<DeleteMember> deleteMemberFrm(int memberNo) {
-		ArrayList<DeleteMember> list = dao.deleteMember(memberNo);
+		ArrayList<DeleteMember> list = dao.deleteMemberList(memberNo);
 		return list;
+	}
+
+	public int deleteMember(int memberNo) {
+		int result = dao.deleteMember(memberNo);
+		result += dao.deleteMember(memberNo);
+		return result;
+	}
+
+	public int updatePasswordPw(Member m) {
+		int result = dao.updatePassword(m);
+		return result;
 	}
 }

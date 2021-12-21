@@ -39,7 +39,6 @@
 					<button id="update-btn" class="btn btn-default"
 						onclick="location.href='/spaceUpdate.do?spaceNo=${s.spaceNo}'">수정하기</button>
 				</c:if>
-				</form>
 			</div>
 		</c:forEach>
 	</div>

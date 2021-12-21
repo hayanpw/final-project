@@ -103,4 +103,9 @@ public class ExhibitionDao {
 		int result = sqlSession.update("exhibition.deletePayment",paymentNo);
 		return result;
 	}
+
+	public ArrayList<ExhibitionPayment> paymentList(int exhibitionNo) {
+		List<ExhibitionPayment> payment = sqlSession.selectList("exhibition.paymentList",exhibitionNo);
+		return (ArrayList<ExhibitionPayment>)payment;
+	}
 }

@@ -5,7 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>공연 등록</title>
-<link href="resources/showCss/show_default.css" rel="stylesheet">
 <link href="resources/showCss/show_insert.css" rel="stylesheet">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
 <!-- include summernote css/js -->
@@ -16,7 +15,6 @@
 	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 	<div class="container">
-        <h1>공연 등록</h1>
         <form action="/insertShow.do" method="post" enctype="multipart/form-data">
             <table>
                 <tr>
@@ -87,7 +85,7 @@
                 </tr>
             </table>
         </form>
-
+	</div>
     <script>
     $('#summernote').summernote({
 		  height: 300,                 // set editor height

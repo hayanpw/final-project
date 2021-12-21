@@ -177,4 +177,12 @@
 	<update id="deleteAcPayment" parameterType="_long">
 		update payment set payment_cancel = 1 where payment_no = #{paymentNo}
 	</update>
+	<select id="studentList" parameterType="_int" resultType="sl">
+		select 
+   			 rownum as count,
+    		 member_name as memberName,
+   			 member_email as memberEmail,
+   			 payment_cancel as paymentCancel
+		from payment join member using(member_no) where academy_no =#{academyNo}
+	</select>
 </mapper>

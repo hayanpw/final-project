@@ -76,5 +76,85 @@
 			</tr>
 		</c:forEach>
 	</table>
+		<script >
+	$(function () {
+		$(".pop").hide();
+		$("#q-img").hover(function() {
+			$(".pop").show();
+		},function(){
+			$(".pop").hide();	
+		});
+		/* 체크 한 내용 출력  */
+ 		$("[name=ub]").change(function(){
+	        if($("[name=ub]").is(":checked")){
+	     	   $.ajax({
+					url : "/spaceMypageAjax.do",
+					data : {memberId : $("[name=memberId]").val(), ub : $("[name=ub]").val() },
+					type : "post",
+					success : function(data) {
+						$(".table").hide();
+						$(".table-bb").show();
+						$(".table-bb").empty();
+						$(".table-bb").append(data);
+					}
+			   });
+	        }else{
+	        	$(".table").show();
+	        	$(".table-bb").hide();
+	        }
+	    }); 
+	});
+		$(".d-review").click(function () {
+			var delConfirm = confirm('리뷰를 삭제하시겠습니까?');
+			var rentalNo = $(this).prev().val();
+			console.log(rentalNo);
+			   if (delConfirm) {
+				   $.ajax({
+						url : "/deleteSpaceReview.do",
+						data : {rentalNo :rentalNo},
+						type : "post",
+						success : function(data) {
+							if(data>0){
+							 location.href = "/spaceMypage.do?memberId=${sessionScope.m.memberId}"; 
+							}else{
+								alert("삭제 실패");
+							}
+						}
+				   });
+			      alert('삭제되었습니다.');
+			   }
+			   else {
+			      alert('삭제가 취소되었습니다.');
+			   }
+		});
+	$(".writeBtn").click(
+			function() {
+				$.ajax({
+					url : "/selectRentalInfo.do",
+					data : {rentalNo :$(this).next().val()},
+					type : "post",
+					success : function(data) {
+						console.log(data);
+						$(".modal-b").empty();
+						$(".modal-b").append("<input type = 'hidden' name='rentalNo' value='"+data.rentalNo +"'>");
+					}
+				});
+			});
+	$(".updateBtn").click(
+			function() {
+				$.ajax({
+					url : "/selectReviewInfo.do",
+					data : {rentalNo :$(this).next().val()},
+					type : "post",
+					success : function(data) {
+						console.log(data);
+						$(".modal-bb").empty();
+						$(".modal-bb").append("<input type = 'hidden' name='rentalNo' value='"+data.rentalNo +"'>");
+						$("[name=srContent]").empty();
+						$("[name=srContent]").attr("value",data.srContent);
+					}
+				});
+			});
+	</script>
 </body>
 </html>

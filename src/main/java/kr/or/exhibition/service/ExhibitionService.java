@@ -117,4 +117,9 @@ public class ExhibitionService {
 		int result = dao.deletePayment(paymentNo);
 		return result;
 	}
+
+	public ArrayList<ExhibitionPayment> paymentList(int exhibitionNo) {
+		ArrayList<ExhibitionPayment> payment = dao.paymentList(exhibitionNo);
+		return payment;
+	}
 }

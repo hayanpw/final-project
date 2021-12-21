@@ -10,7 +10,6 @@
 <head>
 <meta charset="UTF-8">
 <title>${snr.s.showName }</title>
-<link href="resources/showCss/show_default.css" rel="stylesheet">
 <link href="resources/showCss/show_view.css" rel="stylesheet">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/jquery-ui/jquery-ui-big.css">
@@ -108,27 +107,6 @@
                     <p>예매수수료는 예매 당일 밤 12시 이전까지 환불되며, 그 이후 기간에는 환불되지 않습니다.</p>
                 </div>
                 <div class="reviewBox hideContent">
-                
-			        <c:if test="${sessionScope.m != null }">
-			        	<div class="inputReviewBox">
-							<form action="/insertReview.do" method="post">
-								<input type="hidden" name="reviewWriter" value="${sessionScope.m.memberId }">
-								<input type="hidden" name="showNo" value="${snr.s.showNo }">
-								<div class="selectStar">
-									<p>평점선택</p>
-									<select name="star">
-										<option value="1">1</option>
-										<option value="2">2</option>
-										<option value="3">3</option>
-										<option value="4">4</option>
-										<option value="5">5</option>
-									</select>
-								</div>
-								<textarea name="reviewContent" class="form-control" style="width: 90%;resize: none;"></textarea>
-								<button type="submit" class="btn btn-defualt">등록</button>
-							</form>
-						</div>
-			        </c:if>
 					
 					<div class="reviewList">
 						<c:forEach items="${snr.list }" var="sr" varStatus="i">
@@ -332,7 +310,7 @@
 			
 		}
 		function deleteReview(obj,reviewNo,showNo){
-			if(confirm("관람평을 삭제하시겠습니까?")){
+			if(confirm("관람평 삭제시 재등록 불가합니다. 관람평을 삭제하시겠습니까?")){
 				location.href="/deleteReview.do?reviewNo="+reviewNo+"&showNo="+showNo;
 			}
 		}

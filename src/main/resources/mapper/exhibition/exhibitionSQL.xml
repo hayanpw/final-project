@@ -157,4 +157,19 @@
 	<update id="deletePayment" parameterType="_long">
 		update payment set payment_cancel = 1 where payment_no = #{paymentNo}
 	</update>
+	<select id="paymentList" parameterType="_int" resultType="exbp">
+	select 
+			payment_no as paymentNo,
+			payment_select as paymenySelect,
+			academy_no as academyNo,
+			exhibition_no as exhibitionNo,
+			payment_price as paymentPrice,
+			payment_date as paymentDate,
+			payment_cancel as paymentCancel,
+			payment_quantity as paymentQuantity,
+			book_date as bookDate,
+			member_no as memberNo,
+			check_email as checkEmail
+		from payment where payment_select = 1  and exhibition_no = #{exhibitionNo} 
+	</select>
 </mapper>

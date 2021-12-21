@@ -13,6 +13,7 @@ import kr.or.academy.vo.Academy;
 import kr.or.academy.vo.AcademyCategory;
 import kr.or.academy.vo.AcademyPagingVo;
 import kr.or.academy.vo.AcademyPayment;
+import kr.or.academy.vo.StudentList;
 
 @Repository
 public class AcademyDao {
@@ -118,6 +119,11 @@ public class AcademyDao {
 	public int deleteAcPayment(long paymentNo) {
 		int result = sqlSession.update("academy.deleteAcPayment",paymentNo);
 		return result;
+	}
+
+	public ArrayList<StudentList> studentViewList(int academyNo) {
+		List<StudentList> list = sqlSession.selectList("academy.studentList",academyNo);
+		return (ArrayList<StudentList>)list;
 	}
 
 	//public int academyUpdate(Academy a) {

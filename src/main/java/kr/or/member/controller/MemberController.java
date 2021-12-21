@@ -37,7 +37,8 @@ public class MemberController {
 		return "member/login";
 	}
 	@RequestMapping(value="/mypage.do")
-	public String mypage() {
+	public String mypage(Model model) {
+		model.addAttribute("headerText", "마이페이지");
 		return "member/mypage";
 	}
 	@RequestMapping(value="/adminpage.do")
@@ -133,11 +134,9 @@ public class MemberController {
 		public String updateMember(Member member,Model model,String email1, String email2) {
 			//앞에서 받아오는값
 			String memberEmail = email1+"@"+email2;
-			Member m = service.selectOneMemberEmail(memberEmail);
-			m.setMemberEmail(memberEmail); 
+			member.setMemberEmail(memberEmail); 
 			int result = service.updateMember(member);
 			//데이터를 불러오는값
-		
 			if(result>0) {
 				model.addAttribute("msg","정보변경 성공");
 			}else {
@@ -155,7 +154,7 @@ public class MemberController {
 	}else {
 		model.addAttribute("msg","정보변경 실패");
 	}
-	model.addAttribute("loc","/");
+	model.addAttribute("loc", "/");
 	return "common/msg";
 }
 	@RequestMapping(value="/searchId.do")
@@ -252,6 +251,30 @@ public class MemberController {
 		System.out.println(reserveNo);
 		int result = 1;
 		return result;
+	}
+	
+	@RequestMapping(value="/deleteMember.do")
+	public String deleteMember(int memberNo,HttpSession session,Model model) {
+		int result = service.deleteMember(memberNo);
+		if(result>0) {
+			model.addAttribute("msg", "삭제성공");			
+			session.invalidate();
+		}else {
+			model.addAttribute("msg", "삭제실패");
+		}
+		model.addAttribute("loc","/");
+		return "common/msg";
+	}
+	@RequestMapping(value="/updatePassword.do")
+	public String updatePassword(Member m,Model model) {
+		int result = service.updatePasswordPw(m);
+		if(result>0) {
+			model.addAttribute("msg","정보변경 성공");
+		}else {
+			model.addAttribute("msg","정보변경 실패");
+		}
+		model.addAttribute("loc","/");
+		return "common/msg";
 	}
 	
 }

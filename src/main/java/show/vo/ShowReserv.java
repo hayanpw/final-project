@@ -14,4 +14,5 @@ public class ShowReserv {
 	private int ticketNum;
 	private int payment;
 	private String showName;
+	private int reviewStatus;
 }

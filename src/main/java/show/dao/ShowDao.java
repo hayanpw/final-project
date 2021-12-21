@@ -122,4 +122,12 @@ public class ShowDao {
 		return (ArrayList<ShowReserv>)list;
 	}
 
+	public ShowReview selectOneReview(int reservNo) {
+		return sqlSession.selectOne("show.selectOneReview", reservNo);
+	}
+
+	public int updateReviewStatus(int reservNo) {
+		return sqlSession.update("show.updateReviewStatus", reservNo);
+	}
+
 }
