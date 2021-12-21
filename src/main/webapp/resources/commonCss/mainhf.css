@@ -73,18 +73,17 @@ body{
     flex:1;
 }
 #footer{
-    margin: auto;
-    text-align: center;
     height: 500px;
     width: 100%;
-	background-color: #041C32;
-	margin-top : 100px
+    background-color: #041C32;
+    color: silver;
+  	margin-top : 100px
 }
 
 .footer-menu{
     height: 100px;
     width: 100%;
-    border-bottom: solid 1px #041C32;
+    border-bottom: solid 1px #bababa;
 }
 .footer-menu>a {
     border:none;
@@ -93,6 +92,17 @@ body{
     color:#563D39;
 
 }
+
+.f-container {
+  float: left;
+  width: 80%;
+}
+.f-con{
+  font-family: d_i; 
+  margin: 50px 0px 0px 180px;
+  float: left;
+}
+
 
 /*navi 진행중*/
 
