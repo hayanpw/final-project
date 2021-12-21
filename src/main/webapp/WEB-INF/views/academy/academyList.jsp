@@ -60,7 +60,7 @@
 					<p>수업료 : ${a.academyPrice } 원</p>
 					<p>참여 인원 : 10명
 					<c:if test="${sessionScope.m.memberLevel eq 0 || sessionScope.m.memberLevel eq 2}"> 
-						 <button class="studentView" academyNo="${a.academyNo }">참여인원보기</button>
+						<button type = "button" class ="btn btn-info studentView" data-toggle="modal" data-target="#myModal" academyNo="${a.academyNo }">참여인원보기</button>
 					</c:if>
 					</p>
 					<c:if test="${sessionScope.m.memberLevel eq 0 }"> 
@@ -77,6 +77,23 @@
 		</c:if>
 		<input type="hidden" id="totalCount" value="${totalCount }">
 		<input type="hidden" id="memberLevel" value="${sessionScope.m.memberLevel }">
+		<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog" style="width: 700px;">
+    
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">수강중인 학생 목록</h4>
+        </div>
+        <div class="modal-body">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 	<script>
@@ -85,7 +102,35 @@
 		
 		$(document).on("click",".studentView",function(){
 			var academyNo = $(this).attr("academyNo");
-			location.href="/studentView.do?academyNo="+academyNo;
+			$.ajax({
+				url : "/studentView.do",
+				data : {academyNo:academyNo},
+				success : function(data){
+					$(".modal-body").empty();
+					var modal = "";
+					if(data.length < 1){
+						modal += "<p>아직 수강중인 학생이 없습니다</p>";
+						$(".modal-body").append(modal);
+					}else{
+						modal += "<table class='table table-bordered table-hover'><tr><th>No.</th><th>학생이름</th><th>연락처</th><th>상태</th></tr>";
+						for( var i=0; i<data.length; i++ ){
+							modal += "<tr><td>"+data[i].count+"</td>";
+							modal += "<td>"+data[i].memberName+"</td>";
+							modal += "<td>"+data[i].memberEmail+"</td>";
+							if(data[i].paymentCancel == 1){
+								modal += "<td>수강 취소</td>";
+							}else{
+								modal += "<td>진행중</td>";
+							}
+							modal += "</tr>";
+						}
+						modal += "</table>";
+						$(".modal-body").append(modal);
+					}
+				}			
+			});
+		});
+		$(document).on("click",".btn",function(){
 		});
 		$(document).on("click",".academyView",function(){
 			var academyNo = $(this).attr("academyNo");
@@ -128,7 +173,7 @@
 							moreLi += "</div></div></li>";
 						}else{
 						if(memberLevel == 0 || memberLevel == 2){
-						moreLi += "<button class ='studentView' academyNo='"+data[i].academyNo+"'>참여인원보기</button>";
+						moreLi += "<button type ='button' class ='btn btn-info studentView' data-toggle='modal' data-target='#myModal' academyNo='"+data[i].academyNo+"'>참여인원보기</button>";
 						}
 						moreLi += "</p><div class = 'infoButton'>";
 						if(memberLevel == 0){
@@ -176,7 +221,7 @@
 								moreLi += "</div></div></li>";
 							}else{
 							if(memberLevel == 0 || memberLevel == 2){
-							moreLi += "<button class ='studentView' academyNo='"+data[i].academyNo+"'>참여인원보기</button>";
+							moreLi += "<button type ='button' class ='btn btn-info studentView' data-toggle='modal' data-target='#myModal' academyNo='"+data[i].academyNo+"'>참여인원보기</button>";
 							}
 							moreLi += "</p><div class = 'infoButton'>";
 							if(memberLevel == 0){
@@ -236,7 +281,7 @@
 								moreLi += "</div></div></li>";
 							}else{
 							if(memberLevel == 0 || memberLevel == 2){
-							moreLi += "<button class ='studentView' academyNo='"+data[i].academyNo+"'>참여인원보기</button>";
+							moreLi += "<button type ='button' class ='btn btn-info studentView' data-toggle='modal' data-target='#myModal' academyNo='"+data[i].academyNo+"'>참여인원보기</button>";
 							}
 							moreLi += "</p><div class = 'infoButton'>";
 							if(memberLevel == 0){
@@ -298,7 +343,7 @@
 								moreLi += "</div></div></li>";
 							}else{
 							if(memberLevel == 0 || memberLevel == 2){
-							moreLi += "<button class ='studentView' academyNo='"+data[i].academyNo+"'>참여인원보기</button>";
+							moreLi += "<button type ='button' class ='btn btn-info studentView' data-toggle='modal' data-target='#myModal' academyNo='"+data[i].academyNo+"'>참여인원보기</button>";
 							}
 							moreLi += "</p><div class = 'infoButton'>";
 							if(memberLevel == 0){

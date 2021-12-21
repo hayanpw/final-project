@@ -39,8 +39,10 @@ public class ExhibitionController {
 	public String exhibitionView(int exhibitionNo, Model model) {
 		Exhibition exb = service.selectOneExhibition(exhibitionNo);
 		ArrayList<ExhibitionReview> list = service.selectListExReview(exhibitionNo);
+		ArrayList<ExhibitionPayment> payment = service.paymentList(exhibitionNo);
 		model.addAttribute("exb",exb);
 		model.addAttribute("list",list);
+		model.addAttribute("payment",payment);
 		return "exhibition/exhibitionView";
 	}
 	//전시 결제 페이지로 이동

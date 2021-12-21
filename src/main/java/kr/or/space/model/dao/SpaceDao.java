@@ -236,4 +236,13 @@ public class SpaceDao {
 	public int deleteRetnalNo(int rentalNo) {
 		return sqlSession.delete("space.deleteRentalNo",rentalNo);
 	}
+	//블랙리스트 소멸
+	public void cancleBlackList(String time1) {
+		sqlSession.update("space.cancleBlackList",time1);
+	}
+	//삭제 된 블랙리스트
+	public ArrayList<Black> selectDelBlack() {
+		List<Black> list = sqlSession.selectList("space.selectDelBlack");
+		return (ArrayList<Black>) list;
+	}
 }

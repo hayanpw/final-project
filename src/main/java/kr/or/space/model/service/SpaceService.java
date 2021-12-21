@@ -423,4 +423,12 @@ public class SpaceService {
 	public int deleteRental(int rentalNo) {
 		return dao.deleteRetnalNo(rentalNo);
 	}
+	//블랙리스트 소멸
+	public void cancleBlackList(String time1) {
+		dao.cancleBlackList(time1);
+	}
+	//삭제 된 블랙리스트
+	public ArrayList<Black> selectDelBlack() {
+		return dao.selectDelBlack();
+	}
 }

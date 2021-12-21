@@ -31,5 +31,6 @@
 		<typeAlias type="kr.or.academy.vo.AcademyCategory" alias="acc"/>
 		<typeAlias type="kr.or.reading.model.vo.Fixtures" alias="fixtures"/>
 		<typeAlias type="kr.or.exhibition.vo.ExhibitionPaymentMypage" alias="exbpm"/>
+		<typeAlias type="kr.or.academy.vo.StudentList" alias="sl"/>
 	</typeAliases>
 </configuration>
