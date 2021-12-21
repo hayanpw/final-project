@@ -19,6 +19,7 @@
 	width: calc(100%/5);
 	display: inline-block;
 	float: left;
+	margin-bottom: 20px;
 }
 
 .floorWrapper{

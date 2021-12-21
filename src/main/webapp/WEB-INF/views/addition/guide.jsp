@@ -9,7 +9,7 @@
 <style type="text/css">
 	#title{
 	width:165px;
-	border-top: 7px solid #563D39;
+	border-top: 7px solid #064663;
 	margin-top:70px;
 	margin-left:70px;
 	font-weight:700;
@@ -18,7 +18,7 @@
 	}
 	#title2{
 	width:255px;
-	border-top: 7px solid #563D39;
+	border-top: 7px solid #064663;
 	margin-top:70px;
 	margin-left:70px;
 	font-weight:700;
@@ -39,7 +39,7 @@
 	color: black;
 	}
 	#titlemenu>li.active>a {
-	background-color: #563D39 ;
+	background-color: black ;
 	color: white;
 	font-weight: bold;
 	font-size: 18px;
@@ -59,7 +59,7 @@
 	font-size: 30px;
 	}
 	#line{
-	color: #563D39;
+	color: #064663;
 	font-weight: bold; 
 	}
 </style>

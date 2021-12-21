@@ -9,7 +9,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
@@ -33,6 +33,7 @@ import kr.or.addition.model.vo.BoardViewData;
 import kr.or.addition.model.vo.FileVO;
 import kr.or.addition.model.vo.LikeNo;
 import kr.or.addition.model.vo.MyPageData;
+import kr.or.member.vo.Member;
 
 @Controller
 public class AdditionController {
@@ -55,10 +56,13 @@ public class AdditionController {
 		model.addAttribute("start", bpd.getStart());
 		model.addAttribute("nCount", nCount);
 		if (boardType == 1) {
+			model.addAttribute("headerText", "공지사항");
 			return "addition/notice";
 		} else if (boardType == 2) {
+			model.addAttribute("headerText", "FAQ & 질문과 답변");
 			return "addition/qna";
 		} else {
+			model.addAttribute("headerText", "소통게시판");
 			return "addition/free";
 		}
 	}
@@ -152,8 +156,8 @@ public class AdditionController {
 
 	// 글삭제하기
 	@RequestMapping(value = "/boardDelete.do")
-	public String boardDelete(int boardType, int boardNo, Model model) {
-		int result = service.boardDelete(boardNo);
+	public String boardDelete(@SessionAttribute Member m,String num,int boardType, int boardNo, Model model) {
+		int result = service.boardDelete(boardNo,num);
 		if (result > 0) {
 			model.addAttribute("msg", "삭제성공");
 
@@ -164,8 +168,11 @@ public class AdditionController {
 			model.addAttribute("loc", "/additionBoard.do?boardType=1&reqPage=1");
 		} else if (boardType == 2) {
 			model.addAttribute("loc", "/additionBoard.do?boardType=2&reqPage=1");
-		} else {
+		} else if (boardType == 3){
 			model.addAttribute("loc", "/additionBoard.do?boardType=3&reqPage=1");
+		}else {
+			model.addAttribute("loc", "/myFree.do?memberId="+m.getMemberId());
+			System.out.println(m.getMemberId());
 		}
 		return "common/msg";
 	}
@@ -206,8 +213,8 @@ public class AdditionController {
 
 	// 댓글삭제
 	@RequestMapping(value = "/deleteComment.do")
-	public String deleteComment(int boardType, int bcNo, int boardNo, Model model) {
-		int result = service.deleteComment(bcNo);
+	public String deleteComment(int boardType, int bcNo, int boardNo,int bcRef, Model model) {
+		int result = service.deleteComment(bcNo,bcRef);
 		if (result > 0) {
 			model.addAttribute("msg", "삭제성공");
 		} else {

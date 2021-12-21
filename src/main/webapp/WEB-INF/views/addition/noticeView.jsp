@@ -9,7 +9,7 @@
 <style type="text/css">
 	#title{
 	width:165px;
-	border-top: 7px solid #563D39;
+	border-top: 7px solid #064663;
 	margin-top:70px;
 	margin-left:70px;
 	font-weight:700;
@@ -17,7 +17,7 @@
 	margin-bottom: 50px;
 	}
 	#table1 tr:first-child {
-	border-top: 2px solid #563D39;
+	border-top: 2px solid #064663;
     }
     #table1 tr:nth-child(2) {
 	border-top: 2px solid white;
@@ -26,6 +26,26 @@
     font-size: 30px;
     font-weight: 600;
     }
+    .nextTitle{
+	display:inline-block;
+	background-color: #064663;
+	color:white;
+	font-size:16px;
+	width: 20%;
+	height:40px;
+	line-height:40px;
+	text-align: center;
+	margin-bottom: 3px;
+	}
+	.nextTitle+a{
+	color: black;
+	font-size:18px;
+	}
+	.nextTitle+a:hover{
+	text-decoration: none;
+	color: #064663;
+	}
+    
 </style>
 </head>
 <body>
@@ -56,16 +76,18 @@
 		<a class="btn" href="/boardUpdateFrm.do?boardNo=${b.boardNo }">글수정</a>
 		</c:if>
 		<div>
-		<div>다음글&nbsp;
+		
+		<div><span class="nextTitle">다음글</span>&nbsp;
 			<a href="/boardView.do?boardType=1&boardNo=${info.nextNo}" onclick="return chkNext();">
 			<input type="hidden" id="next" value="${info.nextNo }">${info.nextTitle }
 			</a>
 		</div>
-		<div>이전글&nbsp;
+		<div><span class="nextTitle">이전글</span>&nbsp;
 			<a href="/boardView.do?boardType=1&boardNo=${info.prevNo}" onclick="return chkPrev();">
 			<input type="hidden" id="prev" value="${info.prevNo }">${info.prevTitle }
 			</a>
 		</div>
+		
 		<a class="btn" href="/additionBoard.do?boardType=1&reqPage=1">글목록</a>
 		</div>
 	</div>

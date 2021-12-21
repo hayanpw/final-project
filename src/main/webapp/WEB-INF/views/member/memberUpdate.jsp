@@ -32,7 +32,7 @@
 							</tr>
 							<tr>
 								<td>비밀번호변경</td>
-								<td>[휴업]</td>
+								<td><a type="text" class="searchidpw" data-toggle="modal" data-target="#sModal">비밀번호 변경하고싶어요?</a></td>
 							</tr>
 							
 							<tr>
@@ -245,6 +245,74 @@
 	};
 
 	</script>
+	
+	
+			<div class="modal" id="sModal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h3 class="modal-title">새비밀번호입력</h3>
+                    </div>
+                    <!-- 이메일인증 modal -->
+                    <div class="modal-body">
+						<form action="/updatePassword.do" method="post">
+							<fieldset>
+									<label for="memberPassword" class="reg"> PW </label>
+									<input type="password" class="input" name="memberPassword" id="memberPassword"><span id="pw-detail">(“”-+/\:; 제외)</span> <span id="pwChkRule"></span><br><br>
+									<label for="pw_re" class="reg"> 확인 </label><input type="password" class="input" name="pw_re" id="chkpw"> <span id="pwChk"></span>
+									<input type="submit" value="변경">
+									<input type="hidden" name="memberId" id="memberId" value="${sessionScope.m.memberId}">
+									
+							</fieldset>
+						</form>
+						</div>
+						
+					</div>
+                  </div>
+				</div>
+			</div>
+			
+			<script>
+			//비밀번호 여부
+			function chkPw(obj) {
+				var pwChk = document.getElementById("pwChk");
+				var pw = document.getElementsByName("memberPassword")[0].value;
+				var pwRe = obj.value;
+				if (pwRe == "") {
+					pwChk.innerHTML = "";
+					pwCheck = false;
+				} else if (pw != pwRe) {
+					pwChk.innerHTML = "패스워드가 일치하지 않습니다.";
+					pwChk.style.color = "red";
+					obj.style.border = "1px solid red";
+					pwCheck = false;
+				} else {
+					pwChk.innerHTML = "패스워드가 일치합니다.";
+					pwChk.style.color = "#563D39";
+					obj.style.border = "1px solid #563D39";
+					pwCheck = true;
+				}
+			}
+			var memberPwchk = true;
+			$("[name=memberPassword]").eq(0).keyup(function() {
+				var memberPassword = $(this).val();
+				// (알파벳 하나)(숫자 하나)(특수문자 하나)(문자열)
+				 var regExpPw = /(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{5,20}/; 
+				/*  var regExpPw = /^[a-zA-Z0-9]{8,12}$/; */
+				 
+				if (regExpPw.test(memberPassword)){
+					$('#pwChkRule').html("사용가능한 비밀번호입니다.");
+					$('#pwChkRule').css('color' ,"#1f4787");
+					memberPwchk = true;
+					
+				}else{
+					$('#pwChkRule').html("비밀번호는  5~20자 이내 영문,숫자,특수문자로 입력해주세요.");
+					$('#pwChkRule').css('color' ,"red");
+					memberPwchk = false;
+				}
+			});
+			</script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 
 

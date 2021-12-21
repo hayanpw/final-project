@@ -47,13 +47,13 @@ body{
 	text-decoration: none;
 	font-family: d_r; 
     font-size:50px;
-    color:#563D39;
+    color:#041C32; 
 }
 .h-logo>a:hover{
 	text-decoration: none;
 	font-family: d_r; 
     font-size:50px;
-    color:#563D39;
+    color:#041C32; 
 }
 .h-right{
     width: 20%;
@@ -66,17 +66,18 @@ body{
 }
 .h-right>a:hover {
     text-decoration: none;
-    color:#BDB19A;
+    color:#041C32; 
 }
 
 .container{
     flex:1;
 }
 #footer{
-    margin: auto;
-    text-align: center;
     height: 500px;
     width: 100%;
+    background-color: #041C32;
+    color: silver;
+  	margin-top : 100px
 }
 
 .footer-menu{
@@ -92,6 +93,17 @@ body{
 
 }
 
+.f-container {
+  float: left;
+  width: 80%;
+}
+.f-con{
+  font-family: d_i; 
+  margin: 50px 0px 0px 180px;
+  float: left;
+}
+
+
 /*navi 진행중*/
 
 .navi{
@@ -100,9 +112,10 @@ body{
 }
 .navi ul{
     list-style-type: none;
+    text-shadow: 1px 1px 1px gray;
     padding: 0;
     margin: 0 auto;
-    height: 50px;
+    height: 60px;
     width: 100%;
     font-weight: 500;
     color:rgba(86, 61, 57, 0.7);
@@ -111,7 +124,6 @@ body{
 }
 .navi>ul{
     position: relative;
-    background-color: #fff;
     display:flex;
     justify-content:center;
 }
@@ -128,7 +140,7 @@ body{
     text-decoration: none;
 }
 .navi>ul>li>a{
-    color : #563D39;  
+    color : #041C32;  
 }
 /* .navi>ul>li:hover>a{
     font-weight: 900;
@@ -142,7 +154,7 @@ body{
     position: absolute;
     text-align: center;
     content: '';
-    border-bottom: solid 2px #563D39;
+    border-bottom: solid 2px #fff; 
     width: 150px;
     transform: scaleX(0);  
     transition: transform 250ms ease-in-out;
@@ -159,11 +171,11 @@ body{
     color:#fff;
 }
 .sub{
-	background-color: #563D39;
+	background-color: #041C32; 
     display: none;
     position: absolute;
     left:0;
-    top:50px;
+    top:51px;
 }
 .sub>li {
 	float: left;
