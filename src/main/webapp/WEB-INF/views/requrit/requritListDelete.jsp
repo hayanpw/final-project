@@ -12,15 +12,7 @@
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	 <div class="container">
-        <h2><span class="line">강사</span>모집 공고</h2>
-        <c:choose>
-        <c:when test="${sessionScope.m.memberLevel eq 0}">
-        	<button id ="deleteRequritList">삭제된 공고 보기</button>
-        </c:when>
-        <c:otherwise>
-        	<button id="myRequritList" memberNo="${sessionScope.m.memberNo }">내가 지원한 공고 보기</button>
-        </c:otherwise>
-       </c:choose>
+        <h2><span class="line">삭제한</span>모집 공고</h2>
         <table id="tableee" class="table table-hover table-bordered" >
               <tr id="firstTr">
                   <th>#번호</th>
@@ -29,7 +21,7 @@
                   <th>모집 기간</th>
               </tr>
           	<c:forEach items="${list }" var="r" varStatus="i">
-          	<c:if test="${r.requritCancel eq 0 }">
+          	<c:if test="${r.requritCancel eq 1 }">
              	<tr id ="secTr">
 				   <td>${start + i.index }</td>
 				   <td><a href="/requritView.do?requritNo=${r.requritNo }" style="text-decoration: none;">${r.requritTitle }</a></td>
@@ -52,14 +44,5 @@
           <div id="pageNavi">${pageNavi }</div>
         </div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
-	<script>
-		$("#deleteRequritList").click(function(){
-			location.href ="/deleteRequritList.do?reqPage=1";
-		});
-		$("#myRequritList").click(function(){
-			var memberNo = $(this).attr("memberNo").val(); 
-			location.href ="/myRequritList.do?memberNo="+memberNo;
-		});
-	</script>
 </body>
 </html>

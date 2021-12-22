@@ -48,4 +48,21 @@ public class RequritDao {
 		int result = sqlSession.update("requrit.updateRequrit",r);
 		return result;
 	}
+
+	public int selectTotalCountDelete() {
+		int totalCount = sqlSession.selectOne("requrit.selectTotalCountDelete");
+		return totalCount;
+	}
+
+	public ArrayList<Requrit> selectRequritListDelete(RequritPagingVo paging) {
+		System.out.println(paging.getEnd());
+		System.out.println(paging.getStart());
+		List<Requrit> list = sqlSession.selectList("requrit.selectRequritListDelete",paging);
+		return (ArrayList<Requrit>)list;
+	}
+
+	public int revivalRequrit(int requritNo) {
+		int result = sqlSession.update("requrit.revivalRequrit",requritNo);
+		return result;
+	}
 }
