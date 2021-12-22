@@ -154,7 +154,7 @@
 		from payment join exhibition using(exhibition_no) where member_no=#{memberNo} and payment_select = 1  and book_date < sysdate
 	]]>	
 	</select>
-	<update id="deletePayment" parameterType="_long">
+	<update id="deletePayment" parameterType="_int">
 		update payment set payment_cancel = 1 where payment_no = #{paymentNo}
 	</update>
 	<select id="paymentList" parameterType="_int" resultType="exbp">
@@ -172,4 +172,7 @@
 			check_email as checkEmail
 		from payment where payment_select = 1  and exhibition_no = #{exhibitionNo} 
 	</select>
+	<delete id="realDelete" parameterType="_int">
+		delete from payment where payment_no = #{reserveNo}
+	</delete>
 </mapper>

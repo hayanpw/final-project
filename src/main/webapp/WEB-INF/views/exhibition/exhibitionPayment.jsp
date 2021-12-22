@@ -66,7 +66,7 @@
 		var exhibitionNo = Number($("#exhibitionNo").val());
 		var paymentSelect = Number($("#paymentSelect").val()); // 전시결제는 1 , 강좌결제는 2
 		var d = new Date(); // Date 객체 생성
-		var date = d.getFullYear()+""+(d.getMonth()+1)+""+d.getDate()+""+d.getHours()+""+d.getMinutes()+""+d.getSeconds(); 
+		var date = d.getDate()+""+d.getHours()+""+d.getMinutes()+""+d.getSeconds(); 
 		//Date 객체로 고유식별 번호 생성
 		console.log(date);
 		console.log(paymentPrice);
