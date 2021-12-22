@@ -11,7 +11,6 @@
 	width:165px;
 	border-top: 7px solid #064663;
 	margin-top:70px;
-	margin-left:70px;
 	font-weight:700;
 	font-size: 40px;
 	margin-bottom: 50px;
@@ -46,10 +45,11 @@
 	}
 	#titlemenu>li>a{
 	padding:0;
-	line-height:50px;
-	height: 50px;
+	line-height:60px;
+	height: 60px;
 	font-size: 17px;
 	font-weight: 600;
+	border-radius: 0px;
 	}
 	.content-text{
 	padding: 20px;

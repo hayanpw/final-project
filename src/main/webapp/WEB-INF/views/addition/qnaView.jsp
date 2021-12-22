@@ -10,7 +10,7 @@
 <style type="text/css">
 	#title{
 	width:220px;
-	border-top: 7px solid #563D39;
+	border-top: 7px solid #064663;
 	margin-top:70px;
 	margin-left:70px;
 	font-weight:700;
@@ -18,20 +18,18 @@
 	margin-bottom: 50px;
 	}
 	#table tr:nth-child(1){
-	border-top: 2px solid #563D39;
+	border-top: 3px solid #064663;
 	}
 	#table1 tr:nth-child(2) {
-	border-top: 2px solid #f3efe6;
+	border-top: 2px solid #eee;
     }
     #table1 tr:nth-child(3) {
-	border-top: 2px solid #f3efe6;
+	border-top: 2px solid #eee;
     }
      #table1 tr:nth-child(4) {
-	border-top: 2px solid #f3efe6;
+	border-top: 2px solid #eee;
     }
 	#table{
-	margin-left: 50px;
-	margin-right: 50px;
 	text-align: left;
 	}
 	#buttons{
@@ -122,15 +120,15 @@
 		justify-content: space-between;	
 	}
 	.btnColor{
-	color: #563D39;
+	color: #064663;
 	}
 	.btnColor:hover{
 	text-decoration:none;
-	color: #563D39;
+	color: #064663;
 	}
 	#submitBtn{
 	margin-left:7px;
-	background-color: #563D39;
+	background-color: #064663;
 	border: none;
 	}
 	#boardTitle{

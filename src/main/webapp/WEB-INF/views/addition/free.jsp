@@ -10,7 +10,7 @@
 <style type="text/css">
 	#title{
 	width:205px;
-	border-top: 7px solid #563D39;
+	border-top: 7px solid #064663;
 	margin-top:70px;
 	margin-left:70px;
 	font-weight:700;
@@ -18,8 +18,6 @@
 	margin-bottom: 50px;
 	}
 	#table{
-	margin-left: 50px;
-	margin-right: 50px;
 	text-align: center;
 	}
 	#write{
@@ -49,15 +47,15 @@
 		padding-bottom:20px;
 		font-size:16px;
 		font-weight:bold;
-		color:#BDB19A ;
+		color:#064663 ;
 	}
 	.btn{
 		width:100px;
-		background-color: #563D39;
+		background-color: #064663;
 		color: white;
 	}
 	#table1 td {
-	border-top: 1px solid #f3efe6;
+	border-top: 1px solid #eee;
 	font-weight:100;
 	height: 40px;
 	font-size:18px;
@@ -65,7 +63,7 @@
 	}
 	#firtr>td{
 	text-align:center;
-	border-top:3px solid #BDB19A;
+	border-top:3px solid #064663;
 	font-weight: bold;
 	height: 40px;
 	font-size: 15px;
@@ -105,8 +103,8 @@
     border: none;
     }
     #pageNumAct a{
-    background-color: #563D39;
-    border-color: #563D39;
+    background-color: #064663;
+    border-color: #064663;
     color: white;
     border: none;
     }
