@@ -10,7 +10,7 @@
 <style type="text/css">
 	#title{
 	width:205px;
-	border-top: 7px solid #563D39;
+	border-top: 7px solid #064663;
 	margin-top:70px;
 	margin-left:70px;
 	font-weight:700;
@@ -18,20 +18,18 @@
 	margin-bottom: 50px;
 	}
 	#table tr:nth-child(1){
-	border-top: 2px solid #563D39;
+	border-top: 2px solid #064663;
 	}
 	#table1 tr:nth-child(2) {
-	border-top: 2px solid #f3efe6;
+	border-top: 2px solid #eee;
     }
     #table1 tr:nth-child(3) {
-	border-top: 2px solid #f3efe6;
+	border-top: 2px solid #eee;
     }
      #table1 tr:nth-child(4) {
-	border-top: 2px solid #f3efe6;
+	border-top: 2px solid #eee;
     }
 	#table{
-	margin-left: 50px;
-	margin-right: 50px;
 	text-align: left;
 	}
 	#table>a:first-child {
@@ -101,7 +99,7 @@
 	textarea.form-control{
 		height:100%;
 		resize:none;
-		border: 1px solid #f3efe6;
+		border: 1px solid #eee;
 	}
 	.recoment>div{
 		width:10%;
@@ -141,17 +139,17 @@
 	display: inline-block;
 	margin: 10px;
 	background-color: #fff;
-	border: 2px solid #74655E;
+	border: 2px solid #064663;
 	padding: 10px;
 	}
 	
 	input[type=radio]:checked+label{
-	background-color: #74655E;
+	background-color: #064663;
 	color: #fff;
 	}
 	.nextTitle{
 	display:inline-block;
-	background-color: #563D39;
+	background-color: #064663;
 	color:white;
 	font-size:16px;
 	width: 20%;
@@ -161,26 +159,26 @@
 	margin-bottom: 3px;
 	}
 	.nextTitle+a{
-	color: #563D39;
+	color: #064663;
 	font-size:18px;
 	}
 	.nextTitle+a:hover{
 	text-decoration: none;
-	color: #563D39;
+	color: #064663;
 	}
 	#boardTitle{
 	font-size: 30px;
 	}
 	.btnColor{
-	color: #563D39;
+	color: #064663;
 	}
 	.btnColor:hover{
 	text-decoration:none;
-	color: #563D39;
+	color: #064663;
 	}
 	#submitBtn{
 	margin-left:7px;
-	background-color: #563D39;
+	background-color: #064663;
 	border: none;
 	}
 	#bcContent:focus{
@@ -199,19 +197,7 @@
 		<input id="loginId" type="hidden" value="${sessionScope.m.memberId }">
 		<input type="hidden" id="boardNo" value="${b.boardNo }">
 		<div id="table">
-		<div>
-			<a class="btn btnColor" href="/additionBoard.do?boardType=3&reqPage=1">글목록</a>
-			<c:if test="${sessionScope.m.memberLevel eq 0 }">
-			<c:choose>
-				<c:when test="${b.boardLevel eq 2 }">
-				<a class="btn btnColor" href="/removeRegulationBoard.do?boardNo=${b.boardNo }">규제풀기</a>
-				</c:when>
-				<c:otherwise>
-				<a class="btn btnColor" href="/regulationBoard.do?boardNo=${b.boardNo }">규제하기</a>
-				</c:otherwise>
-			</c:choose>
-			</c:if>
-		</div>
+		
 			<table id="table1" class="table">
 				<tr>
 					<td id="boardTitle" colspan="7">${b.boardTitle }</td>
@@ -244,6 +230,28 @@
 					</td>
 				</tr>
 			</table>
+			
+			<div id="btns">
+			<a class="btn btnColor" href="/additionBoard.do?boardType=3&reqPage=1">글목록</a>
+			<c:if test="${sessionScope.m.memberLevel eq 0 }">
+			<c:choose>
+				<c:when test="${b.boardLevel eq 2 }">
+				<a class="btn btnColor" href="/removeRegulationBoard.do?boardNo=${b.boardNo }">규제풀기</a>
+				</c:when>
+				<c:otherwise>
+				<a class="btn btnColor" href="/regulationBoard.do?boardNo=${b.boardNo }">규제하기</a>
+				</c:otherwise>
+			</c:choose>
+			</c:if>
+			<c:if test="${sessionScope.m.memberId == b.boardWriter}">
+			<a class="btn btnColor" href="/boardDelete.do?boardType=3&boardNo=${b.boardNo }">글삭제</a>
+			<a class="btn btnColor" href="/boardUpdateFrm.do?boardNo=${b.boardNo }">글수정</a>
+			</c:if>
+			<c:if test="${sessionScope.m.memberLevel ==0 }">
+			<a class="btn btnColor" href="/boardDelete.do?boardType=3&boardNo=${b.boardNo }">글삭제</a>
+			</c:if>
+			
+		</div>
 			
 			<!-- 댓글쓰기창 로그인 되있을때 -->
 			
@@ -351,17 +359,6 @@
 					</c:if>
 				</c:forEach>
 			</div>
-			
-			
-			
-			<c:if test="${sessionScope.m.memberId == b.boardWriter}">
-			<a class="btn btnColor" href="/boardDelete.do?boardType=3&boardNo=${b.boardNo }">글삭제</a>
-			<a class="btn btnColor" href="/boardUpdateFrm.do?boardNo=${b.boardNo }">글수정</a>
-			</c:if>
-			<c:if test="${sessionScope.m.memberLevel ==0 }">
-			<a class="btn btnColor" href="/boardDelete.do?boardType=3&boardNo=${b.boardNo }">글삭제</a>
-			</c:if>
-			<a class="btn btnColor" onclick="history.go(-1);">이전</a>
 			
 			<div><span class="nextTitle">다음글</span>&nbsp;
 				<a href="/boardView.do?boardType=3&boardNo=${info.nextNo}" onclick="return chkNext();">

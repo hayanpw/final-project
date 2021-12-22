@@ -4,7 +4,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Bootstrap Example</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -19,10 +18,34 @@
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.css"/>
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.css"/>
    <link rel="stylesheet" href="/resources/commonCss/mainhf.css">
-  
-    <title>Document</title>
 </head>
 <body data-spy="scroll" data-target=".navbar" data-offset="50">
+  <div class="popup">
+        <div id="popup">
+            <header class="top"> 
+<!--                 <h1 class="infoTit">소개</h1>  -->
+            </header>
+            <main class="textBox">
+                <h2 class="tit">Musée d'art</h2>
+                <p class="textContents">
+                    musée d'art 뜻은 프랑스어로 '미술관'을 뜻합니다.<br> 
+                    발음대로 읽으면 '무지다'가 되며 강원도 방언으로 '모이다'라는 뜻도 더하여 
+                    저희 홈페이지는 공연 전시 관람 및 열람 다양한 문화생활을 모은 장소를 만들었습니다.
+                <p><strong>적용기간 : 2021.07.14~12.29</strong></p>
+                <p style="font-size:7px;"> 예쁘게 봐주시구 5개월동안 수고많으셨습니다 :) Au revir!</p>
+                <p> KH Team3 </p>
+                </p>
+            </main>
+            
+        </div>   
+        <footer class="btnBox_todayClose">
+            <form method="post" action="" name="pop_form">
+                <span id="check">
+                    <a href="javascript:void(0)" id="cp" style="color:#fff">닫기</a>
+                </span>
+            </form>
+        </footer>
+    </div>
      <!-- <div class="container" style="width: 100%;"> -->
         <div class="slider-for d1">
             <div class="sf"><img src="/resources/mainImage/upload/m-main1.jpg"></div>
@@ -112,6 +135,11 @@
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.js"></script>
       
         <script type="text/javascript">
+        
+        $('#cp').click(function () {
+			$('.popup').hide();
+		})
+		
        $('.slider-for').slick({
         slidesToShow: 1,
         slidesToScroll: 1,
@@ -140,11 +168,6 @@
               <div class="cover-content">
                   <h5>호두까기 인형</h5>
                   <hr>
-                  <p>크리스마스 이브 , 마리의 집에서 크리스마스 파티가 열리고 마리의 대부
-                      드로셀마이어가 마리에게 호두까기 인형을 선물합니다. 
-                      호두까지 인형을 품에 안고 잠이 든 마리,
-                      꿈속에서 거실의 트리가 켜지고,  각나라의 ...
-                  </p>
                   <button class="reserve-button">예매</button>
               </div>
           </div>
@@ -154,11 +177,6 @@
               <div class="cover-content">
                   <h5>프랑켄슈타인</h5>
                   <hr>
-                  <p>크리스마스 이브 , 마리의 집에서 크리스마스 파티가 열리고 마리의 대부
-                      드로셀마이어가 마리에게 호두까기 인형을 선물합니다. 
-                      호두까지 인형을 품에 안고 잠이 든 마리,
-                      꿈속에서 거실의 트리가 켜지고,  각나라의 ...
-                  </p>
                   <button class="reserve-button">예매</button>
               </div>
             </div>
@@ -168,11 +186,6 @@
                 <div class="cover-content">
                     <h5>라이언킹</h5>
                     <hr>
-                    <p>크리스마스 이브 , 마리의 집에서 크리스마스 파티가 열리고 마리의 대부
-                        드로셀마이어가 마리에게 호두까기 인형을 선물합니다. 
-                        호두까지 인형을 품에 안고 잠이 든 마리,
-                        꿈속에서 거실의 트리가 켜지고,  각나라의 ...
-                    </p>
                     <button class="reserve-button">예매</button>
                 </div>
               </div>
@@ -186,11 +199,6 @@
                 <div class="cover-content">
                     <h5>지킬앤하이드</h5>
                     <hr>
-                    <p>크리스마스 이브 , 마리의 집에서 크리스마스 파티가 열리고 마리의 대부
-                        드로셀마이어가 마리에게 호두까기 인형을 선물합니다. 
-                        호두까지 인형을 품에 안고 잠이 든 마리,
-                        꿈속에서 거실의 트리가 켜지고,  각나라의 ...
-                    </p>
                     <button class="reserve-button">예매</button>
                 </div>
               </div>
@@ -200,11 +208,6 @@
                 <div class="cover-content">
                     <h5>드루피와함께 춤을</h5>
                     <hr>
-                    <p>크리스마스 이브 , 마리의 집에서 크리스마스 파티가 열리고 마리의 대부
-                        드로셀마이어가 마리에게 호두까기 인형을 선물합니다. 
-                        호두까지 인형을 품에 안고 잠이 든 마리,
-                        꿈속에서 거실의 트리가 켜지고,  각나라의 ...
-                    </p>
                     <button class="reserve-button">예매</button>
                 </div>
               </div>
@@ -313,6 +316,46 @@
     
     window.addEventListener('scroll', handleScroll);
         </script>
+        <script>
+  (function() {
+    var w = window;
+    if (w.ChannelIO) {
+      return (window.console.error || window.console.log || function(){})('ChannelIO script included twice.');
+    }
+    var ch = function() {
+      ch.c(arguments);
+    };
+    ch.q = [];
+    ch.c = function(args) {
+      ch.q.push(args);
+    };
+    w.ChannelIO = ch;
+    function l() {
+      if (w.ChannelIOInitialized) {
+        return;
+      }
+      w.ChannelIOInitialized = true;
+      var s = document.createElement('script');
+      s.type = 'text/javascript';
+      s.async = true;
+      s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
+      s.charset = 'UTF-8';
+      var x = document.getElementsByTagName('script')[0];
+      x.parentNode.insertBefore(s, x);
+    }
+    if (document.readyState === 'complete') {
+      l();
+    } else if (window.attachEvent) {
+      window.attachEvent('onload', l);
+    } else {
+      window.addEventListener('DOMContentLoaded', l, false);
+      window.addEventListener('load', l, false);
+    }
+  })();
+  ChannelIO('boot', {
+    "pluginKey": "30646173-f05a-4c55-9818-46a0543b5882"
+  });
+</script>
     	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>

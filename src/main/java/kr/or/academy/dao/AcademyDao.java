@@ -116,7 +116,7 @@ public class AcademyDao {
 		return (ArrayList<AcademyPayment>)last;
 	}
 
-	public int deleteAcPayment(long paymentNo) {
+	public int deleteAcPayment(int paymentNo) {
 		int result = sqlSession.update("academy.deleteAcPayment",paymentNo);
 		return result;
 	}

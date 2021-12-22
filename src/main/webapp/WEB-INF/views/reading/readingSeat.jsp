@@ -42,7 +42,6 @@
 			<div class="container-right col-sm-3">
 				<h2>선택 내역</h2>
 				<div class="readingInfo">
-					<h3 name="showdate"></h3>
 					<h3 name="showseat"></h3>
 				</div>
 				<button name="rollback" class="btn btn-success btn-lg" onclick="history.go(-1);" style="background-color: #563D39; border-color: #563D39">이전단계</button>
@@ -66,7 +65,6 @@
 			var str = year+"-"+month+"-"+day;
 			var readingDay = str;
 			$(".todaySeat").html(str+" 좌석 현황");
-			$("h3[name=showdate]").html(month+"월 "+day+"일");
 			$.ajax({
 				url : "/chkSeat.do",
 				data : {readingDay:readingDay},

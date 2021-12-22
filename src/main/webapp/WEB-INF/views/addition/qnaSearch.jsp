@@ -10,7 +10,7 @@
 <style type="text/css">
 	#title{
 	width:85px;
-	border-top: 7px solid #563D39;
+	border-top: 7px solid #064663;
 	margin-top:70px;
 	margin-left:70px;
 	font-weight:700;
@@ -19,7 +19,7 @@
 	}
 	#title2{
 	width:220px;
-	border-top: 7px solid #563D39;
+	border-top: 7px solid #064663;
 	margin-top:70px;
 	margin-left:70px;
 	font-weight:700;
@@ -27,8 +27,6 @@
 	margin-bottom: 50px;
 	}
 	#table{
-	margin-left: 50px;
-	margin-right: 50px;
 	text-align: center;
 	}
 	#table>div:first-child{
@@ -63,7 +61,7 @@
 	}
 	.btn{
 		width:100px;
-		background-color: #563D39;
+		background-color: #064663;
 		color: white;
 	}
 	#table1 td {
@@ -75,7 +73,7 @@
 	}
 	#firtr>td{
 	text-align:center;
-	border-top:3px solid #BDB19A;
+	border-top:3px solid #064663;
 	font-weight: bold;
 	height: 40px;
 	font-size: 15px;
@@ -89,7 +87,7 @@
 	text-decoration: none;
 	}
 	#table1 tr:hover {
-	background-color: #f3efe6 ;
+	background-color: #eee ;
 	}
 	#write:hover,#back:hover {
 	text-decoration: none;
@@ -112,8 +110,8 @@
     border: none;
     }
     #pageNumAct a{
-    background-color: #563D39;
-    border-color: #563D39;
+    background-color: #064663;
+    border-color: #064663;
     color: white;
     border: none;
     }
@@ -122,21 +120,19 @@
     border: none;
     }
     #answerAfter{
-    color: #563D39;
+    color: #064663;
     }
     #answerBefore{
-    color: #A79078;
+    color: #eee;
     }
     i{
-    color: #74655E;
+    color: #064663;
     }
 </style>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="container" id="container">
-		<div id="title">FAQ</div>
-		<div>챗봇자리</div>
 		<div id="title2">질문과 답변</div>
 		<div id="table">
 			<table id="table1" class="table">

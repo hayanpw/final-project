@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class ExhibitionPayment {
-	private long paymentNo;
+	private int paymentNo;
 	private int paymentSelect;
 	private int academyNo;
 	private int exhibitionNo;

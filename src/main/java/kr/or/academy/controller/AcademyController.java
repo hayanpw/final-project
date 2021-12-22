@@ -38,6 +38,7 @@ public class AcademyController {
 	//리스트 페이지 출력
 	@RequestMapping(value="/academyList.do")
 	public String academyList(Academy a,Model model,int reqPage,String category) {
+		model.addAttribute("headerText", "강좌");
 		//전체 페이지 겟수 출력 
 		System.out.println(category);
 		int totalCount = service.academyTotal();
@@ -280,7 +281,7 @@ public class AcademyController {
 		return "academy/academyMypage";
 	}
 	@RequestMapping(value="/deleteAcPayment.do")
-	public String deleteAcPayment(int memberNo,long paymentNo, Model model) {
+	public String deleteAcPayment(int memberNo,int paymentNo, Model model) {
 		int result = service.deleteAcPayment(paymentNo);
 		if(result>0) {
 			model.addAttribute("msg", "수업 취소 성공");			

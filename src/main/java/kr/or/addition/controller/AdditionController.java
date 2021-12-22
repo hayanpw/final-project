@@ -59,7 +59,7 @@ public class AdditionController {
 			model.addAttribute("headerText", "공지사항");
 			return "addition/notice";
 		} else if (boardType == 2) {
-			model.addAttribute("headerText", "FAQ & 질문과 답변");
+			model.addAttribute("headerText", "FAQ • 질문과 답변");
 			return "addition/qna";
 		} else {
 			model.addAttribute("headerText", "소통게시판");
@@ -179,7 +179,8 @@ public class AdditionController {
 
 	// 오시는길
 	@RequestMapping(value = "/additionGuide.do")
-	public String additionGuide() {
+	public String additionGuide(Model model) {
+		model.addAttribute("headerText", "시설안내 • 오시는 길");
 		return "addition/guide";
 	}
 

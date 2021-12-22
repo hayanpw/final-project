@@ -10,11 +10,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.or.academy.service.AcademyService;
+import kr.or.exhibition.service.ExhibitionService;
 import kr.or.member.service.MemberService;
 import kr.or.member.service.SendMail;
 import kr.or.member.vo.DeleteMember;
 import kr.or.member.vo.Member;
 import kr.or.member.vo.MemberPage;
+import kr.or.reading.model.service.ReadingService;
+import kr.or.space.model.service.SpaceService;
+import show.service.ShowService;
 
 @Controller
 public class MemberController {
@@ -23,6 +28,16 @@ public class MemberController {
 	private MemberService service;
 	@Autowired
 	private SendMail sendMailservice;
+	@Autowired
+	private ReadingService readingservice;
+	@Autowired
+	private ShowService showservice;
+	@Autowired
+	private ExhibitionService exhibitionService;
+	@Autowired
+	private AcademyService academyService;
+	@Autowired
+	private SpaceService spaceService;
 	
 	public MemberController() {
 		super();
@@ -219,9 +234,7 @@ public class MemberController {
 	@ResponseBody
 	public int deletmShow(int reserveNo, Model model) {
 		System.out.println(reserveNo);
-		// int result = showService.reservCancel(reservNo);
-		// int result = 0;
-		int result = 1;
+		int result = showservice.deleteReserv(reserveNo);
 		return result;
 	}
 
@@ -229,23 +242,22 @@ public class MemberController {
 	@ResponseBody
 	public int deletmSpace(int reserveNo, Model model) {
 		System.out.println(reserveNo);
-		int result = 1;
+		int result = spaceService.deleteRental(reserveNo);
 		return result;
 	}
 
 	@RequestMapping(value = "/deletemRead.do")
 	@ResponseBody
 	public int deletemRead(int reserveNo, Model model) {
-		System.out.println(reserveNo);
-		int result = 1;
+		int result = readingservice.deleteRead(reserveNo);
 		return result;
 	}
 
 	@RequestMapping(value = "/deletemAcademy.do")
 	@ResponseBody
 	public int deletemAcademy(int reserveNo, Model model) {
-		int result = 1;
 		System.out.println(reserveNo);
+		int result = exhibitionService.realDelete(reserveNo);
 		return result;
 	}
 
@@ -253,7 +265,7 @@ public class MemberController {
 	@ResponseBody
 	public int deletemExhibition(int reserveNo, Model model) {
 		System.out.println(reserveNo);
-		int result = 1;
+		int result = exhibitionService.realDelete(reserveNo);
 		return result;
 	}
 	
@@ -278,8 +290,7 @@ public class MemberController {
 		}else {
 			model.addAttribute("msg","정보변경 실패");
 		}
-		model.addAttribute("loc","/");
-		return "common/msg";
+		return "member/mypage";
 	}
 	
 }

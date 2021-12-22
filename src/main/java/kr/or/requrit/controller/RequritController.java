@@ -128,5 +128,32 @@ public class RequritController {
 		model.addAttribute("loc", "/requritView.do?requritNo="+r.getRequritNo());
 		return "common/msg";
 	}
+	@RequestMapping(value="/deleteRequritList.do")
+	public String deleteRequritList(int reqPage, Model model) {
+		System.out.println("컨트롤러"+reqPage);
+		RequritPageData rpd = service.selectRequritPageDataLast(reqPage);
+		model.addAttribute("list",rpd.getList());
+		model.addAttribute("pageNavi",rpd.getPageNavi());
+		model.addAttribute("start",rpd.getStart());
+		return "requrit/requritListDelete";
+	}
+	@RequestMapping(value="/revivalRequritFrm.do")
+	public String revivalRequritFrm (int requritNo, Model model) {
+		Requrit r = service.updateRequritFrm(requritNo);
+		model.addAttribute("r",r);
+		return "requrit/requritRevivalFrm";
+	}
+	@RequestMapping(value="/requritRevival.do")
+	public String requritRevival (Requrit r,Model model) {
+		int result = service.RevivalrequritFrm(r);
+		if(result>0) {
+			model.addAttribute("msg", "수정 성공");			
+		}else {
+			model.addAttribute("msg", "수정 실패");
+		}
+		model.addAttribute("loc", "/requritView.do?requritNo="+r.getRequritNo());
+		return "common/msg";
+	}
+	
 	
 }

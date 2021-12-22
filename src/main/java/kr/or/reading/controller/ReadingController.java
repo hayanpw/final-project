@@ -25,34 +25,36 @@ public class ReadingController {
 	
 	@RequestMapping(value="/readingNotice.do")
 	public String readingNotice(Model model) {
+		model.addAttribute("headerText", "열람실 안내");
 		return "reading/readingNotice";
 	}
 	
-	@RequestMapping(value="/readingList.do")
-	public String readingList(HttpSession session, String readingId, Model model) {
-		//안내->예약 넘어갈때
-		//로그인부터 확인
-		//넘어가기전에 블랙리스트에 등록되어있는지 확인
-		//등록되어있다면 alert으로 언제까지 블랙리스트인지 보여주고 메인으로
-		//등록되어있지 않다면 예약페이지로 넘어감
-		if(session.getAttribute("m")==null) {
-			model.addAttribute("msg","로그인이 필요한 서비스입니다.");
-			model.addAttribute("loc", "/loginFrm.do");
-			return "common/msg";		
-		}else {
-			ReadingBlack rb = service.selectOneBlackList(readingId);
-			if(rb==null) {
-				return "reading/readingList";
-			}else {
-				model.addAttribute("msg","당신은 "+rb.getBlackEnd()+"까지 열람실 예약을 이용할 수 없습니다.");
-				model.addAttribute("loc", "/");
-				return "common/msg";
-			}
-		}
-	}
+//	@RequestMapping(value="/readingList.do")
+//	public String readingList(HttpSession session, String readingId, Model model) {
+//		//안내->예약 넘어갈때
+//		//로그인부터 확인
+//		//넘어가기전에 블랙리스트에 등록되어있는지 확인
+//		//등록되어있다면 alert으로 언제까지 블랙리스트인지 보여주고 메인으로
+//		//등록되어있지 않다면 예약페이지로 넘어감
+//		if(session.getAttribute("m")==null) {
+//			model.addAttribute("msg","로그인이 필요한 서비스입니다.");
+//			model.addAttribute("loc", "/loginFrm.do");
+//			return "common/msg";		
+//		}else {
+//			ReadingBlack rb = service.selectOneBlackList(readingId);
+//			if(rb==null) {
+//				return "reading/readingList";
+//			}else {
+//				model.addAttribute("msg","당신은 "+rb.getBlackEnd()+"까지 열람실 예약을 이용할 수 없습니다.");
+//				model.addAttribute("loc", "/");
+//				return "common/msg";
+//			}
+//		}
+//	}
 	
 	@RequestMapping(value="/readingSeat.do")
 	public String readingSeat(HttpSession session, Reading re, Model model) {
+		model.addAttribute("headerText", "좌석 선택");
 		//날짜 넘겨줌
 		if(session.getAttribute("m")==null) {
 			model.addAttribute("msg","로그인이 필요한 서비스입니다.");
@@ -73,6 +75,7 @@ public class ReadingController {
 	
 	@RequestMapping(value="/readingOption.do")
 	public String readingOption(Reading re, Model model) {
+		model.addAttribute("headerText", "예약 내역");
 		//선 좌석조회 후 insert
 		//같은날 같은 좌석 선택시 이선좌출력
 		//선택사항은 update로 selectOneId
@@ -91,6 +94,9 @@ public class ReadingController {
 			if(result>0){
 				Reading re3 = service.selectOneNum(re);
 				model.addAttribute("re", re3);
+				Fixtures fi = new Fixtures();
+				fi.setFixturesNo(0);
+				model.addAttribute("fi", fi);
 				return "reading/readingOption";
 				//model.addAttribute("msg",re.getReadingDay()+"일 "+re.getReadingNum()+"번 좌석을 예약하셨습니다.");
 				//model.addAttribute("loc", "/readingOption.do");
@@ -104,6 +110,7 @@ public class ReadingController {
 	
 	@RequestMapping(value="/reservationDay.do")
 	public String reservationDay(HttpSession session, Reading re, Model model) {
+		model.addAttribute("headerText", "예약 내역 조회");
 		if(session.getAttribute("m")==null) {
 			model.addAttribute("msg","로그인이 필요한 서비스입니다.");
 			model.addAttribute("loc", "/loginFrm.do");
@@ -123,6 +130,7 @@ public class ReadingController {
 	
 	@RequestMapping(value="/reservationInfo.do")
 	public String reservationInfo(Reading re, Model model) {
+		model.addAttribute("headerText", "예약 내역");
 		Reading re1 = service.selectOneId(re);
 		Fixtures fi = service.selectOneFixtures(re);
 		model.addAttribute("re", re1);
@@ -157,12 +165,14 @@ public class ReadingController {
 	}
 	
 	@RequestMapping(value="/reservationToday.do")
-	public String reservationToday() {
+	public String reservationToday(Model model) {
+		model.addAttribute("headerText", "오늘 좌석 현황 보기");
 		return "reading/reservationToday";
 	}
 	
 	@RequestMapping(value="/readingAdmin.do")
 	public String readingAdmin(Model model) {
+		model.addAttribute("headerText", "열람실 관리");
 		ArrayList<Reading> list = service.selectWeekReading();
 		ArrayList<Reading> alllist = service.selectAllReading();
 		ArrayList<ReadingBlack> black = service.selectReadingBlackList();
@@ -206,6 +216,7 @@ public class ReadingController {
 	
 	@RequestMapping(value="/readingMypage.do")
 	public String readingMypage(String memberId, Model model) {
+		model.addAttribute("headerText", "내 열람실 이용내역");
 		ArrayList<Reading> mylist = service.selectMyReading(memberId);
 		model.addAttribute("mylist", mylist);
 		return "reading/readingMypage";

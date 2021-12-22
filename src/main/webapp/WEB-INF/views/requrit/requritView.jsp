@@ -53,9 +53,14 @@
        			 <button type="button" class="btn requritBtn" onclick="goResumeFrm();">지원하기</button>
         	</c:when>
          	<c:when test="${sessionScope.m.memberLevel eq 0 }">
+         	<c:if test="${r.requritCancel eq 0 }">
         		<button type="button" class="btn requritBtn" id="deleteRequrit">삭제하기</button>
         		<button type="button" class="btn requritBtn" id="updateRequrit">수정하기</button>
         		<button type="button" class="btn requritBtn" onclick="goResumeList();">지원자보기</button>
+        	</c:if>
+        	<c:if test="${r.requritCancel eq 1 }">
+        		<button type="button" class="btn requritBtn" id="updateRequritAndRevival">수정하고 재공고</button>
+        	</c:if>
        	 	</c:when>
         </c:choose>
 		</c:when>
@@ -84,6 +89,10 @@
 	$("#updateRequrit").click(function(){
 		var requritNo = $("#hide").val();
 		location.href ="/updateRequritFrm.do?requritNo="+requritNo;
+	});
+	$("#updateRequritAndRevival").click(function(){
+		var requritNo = $("#hide").val();
+		location.href ="/revivalRequritFrm.do?requritNo="+requritNo;
 	});
 	</script>
 </body>
