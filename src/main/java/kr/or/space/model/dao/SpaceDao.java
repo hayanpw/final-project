@@ -245,4 +245,17 @@ public class SpaceDao {
 		List<Black> list = sqlSession.selectList("space.selectDelBlack");
 		return (ArrayList<Black>) list;
 	}
+	//삭제 안된 공간 조회
+	public ArrayList<Space> selectNoDelSpace() {
+		List<Space> list = sqlSession.selectList("space.selectNoDelSpace");
+		return (ArrayList<Space>)list;
+	}
+	//공간 복구
+	public int spaceRestore(int spaceNo) {
+		return sqlSession.update("space.spaceRestore",spaceNo);
+	}
+	//공간 완전 삭제
+	public int realDeleteSpace(int spaceNo) {
+		return sqlSession.delete("space.realDeleteSpace",spaceNo);
+	}
 }

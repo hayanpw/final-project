@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -102,6 +103,9 @@
 			<div class="review-box">
 				<h1>Review</h1>
 				<c:forEach items="${srList }" var="sr">
+				<c:if test="${fn:length(srList) > 0 }">
+					<p>엥</p>
+				</c:if>
 					<table class="review-table">
 						<tr>
 							<th>작성자</th>

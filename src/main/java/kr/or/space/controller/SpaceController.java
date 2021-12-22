@@ -56,6 +56,7 @@ public class SpaceController {
 	// 공간메인 이동
 	@RequestMapping(value = "/spaceMain.do")
 	public String spaceMain(Model model) {
+		model.addAttribute("headerText", "공간 · 대관"); 
 		ArrayList<Space> list = service.selectAllSpace();
 		ArrayList<FileVO> fList = service.selectFile();
 		model.addAttribute("list", list);
@@ -66,6 +67,7 @@ public class SpaceController {
 	// 공간 전체 조회
 	@RequestMapping(value = "/spaceList.do")
 	public String spaceList(Model model) {
+		model.addAttribute("headerText", "공간 소개"); 
 		ArrayList<Space> spaceList = service.selectAllSpace();
 		ArrayList<FileVO> fileList = service.selectFile();
 		model.addAttribute("spaceList", spaceList);
@@ -96,6 +98,7 @@ public class SpaceController {
 	// 신청 현황 페이지로 이동
 	@RequestMapping(value = "/spaceRes.do")
 	public String spaceRes(int spaceNo, Model model) {
+		model.addAttribute("headerText", "신청 현황"); 
 		ArrayList<Space> list = service.selectAllSpace();
 		if(spaceNo == 0) {
 			spaceNo = list.get(0).getSpaceNo();
@@ -262,6 +265,7 @@ public class SpaceController {
 	// 공간 예약
 	@RequestMapping(value = "/spaceInfo.do")
 	public String spaceInfo(int spaceNo, int stNo, String rentalDate, Model model) {
+		model.addAttribute("headerText", "공간 예약"); 
 		Space s = service.selectOneSpace(spaceNo);
 		ArrayList<FileVO> fv = service.selectFileList(spaceNo);
 		SpaceTime st = service.selectOneTime(stNo);
@@ -309,14 +313,16 @@ public class SpaceController {
 	@RequestMapping(value = "/spaceAdmin.do")
 	public String spaceAdmin(Model model, int reqPage) {
 		SpacePageNavi spn = service.selectAllRental(reqPage);
-		ArrayList<Space> space = service.selectAllSpace();
+		ArrayList<Space> space = service.selectNoDelSpace();
 		ArrayList<Space> delSpace = service.selectDelSpace();
 		ArrayList<Black> black = service.selectDelBlack();
+		System.out.println(black);
 		model.addAttribute("list", spn.getRList());
 		model.addAttribute("pageNavi", spn.getPageNavi());
 		model.addAttribute("start", spn.getStart());
 		model.addAttribute("space", space);
 		model.addAttribute("delSpace", delSpace);
+		model.addAttribute("black", black);
 		return "space/spaceAdmin";
 	}
 
@@ -367,10 +373,14 @@ public class SpaceController {
 	// 사용게시판 이동
 	@RequestMapping(value = "/selectSpaceBoardList.do")
 	public String selectSpaceBoardList(Model model, int reqPage) {
+		model.addAttribute("headerText", "사용 게시판"); 
 		SpacePageNavi page = service.selectSpacePageNavi(reqPage);
 		model.addAttribute("list", page.getList());
 		model.addAttribute("pageNavi", page.getPageNavi());
 		model.addAttribute("start", page.getStart());
+		System.out.println(page.getList());
+		System.out.println(page.getPageNavi());
+		System.out.println(page.getStart());
 		return "space/spaceBoardList";
 	}
 
@@ -602,6 +612,13 @@ public class SpaceController {
 		int result = service.deleteReview(rentalNo);
 		return new Gson().toJson(result);
 	}
+	//공간 완전 삭제
+	@ResponseBody
+	@RequestMapping(value = "/realDeleteSpace.do", produces = "application/json;charset=utf-8")
+	public String realDeleteSpace(int spaceNo) {
+		int result = service.realDeleteSpace(spaceNo);
+		return new Gson().toJson(result);
+	}
 	//마이페이지 조회 아작스 (다른 페이지에 로드)
 	@RequestMapping(value = "/spaceMypageAjax.do")
 	public String spaceMypageAjax(String memberId, Model model, String ub) {
@@ -611,6 +628,12 @@ public class SpaceController {
 		ArrayList<SpaceMypage> list = service.selectSpaceMypage(map);
 		model.addAttribute("list", list);
 		return "space/testt";
+	}
+	//공간 복구
+	@RequestMapping(value = "/spaceRestore.do")
+	public String spaceRestore(int spaceNo) {
+		int result = service.spaceRestore(spaceNo);
+		return "redirect:/spaceAdmin.do?reqPage=1";
 	}
 	/*
 	  //마이페이지 조회 아작스
@@ -622,6 +645,7 @@ public class SpaceController {
 	  ArrayList<SpaceMypage> list = service.selectSpaceMypage(map); return new
 	  Gson().toJson(list); }
 	 */	
+	//예약 취소
 	@RequestMapping(value = "/deleteRes.do")
 	public String deleteRes(int rentalNo, Model model ) {
 		int result = service.deleteRental(rentalNo);
@@ -633,5 +657,6 @@ public class SpaceController {
 		model.addAttribute("loc", "/spaceAdmin.do");
 		return "common/msg";
 	}
+
 }
 

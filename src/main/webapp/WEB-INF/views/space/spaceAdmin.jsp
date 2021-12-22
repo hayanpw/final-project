@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="resources/spaceCss/space_default.css" rel="stylesheet">
 <link href="resources/spaceCss/space_admin.css" rel="stylesheet">
 </head>
 <body>
@@ -18,6 +19,7 @@
 		</div>
 		<div class="mypage-container">
 			<div class="rental-mgr">
+			<h3><img class="i-img" src="resources/spaceImage/settings.png" style="width: 40px; "> 대관 신청 관리 </h3>
 				<div class="table-box">
 					<table class="table table-bordered">
 						<tr>
@@ -56,38 +58,97 @@
 				<div class="page-box">${pageNavi }</div>
 			</div>
 			<div class="space-box">
+				<h3><img class="i-img" src="resources/spaceImage/settings.png" style="width: 40px; "> 공간 관리 </h3>
 				<div class="choice">
 					<span id="sL">공간 리스트</span><span id ="dL">삭제 된 공간</span>
 				</div>
 				<c:forEach items="${space }" var="s">
 					<div class="noDel-space">
+					<img class="info-img"
+							src="resources/spaceImage/upload/${s.filename }">
 						<p>공간 이름: ${s.spaceName }</p>
 						<p>용도 : ${s.spacePurpose }</p>
 						<p>수용인원 :${s.maxPeople }</p>
 						<p>가격 : ${s.price }</p>
-						<button id="del-btn" class="btn btn-default"
+						<button id="btn" class="btn btn-default"
 							onclick="location.href='/spaceDelete.do?spaceNo=${s.spaceNo}'">삭제하기</button>
-						<button id="update-btn" class="btn btn-default"
+						<button id="btn" class="btn btn-default"
 							onclick="location.href='/spaceUpdate.do?spaceNo=${s.spaceNo}'">수정하기</button>
 					</div>
 				</c:forEach>
 				<c:forEach items="${delSpace }" var="d">
 					<div class="del-space">
+					<img class="info-img"
+							src="resources/spaceImage/upload/${d.filename }">
 						<p>공간 이름 : ${d.spaceName }</p>
 						<p>용도 : ${d.spacePurpose }</p>
 						<p>수용인원 :${d.maxPeople }</p>
 						<p>가격 : ${d.price }</p>
+						<input type="hidden" value="${d.spaceNo }">
+						<img class="del-img" src="resources/spaceImage/bin.png">
+						<button id="btn" class="btn btn-default"
+							onclick="location.href='/spaceRestore.do?spaceNo=${d.spaceNo}'">복구하기</button>
 					</div>
 				</c:forEach>
 			</div>
 			<div class="del-black">
-				블랙리스트 모음
+			<h3><img class="i-img" src="resources/spaceImage/settings.png" style="width: 40px; "> 블랙리스트 관리 </h3>
+					<table class="table table-hover">
+						<tr>
+							<th>No.</th>
+							<th>아이디</th>
+							<th>블랙된 횟수</th>
+						<tr>
+				<c:forEach items="${black }" var="b" varStatus="i">
+					<tr>
+						<td>${i.count }</td>
+						<td>${b.blackId }</td>
+						<td>${b.blackCount }</td>
+					</tr>						
+				</c:forEach>
+					</table>
 			</div>
 		</div>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 	<script>
 		$(".del-space").hide();
+		$("#sL").css("color","#e79b36").css('font-weight','bold' );
+		$("#dL").css("color","black").css('font-weight','lighter' );
+		$("#dL").click(function () {
+			$("#dL").css("color","#e79b36").css('font-weight','bold' );
+			$("#sL").css("color","black").css('font-weight','lighter' );
+			$(".noDel-space").hide();
+			$(".del-space").show();
+		});
+		$("#sL").click(function () {
+			$("#sL").css("color","#e79b36").css('font-weight','bold' );
+			$("#dL").css("color","black").css('font-weight','lighter' );
+			$(".del-space").hide();
+			$(".noDel-space").show();
+		});
+		$(".del-img").click(function () {
+			var delConfirm = confirm('공간을 완전 삭제 하시겠습니까? 복구가 불가능 합니다.');
+			var spaceNo = $(this).prev().val();
+			   if (delConfirm) {
+				   $.ajax({
+						url : "/realDeleteSpace.do",
+						data : {spaceNo :spaceNo},
+						type : "post",
+						success : function(data) {
+							if(data>0){
+							 location.href = "/spaceAdmin?reqPage=1"; 
+							}else{
+								alert("삭제 실패");
+							}
+						}
+				   });
+			      alert('삭제되었습니다.');
+			   }
+			   else {
+			      alert('삭제가 취소되었습니다.');
+			   }
+		});
 	</script>
 </body>
 </html>

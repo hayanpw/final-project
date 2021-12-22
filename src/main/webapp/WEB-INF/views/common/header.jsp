@@ -25,7 +25,7 @@
                            <li><a href="/spaceMain.do">대관 안내</a></li>
                            <li><a href="/spaceList.do">공간 소개</a></li>
                            <li><a href="/spaceRes.do?spaceNo=0">대관 현황</a></li>
-                           <li><a href="/selectSpaceBoardList.do?reqPage=0">사용 게시판</a></li>
+                           <li><a href="/selectSpaceBoardList.do?reqPage=1">사용 게시판</a></li>
                         </ul>
                    </li>
                    <li><a href="/exhibitionList.do?reqPage=4">전시</a></li>

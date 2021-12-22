@@ -1,11 +1,11 @@
 .table-box table tr th{
 	text-align: center;
-	background-color: #A79078 ;
+	background-color: #064663 ;
 	color: #ffffff;
 }
 .table-bb table tr th{
 	text-align: center;
-	background-color: #A79078 ;
+	background-color: #064663 ;
 	color: #ffffff;
 }
 .table-box table tr td{
@@ -27,7 +27,7 @@
 	display: inline-block;
 }
 .pop{
-	border: 1px solid #BDB19A;
+	border: 1px solid #e79b36;
 	width: 400px;
 	margin-top: 15px;
 	margin-right : 50px;
@@ -49,25 +49,25 @@
 	width: 100px;
 }
 .writeBtn{
-	background-color: #A79078 ;
+	background-color: #064663;
 	color: white;
 	border: 1px solid white;
 	border-radius: 10px;
 } .updateBtn{
-	color: #A79078 ;
+	color: #064663 ;
 	background-color: white;
-	border: 1px solid #A79078; 
+	border: 1px solid #e79b36; 
 	border-radius: 10px;
 }
 #ckList{
-	color: #563D39;
+	color: #064663;
 	text-decoration: none;
 }
 #ckList:hover{
 	font-weight: bold;
 }
 #ub{
-	background: #A79078;
+	background: #064663;
 }
 .noRental{
 	margin-top : 100px;
