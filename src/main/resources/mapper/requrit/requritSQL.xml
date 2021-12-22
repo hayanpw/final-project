@@ -20,10 +20,27 @@
 			nn.employee_type as employeeType,
 			nn.requrit_cancel as requritCancel
 			 from (select rownum as rnum, n.* from 
-			( select * from teacher_requrit order by requrit_no desc)n)nn where rnum BETWEEN #{start} and #{end}
+			( select * from teacher_requrit where requrit_cancel = 0 order by requrit_no desc)n)nn where rnum BETWEEN #{start} and #{end}
+	</select>
+	<select id="selectRequritListDelete" parameterType="pa" resultType="rq">
+		select nn.requrit_no as requritNO, 
+			nn.requrit_title as requritTitle,
+			nn.requrit_start as requritStart,
+			nn.requrit_end as requritEnd,
+			nn.requrit_career as requritCareer,
+			nn.requrit_gender as requritGender,
+			nn.requrit_field as requritField,
+			nn.requrit_detail as requritDetail,
+			nn.employee_type as employeeType,
+			nn.requrit_cancel as requritCancel
+			 from (select rownum as rnum, n.* from 
+			( select * from teacher_requrit where requrit_cancel = 1 order by requrit_no desc)n)nn where rnum BETWEEN #{start} and #{end}
 	</select>
 	<select id="selectTotalCount" resultType="_int">
-  		select count(*) from teacher_requrit
+  		select count(*) from teacher_requrit where requrit_cancel =0
+  	</select>
+  	<select id="selectTotalCountDelete" resultType="_int">
+  		select count(*) from teacher_requrit where requrit_cancel =1
   	</select>
   	<select id="selectOneRequrit" parameterType="_int" resultType="rq">
   		select 
@@ -46,5 +63,8 @@
 		update teacher_requrit set requrit_title = #{requritTitle},requrit_start = #{requritStart},requrit_end = #{requritEnd},requrit_career = #{requritCareer}
 		,requrit_gender = #{requritGender}, requrit_field = #{requritField}, requrit_detail = #{requritDetail}, employee_type = #{employeeType}
 		where requrit_no = #{requritNo}
+	</update>
+		<update id="revivalRequrit" parameterType="_int">
+		update teacher_requrit set requrit_cancel = 0 where requrit_no = #{requritNo}
 	</update>
 </mapper>

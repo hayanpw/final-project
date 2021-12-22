@@ -146,16 +146,12 @@ public class ReadingService {
 	public int deleteRead(int reserveNo) {
 		int count=0;
 		int result1=dao.deleteFixtures(reserveNo);
-		if(result1>0) {
-			int result2=dao.deleteRead(reserveNo);
+		int result2=dao.deleteRead(reserveNo);
 			if(result2>0) {
 				count++;
 			}else {
 				return -1;
 			}
-		}else {
-			return -2;
-		}
 		return count;
 	}
 

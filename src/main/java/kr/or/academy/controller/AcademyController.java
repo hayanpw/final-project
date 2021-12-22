@@ -38,6 +38,7 @@ public class AcademyController {
 	//리스트 페이지 출력
 	@RequestMapping(value="/academyList.do")
 	public String academyList(Academy a,Model model,int reqPage,String category) {
+		model.addAttribute("headerText", "강좌");
 		//전체 페이지 겟수 출력 
 		System.out.println(category);
 		int totalCount = service.academyTotal();
