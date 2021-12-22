@@ -96,11 +96,10 @@
          <c:forEach items="${payment }" var="pm">
  			<c:if test="${not check }">
             <c:if test="${empty sessionScope.m }">
-            	<p>로그인후 댓글 등록이 가능 합니다</p>  
+            	<p>전시 구매후 댓글 작성이 가능합니다</p>  
             	<c:set var="check" value="true"/>
             </c:if>
-            
-            <c:if test ="${not empty sessionScope.m || pm.memberNo eq sessionScope.m.memberNo }">
+            <c:if test ="${not empty sessionScope.m && pm.memberNo eq sessionScope.m.memberNo }">
             	<div class="inputReviewBox">
 					<form action="/insertExReview.do" method="post">
 						<input type="hidden" name="exReviewWriter" value="${sessionScope.m.memberId }">

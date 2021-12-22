@@ -8,8 +8,10 @@ body{
 /*스와이프*/
 .showslide{
     position: relative;
-    margin: 100px 50px 0px 50px;
+    margin: 0 auto;
+    margin-top: 100px;
     height: auto;
+    width: 1465px;
 }
 .swiper {
         width: 100%;
@@ -133,17 +135,19 @@ body{
     /*slick*/
     .slider-for>div{
         width: 100%;
-        height: 800px;
+        height: 700px;
         margin: 0 auto;
     }
     .d1 {
-        height: 615px;
+        height: 515px;
         z-index: 1;
     }
     .d2 {
         display: flex;
-        width: 700px;
+        width: 670px;
         z-index: 3;
+        margin:0 auto;
+        z-index:3;
     }
     .sn{
         margin: 15px;
@@ -157,9 +161,10 @@ body{
         max-width: 250px;
     }
     .sf img{
-        height: 800px;
-        width: 100%;
-        
+    	margin: 0 auto;
+        height: 700px;
+        width: auto;
+        z-index:3;
     }
     .slick-dots{
         display: none;
@@ -191,12 +196,11 @@ body{
         font-size: 18px;
         margin: 10px;
         padding: 10px;
-border: solid 1px #041C32; 
-display: inline-block; 
-width: 200px; 
-height: 270px;
-overflow: hidden; 
-
+		border: solid 1px #041C32; 
+		display: inline-block; 
+		width: 200px; 
+		height: 270px;
+		overflow: hidden; 
     }
     .notice-menu > li {
         float: left;
@@ -206,39 +210,111 @@ overflow: hidden;
     .notice-menu{
         padding: 0px 60px 0px 200px;
     }
-.ln-content > li {
-    float:left;
-}
-.lnc-box >a{
-    text-decoration: none;
-    color:#000;
-}
-.tit-main .small:before {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 37px;
-    height: 1px;
-    background: #474747;
-    content: '';
-}
-.tit-main .small {
-    display: block;
-    position: relative;
-    padding-top: 10px;
-    font-size: 13px;
-    letter-spacing: 0;
-}
+	.ln-content > li {
+	    float:left;
+	}
+	.lnc-box >a{
+	    text-decoration: none;
+	    color:#000;
+	}
+	.tit-main .small:before {
+	    position: absolute;
+	    left: 0;
+	    top: 0;
+	    width: 37px;
+	    height: 1px;
+	    background: #474747;
+	    content: '';
+	}
+	.tit-main .small {
+	    display: block;
+	    position: relative;
+	    padding-top: 10px;
+	    font-size: 13px;
+	    letter-spacing: 0;
+	}
+	
+	.rpc-box{
+	    margin: 10px;
+		border: solid 1px #041C32; 
+		display: inline-block; 
+		width: 200px; 
+		height: 270px;
+		overflow: hidden; 
+		}
+	.rpc-box img{
+	    width: 200px;
+	    height: 270px;
+	}
 
-.rpc-box{
-    margin: 10px;
-border: solid 1px #041C32; 
-display: inline-block; 
-width: 200px; 
-height: 270px;
-overflow: hidden; 
-}
-.rpc-box img{
-    width: 200px;
-    height: 270px;
-}
+	
+	/*popup*/
+	 
+    .popup{
+        background-image: url("/resources/mainImage/upload/popbg.JPG");
+	    z-index:5;
+        position: absolute;
+        margin: 250px 0px 0px 100px;
+        height: 400px;
+        width: 400px;
+    }
+
+     
+    #pop_container{
+            font-family: 'NotoSans','맑은 고딕', 'Malgun Gothic',"돋움", dotum, arial, sans-serif;
+            text-align: center;
+            position: relative;
+        }
+    .top {
+        position: relative;
+        display: flex; 
+        justify-content: space-between;
+        padding: 0.5rem 1.4rem;
+        vertical-align: middle;
+    }
+    h1.infoTit {
+           border-bottom: solid 1px #ffffff; 
+            font-size: 15px; 
+            color:#ffffff;
+        }
+    main.textBox{
+        text-shadow: 2px 2px 2px #041C32;
+        color:#ffffff;
+        text-align: center;
+    }
+        h2.tit{
+            letter-spacing: -2px;
+            font-weight: bold;
+            line-height: 1.5em;
+        }
+        p {
+            line-height: 1.8em;
+        }
+        p.textContents{
+            font-size: 14px;
+            margin: 1.5em 1.8em;
+            font-weight: 200;
+        }
+
+    .popup footer {    
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+    }
+    .popup footer.btnBox_todayClose {
+            padding: 0.5rem 0 0.7rem;
+            display: flex;
+            justify-content: flex-end;
+        }
+            form {padding-right: 2rem;}
+            input#chkday {
+                width: 17px;
+                height: 17px; 
+                vertical-align: middle;
+            }
+    .popup     label {
+                text-shadow: 2px 2px 2px #041C32;
+                color:#ffffff;
+                vertical-align: middle;
+                font-size: 7px;
+                }

@@ -131,6 +131,23 @@
 	<delete id="fixturesCancel" parameterType="reading">
 		delete from fixtures where fixtures_day=#{readingDay} and fixtures_id=#{readingId}
 	</delete>
+	<select id="selectReadingBlack" resultType="string">
+		select
+			black_id as blackId
+		from reading_black where black_ty=0
+	</select>
+	<delete id="deleteReading" parameterType="reading">
+		delete from reading where reading_id=#{readingId} and reading_day>sysdate
+	</delete>
+	<delete id="deleteRead">
+		delete from reading where reading_no=#{reserveNo}
+	</delete>
+	<delete id="fixturesAllCancel" parameterType="reading">
+		delete from fixtures where fixtures_id=#{readingId} and fixtures_day>sysdate
+	</delete>
+	<delete id="deleteFixtures">
+		delete from fixtures where reading_no=#{reserveNo}
+	</delete>
 </mapper>
 		
 
