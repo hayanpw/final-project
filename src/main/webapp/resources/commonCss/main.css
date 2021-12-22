@@ -246,3 +246,75 @@ body{
 	    width: 200px;
 	    height: 270px;
 	}
+
+	
+	/*popup*/
+	 
+    .popup{
+        background-image: url("/resources/mainImage/upload/popbg.JPG");
+	    z-index:5;
+        position: absolute;
+        margin: 250px 0px 0px 100px;
+        height: 400px;
+        width: 400px;
+    }
+
+     
+    #pop_container{
+            font-family: 'NotoSans','맑은 고딕', 'Malgun Gothic',"돋움", dotum, arial, sans-serif;
+            text-align: center;
+            position: relative;
+        }
+    .top {
+        position: relative;
+        display: flex; 
+        justify-content: space-between;
+        padding: 0.5rem 1.4rem;
+        vertical-align: middle;
+    }
+    h1.infoTit {
+           border-bottom: solid 1px #ffffff; 
+            font-size: 15px; 
+            color:#ffffff;
+        }
+    main.textBox{
+        text-shadow: 2px 2px 2px #041C32;
+        color:#ffffff;
+        text-align: center;
+    }
+        h2.tit{
+            letter-spacing: -2px;
+            font-weight: bold;
+            line-height: 1.5em;
+        }
+        p {
+            line-height: 1.8em;
+        }
+        p.textContents{
+            font-size: 14px;
+            margin: 1.5em 1.8em;
+            font-weight: 200;
+        }
+
+    .popup footer {    
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+    }
+    .popup footer.btnBox_todayClose {
+            padding: 0.5rem 0 0.7rem;
+            display: flex;
+            justify-content: flex-end;
+        }
+            form {padding-right: 2rem;}
+            input#chkday {
+                width: 17px;
+                height: 17px; 
+                vertical-align: middle;
+            }
+    .popup     label {
+                text-shadow: 2px 2px 2px #041C32;
+                color:#ffffff;
+                vertical-align: middle;
+                font-size: 7px;
+                }
