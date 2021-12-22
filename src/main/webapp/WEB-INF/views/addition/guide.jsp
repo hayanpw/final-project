@@ -40,8 +40,8 @@
 	#titlemenu>li.active>a {
 	background-color: black ;
 	color: white;
-	font-weight: bold;
-	font-size: 18px;
+	border: 1px solid black;
+	font-size: 17px;
 	}
 	#titlemenu>li>a{
 	padding:0;
@@ -50,7 +50,14 @@
 	font-size: 17px;
 	font-weight: 600;
 	border-radius: 0px;
+	border-top: 1px solid black;
+	border-bottom:  1px solid black;
+	border-left:  1px solid black;
 	}
+	#titlemenu>li:last-child>a{
+	border-right:  1px solid black;
+	}
+	
 	.content-text{
 	padding: 20px;
 	font-size: 20px;

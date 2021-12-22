@@ -8,17 +8,9 @@
 <title>Insert title here</title>
 <script src="https://kit.fontawesome.com/4054b6ceaa.js" crossorigin="anonymous"></script>
 <style type="text/css">
-	#title{
-	width:205px;
-	border-top: 7px solid #064663;
-	margin-top:70px;
-	margin-left:70px;
-	font-weight:700;
-	font-size: 40px;
-	margin-bottom: 50px;
-	}
 	#table{
 	text-align: center;
+	margin-top:80px;
 	}
 	#write{
 		float: left;
@@ -74,13 +66,14 @@
 	color: black;
 	}
 	#regulation{
-    color: #A79078;
+    color: gray;
+    text-decoration:none;
     }
 	#table1 td>a:hover {
 	text-decoration: none;
 	}
 	#table1 tr:hover {
-	background-color: #f3efe6 ;
+	background-color: #eee ;
 	}
 	#write:hover ,#my:hover {
 	text-decoration: none;
@@ -112,15 +105,34 @@
     color: black;
     border: none;
     }
-    
+     #pagination>li:first-child>a{
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    }
+    #pagination>li:last-child>a{
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    }
+    #search{
+    float: right;
+    }
 </style>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="container" id="container">
-		<div id="title">소통게시판</div>
 		<div id="table">
 			<div id="new">새글수 : ${nCount }/${totalCount }</div>
+			<div id="search">
+			<form action="/searchKeyword.do?boardType=3&reqPage=1" method="post">
+			 	<select name="type" id="type">
+			 		<option value="tac">제목+내용</option>
+			 		<option value="writer">작성자</option>
+			 	</select>
+			 	<input type="text" id="keyword" name="keyword" placeholder="검색어를 입력하세요.">
+			 	<button id="submit"><i class="fas fa-search"></i></button>
+			</form>
+			</div>
 			<table id="table1" class="table">
 				<tr id="firtr">
 					<td>번호</td><td>제목</td><td>작성자</td><td>작성일</td><td>조회수</td>
@@ -160,14 +172,6 @@
 		</c:if>
 		<div id="page">
 			<div id="pageNavi">${pageNavi }</div>
-			<form action="/searchKeyword.do?boardType=3&reqPage=1" method="post">
-			 	<select name="type" id="type">
-			 		<option value="tac">제목+내용</option>
-			 		<option value="writer">작성자</option>
-			 	</select>
-			 	<input type="text" id="keyword" name="keyword" placeholder="검색어를 입력하세요.">
-			 	<button id="submit"><i class="fas fa-search"></i></button>
-			</form>
 		</div>
 	</div>
 	<script type="text/javascript">

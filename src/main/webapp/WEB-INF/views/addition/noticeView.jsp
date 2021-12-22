@@ -45,6 +45,25 @@
 	text-decoration: none;
 	color: #064663;
 	}
+	
+	#adminbtn{
+	float: right;
+	}
+	#blist{
+	float: right;
+	background-color: #064663;
+	color: #fff;
+	}
+	#delete{
+	float: right;
+	background-color: red;
+	color: #fff;
+	}
+	#update{
+	float: right;
+	background-color: #e79b36;
+	color: #fff;
+	}
     
 </style>
 </head>
@@ -58,12 +77,14 @@
 			</tr>
 			<tr>
 				<td>등록일 &nbsp;&nbsp;&nbsp;&nbsp;  ${b.regDate }</td>
+				<c:if test="${not empty b.list }">
 				<td>첨부파일</td>
 				<td>
 				<c:forEach items="${b.list }" var="f">
 				<a href="/fileDown.do?filename=${f.filename }&filepath=${f.filepath }">${f.filename }</a>
 				</c:forEach>
 				</td>
+				</c:if>
 			</tr>
 			<tr>
 				<td colspan="3">
@@ -71,10 +92,6 @@
 				</td>
 			</tr>
 		</table>
-		<c:if test="${sessionScope.m.memberLevel eq 0 }">
-		<a class="btn" href="/boardDelete.do?boardType=1&boardNo=${b.boardNo }">글삭제</a>
-		<a class="btn" href="/boardUpdateFrm.do?boardNo=${b.boardNo }">글수정</a>
-		</c:if>
 		<div>
 		
 		<div><span class="nextTitle">다음글</span>&nbsp;
@@ -87,8 +104,11 @@
 			<input type="hidden" id="prev" value="${info.prevNo }">${info.prevTitle }
 			</a>
 		</div>
-		
-		<a class="btn" href="/additionBoard.do?boardType=1&reqPage=1">글목록</a>
+		<c:if test="${sessionScope.m.memberLevel eq 0 }">
+		<a id="delete" class="btn" href="/boardDelete.do?num=&boardType=1&boardNo=${b.boardNo }">글삭제</a>
+		<a id="update" class="btn" href="/boardUpdateFrm.do?boardNo=${b.boardNo }">글수정</a>
+		</c:if>
+		<a id="blist" class="btn" href="/additionBoard.do?boardType=1&reqPage=1">글목록</a>
 		</div>
 	</div>
 	<script>

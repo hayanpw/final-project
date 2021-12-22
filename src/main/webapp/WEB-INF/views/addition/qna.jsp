@@ -163,57 +163,30 @@
 	}
 	#titlemenu>li>a{
 	border-radius: 0;
+	border-top:1px solid black;
+	border-left:1px solid black;
 	color: black;
+	}
+	#titlemenu>li:last-child>a{
+	border-right:1px solid black;
 	}
 	#titlemenu>li.active>a {
 	 background-color: black;
 	 color: white;
 	}
-	
+	 #pagination>li:first-child>a{
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    }
+    #pagination>li:last-child>a{
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    }
 </style>
 </head>
 <body>
 
-<script>
-  (function() {
-    var w = window;
-    if (w.ChannelIO) {
-      return (window.console.error || window.console.log || function(){})('ChannelIO script included twice.');
-    }
-    var ch = function() {
-      ch.c(arguments);
-    };
-    ch.q = [];
-    ch.c = function(args) {
-      ch.q.push(args);
-    };
-    w.ChannelIO = ch;
-    function l() {
-      if (w.ChannelIOInitialized) {
-        return;
-      }
-      w.ChannelIOInitialized = true;
-      var s = document.createElement('script');
-      s.type = 'text/javascript';
-      s.async = true;
-      s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
-      s.charset = 'UTF-8';
-      var x = document.getElementsByTagName('script')[0];
-      x.parentNode.insertBefore(s, x);
-    }
-    if (document.readyState === 'complete') {
-      l();
-    } else if (window.attachEvent) {
-      window.attachEvent('onload', l);
-    } else {
-      window.addEventListener('DOMContentLoaded', l, false);
-      window.addEventListener('load', l, false);
-    }
-  })();
-  ChannelIO('boot', {
-    "pluginKey": "30646173-f05a-4c55-9818-46a0543b5882"
-  });
-</script>
+
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="container" id="container">
 		<div id="title">FAQ</div>
