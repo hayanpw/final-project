@@ -23,4 +23,5 @@ public class ReadingScheduled {
 		String time1 = format.format(time);
 		service.timeOutBlackList(time1);
 	}
+	
 }

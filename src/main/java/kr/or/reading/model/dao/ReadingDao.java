@@ -95,5 +95,27 @@ public class ReadingDao {
 		return sqlSession.delete("reading.fixturesCancel", re);
 	}
 
+	public ArrayList<String> selectReadingBlack() {
+		List<String> memberId = sqlSession.selectList("reading.selectReadingBlack");
+		return (ArrayList<String>)memberId;
+	}
+
+	public int deleteReading(Reading re) {
+		return sqlSession.delete("reading.deleteReading", re);
+	}
+
+	public int deleteRead(int reserveNo) {
+		return sqlSession.delete("reading.deleteRead", reserveNo);
+	}
+
+	public int fixturesAllCancel(Reading re) {
+		return sqlSession.delete("reading.fixturesAllCancel", re);
+	}
+
+	public int deleteFixtures(int reserveNo) {
+		return sqlSession.delete("reading.deleteFixtures", reserveNo);
+	}
+
+
 	
 }
