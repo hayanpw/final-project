@@ -103,7 +103,7 @@
 			<div class="review-box">
 				<h1>Review</h1>
 				<c:forEach items="${srList }" var="sr">
-				<c:if test="${fn:length(srList) > 0 }">
+				<c:if test="${fn:length(srList) == 0 }">
 					<p>엥</p>
 				</c:if>
 					<table class="review-table">
