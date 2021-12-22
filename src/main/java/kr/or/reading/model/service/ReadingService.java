@@ -73,6 +73,8 @@ public class ReadingService {
 			if(result>0) {
 				int result1 = dao.insertBlackList(re);
 				if(result1>0) {
+					int result3 = dao.fixturesAllCancel(re);
+					int result2 = dao.deleteReading(re);
 					count++;
 				}else {
 					return -2;
@@ -138,6 +140,19 @@ public class ReadingService {
 
 	public int fixturesCancel(Reading re) {
 		return dao.fixturesCancel(re);
+	}
+
+	@Transactional
+	public int deleteRead(int reserveNo) {
+		int count=0;
+		int result1=dao.deleteFixtures(reserveNo);
+		int result2=dao.deleteRead(reserveNo);
+			if(result2>0) {
+				count++;
+			}else {
+				return -1;
+			}
+		return count;
 	}
 
 

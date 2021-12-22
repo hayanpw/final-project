@@ -23,7 +23,7 @@
 	<br><br><br>
 	<div class="container">
 		<div class="main-title">
-			<h1>예약 내역 조회  & 비품 대여</h1><br>
+			<h1>예약 내역 조회</h1><br>
 		</div>
 		<br><br><br>
 		<div class="container-left col-sm-7">

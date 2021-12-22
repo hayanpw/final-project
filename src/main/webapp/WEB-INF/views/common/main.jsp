@@ -4,7 +4,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Bootstrap Example</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -19,10 +18,34 @@
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.css"/>
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.css"/>
    <link rel="stylesheet" href="/resources/commonCss/mainhf.css">
-  
-    <title>Document</title>
 </head>
 <body data-spy="scroll" data-target=".navbar" data-offset="50">
+  <div class="popup">
+        <div id="popup">
+            <header class="top"> 
+                <h1 class="infoTit">소개</h1> 
+            </header>
+            <main class="textBox">
+                <h2 class="tit">Musée d'art</h2>
+                <p class="textContents">
+                    musée d'art 뜻은 프랑스어로 '미술관'을 뜻합니다.<br> 
+                    발음대로 읽으면 '무지다'가 되며 강원도 방언으로 '모이다'라는 뜻도 더하여 
+                    저희 홈페이지는 공연 전시 관람 및 열람 다양한 문화생활을 모은 장소를 만들었습니다.
+                <p><strong>적용기간 : 2021.07.14~12.29</strong></p>
+                <p style="font-size:7px;"> 예쁘게 봐주시구 5개월동안 수고많으셨습니다 :) Au revir!</p>
+                <p> KH Team3 </p>
+                </p>
+            </main>
+            
+        </div>   
+        <footer class="btnBox_todayClose">
+            <form method="post" action="" name="pop_form">
+                <span id="check">
+                    <a href="javascript:void(0)" id="cp">닫기</a>
+                </span>
+            </form>
+        </footer>
+    </div>
      <!-- <div class="container" style="width: 100%;"> -->
         <div class="slider-for d1">
             <div class="sf"><img src="/resources/mainImage/upload/m-main1.jpg"></div>
@@ -112,6 +135,11 @@
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.js"></script>
       
         <script type="text/javascript">
+        
+        $('#cp').click(function () {
+			$('.popup').hide();
+		})
+		
        $('.slider-for').slick({
         slidesToShow: 1,
         slidesToScroll: 1,
