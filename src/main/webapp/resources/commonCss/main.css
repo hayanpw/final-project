@@ -282,7 +282,7 @@ body{
         text-align: center;
     }
         h2.tit{
-            letter-spacing: -2px;
+            font-family: "d_r";
             font-weight: bold;
             line-height: 1.5em;
         }
@@ -311,9 +311,3 @@ body{
                 height: 17px; 
                 vertical-align: middle;
             }
-    .popup     label {
-                text-shadow: 2px 2px 2px #041C32;
-                color:#ffffff;
-                vertical-align: middle;
-                font-size: 7px;
-                }

@@ -23,7 +23,7 @@
   <div class="popup">
         <div id="popup">
             <header class="top"> 
-                <h1 class="infoTit">소개</h1> 
+<!--                 <h1 class="infoTit">소개</h1>  -->
             </header>
             <main class="textBox">
                 <h2 class="tit">Musée d'art</h2>
@@ -41,7 +41,7 @@
         <footer class="btnBox_todayClose">
             <form method="post" action="" name="pop_form">
                 <span id="check">
-                    <a href="javascript:void(0)" id="cp">닫기</a>
+                    <a href="javascript:void(0)" id="cp" style="color:#fff">닫기</a>
                 </span>
             </form>
         </footer>
