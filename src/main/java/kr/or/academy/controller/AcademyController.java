@@ -281,7 +281,7 @@ public class AcademyController {
 		return "academy/academyMypage";
 	}
 	@RequestMapping(value="/deleteAcPayment.do")
-	public String deleteAcPayment(int memberNo,long paymentNo, Model model) {
+	public String deleteAcPayment(int memberNo,int paymentNo, Model model) {
 		int result = service.deleteAcPayment(paymentNo);
 		if(result>0) {
 			model.addAttribute("msg", "수업 취소 성공");			

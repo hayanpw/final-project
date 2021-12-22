@@ -286,7 +286,7 @@ public class ExhibitionController {
 	}
 	
 	@RequestMapping(value="/deletePayment.do")
-	public String deletePayment(int memberNo, long paymentNo,Model model) {
+	public String deletePayment(int memberNo, int paymentNo,Model model) {
 		int result = service.deletePayment(paymentNo);
 		if(result>0) {
 			model.addAttribute("msg", "결제 취소 성공");			

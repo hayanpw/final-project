@@ -10,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.or.academy.service.AcademyService;
+import kr.or.exhibition.service.ExhibitionService;
 import kr.or.member.service.MemberService;
 import kr.or.member.service.SendMail;
 import kr.or.member.vo.DeleteMember;
@@ -29,6 +31,10 @@ public class MemberController {
 	private ReadingService readingservice;
 	@Autowired
 	private ShowService showservice;
+	@Autowired
+	private ExhibitionService exhibitionService;
+	@Autowired
+	private AcademyService academyService;
 	
 	public MemberController() {
 		super();
@@ -247,8 +253,8 @@ public class MemberController {
 	@RequestMapping(value = "/deletemAcademy.do")
 	@ResponseBody
 	public int deletemAcademy(int reserveNo, Model model) {
-		int result = 1;
 		System.out.println(reserveNo);
+		int result = exhibitionService.realDelete(reserveNo);
 		return result;
 	}
 
@@ -256,7 +262,7 @@ public class MemberController {
 	@ResponseBody
 	public int deletemExhibition(int reserveNo, Model model) {
 		System.out.println(reserveNo);
-		int result = 1;
+		int result = exhibitionService.realDelete(reserveNo);
 		return result;
 	}
 	

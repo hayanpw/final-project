@@ -99,7 +99,7 @@ public class ExhibitionDao {
 		return (ArrayList<ExhibitionPayment>)last;
 	}
 
-	public int deletePayment(long paymentNo) {
+	public int deletePayment(int paymentNo) {
 		int result = sqlSession.update("exhibition.deletePayment",paymentNo);
 		return result;
 	}
@@ -107,5 +107,10 @@ public class ExhibitionDao {
 	public ArrayList<ExhibitionPayment> paymentList(int exhibitionNo) {
 		List<ExhibitionPayment> payment = sqlSession.selectList("exhibition.paymentList",exhibitionNo);
 		return (ArrayList<ExhibitionPayment>)payment;
+	}
+
+	public int realDelete(int reserveNo) {
+		int result = sqlSession.delete("exhibition.realDelete",reserveNo);
+		return result;
 	}
 }

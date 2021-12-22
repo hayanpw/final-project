@@ -113,7 +113,7 @@ public class ExhibitionService {
 		return map;
 	}
 	@Transactional
-	public int deletePayment(long paymentNo) {
+	public int deletePayment(int paymentNo) {
 		int result = dao.deletePayment(paymentNo);
 		return result;
 	}
@@ -121,5 +121,10 @@ public class ExhibitionService {
 	public ArrayList<ExhibitionPayment> paymentList(int exhibitionNo) {
 		ArrayList<ExhibitionPayment> payment = dao.paymentList(exhibitionNo);
 		return payment;
+	}
+
+	public int realDelete(int reserveNo) {
+		int result = dao.realDelete(reserveNo); 
+		return result;
 	}
 }

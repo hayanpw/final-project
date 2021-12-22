@@ -174,7 +174,7 @@
 		from payment join academy using(academy_no) where member_no=#{memberNo} and payment_select = 2  and academy_end < sysdate
 	]]>	
 	</select>
-	<update id="deleteAcPayment" parameterType="_long">
+	<update id="deleteAcPayment" parameterType="_int">
 		update payment set payment_cancel = 1 where payment_no = #{paymentNo}
 	</update>
 	<select id="studentList" parameterType="_int" resultType="sl">

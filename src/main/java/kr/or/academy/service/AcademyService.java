@@ -170,7 +170,7 @@ public class AcademyService {
 		return map;
 	}
 	@Transactional
-	public int deleteAcPayment(long paymentNo) {
+	public int deleteAcPayment(int paymentNo) {
 		int result = dao.deleteAcPayment(paymentNo);
 		return result;
 	}
