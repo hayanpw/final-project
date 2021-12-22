@@ -271,14 +271,14 @@ public class MemberController {
 	}
 	@RequestMapping(value="/updatePassword.do")
 	public String updatePassword(Member m,Model model) {
+		System.out.println(m);
 		int result = service.updatePasswordPw(m);
 		if(result>0) {
 			model.addAttribute("msg","정보변경 성공");
 		}else {
 			model.addAttribute("msg","정보변경 실패");
 		}
-		model.addAttribute("loc","/");
-		return "common/msg";
+		return "member/mypage";
 	}
 	
 }

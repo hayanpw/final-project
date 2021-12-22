@@ -74,7 +74,7 @@
  		update member set 		
  			MEMBER_PASSWORD = #{memberPassword}
 		where member_id=#{memberId}
- 	</update>
+ 		</update>
 	<select id="searchId" parameterType="m" resultType="m">
 		select
 			member_id as memberId	
@@ -162,7 +162,9 @@
 	<delete id="deleteMember" parameterType="m">
 		delete from member where member_no=#{memberNo}
 	</delete>
-	 <update id="updatePassword" parameterType="m">
- 		update member set member_password=#{memberPassword} where member_id=#{memberId}
- 	</update>
+		<update id="updatePassword" parameterType="m">
+ 		update member set 		
+ 			MEMBER_PASSWORD = #{memberPassword}
+		where member_id=#{memberId}
+ 		</update>
 </mapper>

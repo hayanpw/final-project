@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @font-face {
   font-family: "NotoSansKR";
   src: local("NotoSansKR"), url(/resources/font/NotoSansKR-Regular.otf);
@@ -11,24 +12,37 @@
   src: url(/resources/font/DMSerifDisplay-Regular.ttf);
 }
 
-body{
-    display: flex;
-    flex-direction: column;
-    min-height: 200vh;
-    font-family: "NotoSansKR";
-  	color:black;
+.header-title{
+	position: absolute;
+    height: 90px;
+    width: 100%;
+    z-index:4;
+    background: rgba(0,0,0,.3);
+    background: -moz-linear-gradient(top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0) 100%);
+    background: -webkit-linear-gradient(top, rgba(0,0,0,0.3) 0%,rgba(0,0,0,0) 100%);
+    background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%,rgba(0,0,0,0) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#00000000',GradientType=0 );
 }
 .container{
     width: 1170px;
     margin: 0 auto;
 }
-.header-title{
-    background-color: #fff;
+body{
+    display: flex;
+    flex-direction: column;
+    font-family: "NotoSansKR";
+  	color:black;
+}
+.header-title img{
+    height: 300px;
+    overflow: hidden;
+    
+
 }
 .h-left{
-    width: 20%;
+    width: 70%;
     float: left;
-    height: 90px;
+    height: 51px;
 }
 .search-img {
     width: auto;
@@ -37,36 +51,37 @@ body{
     max-height: 50px;
 }
 .h-logo{
-    width: 60%;
+    width: 20%;
     text-align: center;
-    background-color: #fff;
     float: left;
     height: 90px;
+    z-index:5;
 }
 .h-logo>a{
 	text-decoration: none;
 	font-family: d_r; 
     font-size:50px;
-    color:#041C32; 
+    color:#041C32;
+    text-shadow: 2px 2px 2px gray;
 }
 .h-logo>a:hover{
 	text-decoration: none;
 	font-family: d_r; 
     font-size:50px;
-    color:#041C32; 
+    color:#fff;
 }
 .h-right{
-    width: 20%;
+    width: 10%;
     float: left;
 	height: 90px;
 }
 .h-right>a{
 	text-decoration: none;
-    color:#563D39;
+    color:#fff;
 }
 .h-right>a:hover {
     text-decoration: none;
-    color:#041C32; 
+    color:#BDB19A;
 }
 
 .container{
@@ -94,11 +109,12 @@ body{
 }
 
 .f-container {
-  float: left;
-  width: 80%;
+	position: relative;
+    margin: 0 auto;
+    width: 80%;
 }
 .f-con{
-  font-family: d_i; 
+  font-family: d_r; 
   margin: 50px 0px 0px 180px;
   float: left;
 }
@@ -106,23 +122,26 @@ body{
 
 /*navi 진행중*/
 
+    /*navi 진행중*/
+
 .navi{
+	margin-top:10px;
     position: relative;
-    z-index: 2;
 }
 .navi ul{
+	font-size:13px;
     list-style-type: none;
-    text-shadow: 1px 1px 1px gray;
     padding: 0;
     margin: 0 auto;
-    height: 60px;
+    height: 70px;
     width: 100%;
     font-weight: 500;
     color:rgba(86, 61, 57, 0.7);
+    text-shadow: 2px 2px 2px gray;
     /*padding: 0 px 500px;*/
-    
 }
 .navi>ul{
+	font-size:15px;
     position: relative;
     display:flex;
     justify-content:center;
@@ -140,7 +159,7 @@ body{
     text-decoration: none;
 }
 .navi>ul>li>a{
-    color : #041C32;  
+    color : #fff;  
 }
 /* .navi>ul>li:hover>a{
     font-weight: 900;
@@ -154,13 +173,13 @@ body{
     position: absolute;
     text-align: center;
     content: '';
-    border-bottom: solid 2px #fff; 
+    border-bottom: solid 2px #fff;
     width: 150px;
     transform: scaleX(0);  
     transition: transform 250ms ease-in-out;
 }
 .navi ul>li>a:first-child:hover:after { 
-	font-weight: 900;
+	font-weight: bold;
     transform: scaleX(1); 
 }
 .navi>ul>li:hover>.sub{
@@ -169,14 +188,62 @@ body{
 }
 .sub>li>a:hover{
     color:#fff;
+    text-style:bold;
 }
 .sub{
-	background-color: #041C32; 
     display: none;
     position: absolute;
     left:0;
-    top:51px;
+        background-color: rgba(0,0,0,0.4);
+	
 }
 .sub>li {
 	float: left;
+}
+
+.headerText{
+  display: inline-block;
+  text-decoration: none;
+  font-family: d_r; 
+  font-size:50px;
+  width: 100%;
+  color: #fff;
+  text-align: center;
+  margin: 0 auto;
+  animation: fadein 2s;
+  -moz-animation: fadein 2s; /* Firefox */
+  -webkit-animation: fadein 2s; /* Safari and Chrome */
+  -o-animation: fadein 2s; /* Opera */
+}
+@keyframes fadein {
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-moz-keyframes fadein { /* Firefox */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-webkit-keyframes fadein { /* Safari and Chrome */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-o-keyframes fadein { /* Opera */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity: 1;
+    }
 }
