@@ -16,6 +16,7 @@ import kr.or.member.vo.DeleteMember;
 import kr.or.member.vo.Member;
 import kr.or.member.vo.MemberPage;
 import kr.or.reading.model.service.ReadingService;
+import show.service.ShowService;
 
 @Controller
 public class MemberController {
@@ -26,6 +27,8 @@ public class MemberController {
 	private SendMail sendMailservice;
 	@Autowired
 	private ReadingService readingservice;
+	@Autowired
+	private ShowService showservice;
 	
 	public MemberController() {
 		super();
@@ -222,9 +225,7 @@ public class MemberController {
 	@ResponseBody
 	public int deletmShow(int reserveNo, Model model) {
 		System.out.println(reserveNo);
-		// int result = showService.reservCancel(reservNo);
-		// int result = 0;
-		int result = 1;
+		int result = showservice.deleteReserv(reserveNo);
 		return result;
 	}
 
