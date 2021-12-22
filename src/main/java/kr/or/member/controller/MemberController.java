@@ -15,6 +15,7 @@ import kr.or.member.service.SendMail;
 import kr.or.member.vo.DeleteMember;
 import kr.or.member.vo.Member;
 import kr.or.member.vo.MemberPage;
+import kr.or.reading.model.service.ReadingService;
 
 @Controller
 public class MemberController {
@@ -23,6 +24,8 @@ public class MemberController {
 	private MemberService service;
 	@Autowired
 	private SendMail sendMailservice;
+	@Autowired
+	private ReadingService readingservice;
 	
 	public MemberController() {
 		super();
@@ -236,8 +239,7 @@ public class MemberController {
 	@RequestMapping(value = "/deletemRead.do")
 	@ResponseBody
 	public int deletemRead(int reserveNo, Model model) {
-		System.out.println(reserveNo);
-		int result = 1;
+		int result = readingservice.deleteRead(reserveNo);
 		return result;
 	}
 
