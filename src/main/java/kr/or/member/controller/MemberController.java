@@ -280,8 +280,7 @@ public class MemberController {
 		}else {
 			model.addAttribute("msg","정보변경 실패");
 		}
-		model.addAttribute("loc","/");
-		return "common/msg";
+		return "member/mypage";
 	}
 	
 }
