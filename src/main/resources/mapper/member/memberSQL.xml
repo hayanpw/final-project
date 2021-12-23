@@ -167,4 +167,10 @@
  			MEMBER_PASSWORD = #{memberPassword}
 		where member_id=#{memberId}
  		</update>
+ 		<select id="selectMemberEmail" parameterType="_int" resultType="string">
+		select
+			member_email as memberEmail
+		from member
+		where member_no = #{memberNo}	
+	</select>
 </mapper>

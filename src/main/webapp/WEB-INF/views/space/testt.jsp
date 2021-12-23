@@ -22,7 +22,7 @@
 			<th>인원</th>
 			<th>가격</th>
 			<th>상태</th>
-			<th>리뷰</th>
+			<th>리뷰/예매</th>
 			<th>체크리스트 작성 여부 <img id="q-img"
 				src="resources/spaceImage/ask.png" style="width: 20px;"></th>
 		</tr>
@@ -41,27 +41,27 @@
 				<c:if test="${l.rentalStatus eq 2 }">
 					<td>확정</td>
 				</c:if>
-				<td><c:choose>
-						<c:when test="${l.srNo eq 0 && l.rentalDate<today|| l.delYn eq 'Y'  }">
+				<td>
+							<c:choose>
+								<c:when test="${l.srNo eq 0 && l.rentalDate<today|| l.delYn eq 'Y'  }">
 									<button class="writeBtn" type="button"
 									class="btn btn-info btn-lg" data-toggle="modal"
 									data-target="#myModal">리뷰 작성</button>
 									<input type="hidden" id="rentalNo" value="${l.rentalNo }">
 								</c:when>
 								<c:when test="${ l.rentalDate>today  }">
-									리뷰 작성 기간이 아닙니다.
+									<button type="button" onclick="location.href='/deleteRes.do?rentalNo=${l.rentalNo}'">예약 취소</button>
 								</c:when>
-						<c:otherwise>
-							<button class="updateBtn" type="button"
-								class="btn btn-info btn-lg" data-toggle="modal"
-								data-target="#rModal">리뷰 수정</button>
+								<c:otherwise>
+									<button  class="updateBtn" type="button" class="btn btn-info btn-lg" data-toggle="modal"
+							data-target="#rModal">리뷰 수정</button>
 							<input type="hidden" id="rentalNo" value="${l.rentalNo }">
-							<div class="d-review">
-								<img src="resources/spaceImage/x.png"
-									style="width: 20px; opacity: 0.8;">
-							</div>
-						</c:otherwise>
-					</c:choose></td>
+								<div class="d-review">
+										<img   src="resources/spaceImage/x.png" style="width: 20px; opacity: 0.8;">
+									</div>
+								</c:otherwise>
+							</c:choose>							
+						</td>
 				<td><c:choose>
 						<c:when test="${l.usedBoard eq 1 }">
 									작성완료

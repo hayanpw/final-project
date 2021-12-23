@@ -126,7 +126,7 @@ public class SpaceService {
 		//페이지숫자
 		for(int i=0; i<pageNaviSize; i++) {
 			if(pageNo == reqPage) {
-				pageNavi += "<li class='active'>";
+				pageNavi += "<li id='click-page' class='active'>";
 				pageNavi += "<a href='/spaceAdmin.do?reqPage="+pageNo+"'>";
 				pageNavi += pageNo+"</a></li>";
 			}else {
@@ -185,6 +185,8 @@ public class SpaceService {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("start", start);
 		map.put("end", end);
+		System.out.println(start);
+		System.out.println(end);
 		ArrayList<UseBoard> list = dao.selectUseBoardList(map);
 		int totalCount = dao.selectTotalCount();
 		int totalPage = 0;
@@ -231,6 +233,7 @@ public class SpaceService {
 		page.setList(list);
 		page.setPageNavi(pageNavi);
 		page.setStart(start);
+		System.out.println("서비스 : "+list);
 		return page;
 	}
 	//게시판 작성할 대관
@@ -430,5 +433,17 @@ public class SpaceService {
 	//삭제 된 블랙리스트
 	public ArrayList<Black> selectDelBlack() {
 		return dao.selectDelBlack();
+	}
+	//삭제 안된 공간 조회
+	public ArrayList<Space> selectNoDelSpace() {
+		return dao.selectNoDelSpace();
+	}
+	//공간 복구
+	public int spaceRestore(int spaceNo) {
+		return dao.spaceRestore(spaceNo);
+	}
+	//공간 완전 삭제
+	public int realDeleteSpace(int spaceNo) {
+		return dao.realDeleteSpace(spaceNo);
 	}
 }

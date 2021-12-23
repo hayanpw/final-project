@@ -11,4 +11,5 @@ public class Space {
 	private String mainProduct;
 	private int maxPeople;
 	private int price;
+	private String filename;
 }

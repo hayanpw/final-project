@@ -6,45 +6,67 @@
 }
 .login-title span{
 	padding-top : 3px;
-	border-top : 5px solid #BDB19A;
+	border-top : 5px solid #064663;
 }
 .login-box{
     width: 400px;
-    height:300px;
+    height:400px;
     margin: 0 auto;
+    border-radius: 2em;
+   	border: solid 2px  #064663;
+   
 }
 input{
     border-style:none;
     border-bottom:solid 1px #cacaca;
     border-collapse:collapse;
+
 }
 input:focus {
+	background-color: rgba(231, 155, 54, 0.14);
     outline: none;
     padding-bottom : 5px;
-	border-bottom : 2px solid #BDB19A;
-    box-shadow: 0 1px 0 0 #563D39;
+/*     border-radius: 10px 10px 0 0; */
+	border-bottom : 2px solid #e79b36;
+/*     box-shadow: 0 1px 0 0 #e79b36; */
 }
 fieldset {
     border-style:none;
 }
-.searchidpw{
-    text-decoration: none;
-    color:#BDB19A;
-}
-.searchidpw:hover{
-	border-style:none;
-    color:#563D39;
+.idbox{
+	padding-top:50px;
+	text-align:center;
+    min-width: 0;
+    padding-top: 25px;
+    margin: 50px;
+    border: 0;
 }
 .intputBtn{
-	background-color: #BDB19A;
+	background-color: #064663;
 	color:#fff;
-	margin-top: 15px;
+	margin-top: 20px;
+}
+.loginbtn {
+	border:none;
+	font-size:14px;
+    text-decoration: none;
+    display: inline-block;
+    width: 80%;
+    background-color: #064663;
+	color:#fff;
+	margin-top: 10px;
+	padding:7px;
+	border-radius: 15px;
+}
+.loginbtn:hover {
+    background-color: #e79b36;
+    color: #fff;
 }
 input [type=submit] {
-    width: 70px;
-    height: 30px;
+	color:#064663;
+    width: 80px;
+    height: auto;
     background-color:#fff;
-    color:#BDB19A;
     border: solid 1px #BDB19A;
 }
 input [type=submit]:hover{
@@ -55,9 +77,36 @@ input [type=submit]:hover{
     width: 40px;
     float: left;
 }
+
 .modal-body>div{
 	display: none;
 }
 .modal-body>div:first-child{
 	display: block;
+}
+.joinbtn{
+	float:right;
+	border:none;
+	font-size:15px;
+    text-decoration: none;
+	color:#064663;
+	padding:7px;
+	border-radius: 15px;
+	margin: 0px 80px;
+    font-weight: 800;
+}
+
+a:hover{
+	text-decoration: none;
+}
+.findbtn{
+	border:none;
+	font-size:14px;
+    text-decoration: none;
+    display: inline-block;
+    background-color: #064663;
+	color:#fff;
+	margin-top: 10px;
+	padding:7px;
+	border-radius: 15px;
 }

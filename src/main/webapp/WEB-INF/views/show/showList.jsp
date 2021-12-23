@@ -18,7 +18,7 @@
         </div>
         <div class="showList">
         	<c:forEach items="${list }" var="s">
-	            <a href="/showView.do?showNo=${s.showNo }" class="showInfo">
+	            <div class="showInfo">
 	                <div>
 		                <img src="${s.filepath }" class="poster">
 		                <h2>${s.showName }</h2>
@@ -27,7 +27,10 @@
 		                <h4>${s.showHall }</h4>
 		                <p>${s.showStart } ~ ${s.showEnd }</p>
 	                </div>
-	            </a>        	
+	                <div class="sModal">
+                    	<a href="/showView.do?showNo=${s.showNo }">상세</a>
+                	</div>
+	            </div>        	
         	</c:forEach>
         </div>
     </div>

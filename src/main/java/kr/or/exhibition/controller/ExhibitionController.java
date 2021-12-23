@@ -21,14 +21,20 @@ import com.google.gson.Gson;
 
 import kr.or.academy.vo.Academy;
 import kr.or.exhibition.service.ExhibitionService;
+import kr.or.exhibition.service.TicketMailSend;
 import kr.or.exhibition.vo.Exhibition;
 import kr.or.exhibition.vo.ExhibitionPayment;
+import kr.or.exhibition.vo.ExhibitionPaymentMypage;
 import kr.or.exhibition.vo.ExhibitionReview;
+import kr.or.space.model.service.MailSend;
+import kr.or.space.model.vo.SpacePageNavi;
 
 @Controller
 public class ExhibitionController {
 	@Autowired
 	private ExhibitionService service;
+	@Autowired
+	private TicketMailSend ticketMailService;
 	//전시등록 폼
 	@RequestMapping(value="/exhibitionFrm.do")
 	public String exhibitionFrm() {
@@ -295,6 +301,31 @@ public class ExhibitionController {
 		}
 		model.addAttribute("loc", "/exhibitionMypage.do?memberNo="+memberNo);
 		return "common/msg";
+	}
+	@RequestMapping(value="/sendEmailTicket.do")
+	public String sendEmailTicket(int memberNo, int paymentNo,Model model) {
+		ExhibitionPaymentMypage expm = service.selectOneExhibitionPayment(paymentNo);
+		String memberEmail = service.selectEmail(memberNo);
+		String result = ticketMailService.mailSend(expm);
+		if(result.equals("ok")) {
+			int result1 = service.updateEmailStatus(paymentNo);
+			if (result1 > 0) {
+				HashMap<String, Object> map = service.selectExhibitionPaymentList(memberNo);
+				model.addAttribute("list",map.get("list"));
+				model.addAttribute("last",map.get("last"));
+				model.addAttribute("totalCount",map.get("totalCount"));
+				return "exhibition/exhibitionMypage";
+			} else {
+				model.addAttribute("msg", "메일 발송에 실패하였습니다.");
+				model.addAttribute("loc", "/exhibitionMypage.do?memberNo"+memberNo);
+				return "common/msg";
+			}
+		}else {
+			model.addAttribute("msg", "메일 발송에 실패하였습니다.");
+			model.addAttribute("loc", "/exhibitionMypage.do?memberNo"+memberNo);
+			return "common/msg";
+		}
+		
 	}
 		
 }

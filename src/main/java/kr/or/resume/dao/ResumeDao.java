@@ -59,4 +59,9 @@ public class ResumeDao {
 		int result = sqlSession.update("resume.deleteRequrit",requritNo);
 		return result;
 	}
+
+	public ArrayList<Resume> selectMyResumeList(int memberNo) {
+		List<Resume> list = sqlSession.selectList("resume.selectMyResumeList",memberNo);
+		return (ArrayList<Resume>)list;
+	}
 }

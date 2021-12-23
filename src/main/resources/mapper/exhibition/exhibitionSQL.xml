@@ -175,4 +175,27 @@
 	<delete id="realDelete" parameterType="_int">
 		delete from payment where payment_no = #{reserveNo}
 	</delete>
+	<update id="updateEmailStatus" parameterType="_int">
+		update payment set check_email = 1 where payment_no = #{paymentNo}
+	</update>
+	<select id="selectOneExhibitionPayment" parameterType="_int" resultType="exbpm">
+		select 
+			payment_no as paymentNo,
+			payment_select as paymenySelect,
+			academy_no as academyNo,
+			exhibition_no as exhibitionNo,
+			payment_price as paymentPrice,
+			payment_date as paymentDate,
+			payment_cancel as paymentCancel,
+			payment_quantity as paymentQuantity,
+			book_date as bookDate,
+			member_no as memberNo,
+			check_email as checkEmail,
+			exhibition_title as exhibitionTitle,
+            exhibition_start as exhibitionStart,
+            exhibition_end as exhibitionEnd,
+            exhibition_time_start as exhibitionTimeStart,
+            exhibition_time_end as exhibitionTimeEnd
+		from payment join exhibition using(exhibition_no) where payment_no=#{paymentNo} and payment_select = 1
+	</select>
 </mapper>

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import kr.or.exhibition.vo.Exhibition;
 import kr.or.exhibition.vo.ExhibitionPagingVo;
 import kr.or.exhibition.vo.ExhibitionPayment;
+import kr.or.exhibition.vo.ExhibitionPaymentMypage;
 import kr.or.exhibition.vo.ExhibitionReview;
 
 @Repository
@@ -112,5 +113,20 @@ public class ExhibitionDao {
 	public int realDelete(int reserveNo) {
 		int result = sqlSession.delete("exhibition.realDelete",reserveNo);
 		return result;
+	}
+
+	public String selectEmail(int memberNo) {
+		String memberEmail = sqlSession.selectOne("member.selectMemberEmail",memberNo);
+		return memberEmail;
+	}
+
+	public int updateEmailStatus(int paymentNo) {
+		int result1 = sqlSession.update("exhibition.updateEmailStatus",paymentNo);
+		return result1;
+	}
+
+	public ExhibitionPaymentMypage selectOneExhibitionPayment(int paymentNo) {
+		ExhibitionPaymentMypage expm = sqlSession.selectOne("exhibition.selectOneExhibitionPayment",paymentNo);
+		return expm;
 	}
 }

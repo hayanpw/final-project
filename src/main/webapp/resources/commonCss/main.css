@@ -47,9 +47,10 @@ body{
         overflow: hidden;
       }
       .cover{
+      		border:solid 1px #000;
             position :absolute;
             margin: auto;
-            width: auto;
+            width: 100%;
             height: 100%;
             background-color: rgba(0,0,0,0.4);
             transition-duration: 0.5s;
@@ -61,25 +62,23 @@ body{
       }
       /*cover 안에있는 내용*/
       .cover-content{
-            padding: 50px 10px;
-            font-size: 14px;
+      		padding: 70px 30px;
+            font-size: 16px;
             color:#fff;
         }
         .reserve-button{
             margin: auto;
-            height: 40px;
-            width: 90px;
-            margin-top: 10px;
+            height: 50px;
+            width: 50px;
+            border-radius:50%;
             font-weight: bold;
-            color:#fff;
-            background-color:#041C32; 
+            color:#041C32;
+            background-color:#fff; 
+            text-align:center;
         }
         .reserve-button:hover{
-            margin: auto;
-            height: 40px;
-            width: 90px;
-            margin-top: 10px;
-            transform:  scale(1.1);
+            background-color:#041C32; 
+            color:#fff;
         }
       /*1번슬라이드*/
       .carousel-inner{
@@ -109,12 +108,12 @@ body{
         display: flex;
         padding-top: 100px;
         top:50px;
-        width: 1170px;
+        width: 100%;
         height: 500px;
         margin: 0 auto;
     }
     .m-menu img{
-        width: auto;
+        width: 100%;
         height: 100%;
         max-height:500px ;
     }
@@ -163,7 +162,7 @@ body{
     .sf img{
     	margin: 0 auto;
         height: 700px;
-        width: auto;
+        width: 100%;
         z-index:3;
     }
     .slick-dots{
@@ -283,7 +282,7 @@ body{
         text-align: center;
     }
         h2.tit{
-            letter-spacing: -2px;
+            font-family: "d_r";
             font-weight: bold;
             line-height: 1.5em;
         }
@@ -312,9 +311,3 @@ body{
                 height: 17px; 
                 vertical-align: middle;
             }
-    .popup     label {
-                text-shadow: 2px 2px 2px #041C32;
-                color:#ffffff;
-                vertical-align: middle;
-                font-size: 7px;
-                }

@@ -57,8 +57,8 @@
 			location.href ="/deleteRequritList.do?reqPage=1";
 		});
 		$("#myRequritList").click(function(){
-			var memberNo = $(this).attr("memberNo").val(); 
-			location.href ="/myRequritList.do?memberNo="+memberNo;
+			var memberNo = $(this).attr("memberNo");
+			location.href ="/myResumeList.do?memberNo="+memberNo;
 		});
 	</script>
 </body>

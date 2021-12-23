@@ -23,7 +23,7 @@
   <div class="popup">
         <div id="popup">
             <header class="top"> 
-                <h1 class="infoTit">소개</h1> 
+<!--                 <h1 class="infoTit">소개</h1>  -->
             </header>
             <main class="textBox">
                 <h2 class="tit">Musée d'art</h2>
@@ -41,11 +41,72 @@
         <footer class="btnBox_todayClose">
             <form method="post" action="" name="pop_form">
                 <span id="check">
-                    <a href="javascript:void(0)" id="cp">닫기</a>
+                    <a href="javascript:void(0)" id="cp" style="color:#fff">닫기</a>
                 </span>
             </form>
         </footer>
     </div>
+    
+    <div class="container" style="width: 100%; height: 100vh;">
+		<div class="quick">
+			<div class="imgb" >
+				<div class="pop-content">
+				<div class="pop-title">
+					<p>내려온다아아아<br>
+					</p>
+					<h1>무지다 문화센터</h1>
+				</div>
+				<div class="pop-table">
+					<div class="pop-con">
+						<p>아니이거세로로나와?</p>
+					</div>
+					<div class="pop-con">
+						
+					</div>
+					<div class="pop-con">
+						
+					</div>
+					<div class="pop-con">
+						
+					</div>
+				</div>
+				</div>	
+				<button class="btn-quick close">Close</button>
+			</div>
+		</div>
+	</div>
+	
+	<script>
+		var size = "";
+		$(window).resize(function(){
+	      var m_w = $(window).width();
+	      var q_w = $(".quick").outerWidth();
+	      if ( m_w > 1350 ) {
+  	  			size = -q_w
+					//$(".main_quick").css("right",size)
+				//$(".main_quick").delay(8000).animate({"right":-q_w},800)
+	      }else {
+	    	  $(".btn-quick").removeClass("close").addClass("open").text("Open")
+				size = -q_w
+				$(".quick").css("right",-q_w)
+	      }
+	  	}).resize();
+
+		  $(".btn-quick").click(function(){
+			if($(this).hasClass('open')){
+				$(".quick").animate({"right":0},300);
+				//$(".quick").delay(300).stop().fadeIn(300)
+				
+	          $(this).removeClass('open').addClass('close').text('Close');
+	        }else{
+				$(".quick").animate({"right": -650},300);
+				 //$(".quick").delay(300).stop().fadeOut(300)
+				 $(this).show();
+	          $(this).removeClass('close').addClass('open').text('Open');
+
+	        }
+		})
+	</script>
      <!-- <div class="container" style="width: 100%;"> -->
         <div class="slider-for d1">
             <div class="sf"><img src="/resources/mainImage/upload/m-main1.jpg"></div>
@@ -168,11 +229,6 @@
               <div class="cover-content">
                   <h5>호두까기 인형</h5>
                   <hr>
-                  <p>크리스마스 이브 , 마리의 집에서 크리스마스 파티가 열리고 마리의 대부
-                      드로셀마이어가 마리에게 호두까기 인형을 선물합니다. 
-                      호두까지 인형을 품에 안고 잠이 든 마리,
-                      꿈속에서 거실의 트리가 켜지고,  각나라의 ...
-                  </p>
                   <button class="reserve-button">예매</button>
               </div>
           </div>
@@ -182,11 +238,6 @@
               <div class="cover-content">
                   <h5>프랑켄슈타인</h5>
                   <hr>
-                  <p>크리스마스 이브 , 마리의 집에서 크리스마스 파티가 열리고 마리의 대부
-                      드로셀마이어가 마리에게 호두까기 인형을 선물합니다. 
-                      호두까지 인형을 품에 안고 잠이 든 마리,
-                      꿈속에서 거실의 트리가 켜지고,  각나라의 ...
-                  </p>
                   <button class="reserve-button">예매</button>
               </div>
             </div>
@@ -196,11 +247,6 @@
                 <div class="cover-content">
                     <h5>라이언킹</h5>
                     <hr>
-                    <p>크리스마스 이브 , 마리의 집에서 크리스마스 파티가 열리고 마리의 대부
-                        드로셀마이어가 마리에게 호두까기 인형을 선물합니다. 
-                        호두까지 인형을 품에 안고 잠이 든 마리,
-                        꿈속에서 거실의 트리가 켜지고,  각나라의 ...
-                    </p>
                     <button class="reserve-button">예매</button>
                 </div>
               </div>
@@ -214,11 +260,6 @@
                 <div class="cover-content">
                     <h5>지킬앤하이드</h5>
                     <hr>
-                    <p>크리스마스 이브 , 마리의 집에서 크리스마스 파티가 열리고 마리의 대부
-                        드로셀마이어가 마리에게 호두까기 인형을 선물합니다. 
-                        호두까지 인형을 품에 안고 잠이 든 마리,
-                        꿈속에서 거실의 트리가 켜지고,  각나라의 ...
-                    </p>
                     <button class="reserve-button">예매</button>
                 </div>
               </div>
@@ -228,11 +269,6 @@
                 <div class="cover-content">
                     <h5>드루피와함께 춤을</h5>
                     <hr>
-                    <p>크리스마스 이브 , 마리의 집에서 크리스마스 파티가 열리고 마리의 대부
-                        드로셀마이어가 마리에게 호두까기 인형을 선물합니다. 
-                        호두까지 인형을 품에 안고 잠이 든 마리,
-                        꿈속에서 거실의 트리가 켜지고,  각나라의 ...
-                    </p>
                     <button class="reserve-button">예매</button>
                 </div>
               </div>
@@ -383,4 +419,89 @@
 </script>
     	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
+
+<style>
+.quick {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 650px;
+    height: 700px;
+    z-index: 5;
+}
+.btn-quick{
+    z-index: 4;
+	border: rgb(11,11,51);
+	width: 100px;
+    height: 100px;
+    top: 42%;
+	position: absolute;
+    left: -55px;
+	font-size: 15px;
+    border-radius: 50%;
+    text-align: left;
+    padding-left: 15px;
+	background-color:rgb(11,11,51);
+    color: #fff;
+}
+.imgb{
+    background-image: url("/resources/mainImage/upload/m-gifimage.gif");
+	width: auto;
+	height: 100%;
+    overflow-y: auto;
+	background-size: cover;
+}
+.pop-content{
+	display: flex;
+	padding-left:50px;
+	padding-top:70px;
+}
+.pop-title{
+	letter-spacing: 0.4em;
+	margin:0;
+	font-size: 20px;
+	font-style: bold;
+	color: #fff;
+	writing-mode: tb-rl;
+	animation: fadeInDown 1.5s;
+}
+@keyframes fadeInDown {
+        0% {
+            opacity: 0;
+            transform: translate3d(0, -100%, 0);
+        }
+        to {
+            opacity: 1;
+            transform: translateZ(0);
+        }
+    }
+@keyframes fade {
+        0% {
+            opacity: 0;
+            transform: translate3d(0);
+        }
+        to {
+            opacity: 1;
+            transform: translateZ(0);
+        }
+    }
+	.pop-table{
+		writing-mode: tb-rl;
+		animation: fade 2s;
+		margin-top: -20px;
+		margin-left: 280px;
+		position: absolute;
+		width: 250px;
+		height: 250px;
+	}
+	.pop-con{
+		float: left;
+		border: solid 1px rgb(255,255,255,.3);
+		width: 120px;
+		height: 120px;
+	}
+	.icon{
+		margin:auto;
+	}
+</style>
 </html>
