@@ -26,9 +26,8 @@
 }
 .showInfo>div>h2{
     color: #000000;
-}
-.showInfo>div>h2{
     text-align: center;
+    font-size: 22px;
 }
 .showInfo>div>h4,p{
     text-align: left;
@@ -43,6 +42,7 @@
 }
 .showInfo>div>h4{
 	color: #000;
+	font-size: 16px;
 }
 .showSearchBox{
 	margin-top:50px;
