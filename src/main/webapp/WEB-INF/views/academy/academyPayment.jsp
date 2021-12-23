@@ -47,7 +47,7 @@
 <script>
 	$("#credit").click(function(){
 		var paymentPrice = Number($("#paymentPrice").val()); 
-		paymentPrice = 10;
+		paymentPrice = 100;
 		var academyNo = Number($("#academyNo").val());
 		var memberNo = Number($("#memberNo").val());
 		var paymentSelect = Number($("#paymentSelect").val()); // 전시결제는 1 , 강좌결제는 2

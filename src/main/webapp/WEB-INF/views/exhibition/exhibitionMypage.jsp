@@ -58,17 +58,17 @@
 						<td>${exm.paymentQuantity }명</td>
 						<td>${exm.paymentPrice }원</td>
 						<c:choose>
-						<c:when test="${exm.paymentCancel eq 0 }">
-							<td><button class="writeBtn cancelPayment" type="button" paymentNo="${exm.paymentNo }" memberNo="${sessionScope.m.memberNo }">취소하기</button></td>
-							<c:if test="${exm.checkEmail  eq 0 }">
-							<td><button class="writeBtn" type="button" id="emailSend" memberNo="${sessionScope.m.memberNo }" paymentNo="${exm.paymentNo }">이메일 발권</button></td>
+						<c:when test="${exm.checkEmail  eq 0 }">
+							<c:if test="${exm.paymentCancel eq 0 }">
+								<td><button class="writeBtn cancelPayment" type="button" paymentNo="${exm.paymentNo }" memberNo="${sessionScope.m.memberNo }">취소하기</button></td>
+								<td><button class="writeBtn" type="button" id="emailSend" memberNo="${sessionScope.m.memberNo }" paymentNo="${exm.paymentNo }">이메일 발권</button></td>
 							</c:if>
-							<c:if test="${exm.checkEmail  eq 1 }">
-							<td>발권 되었습니다</td>
+							<c:if test="${exm.paymentCancel eq 1 }">
+								<td colspan="2">취소되었습니다</td>
 							</c:if>
 						</c:when>
-						<c:when test="${exm.paymentCancel eq 1 }">
-							<td colspan="2">취소되었습니다</td>
+						<c:when test="${exm.checkEmail eq 1 }">
+							<td colspan="2">티켓이 발권되었습니다.</td>
 						</c:when>
 						</c:choose>
 					</tr>
