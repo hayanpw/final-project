@@ -191,8 +191,8 @@
 						<tbody>
 							<c:forEach items="${commentList }" var="b" varStatus="i">
 								<tr>
-									<td><input type="checkbox"></td>
-									<td>${i.count }</td>
+									<td><input type="checkbox" class="chkc"></td>
+									<td><input type="hidden" value="${b.bcNo }">${i.count }</td>
 									<td>${b.bcContent }</td>
 									<td id="btitle"><a href="/boardView.do?boardType=${b.boardType }&boardNo=${b.boardRef }">${b.boardTitle }</a></td>
 									<td>${b.regDate }</td>
@@ -200,7 +200,7 @@
 							</c:forEach>
 						</tbody>
 					</table>
-					<button id="btnColor" class="btn btn-danger">댓글삭제</button>
+					<button id="btnColor" class="btn btn-danger chkDeleteCmt">댓글삭제</button>
 					</div>
 		</div>
 	<script type="text/javascript">
@@ -358,6 +358,19 @@
 			inputs.each(function(idx,item){
 				var boardNo = $(item).parent().next().children().val();
 				num.push(boardNo);
+			});
+			if(!inputs.length){
+				alert("삭제할 글을 선택해 주세요");
+			}else{
+			location.href="/boardDelete.do?boardNo=0&boardType=4&num="+num.join("/");
+			}
+		});
+	 $(".chkDeleteCmt").click(function(){
+			var inputs=$(".chkc:checked");
+			var num = new Array(); 
+			inputs.each(function(idx,item){
+				var bcNo = $(item).parent().next().children().val();
+				num.push(bcNo);
 			});
 			if(!inputs.length){
 				alert("삭제할 글을 선택해 주세요");

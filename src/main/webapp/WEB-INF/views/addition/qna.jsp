@@ -137,14 +137,21 @@
 	  padding: 18px;
 	  width: 100%;
 	  text-align: left;
-	  border: 1px solid black;
+	  border:0;
+	  border-left:1px solid black;
+	  border-right:1px solid black;
+	  border-top:1px solid black;
 	  outline: none;
-	  transition: 0.4s;
+	  transition:border-bottom 0.3s, color 0.6s;
 	}
 	
 	/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
 	.active, .accordion:hover {
 	  background-color: #fff;
+	  
+	}
+	.active{
+	border-bottom:1px solid black;
 	}
 	
 	/* Style the accordion panel. Note: hidden by default */
@@ -159,7 +166,8 @@
 	#panel{
 	 border-radius: 0;
 	 margin-bottom: 0px;
-	 border: none;
+	 border-left:1px solid black;
+	 border-right:1px solid black;
 	}
 	#titlemenu>li>a{
 	border-radius: 0;
@@ -167,6 +175,7 @@
 	border-left:1px solid black;
 	color: black;
 	}
+	
 	#titlemenu>li:last-child>a{
 	border-right:1px solid black;
 	}
