@@ -16,7 +16,7 @@
 	position: absolute;
     height: 90px;
     width: 100%;
-    z-index:4;
+    z-index:5;
     background: rgba(0,0,0,.3);
     background: -moz-linear-gradient(top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0) 100%);
     background: -webkit-linear-gradient(top, rgba(0,0,0,0.3) 0%,rgba(0,0,0,0) 100%);
@@ -61,8 +61,7 @@ body{
 	text-decoration: none;
 	font-family: d_r; 
     font-size:50px;
-    color:#041C32;
-    text-shadow: 2px 2px 2px gray;
+    color:#fff;
 }
 .h-logo>a:hover{
 	text-decoration: none;
@@ -74,6 +73,7 @@ body{
     width: 10%;
     float: left;
 	height: 90px;
+	z-index:6;
 }
 .h-right>a{
 	text-decoration: none;

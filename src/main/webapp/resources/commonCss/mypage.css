@@ -24,6 +24,7 @@
 	font-size: 14px;
 }
 .mypage-navi>div>a:hover{
+	transition-duration:1s;
     font-weight: 900;
     background-color:#064663;
     color : #fff;

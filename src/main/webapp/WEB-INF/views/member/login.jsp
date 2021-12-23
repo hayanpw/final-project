@@ -197,12 +197,12 @@
 
 								if (mailCode == null) {
 									$("#authMsg").html("인증 실패");
-									$("#authMsg").css("color", "red");
+									$("#authMsg").css("color", "#e79b36");
 									$("#emailchk").val('2');
 								} else {
 									if ($("#authCode").val() == mailCode) {
 										$("#authMsg").html("인증성공");
-										$("#authMsg").css("color", "blue"); //여기다가 인증추가를 해야함
+										$("#authMsg").css("color", "#e79b36"); //여기다가 인증추가를 해야함
 										$("#emailchk").val('1');
 										clearInterval(intervalId);
 										$("#timeZone").empty();
@@ -210,7 +210,7 @@
 
 									} else {
 										$("#authMsg").html("인증코드를 확인하세요");
-										$("#authMsg").css("color", "red");
+										$("#authMsg").css("color", "#e79b36");
 										$("#emailchk").val('2');
 									}
 								}
@@ -219,7 +219,7 @@
 
 						} else if (data == 0) {
 							$("#ajaxEmailcheck").html("일치하는 이메일이 없습니다");
-							$("#ajaxEmailcheck").css("color", "red");
+							$("#ajaxEmailcheck").css("color", "#e79b36");
 						}
 
 					}
@@ -238,13 +238,13 @@
 			pwCheck = false;
 		} else if (pw != pwRe) {
 			pwChk.innerHTML = "패스워드가 일치하지 않습니다.";
-			pwChk.style.color = "red";
-			obj.style.border = "1px solid red";
+			pwChk.style.color = "#e79b36";
+			obj.style.border = "1px solid #e79b36";
 			pwCheck = false;
 		} else {
 			pwChk.innerHTML = "패스워드가 일치합니다.";
-			pwChk.style.color = "#563D39";
-			obj.style.border = "1px solid #563D39";
+			pwChk.style.color = "#e79b36";
+			obj.style.border = "1px solid #e79b36";
 			pwCheck = true;
 		}
 	}
@@ -257,12 +257,12 @@
 		 
 		if (regExpPw.test(memberPassword)){
 			$('#pwChkRule').html("사용가능한 비밀번호입니다.");
-			$('#pwChkRule').css('color' ,"#1f4787");
+			$('#pwChkRule').css('color' ,"#e79b36");
 			memberPwchk = true;
 			
 		}else{
 			$('#pwChkRule').html("비밀번호는  5~20자 이내 영문,숫자,특수문자로 입력해주세요.");
-			$('#pwChkRule').css('color' ,"red");
+			$('#pwChkRule').css('color' ,"#e79b36");
 			memberPwchk = false;
 		}
 	});
