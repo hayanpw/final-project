@@ -8,6 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <link href="resources/hansolCss/hansol_exhibitionMypage.css" rel="stylesheet">
 </head>
 <body>
@@ -60,7 +61,7 @@
 						<c:when test="${exm.paymentCancel eq 0 }">
 							<td><button class="writeBtn cancelPayment" type="button" paymentNo="${exm.paymentNo }" memberNo="${sessionScope.m.memberNo }">취소하기</button></td>
 							<c:if test="${exm.checkEmail  eq 0 }">
-							<td><button class="writeBtn" type="button" id="emailSend">이메일 발권</button></td>
+							<td><button class="writeBtn" type="button" id="emailSend" memberNo="${sessionScope.m.memberNo }" paymentNo="${exm.paymentNo }">이메일 발권</button></td>
 							</c:if>
 							<c:if test="${exm.checkEmail  eq 1 }">
 							<td>발권 되었습니다</td>
@@ -107,6 +108,25 @@
 		var memberNo = $(this).attr("memberNo");
 		location.href="/deletePayment.do?paymentNo="+paymentNo+"&memberNo="+memberNo;
 	});
+	$("#emailSend").click(function(){
+		var memberNo = $(this).attr("memberNo");
+		var paymentNo = $(this).attr("paymentNo");
+		swal({
+			  title: "이메일 발권",
+			  text: "한번만 발권이 가능 하면 발권시 취소가 불가능 합니다 합니다 발권 하시겠습니까?",
+			  icon: "warning",
+			  buttons: true,
+			  dangerMode: true,
+			})
+			.then((email) => {
+			  if (email) {
+				  location.href="/sendEmailTicket.do?paymentNo="+paymentNo+"&memberNo="+memberNo;
+			  } else {
+			    swal("발권을 취소 하였습니다");
+			  }
+		});
+	});
+	
 	</script>
 </body>
 </html>

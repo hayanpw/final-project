@@ -59,4 +59,10 @@ public class ResumeService {
 		
 	}
 
+	public ArrayList<Resume> selectMyResumeList(int memberNo) {
+		ArrayList<Resume> list = dao.selectMyResumeList(memberNo);
+		return list;
+	
+	}
+
 }

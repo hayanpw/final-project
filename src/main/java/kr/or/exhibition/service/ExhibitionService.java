@@ -11,6 +11,7 @@ import kr.or.exhibition.dao.ExhibitionDao;
 import kr.or.exhibition.vo.Exhibition;
 import kr.or.exhibition.vo.ExhibitionPagingVo;
 import kr.or.exhibition.vo.ExhibitionPayment;
+import kr.or.exhibition.vo.ExhibitionPaymentMypage;
 import kr.or.exhibition.vo.ExhibitionReview;
 
 @Service
@@ -126,5 +127,20 @@ public class ExhibitionService {
 	public int realDelete(int reserveNo) {
 		int result = dao.realDelete(reserveNo); 
 		return result;
+	}
+
+	public String selectEmail(int memberNo) {
+		String memberEmail = dao.selectEmail(memberNo);
+		return memberEmail;
+	}
+
+	public int updateEmailStatus(int paymentNo) {
+		int result1 = dao.updateEmailStatus(paymentNo);
+		return result1;
+	}
+
+	public ExhibitionPaymentMypage selectOneExhibitionPayment(int paymentNo) {
+		ExhibitionPaymentMypage expm = dao.selectOneExhibitionPayment(paymentNo);
+		return expm;
 	}
 }

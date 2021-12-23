@@ -65,4 +65,9 @@ public class RequritDao {
 		int result = sqlSession.update("requrit.revivalRequrit",requritNo);
 		return result;
 	}
+
+	public int deleteResume(int requritNo) {
+		int result = sqlSession.delete("resume.deleteResume",requritNo);
+		return result;
+	}
 }
