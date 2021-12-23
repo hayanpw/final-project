@@ -15,20 +15,16 @@
 		<!-- 로그인  -->
 		<div class="login-box">
 		<form action="/login.do" method="post">
-			<fieldset>
+			<fieldset class="idbox">
 					<label for="memberId" class="reg">ID </label><input type="text" name="memberId"><br><br>
-					<label for="memberPassword" class="reg"> PW </label><input type="password" name="memberPassword"><br><br>
-					<input type="submit" value="login">
-					<a type="text" class="searchidpw" data-toggle="modal" data-target="#sModal">ID · PASSWORD 찾기</a>
+					<label for="memberPassword" class="reg"> Pw </label><input type="password" name="memberPassword"><br><br>
+					<button type="submit" class="loginbtn">Sign up</button>
+					<button type="button" class="loginbtn" data-toggle="modal" data-target="#sModal">Find</button>
 				</fieldset>
 		</form>
-		<hr>
-		<a href="/joinFrm.do">회원가입[임시]</a>
-		<hr>
+		<a href="/joinFrm.do" class="joinbtn" onMouseOver="this.innerHTML='Welcome'" onMouseOut="this.innerHTML='Sign up'" style="text-decoration:none">Sign up</a>
 		
 		<!-- 아이디 비밀번호 찾기 modal -->
-		<div class="login-box" style="width:600px">
-		</div>
 		</div>
 		<div class="modal" id="sModal">
 			<div class="modal-dialog">
