@@ -51,26 +51,27 @@
 			<div class="imgb" >
 				<div class="pop-content">
 				<div class="pop-title">
-					<p>내려온다아아아<br>
+					<p>
+					내려온다아아아<br>
 					</p>
 					<h1>무지다 문화센터</h1>
 				</div>
 				<div class="pop-table">
 					<div class="pop-con">
 						<span class="iconimg"><img src="/resources/mainImage/upload/m-icon1.png"></span>
-						<span class="iconname">2021<br>세종시즌</span>
+						<span class="iconname">2021<br>무지다시즌</span>
 					</div>
 					<div class="pop-con">
 						<span class="iconimg"><img src="/resources/mainImage/upload/m-icon2.png"></span>
-						<span class="iconname">2021<br>세종시즌</span>
+						<span class="iconname">2021<br>무지다시즌</span>
 					</div>
 					<div class="pop-con">
 						<span class="iconimg"><img src="/resources/mainImage/upload/m-icon3.png"></span>
-						<span class="iconname">2021<br>세종시즌</span>
+								<span class="iconname">2021<br>무지다시즌</span>
 					</div>
 					<div class="pop-con">
 						<span class="iconimg"><img src="/resources/mainImage/upload/m-icon4.png"></span>
-						<span class="iconname">2021<br>세종시즌</span>
+						<span class="iconname">2021<br>무지다시즌</span>
 					</div>
 				</div>
 				</div>	
