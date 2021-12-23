@@ -11,7 +11,7 @@
 <style type="text/css">
 	#title{
 	width:165px;
-	border-top: 7px solid #563D39;
+	border-top: 7px solid #064663;
 	margin-top:70px;
 	margin-left:70px;
 	font-weight:700;
@@ -20,7 +20,7 @@
 	}
 	#qnaTitle{
 	width:220px;
-	border-top: 7px solid #563D39;
+	border-top: 7px solid #064663;
 	margin-top:70px;
 	margin-left:70px;
 	font-weight:700;
@@ -29,7 +29,7 @@
 	}
 	#freeTitle{
 	width:205px;
-	border-top: 7px solid #563D39;
+	border-top: 7px solid #064663;
 	margin-top:70px;
 	margin-left:70px;
 	font-weight:700;
@@ -45,6 +45,13 @@
 	#text{
 	border: none;
 	box-shadow: none;
+	}
+	.btnColor{
+	background-color: #064663;
+	color: white;
+	}
+	#btnColor:hover {
+	color: white;
 	}
 </style>
 </head>
@@ -110,7 +117,7 @@
 					</tr>
 					<tr>
 						<td colspan="6">
-							<button type="submit" class="btn btn-block" onclick="return contentChk();">글등록</button>
+							<button type="submit" id="btnColor" class="btn btn-block btnColor" onclick="return contentChk();">글등록</button>
 						</td>
 					</tr>
 				</table>

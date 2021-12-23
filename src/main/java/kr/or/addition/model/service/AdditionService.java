@@ -55,7 +55,7 @@ public class AdditionService {
 				pageNo = reqPage-2;
 			}
 			
-			String pageNavi = "<ul class ='pagination pagination-lg'>";
+			String pageNavi = "<ul id='pagination' class ='pagination pagination-lg'>";
 
 			if(reqPage>=4) {
 				pageNavi += "<li id='pageNum' class='page-item'>";
@@ -260,7 +260,7 @@ public class AdditionService {
 		}
 		
 		
-		String pageNavi = "<ul class ='pagination pagination-lg'>";
+		String pageNavi = "<ul id='pagination' class ='pagination pagination-lg'>";
 
 		if(reqPage>=4) {
 			pageNavi += "<li id='pageNum' class='page-item'>";

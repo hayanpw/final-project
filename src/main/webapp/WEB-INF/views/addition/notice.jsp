@@ -8,16 +8,8 @@
 <title>Insert title here</title>
 <script src="https://kit.fontawesome.com/4054b6ceaa.js" crossorigin="anonymous"></script>
 <style type="text/css">
-	#title{
-	width:165px;
-	border-top: 7px solid #064663;
-	margin-top:70px;
-	margin-left:70px;
-	font-weight:700;
-	font-size: 40px;
-	margin-bottom: 50px;
-	}
 	#table{
+	margin-top:80px;
 	margin-left: 50px;
 	margin-right: 50px;
 	text-align: center;
@@ -110,14 +102,21 @@
     border: none;
     }
     #fix{
-    color: #064663;
+    color: #e79b36;
+    }
+    #pagination>li:first-child>a{
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    }
+    #pagination>li:last-child>a{
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
     }
 </style>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="container" id="container">
-		<div id="title">공지사항</div>
 		<div id="table">
 			<div id="new">새글수 : ${nCount }/${totalCount } </div>
 			<div id="search">

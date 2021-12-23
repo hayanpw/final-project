@@ -18,6 +18,7 @@ import kr.or.member.vo.DeleteMember;
 import kr.or.member.vo.Member;
 import kr.or.member.vo.MemberPage;
 import kr.or.reading.model.service.ReadingService;
+import kr.or.space.model.service.SpaceService;
 import show.service.ShowService;
 
 @Controller
@@ -35,6 +36,8 @@ public class MemberController {
 	private ExhibitionService exhibitionService;
 	@Autowired
 	private AcademyService academyService;
+	@Autowired
+	private SpaceService spaceService;
 	
 	public MemberController() {
 		super();
@@ -239,7 +242,7 @@ public class MemberController {
 	@ResponseBody
 	public int deletmSpace(int reserveNo, Model model) {
 		System.out.println(reserveNo);
-		int result = 1;
+		int result = spaceService.deleteRental(reserveNo);
 		return result;
 	}
 

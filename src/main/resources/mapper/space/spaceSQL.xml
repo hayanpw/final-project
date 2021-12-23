@@ -260,7 +260,7 @@
 		order by rental_date desc
 	</select>
 	<select id="selectUseBoardList" parameterType="map" resultType="kr.or.space.model.vo.UseBoard">
-		  select 
+		 select 
 		 	ub_no as ubNo, 
             space_name as spaceName,
 		 	ub.member_id as memberId, 
@@ -417,11 +417,11 @@
 			price = #{price}
 		where space_no = #{spaceNo}	
 	</update>
-	<update id="deleteSpaceFile" parameterType="fv">
+	<delete id="deleteSpaceFile" parameterType="fv">
 		delete
 			from space_file
 			where space_no = #{spaceNo}	
-	</update>
+	</delete>
 	<update id="updateSpaceTime" parameterType="kr.or.space.model.vo.SpaceTime">
 		update
 			space_time set
@@ -437,9 +437,25 @@
 			main_facility as mainFacility,
 			main_product as mainProduct,
 			max_people as maxPeople,
-			price
+			price,
+			filename
 		from space
-		where del_yn like 'Y' 	
+		join space_file using (space_no)
+		where del_yn like 'Y' and thumbnail = 'Y' 	
+	</select>
+	<select id="selectNoDelSpace" resultType="space">
+		select
+			space_no as spaceNo,
+			space_name as spaceName,
+			space_purpose as spacePurpose,
+			main_facility as mainFacility,
+			main_product as mainProduct,
+			max_people as maxPeople,
+			price,
+			filename
+		from space
+		join space_file using (space_no)
+		where del_yn like 'N' and thumbnail = 'Y' 	
 	</select>
 	<delete id="deleteRentalNo" parameterType="_int">
 		delete
@@ -453,9 +469,27 @@
 			where black_end=#{time1} and black_ty=1
 	</update>
 	<select id="selectDelBlack" resultType="kr.or.space.model.vo.Black">
-		select
-			black_id as blackId
+		select 
+        black_id as blackId,
+			count(*) as blackCount 
 		from reading_black
-		where black_ty=1 and black_del = 'Y'	
+        group by black_id	
+	</select>
+	<update id="spaceRestore" parameterType="_int">
+		update
+			space set 
+			del_yn = 'N'
+			where space_no = #{spaceNo} 
+	</update>	
+	<delete id="realDeleteSpace" parameterType="_int">
+		delete
+			from space
+			where space_no = #{spaceNo}
+	</delete>
+	<select id="selectBlackCount" parameterType="string">
+		select 
+			count(*) as cnt 
+		from reading_black
+		where black_id = #{blackId};
 	</select>
 </mapper>

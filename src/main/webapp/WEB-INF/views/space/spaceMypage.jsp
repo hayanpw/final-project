@@ -73,7 +73,7 @@
 									<input type="hidden" id="rentalNo" value="${l.rentalNo }">
 								</c:when>
 								<c:when test="${ l.rentalDate>today  }">
-									<button type="button" onclick="location.href='/deleteRes.do?rentalNo=${l.rentalNo}'">예매 삭제</button>
+									<button type="button" onclick="location.href='/deleteRes.do?rentalNo=${l.rentalNo}'">예약 취소</button>
 								</c:when>
 								<c:otherwise>
 									<button  class="updateBtn" type="button" class="btn btn-info btn-lg" data-toggle="modal"

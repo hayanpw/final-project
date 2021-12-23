@@ -11,7 +11,6 @@
 	width:165px;
 	border-top: 7px solid #064663;
 	margin-top:70px;
-	margin-left:70px;
 	font-weight:700;
 	font-size: 40px;
 	margin-bottom: 50px;
@@ -41,16 +40,24 @@
 	#titlemenu>li.active>a {
 	background-color: black ;
 	color: white;
-	font-weight: bold;
-	font-size: 18px;
+	border: 1px solid black;
+	font-size: 17px;
 	}
 	#titlemenu>li>a{
 	padding:0;
-	line-height:50px;
-	height: 50px;
+	line-height:60px;
+	height: 60px;
 	font-size: 17px;
 	font-weight: 600;
+	border-radius: 0px;
+	border-top: 1px solid black;
+	border-bottom:  1px solid black;
+	border-left:  1px solid black;
 	}
+	#titlemenu>li:last-child>a{
+	border-right:  1px solid black;
+	}
+	
 	.content-text{
 	padding: 20px;
 	font-size: 20px;

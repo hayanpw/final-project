@@ -9,7 +9,7 @@
 <style type="text/css">
 #title {
 	width: 220px;
-	border-top: 7px solid #563D39;
+	border-top: 7px solid #064663;
 	margin-top: 70px;
 	margin-left: 70px;
 	font-weight: 700;
@@ -22,7 +22,7 @@
 	margin-bottom:20px;
 	font-weight: 700;
 	font-size: 30px;
-	color: #563D39;
+	color: #064663;
 }
 
 .display {
@@ -30,8 +30,6 @@
 }
 
 #table, #nav, .table{
-	margin-left: 50px;
-	margin-right: 50px;
 	margin-bottom: 50px;
 }
 
@@ -57,7 +55,7 @@
 
 #firtr>td {
 	text-align: center;
-	border-top: 3px solid #BDB19A;
+	border-top: 3px solid #064663;
 	font-weight: bold;
 	height: 40px;
 	font-size: 15px;
@@ -77,6 +75,11 @@
 }
 #firtr>td:first-child {
 	width: 50px;
+}
+#btnColor{
+	background-color: #064663;
+	border: none;
+	float: right;
 }
 
 </style>
@@ -111,7 +114,7 @@
 						</c:forEach>
 					</tbody>
 				</table>
-				<button class="btn btn-danger chkDeleteNotice">공지글삭제</button>
+				<button id="btnColor" class="btn btn-danger chkDeleteNotice">공지글삭제</button>
 			</div>	
 			</c:if>	
 			<div class="boardName">소통게시판</div>
@@ -137,7 +140,7 @@
 						</c:forEach>
 					</tbody>
 				</table>
-				<button class="btn btn-danger chkDeleteFree">소통글삭제</button>
+				<button id="btnColor" class="btn btn-danger chkDeleteFree">소통글삭제</button>
 				</div>
 				<div class="boardName">문의게시판</div>
 				<div class="table">
@@ -171,7 +174,7 @@
 							</c:forEach>
 						</tbody>
 					</table>
-					<button class="btn btn-danger chkDeleteQna">문의글삭제</button>
+					<button id="btnColor" class="btn btn-danger chkDeleteQna">문의글삭제</button>
 					</div>
 					<div class="boardName">댓글</div>
 					<div class="table">
@@ -197,7 +200,7 @@
 							</c:forEach>
 						</tbody>
 					</table>
-					<button class="btn btn-danger">댓글삭제</button>
+					<button id="btnColor" class="btn btn-danger">댓글삭제</button>
 					</div>
 		</div>
 	<script type="text/javascript">

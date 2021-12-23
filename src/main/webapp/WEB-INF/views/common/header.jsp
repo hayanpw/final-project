@@ -25,7 +25,7 @@
                            <li><a href="/spaceMain.do">대관 안내</a></li>
                            <li><a href="/spaceList.do">공간 소개</a></li>
                            <li><a href="/spaceRes.do?spaceNo=0">대관 현황</a></li>
-                           <li><a href="/selectSpaceBoardList.do?reqPage=0">사용 게시판</a></li>
+                           <li><a href="/selectSpaceBoardList.do?reqPage=1">사용 게시판</a></li>
                         </ul>
                    </li>
                    <li><a href="/exhibitionList.do?reqPage=4">전시</a></li>
@@ -79,3 +79,43 @@
 		</div>
 	</div>
 	</div>
+	<script>
+  (function() {
+    var w = window;
+    if (w.ChannelIO) {
+      return (window.console.error || window.console.log || function(){})('ChannelIO script included twice.');
+    }
+    var ch = function() {
+      ch.c(arguments);
+    };
+    ch.q = [];
+    ch.c = function(args) {
+      ch.q.push(args);
+    };
+    w.ChannelIO = ch;
+    function l() {
+      if (w.ChannelIOInitialized) {
+        return;
+      }
+      w.ChannelIOInitialized = true;
+      var s = document.createElement('script');
+      s.type = 'text/javascript';
+      s.async = true;
+      s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
+      s.charset = 'UTF-8';
+      var x = document.getElementsByTagName('script')[0];
+      x.parentNode.insertBefore(s, x);
+    }
+    if (document.readyState === 'complete') {
+      l();
+    } else if (window.attachEvent) {
+      window.attachEvent('onload', l);
+    } else {
+      window.addEventListener('DOMContentLoaded', l, false);
+      window.addEventListener('load', l, false);
+    }
+  })();
+  ChannelIO('boot', {
+    "pluginKey": "30646173-f05a-4c55-9818-46a0543b5882"
+  });
+</script>
