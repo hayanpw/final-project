@@ -18,7 +18,7 @@
 			<fieldset class="idbox">
 					<label for="memberId" class="reg">ID </label><input type="text" name="memberId"><br><br>
 					<label for="memberPassword" class="reg"> Pw </label><input type="password" name="memberPassword"><br><br>
-					<button type="submit" class="loginbtn">Sign up</button>
+					<button type="submit" class="loginbtn">Sign in</button>
 					<button type="button" class="loginbtn" data-toggle="modal" data-target="#sModal">Find</button>
 				</fieldset>
 		</form>
@@ -31,14 +31,14 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h3 class="modal-title">ID · PASSWORD 찾기</h3>
+						<h3 class="modal-title">아이디 · 비밀번호 찾기</h3>
                     </div>
                     <!-- 이메일인증 modal -->
                     <div class="modal-body">
                        	<div>
 							<fieldset>
-									<label for="memberEmail" class="reg" >Email </label><input type="text" name="memberEmail" id="memberEmail"><br><br>
-									<button type="button" onclick="checkEmail();" id="btnOpen1">전송</button>
+									<label for="memberEmail" class="reg" >Email </label><input type="text" name="memberEmail" id="memberEmail">
+									<button type="button" onclick="checkEmail();" id="btnOpen1" class="findbtn">전송</button><br><br>
 									<span id="ajaxEmailcheck"></span>
 									<div class="agreebox adcheck">
 										<span id="authMsg"></span><input type="hidden" id="emailchk">

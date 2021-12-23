@@ -6,7 +6,7 @@
 
         <div class="mypage-nav">
             <div class="mypage-navi">
-                <div><a href="/showAdmin.do">공연관리</a></div>
+                <div class="m1"><a href="/showAdmin.do">공연관리</a></div>
                 <div><a href="/exhibitionAdmin.do">전시관리</a></div>
                 <div><a href="/academyAdminList.do">강좌관리</a></div>
                 <div><a href="/spaceAdmin.do?reqPage=1">대관관리</a></div>

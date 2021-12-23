@@ -133,7 +133,7 @@
 			pwCheck = false;
 		} else if (pw != pwRe) {
 			pwChk.innerHTML = "패스워드가 일치하지 않습니다.";
-			pwChk.style.color = "#BDB19A";
+			pwChk.style.color = "#e79b36";
 			pwCheck = false;
 		} else {
 			pwChk.innerHTML = "";
@@ -197,8 +197,7 @@
 			<div class="content">
 				<form action="/join.do" method="post" class="contentDetail" id="contentDetail-field" name="joinFrm">
 					<!--legend class="contentDetail-legend">14세 이상 회원 가입 입력양식</legend> -->
-					<div class="contentDetail">
-					</div>
+
 					<div class="contentDetail border">
 						<br>
 						<table class="inputTbl">
@@ -356,7 +355,7 @@
 							//console.log(data);
 						} else if (data == 1) {
 							$("#ajaxCheck").html("이미 사용중인 아이디 입니다.");
-							$("#ajaxCheck").css("color", "#BDB19A");
+							$("#ajaxCheck").css("color", "#e79b36");
 							$("#idchk").val('2');
 						}
 
@@ -364,7 +363,7 @@
 				});
 			} else {
 				$("#ajaxCheck").html("영문+숫자로 4글자 이상입니다.")
-				$("#ajaxCheck").css("color", "#BDB19A");
+				$("#ajaxCheck").css("color", "#e79b36");
 			}
 		});
 			var memberPwchk = true;
@@ -380,7 +379,7 @@
 				
 			}else{
 				$('#pwChkRule').html("비밀번호는  5~20자 이내 영문,숫자,특수문자로 입력해주세요.");
-				$('#pwChkRule').css('color' ,"#BDB19A");
+				$('#pwChkRule').css('color' ,"#e79b36");
 				memberPwchk = false;
 			}
 		});
@@ -469,12 +468,12 @@
 
 									if (mailCode == null) {
 										$("#authMsg").html("인증 실패");
-										$("#authMsg").css("color", "#BDB19A");
+										$("#authMsg").css("color", "#e79b36");
 										$("#emailchk").val('2');
 									} else {
 										if ($("#authCode").val() == mailCode) {
 											$("#authMsg").html("인증성공");
-											$("#authMsg").css("color", "#BDB19A"); //여기다가 인증추가를 해야함
+											$("#authMsg").css("color", "#e79b36"); //여기다가 인증추가를 해야함
 											$("#emailchk").val('1');
 											clearInterval(intervalId);
 											$("#timeZone").empty();
@@ -482,7 +481,7 @@
 
 										} else {
 											$("#authMsg").html("인증코드를 확인하세요");
-											$("#authMsg").css("color", "#BDB19A");
+											$("#authMsg").css("color", "#e79b36");
 											$("#emailchk").val('2');
 										}
 									}
@@ -491,7 +490,7 @@
 
 							} else if (data == 1) {
 								$("#ajaxEmailcheck").html("이미 사용중인 이메일 입니다.");
-								$("#ajaxEmailcheck").css("color", "#BDB19A");
+								$("#ajaxEmailcheck").css("color", "#e79b36");
 							}
 
 						}
