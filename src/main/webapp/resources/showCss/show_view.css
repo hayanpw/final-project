@@ -1,7 +1,7 @@
 .summary{
     padding-left: 100px;
     border-radius: 10px;
-    border:3px solid #BDB19A;
+    border:3px solid #195083;
     margin-top: 50px;
 }
 .summaryTop{
@@ -53,17 +53,17 @@
 }
 .showNavi>div{
     width: calc(100%/3);
-    border-bottom: 2px solid #A79078;
+    border-bottom: 2px solid #195083;
     text-align: center;
     cursor: pointer;
 }
 .showNavi>div:hover{
-	border:2px solid #BDB19A;
+	border:2px solid #195083;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
 }
 .selec{
-	border:2px solid #BDB19A;
+	border:2px solid #195083;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
 }
@@ -84,7 +84,7 @@
 }
 .ticketPrice{
 	border-radius: 10px;
-    border:2px solid #BDB19A;
+    border:2px solid #195083;
 	min-height: 50px;
 	padding: 0 50px;
 	border-radius: 10px;
@@ -118,7 +118,7 @@
 	display: flex;
 	flex-direction: row;
 	overflow: hidden;
-	border: 2px solid #BDB19A;
+	border: 2px solid #195083;
 }
 .reviews>li{
 	padding-top: 10px;
@@ -154,7 +154,7 @@
 	opacity: 0.7;
     cursor: pointer;
     display: inline-block;
-	background-color: #A79078;
+	background-color: #195083;
 	color: #fff;
 	right: 125px;
 	bottom: 65px;

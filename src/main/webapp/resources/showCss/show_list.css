@@ -17,7 +17,8 @@
     text-decoration: none;
     margin: 25px 20px;
     padding: 20px 0;
-    border: 2px solid #A79078;
+    border: 2px solid #195083;
+    position: relative;
 }
 .poster{
 	width: 200px;
@@ -35,7 +36,7 @@
 }
 .showInfo>div>p{
 	margin: 0;
-    color: #A79078;
+    color: #195083;
 }
 .showInfo:hover{
 	text-decoration: none;
@@ -46,4 +47,37 @@
 }
 .showSearchBox{
 	margin-top:50px;
+}
+.sModal{
+    position: absolute;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.showInfo:hover .sModal{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+.sModal>a{
+    position: absolute;
+    display: none;
+    background-color: #195083;
+    border-radius: 50px;
+    line-height: 75px;
+    text-decoration: none;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 900;
+    border: 4px solid #fff;
+}
+.sModal>a:hover{
+	text-decoration: none;
+	color:#fff;
+}
+.showInfo:hover .sModal>a{
+    width: 80px;
+    height: 80px;
+    display: block;
 }
