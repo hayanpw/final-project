@@ -311,3 +311,16 @@ body{
                 height: 17px; 
                 vertical-align: middle;
             }
+ 
+ .iconimg img{
+ 	padding-top: 15px;
+ 	display: block; 
+ 	margin: 0px auto;
+ }
+ .iconname{
+ 	padding-top:5px;
+ 	text-align: center;
+  	display: block; 
+  	margin: 0px auto;
+ 	color:#fff;
+ }
