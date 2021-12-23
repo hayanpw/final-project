@@ -26,7 +26,7 @@
 						</dt>
 						<dd>
 							<input type="password" class="pw-confirm" id="pw_con_chk_password" name="memberPassword" placeholder="비밀번호를 입력하세요." >
-							<input type="submit" value="확인">
+							<input type="submit" class="msbtn"value="확인">
 							<input type="hidden" name="memberId" value="${sessionScope.m.memberId}">
 						</dd>
 					</dl>
@@ -44,15 +44,34 @@
 }
 .gray-box {
     padding: 40px;
-    opacity: 0.7;
-    background: #BDB19A;
+    background: #064663;
+    border-radius: 20px;
     color:#fff;
-}
-input {
-	color: #BDB19A;
 }
 .mgt10 {
     margin-top: 30px !important;
+}
+
+.pw-confirm{
+    background: #064663;
+    border-style:none;
+    border-bottom:solid 2px #cacaca;
+    border-collapse:collapse;
+}
+input{
+	color: #e79b36; 
+}
+.pw-confirm input:focus {
+    outline: none;
+    padding-bottom : 5px;
+/*     border-radius: 10px 10px 0 0; */
+	border-bottom : 2px solid #e79b36;
+/*     box-shadow: 0 1px 0 0 #e79b36; */
+}
+dd {
+    float: right;
+    margin-top: -50px;
+    margin-right: 150px;
 }
 </style>
 

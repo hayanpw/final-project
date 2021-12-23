@@ -17,11 +17,10 @@
    
 }
 input{
-
     border-style:none;
     border-bottom:solid 1px #cacaca;
     border-collapse:collapse;
-    
+
 }
 input:focus {
 	background-color: rgba(231, 155, 54, 0.14);
@@ -99,4 +98,15 @@ input [type=submit]:hover{
 
 a:hover{
 	text-decoration: none;
+}
+.findbtn{
+	border:none;
+	font-size:14px;
+    text-decoration: none;
+    display: inline-block;
+    background-color: #064663;
+	color:#fff;
+	margin-top: 10px;
+	padding:7px;
+	border-radius: 15px;
 }
