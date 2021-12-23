@@ -7,10 +7,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="jquery.js"></script>
-  <script src="jquery.fadethis.min.js"></script>
+<!--   <script src="jquery.js"></script> 
+  <script src="jquery.fadethis.min.js"></script>-->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<!--   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
   <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css">
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"/>
   <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
@@ -444,6 +444,21 @@
 	background-color:rgb(11,11,51);
     color: #fff;
 }
+.btn-quick close{
+    z-index: 4;
+	border: rgb(11,11,51);
+	width: 100px;
+    height: 100px;
+    top: 42%;
+	position: absolute;
+    left: -55px;
+	font-size: 15px;
+    border-radius: 50%;
+    text-align: left;
+    padding-left: 15px;
+	background-color:rgb(11,11,51);
+    color: #fff;
+}
 .imgb{
     background-image: url("/resources/mainImage/upload/m-gifimage.gif");
 	width: auto;
@@ -503,5 +518,14 @@
 	.icon{
 		margin:auto;
 	}
+	.close:focus, .close:hover {
+    color: #fff;
+    background-color: rgb(11,11,51);
+    text-decoration: none;
+    cursor: pointer;
+    padding-left: 15px;
+    opacity: 1;
+    }
+
 </style>
 </html>

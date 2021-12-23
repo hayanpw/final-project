@@ -18,7 +18,7 @@
 	<div class="container">        
         <div class="mypage-title"><span>개</span>인정보관리</div>
         <div class="mypage-container">
-				<form action="/memberUpdate.do" method="post" style="padding-left: 200px; padding-top:50px" onsubmit="return emailChk()">
+				<form action="/memberUpdate.do" class="contentDetail"method="post" id="contentDetail-field" onsubmit="return emailChk()" >
 						<table class="inputTbl">
 							<tr>
 								<td>아이디</td>
@@ -32,17 +32,17 @@
 							</tr>
 							<tr>
 								<td>비밀번호변경</td>
-								<td><a type="text" class="searchidpw" data-toggle="modal" data-target="#sModal">비밀번호 변경하고싶어요?</a></td>
+								<td><a type="text" id="searchidpw" data-toggle="modal" data-target="#sModal">비밀번호 변경하고싶어요?</a></td>
 							</tr>
 							
 							<tr>
 								<td>휴대전화번호</td>
-								<td><input type="text" name="memberPhone" value="${sessionScope.m.memberPhone}" readonly>
+								<td><input type="text" class="input" name="memberPhone" value="${sessionScope.m.memberPhone}" readonly>
 								</td>
 							</tr>
 							<tr>
 								<td>생년월일</td>
-								<td><input type="text" id="memberBirthday" name="memberBirthday" class="mypagecontrol" value="${m.memberBirthday}" readonly></td>
+								<td><input type="text" class="input" id="memberBirthday" name="memberBirthday" class="mypagecontrol" value="${m.memberBirthday}" readonly></td>
 							</tr>
 							<tr>
 								<td>주소입력</td>
@@ -53,13 +53,13 @@
 								<td></td>
 								<td style="padding-top: 5px;"><input type="text"
 									id="addressRoad" class="input long" name="addressRoad" value="${m.addressRoad}" readonly>
-									<input type="text" id="addressDetail" class="input long"
+									<input type="text" id="addressDetail" style="background:#fff; border:1px solid #064663;" class="input long"
 									name="addressDetail" value="${m.addressDetail}" ></td>
 							</tr>
 							<tr>
 								<td>이메일</td>
 								<td>
-								<input type="text" class="input" id="email1" name="email1" value="${email1}"> @ <input type="text" class="input" id="email2" name="email2" value="${email2}"> 		
+								<input type="text" class="input" id="email1" name="email1" value="${email1}" style="background:#fff; border:1px solid #064663;"> @ <input type="text" class="input" id="email2" name="email2" value="${email2}" style="background:#fff; border:1px solid #064663;"> 		
 								<button type="button" onclick="checkEmail();" id="btnOpen1" class="nextBtn">중복체크</button>
 									<span id="ajaxEmailcheck"></span>
 									<div class="agreebox adcheck">
@@ -70,11 +70,12 @@
 							</tr>
 						</table>
 						<div class="btnBox">
-							<button  type="submit" class="nextBtn">정보수정</button>
+							<button  type="submit" class="nextBtn2">정보수정</button>
+							
 						</div>	
 				</form>	
 
-				<a href="/deleteMemberFrm.do?memberNo=${m.memberNo}" >탈퇴하기<span>></span></a>
+				<a href="/deleteMemberFrm.do?memberNo=${m.memberNo}" class="joinbtn">탈퇴하기 ></a>
 				<form action="" id="modal1">
 				<div id='content' class="modal_window">
 					<div class="modal_window_text" id="auth">
@@ -285,12 +286,12 @@
 				} else if (pw != pwRe) {
 					pwChk.innerHTML = "패스워드가 일치하지 않습니다.";
 					pwChk.style.color = "red";
-					obj.style.border = "1px solid red";
+					obj.style.border = "1px solid #e79b36";
 					pwCheck = false;
 				} else {
 					pwChk.innerHTML = "패스워드가 일치합니다.";
 					pwChk.style.color = "#563D39";
-					obj.style.border = "1px solid #563D39";
+					obj.style.border = "1px solid #e79b36";
 					pwCheck = true;
 				}
 			}
@@ -303,32 +304,34 @@
 				 
 				if (regExpPw.test(memberPassword)){
 					$('#pwChkRule').html("사용가능한 비밀번호입니다.");
-					$('#pwChkRule').css('color' ,"#1f4787");
+					$('#pwChkRule').css('color' ,"#e79b36");
 					memberPwchk = true;
 					
 				}else{
-					$('#pwChkRule').html("비밀번호는  5~20자 이내 영문,숫자,특수문자로 입력해주세요.");
-					$('#pwChkRule').css('color' ,"red");
+					$('#pwChkRule').html("5자 이상 영문,숫자,특수문자로 입력");
+					$('#pwChkRule').css('color' ,"#e79b36");
 					memberPwchk = false;
 				}
 			});
 			</script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </body>
+<style>
+a:hover {
+    color: #e79b36;
+    text-decoration: underline;
+    text-underline-position: under;
+}
+.joinbtn{
+	float:right;
+	border:none;
+	font-size:15px;
+    text-decoration: none;
+	color:#064663;
+	padding:7px;
+	border-radius: 15px;
+	margin: 0px 80px;
+    font-weight: 800;
+}
+</style>
 </html>

@@ -105,6 +105,7 @@
     font-size: 14px;
 }
 .nextBtn:hover{
+	transition-duration:1s;
 	color: #fff;
 	background-color: #064663;
 }
@@ -410,4 +411,22 @@ input[name=gender]:checked+label {
 }
 #timeZone{
 	color:#064663;
+}
+
+.nextBtn2 {
+	margin-top:50px;
+    width: 80px;
+    height: 35px;
+    margin-left:10px;
+    background-color: #fff;
+    border: none;
+    outline: 1px solid;
+    cursor: pointer;
+    color: #064663;
+    font-size: 14px;
+}
+.nextBtn2:hover{
+	transition-duration:1s;
+	color: #fff;
+	background-color: #e79b36;
 }
