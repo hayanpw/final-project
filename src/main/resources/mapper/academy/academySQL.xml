@@ -9,7 +9,7 @@
 			#{academyDetail},#{academyCategory},0)
 	</insert>
 	<select id="acadeyTotal" resultType="_int">
-  		select count(*) from academy
+  		select count(*) from academy where academy_end > sysdate and academy_cancel = 0
   	</select>
   	<select id="academyList" parameterType="ap" resultType="ac">
 		  		select 
@@ -24,7 +24,7 @@
 		  			nn.academy_detail as academyDetail,
 		  			nn.academy_category as academyCategory,
 		  			nn.academy_cancel as academyCancel
-		  		from (select rownum as rnum,n.* from(select * from  academy order by academy_no desc)n)nn where rnum between  #{start} and #{end}
+		  		from (select rownum as rnum,n.* from(select * from  academy where academy_end > sysdate and academy_cancel = 0 order by academy_no desc)n)nn where rnum between  #{start} and #{end}
 	</select>
 	<select id ="selectCategoryList" parameterType="ap" resultType="ac">	
   				select 
@@ -39,7 +39,7 @@
 		  			nn.academy_detail as academyDetail,
 		  			nn.academy_category as academyCategory,
 		  			nn.academy_cancel as academyCancel
-		  		from (select rownum as rnum,n.* from(select * from  academy where academy_category=#{category}  order by academy_no desc)n)nn where rnum between  #{start} and #{end}
+		  		from (select rownum as rnum,n.* from(select * from  academy where academy_category=#{category} and academy_end > sysdate and academy_cancel = 0 order by academy_no desc)n)nn where rnum between  #{start} and #{end}
 	</select>
   	<select id="selectOneAcademy" parameterType="_int" resultType="ac">
   	 	select 
@@ -69,8 +69,8 @@
 		  			nn.academy_detail as academyDetail,
 		  			nn.academy_category as academyCategory,
 		  			nn.academy_cancel as academyCancel
-	from (select rownum as rnum,n.* from(select * from  academy where academy_title like '%'||#{category}||'%' or academy_detail like '%'||#{category}||'%' order by academy_no desc)n)nn 
-	where rnum between  #{start} and #{end}
+	from (select rownum as rnum,n.* from(select * from  academy where academy_title like '%'||#{category}||'%' or academy_detail like '%'||#{category}||'%' and academy_end > sysdate and academy_cancel = 0  order by academy_no desc)n)nn 
+	where rnum between  #{start} and #{end} 
   	</select>
   	<insert id="academyCredit" parameterType="acp">
 		insert
@@ -91,7 +91,7 @@
 		update academy set academy_title = #{academyTitle},academy_start = #{academyStart}, academy_end = #{academyEnd}, academy_photo=#{academyPhoto}, academy_teacher=#{academyTeacher}
 			,academy_place = #{academyPlace}, academy_price=#{academyPrice},academy_detail=#{academyDetail},academy_category=#{academyCategory} where academy_no=#{academyNo}
 	</update>
-	<select id="academtAdminList" resultType="ac">
+	<select id="academyAdminList" resultType="ac">
 	<![CDATA[
 		select 
   			academy_no as academyNo,
@@ -106,10 +106,10 @@
   			academy_category as academyCategory,
   			academy_cancel as academyCancel
   		from academy 
-  			where academy_end > sysdate order by 1 desc
+  			where academy_end > sysdate and academy_cancel = 0 order by 1 desc
   	]]>	
 	</select>
-	<select id="academtAdminListLast" resultType="ac">
+	<select id="academyAdminListLast" resultType="ac">
 		<![CDATA[
 		select 
   			academy_no as academyNo,
@@ -124,7 +124,25 @@
   			academy_category as academyCategory,
   			academy_cancel as academyCancel
   		from academy
-  			where academy_end < sysdate order by 1 desc
+  			where academy_end < sysdate and academy_cancel = 0 order by 1 desc
+  	]]>	
+	</select>
+	<select id="academyAdminListCancel" resultType="ac">
+		<![CDATA[
+		select 
+  			academy_no as academyNo,
+  			academy_title as academyTitle,
+  			academy_start as academyStart,
+  			academy_end as academyEnd,
+  			academy_photo as academyPhoto,
+  			academy_teacher as academyTeacher,
+  			academy_place as academyPlace,
+  			academy_price as academyPrice,
+  			academy_detail as academyDetail,
+  			academy_category as academyCategory,
+  			academy_cancel as academyCancel
+  		from academy
+  			where academy_cancel = 1 order by 1 desc
   	]]>	
 	</select>
 	<select id="countingStar" parameterType="_int" resultType="_int">
@@ -184,5 +202,24 @@
    			 member_email as memberEmail,
    			 payment_cancel as paymentCancel
 		from payment join member using(member_no) where academy_no =#{academyNo}
+	</select>
+	<update id="deleteAcademy" parameterType="_int">
+		update academy set academy_cancel = 1 where academy_no = #{academyNo}
+	</update>
+	<select id="countCancelQuan" parameterType="_int" resultType="_int">
+		select count(*) from academy where academy_no=#{academyNo} and academy_cancel = 0
+	</select>
+	<update id="updateAcademyStatus" parameterType="_int">
+		update payment set payment_cancel = 2 where academy_no = #{academyNo} and payment_cancel = 0 book_date > sysdate
+	</update>
+	<update id="revivalAcademy" parameterType="_int">
+		update academy set academy_cancel = 0 where academy_no = #{academyNo}
+	</update>
+	<select id="refundStudentView" parameterType="_int" resultType="exbrf">
+		select 
+			payment_no as paymentNo,
+            member_name as memberName,
+            member_email as memberEmail
+		from payment join member using(member_no) where payment_cancel= 2 and payment_select = 1  and academy_no =#{academyNo}
 	</select>
 </mapper>

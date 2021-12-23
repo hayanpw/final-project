@@ -20,12 +20,12 @@
 	<jsp:include page="/WEB-INF/views/common/mypageMenu.jsp" />
 	<div class="container">        
         <div class="mypage-title"><span>전시</span>예매내역</div>
-        <c:if test="${empty list }">
+        <c:if test="${empty list && empty last }">
         	<div class="noRental">
         		<p>예매 내역이 없습니다.</p>
         	</div>
         </c:if>
-        <c:if test="${!empty list }">
+        <c:if test="${!empty list || !empty last }">
 		<div class="pop">
 			<span>☞이메일 발권이란?</span>
 			<p>회원가입시 등록한 이메일로 티켓을 전송 해드립니다</p>
@@ -65,6 +65,9 @@
 							</c:if>
 							<c:if test="${exm.paymentCancel eq 1 }">
 								<td colspan="2">취소되었습니다</td>
+							</c:if>
+							<c:if test="${exm.paymentCancel eq 2 }">
+								<td colspan="2">전시가 취소 되었습니다 3일 애내에 환불 예정</td>
 							</c:if>
 						</c:when>
 						<c:when test="${exm.checkEmail eq 1 }">

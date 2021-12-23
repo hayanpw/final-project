@@ -14,6 +14,7 @@ import kr.or.academy.vo.AcademyCategory;
 import kr.or.academy.vo.AcademyPagingVo;
 import kr.or.academy.vo.AcademyPayment;
 import kr.or.academy.vo.StudentList;
+import kr.or.exhibition.vo.ExhibitionRefund;
 
 @Repository
 public class AcademyDao {
@@ -91,15 +92,18 @@ public class AcademyDao {
 	}
 
 	public ArrayList<Academy> acadeyAdminList() {
-		List<Academy> list = sqlSession.selectList("academy.academtAdminList");
+		List<Academy> list = sqlSession.selectList("academy.academyAdminList");
 		return (ArrayList<Academy>)list;
 	}
 
 	public ArrayList<Academy> academyAdminListLast() {
-		List<Academy> last = sqlSession.selectList("academy.academtAdminListLast");
+		List<Academy> last = sqlSession.selectList("academy.academyAdminListLast");
 		return (ArrayList<Academy>)last;
 	}
-
+	public ArrayList<Academy> academyAdminListCancel() {
+		List<Academy> cancel = sqlSession.selectList("academy.academyAdminListCancel");
+		return (ArrayList<Academy>)cancel;
+	}
 	public int countingStar(int academyNo) {
 		int studentCount = sqlSession.selectOne("academy.countingStar",academyNo);
 		System.out.println(studentCount);
@@ -125,6 +129,32 @@ public class AcademyDao {
 		List<StudentList> list = sqlSession.selectList("academy.studentList",academyNo);
 		return (ArrayList<StudentList>)list;
 	}
+
+	public int deleteAcademy(int academyNo) {
+		int result = sqlSession.update("academy.deleteAcademy",academyNo);
+		return result;
+	}
+
+	public int countCancelQuan(int academyNo) {
+		int count = sqlSession.selectOne("academy.countCancelQuan",academyNo);
+		return count;
+	}
+
+	public int updateAcademyStatus(int academyNo) {
+		int result = sqlSession.update("academy.updateAcademyStatus",academyNo);
+		return result;
+	}
+
+	public int revivalAcademy(int academyNo) {
+		int result = sqlSession.update("academy.revivalAcademy",academyNo);
+		return result;
+	}
+
+	public ArrayList<ExhibitionRefund> refundStudentView(int academyNo) {
+		List<ExhibitionRefund> list = sqlSession.selectList("academy.refundStudentView",academyNo);
+		return (ArrayList<ExhibitionRefund>)list;
+	}
+
 
 	//public int academyUpdate(Academy a) {
 	//	int result = sqlSession.update("academy.academyUpdate",a);

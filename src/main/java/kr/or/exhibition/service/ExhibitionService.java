@@ -12,6 +12,7 @@ import kr.or.exhibition.vo.Exhibition;
 import kr.or.exhibition.vo.ExhibitionPagingVo;
 import kr.or.exhibition.vo.ExhibitionPayment;
 import kr.or.exhibition.vo.ExhibitionPaymentMypage;
+import kr.or.exhibition.vo.ExhibitionRefund;
 import kr.or.exhibition.vo.ExhibitionReview;
 
 @Service
@@ -89,8 +90,10 @@ public class ExhibitionService {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		ArrayList<Exhibition> list = dao.selectExhibitionAdmin();
 		ArrayList<Exhibition> last = dao.selectExhibitionAdminLast();
+		ArrayList<Exhibition> cancel = dao.selectExhibitionAdminCancel();
 		map.put("list", list);
 		map.put("last", last);
+		map.put("cancel", cancel);
 		return map;
 	}
 
@@ -142,5 +145,26 @@ public class ExhibitionService {
 	public ExhibitionPaymentMypage selectOneExhibitionPayment(int paymentNo) {
 		ExhibitionPaymentMypage expm = dao.selectOneExhibitionPayment(paymentNo);
 		return expm;
+	}
+	@Transactional
+	public int deleteExhibition(int exhibitionNo) {
+		int result = dao.deleteExhibition(exhibitionNo);
+		if(result>0) {
+			result = dao.updatePaymentStatus(exhibitionNo);
+			return result;
+		}else {
+			return result;
+		}
+		
+	}
+
+	public int revivalExhibition(int exhibitionNo) {
+		int result = dao.revivalExhibition(exhibitionNo);
+		return result;
+	}
+
+	public ArrayList<ExhibitionRefund> refundMemberView(int exhibitionNo) {
+		 ArrayList<ExhibitionRefund> list = dao.refundMemberView(exhibitionNo);
+		return list;
 	}
 }
