@@ -8,7 +8,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URLEncoder;
-import java.util.ArrayList;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -30,7 +29,6 @@ import kr.or.addition.model.vo.BoardComment;
 import kr.or.addition.model.vo.BoardNext;
 import kr.or.addition.model.vo.BoardPageData;
 import kr.or.addition.model.vo.BoardViewData;
-import kr.or.addition.model.vo.FileVO;
 import kr.or.addition.model.vo.LikeNo;
 import kr.or.addition.model.vo.MyPageData;
 import kr.or.member.vo.Member;
@@ -76,50 +74,48 @@ public class AdditionController {
 
 	// 글쓰기
 	@RequestMapping(value = "/boardWrite.do")
-	public String boardWrite(Board b, MultipartFile[] addFiles, HttpServletRequest request, Model model) {
-		// 파일목록을 저장할 List
-		ArrayList<FileVO> list = new ArrayList<FileVO>();
-		if (addFiles[0].isEmpty()) {
-		} else {
-			String savePath = request.getSession().getServletContext().getRealPath("/resources/additionImage/");
-			for (MultipartFile file : addFiles) {
-				String filename = file.getOriginalFilename();
-				String onlyFilename = filename.substring(0, filename.indexOf(".")); // test (0부터 .앞까지)
-				String extention = filename.substring(filename.indexOf(".")); // .txt (.부터 끝까지)
-				String filepath = null;
-				int count = 0;
-				while (true) {
-					if (count == 0) {
-						filepath = onlyFilename + extention; // test.txt
-					} else {
-						filepath = onlyFilename + "_" + count + extention;// test_3.txt
-					}
-					File checkFile = new File(savePath + filepath);// java.io.File
-					if (!checkFile.exists()) {
-						break;
-					}
-					count++;
+	public String boardWrite(Board b, MultipartFile addFile, HttpServletRequest request, Model model) {
+		if(!addFile.isEmpty()) {
+		String savePath = request.getSession().getServletContext().getRealPath("/resources/additionImage");
+			
+			String filename = addFile.getOriginalFilename();
+			String onlyFilename = filename.substring(0, filename.indexOf("."));
+			String extention = filename.substring(filename.indexOf("."));
+			
+			String filepath = null;
+			int count = 0;
+			while(true) {
+				if(count==0) {
+					filepath = onlyFilename + extention;
+				}else {
+					filepath = onlyFilename+"_"+count+extention;
 				}
-				try {
-					FileOutputStream fos = new FileOutputStream(new File(savePath + filepath));
-					BufferedOutputStream bos = new BufferedOutputStream(fos);
-					// 파일업로드
-					byte[] bytes = file.getBytes();
-					bos.write(bytes);
-					bos.close();
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
-				} catch (IOException e) {
-					e.printStackTrace();
+				File checkFile = new File(savePath+filepath);
+				if(!checkFile.exists()) {
+					break;
 				}
-				FileVO fv = new FileVO();
-				fv.setFilename(filename);
-				fv.setFilepath(filepath);
-				list.add(fv);
+				count++;
 			}
+			
+			try {
+				FileOutputStream fos = new FileOutputStream(new File(savePath+filepath));
+				BufferedOutputStream bos = new BufferedOutputStream(fos);
+				byte[] bytes = addFile.getBytes();
+				bos.write(bytes);
+				bos.close();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			b.setFilename(filename);
+			b.setFilepath(filepath);
 		}
-		int result = service.insertBoard(b, list);
-		if (result == -1 || result != list.size()) {
+		
+		int result = service.insertBoard(b);
+		if (result <= 0) {
 			model.addAttribute("msg", "등록실패");
 		} else {
 			model.addAttribute("msg", "등록성공");
@@ -172,7 +168,6 @@ public class AdditionController {
 			model.addAttribute("loc", "/additionBoard.do?boardType=3&reqPage=1");
 		}else {
 			model.addAttribute("loc", "/myFree.do?memberId="+m.getMemberId());
-			System.out.println(m.getMemberId());
 		}
 		return "common/msg";
 	}
@@ -214,7 +209,9 @@ public class AdditionController {
 
 	// 댓글삭제
 	@RequestMapping(value = "/deleteComment.do")
-	public String deleteComment(int boardType, int bcNo, int boardNo,int bcRef, Model model) {
+	public String deleteComment(@SessionAttribute Member m,int boardType, int bcNo, int boardNo,int bcRef, Model model) {
+		System.out.println(bcNo);
+		System.out.println(bcRef);
 		int result = service.deleteComment(bcNo,bcRef);
 		if (result > 0) {
 			model.addAttribute("msg", "삭제성공");
@@ -223,8 +220,10 @@ public class AdditionController {
 		}
 		if (boardType == 2) {
 			model.addAttribute("loc", "/boardView.do?boardType=2&boardNo=" + boardNo);
-		} else {
+		} else if(boardType == 3) {
 			model.addAttribute("loc", "/boardView.do?boardType=3&boardNo=" + boardNo);
+		}else if(boardType == 4) {
+			model.addAttribute("loc", "/myFree.do?memberId="+m.getMemberId());
 		}
 		return "common/msg";
 	}
@@ -354,65 +353,100 @@ public class AdditionController {
 
 	// 글수정폼이동
 	@RequestMapping(value = "/boardUpdateFrm.do")
-	public String boardUpdateFrm(int boardNo, Model model) {
+	public String boardUpdateFrm(int boardType,int boardNo, Model model) {
 		BoardViewData bvd = service.selectOneBoard(boardNo);
 		model.addAttribute("b", bvd.getB());
-		System.out.println(bvd.getB());
+		model.addAttribute("boardType", boardType);
 		return "addition/boardUpdateFrm";
 	}
 
-	/*
 	// 글수정
 	@RequestMapping(value = "/boardUpdate.do")
 	public String boardUpdate(Board b, int status, String oldFilename, String oldFilepath,
-			MultipartFile[] upfiles, HttpServletRequest request, Model model) {
-		ArrayList<FileVO> list = new ArrayList<FileVO>();
-		if (status == 2) { // 기존파일 지웠을때
-			String savePath = request.getSession().getServletContext().getRealPath("/resources/additionImage/");
-			File delFile = new File(savePath + "/" + oldFilepath);
-			delFile.delete(); // 서버에서 파일 지우기
-			if (upfiles[0].isEmpty()) {// 새첨부파일 없을때
-			} else { // 첨부파일 있을때
-				for (MultipartFile file : upfiles) {
-					String filename = file.getOriginalFilename();
-					String onlyFilename = filename.substring(0, filename.indexOf("."));
-					String extention = filename.substring(filename.indexOf("."));
-					String filepath = null;
-					int count = 0;
-					while (true) {
-						if (count == 0) {
-							filepath = onlyFilename + extention;
-						} else {
-							filepath = onlyFilename + "_" + count + extention;
-							File checkFile = new File(savePath + filepath);
-							break;
-						}
-						count++;
+		MultipartFile addFile, HttpServletRequest request, Model model) {
+		if(status == 2) {//지웠을때
+			if(!addFile.isEmpty()) { //새파일있을때
+				String savePath = request.getSession().getServletContext().getRealPath("/resources/additionImage/");
+				String filename = addFile.getOriginalFilename();
+				String onlyFilename = filename.substring(0, filename.indexOf("."));
+				String extention = filename.substring(filename.indexOf("."));
+				String filepath = null;
+				int count = 0;
+				while(true) {
+					if(count==0) {
+						filepath = onlyFilename + extention;
+					}else {
+						filepath = onlyFilename+"_"+count+extention;
 					}
-					try {
-						FileOutputStream fos = new FileOutputStream(new File(savePath + filepath));
-						BufferedOutputStream bos = new BufferedOutputStream(fos);
-						// 파일업로드
-						byte[] bytes = file.getBytes();
-						bos.write(bytes);
-						bos.close();
-					} catch (FileNotFoundException e) {
-						e.printStackTrace();
-					} catch (IOException e) {
-						e.printStackTrace();
+					File checkFile = new File(savePath+filepath);
+					if(!checkFile.exists()) {
+						break;
 					}
-					FileVO fv = new FileVO();
-					fv.setFilename(filename);
-					fv.setFilepath(filepath);
-					list.add(fv);
+					count++;
 				}
+				
+				try {
+					FileOutputStream fos = new FileOutputStream(new File(savePath+filepath));
+					BufferedOutputStream bos = new BufferedOutputStream(fos);
+					byte[] bytes = addFile.getBytes();
+					bos.write(bytes);
+					bos.close();
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				b.setFilename(filename);
+				b.setFilepath(filepath);
+			}
+		}else {//안지웠을때 새파일있을때 새파일 없을때
+			if(!addFile.isEmpty()) {
+				String savePath = request.getSession().getServletContext().getRealPath("/resources/additionImage/");
+				String filename = addFile.getOriginalFilename();
+				String onlyFilename = filename.substring(0, filename.indexOf("."));
+				String extention = filename.substring(filename.indexOf("."));
+				String filepath = null;
+				int count = 0;
+				while(true) {
+					if(count==0) {
+						filepath = onlyFilename + extention;
+					}else {
+						filepath = onlyFilename+"_"+count+extention;
+					}
+					File checkFile = new File(savePath+filepath);
+					if(!checkFile.exists()) {
+						break;
+					}
+					count++;
+				}
+				
+				try {
+					FileOutputStream fos = new FileOutputStream(new File(savePath+filepath));
+					BufferedOutputStream bos = new BufferedOutputStream(fos);
+					byte[] bytes = addFile.getBytes();
+					bos.write(bytes);
+					bos.close();
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				b.setFilename(filename);
+				b.setFilepath(filepath);
+			}else {
+				b.setFilepath(oldFilepath);
+				b.setFilename(oldFilename);
 			}
 		}
 		int result = service.boardUpdate(b);
-		if (result > 0) {
-			model.addAttribute("msg", "수정성공");
-		} else {
-			model.addAttribute("msg", "수정실패");
+		if(result>0) {
+			model.addAttribute("msg", "수정 성공");			
+		}else {
+			model.addAttribute("msg", "수정 실패");
 		}
 		if (b.getBoardType() == 2) {
 			model.addAttribute("loc", "/boardView.do?boardType=2&boardNo=" + b.getBoardNo());
@@ -425,7 +459,6 @@ public class AdditionController {
 
 	}
 	
-	*/
 	
 	//규제하기
 	@RequestMapping(value = "/regulationBoard.do")

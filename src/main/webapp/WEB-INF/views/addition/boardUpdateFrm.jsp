@@ -8,27 +8,7 @@
 <title>Insert title here</title> 
 <!-- include summernote css/js -->
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-<style type="text/css">
-	#title{
-	width:205px;
-	border-top: 7px solid #563D39;
-	margin-top:70px;
-	margin-left:70px;
-	font-weight:700;
-	font-size: 40px;
-	margin-bottom: 50px;
-	}
-	#boardContent{
-	border: 1px white;
-	}
-	table input{
-	border: none;
-	}
-	#text{
-	border: none;
-	box-shadow: none;
-	}
-</style>
+<<link rel="stylesheet" href="/resources/additionCss/boardUpdateFrm.css">
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
@@ -65,19 +45,17 @@
 						<input type="hidden" name="boardNo" value="${b.boardNo }">
 						<input type="hidden" name="status" value="1">
 							<c:choose>
-							<c:when test="${not empty b.list }">
-								<c:forEach items="${b.list }" var="f">
-								<span>${f.filename }</span>
+							<c:when test="${not empty b.filename }">
+								<span class="delFile">${b.filename }</span>
 								<button type="button" id="delBtn" class="btn btn-primary btn-sm delFile">
 								삭제
 								</button>
-								<input type="hidden" class="oldFilename" name="oldFilename" value="${f.filename }">
-								<input type="hidden" class="oldFilepath" name="oldFilepath" value="${f.filepath }>">
-								</c:forEach>
-								<input type="file" id="addFiles" name="addFiles" multiple style="display:none;">
+								<input type="file" id="addFile" name="addFile" style="display:none;">
+								<input type="hidden" class="oldFilename" name="oldFilename" value="${b.filename }">
+								<input type="hidden" class="oldFilepath" name="oldFilepath" value="${b.filepath }">
 							</c:when>
 							<c:otherwise>
-							<input type="file" name="addFiles" multiple>
+							<input type="file" name="addFile">
 							</c:otherwise>
 							</c:choose>
 						</td> 
@@ -99,18 +77,8 @@
 	</div>
 	<script type="text/javascript">
 	$(document).on("click",".delFile",function(){
-		var idx=$(".delFile").index(this);
-		var oldFilename=$(".oldFilename").eq(idx).val();
-		var oldFilepath=$(".oldFilepath").eq(idx).val();
-		var input   = document.createElement('input'); 
-		input.type   = 'hidden'; 
-		input.name  = 'delOldFilename'; 
-		input.id  = 'delOldFilename'; 
-		input.value  = value; 
-		theForm.appendChild(input); 
-		$(this).prev().hide();
-		$(this).hide();
-		$("#addFiles").show();
+		$(".delFile").hide();
+		$(this).next().show();
 		$("[name=status]").val(2);
     });
 	$(function() {

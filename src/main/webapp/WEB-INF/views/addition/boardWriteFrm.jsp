@@ -8,52 +8,7 @@
 <title>Insert title here</title> 
 <!-- include summernote css/js -->
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-<style type="text/css">
-	#title{
-	width:165px;
-	border-top: 7px solid #064663;
-	margin-top:70px;
-	margin-left:70px;
-	font-weight:700;
-	font-size: 40px;
-	margin-bottom: 50px;
-	}
-	#qnaTitle{
-	width:220px;
-	border-top: 7px solid #064663;
-	margin-top:70px;
-	margin-left:70px;
-	font-weight:700;
-	font-size: 40px;
-	margin-bottom: 50px;
-	}
-	#freeTitle{
-	width:205px;
-	border-top: 7px solid #064663;
-	margin-top:70px;
-	margin-left:70px;
-	font-weight:700;
-	font-size: 40px;
-	margin-bottom: 50px;
-	}
-	#boardContent{
-	border: 1px white;
-	}
-	table input{
-	border: none;
-	}
-	#text{
-	border: none;
-	box-shadow: none;
-	}
-	.btnColor{
-	background-color: #064663;
-	color: white;
-	}
-	#btnColor:hover {
-	color: white;
-	}
-</style>
+<link rel="stylesheet" href="/resources/additionCss/boardWriteFrm.css">
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
@@ -105,7 +60,7 @@
 						</c:choose>
 				   		<td>첨부파일</td>
 						<td style="text-align:left;">
-						<input type="file" name="addFiles" multiple>
+						<input type="file" name="addFile">
 						</td> 
 					</tr>
 					<tr>
@@ -144,7 +99,6 @@
 			$("#img-view").attr("src","");
 		}
 	} */
-
 	$(function() {
 		$("#summernote").summernote({
 			height:400,

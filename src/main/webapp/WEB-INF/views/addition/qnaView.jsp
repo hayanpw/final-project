@@ -7,137 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://kit.fontawesome.com/4054b6ceaa.js" crossorigin="anonymous"></script>
-<style type="text/css">
-	#title{
-	width:220px;
-	border-top: 7px solid #064663;
-	margin-top:70px;
-	margin-left:70px;
-	font-weight:700;
-	font-size: 40px;
-	margin-bottom: 50px;
-	}
-	#table tr:nth-child(1){
-	border-top: 3px solid #064663;
-	}
-	#table1 tr:nth-child(2) {
-	border-top: 2px solid #eee;
-    }
-    #table1 tr:nth-child(3) {
-	border-top: 2px solid #eee;
-    }
-     #table1 tr:nth-child(4) {
-	border-top: 2px solid #eee;
-    }
-	#table{
-	text-align: left;
-	}
-	#buttons{
-	text-align: right;
-	}
-	.inputCommentBox ul{
-	list-style-type: none;
-	padding : 0;
-	display: flex;
-	}
-	.inputCommentBox textarea[name=commentContent]{
-		height:100%;
-		resize: none;
-	}
-	.inputCommentBox ul>li:first-child,.inputCommentBox ul>li:last-child {
-		width:15%;
-		text-align: center;
-		display: flex;	
-		justify-content: center;
-		align-items: center;
-	}
-	.inputCommentBox ul>li:nth-child(2) {
-		width:70%;
-	}
-	.comments,.recomments{
-		list-style-type: none;
-		padding : 0;
-		display: flex;
-	}
-	.comments>li>p,.recomments>li>p{
-		margin: 0;
-	}
-	.comments>li:first-child{
-		display: flex;
-		flex-flow:column;
-		justify-content: flex-start;
-		align-items: center;
-		width:15%;
-		padding : 5px 0px 5px 0px;
-	}
-	
-	.comments>li:last-child{
-		padding : 5px 0px 5px 0px;
-		width : 85%;
-		display:flex;
-		flex-flow:column;
-		justify-content: space-between;	
-		
-	}
-	.commentsBtn{	
-		text-align: right;	
-	}
-	.recoment{
-		display: none;	
-		justify-content: space-around;
-	}
-	.recoment>textarea{
-		width: 85%;
-		resize: none;
-	}
-	textarea.form-control{
-		height:100%;
-		resize:none;
-	}
-	.recoment>div{
-		width:10%;
-	}
-	.recomments>li:first-child{
-		display: flex;	
-		justify-content: center;
-		align-items: center;
-		width:15%;
-		padding : 5px 0px 5px 0px;
-	}
-	.recomments>li:nth-child(2){
-		display: flex;
-		flex-flow:column;	
-		justify-content: center;
-		align-items: center;
-		width:10%;
-		padding : 5px 0px 5px 0px;
-	}
-	.recomments>li:last-child{
-		padding : 5px 0px 5px 0px;
-		width : 75%;
-		display:flex;
-		flex-flow:column;
-		justify-content: space-between;	
-	}
-	.btnColor{
-	color: #064663;
-	}
-	.btnColor:hover{
-	text-decoration:none;
-	color: #064663;
-	}
-	#submitBtn{
-	margin-left:7px;
-	background-color: #064663;
-	border: none;
-	}
-	#boardTitle{
-	font-size: 30px;
-	}
-	#tag{
-	font-weight: bold;
-	}
-</style>
+<link rel="stylesheet" href="/resources/additionCss/qnaView.css">
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
@@ -279,7 +149,7 @@
 			<div id="buttons">
 				<c:if test="${sessionScope.m.memberId eq b.boardWriter }">
 				<a class="btn btnColor" href="/boardDelete.do?boardType=2&boardNo=${b.boardNo }">글삭제</a>
-				<a class="btn btnColor" href="/boardUpdate.do?boardNo=${b.boardNo }">글수정</a>
+				<a class="btn btnColor" href="/boardUpdate.do?boardType=2&boardNo=${b.boardNo }">글수정</a>
 				</c:if>
 				<c:if test="${sessionScope.m.memberLevel ==0 }">
 				<a class="btn btnColor" href="/boardDelete.do?boardType=2&boardNo=${b.boardNo }">글삭제</a>

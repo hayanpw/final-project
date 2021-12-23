@@ -7,188 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://kit.fontawesome.com/4054b6ceaa.js" crossorigin="anonymous"></script>
-<style type="text/css">
-	#title{
-	width:205px;
-	border-top: 7px solid #064663;
-	margin-top:70px;
-	margin-left:70px;
-	font-weight:700;
-	font-size: 40px;
-	margin-bottom: 50px;
-	}
-	#table tr:nth-child(1){
-	border-top: 2px solid #064663;
-	}
-	#table1 tr:nth-child(2) {
-	border-top: 2px solid #eee;
-    }
-    #table1 tr:nth-child(3) {
-	border-top: 2px solid #eee;
-    }
-     #table1 tr:nth-child(4) {
-	border-top: 2px solid #eee;
-    }
-	#table{
-	text-align: left;
-	}
-	#table>a:first-child {
-	float: left;
-	}
-	#table>a:nth-child(2) {
-	float: left;
-	}
-	#table>a:nth-child(3) {
-	float: left;
-	}
-	.inputCommentBox ul{
-	list-style-type: none;
-	padding : 0;
-	display: flex;
-	}
-	.inputCommentBox textarea[name=commentContent]{
-		height:100%;
-		resize: none;
-	}
-	.inputCommentBox ul>li:first-child,.inputCommentBox ul>li:last-child {
-		width:15%;
-		text-align: center;
-		display: flex;	
-		justify-content: center;
-		align-items: center;
-	}
-	.inputCommentBox ul>li:nth-child(2) {
-		width:70%;
-	}
-	.comments,.recomments{
-		list-style-type: none;
-		padding : 0;
-		display: flex;
-	}
-	.comments>li>p,.recomments>li>p{
-		margin: 0;
-	}
-	.comments>li:first-child{
-		display: flex;
-		flex-flow:column;
-		justify-content: flex-start;
-		align-items: center;
-		width:15%;
-		padding : 5px 0px 5px 0px;
-	}
-	
-	.comments>li:last-child{
-		padding : 5px 0px 5px 0px;
-		width : 85%;
-		display:flex;
-		flex-flow:column;
-		justify-content: space-between;	
-		
-	}
-	.commentsBtn{	
-		text-align: right;	
-	}
-	.recoment{
-		display: none;	
-		justify-content: space-around;
-	}
-	.recoment>textarea{
-		width: 85%;
-		resize: none;
-	}
-	textarea.form-control{
-		height:100%;
-		resize:none;
-		border: 1px solid #eee;
-	}
-	.recoment>div{
-		width:10%;
-	}
-	.recomments>li:first-child{
-		display: flex;	
-		justify-content: center;
-		align-items: center;
-		width:15%;
-		padding : 5px 0px 5px 0px;
-	}
-	.recomments>li:nth-child(2){
-		display: flex;
-		flex-flow:column;	
-		justify-content: center;
-		align-items: center;
-		width:10%;
-		padding : 5px 0px 5px 0px;
-	}
-	.recomments>li:last-child{
-		padding : 5px 0px 5px 0px;
-		width : 75%;
-		display:flex;
-		flex-flow:column;
-		justify-content: space-between;	
-	}
-	#likechk {
-	  display: flex;
-	  justify-content: center;
-	}
-	
-	input[type=radio] {
-	display: none;
-	margin: 50px;
-	}
-	input[type=radio]+label{
-	display: inline-block;
-	margin: 10px;
-	background-color: #fff;
-	border: 2px solid #064663;
-	padding: 10px;
-	}
-	
-	input[type=radio]:checked+label{
-	background-color: #064663;
-	color: #fff;
-	}
-	.nextTitle{
-	display:inline-block;
-	background-color: #064663;
-	color:white;
-	font-size:16px;
-	width: 20%;
-	height:40px;
-	line-height:40px;
-	text-align: center;
-	margin-bottom: 3px;
-	}
-	.nextTitle+a{
-	color: #064663;
-	font-size:18px;
-	}
-	.nextTitle+a:hover{
-	text-decoration: none;
-	color: #064663;
-	}
-	#boardTitle{
-	font-size: 30px;
-	}
-	.btnColor{
-	color: #064663;
-	}
-	.btnColor:hover{
-	text-decoration:none;
-	color: #064663;
-	}
-	#submitBtn{
-	margin-left:7px;
-	background-color: #064663;
-	border: none;
-	}
-	#bcContent:focus{
-	outline: none;
-	}
-	#tag{
-	font-weight: bold;
-	}
-	
-</style>
+<link rel="stylesheet" href="/resources/additionCss/freeView.css">
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
@@ -211,13 +30,11 @@
 					<td>댓글수</td>
 					<td>${b.commentCount }</td>
 				</tr>
-				<c:if test="${not empty b.list }">
+				<c:if test="${not empty b.filename }">
 				<tr>
 					<td>첨부파일</td>
 					<td colspan="6">
-						<c:forEach items="${b.list }" var="f">
-							<a class="btnColor" href="/fileDown.do?filename=${f.filename }&filepath=${f.filepath }">${f.filename }</a>
-						</c:forEach>
+						<a class="btnColor" href="/fileDown.do?filepath=${b.filepath }&filename=${b.filename }">${b.filename }</a>
 					</td>
 				</tr>
 				</c:if>
@@ -245,7 +62,7 @@
 			</c:if>
 			<c:if test="${sessionScope.m.memberId == b.boardWriter}">
 			<a class="btn btnColor" href="/boardDelete.do?boardType=3&boardNo=${b.boardNo }">글삭제</a>
-			<a class="btn btnColor" href="/boardUpdateFrm.do?boardNo=${b.boardNo }">글수정</a>
+			<a class="btn btnColor" href="/boardUpdateFrm.do?boardType=3&boardNo=${b.boardNo }">글수정</a>
 			</c:if>
 			<c:if test="${sessionScope.m.memberLevel ==0 }">
 			<a class="btn btnColor" href="/boardDelete.do?boardType=3&boardNo=${b.boardNo }">글삭제</a>
@@ -292,8 +109,8 @@
 								<textarea name="bcContent" class="form-control" style="display:none;">${bc.bcContentBr }</textarea><!-- 수정시보임 -->
 								<p class="commentsBtn">
 									<c:if test="${sessionScope.m.memberId eq bc.bcWriter }">
-										<a href="javascript:void(0)"  class="btnColor" onclick="modifyComment(this,'${bc.bcNo }','${b.boardNo }','${bc.bcRef }');">수정</a>
-										<a href="javascript:void(0)" class="btnColor" onclick="deleteComment(this,'${bc.bcNo }','${b.boardNo }','${bc.bcRef }');">삭제</a>
+										<a href="javascript:void(0)"  class="btnColor" onclick="modifyComment(this,'${bc.bcNo }','${b.boardNo }','${bc.bcRef }','${bc.bcDel }');">수정</a>
+										<a href="javascript:void(0)" class="btnColor" onclick="deleteComment(this,'${bc.bcNo }','${b.boardNo }','${bc.bcRef }','${bc.bcDel }');">삭제</a>
 									</c:if>
 									<a href="javascript:void(0)" class="recShow btnColor">답글달기</a>
 									<input class="delchk" type="hidden" value="${bc.bcDel }">
@@ -335,7 +152,7 @@
 										<textarea name="bcContent" class="form-control" style="display:none;">${bcc.bcContentBr }</textarea>
 										<p class="commentsBtn">
 											<c:if test="${sessionScope.m.memberId eq bcc.bcWriter }">
-												<a href="javascript:void(0)" class="btnColor" onclick="modifyComment(this,'${bcc.bcNo }','${b.boardNo }','${bcc.bcRef }');">수정</a>
+												<a href="javascript:void(0)" class="btnColor" onclick="modifyComment(this,'${bcc.bcNo }','${b.boardNo }','${bcc.bcRef }','${bcc.bcDel }');">수정</a>
 												<a href="javascript:void(0)" class="btnColor"class="btn btnColor" onclick="deleteComment(this,'${bcc.bcNo }','${b.boardNo }','${bcc.bcRef }');">삭제</a>
 											</c:if>	
 												<a href="javascript:void(0)" class="recShow btnColor">답글달기</a>
@@ -505,15 +322,21 @@
 	});
 	
 	//댓글삭제
-	function deleteComment(obj,bcNo,boardNo,bcRef){
+	function deleteComment(obj,bcNo,boardNo,bcRef,bcDel){
+		if(bcDel==1){
+			return false;
+		}
 		if(confirm("댓글을 삭제하시겠습니까?")){
 			location.href="/deleteComment.do?boardType=3&bcNo="+bcNo+"&boardNo="+boardNo+"&bcRef="+bcRef;
 		}
 	}
 	
 	//댓글수정창띄움
-	function modifyComment(obj,bcNo,boardNo,bcRef){
+	function modifyComment(obj,bcNo,boardNo,bcRef,bcDel){
 		//textarea를 화면에 표현
+		if(bcDel==1){
+			return false;
+		}
 		$(obj).parent().prev().show();
 		//기존본문 내용 숨김
 		$(obj).parent().prev().prev().hide();

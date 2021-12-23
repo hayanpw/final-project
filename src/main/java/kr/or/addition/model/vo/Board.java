@@ -18,5 +18,7 @@ public class Board {
 	private int commentCount;
 	private int boardLevel;
 	private int boardFix;
+	private String filename;
+	private String filepath;
 	private ArrayList<FileVO> list;
 }

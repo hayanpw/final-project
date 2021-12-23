@@ -6,83 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style type="text/css">
-#title {
-	width: 220px;
-	border-top: 7px solid #064663;
-	margin-top: 70px;
-	margin-left: 70px;
-	font-weight: 700;
-	font-size: 30px;
-	margin-bottom: 50px;
-}
-.boardName{
-	margin-top: 70px;
-	margin-left: 30px;
-	margin-bottom:20px;
-	font-weight: 700;
-	font-size: 30px;
-	color: #064663;
-}
-
-.display {
-	text-align: center;
-}
-
-#table, #nav, .table{
-	margin-bottom: 50px;
-}
-
-#date {
-	width: 100px;
-}
-
-.display td>a:hover {
-	text-decoration: none;
-}
-
-.display tr:hover {
-	background-color: #f3efe6;
-}
-
-.display td {
-	border-top: 1px solid #f3efe6;
-	font-weight: 100;
-	height: 40px;
-	font-size: 18px;
-	line-height: 40px;
-}
-
-#firtr>td {
-	text-align: center;
-	border-top: 3px solid #064663;
-	font-weight: bold;
-	height: 40px;
-	font-size: 15px;
-	line-height: 40px;
-}
-
-#btitle a {
-	color: black;
-}
-#mymenu>li>a{
-	color: black;
-}
-
-#mymenu>li.active>a {
-	background-color: #563D39;
-	color: white;
-}
-#firtr>td:first-child {
-	width: 50px;
-}
-#btnColor{
-	background-color: #064663;
-	border: none;
-	float: right;
-}
-
-</style>
+<link rel="stylesheet" href="/resources/additionCss/myFree.css">
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
@@ -191,16 +115,15 @@
 						<tbody>
 							<c:forEach items="${commentList }" var="b" varStatus="i">
 								<tr>
-									<td><input type="checkbox" class="chkc"></td>
-									<td><input type="hidden" value="${b.bcNo }">${i.count }</td>
-									<td>${b.bcContent }</td>
+									<td><button id="btnColor" class="btn btn-danger chkDeleteCmt">삭제</button></td>
+									<td><input class="bcNo" type="hidden" value="${b.bcNo }">${i.count }</td>
+									<td><input class="bcRef" type="hidden" value="${b.bcRef }">${b.bcContent }</td>
 									<td id="btitle"><a href="/boardView.do?boardType=${b.boardType }&boardNo=${b.boardRef }">${b.boardTitle }</a></td>
 									<td>${b.regDate }</td>
 								</tr>
 							</c:forEach>
 						</tbody>
 					</table>
-					<button id="btnColor" class="btn btn-danger chkDeleteCmt">댓글삭제</button>
 					</div>
 		</div>
 	<script type="text/javascript">
@@ -366,17 +289,10 @@
 			}
 		});
 	 $(".chkDeleteCmt").click(function(){
-			var inputs=$(".chkc:checked");
-			var num = new Array(); 
-			inputs.each(function(idx,item){
-				var bcNo = $(item).parent().next().children().val();
-				num.push(bcNo);
-			});
-			if(!inputs.length){
-				alert("삭제할 글을 선택해 주세요");
-			}else{
-			location.href="/boardDelete.do?boardNo=0&boardType=4&num="+num.join("/");
-			}
+		 	var idx=$(".chkDeleteCmt").index(this);
+		 	var bcNo=$(".bcNo").eq(idx).val();
+		 	var bcRef=$(".bcRef").eq(idx).val();
+		 	location.href="/deleteComment.do?boardNo=0&boardType=4&bcNo="+bcNo+"&bcRef="+bcRef;
 		});
 	</script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
