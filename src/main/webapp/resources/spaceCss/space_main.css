@@ -11,9 +11,6 @@
 	width: 80%;
 	
 	}
-.s-title{
-	border-bottom: 1px solid #563D39;
-}
 .rental-sequence>img{
 	display : block;
 	margin : auto;
@@ -25,52 +22,36 @@
 	display: block;
 	margin: auto;
 }
-#s-table {
-	margin: 10px;
-}
-#s-table tr td img{
-	width: 300px;
-	height: 200px;
-}
-#s-table tr td:first-child{
-	width: 10%;
-	text-align: center;
-	border-right: 1px solid #BDB19A ;
-	vertical-align: middle;
-}
-#s-table tr td:last-child{
-	width: 50%;
-	text-align: center;
-	vertical-align: middle;
-}
-#s-table tr td{
-	border-bottom: 1px solid #BDB19A;
-}
 .info-img{
-	width: 300px;
+	width: 100%;
+	margin-bottom: 20px;
+	border-radius: 20px; 
 }
 .spaceRes{
-	float: right;
 	margin-bottom: 10px;
+	margin-left: 1050px;
 }
 .spaceRes>a{
-	color: #563D39;
+	color: #064663 ;
 }
 .spaceRes>a:hover{
 	font-weight : bold;
-	color: #563D39;
+	color: #e79b36;
 }
 #rentalBtn{
-	border : 1px solid #BDB19A; 
+	border : 2px solid #064663 ; 
+	color : #ffffff;
+	background-color : #064663;
 	width : 250px;
 	height : 50px;
 	margin-bottom : 10px;
 	margin-left: 40%;
 }
 #rentalBtn:hover{
-	border : 1px solid white;
-	background: #BDB19A;	
-	
+	border : 2px solid #064663 ; 
+	background-color: #ffffff;;
+	color :#064663;
+	font-weight: bold;
 }
 .space-img p{
 	margin-top : 40px;
@@ -79,4 +60,18 @@
 }
 .ckeckL{
 	margin-bottom: 40px;
+}
+.space-intro{
+	border-radius : 30px;
+	float: left;
+	border : 1px solid #064663 ;
+	width :  450px;
+	margin-left: 80px;
+	margin-bottom: 50px;
+	padding: 30px;
+}
+.space-intro p{
+	margin: 10px;
+	border-bottom: 1px solid #064663;
+	margin-top: 15px;
 }
