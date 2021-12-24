@@ -156,6 +156,12 @@ public class ReadingService {
 	}
 
 
+	public ArrayList<Fixtures> selectAllFixtures() {
+		ArrayList<Fixtures> fi = dao.selectAllFixtures();
+		return fi;
+	}
+
+
 
 
 }
