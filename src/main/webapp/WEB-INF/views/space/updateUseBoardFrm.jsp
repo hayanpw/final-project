@@ -16,16 +16,14 @@
 			<form action="/updateUseBoard.do" method="post" enctype="multipart/form-data">
 				<table class="table table-border" border="1">
 					<tr>
-						<th colspan=2">제목</th>
+						<th colspan="2">제목</th>
 						<td colspan="6"><input type="text" name="ubTitle" value="${u.ubTitle }"></td>
 					</tr>
 					<tr>
 						<th>작성자</th>
 						<td>${sessionScope.m.memberId }</td>
-						<th>사용공간</th>
-						<td>${r.spaceName }</td>
-						<th>사용날짜</th>
-						<td>${r.rentalDate }</td>
+						<th>작성날짜</th>
+						<td>${u.ubDate }</td>
 						<th>첨부파일</th>
 						<td><input type="file" name="upfile"></td>
 					</tr>
@@ -39,9 +37,20 @@
 				</table>
 				<input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
 				<input type="hidden" name="ubNo" value="${u.ubNo }">
-				<button type="submit">수정</button>			
+				<div class="btn-box">
+					<button id="btn" type="submit" onclick="return checkAgree();">수정하기</button>			
+				</div>
 			</form>	
 		</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+	<script>
+	 function checkAgree() {
+	      if ($("[name=upfile]").val() == "") {
+	         alert("파일을 업로드 해주세요.");
+	         $("[name=upfile]").focus();
+	         return false;
+	      }
+	 }
+	</script>
 </body>
 </html>

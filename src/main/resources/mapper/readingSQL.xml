@@ -148,6 +148,20 @@
 	<delete id="deleteFixtures">
 		delete from fixtures where reading_no=#{reserveNo}
 	</delete>
+	<select id="selectAllFixtures" resultType="fixtures">
+		select
+			fixtures_no as fixturesNo,
+			reading_no as readingNo,
+			fixtures_time as fixturesTime,
+			fixtures_day as fixturesDay,
+			fixtures_num as fixturesNum,
+			fixtures_id as fixturesId,
+			fixtures_name as fixturesName,
+			fixtures_charger as fixturesCharger,
+			fixtures_table as fixturesTable,
+			fixtures_blanket as fixturesBlanket
+		from fixtures
+	</select>
 </mapper>
 		
 

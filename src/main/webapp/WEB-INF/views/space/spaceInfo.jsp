@@ -73,8 +73,7 @@
 						</tr>
 						<tr>
 							<th>가격</th>
-							<td>${s.price } / 2시간</td>
-							<input type="hidden" value="100" id="price">
+							<td>${s.price } / 2시간<input type="hidden" value="100" id="price"></td>
 						</tr>
 					</table>
 					<p>  ※ 대관으로 인한 직접적인 수익이 발생하는 경우, 대관이 불가합니다.<br> 규정에 따라 대관이 취소될 수 있습니다.</p>

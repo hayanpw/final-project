@@ -26,7 +26,12 @@
 	<div class="container">
 		<div class="title">
 			<h1><strong>좌석 선택</strong></h1>
-			<h2>${s.showName } / </h2>
+			<c:if test="${s.showName.length() > 13 }">
+				<h2>${s.showName.substring(0,10) }... / </h2>
+			</c:if>
+			<c:if test="${s.showName.length() <= 13 }">
+				<h2>${s.showName } / </h2>
+			</c:if>
 			<h2>${s.showHall } / </h2>
 			<h2>${sr.showDate }</h2>
 		</div>

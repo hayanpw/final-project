@@ -52,6 +52,15 @@ public class ExhibitionService {
 		ArrayList<Exhibition> list = dao.selectExhibition(ep);
 		return list;
 	}
+	public ArrayList<Exhibition> selectExhibitionListMain() {
+		int start = 1;
+		int end = 9;
+		ExhibitionPagingVo ep = new ExhibitionPagingVo();
+		ep.setStart(start);
+		ep.setEnd(end);
+		ArrayList<Exhibition> list = dao.selectExhibition(ep);
+		return list;
+	}
 
 	public ArrayList<Exhibition> moreExhibition(int start) {
 		int end = start +2;

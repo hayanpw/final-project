@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>좌석 선택</title>
+<title>좌석 현황</title>
     <link href="resources/readingCss/reserationToday.css" rel="stylesheet">
 </head>
 <body>
@@ -16,7 +16,7 @@
 				<h1 class="todaySeat"></h1>
 			</div>
 			<br><br><br>
-			<div class="container-left">
+			<div class="container-left col-sm-10">
 				<c:forEach begin="1" end="100" varStatus="i" >
 					<c:choose>
 						<c:when test="${i.index%20 eq 0}">
@@ -38,6 +38,10 @@
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
+			</div>
+			<div class="container-right col-sm-2">
+				<div style="background-color:#A79078">이용가능</div>
+				<div style="background-color:#6B6C68">이용불가</div>
 			</div>
 		</div>
 	<script>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,7 +24,7 @@
 			<c:if test="${ !empty s.spaceName  }">
 				<h3>
 					<img class="i-img" src="resources/spaceImage/appointment.png"
-						style="width: 40px;"> 신청 현황-${s.spaceName }
+						style="width: 40px;"> 신청 현황   -   ${s.spaceName }
 				</h3>
 			</c:if>
 			<c:if test="${ empty s.spaceName  }">
@@ -72,8 +73,10 @@
 			<table class="table">
 				<tr>
 					<td>▶ 선택한날짜</td>
-					<td colspan="4"><input type="text" id="selectDate"
-						name="rentalDate"></td>
+					<td colspan="4">
+						<input type="text" class="selectDate" disabled="disabled">
+						<input type="hidden" class="selectDate" name="rentalDate" > 
+					</td>
 				</tr>
 				<tr>
 					<td>▶선택시간</td>
@@ -87,13 +90,7 @@
 				<c:set var="black" value="false" />
 				<c:set var="logout" value="false" />
 				<c:set var="res" value="false" />
-				<c:forEach items="${b }" var="b">
-					<c:if test="${not black }">
-						<c:if test="${b.blackId eq sessionScope.m.memberId }">
-							<div class="box">현재 예약이 불가능한 아이디 입니다.</div>
-							<c:set var="black" value="true" />
-						</c:if>
-					</c:if>
+				<c:if test="${fn:length(b) == 0  }">
 					<c:if test="${not logout }">
 						<c:if test="${empty sessionScope.m  }">
 							<button class="btn btn-default" type="button"
@@ -101,12 +98,25 @@
 							<c:set var="logout" value="true" />
 						</c:if>
 					</c:if>
+					<c:if test="${not empty sessionScope.m }">
+						<button onclick="return checkAgree();" class="btn btn-default"
+									id="resBtn" type="submit">신청하기</button>
+					</c:if>
+				</c:if>
+				<c:forEach items="${b }" var="b">
+					<c:if test="${not black }">
+						<c:if test="${b.blackId eq sessionScope.m.memberId }">
+							<div class="box">현재 예약이 불가능한 아이디 입니다.</div>
+							<c:set var="black" value="true" />
+						</c:if>
+					</c:if>
 					<c:if test="${not res }">
-						<c:if
-							test="${not empty sessionScope.m && b.blackId ne sessionScope.m.memberId }">
-							<button onclick="return checkAgree();" class="btn btn-default"
-								id="resBtn" type="submit">신청하기</button>
+						<c:if test="${not empty sessionScope.m}">
+							<c:if test="${ b.blackId ne sessionScope.m.memberId }">
+								<button onclick="return checkAgree();" class="btn btn-default"
+									id="resBtn" type="submit">신청하기</button>
 							<c:set var="res" value="true" />
+							</c:if>	
 						</c:if>
 					</c:if>
 				</c:forEach>
@@ -152,7 +162,7 @@
 						maxDate : endDate,
 						beforeShowDay : noMondays, //월요일은 휴무일
 						onSelect : function(data) {
-							$("#selectDate").val(data);
+							$(".selectDate").val(data);
 							$(".time-table").show();
 							selectResList(data);
 						}

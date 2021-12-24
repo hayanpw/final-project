@@ -53,6 +53,7 @@
 	color: white;
 	border: 1px solid white;
 	border-radius: 10px;
+	
 } .updateBtn{
 	color: #064663 ;
 	background-color: white;
@@ -70,6 +71,10 @@
 	background: #064663;
 }
 .noRental{
+	margin-top : 100px;
+	text-align: center;
+}
+.no{
 	margin-top : 100px;
 	text-align: center;
 }

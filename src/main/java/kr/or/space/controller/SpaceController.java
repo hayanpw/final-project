@@ -273,6 +273,8 @@ public class SpaceController {
 		model.addAttribute("s", s);
 		model.addAttribute("rentalDate", rentalDate);
 		model.addAttribute("fv", fv);
+		System.out.println(rentalDate);
+		System.out.println(stNo);
 		return "space/spaceInfo";
 	}
 	//공간 상세보기
@@ -347,7 +349,7 @@ public class SpaceController {
 	public String mailSend(String memberId, int rentalNo, Model model) {
 		int reqPage = 1;
 		String email = service.selectEmail(memberId);
-		String result = mailService.mailSend("redsix622@naver.com");
+		String result = mailService.mailSend(email);
 		int result1 = service.updateRentalStatus(rentalNo);
 		if (result1 > 0) {
 			SpacePageNavi spn = service.selectAllRental(reqPage);
@@ -647,14 +649,14 @@ public class SpaceController {
 	 */	
 	//예약 취소
 	@RequestMapping(value = "/deleteRes.do")
-	public String deleteRes(int rentalNo, Model model ) {
+	public String deleteRes(int rentalNo, Model model, String memberId ) {
 		int result = service.deleteRental(rentalNo);
 		if(result > 0) {
-			model.addAttribute("msg", "삭제하였습니다.");
+			model.addAttribute("msg", "예약을 취소하였습니다.");
 		}else {
-			model.addAttribute("msg", "삭제 실패");
+			model.addAttribute("msg", "다시 시도 해주십시오.");
 		}
-		model.addAttribute("loc", "/spaceAdmin.do");
+		model.addAttribute("loc", "/spaceMypage.do?memberId="+memberId);
 		return "common/msg";
 	}
 

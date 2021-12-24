@@ -69,7 +69,7 @@
 					</tr>
 					<tr>
 						<th>수용인원</th>
-						<td>${s.maxPeople }명</td>
+						<td>최대 ${s.maxPeople }명</td>
 					</tr>
 					<tr>
 						<th>가격</th>
@@ -102,25 +102,24 @@
 			<!-- 리뷰 보기  -->
 			<div class="review-box">
 				<h1>Review</h1>
-				<c:forEach items="${srList }" var="sr">
 				<c:if test="${fn:length(srList) == 0 }">
-					<p>엥</p>
+					<p>아직 작성 된 리뷰가 없습니다.</p>
 				</c:if>
+				<c:forEach items="${srList }" var="sr">
 					<table class="review-table">
 						<tr>
 							<th>작성자</th>
 							<td id="content" rowspan="2">${sr.srContent }</td>
-							<th id="date"">작성일 : ${sr.srDate }</th>
+							<th id="date">작성일 : ${sr.srDate }</th>
 						</tr>
 						<tr>
 							<th><img src="resources/spaceImage/music.png" style="width: 20px; height: 20px; margin-right: 5px;" >    ${sr.memberId }</th>
 						</tr>
 					</table>
 				</c:forEach>
-				<div>
+				<div class="more-box">
 				<c:if test="${count < totalCount}">
-					<button type="button" class="moreBtn" id="more" currentCount="5"
-						totalCount="${totalCount }" value="5">더보기</button>
+					<button type="button" class="moreBtn" id="more" currentCount="5" totalCount="${totalCount }" value="5">더보기</button>
 				</c:if>
 				</div>
 			</div>
@@ -133,7 +132,7 @@
 		$("#more").click(
 				function() {
 					var start = $(this).val();
-					console.log(start);
+					console.log("start :"+start);
 					$.ajax({
 						url : "/moreSpaceReview.do",
 						data : {
@@ -155,7 +154,7 @@
 							var currCount = $("#more").attr("currentCount");
 							console.log("totalCount : "+totalCount);
 							console.log("currCount : "+currCount);
-							if(currCount == totalCount){
+							if(currCount >= totalCount){
 								$("#more").css("display","none");
 								$("#more").prop("diabled",true);
 							}
