@@ -273,6 +273,8 @@ public class SpaceController {
 		model.addAttribute("s", s);
 		model.addAttribute("rentalDate", rentalDate);
 		model.addAttribute("fv", fv);
+		System.out.println(rentalDate);
+		System.out.println(stNo);
 		return "space/spaceInfo";
 	}
 	//공간 상세보기
@@ -347,7 +349,7 @@ public class SpaceController {
 	public String mailSend(String memberId, int rentalNo, Model model) {
 		int reqPage = 1;
 		String email = service.selectEmail(memberId);
-		String result = mailService.mailSend("redsix622@naver.com");
+		String result = mailService.mailSend(email);
 		int result1 = service.updateRentalStatus(rentalNo);
 		if (result1 > 0) {
 			SpacePageNavi spn = service.selectAllRental(reqPage);

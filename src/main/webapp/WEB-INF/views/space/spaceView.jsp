@@ -110,17 +110,16 @@
 						<tr>
 							<th>작성자</th>
 							<td id="content" rowspan="2">${sr.srContent }</td>
-							<th id="date"">작성일 : ${sr.srDate }</th>
+							<th id="date">작성일 : ${sr.srDate }</th>
 						</tr>
 						<tr>
 							<th><img src="resources/spaceImage/music.png" style="width: 20px; height: 20px; margin-right: 5px;" >    ${sr.memberId }</th>
 						</tr>
 					</table>
 				</c:forEach>
-				<div>
+				<div class="more-box">
 				<c:if test="${count < totalCount}">
-					<button type="button" class="moreBtn" id="more" currentCount="5"
-						totalCount="${totalCount }" value="5">더보기</button>
+					<button type="button" class="moreBtn" id="more" currentCount="5" totalCount="${totalCount }" value="5">더보기</button>
 				</c:if>
 				</div>
 			</div>
@@ -133,7 +132,7 @@
 		$("#more").click(
 				function() {
 					var start = $(this).val();
-					console.log(start);
+					console.log("start :"+start);
 					$.ajax({
 						url : "/moreSpaceReview.do",
 						data : {
@@ -155,7 +154,7 @@
 							var currCount = $("#more").attr("currentCount");
 							console.log("totalCount : "+totalCount);
 							console.log("currCount : "+currCount);
-							if(currCount == totalCount){
+							if(currCount >= totalCount){
 								$("#more").css("display","none");
 								$("#more").prop("diabled",true);
 							}
