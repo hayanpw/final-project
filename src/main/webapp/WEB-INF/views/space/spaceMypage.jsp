@@ -47,7 +47,7 @@
 					<th>가격</th>
 					<th>상태</th>
 					<th>리뷰/예매</th>
-					<th>체크리스트 작성 여부  <img id="q-img" src="resources/spaceImage/ask.png" style="width: 20px; "></th>
+					<th>체크리스트 <img id="q-img" src="resources/spaceImage/ask.png" style="width: 20px; "></th>
 				</tr>
 				<c:forEach items="${list }" var="l" varStatus="i">
 					<tr>
@@ -73,7 +73,7 @@
 									<input type="hidden" id="rentalNo" value="${l.rentalNo }">
 								</c:when>
 								<c:when test="${ l.rentalDate>today  }">
-									<button type="button" onclick="location.href='/deleteRes.do?rentalNo=${l.rentalNo}'">예약 취소</button>
+									<button class="writeBtn" type="button" onclick="location.href='/deleteRes.do?rentalNo=${l.rentalNo}&memberId=${sessionScope.m.memberId }'">예약 취소</button>
 								</c:when>
 								<c:otherwise>
 									<button  class="updateBtn" type="button" class="btn btn-info btn-lg" data-toggle="modal"
@@ -109,7 +109,7 @@
 				<div class="modal-content">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal">&times;</button>
-							<h4 class="modal-title">리뷰를 작성 해주세요.</h4>
+							<h4 class="modal-title"><img   src="resources/spaceImage/edit.png" style="width: 20px; ">   리뷰를 작성 해주세요.</h4>
 						</div>
 
 						<div class="modal-body">
@@ -117,7 +117,7 @@
 								<input type="hidden" value="${sessionScope.m.memberId }" name="memberId">
 								<input placeholder="☞리뷰를 작성해주세요." name="srContent">
 								<div class="modal-b"></div>
-								<button type="submit">리뷰 등록</button>
+								<button class="updateBtn" type="submit">리뷰 등록</button>
 							</form>
 						</div>
 					<div class="modal-footer">
@@ -134,7 +134,7 @@
 				<div class="modal-content">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal">&times;</button>
-							<h4 class="modal-title">수정할 리뷰를 작성해주세요.</h4>
+							<h4 class="modal-title"><img   src="resources/spaceImage/edit.png" style="width: 20px; ">   수정할 리뷰를 작성해주세요.</h4>
 						</div>
 
 						<div class="modal-body">
@@ -142,7 +142,7 @@
 								<input type="hidden" value="${sessionScope.m.memberId }" name="memberId">
 								<input type="text" name="srContent">
 								<div class="modal-bb"></div>
-								<button type="submit">리뷰 수정</button>
+								<button class="updateBtn" type="submit">리뷰 수정</button>
 							</form>
 						</div>
 					<div class="modal-footer">

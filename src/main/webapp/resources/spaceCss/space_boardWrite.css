@@ -14,20 +14,30 @@
 	margin-top: 50px;
 }
 .btn-box button{
-	border : 1px solid #BDB19A; 
+	border : 1px solid #064663; 
 	width : 250px;
 	height : 50px;
 	background-color: white;
-	color: #563d39 ;
+	color: #064663 ;
 	border-radius: 10px;
 }
 .view-btn{
 	text-align: right;
 }
 .view-btn button{
-	border : 1px solid #BDB19A; 
+	border : 1px solid #064663; 
 	width : 59px;
 	background-color: white;
-	color: #563d39 ;
+	color: #064663 ;
+	border-radius: 10px;
+}
+.prev-btn{
+	float: left;
+}
+.prev-btn button{
+	border : 1px solid #064663; 
+	width : 100px;
+	background-color: #064663;
+	color: white ;
 	border-radius: 10px;
 }

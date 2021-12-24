@@ -64,13 +64,15 @@
 					</c:forEach>
 					<p>이름 : ${s.spaceName }</p>
 					<p>용도 : ${s.spacePurpose }</p>
-					<p>수용인원 : ${s.maxPeople }명</p>
+					<p>수용인원 : 최대  ${s.maxPeople }명</p>
 					<p>가격 : ${s.price }원/ 2시간</p>
 				</div>
 				</c:forEach>
 		</div>
+		<div class="btn-box">		
 		<button class="btn btn-default" id="rentalBtn"
 			onclick="location.href='/spaceRes.do?spaceNo=0'">대관 신청하기</button>
+		</div>	
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>

@@ -24,6 +24,7 @@
 }
 .info-img{
 	width: 100%;
+	height : 388px;
 	margin-bottom: 20px;
 	border-radius: 20px; 
 }
@@ -57,9 +58,14 @@
 	margin-top : 40px;
 	margin-bottom : 40px;
 	line-height: 250%;
+	font-size: 15px;
 }
 .ckeckL{
 	margin-bottom: 40px;
+}
+.ckeckL p{
+	font-size : 17px;
+	line-height: 250%;
 }
 .space-intro{
 	border-radius : 30px;
@@ -74,4 +80,7 @@
 	margin: 10px;
 	border-bottom: 1px solid #064663;
 	margin-top: 15px;
+}
+.rental-price{
+	overflow: hidden;
 }

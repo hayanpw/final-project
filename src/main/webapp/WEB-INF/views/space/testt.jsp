@@ -3,6 +3,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,36 +13,39 @@
 <body>
 	<jsp:useBean id="now" class="java.util.Date" />
 	<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today" />
+	<c:if test="${fn:length(list) == 0  }">
+		<p class="no">미작성한 예매 내역이 없습니다.</p>
+	</c:if>
+	<c:if test="${fn:length(list) != 0  }">
 	<table class="table table-bordered">
-		<tr>
-			<th>No.</th>
-			<th>예약 공간</th>
-			<th>예약 시간</th>
-			<th>예약 날짜</th>
-			<th>용도</th>
-			<th>인원</th>
-			<th>가격</th>
-			<th>상태</th>
-			<th>리뷰/예매</th>
-			<th>체크리스트 작성 여부 <img id="q-img"
-				src="resources/spaceImage/ask.png" style="width: 20px;"></th>
-		</tr>
-		<c:forEach items="${list }" var="l" varStatus="i">
-			<tr>
-				<td>${i.count }</td>
-				<td>${l.spaceName }</td>
-				<td>${l.startTime }~${l.endTime }</td>
-				<td>${l.rentalDate }</td>
-				<td>${l.spacePurpose }</td>
-				<td>${l.rentalPeople }/${l.maxPeople }명</td>
-				<td>${l.price }원</td>
-				<c:if test="${l.rentalStatus eq 1 }">
-					<td>심사중</td>
-				</c:if>
-				<c:if test="${l.rentalStatus eq 2 }">
-					<td>확정</td>
-				</c:if>
-				<td>
+				<tr>
+					<th>No.</th>
+					<th>예약 공간</th>
+					<th>예약 시간</th>
+					<th>예약 날짜</th>
+					<th>용도</th>
+					<th>인원</th>
+					<th>가격</th>
+					<th>상태</th>
+					<th>리뷰/예매</th>
+					<th>체크리스트 <img id="q-img" src="resources/spaceImage/ask.png" style="width: 20px; "></th>
+				</tr>
+				<c:forEach items="${list }" var="l" varStatus="i">
+					<tr>
+						<td>${i.count }</td>
+						<td>${l.spaceName }</td>
+						<td>${l.startTime }~${l.endTime }</td>
+						<td>${l.rentalDate }</td>
+						<td>${l.spacePurpose }</td>
+						<td>${l.rentalPeople }/${l.maxPeople }명</td>
+						<td>${l.price }원</td>
+						<c:if test="${l.rentalStatus eq 1 }">
+							<td>심사중</td>
+						</c:if>
+						<c:if test="${l.rentalStatus eq 2 }">
+							<td>확정</td>
+						</c:if>
+						<td>
 							<c:choose>
 								<c:when test="${l.srNo eq 0 && l.rentalDate<today|| l.delYn eq 'Y'  }">
 									<button class="writeBtn" type="button"
@@ -50,7 +54,7 @@
 									<input type="hidden" id="rentalNo" value="${l.rentalNo }">
 								</c:when>
 								<c:when test="${ l.rentalDate>today  }">
-									<button type="button" onclick="location.href='/deleteRes.do?rentalNo=${l.rentalNo}'">예약 취소</button>
+									<button class="writeBtn" type="button" onclick="location.href='/deleteRes.do?rentalNo=${l.rentalNo}&memberId=${sessionScope.m.memberId }'">예약 취소</button>
 								</c:when>
 								<c:otherwise>
 									<button  class="updateBtn" type="button" class="btn btn-info btn-lg" data-toggle="modal"
@@ -62,20 +66,23 @@
 								</c:otherwise>
 							</c:choose>							
 						</td>
-				<td><c:choose>
-						<c:when test="${l.usedBoard eq 1 }">
+						<td>
+							<c:choose>
+								<c:when test="${l.usedBoard eq 1 }">
 									작성완료
 								</c:when>
-						<c:when test="${l.usedBoard eq 0 && l.rentalDate>today }">
+								<c:when test="${l.usedBoard eq 0 && l.rentalDate>today }">
 									-
 								</c:when>
-						<c:when test="${l.usedBoard eq 0 && l.rentalDate<today}">
-							<a id="ckList" href="/selectSpaceBoardList.do?reqPage=1">☞작성하러가기</a>
-						</c:when>
-					</c:choose></td>
-			</tr>
-		</c:forEach>
-	</table>
+								<c:when test="${l.usedBoard eq 0 && l.rentalDate<today}">
+									<a id="ckList" href="/selectSpaceBoardList.do?reqPage=1">☞작성하러가기</a>
+								</c:when>
+							</c:choose>
+						</td>
+					</tr>
+				</c:forEach>
+			</table>
+	</c:if>
 		<script >
 	$(function () {
 		$(".pop").hide();
