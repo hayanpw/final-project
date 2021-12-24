@@ -182,7 +182,23 @@
 				alert("날짜를 선택해주세요");
 				return false;
 			}else{
-				return true;
+				var showDate = $("input[name=showDate]").val();
+				var showNo = $("input[name=showNo]").val()
+				$.ajax({
+					url: "/checkSoldOut.do",
+					type: "post",
+					data: {showDate:showDate, showNo:showNo},
+					success: function(data) {
+						var seats = 413-data;
+						if(seats != 0){
+							return true;
+						}else{
+							alert("해당 일자의 좌석이 매진되었습니다.");
+							return false;
+						}
+					}
+				});
+				
 			}
 		}
     
