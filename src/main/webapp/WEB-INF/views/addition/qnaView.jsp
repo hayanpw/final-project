@@ -148,7 +148,7 @@
 			</div>
 			<div id="buttons">
 				<c:if test="${sessionScope.m.memberId eq b.boardWriter }">
-				<a class="btn btnColor" href="/boardDelete.do?boardType=2&boardNo=${b.boardNo }">글삭제</a>
+				<a class="btn btnColor" href="/boardDelete.do?num=&boardType=2&boardNo=${b.boardNo }">글삭제</a>
 				<a class="btn btnColor" href="/boardUpdate.do?boardType=2&boardNo=${b.boardNo }">글수정</a>
 				</c:if>
 				<c:if test="${sessionScope.m.memberLevel ==0 }">

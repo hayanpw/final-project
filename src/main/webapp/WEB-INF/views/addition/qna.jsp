@@ -113,7 +113,7 @@
 		
 		
 		
-		<div id="title2">질문과 답변</div>
+		<div id="title2">1대1문의</div>
 		<div id="table">
 			<div>
 				<form action="/searchKeyword.do?boardType=2&reqPage=1" method="post">

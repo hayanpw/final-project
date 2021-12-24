@@ -137,4 +137,13 @@ public class AdditionDao {
 		return sqlSession.selectOne("addition.chkDelComment",bcRef);
 	}
 
+	public int totalEventCount() {
+		return sqlSession.selectOne("addition.totalEventCount");
+	}
+
+	public ArrayList<Board> eventMore(HashMap<String, Object> map) {
+		List<Board> list = sqlSession.selectList("addition.eventMore",map);
+		return (ArrayList<Board>)list;
+	}
+
 }

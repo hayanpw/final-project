@@ -13,10 +13,11 @@
 			reg_date as regDate,
 			cnt as commentCount,
 			boardlevel as boardLevel,
-			boardfix as boardFix
+			boardfix as boardFix,
+			filepath as filepath
 		from
 		(select rownum as rnum,n.* from
-		(select board_no,board_title,board_writer,readcount,reg_date,nvl(count, 0) as cnt,boardlevel,boardfix
+		(select board_no,board_title,board_writer,readcount,reg_date,nvl(count, 0) as cnt,boardlevel,boardfix,filepath
 		from(select*from board where boardtype=#{boardType}) 
 		left join (select board_no,count(*) as count from (select board_no,board_ref,bc_del from board join comment1 on (board_no=board_ref) where bc_del=0) group by board_no) 
 		using (board_no) order by board_no desc)n) where rnum between #{start} and #{end}
@@ -292,5 +293,16 @@
 	from comment1 where bc_no=#{bcRef}
 	</select>
 	
+	<!--이벤트글갯수-->
+	<select id="totalEventCount" parameterType="_int" resultType="_int">
+	select count(*) from board where boardtype=5
+	</select>
+	
+	<!--이벤트 글리스트-->
+	<select id="eventMore" parameterType="_int" resultType="board">
+	select
+	bc_del as bcDel
+	from comment1 where bc_no=#{bcRef}
+	</select>
 	
 </mapper>

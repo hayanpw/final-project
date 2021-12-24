@@ -7,73 +7,44 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://kit.fontawesome.com/4054b6ceaa.js" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="/resources/additionCss/freeView.css">
+<link rel="stylesheet" href="/resources/additionCss/eventView.css">
 </head>
-<body>
-	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+<body><jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="container" id="container">
-		<div id="title">소통게시판</div>
 		<input id="loginId" type="hidden" value="${sessionScope.m.memberId }">
 		<input type="hidden" id="boardNo" value="${b.boardNo }">
 		<div id="table">
-		
+			<div id="btns">
+			<a class="btn btnColor" href="/eventList.do">글목록</a>
+			<c:choose>
+			<c:when test="${sessionScope.m.memberId == b.boardWriter}">
+			<a class="btn btnColor" href="/boardDelete.do?num=&boardType=5&boardNo=${b.boardNo }">글삭제</a>
+			<a class="btn btnColor" href="/boardUpdateFrm.do?boardType=5&boardNo=${b.boardNo }">글수정</a>
+			</c:when>
+			<c:when test="${sessionScope.m.memberLevel == 0}">
+			<a class="btn btnColor" href="/boardDelete.do?num=&boardType=5&boardNo=${b.boardNo }">글삭제</a>
+			</c:when>
+			</c:choose>
+			</div>
 			<table id="table1" class="table">
 				<tr>
 					<td id="boardTitle" colspan="7">${b.boardTitle }</td>
 				</tr>
 				<tr>
-					<td>${b.boardWriter }</td>
-					<td>조회수</td>
-					<td>${b.readCount }</td>
-					<td>작성일</td>
-					<td>${b.regDate }</td>
-					<td>댓글수</td>
-					<td>${b.commentCount }</td>
+					<td colspan="7">이벤트 기간</td>
 				</tr>
-				<c:if test="${not empty b.filename }">
 				<tr>
-					<td>첨부파일</td>
-					<td colspan="6">
-						<a class="btnColor" href="/fileDown.do?filepath=${b.filepath }&filename=${b.filename }">${b.filename }</a>
-					</td>
-				</tr>
-				</c:if>
-				<tr>
-					<td colspan="7">${b.boardContent }
-						<div id="likechk">
-					    <input type="radio" value="like" name="likechk" id="like" onclick="return check(0);"><label for="like" ><i class="fas fa-thumbs-up"><span id="likeResult" >&nbsp;${l.likeSum }</span>&nbsp;&nbsp;좋아요</i></label>
-					    <input type="radio" value="dislike" name="likechk" id="dislike" onclick="return check(1);"><label for="dislike"><i class="fas fa-thumbs-down"><span id="dislikeResult">&nbsp;${l.dislikeSum }</span>&nbsp;&nbsp;싫어요</i></label>
-					    </div>
+					<td colspan="7">
+					${b.boardContent }
 					</td>
 				</tr>
 			</table>
 			
-			<div id="btns">
-			<a class="btn btnColor" href="/additionBoard.do?boardType=3&reqPage=1">글목록</a>
-			<c:if test="${sessionScope.m.memberLevel eq 0 }">
-			<c:choose>
-				<c:when test="${b.boardLevel eq 2 }">
-				<a class="btn btnColor" href="/removeRegulationBoard.do?boardNo=${b.boardNo }">규제풀기</a>
-				</c:when>
-				<c:otherwise>
-				<a class="btn btnColor" href="/regulationBoard.do?boardNo=${b.boardNo }">규제하기</a>
-				</c:otherwise>
-			</c:choose>
-			</c:if>
-			<c:if test="${sessionScope.m.memberId == b.boardWriter}">
-			<a class="btn btnColor" href="/boardDelete.do?num=&boardType=3&boardNo=${b.boardNo }">글삭제</a>
-			<a class="btn btnColor" href="/boardUpdateFrm.do?boardType=3&boardNo=${b.boardNo }">글수정</a>
-			</c:if>
-			<c:if test="${sessionScope.m.memberLevel ==0 }">
-			<a class="btn btnColor" href="/boardDelete.do?boardType=3&boardNo=${b.boardNo }">글삭제</a>
-			</c:if>
-			
-		</div>
 			
 			<!-- 댓글쓰기창 로그인 되있을때 -->
 			
 				<div class="inputCommentBox">
-					<form action="/insertComment.do?boardType=3" method="post">
+					<form action="/insertComment.do?boardType=5" method="post">
 						<ul>
 							<li>
 								<i class="far fa-comment-dots fa-3x"></i>
@@ -115,7 +86,7 @@
 									<a href="javascript:void(0)" class="recShow btnColor">답글달기</a>
 									<input class="delchk" type="hidden" value="${bc.bcDel }">
 								</p>
-								<form action="/insertComment.do?boardType=3" class="recoment" method="post"> <!-- recoment 클래스가 안보이게 하는 속성 -->
+								<form action="/insertComment.do?boardType=5" class="recoment" method="post"> <!-- recoment 클래스가 안보이게 하는 속성 -->
 									<input type="hidden" name="bcLevel" value="2">
 									<input type="hidden" name="bcWriter" value="${sessionScope.m.memberId }"> <!--로그인 된 아이디로 변경해야함 -->
 									<input type="hidden" name="boardRef" value="${b.boardNo }">
@@ -157,7 +128,7 @@
 											</c:if>	
 												<a href="javascript:void(0)" class="recShow btnColor">답글달기</a>
 										</p>
-										<form action="/insertComment.do?boardType=3" class="recoment" method="post"> <!-- recoment 클래스가 안보이게 하는 속성 -->
+										<form action="/insertComment.do?boardType=5" class="recoment" method="post"> <!-- recoment 클래스가 안보이게 하는 속성 -->
 											<input type="hidden" name="bcLevel" value="2">
 											<input type="hidden" name="bcWriter" value="${sessionScope.m.memberId }"> <!--로그인 된 아이디로 변경해야함 -->
 											<input type="hidden" name="boardRef" value="${b.boardNo }">
@@ -178,12 +149,12 @@
 			</div>
 			
 			<div><span class="nextTitle">다음글</span>&nbsp;
-				<a href="/boardView.do?boardType=3&boardNo=${info.nextNo}" onclick="return chkNext();">
+				<a href="/boardView.do?boardType=5&boardNo=${info.nextNo}" onclick="return chkNext();">
 				<input type="hidden" id="next" value="${info.nextNo }">${info.nextTitle }
 				</a>
 			</div>
 			<div><span class="nextTitle">이전글</span>&nbsp;
-				<a href="/boardView.do?boardType=3&boardNo=${info.prevNo}" onclick="return chkPrev();">
+				<a href="/boardView.do?boardType=5&boardNo=${info.prevNo}" onclick="return chkPrev();">
 				<input type="hidden" id="prev" value="${info.prevNo }">${info.prevTitle }
 				</a>
 			</div>
@@ -327,7 +298,7 @@
 			return false;
 		}
 		if(confirm("댓글을 삭제하시겠습니까?")){
-			location.href="/deleteComment.do?boardType=3&bcNo="+bcNo+"&boardNo="+boardNo+"&bcRef="+bcRef;
+			location.href="/deleteComment.do?boardType=5&bcNo="+bcNo+"&boardNo="+boardNo+"&bcRef="+bcRef;
 		}
 	}
 	
@@ -375,7 +346,7 @@
 				return false;
 			}
 			//새로운 form생성
-			var form =$("<form action='/updateComment.do?boardType=3' method='post'></form>");
+			var form =$("<form action='/updateComment.do?boardType=5' method='post'></form>");
 			//폼안에 수정댓글번호 설정
 			form.append($("<input type='text' name='bcNo' value='"+bcNo+"'>"));
 			//폼안에 공지사항번호설정
@@ -413,7 +384,7 @@
 			return false;
 		}
 	}
-	
+
 	</script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>

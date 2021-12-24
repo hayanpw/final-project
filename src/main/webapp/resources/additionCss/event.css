@@ -1,0 +1,54 @@
+.photoWrapper{
+	padding-top :20px;
+	clear :right;
+	display:flex;
+	flex-wrap:wrap;
+	justify-content:center;
+}
+.photo{
+	border : 2px solid #064663;
+	margin-left:25px;
+	margin-right:25px;
+	margin-top : 30px;
+	width:28%;
+	height : 230px;
+	overflow : hidden;
+}
+#eventImg{
+	width:100%;
+	height:150px;
+}
+
+.photo>p{
+	text-align : center;
+}
+.photo a{
+	color: black;
+	font-size: 20px;
+}
+#more-btn{
+	background-color:  #064663;
+	color: white;
+	margin: 50px auto;
+}
+#more-btn[disabled]{
+	cursor: default;
+}
+#btnBack{
+	text-align: center;
+}
+.writeBtn{
+	float: right;
+	margin: 20px;
+}
+#title{
+	padding-top:30px;
+	padding-left:30px;
+	font-weight:700;
+	font-size: 40px;
+	padding-bottom: 30px;
+	
+	}
+#menu>div{
+	float: left;
+}

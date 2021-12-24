@@ -389,4 +389,22 @@ public class AdditionService {
 	}
 
 
+	public int totalEventCount() {
+		int result=dao.totalEventCount();
+		return result;
+	}
+
+
+	public ArrayList<Board> eventMore(int start) {
+		int length=3;
+		int end = start+length-1;
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("start", start);
+		map.put("end", end);
+		map.put("boardType", 5);
+		ArrayList<Board> list = dao.selectNoticeList(map);
+		return list;
+	}
+
+
 }

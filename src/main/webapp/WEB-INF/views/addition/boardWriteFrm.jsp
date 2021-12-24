@@ -22,6 +22,9 @@
 		<c:when test="${boardType eq 2 }">
 		<div id="qnaTitle">질문과 답변</div>
 		</c:when>
+		<c:when test="${boardType eq 5 }">
+		<div id="event">이벤트</div>
+		</c:when>
 		<c:otherwise>
 		<div id="freeTitle">소통게시판</div>
 		</c:otherwise>

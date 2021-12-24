@@ -20,20 +20,22 @@
 		<div id="title">공지사항</div>
 		</c:when>
 		<c:when test="${boardType eq 2 }">
-		<div id="title">질문과 답변</div>
+		<div id="qnaTitle">질문과 답변</div>
+		</c:when>
+		<c:when test="${boardType eq 5 }">
+		<div id="event">이벤트</div>
 		</c:when>
 		<c:otherwise>
-		<div id="title">소통게시판</div>
+		<div id="freeTitle">소통게시판</div>
 		</c:otherwise>
 	</c:choose>
 	<form action="/boardUpdate.do" method="post" enctype="multipart/form-data">
-		
+				<input type="hidden" name="boardType" value="${boardType }">
 				<table class="table" style="width:100%;">
 					<tr>
 						<td>제목</td>
 						<td colspan="3">
 							<input type="text" id="text" name="boardTitle" class="form-control" value="${b.boardTitle }">
-							<input type="hidden" name="boardType" value="${b.boardType }">
 						</td>
 					</tr>
 					<tr>

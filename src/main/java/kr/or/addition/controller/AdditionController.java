@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -57,9 +58,9 @@ public class AdditionController {
 			model.addAttribute("headerText", "공지사항");
 			return "addition/notice";
 		} else if (boardType == 2) {
-			model.addAttribute("headerText", "FAQ • 질문과 답변");
+			model.addAttribute("headerText", "FAQ • 1대1문의");
 			return "addition/qna";
-		} else {
+		} else{
 			model.addAttribute("headerText", "소통게시판");
 			return "addition/free";
 		}
@@ -76,8 +77,7 @@ public class AdditionController {
 	@RequestMapping(value = "/boardWrite.do")
 	public String boardWrite(Board b, MultipartFile addFile, HttpServletRequest request, Model model) {
 		if(!addFile.isEmpty()) {
-		String savePath = request.getSession().getServletContext().getRealPath("/resources/additionImage");
-			
+		String savePath = request.getSession().getServletContext().getRealPath("/resources/additionImage/");
 			String filename = addFile.getOriginalFilename();
 			String onlyFilename = filename.substring(0, filename.indexOf("."));
 			String extention = filename.substring(filename.indexOf("."));
@@ -124,8 +124,10 @@ public class AdditionController {
 			model.addAttribute("loc", "/additionBoard.do?boardType=1&reqPage=1");
 		} else if (b.getBoardType() == 2) {
 			model.addAttribute("loc", "/additionBoard.do?boardType=2&reqPage=1");
-		} else {
+		} else if (b.getBoardType() == 3) {
 			model.addAttribute("loc", "/additionBoard.do?boardType=3&reqPage=1");
+		}else {
+			model.addAttribute("loc", "/eventList.do");
 		}
 		return "common/msg";
 	}
@@ -141,11 +143,17 @@ public class AdditionController {
 		model.addAttribute("info",info);
 		model.addAttribute("l",bvd.getLikeList());
 		if (boardType == 1) {
+			model.addAttribute("headerText", "공지사항");
 			return "addition/noticeView";
 		} else if (boardType == 2) {
+			model.addAttribute("headerText", "1대1문의");
 			return "addition/qnaView";
-		} else {
+		} else if (boardType == 3){
+			model.addAttribute("headerText", "소통게시판");
 			return "addition/freeView";
+		} else {
+			model.addAttribute("headerText", "이벤트");
+			return "addition/eventView";
 		}
 
 	}
@@ -166,8 +174,10 @@ public class AdditionController {
 			model.addAttribute("loc", "/additionBoard.do?boardType=2&reqPage=1");
 		} else if (boardType == 3){
 			model.addAttribute("loc", "/additionBoard.do?boardType=3&reqPage=1");
-		}else {
+		}else if(boardType == 4){
 			model.addAttribute("loc", "/myFree.do?memberId="+m.getMemberId());
+		}else {
+			model.addAttribute("loc", "/eventList.do");
 		}
 		return "common/msg";
 	}
@@ -179,11 +189,22 @@ public class AdditionController {
 		return "addition/guide";
 	}
 
-	// 할인 및 이벤트
-	@RequestMapping(value = "/discount.do")
-	public String discount() {
-		return "addition/discount";
+	// 이벤트페이지
+	@RequestMapping(value = "/eventList.do")
+	public String eventList(Model model) {
+		int totalEventCount=service.totalEventCount();
+		model.addAttribute("totalCount", totalEventCount);
+		return "addition/event";
 	}
+	
+	//이벤트 글조회
+	@ResponseBody
+	@RequestMapping(value = "/eventMore.do",produces = "application/json;charset=utf-8")
+	public String eventMore(int start) {
+		ArrayList<Board> list=service.eventMore(start);
+		return new Gson().toJson(list);
+	}
+	
 
 	// 댓글달기
 	@RequestMapping(value = "/insertComment.do")
@@ -192,15 +213,19 @@ public class AdditionController {
 		if (result > 0) {
 			if (boardType == 2) {
 				return "redirect:/boardView.do?boardType=2&boardNo=" + bc.getBoardRef();
-			} else {
+			} else if(boardType == 3) {
 				return "redirect:/boardView.do?boardType=3&boardNo=" + bc.getBoardRef();
+			}else {
+				return "redirect:/boardView.do?boardType=5&boardNo=" + bc.getBoardRef();
 			}
 		}else {
 			model.addAttribute("msg", "등록실패");
 			if (boardType == 2) {
 				model.addAttribute("loc", "/boardView.do?boardType=2&boardNo=" + bc.getBoardRef());
-			} else {
+			} else if(boardType == 3) {
 				model.addAttribute("loc", "/boardView.do?boardType=3&boardNo=" + bc.getBoardRef());
+			}else {
+				model.addAttribute("loc", "/boardView.do?boardType=5&boardNo=" + bc.getBoardRef());
 			}
 			
 		}
@@ -452,8 +477,10 @@ public class AdditionController {
 			model.addAttribute("loc", "/boardView.do?boardType=2&boardNo=" + b.getBoardNo());
 		} else if(b.getBoardType() == 1){
 			model.addAttribute("loc", "/boardView.do?boardType=1&boardNo=" + b.getBoardNo());
-		} else {
+		} else if(b.getBoardType()==3){
 			model.addAttribute("loc", "/boardView.do?boardType=3&boardNo=" + b.getBoardNo());
+		}else {
+			model.addAttribute("loc", "/boardView.do?boardType=5&boardNo=" + b.getBoardNo());
 		}
 		return "common/msg";
 
