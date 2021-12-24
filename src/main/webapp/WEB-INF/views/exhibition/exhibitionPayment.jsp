@@ -14,7 +14,7 @@
         <div class="row" style="width: 600px; margin: 0 auto;">
             <div style="width: 600px; height: 305px;">
                 <div class="thumbnail" style="margin: 0 auto; border-radius: 0px; border-bottom: none;">
-                	<img src=${exbp.exhibitionPhoto } style="width:50%; height: 100%;">
+                	<img src=${exbp.exhibitionPhoto } style="height:30%; width: 38%;">
                 </div>
             </div>
             <table class="table table-bordered" style="width: 600px; text-align: center;">

@@ -14,7 +14,7 @@
         <div class="row" style="width: 600px ;margin: 0 auto;">
             <div style="width: 600px; height:305px; ">
                 <div class="thumbnail" style="margin: 0 auto; border-radius: 0px; border-bottom: none;">
-                <img src=${acp.academyPhoto } style="width:50%; height: 100%;">
+                <img src=${acp.academyPhoto } style="height:30%; width: 38%;">
                     <div class="caption">
                         <p>담당 선생님 : ${acp.academyTeacher }</p>
                     </div>

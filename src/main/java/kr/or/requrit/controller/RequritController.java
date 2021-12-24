@@ -27,7 +27,8 @@ public class RequritController {
 	private RequritService service;
 	//공지 작성 페이지로 이동
 	@RequestMapping(value="/requritFrm.do")
-	public String resumerFrm() {
+	public String resumerFrm(Model model) {
+		model.addAttribute("headerText", "모집 공고 등록");
 		return "requrit/requritInsert";
 	}
 	//공지 리스트 페이지로 이동
@@ -38,6 +39,7 @@ public class RequritController {
 		model.addAttribute("list",rpd.getList());
 		model.addAttribute("pageNavi",rpd.getPageNavi());
 		model.addAttribute("start",rpd.getStart());
+		model.addAttribute("headerText", "모집 공고 목록");
 		return "requrit/requritList";
 	}
 	@RequestMapping(value="/requritInsert.do")
@@ -55,6 +57,7 @@ public class RequritController {
 	public String requritView(int requritNo,Model model) {
 		Requrit r = service.selectOneRequrit(requritNo);
 		model.addAttribute("r",r);
+		model.addAttribute("headerText", r.getRequritTitle());
 		return "requrit/requritView";
 	}
 	@ResponseBody

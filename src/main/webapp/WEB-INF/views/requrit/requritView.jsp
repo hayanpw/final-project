@@ -14,11 +14,11 @@
 	 <div class="container">
 		
 		<c:choose>	
-			<c:when test="${r.period ge 0 }">
+			<c:when test="${r.period le -1 }">
 				<p>마감된 공고입니다</p>
 			</c:when>
-		<c:when test="${r.period le 0 }">
-        <h2 class="title">${r.requritTitle }</h2>
+		<c:when test="${r.period ge 0 }">
+        <h2 class="title">${r.requritTitle }${r.period }</h2>
         <div class="sector">
                 <span class="first"><span class="line">경력</span></span>
                 <span class="second">${r.requritCareer }</span>
@@ -41,7 +41,14 @@
         </div>
         <div class="sector">
             <span class="first"><span class="line">모집</span>기간</span>
-            <span class="second">${r.requritStart } ~ ${r.requritEnd }(남은기간${r.period } 일)</span>
+            <c:choose>
+            <c:when test="${r.period ge 1 }">
+            	<span class="second">${r.requritStart } ~ ${r.requritEnd }(남은기간${r.period } 일)</span>
+            </c:when>
+            <c:when test="${r.period eq 0 }">
+            	<span class="second">${r.requritStart } ~ ${r.requritEnd }(오늘 마감!!)</span>
+            </c:when>
+            </c:choose>
 			<p class="sectorLine"></p>
         </div>
         <div class="sector">

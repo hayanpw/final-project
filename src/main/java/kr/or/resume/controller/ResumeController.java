@@ -37,6 +37,7 @@ public class ResumeController {
 	public String resumeFrm(Model model, String requritTitle, int requritNo) {
 		model.addAttribute("requritTitle",requritTitle);
 		model.addAttribute("requritNo",requritNo);
+		model.addAttribute("headerText", requritTitle+"이력서 작성");
 		return "resume/resumeInsert";
 	}
 	@RequestMapping(value="/resumeInsert.do")
@@ -141,12 +142,14 @@ public class ResumeController {
 		ArrayList<Resume> list = service.selectResumeList(requritNo);
 		model.addAttribute("list",list);
 		model.addAttribute("requritTltle",requritTitle);
+		model.addAttribute("headerText", "지원자 목록");
 		return "resume/resumeList";
 	}
 	@RequestMapping(value="/resumeView.do")
 	public String resumeView(Model model, int resumeNo) {
 		Resume r = service.selectOneResume(resumeNo);
 		model.addAttribute("r",r);
+		model.addAttribute("headerText", r.getMemberName()+"의 이력서");
 		return "resume/resumeView";
 	}
 	@RequestMapping(value = "/resumeFileDown.do")
@@ -209,6 +212,7 @@ public class ResumeController {
 		public String myRequritList(int memberNo,Model model) {
 			ArrayList<Resume> list = service.selectMyResumeList(memberNo);
 			model.addAttribute("list",list);
+			model.addAttribute("headerText", "내 지원 목록");
 			return "resume/myResumeList";
 		}
 	
