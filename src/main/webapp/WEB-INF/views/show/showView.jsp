@@ -21,13 +21,15 @@
         <div class="summary">
             <div class="summaryTop">
                 <h1>${snr.s.showName }</h1>
-                <%for(int i=0; i<Math.round(snr.getS().getShowStar()); i++){ %>
-                <span><img src="resources/showImage/star-on.png"></span>
-                <%} %>
-                <%for(int i=0; i<5-Math.round(snr.getS().getShowStar()); i++){ %>
-                <span><img src="resources/showImage/star-off.png"></span>
-                <%} %>
-                <span id="reviewAvg">${snr.s.showStar }</span>
+                <c:if test="${snr.getS().getShowStar() != 0 }">
+	                <%for(int i=0; i<Math.round(snr.getS().getShowStar()); i++){ %>
+	                <span><img src="resources/showImage/star-on.png"></span>
+	                <%} %>
+	                <%for(int i=0; i<5-Math.round(snr.getS().getShowStar()); i++){ %>
+	                <span><img src="resources/showImage/star-off.png"></span>
+	                <%} %>
+	                <span id="reviewAvg">${snr.s.showStar }</span>
+                </c:if>
             </div>
             <div class="summaryBottom">
                 <div class="poster">
