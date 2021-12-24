@@ -12,6 +12,12 @@
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	 <div class="container">
+	 	<c:if test="${sessionScope.m.memberLevel eq 0 }">
+			<button class="btn" id="exhibitionInsert">전시 등록하기</button>
+		</c:if>
+		<c:if test="${empty list }">
+			<h3 style="margin-top: 200px;">진행중인 전시가 없습니다</h3>
+		</c:if>
 		<ul class="mainmenu">
 		<c:forEach items="${list  }" var="ex" >
 			<li class="exhibition">
@@ -28,7 +34,7 @@
 					<p>수업료 : ${ex.exhibitionPrice }</p>
 					<c:if test="${sessionScope.m.memberLevel eq 0 }"> 
 					<div class="infoButton">
-						<button class="btn1 exhibitionView" exhibitionNo="${ex.exhibitionNo }">상세보기</button><button class="btn1 exhibitionUpdate" exhibitionNo="${ex.exhibitionNo }">수정하기</button><button class="btn1 exhibitionDelete" exhibitionNo="${ex.exhibitionNo }">삭제하기</button>
+						<button class="btn1 exhibitionView" exhibitionNo="${ex.exhibitionNo }">상세보기</button><button class="btn1 exhibitionUpdate" exhibitionNo="${ex.exhibitionNo }">수정하기</button>
 					</div>
 					</c:if>
 				</div>	
@@ -99,6 +105,9 @@
 					
 				}
 			});
+		});
+		$("#exhibitionInsert").click(function(){
+			location.href= "/exhibitionFrm.do";
 		});
 	</script>
 </body>

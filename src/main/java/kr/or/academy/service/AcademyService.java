@@ -13,6 +13,7 @@ import kr.or.academy.vo.AcademyCategory;
 import kr.or.academy.vo.AcademyPagingVo;
 import kr.or.academy.vo.AcademyPayment;
 import kr.or.academy.vo.StudentList;
+import kr.or.exhibition.vo.ExhibitionRefund;
 
 @Service
 public class AcademyService {
@@ -148,8 +149,10 @@ public class AcademyService {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		ArrayList<Academy> list = dao.acadeyAdminList();
 		ArrayList<Academy> last = dao.academyAdminListLast();
+		ArrayList<Academy> cancel = dao.academyAdminListCancel();
 		map.put("list", list);
 		map.put("last", last);
+		map.put("cancel", cancel);
 		return map;
 	}
 
@@ -177,6 +180,32 @@ public class AcademyService {
 
 	public ArrayList<StudentList> studentViewList(int academyNo) {
 		ArrayList<StudentList> list = dao.studentViewList(academyNo);
+		return list;
+	}
+	@Transactional
+	public int deleteAcademy(int academyNo) {
+		int result = dao.deleteAcademy(academyNo);
+		if(result > 0) {
+			int count = dao.countCancelQuan(academyNo);
+			if(count == 0) {
+				return result;
+			}else {
+				result = dao.updateAcademyStatus(academyNo);
+				return result;
+			}
+		}else {
+			return result;
+		}
+		
+	}
+
+	public int revivalAcademy(int academyNo) {
+		int result = dao.revivalAcademy(academyNo);
+		return result;
+	}
+
+	public ArrayList<ExhibitionRefund> refundStudentView(int academyNo) {
+		ArrayList<ExhibitionRefund> list = dao. refundStudentView(academyNo);
 		return list;
 	}
 

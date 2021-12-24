@@ -49,9 +49,8 @@
         </div>
         <div class="bottomSide">
             <ul class="nav nav-tabs">
-                <li class="active"><a data-toggle="tab" href="#home">전시정보</a></li>
-                <li><a data-toggle="tab" href="#menu1">예매및취소</a></li>
-                <li><a data-toggle="tab" href="#menu2">관람평</a></li>
+                <li class="active"><a data-toggle="tab" href="#home">수업 정보</a></li>
+                <li><a data-toggle="tab" href="#menu1">수강및취소</a></li>
               </ul>
               <div class="tab-content">
               		<div id="home" class="tab-pane fate in active" >
@@ -61,10 +60,6 @@
               		<div id="menu1" class="tab-pane fate in" style="width:850px">
               			<h3>취소 환불 규정</h3>
 		    			<p>Some content in menu 1.</p>
-              		</div>
-              		<div id="menu2" class="tab-pane fate in" >
-              			<h3>관람평이</h3>
-		    			<p>Some content in menu 2.</p>
               		</div>
               </div>
         </div>

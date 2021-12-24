@@ -61,7 +61,7 @@
 		var bookDate = $("#bookDate").val();
 		var memberNo = Number($("#memberNo").val());
 		var paymentPrice = Number($("#paymentPrice").val()); 
-		paymentPrice = 10;
+		paymentPrice = 100;
 		var paymentQuantity = Number($("#paymentQuantity").val()); 
 		var exhibitionNo = Number($("#exhibitionNo").val());
 		var paymentSelect = Number($("#paymentSelect").val()); // 전시결제는 1 , 강좌결제는 2
