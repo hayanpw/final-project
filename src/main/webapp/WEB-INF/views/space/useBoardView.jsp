@@ -15,7 +15,7 @@
 	<h3><img class="i-img" src="resources/spaceImage/search.png" style="width: 40px; "> 게시판 상세보기 </h3>
 		<table class="table table-border" border="1">
 			<tr>
-				<th colspan=2">제목</th>
+				<th colspan="2">제목</th>
 				<td colspan="6">${u.ubTitle }</td>
 			</tr>
 			<tr>
@@ -34,6 +34,9 @@
 			</tr>
 		</table>
 		<c:if test="${sessionScope.m.memberId eq u.memberId }">
+		<div class="prev-btn">
+			<button onclick="location.href='/selectSpaceBoardList.do?reqPage=1'"> &lt  뒤로가기</button>
+		</div>
 		<div class="view-btn">
 			<button onclick="location.href='/deleteUseBoard.do?ubNo=${u.ubNo}'">삭제</button>
 			<button onclick="location.href='/updateUseBoardFrm.do?ubNo=${u.ubNo}'">수정</button>

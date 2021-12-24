@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import kr.or.addition.model.dao.AdditionDao;
+import kr.or.addition.model.vo.Board;
 import kr.or.member.dao.MemberDao;
 import kr.or.member.vo.DeleteMember;
 import kr.or.member.vo.Member;
@@ -17,6 +19,8 @@ public class MemberService {
 
 	@Autowired
 	private MemberDao dao;
+	@Autowired
+	private AdditionDao additiondao;
 
 	public Member selectOneMemberPw(Member member) {
 //		if(member.getMemberId().isEmpty() || member.getMemberPw().isEmpty()) {//입력 받은 문자열의 길이가 0인 경우
@@ -227,5 +231,10 @@ public class MemberService {
 	public int updatePasswordPw(Member m) {
 		int result = dao.updatePassword(m);
 		return result;
+	}
+
+	public ArrayList<Board> selectFixlist() {
+		ArrayList<Board> fixlist = additiondao.selectFixlist();
+		return fixlist;
 	}
 }

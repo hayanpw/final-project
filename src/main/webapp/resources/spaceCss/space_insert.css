@@ -1,7 +1,8 @@
 .insert-main{
-	border: 1px solid #BDB19A; 
+	border: 2px solid #064663; 
 	border-radius: 50px;
 	padding: 10px;
+	margin-top: 10px;
 }
 .container h3{
 	margin: 50px;
@@ -17,19 +18,19 @@
 	margin-left : 35px;
 	float : left;
 	width : 500px;
-	border: 1px double #A79078 ;
+	border: 1px double #064663 ;
 	padding: 10px;
 }
 .space-time{
-	border: 1px double #A79078; 
+	border: 1px double #064663; 
 	margin-left : 10px;
 	display : inline-block;
 	width : 550px;
-	height : 340px;
+	height : 342px;
 	padding: 10px;
 }
 .space-info input{
-	border : 1px solid #74655E ;
+	border : 1px solid #064663 ;
 	box-shadow : 1px 1px gray;
 	margin-bottom : 5px;
 	border-radius : 10px;
@@ -39,7 +40,7 @@
 }
 .time-table input{
 	border : none;
-	border-bottom : 1px solid #74655E ;
+	border-bottom : 1px solid #064663 ;
 	margin-bottom : 10px;
 	height: 30px;
 	margin-left: 10px;
@@ -57,7 +58,7 @@
 	margin-top: 200px;
 }
 #insertBtn>button{
-	border : 1px solid #BDB19A; 
+	border : 1px solid #064663; 
 	width : 250px;
 	height : 50px;
 	margin-bottom : 10px;
@@ -65,7 +66,8 @@
 }
 #insertBtn>button:hover{
 	border : 1px solid white;
-	background: #BDB19A;	
+	background: #064663 ;	
+	color: white;
 	
 }
 #image_container img{
@@ -81,6 +83,6 @@
 	margin-left: 20px;
 }
 .i-img{
-	color: #A79078;
+	color: #064663;
 	margin-right: 5px;
 }	

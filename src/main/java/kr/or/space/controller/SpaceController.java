@@ -649,14 +649,14 @@ public class SpaceController {
 	 */	
 	//예약 취소
 	@RequestMapping(value = "/deleteRes.do")
-	public String deleteRes(int rentalNo, Model model ) {
+	public String deleteRes(int rentalNo, Model model, String memberId ) {
 		int result = service.deleteRental(rentalNo);
 		if(result > 0) {
-			model.addAttribute("msg", "삭제하였습니다.");
+			model.addAttribute("msg", "예약을 취소하였습니다.");
 		}else {
-			model.addAttribute("msg", "삭제 실패");
+			model.addAttribute("msg", "다시 시도 해주십시오.");
 		}
-		model.addAttribute("loc", "/spaceAdmin.do");
+		model.addAttribute("loc", "/spaceMypage.do?memberId="+memberId);
 		return "common/msg";
 	}
 

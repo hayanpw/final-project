@@ -1,6 +1,5 @@
 
 .main-title{
-	width:1170px;
 	border-bottom : 1px solid #d6d6d6;
 }
 .main-title>h1{
@@ -10,7 +9,6 @@
 }
 .container-left{
     text-align:center;
-	width:1170px;
 }
 .container-left>div{
 	width:calc(700px/12);
@@ -32,22 +30,22 @@
     border: 1px solid #fff;
 }
 .container-right{
-	width: 300px;
+	height:850px;
     display: flex;
     flex-direction: column;
     align-items: center;
     align-content: center;
+    justify-content: flex-start;
 }
-.container-right>h2{
-	text-align:center;
-}
-.container-right h3{
-	text-align:right;
-}
-.readingInfo{
-	width: 147px;
-	height: 117px;
-    background-color: #BDB19A;
-    margin-top: 5px;
-    margin-bottom: 10px;
+.container-right div{
+	display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    border: 1px solid black;
+    box-sizing: border-box;
+    text-align:center;
+    margin-bottom: 5px;
+    color:white;
+    font-size:16px;
 }

@@ -69,7 +69,7 @@
 					</tr>
 					<tr>
 						<th>수용인원</th>
-						<td>${s.maxPeople }명</td>
+						<td>최대 ${s.maxPeople }명</td>
 					</tr>
 					<tr>
 						<th>가격</th>
@@ -102,10 +102,10 @@
 			<!-- 리뷰 보기  -->
 			<div class="review-box">
 				<h1>Review</h1>
-				<c:forEach items="${srList }" var="sr">
 				<c:if test="${fn:length(srList) == 0 }">
-					<p>엥</p>
+					<p>아직 작성 된 리뷰가 없습니다.</p>
 				</c:if>
+				<c:forEach items="${srList }" var="sr">
 					<table class="review-table">
 						<tr>
 							<th>작성자</th>

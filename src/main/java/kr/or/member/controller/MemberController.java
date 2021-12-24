@@ -11,7 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.or.academy.service.AcademyService;
+import kr.or.addition.model.service.AdditionService;
+import kr.or.addition.model.vo.Board;
 import kr.or.exhibition.service.ExhibitionService;
+import kr.or.exhibition.vo.Exhibition;
 import kr.or.member.service.MemberService;
 import kr.or.member.service.SendMail;
 import kr.or.member.vo.DeleteMember;
@@ -20,6 +23,7 @@ import kr.or.member.vo.MemberPage;
 import kr.or.reading.model.service.ReadingService;
 import kr.or.space.model.service.SpaceService;
 import show.service.ShowService;
+import show.vo.Show;
 
 @Controller
 public class MemberController {
@@ -38,15 +42,30 @@ public class MemberController {
 	private AcademyService academyService;
 	@Autowired
 	private SpaceService spaceService;
+	@Autowired
+	private AdditionService additionService;
 	
 	public MemberController() {
 		super();
 		System.out.println("객체 생성");
 	}
 	@RequestMapping(value="/main.do")
-	public String main() {
+	public String main(Model model) {
+		ArrayList<Show> showlist = showservice.selectShowList();
+		model.addAttribute("showlist", showlist);
+		ArrayList<Exhibition> artlist1 = exhibitionService.selectExhibitionList(4);
+		ArrayList<Exhibition> artlist2 = exhibitionService.selectExhibitionList(8);
+		ArrayList<Exhibition> artlist3 = exhibitionService.selectExhibitionList(12);
+		ArrayList<Exhibition> artlist = new ArrayList<Exhibition>();
+		artlist.addAll(artlist1);
+		artlist.addAll(artlist2);
+		artlist.addAll(artlist3);
+		model.addAttribute("artlist", artlist);
+		ArrayList<Board> fixlist = service.selectFixlist();
+		model.addAttribute("fixlist", fixlist);
 		return "common/main";
 	}
+	
 	@RequestMapping(value="/loginFrm.do")
 	public String loginFrm(Model model) {
 		model.addAttribute("headerText", "로그인");
@@ -292,6 +311,7 @@ public class MemberController {
 		}
 		return "member/mypage";
 	}
+	
 	
 }
 	
