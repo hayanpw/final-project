@@ -27,7 +27,7 @@
 		</div>
 		<br><br><br>
 		<div class="container-left col-sm-7">
-			<h3>날짜를 선택해주세요</h3><br>
+			<h2>날짜를 선택해주세요</h2><br>
 			<!-- 캘린더 코드 -->
 			<div id="datepicker"></div>
 		</div>

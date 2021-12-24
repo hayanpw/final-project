@@ -116,6 +116,11 @@ public class ReadingDao {
 		return sqlSession.delete("reading.deleteFixtures", reserveNo);
 	}
 
+	public ArrayList<Fixtures> selectAllFixtures() {
+		List<Fixtures> fi = sqlSession.selectList("reading.selectAllFixtures");
+		return (ArrayList<Fixtures>)fi;
+	}
+
 
 	
 }
