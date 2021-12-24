@@ -17,9 +17,14 @@
 .reservBox{
 	text-align: center;
 	width: calc(100%/5);
+	height: 200px;
 	display: inline-block;
 	float: left;
 	margin-bottom: 20px;
+}
+.reservBox>h4{
+	height: 19px;
+	overflow: hidden;
 }
 
 .floorWrapper{
