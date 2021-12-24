@@ -26,7 +26,7 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.css" />
 <link rel="stylesheet" href="/resources/commonCss/mainhf.css">
 </head>
-<body data-spy="scroll" data-target=".navbar" data-offset="50">
+<body data-spy="scroll" data-target=".navbar" data-offset="50" style="overflow-x:hidden; overflow-y:auto">
 	<div class="popup">
 		<div id="popup">
 			<header class="top">
@@ -56,7 +56,7 @@
 		</footer>
 	</div>
 
-	<div class="container" style="width: 100%; height: 100vh;">
+	<div class="container" style="width: 100%; height: 100vh;" >
 		<div class="quick">
 			<div class="imgb">
 				<div class="pop-content">

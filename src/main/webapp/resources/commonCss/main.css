@@ -37,7 +37,6 @@ body{
         -ms-flex-align: center;
         -webkit-align-items: center;
         align-items: center;
-        overflow: hidden;
       }
       .swiper-slide img {
         display: block;
