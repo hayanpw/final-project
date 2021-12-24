@@ -205,7 +205,7 @@
 	        var start = $("#startDay").val();
 	        var end = $("#endDay").val();
 	    	
-	        var today = new Date();;
+	        var today = new Date();
 	        var endDate = end;
 	        $("#datepicker").datepicker({
 	            dateFormat: "yy-mm-dd",
@@ -215,7 +215,7 @@
 	            dayNamesShort : [ '일', '월', '화', '수', '목', '금', '토' ],
 	            dayNamesMin : [ '일', '월', '화', '수', '목', '금', '토' ],
 	            yearSuffix : '년',
- 	            minDate: start,
+ 	            minDate: today,
 	            maxDate: endDate,
 	            onSelect : function(data){
 	            	$("#bookDate").val(data);

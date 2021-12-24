@@ -205,4 +205,11 @@ public class ResumeController {
 		model.addAttribute("loc","/requritList.do?reqPage=1");
 		return "common/msg";
 	}
+	@RequestMapping(value="/myResumeList.do")
+		public String myRequritList(int memberNo,Model model) {
+			ArrayList<Resume> list = service.selectMyResumeList(memberNo);
+			model.addAttribute("list",list);
+			return "resume/myResumeList";
+		}
+	
 }

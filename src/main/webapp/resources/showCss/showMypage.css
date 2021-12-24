@@ -6,12 +6,12 @@
 }
 .reservNavi>div{
     width: 50%;
-    border-bottom: 2px solid #A79078;
+    border-bottom: 2px solid #195083;
     text-align: center;
     cursor: pointer;
 }
 .selec{
-	color: #A79078;
+	color: #195083;
 	font-weight: bold;
 }
 .reservBox{

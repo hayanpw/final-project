@@ -33,7 +33,7 @@
 			<div class="search_text">
 				<c:choose>
 				<c:when test="${not empty sessionScope.m }">
-				<h3>${sessionScope.m.memberName}님이 원하는 수업을 찾아보세요.</h2>
+				<h3>${sessionScope.m.memberName}님이 원하는 수업을 찾아보세요.</h3>
 				</c:when>
 				<c:otherwise>
 				<h2>수업을 찾아보아요~~~</h2>
@@ -45,6 +45,9 @@
 					<button id="search" type="button" class="search_btn"><img src="/resources/exhibitionImage/icon/search.png"></button>
 				</div>
 		</div>
+		<c:if test="${sessionScope.m.memberLevel eq 0 }">
+			<button class="btn" id="insertAcademy">수업 등록하기</button>
+		</c:if>
 		<ul class="mainmenu">
 		<c:forEach items="${list }" var="a" >
 			<li class="academy">
@@ -65,7 +68,7 @@
 					</p>
 					<c:if test="${sessionScope.m.memberLevel eq 0 }"> 
 					<div class="infoButton">
-						<button class="btn1 academyView" academyNo="${a.academyNo }">상세보기</button><button class="btn1 academyUpdate" academyNo="${a.academyNo }">수정하기</button><button class="btn1 academyDelete" academyNo="${a.academyNo }">삭제하기</button>
+						<button class="btn1 academyView" academyNo="${a.academyNo }">상세보기</button><button class="btn1 academyUpdate" academyNo="${a.academyNo }">수정하기</button>
 					</div>
 					</c:if>
 				</div>	
@@ -147,7 +150,6 @@
 		$("#more").click(function(){
 			console.log("더보기 클릭시 실행");
 			var memberLevel = $("#memberLevel").val();
-			console.log("멤버레벨 :" +memberLevel)
 			var start = $(this).val();
 			var category = $("#more").attr("search");
 			var type = $("#more").attr("class");
@@ -177,7 +179,7 @@
 						}
 						moreLi += "</p><div class = 'infoButton'>";
 						if(memberLevel == 0){
-						moreLi += "<button class='btn1 academyView' academyNo='"+data[i].academyNo+"'>상세보기</button><button class='btn1 academyUpdate' academyNo='"+data[i].academyNo+"'>수정하기</button><button class='btn1 academyDelete' academyNo='"+data[i].academyNo+"'>삭제하기</button>";
+						moreLi += "<button class='btn1 academyView' academyNo='"+data[i].academyNo+"'>상세보기</button><button class='btn1 academyUpdate' academyNo='"+data[i].academyNo+"'>수정하기</button>";
 						}
 						moreLi += "</div></div></li>";
 						}
@@ -225,7 +227,7 @@
 							}
 							moreLi += "</p><div class = 'infoButton'>";
 							if(memberLevel == 0){
-							moreLi += "<button class='btn1 academyView' academyNo='"+data[i].academyNo+"'>상세보기</button><button class='btn1 academyUpdate' academyNo='"+data[i].academyNo+"'>수정하기</button><button class='btn1 academyDelete'  academyNo='"+data[i].academyNo+"'>삭제하기</button>";
+							moreLi += "<button class='btn1 academyView' academyNo='"+data[i].academyNo+"'>상세보기</button><button class='btn1 academyUpdate' academyNo='"+data[i].academyNo+"'>수정하기</button>";
 							}
 							moreLi += "</div></div></li>";
 							}
@@ -237,7 +239,6 @@
 					$("#more").attr("currentCount",curr + data.length);
 					var totalCount = $("#more").attr("totalCount");
 					var currCount = $("#more").attr("currentCount");
-					console.log(totalCount);
 					console.log(currCount);
 					console.log(category);
 					if(currCount == totalCount){
@@ -263,6 +264,14 @@
 				url : "/categoryAcademy.do",
 				data : {category:category,reqPage:reqPage},
 				success : function(data){
+					if(data.length < 1){
+						$(".mainmenu").empty();
+						var none = " <span class='nonebox'><img src='/resources/exhibitionImage/icon/comingsoon.png'><h3>원하시는 조건의 수업이  없습니다.</h3></span>";
+						$("#more").css("display","none");
+						$("#more").prop("diabled",true);
+						$("#more").val(4);
+						$(".mainmenu").append(none);
+					}else{
 					$(".mainmenu").empty();
 					console.log(data.length);
 					for(var i=0;i<data.length;i++){
@@ -285,7 +294,7 @@
 							}
 							moreLi += "</p><div class = 'infoButton'>";
 							if(memberLevel == 0){
-							moreLi += "<button class='btn1 academyView' academyNo='"+data[i].academyNo+"'>상세보기</button><button class='btn1 academyUpdate' academyNo='"+data[i].academyNo+"'>수정하기</button><button class='btn1 academyDelete' academyNo='"+data[i].academyNo+"'>삭제하기</button>";
+							moreLi += "<button class='btn1 academyView' academyNo='"+data[i].academyNo+"'>상세보기</button><button class='btn1 academyUpdate' academyNo='"+data[i].academyNo+"'>수정하기</button>";
 							}
 							moreLi += "</div></div></li>";
 							}
@@ -297,19 +306,18 @@
 					var search = $("#more").attr("search");
 					totalCount = $("#more").attr("totalCount");
 					var currCount = $("#more").attr("currentCount");
-					console.log(totalCount);
 					console.log(currCount);
 					console.log(search);
 					if(totalCount <= 4){
 						$("#more").css("display","none");
 						$("#more").prop("diabled",true);
 					}
-					
+				}
 				}
 			});
 		});
 		$("#search").click(function(){
-			console.log("검색 아작스 실행");
+			
 			$("#more").css("display","block");
 			$("#more").attr("currentCount",4);
 			var reqPage = 4;
@@ -347,7 +355,7 @@
 							}
 							moreLi += "</p><div class = 'infoButton'>";
 							if(memberLevel == 0){
-							moreLi += "<button class='btn1 academyView' academyNo='"+data[i].academyNo+"'>상세보기</button><button class='btn1 academyUpdate' academyNo='"+data[i].academyNo+"'>수정하기</button><button class='btn1 academyDelete' academyNo='"+data[i].academyNo+"'>삭제하기</button>";
+							moreLi += "<button class='btn1 academyView' academyNo='"+data[i].academyNo+"'>상세보기</button><button class='btn1 academyUpdate' academyNo='"+data[i].academyNo+"'>수정하기</button>";
 							}
 							moreLi += "</div></div></li>";
 							}
@@ -359,7 +367,6 @@
 					var search = $("#more").attr("search");
 					totalCount = $("#more").attr("totalCount");
 					var currCount = $("#more").attr("currentCount");
-					console.log(totalCount);
 					console.log(currCount);
 					console.log(search);
 					if(totalCount <= 4){
@@ -384,7 +391,9 @@
 			});
 			
 		});
-		
+		$("#insertAcademy").click(function(){
+			location.href= "/academyFrm.do";
+		});
 	</script>
 </body>
 </html>

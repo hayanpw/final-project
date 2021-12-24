@@ -8,6 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <link href="resources/hansolCss/hansol_exhibitionMypage.css" rel="stylesheet">
 </head>
 <body>
@@ -19,12 +20,12 @@
 	<jsp:include page="/WEB-INF/views/common/mypageMenu.jsp" />
 	<div class="container">        
         <div class="mypage-title"><span>전시</span>예매내역</div>
-        <c:if test="${empty list }">
+        <c:if test="${empty list && empty last }">
         	<div class="noRental">
         		<p>예매 내역이 없습니다.</p>
         	</div>
         </c:if>
-        <c:if test="${!empty list }">
+        <c:if test="${!empty list || !empty last }">
 		<div class="pop">
 			<span>☞이메일 발권이란?</span>
 			<p>회원가입시 등록한 이메일로 티켓을 전송 해드립니다</p>
@@ -57,17 +58,20 @@
 						<td>${exm.paymentQuantity }명</td>
 						<td>${exm.paymentPrice }원</td>
 						<c:choose>
-						<c:when test="${exm.paymentCancel eq 0 }">
-							<td><button class="writeBtn cancelPayment" type="button" paymentNo="${exm.paymentNo }" memberNo="${sessionScope.m.memberNo }">취소하기</button></td>
-							<c:if test="${exm.checkEmail  eq 0 }">
-							<td><button class="writeBtn" type="button" id="emailSend">이메일 발권</button></td>
+						<c:when test="${exm.checkEmail  eq 0 }">
+							<c:if test="${exm.paymentCancel eq 0 }">
+								<td><button class="writeBtn cancelPayment" type="button" paymentNo="${exm.paymentNo }" memberNo="${sessionScope.m.memberNo }">취소하기</button></td>
+								<td><button class="writeBtn" type="button" id="emailSend" memberNo="${sessionScope.m.memberNo }" paymentNo="${exm.paymentNo }">이메일 발권</button></td>
 							</c:if>
-							<c:if test="${exm.checkEmail  eq 1 }">
-							<td>발권 되었습니다</td>
+							<c:if test="${exm.paymentCancel eq 1 }">
+								<td colspan="2">취소되었습니다</td>
+							</c:if>
+							<c:if test="${exm.paymentCancel eq 2 }">
+								<td colspan="2">전시가 취소 되었습니다 3일 애내에 환불 예정</td>
 							</c:if>
 						</c:when>
-						<c:when test="${exm.paymentCancel eq 1 }">
-							<td colspan="2">취소되었습니다</td>
+						<c:when test="${exm.checkEmail eq 1 }">
+							<td colspan="2">티켓이 발권되었습니다.</td>
 						</c:when>
 						</c:choose>
 					</tr>
@@ -107,6 +111,25 @@
 		var memberNo = $(this).attr("memberNo");
 		location.href="/deletePayment.do?paymentNo="+paymentNo+"&memberNo="+memberNo;
 	});
+	$("#emailSend").click(function(){
+		var memberNo = $(this).attr("memberNo");
+		var paymentNo = $(this).attr("paymentNo");
+		swal({
+			  title: "이메일 발권",
+			  text: "한번만 발권이 가능 하면 발권시 취소가 불가능 합니다 합니다 발권 하시겠습니까?",
+			  icon: "warning",
+			  buttons: true,
+			  dangerMode: true,
+			})
+			.then((email) => {
+			  if (email) {
+				  location.href="/sendEmailTicket.do?paymentNo="+paymentNo+"&memberNo="+memberNo;
+			  } else {
+			    swal("발권을 취소 하였습니다");
+			  }
+		});
+	});
+	
 	</script>
 </body>
 </html>

@@ -41,7 +41,9 @@
            <p><span class="line">간단</span>소개</p>
             ${r.resumeDetail }
         </div>
+        	<c:if test="${sessionScope.m.memberLevel eq 0 }">
         		<button type="button" class="btn requritBtn" id="updateMemberLevel" memberNo=${r.memberNo }>선생님 으로</button>
+        	</c:if>
         <input type="hidden" id ="hide" value="${r.requritNo }">
     </div>
   	

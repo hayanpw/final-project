@@ -12,6 +12,8 @@ import org.springframework.stereotype.Repository;
 import kr.or.exhibition.vo.Exhibition;
 import kr.or.exhibition.vo.ExhibitionPagingVo;
 import kr.or.exhibition.vo.ExhibitionPayment;
+import kr.or.exhibition.vo.ExhibitionPaymentMypage;
+import kr.or.exhibition.vo.ExhibitionRefund;
 import kr.or.exhibition.vo.ExhibitionReview;
 
 @Repository
@@ -83,14 +85,17 @@ public class ExhibitionDao {
 		List<Exhibition> last = sqlSession.selectList("exhibition.selectExhibitionAdminLast");
 		return (ArrayList<Exhibition>)last;
 	}
-
+	public ArrayList<Exhibition> selectExhibitionAdminCancel() {
+		List<Exhibition> cancel = sqlSession.selectList("exhibition.selectExhibitionAdminCancel");
+		return (ArrayList<Exhibition>)cancel;
+	}
 	public int checkTotalCount(HashMap<String, Object> map) {
 		int totalCount = sqlSession.selectOne("exhibition.checkTotalCount",map);
 		return totalCount;
 	}
 
 	public ArrayList<ExhibitionPayment> selectExhibitionPaymentList(int memberNo) {
-		List<ExhibitionPayment> list = sqlSession.selectList("exhibition.selectExhibitionPaymenyt",memberNo);
+		List<ExhibitionPayment> list = sqlSession.selectList("exhibition.selectExhibitionPayment",memberNo);
 		return (ArrayList<ExhibitionPayment>)list;
 	}
 
@@ -98,7 +103,7 @@ public class ExhibitionDao {
 		List<ExhibitionPayment> last = sqlSession.selectList("exhibition.selectExhibitionPaymenytLast",memberNo);
 		return (ArrayList<ExhibitionPayment>)last;
 	}
-
+	
 	public int deletePayment(int paymentNo) {
 		int result = sqlSession.update("exhibition.deletePayment",paymentNo);
 		return result;
@@ -112,5 +117,40 @@ public class ExhibitionDao {
 	public int realDelete(int reserveNo) {
 		int result = sqlSession.delete("exhibition.realDelete",reserveNo);
 		return result;
+	}
+
+	public String selectEmail(int memberNo) {
+		String memberEmail = sqlSession.selectOne("member.selectMemberEmail",memberNo);
+		return memberEmail;
+	}
+
+	public int updateEmailStatus(int paymentNo) {
+		int result1 = sqlSession.update("exhibition.updateEmailStatus",paymentNo);
+		return result1;
+	}
+
+	public ExhibitionPaymentMypage selectOneExhibitionPayment(int paymentNo) {
+		ExhibitionPaymentMypage expm = sqlSession.selectOne("exhibition.selectOneExhibitionPayment",paymentNo);
+		return expm;
+	}
+
+	public int deleteExhibition(int exhibitionNo) {
+		int result = sqlSession.update("exhibition.deleteExhibition",exhibitionNo);
+		return result;
+	}
+
+	public int updatePaymentStatus(int exhibitionNo) {
+		int result = sqlSession.update("exhibition.updatePaymentStatus",exhibitionNo);
+		return result;
+	}
+
+	public int revivalExhibition(int exhibitionNo) {
+		int result = sqlSession.update("exhibition.revivalExhibition",exhibitionNo);
+		return result;
+	}
+
+	public ArrayList<ExhibitionRefund> refundMemberView(int exhibitionNo) {
+		List<ExhibitionRefund> list = sqlSession.selectList("exhibition.refundMemberView",exhibitionNo);
+		return (ArrayList<ExhibitionRefund>)list;
 	}
 }

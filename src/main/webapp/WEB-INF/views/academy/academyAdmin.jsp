@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <link rel="stylesheet" href="/resources/hansolCss/hansol_academyAdmin.css">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/jquery-ui/jquery-ui.css">
@@ -20,12 +21,16 @@
         	<div class="listNavi">
 	    		<div><h4>진행중인 수업</h4></div>
 	    		<div><h4>지난 수업</h4></div>
+	    		<div><h4>삭제 수업</h4></div>
 	    	</div>
 			<div class="academyBox">
+			<c:if test="${empty list }">
+			<h4>진행 중인 수업이  없습니다</h4>
+			</c:if>
 	        	<c:forEach items="${list }" var="ac">
 	        		<div class="academyList">
 		                <img src="${ac.academyPhoto }" class="poster">
-		                <div>
+		                <div style="width: 800px;">
 			                <h2>수업명 : ${ac.academyTitle }</h2>
 			                <h4>담당 선생님 : ${ac.academyTeacher }</h4>
 			                <p>전시기간 : ${ac.academyStart } ~ ${ac.academyEnd }</p>	 
@@ -37,20 +42,23 @@
 		                	</div>
 		                </div>
 		                <div>
-		                	<button onclick="deleteAcademy('${ac.academyNo}')" class="btn btn-danger">전시삭제</button>
+		                	<button  class="btn btn-danger deleteAcademy" academyNo="${ac.academyNo }">수업 삭제</button>
 		         
 		                </div>
 	        		</div>
 	        	</c:forEach>
         	</div>
         	<div class="lastAcademyBox">
+        	<c:if test="${empty last }">
+			<h4>기간이 지난 수업이  없습니다</h4>
+			</c:if>
 	        	<c:forEach items="${last }" var="acl">
 	        		<div class="academyList">
 		                <img src="${acl.academyPhoto }" class="poster">
-		                <div>
-			                <h2>전시명 : ${acl.academyTitle }</h2>
-			                <h4>장소 : 무지다 미술관</h4>
-			                <p>전시기간 : ${acl.academyStart } ~ ${acl.academyEnd }</p>	 
+		                <div style="width: 800px;">
+			               	<h2>수업명 : ${acl.academyTitle }</h2>
+			                <h4>담당 선생님 : ${acl.academyTeacher }</h4>
+			                <p>수업기간 : ${acl.academyStart } ~ ${acl.academyEnd }</p>	 
 			                <a href="/academyView.do?academyNo=${acl.academyNo }" class="btn btn-default">상세보기</a>
 		                </div>
 		                 <div class="reservList">
@@ -59,21 +67,111 @@
 		                	</div>
 		                </div>
 		                <div>
-		                	<button onclick="deleteAcademy('${acl.academyNo}')" class="btn btn-danger">전시삭제</button>
+		                	<button class="btn btn-danger deleteAcademy" academyNo="${acl.academyNo }">수업 삭제</button>
 		                	
 		                </div>
 	        		</div>
 	        	</c:forEach>
         	</div>
+        	<div class="cancelAcademyBox">
+        	<c:if test="${empty cancel }">
+			<h4>내린 지난 수업이  없습니다</h4>
+			</c:if>
+	        	<c:forEach items="${cancel }" var="acc">
+	        		<div class="academyList">
+		                <img src="${acc.academyPhoto }" class="poster">
+		                <div style="width: 800px;">
+			                <h2>수업명 : ${acc.academyTitle }</h2>
+			                <h4>담당 선생님 : ${acc.academyTeacher }</h4>
+			                <p>수업기간 : ${acc.academyStart } ~ ${acc.academyEnd }</p>	 
+			                <a href="/academyView.do?academyNo=${acc.academyNo }" class="btn btn-default">상세보기</a>
+		                </div>
+		                <div>
+		                	<button class="btn btn-danger revivalAcademy" academyNo="${acc.academyNo }" style="margin-right: 20px;">수업 소생</button>
+		                	<button type = "button" class ="btn btn-info refundStudent" data-toggle="modal" data-target="#myModal" academyNo="${acc.academyNo }">환불 회원 보기</button>
+		                </div>
+	        		</div>
+	        	</c:forEach>
+	        	<div class="modal fade" id="myModal" role="dialog">
+    				<div class="modal-dialog" style="width: 700px;">
+
+      				<div class="modal-content">
+        			<div class="modal-header">
+         				<button type="button" class="close" data-dismiss="modal">&times;</button>
+          				<h4 class="modal-title">수강중인 학생 목록</h4>
+        			</div>
+        			<div class="modal-body">
+        			</div>
+        			<div class="modal-footer">
+         				 <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+        			</div>
+      				</div>
+        	</div>
+			</div>
+        	</div>
         </div>
 	</div>
 	<script>
 
-		function deleteAcademy(academyNo) {
-	    	if(confirm("수업을 삭제하시겠습니까?")){
-				location.href="/deleteAcademy.do?academyNo="+academyNo;
-			}
-		}
+	$(".refundStudent").click(function(){
+		var academyNo = $(this).attr("academyNo");
+		$.ajax({
+			url : "/refundStudentView.do",
+			data : {academyNo:academyNo},
+			success : function(data){
+				$(".modal-body").empty();
+				var modal = "";
+				if(data.length < 1){
+					modal += "<p>환불이 필요한 회원이 없습니다</p>";
+					$(".modal-body").append(modal);
+				}else{
+					modal += "<table class='table table-bordered table-hover'><tr><th>주문번호</th><th>이름</th><th>이메일</th></tr>";
+					for( var i=0; i<data.length; i++ ){
+						modal += "<tr><td>"+data[i].paymentNo+"</td>";
+						modal += "<td>"+data[i].memberName+"</td>";
+						modal += "<td>"+data[i].memberEmail+"</td>";
+						modal += "</tr>";
+					}
+					modal += "</table>";
+					$(".modal-body").append(modal);
+				}
+			}			
+		});
+	});
+	$(".revivalAcademy").click(function(){
+		var academyNo = $(this).attr("academyNo");
+		swal({
+			  title: "수업 살리기",
+			  text: "수업을 살리겠습니까??",
+			  icon: "success",
+			  buttons: true,
+			  dangerMode: true,
+			})
+			.then((email) => {
+			  if (email) {
+				  location.href="/revivalAcademy.do?academyNo="+academyNo;
+			  } else {
+			    swal("수업 소생 취소");
+			  }
+		});
+	});
+		$(".deleteAcademy").click(function(){
+			var academyNo = $(this).attr("academyNo");
+    	swal({
+			  title: "수업 내리기",
+			  text: "수업을  내리시겠습니까??",
+			  icon: "warning",
+			  buttons: true,
+			  dangerMode: true,
+			})
+			.then((email) => {
+			  if (email) {
+				  location.href="/deleteAcademy.do?academyNo="+academyNo;
+			  } else {
+			    swal("수업 종료 취소");
+			  }
+			});
+		});
 		$(".countStudent").click(function(){
 			var academyNo = $(this).attr("academyNo");
 			var message = "";
@@ -94,16 +192,18 @@
 			});
 		});
 		$(function() {
-			$(".listNavi>div").click(function() {
-				$(".listNavi>div").children().removeClass("selec");
-	            $(this).children().addClass("selec");
-	            $(".listNavi").nextAll().hide();
-	            if($(this).index() == 0){
-	                $(".academyBox").show();
-	            }else{
-	                $(".lastAcademyBox").show();
-	            }
-			});
+		$(".listNavi>div").click(function() {
+			$(".listNavi>div").children().removeClass("selec");
+            $(this).children().addClass("selec");
+            $(".listNavi").nextAll().hide();
+            if($(this).index() == 0){
+                $(".academyBox").show();
+            }else if($(this).index() == 1){
+            	$(".lastAcademyBox").show();
+            }else{
+                $(".cancelAcademyBox").show();
+            }
+		});
 			$(".listNavi>div").first().click();
 		});
 	</script>

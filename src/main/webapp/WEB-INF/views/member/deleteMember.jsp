@@ -12,7 +12,7 @@
 	
 	<jsp:include page="/WEB-INF/views/common/mypageMenu.jsp"/>
 	<div class="container">        
-        <div class="mypage-title"><span>회</span>원탈퇴 [${count}]</div>
+        <div class="mypage-title"><span>회</span>원탈퇴 </div>
         <div class="mypage-container" style="">
 		<c:choose>
 			<c:when test="${count eq 0 }">

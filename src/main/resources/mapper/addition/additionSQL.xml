@@ -18,10 +18,14 @@
 		(select rownum as rnum,n.* from
 		(select board_no,board_title,board_writer,readcount,reg_date,nvl(count, 0) as cnt,boardlevel,boardfix
 		from(select*from board where boardtype=#{boardType}) 
-		left join (select board_no,count(*) as count from (select board_no,board_ref from board join comment1 on (board_no=board_ref)) group by board_no) 
+		left join (select board_no,count(*) as count from (select board_no,board_ref,bc_del from board join comment1 on (board_no=board_ref) where bc_del=0) group by board_no) 
 		using (board_no) order by board_no desc)n) where rnum between #{start} and #{end}
 	</select>
 	
+	<!--글수정-->
+	<update id="boardUpdate" parameterType="board">
+		 update board set board_title=#{boardTitle},board_content=#{boardContent},filename=#{filename},filepath=#{filepath} where board_no=#{boardNo}
+	</update>
 	
 	<!--전체글 갯수-->
 	<select id="totalCount" parameterType="map" resultType="_int">
@@ -30,7 +34,7 @@
 	
 	<!--글쓰기-->
 	<insert id="insertBoard" parameterType="board">
-		insert into board values (board_seq.nextval,#{boardWriter},#{boardTitle},#{boardContent},default,to_char(sysdate,'yyyy-mm-dd'),#{boardType},#{boardLevel},#{boardFix})
+		insert into board values (board_seq.nextval,#{boardWriter},#{boardTitle},#{boardContent},default,to_char(sysdate,'yyyy-mm-dd'),#{boardType},#{boardLevel},#{boardFix},#{filename},#{filepath})
 		<selectKey  resultType="_int" order="AFTER" keyProperty="boardNo">
 			select max(board_no) from board
 		</selectKey>
@@ -47,33 +51,24 @@
 	</insert>
 	
 	<!--글보기-->
-	<select id="selectOneBoard" parameterType="_int" resultMap="board">
-		select board_no,board_title,board_content,board_writer,readcount,reg_date,nvl(count,0) as cnt,boardLevel
+	<select id="selectOneBoard" parameterType="_int" resultType="board">
+		 select
+        filename as filename,
+        filepath as filepath,
+        board_no as boardNo,
+        board_title as boardTitle,
+        board_content as boardContent,
+        board_writer as boardWriter,
+        readcount as readCount,
+        reg_date as regDate,
+        cnt as commentCount,
+        boardLevel as boardLevel
+        from(
+        (select filename,filepath,board_no,board_title,board_content,board_writer,readcount,reg_date,nvl(count,0) as cnt,boardLevel
 		from (select *from board where board_no =#{boardNo})
-		left join (select board_ref,count(*) as count from comment1 group by board_ref)
-		on (board_no=board_ref)
+		left join (select board_ref,count(*) as count from comment1 where bc_del=0 group by board_ref)
+		on (board_no=board_ref)))
 	</select>
-	
-	<!--해당글 파일읽어오기-->
-	<select id="selectFileList" parameterType="_int" resultType="kr.or.addition.model.vo.FileVO">
-		select	
-			file_no as fileNo,
-			board_no as boardNo,
-			filename,
-			filepath
-		from file_tbl where board_no = #{boardNo}	
-	</select>
-	<resultMap type="board" id="board">
-		<result column="board_no" property="boardNo"/>
-		<result column="board_title" property="boardTitle"/>
-		<result column="board_content" property="boardContent"/>
-		<result column="board_writer" property="boardWriter"/>
-		<result column="readcount" property="readCount"/>
-		<result column="reg_date" property="regDate"/>
-		<result column="cnt" property="commentCount"/>
-		<result column="boardlevel" property="boardLevel"/>
-		<collection property="list" column="board_no" javaType="java.util.ArrayList" ofType="kr.or.addition.model.vo.FileVO" select="selectFileList"></collection>
-	</resultMap>
 	
 	<!--글삭제-->
 	<delete id="boardDelete" parameterType="_int">
@@ -126,7 +121,7 @@
 	
 	<!--댓글수 조회-->
 	<select id="selectCommentCount" resultType="_int">
-		select board_no,count(*) from (select board_no,board_ref from board join comment1 on (board_no=board_ref)) group by board_no;
+		select board_no,count(*) from (select board_no,board_ref,bc_del from board join comment1 on (board_no=board_ref)  where bc_del=0) group by board_no
 	</select>
 	
 	<!--키워드 검색-->
@@ -274,12 +269,15 @@
 	<!--내가 쓴 댓글 조회-->
 	<select id="myCommentList" parameterType="string" resultType="kr.or.addition.model.vo.BoardComment">
 	select 
+	bc_no as bcNo,
+	bc_ref as bcRef,
 	bc_writer as bcWriter,
 	bc_content as bcContent,
 	board_ref as boardRef,
 	board_title as boardTitle,
 	boardtype as boardType,
-	comment1.reg_date as regDate
+	comment1.reg_date as regDate,
+	bc_del as bcDel
 	from comment1 
 	join board on (board_no=board_ref)
 	where bc_writer=#{memberId} and bc_del=0 order by comment1.reg_date desc
@@ -298,4 +296,6 @@
 	bc_del as bcDel
 	from comment1 where bc_no=#{bcRef}
 	</select>
+	
+	
 </mapper>

@@ -14,7 +14,6 @@ import kr.or.addition.model.vo.BoardComment;
 import kr.or.addition.model.vo.BoardNext;
 import kr.or.addition.model.vo.BoardPageData;
 import kr.or.addition.model.vo.BoardViewData;
-import kr.or.addition.model.vo.FileVO;
 import kr.or.addition.model.vo.LikeNo;
 import kr.or.addition.model.vo.MyPageData;
 
@@ -121,18 +120,8 @@ public class AdditionService {
 	
 	//글쓰기
 	@Transactional
-	public int insertBoard(Board b, ArrayList<FileVO> list) {
-		int result1 = dao.insertBoard(b);
-		int result = 0;
-		if(result1>0) {
-			int boardNo = b.getBoardNo();
-			for(FileVO fv: list) {
-				fv.setBoardNo(boardNo);
-				result += dao.insertFile(fv);
-			}
-		}else {
-			return -1;
-		}
+	public int insertBoard(Board b) {
+		int result = dao.insertBoard(b);
 		return result;
 	}
 
@@ -141,8 +130,6 @@ public class AdditionService {
 	public BoardViewData selectOneBoard(int boardNo) {
 		int result = dao.updateReadCount(boardNo); //조회수올림
 		Board b = dao.selectOneBoard(boardNo); //게시글정보
-		ArrayList<FileVO> flist = dao.selectFileList(boardNo);
-		b.setList(flist);
 		ArrayList<BoardComment> list = dao.selectCommentList(boardNo);//댓글정보
 		LikeNo l = dao.selectLikeSum(boardNo);
 		BoardViewData bvd = new BoardViewData(list,l,b);
@@ -210,8 +197,7 @@ public class AdditionService {
 			return result;
 		}
 	}
-
-
+	
 	//댓글수정
 	@Transactional
 	public int updateComment(int bcNo, String bcContent) {
@@ -321,7 +307,8 @@ public class AdditionService {
 		BoardPageData bpd = new BoardPageData(list, pageNavi, start,totalCount);
 		return bpd;
 	}
-
+	
+	//글수정
 	@Transactional
 	public int boardUpdate(Board b) {
 		int result=dao.boardUpdate(b);
@@ -329,6 +316,7 @@ public class AdditionService {
 	}
 
 	
+	//이전글다음글 목록
 	public BoardNext selectNextBoard(int boardNo,int boardType) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("boardNo", boardNo);
@@ -337,19 +325,21 @@ public class AdditionService {
 		return info;
 	}
 
+	//글규제
 	@Transactional
 	public int regulationBoard(int boardNo) {
 		int result=dao.regulationBoard(boardNo);
 		return result;
 	}
 	
+	//규제해제
 	@Transactional
 	public int removeRegulationBoard(int boardNo) {
 		int result=dao.removeRegulationBoard(boardNo);
 		return result;
 	}
 
-
+	//좋아요
 	public int boardLike(int checkNum,int boardNo, String memberId) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("boardNo", boardNo);
@@ -359,7 +349,7 @@ public class AdditionService {
 		return result;
 	}
 
-
+	//싫어요
 	public int boardDislike(int boardNo, String memberId) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("boardNo", boardNo);
@@ -368,13 +358,13 @@ public class AdditionService {
 		return result;
 	}
 
-
+	//좋아요수
 	public LikeNo selectLikeSum(int boardNo) {
 		LikeNo l = dao.selectLikeSum(boardNo);
 		return l;
 	}
 
-
+	//좋아요 했는지 체크
 	public LikeNo selectLikeChk(int boardNo, String memberId) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("boardNo", boardNo);
@@ -382,7 +372,8 @@ public class AdditionService {
 		LikeNo chk= dao.selectLikeChk(map);
 		return chk;
 	}
-
+	
+	//내가쓴글
 	public MyPageData myFree(String memberId) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("memberId", memberId);
@@ -396,7 +387,6 @@ public class AdditionService {
 		MyPageData mpd= new MyPageData(commentList,noticeList,freeList,qnaList);
 		return mpd;
 	}
-	
-	
+
 
 }

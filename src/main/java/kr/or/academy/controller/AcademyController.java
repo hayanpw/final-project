@@ -25,6 +25,8 @@ import kr.or.academy.vo.AcademyCategory;
 import kr.or.academy.vo.AcademyPagingVo;
 import kr.or.academy.vo.AcademyPayment;
 import kr.or.academy.vo.StudentList;
+import kr.or.exhibition.vo.ExhibitionPaymentMypage;
+import kr.or.exhibition.vo.ExhibitionRefund;
 
 @Controller
 public class AcademyController {
@@ -257,6 +259,7 @@ public class AcademyController {
 		HashMap<String, Object> map = service.academyAdminList();
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("last", map.get("last"));
+		model.addAttribute("cancel", map.get("cancel"));
 		return "academy/academyAdmin";
 	}
 	@ResponseBody
@@ -295,6 +298,34 @@ public class AcademyController {
 	@RequestMapping(value="/studentView.do",produces = "application/json;charset=utf-8")
 	public String studentView(int academyNo) {
 		ArrayList<StudentList> list = service.studentViewList(academyNo);
+		return new Gson().toJson(list);
+	}
+	@RequestMapping(value="/deleteAcademy.do")
+	public String deleteAcademy(int academyNo,Model model) {
+		int result = service.deleteAcademy(academyNo);
+		if(result > 0) {
+			model.addAttribute("msg", "수업 취소 성공");			
+		}else {
+			model.addAttribute("msg", "수업 취소 실패");
+		}
+		model.addAttribute("loc", "/academyAdminList.do");
+		return "common/msg";
+	}
+	@RequestMapping(value="/revivalAcademy.do")
+	public String revivalAcademy(int academyNo,Model model) {
+		int result = service.revivalAcademy(academyNo);
+		if(result > 0) {
+			model.addAttribute("msg", "수업 소생 성공");			
+		}else {
+			model.addAttribute("msg", "수업 소생 실패");
+		}
+		model.addAttribute("loc", "/academyAdminList.do");
+		return "common/msg";
+	}
+	@ResponseBody
+	@RequestMapping(value="/refundStudentView.do",produces="application/json;charset=utf-8")
+	public String refundStudentView(int academyNo) {
+		ArrayList<ExhibitionRefund> list = service.refundStudentView(academyNo);
 		return new Gson().toJson(list);
 	}
 	//@RequestMapping(value="/academyDelete.do")

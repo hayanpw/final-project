@@ -6,66 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style type="text/css">
-	#title{
-	width:165px;
-	border-top: 7px solid #064663;
-	margin-top:70px;
-	margin-left:70px;
-	font-weight:700;
-	font-size: 40px;
-	margin-bottom: 50px;
-	}
-	#table1 tr:first-child {
-	border-top: 2px solid #064663;
-    }
-    #table1 tr:nth-child(2) {
-	border-top: 2px solid white;
-    }
-    #boardTitle{
-    font-size: 30px;
-    font-weight: 600;
-    }
-    .nextTitle{
-	display:inline-block;
-	background-color: #064663;
-	color:white;
-	font-size:16px;
-	width: 20%;
-	height:40px;
-	line-height:40px;
-	text-align: center;
-	margin-bottom: 3px;
-	}
-	.nextTitle+a{
-	color: black;
-	font-size:18px;
-	}
-	.nextTitle+a:hover{
-	text-decoration: none;
-	color: #064663;
-	}
-	
-	#adminbtn{
-	float: right;
-	}
-	#blist{
-	float: right;
-	background-color: #064663;
-	color: #fff;
-	}
-	#delete{
-	float: right;
-	background-color: red;
-	color: #fff;
-	}
-	#update{
-	float: right;
-	background-color: #e79b36;
-	color: #fff;
-	}
-    
-</style>
+<link rel="stylesheet" href="/resources/additionCss/noticeView.css">
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
@@ -77,12 +18,10 @@
 			</tr>
 			<tr>
 				<td>등록일 &nbsp;&nbsp;&nbsp;&nbsp;  ${b.regDate }</td>
-				<c:if test="${not empty b.list }">
+				<c:if test="${not empty b.filename }">
 				<td>첨부파일</td>
 				<td>
-				<c:forEach items="${b.list }" var="f">
-				<a href="/fileDown.do?filename=${f.filename }&filepath=${f.filepath }">${f.filename }</a>
-				</c:forEach>
+				<a href="/fileDown.do?filename=${b.filename }&filepath=${b.filepath }">${b.filename }</a>
 				</td>
 				</c:if>
 			</tr>
@@ -106,7 +45,7 @@
 		</div>
 		<c:if test="${sessionScope.m.memberLevel eq 0 }">
 		<a id="delete" class="btn" href="/boardDelete.do?num=&boardType=1&boardNo=${b.boardNo }">글삭제</a>
-		<a id="update" class="btn" href="/boardUpdateFrm.do?boardNo=${b.boardNo }">글수정</a>
+		<a id="update" class="btn" href="/boardUpdateFrm.do?boardType=1&boardNo=${b.boardNo }">글수정</a>
 		</c:if>
 		<a id="blist" class="btn" href="/additionBoard.do?boardType=1&reqPage=1">글목록</a>
 		</div>

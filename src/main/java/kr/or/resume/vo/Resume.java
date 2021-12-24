@@ -15,5 +15,5 @@ public class Resume {
 	private String memberName;
 	private ArrayList<ResumeTbl> rtList;
 	private int resumeCancel;
-	
+	private String requritTitle;
 }

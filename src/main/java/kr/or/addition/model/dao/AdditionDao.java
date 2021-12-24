@@ -29,18 +29,11 @@ public class AdditionDao {
 	}
 
 	public int insertBoard(Board b) {
-		
 		return sqlSession.insert("addition.insertBoard",b);
 	}
 
-
 	public int selectBoardNo() {
 		return sqlSession.selectOne("addition.getBoardNo");
-	}
-
-
-	public int insertFile(FileVO fv) {
-		return sqlSession.insert("addition.insertFile",fv);
 	}
 
 	public Board selectOneBoard(int boardNo) {
@@ -72,11 +65,6 @@ public class AdditionDao {
 		return sqlSession.update("addition.updateComment",map);
 	}
 
-	public ArrayList<FileVO> selectFileList(int boardNo) {
-		List<FileVO> list = sqlSession.selectList("addition.selectFileList",boardNo);
-		return (ArrayList<FileVO>)list;
-	}
-
 	public int selectNewCount(int boardType) {
 		return sqlSession.selectOne("addition.selectNewCount",boardType);
 	}
@@ -92,7 +80,6 @@ public class AdditionDao {
 
 	public int boardUpdate(Board b) {
 		return sqlSession.update("addition.boardUpdate",b);
-		
 	}
 
 	public BoardNext selectNextBoard(HashMap<String, Object> map) {
@@ -149,6 +136,10 @@ public class AdditionDao {
 
 	public BoardComment chkDelComment(int bcRef) {
 		return sqlSession.selectOne("addition.chkDelComment",bcRef);
+	}
+
+	public int fileUpdate(FileVO fv) {
+		return sqlSession.update("addition.fileUpdate",fv);
 	}
 
 }

@@ -1,0 +1,44 @@
+	#title{
+	width:165px;
+	border-top: 7px solid #064663;
+	margin-top:70px;
+	margin-left:70px;
+	font-weight:700;
+	font-size: 40px;
+	margin-bottom: 50px;
+	}
+	#qnaTitle{
+	width:220px;
+	border-top: 7px solid #064663;
+	margin-top:70px;
+	margin-left:70px;
+	font-weight:700;
+	font-size: 40px;
+	margin-bottom: 50px;
+	}
+	#freeTitle{
+	width:205px;
+	border-top: 7px solid #064663;
+	margin-top:70px;
+	margin-left:70px;
+	font-weight:700;
+	font-size: 40px;
+	margin-bottom: 50px;
+	}
+	#boardContent{
+	border: 1px white;
+	}
+	table input{
+	border: none;
+	}
+	#text{
+	border: none;
+	box-shadow: none;
+	}
+	.btnColor{
+	background-color: #064663;
+	color: white;
+	}
+	#btnColor:hover {
+	color: white;
+	}

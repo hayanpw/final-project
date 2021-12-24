@@ -60,4 +60,19 @@
 	<update id="deleteRequrit" parameterType="_int">
 		update teacher_requrit set requrit_cancel = 1 where requrit_no = #{requritNo}
 	</update>
+	<select id="selectMyResumeList" parameterType="_int" resultType="r">
+	select a.resume_no as resumeNo,
+       a.requrit_no as requritNo,
+       a.resume_gender as resumeGender,
+       a.resume_detail as resumeDetail,
+       a.member_no as memberNo,
+       a.resume_phone as resumePhone,
+       a.resume_cancel as resumeCancel,
+       b.requrit_title as requritTitle
+from resume a join teacher_requrit b on a.requrit_no = b.requrit_no 
+where a.member_no = #{memberNo} order by 1 desc
+	</select>
+	<update id="deleteResume" parameterType="_int">
+		update resume set resume_cancel = 1 where requrit_no = #{requritNo}
+	</update>
 </mapper>

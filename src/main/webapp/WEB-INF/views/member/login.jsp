@@ -15,34 +15,30 @@
 		<!-- 로그인  -->
 		<div class="login-box">
 		<form action="/login.do" method="post">
-			<fieldset>
+			<fieldset class="idbox">
 					<label for="memberId" class="reg">ID </label><input type="text" name="memberId"><br><br>
-					<label for="memberPassword" class="reg"> PW </label><input type="password" name="memberPassword"><br><br>
-					<input type="submit" value="login">
-					<a type="text" class="searchidpw" data-toggle="modal" data-target="#sModal">ID · PASSWORD 찾기</a>
+					<label for="memberPassword" class="reg"> Pw </label><input type="password" name="memberPassword"><br><br>
+					<button type="submit" class="loginbtn">Sign in</button>
+					<button type="button" class="loginbtn" data-toggle="modal" data-target="#sModal">Find</button>
 				</fieldset>
 		</form>
-		<hr>
-		<a href="/joinFrm.do">회원가입[임시]</a>
-		<hr>
+		<a href="/joinFrm.do" class="joinbtn" onMouseOver="this.innerHTML='Welcome'" onMouseOut="this.innerHTML='Sign up'" style="text-decoration:none">Sign up</a>
 		
 		<!-- 아이디 비밀번호 찾기 modal -->
-		<div class="login-box" style="width:600px">
-		</div>
 		</div>
 		<div class="modal" id="sModal">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h3 class="modal-title">ID · PASSWORD 찾기</h3>
+						<h3 class="modal-title">아이디 · 비밀번호 찾기</h3>
                     </div>
                     <!-- 이메일인증 modal -->
                     <div class="modal-body">
                        	<div>
 							<fieldset>
-									<label for="memberEmail" class="reg" >Email </label><input type="text" name="memberEmail" id="memberEmail"><br><br>
-									<button type="button" onclick="checkEmail();" id="btnOpen1">전송</button>
+									<label for="memberEmail" class="reg" >Email </label><input type="text" name="memberEmail" id="memberEmail">
+									<button type="button" onclick="checkEmail();" id="btnOpen1" class="findbtn">전송</button><br><br>
 									<span id="ajaxEmailcheck"></span>
 									<div class="agreebox adcheck">
 										<span id="authMsg"></span><input type="hidden" id="emailchk">
@@ -201,12 +197,12 @@
 
 								if (mailCode == null) {
 									$("#authMsg").html("인증 실패");
-									$("#authMsg").css("color", "red");
+									$("#authMsg").css("color", "#e79b36");
 									$("#emailchk").val('2');
 								} else {
 									if ($("#authCode").val() == mailCode) {
 										$("#authMsg").html("인증성공");
-										$("#authMsg").css("color", "blue"); //여기다가 인증추가를 해야함
+										$("#authMsg").css("color", "#e79b36"); //여기다가 인증추가를 해야함
 										$("#emailchk").val('1');
 										clearInterval(intervalId);
 										$("#timeZone").empty();
@@ -214,7 +210,7 @@
 
 									} else {
 										$("#authMsg").html("인증코드를 확인하세요");
-										$("#authMsg").css("color", "red");
+										$("#authMsg").css("color", "#e79b36");
 										$("#emailchk").val('2');
 									}
 								}
@@ -223,7 +219,7 @@
 
 						} else if (data == 0) {
 							$("#ajaxEmailcheck").html("일치하는 이메일이 없습니다");
-							$("#ajaxEmailcheck").css("color", "red");
+							$("#ajaxEmailcheck").css("color", "#e79b36");
 						}
 
 					}
@@ -242,13 +238,13 @@
 			pwCheck = false;
 		} else if (pw != pwRe) {
 			pwChk.innerHTML = "패스워드가 일치하지 않습니다.";
-			pwChk.style.color = "red";
-			obj.style.border = "1px solid red";
+			pwChk.style.color = "#e79b36";
+			obj.style.border = "1px solid #e79b36";
 			pwCheck = false;
 		} else {
 			pwChk.innerHTML = "패스워드가 일치합니다.";
-			pwChk.style.color = "#563D39";
-			obj.style.border = "1px solid #563D39";
+			pwChk.style.color = "#e79b36";
+			obj.style.border = "1px solid #e79b36";
 			pwCheck = true;
 		}
 	}
@@ -261,12 +257,12 @@
 		 
 		if (regExpPw.test(memberPassword)){
 			$('#pwChkRule').html("사용가능한 비밀번호입니다.");
-			$('#pwChkRule').css('color' ,"#1f4787");
+			$('#pwChkRule').css('color' ,"#e79b36");
 			memberPwchk = true;
 			
 		}else{
 			$('#pwChkRule').html("비밀번호는  5~20자 이내 영문,숫자,특수문자로 입력해주세요.");
-			$('#pwChkRule').css('color' ,"red");
+			$('#pwChkRule').css('color' ,"#e79b36");
 			memberPwchk = false;
 		}
 	});

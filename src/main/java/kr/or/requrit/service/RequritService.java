@@ -106,10 +106,15 @@ public class RequritService {
 		r.setPeriod(period);
 		return r;
 	}
-
+	@Transactional
 	public int deleteRequrit2(int requritNo) {
 		int result = dao.deleteRequrit2(requritNo);
-		return result;
+		if(result >0) {
+			result = dao.deleteResume(requritNo);
+			return result;
+		}else{
+			return result;
+		}
 	}
 
 	public Requrit updateRequritFrm(int requritNo) {

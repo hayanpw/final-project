@@ -21,14 +21,21 @@ import com.google.gson.Gson;
 
 import kr.or.academy.vo.Academy;
 import kr.or.exhibition.service.ExhibitionService;
+import kr.or.exhibition.service.TicketMailSend;
 import kr.or.exhibition.vo.Exhibition;
 import kr.or.exhibition.vo.ExhibitionPayment;
+import kr.or.exhibition.vo.ExhibitionPaymentMypage;
+import kr.or.exhibition.vo.ExhibitionRefund;
 import kr.or.exhibition.vo.ExhibitionReview;
+import kr.or.space.model.service.MailSend;
+import kr.or.space.model.vo.SpacePageNavi;
 
 @Controller
 public class ExhibitionController {
 	@Autowired
 	private ExhibitionService service;
+	@Autowired
+	private TicketMailSend ticketMailService;
 	//전시등록 폼
 	@RequestMapping(value="/exhibitionFrm.do")
 	public String exhibitionFrm() {
@@ -263,6 +270,7 @@ public class ExhibitionController {
 		HashMap<String, Object> map  = service.selectExhibitionAdmin();
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("last", map.get("last"));
+		model.addAttribute("cancel", map.get("cancel"));
 		return "exhibition/exhibitionAdmin";
 	}
 	@ResponseBody
@@ -296,5 +304,58 @@ public class ExhibitionController {
 		model.addAttribute("loc", "/exhibitionMypage.do?memberNo="+memberNo);
 		return "common/msg";
 	}
+	@RequestMapping(value="/sendEmailTicket.do")
+	public String sendEmailTicket(int memberNo, int paymentNo,Model model) {
+		ExhibitionPaymentMypage expm = service.selectOneExhibitionPayment(paymentNo);
+		String memberEmail = service.selectEmail(memberNo);
+		String result = ticketMailService.mailSend(expm,memberEmail);
+		if(result.equals("ok")) {
+			int result1 = service.updateEmailStatus(paymentNo);
+			if (result1 > 0) {
+				HashMap<String, Object> map = service.selectExhibitionPaymentList(memberNo);
+				model.addAttribute("list",map.get("list"));
+				model.addAttribute("last",map.get("last"));
+				model.addAttribute("totalCount",map.get("totalCount"));
+				return "exhibition/exhibitionMypage";
+			} else {
+				model.addAttribute("msg", "메일 발송에 실패하였습니다.");
+				model.addAttribute("loc", "/exhibitionMypage.do?memberNo"+memberNo);
+				return "common/msg";
+			}
+		}else {
+			model.addAttribute("msg", "메일 발송에 실패하였습니다.");
+			model.addAttribute("loc", "/exhibitionMypage.do?memberNo"+memberNo);
+			return "common/msg";
+		}
 		
+	}
+	@RequestMapping(value="/deleteExhibition.do")
+	public String deleteExhibition (int exhibitionNo,Model model) {
+		System.out.println("전시 번호 :" +exhibitionNo );
+		int result = service.deleteExhibition(exhibitionNo);
+			if(result>0) {
+				model.addAttribute("msg", "전시 삭제 성공");			
+			}else {
+				model.addAttribute("msg", "전시 삭제 실패");
+			}
+			model.addAttribute("loc", "/exhibitionAdmin.do");
+			return "common/msg";
+	}
+	@RequestMapping(value="/revivalExhibition.do")
+	public String revivalExhibition(int exhibitionNo,Model model) {
+		int result = service.revivalExhibition(exhibitionNo);
+		if(result>0) {
+			model.addAttribute("msg", "전시 소생 성공");			
+		}else {
+			model.addAttribute("msg", "전시 소생 실패");
+		}
+		model.addAttribute("loc", "/exhibitionAdmin.do");
+		return "common/msg";
+	}
+	@ResponseBody
+	@RequestMapping(value="/refundMemberView.do",produces="application/json;charset=utf-8")
+	public String refundMemberView(int exhibitionNo) {
+		ArrayList<ExhibitionRefund> list = service.refundMemberView(exhibitionNo);
+		return new Gson().toJson(list);
+	}
 }

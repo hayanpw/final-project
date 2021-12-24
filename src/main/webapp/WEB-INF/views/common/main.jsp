@@ -7,10 +7,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="jquery.js"></script>
-  <script src="jquery.fadethis.min.js"></script>
+<!--   <script src="jquery.js"></script> 
+  <script src="jquery.fadethis.min.js"></script>-->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<!--   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
   <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css">
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"/>
   <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
@@ -34,7 +34,6 @@
                 <p><strong>적용기간 : 2021.07.14~12.29</strong></p>
                 <p style="font-size:7px;"> 예쁘게 봐주시구 5개월동안 수고많으셨습니다 :) Au revir!</p>
                 <p> KH Team3 </p>
-                </p>
             </main>
             
         </div>   
@@ -46,6 +45,72 @@
             </form>
         </footer>
     </div>
+    
+    <div class="container" style="width: 100%; height: 100vh;">
+		<div class="quick">
+			<div class="imgb" >
+				<div class="pop-content">
+				<div class="pop-title">
+					<p>
+					내려온다아아아<br>
+					</p>
+					<h1>무지다 문화센터</h1>
+				</div>
+				<div class="pop-table">
+					<div class="pop-con">
+						<span class="iconimg"><img src="/resources/mainImage/upload/m-icon1.png"></span>
+						<span class="iconname">2021<br>무지다시즌</span>
+					</div>
+					<div class="pop-con">
+						<span class="iconimg"><img src="/resources/mainImage/upload/m-icon2.png"></span>
+						<span class="iconname">2021<br>무지다시즌</span>
+					</div>
+					<div class="pop-con">
+						<span class="iconimg"><img src="/resources/mainImage/upload/m-icon3.png"></span>
+								<span class="iconname">2021<br>무지다시즌</span>
+					</div>
+					<div class="pop-con">
+						<span class="iconimg"><img src="/resources/mainImage/upload/m-icon4.png"></span>
+						<span class="iconname">2021<br>무지다시즌</span>
+					</div>
+				</div>
+				</div>	
+				<button class="btn-quick close">Close</button>
+			</div>
+		</div>
+	</div>
+	
+	<script>
+		var size = "";
+		$(window).resize(function(){
+	      var m_w = $(window).width();
+	      var q_w = $(".quick").outerWidth();
+	      if ( m_w > 1350 ) {
+  	  			size = -q_w
+					//$(".main_quick").css("right",size)
+				//$(".main_quick").delay(8000).animate({"right":-q_w},800)
+	      }else {
+	    	  $(".btn-quick").removeClass("close").addClass("open").text("Open")
+				size = -q_w
+				$(".quick").css("right",-q_w)
+	      }
+	  	}).resize();
+
+		  $(".btn-quick").click(function(){
+			if($(this).hasClass('open')){
+				$(".quick").animate({"right":0},300);
+				//$(".quick").delay(300).stop().fadeIn(300)
+				
+	          $(this).removeClass('open').addClass('close').text('Close');
+	        }else{
+				$(".quick").animate({"right": -650},300);
+				 //$(".quick").delay(300).stop().fadeOut(300)
+				 $(this).show();
+	          $(this).removeClass('close').addClass('open').text('Open');
+
+	        }
+		})
+	</script>
      <!-- <div class="container" style="width: 100%;"> -->
         <div class="slider-for d1">
             <div class="sf"><img src="/resources/mainImage/upload/m-main1.jpg"></div>
@@ -117,7 +182,7 @@
 				<a href="/loginFrm.do">Sign in <span>></span></a>
 			</c:when>
 			<c:when test="${not empty sessionScope.m && sessionScope.m.memberLevel == 0}">
-			    <a href="/adminpage.do">My Page[관리] <span>></span></a>
+			    <a href="/adminpage.do">My Page[관리] <span>></span></a><br>
 			    <a href="/logout.do">로그아웃</a>
 			</c:when>
 			<c:when test="${not empty sessionScope.m && sessionScope.m.memberLevel == 1 || sessionScope.m.memberLevel == 2}">
@@ -356,6 +421,115 @@
     "pluginKey": "30646173-f05a-4c55-9818-46a0543b5882"
   });
 </script>
-    	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+    <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
+
+<style>
+.quick {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 650px;
+    height: 700px;
+    z-index: 5;
+}
+.btn-quick{
+    z-index: 4;
+	border: rgb(11,11,51);
+	width: 100px;
+    height: 100px;
+    top: 42%;
+	position: absolute;
+    left: -55px;
+	font-size: 15px;
+    border-radius: 50%;
+    text-align: left;
+    padding-left: 15px;
+	background-color:rgb(11,11,51);
+    color: #fff;
+}
+.btn-quick close{
+    z-index: 4;
+	border: rgb(11,11,51);
+	width: 100px;
+    height: 100px;
+    top: 42%;
+	position: absolute;
+    left: -55px;
+	font-size: 15px;
+    border-radius: 50%;
+    text-align: left;
+    padding-left: 15px;
+	background-color:rgb(11,11,51);
+    color: #fff;
+}
+.imgb{
+    background-image: url("/resources/mainImage/upload/m-gifimage.gif");
+	width: auto;
+	height: 100%;
+    overflow-y: auto;
+	background-size: cover;
+}
+.pop-content{
+	display: flex;
+	padding-left:70px;
+	padding-top:70px;
+}
+.pop-title{
+	writing-mode: tb-rl;
+	letter-spacing: 0.4em;
+	margin:0;
+	font-size: 20px;
+	font-style: bold;
+	color: #fff;
+	writing-mode: tb-rl;
+	animation: fadeInDown 1.5s;
+}
+@keyframes fadeInDown {
+        0% {
+            opacity: 0;
+            transform: translate3d(0, -100%, 0);
+        }
+        to {
+            opacity: 1;
+            transform: translateZ(0);
+        }
+    }
+@keyframes fade {
+        0% {
+            opacity: 0;
+            transform: translate3d(0);
+        }
+        to {
+            opacity: 1;
+            transform: translateZ(0);
+        }
+    }
+	.pop-table{
+		animation: fade 2s;
+	    margin-top: -10px;
+	    margin-left: 250px;
+		position: absolute;
+		width: 250px;
+		height: 250px;
+	}
+	.pop-con{
+		float: left;
+		border: solid 1px rgb(255,255,255,.3);
+		width: 120px;
+		height: 120px;
+	}
+	.icon{
+		margin:auto;
+	}
+	.close:focus, .close:hover {
+    color: #fff;
+    background-color: rgb(11,11,51);
+    text-decoration: none;
+    cursor: pointer;
+    padding-left: 15px;
+    opacity: 1;
+    }
+
+</style>
 </html>
