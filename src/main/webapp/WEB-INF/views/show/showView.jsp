@@ -21,13 +21,15 @@
         <div class="summary">
             <div class="summaryTop">
                 <h1>${snr.s.showName }</h1>
-                <%for(int i=0; i<Math.round(snr.getS().getShowStar()); i++){ %>
-                <span><img src="resources/showImage/star-on.png"></span>
-                <%} %>
-                <%for(int i=0; i<5-Math.round(snr.getS().getShowStar()); i++){ %>
-                <span><img src="resources/showImage/star-off.png"></span>
-                <%} %>
-                <span id="reviewAvg">${snr.s.showStar }</span>
+                <c:if test="${snr.getS().getShowStar() != 0 }">
+	                <%for(int i=0; i<Math.round(snr.getS().getShowStar()); i++){ %>
+	                <span><img src="resources/showImage/star-on.png"></span>
+	                <%} %>
+	                <%for(int i=0; i<5-Math.round(snr.getS().getShowStar()); i++){ %>
+	                <span><img src="resources/showImage/star-off.png"></span>
+	                <%} %>
+	                <span id="reviewAvg">${snr.s.showStar }</span>
+                </c:if>
             </div>
             <div class="summaryBottom">
                 <div class="poster">
@@ -180,7 +182,25 @@
 				alert("날짜를 선택해주세요");
 				return false;
 			}else{
-				return true;
+				var showDate = $("input[name=showDate]").val();
+				var showNo = $("input[name=showNo]").val()
+				var result;
+				$.ajax({
+					url: "/checkSoldOut.do",
+					type: "post",
+					async: false,
+					data: {showDate:showDate, showNo:showNo},
+					success: function(data) {
+						seats = 413 - data;
+						if(seats>0){
+							result = true;
+						}else{
+							alert("해당 일자에 좌석이 매진되었습니다.");
+							result = false;
+						}
+					}
+				});
+				return result;
 			}
 		}
     

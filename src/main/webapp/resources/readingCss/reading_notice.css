@@ -7,7 +7,7 @@ body{
 .date-form{
 	display: flex;
     flex-wrap: wrap;
-    justify-content: flex-end;
+    justify-content: center;
 }
 .main-title{
 	border-bottom : 1px solid #d6d6d6;

@@ -105,7 +105,7 @@ public class ExhibitionController {
 		}else {
 			model.addAttribute("msg", "전시 등록 실패");
 		}
-		model.addAttribute("loc", "/exhibitionView.do");
+		model.addAttribute("loc", "/exhibitionList.do?reqPage=4");
 		return "common/msg";
 	}
 	//전시 결제
@@ -261,7 +261,7 @@ public class ExhibitionController {
 		}else {
 			model.addAttribute("msg", "전시 수정 실패");
 		}
-		model.addAttribute("loc", "/exhibitionView.do?exhibitionNo="+ex.getExhibitionNo());
+		model.addAttribute("loc", "/exhibitionList.do?reqPage=4");
 		return "common/msg";
 	}
 	//전시 관리자 페이지로 이동

@@ -40,16 +40,16 @@
 				</c:forEach>
 			</div>
 			<div class="container-right col-sm-3">
-				<h2>선택 내역</h2>
+				<h1><strong>선택 내역</strong></h1>
 				<div class="readingInfo">
-					<h3 name="showseat"></h3>
+					<h2 name="showseat"></h2>
 				</div>
-				<button name="rollback" class="btn btn-success btn-lg" onclick="history.go(-1);" style="background-color: #563D39; border-color: #563D39">이전단계</button>
+				<button name="rollback" class="btn btn-success btn-lg" onclick="history.go(-1);" style="background-color: #563D39; border-color: #563D39; margin-top: 10px;">이전단계</button>
 				<form action="/readingOption.do" method="post">
 					<input type="hidden" name="readingNum">
 					<input type="hidden" name="readingDay" value="${re.readingDay }">
 					<input type="hidden" name="readingId" value="${sessionScope.m.memberId }">
-					<input type="hidden" name="sub" class="btn btn-success btn-lg" value="예약하기" style="background-color: #563D39; border-color: #563D39">
+					<input type="hidden" name="sub" class="btn btn-danger btn-lg" value="예약하기" style="margin-top: 10px;">
 				</form>
 			</div>
 		</div>
@@ -91,7 +91,7 @@
 				$(obj).css("background-color", "#563D39");
 				$(obj).attr("onclick", "cancel(this);");
 				$("input[name=readingNum]").val($(obj).html());
-				$("h3[name=showseat]").html($(obj).html()+"번 좌석");
+				$("h2[name=showseat]").html($(obj).html()+"번 좌석");
 				$("input[name=sub]").attr("type","submit");
 				count++;
 				$("button[name=rollback]").attr("class","hidden");
@@ -101,7 +101,7 @@
 			$(obj).css("background-color", "#A79078");
 			$(obj).attr("onclick", "chocie(this);");
 			$("input[name=readingNum]").val("");
-			$("h3[name=showseat]").html("");
+			$("h2[name=showseat]").html("");
 			$("input[name=sub]").attr("type","hidden");
 			count--;
 			$("button[name=rollback]").attr("class","btn btn-success btn-lg");

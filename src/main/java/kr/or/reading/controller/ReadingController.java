@@ -83,12 +83,12 @@ public class ReadingController {
 		Reading re2 = service.selectOneId(re);
 		if(re1!=null) {
 			model.addAttribute("msg","이미 선택된 좌석입니다.");
-			model.addAttribute("loc", "/readingList.do");
+			model.addAttribute("loc", "/readingNotice.do");
 		}else if(re2!=null){
 			//좌석 선택으로 넘어갈때로 옮길예정
 			//이 문구 뜨고 예매내역으로 이동예정
 			model.addAttribute("msg",re.getReadingDay()+"일은 이미 예약하셨습니다.");
-			model.addAttribute("loc", "/readingList.do");
+			model.addAttribute("loc", "/readingNotice.do");
 		}else {
 			int result = service.insertReading(re);
 			if(result>0){
@@ -102,7 +102,7 @@ public class ReadingController {
 				//model.addAttribute("loc", "/readingOption.do");
 			}else {
 				model.addAttribute("msg","예약 오류. 다시 시도해주세요.");
-				model.addAttribute("loc", "/readingList.do");
+				model.addAttribute("loc", "/readingNotice.do");
 			}
 		}
 		return "common/msg";
@@ -176,10 +176,12 @@ public class ReadingController {
 		ArrayList<Reading> list = service.selectWeekReading();
 		ArrayList<Reading> alllist = service.selectAllReading();
 		ArrayList<ReadingBlack> black = service.selectReadingBlackList();
+		ArrayList<Fixtures> fi = service.selectAllFixtures();
 		model.addAttribute("list",list);
 		model.addAttribute("alllist",alllist);
 		model.addAttribute("black",black);
-		return "reading/readingAdmin";
+		model.addAttribute("fi",fi);
+		return "reading/readingAdmin2";
 	}
 	
 	@RequestMapping(value="/outAndBlackList.do")

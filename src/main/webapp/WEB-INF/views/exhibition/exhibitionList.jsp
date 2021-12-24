@@ -71,6 +71,7 @@
 				success : function(data){
 					var moreLi = "";
 					for(var i=0;i<data.length;i++){
+						var moreLi = "";
 						moreLi += "<li class='exhibition'>";
 						moreLi += "<div class='exhibitionImg'>"
 						moreLi += "<a href='/exhibitionView.do?exhibitionNo="+data[i].exhibitionNo+"'>";

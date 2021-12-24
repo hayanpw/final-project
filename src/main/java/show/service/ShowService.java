@@ -180,6 +180,12 @@ public class ShowService {
 		}
 	}
 
+	public int checkSoldOut(ShowReserv sr) {
+		ArrayList<Seat> list = dao.selectAllSeat(sr);
+		int size = list.size();
+		return size;
+	}
+
 
 
 

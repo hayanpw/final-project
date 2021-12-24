@@ -376,4 +376,11 @@ public class ShowController {
 		model.addAttribute("result", result);
 		return "show/reviewWriteFrm";
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/checkSoldOut.do")
+	public int checkSoldOut(ShowReserv sr) {
+		int size = service.checkSoldOut(sr);
+		return size;
+	}
 }
