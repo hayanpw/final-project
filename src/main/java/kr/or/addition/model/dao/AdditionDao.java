@@ -11,7 +11,6 @@ import org.springframework.stereotype.Repository;
 import kr.or.addition.model.vo.Board;
 import kr.or.addition.model.vo.BoardComment;
 import kr.or.addition.model.vo.BoardNext;
-import kr.or.addition.model.vo.FileVO;
 import kr.or.addition.model.vo.LikeNo;
 
 @Repository
@@ -136,10 +135,6 @@ public class AdditionDao {
 
 	public BoardComment chkDelComment(int bcRef) {
 		return sqlSession.selectOne("addition.chkDelComment",bcRef);
-	}
-
-	public int fileUpdate(FileVO fv) {
-		return sqlSession.update("addition.fileUpdate",fv);
 	}
 
 }

@@ -45,11 +45,6 @@
 		select max(board_no) from board
 	</select>
 	
-	<!--파일등록-->
-	<insert id="insertFile" parameterType="kr.or.addition.model.vo.FileVO">
-		insert into file_tbl values(file_seq.nextval,#{boardNo},#{filename},#{filepath})
-	</insert>
-	
 	<!--글보기-->
 	<select id="selectOneBoard" parameterType="_int" resultType="board">
 		 select
