@@ -51,15 +51,15 @@
 		insert into exhibition_review values(exhibition_review_seq.nextval, #{exhibitionNo}, #{exReviewWriter}, #{exReviewContent}, #{exReviewStar}, to_char(sysdate, 'yyyy-mm-dd'),0)
 	</insert>
 	<update id="deleteExReview" parameterType="exr">
-		update exhibitioin_review set ex_review_status=1 where ex_review_no=#{exReviewNo}
+		update exhibition_review set ex_review_status=1 where ex_review_no=#{exReviewNo}
 	</update>
 	<update id="updateExReveiw" parameterType="exr">
-		update exhibition_review set ex_reviewContent=#{exReviewContent} where ex_review_no=#{exReviewNo}
+		update exhibition_review set ex_review_content=#{exReviewContent} where ex_review_no=#{exReviewNo}
 	</update>
 	<select id="selectExReviewList" parameterType="_int" resultType="exr">
 		select
 			ex_review_no as exReviewNo,
-			exhibition_no as getExhibitionNo,
+			exhibition_no as exhibitionNo,
 			ex_review_writer as exReviewWriter,
 			ex_review_content as exReviewContent,
 			ex_review_star as exReviewStar,

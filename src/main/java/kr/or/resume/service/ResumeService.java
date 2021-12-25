@@ -52,7 +52,12 @@ public class ResumeService {
 	public int updateMemberLevel(int memberNo, int requritNo) {
 		int result = dao.updateMemberLevel(memberNo);
 		if(result >0) {
-			return dao.deleteRequrit(requritNo);
+			result = dao.deleteRequrit(requritNo);
+			if(result >0) {
+				return dao.deleteResume2(requritNo);
+			}else {
+				return 0;
+			}
 		}else {
 			return 0;
 		}

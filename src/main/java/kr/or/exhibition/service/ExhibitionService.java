@@ -81,6 +81,7 @@ public class ExhibitionService {
 	}
 
 	public int updateExReview(ExhibitionReview exr) {
+		System.out.println(exr.getExReviewContent());
 		int result = dao.updateExReview(exr);
 		return result;
 	}

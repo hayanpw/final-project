@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="resources/hansolCss/hansol_default.css" rel="stylesheet">
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
@@ -28,7 +29,6 @@
                         <td>결제금액 : ${exbp.paymentPrice }원/총인원 : ${exbp.paymentQuantity }명</td>
                     </tr>
             </table>
-            <span>${exbp.paymentPrice }원</span>
             <button type="button" id="credit" class="btn" style="float: right;">결제하기</button>
             <input type="hidden" id="memberNo" value="${sessionScope.m.memberNo }">
             <input type="hidden" id="paymentSelect" value="${exbp.paymentSelect }">

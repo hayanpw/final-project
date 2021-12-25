@@ -193,7 +193,7 @@ public class ExhibitionController {
 	}
 	@RequestMapping(value ="/deleteExReview.do")
 	public String deleteExReview(ExhibitionReview exr,Model model) {
-		int result = service.insertExReview(exr);
+		int result = service.deleteExReview(exr);
 		if(result>0) {
 			model.addAttribute("msg", "등록 성공");			
 		}else {

@@ -20,7 +20,7 @@
         
  	}
  	
- 	.academy:hover{
+ 	.academy>.academyImg:hover{
  	 cursor: pointer;
      transform: translate3d(0,-5px,0);
   		box-shadow :2px 2px 5px rgb(0 0 0 / 15%);;
@@ -60,7 +60,7 @@
 	 	text-align: center;
 	 }
 	
-	 .btn1{
+	 .btn{
 	 	margin-right: 10px;
 	 	font-size: 12px;
 	 }
@@ -72,27 +72,31 @@
 		margin-top: 0px;
 	 }
 	 .moreBtn{
-	border : 1px solid #BDB19A; 
-	width : 250px;
+	background-color: #064663;
+	color: #ffffff;
+	width : 200px;
 	height : 50px;
 	margin-bottom : 10px;
 	margin-left: 40%;
 }
 	 .searchMore{
-	border : 1px solid #BDB19A; 
-	width : 250px;
+	background-color: #064663;
+	color: #ffffff;
+	width : 200px;
 	height : 50px;
 	margin-bottom : 10px;
 	margin-left: 40%;
 }
-.moreBtn:hover{
-	border : 1px solid white;
-	background: #BDB19A;	
+*.moreBtn:hover{
+	background-color: #e79b36;
+	color: #064663;
+	font-weight: 800;
 	
 }
 .searchMore:hover{
-	border : 1px solid white;
-	background: #BDB19A;	
+	background-color: #e79b36;
+	color: #064663;
+	font-weight: 800;
 	
 }
 .category{
@@ -118,7 +122,7 @@
     transition: 0.5s;
 }
 .on a{
-	border: 2px solid #563D39;
+	border: 2px solid #064663;
     color: #000000;
 }
 .search{
@@ -131,7 +135,7 @@
 .search_bar{
     display: flex;
     align-items: center;
-    border-bottom:2px solid #563D39;
+    border-bottom:2px solid #064663;
     transition: 0.5s;
     padding: 5px;
     width: 350px;
@@ -196,4 +200,7 @@
 }
 .modal-body{
 	text-align: center;
+}
+.info>p{
+	margin-bottom: 9px;
 }

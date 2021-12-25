@@ -64,4 +64,9 @@ public class ResumeDao {
 		List<Resume> list = sqlSession.selectList("resume.selectMyResumeList",memberNo);
 		return (ArrayList<Resume>)list;
 	}
+
+	public int deleteResume2(int requritNo) {
+		int result = sqlSession.delete("resume.deleteResume",requritNo);
+		return result;
+	}
 }

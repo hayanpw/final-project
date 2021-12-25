@@ -46,7 +46,7 @@
 				</div>
 		</div>
 		<c:if test="${sessionScope.m.memberLevel eq 0 }">
-			<button class="btn" id="insertAcademy">수업 등록하기</button>
+			<button class="btn" id="insertAcademy" onfocus="this.blur()">수업 등록하기</button>
 		</c:if>
 		<ul class="mainmenu">
 		<c:forEach items="${list }" var="a" >
@@ -61,14 +61,14 @@
 					<p>기간: ${a.academyStart } ~ ${a.academyEnd }</p>
 					<p>강사 : ${a.academyTeacher }</p>
 					<p>수업료 : ${a.academyPrice } 원</p>
-					<p>참여 인원 : 10명
+					<p>
 					<c:if test="${sessionScope.m.memberLevel eq 0 || sessionScope.m.memberLevel eq 2}"> 
-						<button type = "button" class ="btn btn-info studentView" data-toggle="modal" data-target="#myModal" academyNo="${a.academyNo }">참여인원보기</button>
+						<button type = "button" class ="btn studentView" data-toggle="modal" data-target="#myModal" academyNo="${a.academyNo }" onfocus="this.blur()">참여인원보기</button>
 					</c:if>
 					</p>
 					<c:if test="${sessionScope.m.memberLevel eq 0 }"> 
 					<div class="infoButton">
-						<button class="btn1 academyView" academyNo="${a.academyNo }">상세보기</button><button class="btn1 academyUpdate" academyNo="${a.academyNo }">수정하기</button>
+						<button class="btn academyView" academyNo="${a.academyNo }" onfocus="this.blur()">상세보기</button><button class="btn academyUpdate" academyNo="${a.academyNo }" onfocus="this.blur()">수정하기</button>
 					</div>
 					</c:if>
 				</div>	
@@ -76,7 +76,7 @@
 		</c:forEach>
 		</ul>
 		<c:if test="${count < totalCount}">
-		<button class="moreBtn" id="more" currentCount="4" totalCount="${totalCount }" value="4" search="all">더보기</button>
+		<button class="btn moreBtn" id="more" currentCount="4" totalCount="${totalCount }" value="4" search="all" onfocus="this.blur()">더보기</button>
 		</c:if>
 		<input type="hidden" id="totalCount" value="${totalCount }">
 		<input type="hidden" id="memberLevel" value="${sessionScope.m.memberLevel }">
@@ -133,8 +133,8 @@
 				}			
 			});
 		});
-		$(document).on("click",".btn",function(){
-		});
+		//$(document).on("click",".btn",function(){
+		//});
 		$(document).on("click",".academyView",function(){
 			var academyNo = $(this).attr("academyNo");
 			location.href="/academyView.do?academyNo="+academyNo;
@@ -148,17 +148,17 @@
 			location.href="/academyDelete.do?academyNo="+academyNo;
 		});
 		$("#more").click(function(){
-			console.log("더보기 클릭시 실행");
 			var memberLevel = $("#memberLevel").val();
 			var start = $(this).val();
 			var category = $("#more").attr("search");
 			var type = $("#more").attr("class");
 			console.log(type);
-			if(type == "moreBtn"){
+			if(type == "btn moreBtn"){
 			$.ajax({
 				url : "/moreAcademy.do",
 				data : {start:start,category:category},
 				success : function(data){
+					console.log("333333333333");
 					for(var i=0;i<data.length;i++){
 						var moreLi = "";
 						moreLi += "<li class='academy'>";
@@ -170,21 +170,22 @@
 						moreLi += "<p>수업 기간: "+data[i].academyStart+"~"+data[i].academyEnd+"</p>";
 						moreLi += "<p>강사: "+data[i].academyTeacher+"</p>";
 						moreLi += "<p>수업료: "+data[i].academyPrice+"원</p>";
-						moreLi += "<p>참여인원: 10명  "
+						moreLi += "<p>"
 						if(memberLevel == ""){
 							moreLi += "</div></div></li>";
 						}else{
 						if(memberLevel == 0 || memberLevel == 2){
-						moreLi += "<button type ='button' class ='btn btn-info studentView' data-toggle='modal' data-target='#myModal' academyNo='"+data[i].academyNo+"'>참여인원보기</button>";
+						moreLi += "<button type ='button' class ='btn studentView' data-toggle='modal' data-target='#myModal' academyNo='"+data[i].academyNo+"' onfocus='this.blur()'>참여인원보기</button>";
 						}
 						moreLi += "</p><div class = 'infoButton'>";
 						if(memberLevel == 0){
-						moreLi += "<button class='btn1 academyView' academyNo='"+data[i].academyNo+"'>상세보기</button><button class='btn1 academyUpdate' academyNo='"+data[i].academyNo+"'>수정하기</button>";
+						moreLi += "<button class='btn academyView' academyNo='"+data[i].academyNo+"'onfocus='this.blur()'>상세보기</button><button class='btn academyUpdate' academyNo='"+data[i].academyNo+"' onfocus='this.blur()'>수정하기</button>";
 						}
 						moreLi += "</div></div></li>";
 						}
 						$(".mainmenu").append(moreLi);
 					}
+					
 					console.log("스타트값"+start);
 					$("#more").val(Number(start)+2);
 					var curr = Number($("#more").attr("currentCount"));
@@ -203,6 +204,7 @@
 				}
 			});
 		}else{
+			console.log("999999999");
 			$.ajax({
 				url : "/searchMoreAcademy.do",
 				data : {start:start,category:category},
@@ -218,16 +220,16 @@
 						moreLi += "<p>수업 기간: "+data[i].academyStart+"~"+data[i].academyEnd+"</p>";
 						moreLi += "<p>강사: "+data[i].academyTeacher+"</p>";
 						moreLi += "<p>수업료: "+data[i].academyPrice+"원</p>";
-						moreLi += "<p>참여인원: 10명  "
+						moreLi += "<p>"
 							if(memberLevel == ""){
 								moreLi += "</div></div></li>";
 							}else{
 							if(memberLevel == 0 || memberLevel == 2){
-							moreLi += "<button type ='button' class ='btn btn-info studentView' data-toggle='modal' data-target='#myModal' academyNo='"+data[i].academyNo+"'>참여인원보기</button>";
+							moreLi += "<button type ='button' class ='btn studentView' data-toggle='modal' data-target='#myModal' academyNo='"+data[i].academyNo+"' onfocus='this.blur()'>참여인원보기</button>";
 							}
 							moreLi += "</p><div class = 'infoButton'>";
 							if(memberLevel == 0){
-							moreLi += "<button class='btn1 academyView' academyNo='"+data[i].academyNo+"'>상세보기</button><button class='btn1 academyUpdate' academyNo='"+data[i].academyNo+"'>수정하기</button>";
+							moreLi += "<button class='btn academyView' academyNo='"+data[i].academyNo+"' onfocus='this.blur()'>상세보기</button><button class='btn academyUpdate' academyNo='"+data[i].academyNo+"' onfocus='this.blur()'>수정하기</button>";
 							}
 							moreLi += "</div></div></li>";
 							}
@@ -264,6 +266,7 @@
 				url : "/categoryAcademy.do",
 				data : {category:category,reqPage:reqPage},
 				success : function(data){
+					console.log("4444444444");
 					if(data.length < 1){
 						$(".mainmenu").empty();
 						var none = " <span class='nonebox'><img src='/resources/exhibitionImage/icon/comingsoon.png'><h3>원하시는 조건의 수업이  없습니다.</h3></span>";
@@ -285,16 +288,16 @@
 						moreLi += "<p>수업 기간: "+data[i].academyStart+"~"+data[i].academyEnd+"</p>";
 						moreLi += "<p>강사: "+data[i].academyTeacher+"</p>";
 						moreLi += "<p>수업료: "+data[i].academyPrice+"원</p>";
-						moreLi += "<p>참여인원: 10명  "
+						moreLi += "<p>"
 							if(memberLevel == ""){
 								moreLi += "</div></div></li>";
 							}else{
 							if(memberLevel == 0 || memberLevel == 2){
-							moreLi += "<button type ='button' class ='btn btn-info studentView' data-toggle='modal' data-target='#myModal' academyNo='"+data[i].academyNo+"'>참여인원보기</button>";
+							moreLi += "<button type ='button' class ='btn studentView' data-toggle='modal' data-target='#myModal' academyNo='"+data[i].academyNo+"' onfocus='this.blur()'>참여인원보기</button>";
 							}
 							moreLi += "</p><div class = 'infoButton'>";
 							if(memberLevel == 0){
-							moreLi += "<button class='btn1 academyView' academyNo='"+data[i].academyNo+"'>상세보기</button><button class='btn1 academyUpdate' academyNo='"+data[i].academyNo+"'>수정하기</button>";
+							moreLi += "<button class='btn academyView' academyNo='"+data[i].academyNo+"' onfocus='this.blur()'>상세보기</button><button class='btn academyUpdate' academyNo='"+data[i].academyNo+"' onfocus='this.blur()'>수정하기</button>";
 							}
 							moreLi += "</div></div></li>";
 							}
@@ -346,16 +349,16 @@
 						moreLi += "<p>수업 기간: "+data[i].academyStart+"~"+data[i].academyEnd+"</p>";
 						moreLi += "<p>강사: "+data[i].academyTeacher+"</p>";
 						moreLi += "<p>수업료: "+data[i].academyPrice+"원</p>";
-						moreLi += "<p>참여인원: 10명  "
+						moreLi += "<p> "
 							if(memberLevel == ""){
 								moreLi += "</div></div></li>";
 							}else{
 							if(memberLevel == 0 || memberLevel == 2){
-							moreLi += "<button type ='button' class ='btn btn-info studentView' data-toggle='modal' data-target='#myModal' academyNo='"+data[i].academyNo+"'>참여인원보기</button>";
+							moreLi += "<button type ='button' class ='btn studentView' data-toggle='modal' data-target='#myModal' academyNo='"+data[i].academyNo+"' onfocus='this.blur()'>참여인원보기</button>";
 							}
 							moreLi += "</p><div class = 'infoButton'>";
 							if(memberLevel == 0){
-							moreLi += "<button class='btn1 academyView' academyNo='"+data[i].academyNo+"'>상세보기</button><button class='btn1 academyUpdate' academyNo='"+data[i].academyNo+"'>수정하기</button>";
+							moreLi += "<button class='btn academyView' academyNo='"+data[i].academyNo+"' onfocus='this.blur()'>상세보기</button><button class='btn academyUpdate' academyNo='"+data[i].academyNo+"' onfocus='this.blur()'>수정하기</button>";
 							}
 							moreLi += "</div></div></li>";
 							}

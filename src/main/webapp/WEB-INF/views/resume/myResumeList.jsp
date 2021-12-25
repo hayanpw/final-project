@@ -12,9 +12,9 @@
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	 <div class="container">
-        <h2><span class="line">내가</span>지원한 공고</h2>
+        <h2 style="margin-top: 100px; margin-bottom: 50px;"><span class="line">내가</span>지원한 공고</h2>
        
-        <table id="tableee" class="table table-hover table-bordered">
+        <table id="tableee" class="table table-hover">
               <tr id="firstTr">
                   <th>#번호</th>
                   <th>공고명 </th>

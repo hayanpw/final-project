@@ -6,18 +6,15 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="resources/hansolCss/hansol_default.css" rel="stylesheet">
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 		 <div class="container">
-        <h2 style="margin-left: 166px;">수업 결제</h2>
-        <div class="row" style="width: 600px ;margin: 0 auto;">
+        <div class="row" style="width: 600px;margin: 0 auto; margin-top: 130px;" >
             <div style="width: 600px; height:305px; ">
-                <div class="thumbnail" style="margin: 0 auto; border-radius: 0px; border-bottom: none;">
-                <img src=${acp.academyPhoto } style="height:30%; width: 38%;">
-                    <div class="caption">
-                        <p>담당 선생님 : ${acp.academyTeacher }</p>
-                    </div>
+                <div class="thumbnail" style="margin: 0 auto; border-radius: 0px; border-bottom: none; height: 100%">
+                	<img src=${acp.academyPhoto } style="height: 90%;">
                 </div>
             </div>
             <table class="table table-bordered" style="width: 600px; text-align: center;">
@@ -29,11 +26,10 @@
                         <td>수업 날짜 : ${acp.academyStart } ~ ${acp.academyEnd }</td>
                     </tr>
                     <tr>
-                        <td>결제금액 : ${acp.paymentPrice }</td>
+                        <td>결제금액 : ${acp.paymentPrice } 원</td>
                     </tr>
                 </tbody>
             </table>
-            <span>${acp.paymentPrice }</span>
             <button type="button" id="credit" class="btn" style="float: right;">결제하기</button>
             <input type="hidden" id="memberNo" value="${sessionScope.m.memberNo }">
             <input type="hidden" id="paymentSelect" value="${acp.paymentSelect }">

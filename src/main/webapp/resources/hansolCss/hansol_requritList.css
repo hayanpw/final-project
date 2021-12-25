@@ -1,6 +1,6 @@
 #firstTr th{
 	text-align: center;
-	background-color: #563D39 ;
+	background-color: #064663 ;
 	color: #ffffff;
 	height: 50px;
 	line-height: 50px;
@@ -22,8 +22,8 @@ table tr td>a:hover{
 	text-align: center;
 }
 #pageNumAct a{
-    background-color: #563D39;
-    border-color: #563D39;
+    background-color: #064663;
+    border-color: #064663;
     color: white;
     border: none;
 }
@@ -41,12 +41,12 @@ table tr td>a:hover{
 	width: 200px;
 }
 #secTr td{
-	border-top: 1px solid #563D39;
+	border-top: 1px solid #064663;
 	height: 30px;
 	line-height: 30px;
 }
 
 #tableee{
 	margin: 0 auto;
-	width: 900px;
+	width: 1050px;
 }

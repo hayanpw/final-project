@@ -12,17 +12,9 @@
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	 <div class="container">
-        <h2><span class="line">강사</span>모집 공고</h2>
-        <c:choose>
-        <c:when test="${sessionScope.m.memberLevel eq 0}">
-        	<button id ="deleteRequritList">삭제된 공고 보기</button>
-        	<button id ="insertRequrit">공고 등록하기</button>
-        </c:when>
-        <c:otherwise>
-        	<button id="myRequritList" memberNo="${sessionScope.m.memberNo }">내가 지원한 공고 보기</button>
-        </c:otherwise>
-       </c:choose>
-        <table id="tableee" class="table table-hover table-bordered" >
+        <h2 style="margin-top: 100px; margin-bottom: 50px;"><span class="line">강사</span>모집 공고</h2>
+        
+        <table id="tableee" class="table table-hover" >
               <tr id="firstTr">
                   <th>#번호</th>
                   <th>공고명</th>
@@ -51,6 +43,17 @@
 			 </c:forEach>
           </table>
           <div id="pageNavi">${pageNavi }</div>
+        <div class="btnArea" style="float: right; margin-right: 50px;">
+        <c:choose>
+        <c:when test="${sessionScope.m.memberLevel eq 0}">
+        	<button class="btn" id ="deleteRequritList">삭제된 공고 보기</button>
+        	<button class="btn" id ="insertRequrit">공고 등록하기</button>
+        </c:when>
+        <c:otherwise>
+        	<button id="myRequritList" memberNo="${sessionScope.m.memberNo }">내가 지원한 공고 보기</button>
+        </c:otherwise>
+       </c:choose>
+       </div>
         </div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 	<script>

@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="/resources/hansolCss/hansol_academyAdmin.css">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/jquery-ui/jquery-ui.css">
+<link href="resources/hansolCss/hansol_default.css" rel="stylesheet">
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
@@ -37,12 +38,12 @@
 			                <a href="/academyView.do?academyNo=${ac.academyNo }" class="btn btn-default">상세보기</a>
 		                </div>
 		                <div class="reservList">
-		                		<button class="btn btn-danger countStudent" style="margin-left: 5px" academyNo="${ac.academyNo }">학생수 조회</button>
+		                		<button class="btn countStudent" style="margin-left: 5px" academyNo="${ac.academyNo }" onfocus="this.blur()">학생수 조회</button>
 		                	<div class="academy">
 		                	</div>
 		                </div>
 		                <div>
-		                	<button  class="btn btn-danger deleteAcademy" academyNo="${ac.academyNo }">수업 삭제</button>
+		                	<button  class="btn deleteAcademy" academyNo="${ac.academyNo }">수업 삭제</button>
 		         
 		                </div>
 	        		</div>
@@ -62,12 +63,12 @@
 			                <a href="/academyView.do?academyNo=${acl.academyNo }" class="btn btn-default">상세보기</a>
 		                </div>
 		                 <div class="reservList">
-		                		<button class="btn btn-danger countStudent" style="margin-left: 5px" academyNo="${acl.academyNo }">학생수 조회</button>
+		                		<button class="btn countStudent" style="margin-left: 5px" academyNo="${acl.academyNo }" onfocus="this.blur()">학생수 조회</button>
 		                	<div class="academy">
 		                	</div>
 		                </div>
 		                <div>
-		                	<button class="btn btn-danger deleteAcademy" academyNo="${acl.academyNo }">수업 삭제</button>
+		                	<button class="btn deleteAcademy" academyNo="${acl.academyNo }">수업 삭제</button>
 		                	
 		                </div>
 	        		</div>
@@ -88,7 +89,7 @@
 		                </div>
 		                <div>
 		                	<button class="btn btn-danger revivalAcademy" academyNo="${acc.academyNo }" style="margin-right: 20px;">수업 소생</button>
-		                	<button type = "button" class ="btn btn-info refundStudent" data-toggle="modal" data-target="#myModal" academyNo="${acc.academyNo }">환불 회원 보기</button>
+		                	<button type = "button" class ="btn refundStudent" data-toggle="modal" data-target="#myModal" academyNo="${acc.academyNo }" onfocus="this.blur()">환불 회원 보기</button>
 		                </div>
 	        		</div>
 	        	</c:forEach>

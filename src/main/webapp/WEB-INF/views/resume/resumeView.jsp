@@ -42,7 +42,7 @@
             ${r.resumeDetail }
         </div>
         	<c:if test="${sessionScope.m.memberLevel eq 0 }">
-        		<button type="button" class="btn requritBtn" id="updateMemberLevel" memberNo=${r.memberNo }>선생님 으로</button>
+        		<button type="button" class="btn" id="updateMemberLevel" memberNo = "${r.memberNo }">선생님 으로</button>
         	</c:if>
         <input type="hidden" id ="hide" value="${r.requritNo }">
     </div>
@@ -56,7 +56,9 @@
 	$("#updateMemberLevel").click(function(){
 		var memberNo = $(this).attr("memberNo");
 		var requritNo = $("#hide").val();
-		lacation.href="/updateMemberLevel.do?memberNo="+memberNo+"&requritNo="+requritNo;
+		console.log(memberNo);
+		console.log(requritNo);
+		location.href="/updateMemberLevel.do?memberNo="+memberNo+"&requritNo="+requritNo;
 	});
 	</script>
 </body>
