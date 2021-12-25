@@ -38,7 +38,8 @@ public class ExhibitionController {
 	private TicketMailSend ticketMailService;
 	//전시등록 폼
 	@RequestMapping(value="/exhibitionFrm.do")
-	public String exhibitionFrm() {
+	public String exhibitionFrm(Model model) {
+		model.addAttribute("headerText", "전시 등록");
 		return "exhibition/exhibitionInsert";
 	}
 	//전시 뷰
@@ -50,12 +51,14 @@ public class ExhibitionController {
 		model.addAttribute("exb",exb);
 		model.addAttribute("list",list);
 		model.addAttribute("payment",payment);
+		model.addAttribute("headerText", exb.getExhibitionTitle());
 		return "exhibition/exhibitionView";
 	}
 	//전시 결제 페이지로 이동
 		@RequestMapping(value="/exhibitionPaymentFrm.do")
 		public String exhibitionpaymentFrm(ExhibitionPayment exbp,Model model) {
 			model.addAttribute("exbp",exbp);
+			model.addAttribute("headerText", "전시 결제");
 			return "exhibition/exhibitionPayment";
 		}
 	//전시 등록
@@ -124,6 +127,7 @@ public class ExhibitionController {
 		model.addAttribute("list",list);
 		model.addAttribute("totalCount",totalCount);
 		model.addAttribute("count",count);
+		model.addAttribute("headerText", "전시 목록");
 		return "exhibition/exhibitionList";
 	}
 	//더보기 버튼
@@ -189,7 +193,7 @@ public class ExhibitionController {
 	}
 	@RequestMapping(value ="/deleteExReview.do")
 	public String deleteExReview(ExhibitionReview exr,Model model) {
-		int result = service.insertExReview(exr);
+		int result = service.deleteExReview(exr);
 		if(result>0) {
 			model.addAttribute("msg", "등록 성공");			
 		}else {
@@ -202,9 +206,9 @@ public class ExhibitionController {
 	public String updateExReview(ExhibitionReview exr,Model model) {
 		int result = service.updateExReview(exr);
 		if(result>0) {
-			model.addAttribute("msg", "등록 성공");			
+			model.addAttribute("msg", "수정 성공");			
 		}else {
-			model.addAttribute("msg", "등록 실패");
+			model.addAttribute("msg", "수정 실패");
 		}
 		model.addAttribute("loc", "/exhibitionView.do?exhibitionNo="+exr.getExhibitionNo());
 		return "common/msg";
@@ -213,6 +217,7 @@ public class ExhibitionController {
 	public String exhibitionUpdateFrm (int exhibitionNo, Model model) {
 		Exhibition ex = service.selectOneExhibition(exhibitionNo);
 		model.addAttribute("ex",ex);
+		model.addAttribute("headerText", "전시 수정");
 		return "exhibition/exhibitionUpdateFrm";
 	}
 	@RequestMapping(value="/exhibitionUpdate.do")
@@ -271,6 +276,7 @@ public class ExhibitionController {
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("last", map.get("last"));
 		model.addAttribute("cancel", map.get("cancel"));
+		model.addAttribute("headerText", "전시 관리자 페이지");
 		return "exhibition/exhibitionAdmin";
 	}
 	@ResponseBody
@@ -290,6 +296,7 @@ public class ExhibitionController {
 		model.addAttribute("list",map.get("list"));
 		model.addAttribute("last",map.get("last"));
 		model.addAttribute("totalCount",map.get("totalCount"));
+		model.addAttribute("headerText", "전시 마이페이지");
 		return "exhibition/exhibitionMypage";
 	}
 	

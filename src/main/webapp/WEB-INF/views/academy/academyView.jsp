@@ -5,7 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="resources/hansolCss/hansol_default.css" rel="stylesheet">
 <link href="resources/hansolCss/hansol_academyView.css" rel="stylesheet">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/jquery-ui/jquery-ui.css">
 </head>
 <body>
@@ -15,8 +17,6 @@
 	<div class="container">
 		<div class="rightSide">
         <div class="topSide">
-            <h2>${a.academyTitle }</h2>
-
         </div>
         <div class="middleSide">
             <div class="academyPhoto">
@@ -59,7 +59,16 @@
              	 	</div>
               		<div id="menu1" class="tab-pane fate in" style="width:850px">
               			<h3>취소 환불 규정</h3>
-		    			<p>Some content in menu 1.</p>
+		    			<p>예매는 PC, 모바일, 고객센터 를 통해 신용카드, 카카오페이, 네이버페이 등으로 예매하실 수 있습니다.<br>
+                        (단, 상품마다 사용 가능한 결제 수단이 다르게 적용될 수 있으니 상품 상세페이지 안내 사항을 확인해주세요.)<br>
+                        </p>
+                    
+                    <p><strong>수업 시간</strong><br>
+                        수업 시간은 19:00~20:30 입니다<br>
+                        매주 월요일은 휴무입니다<br>
+                        </p>
+                    <h3>환불</h3>
+                    <p>수업 중간 환불은 남은 수강 기간을 빼고 드립니다</p>
               		</div>
               </div>
         </div>
@@ -67,7 +76,7 @@
     <div class="leftSide">
     <div class="fixed">
     	 <div id="datepicker"></div>
-    	 <button onclick="payment();" class="btn">결제하기</button>
+    	 <button onclick="payment();" class="btn" style="float: right;">결제하기</button>
     	 <input type="hidden" id="startDay" value="${a.academyStart }">
     	 <input type="hidden" id="endDay" value="${a.academyEnd }">
     	 <input type="hidden" id="paymentPrice" value="${a.academyPrice }">
@@ -117,14 +126,15 @@
 	            dayNamesMin : [ '일', '월', '화', '수', '목', '금', '토' ],
 	            yearSuffix : '년',
  	            minDate: start,
-	            maxDate: endDate
+	            maxDate: endDate,
+	            beforeShowDay: noMondays //월요일은 휴무일
 	        });
 	
-	        $("#datepicker").change(function() {
+	        //$("#datepicker").change(function() {
 				selectDate = $(this).val();
 				$(".slide").fadeOut();
 				$("input[name=date]").val(selectDate);
-	        });
+	        //});
 	      //월요일 휴무 코드
 			 function noMondays(date) {
 	    		return [date.getDay() != 1, ''];

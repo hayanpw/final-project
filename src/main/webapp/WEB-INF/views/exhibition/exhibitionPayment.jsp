@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="resources/hansolCss/hansol_default.css" rel="stylesheet">
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
@@ -14,7 +15,7 @@
         <div class="row" style="width: 600px; margin: 0 auto;">
             <div style="width: 600px; height: 305px;">
                 <div class="thumbnail" style="margin: 0 auto; border-radius: 0px; border-bottom: none;">
-                	<img src=${exbp.exhibitionPhoto } style="width:50%; height: 100%;">
+                	<img src=${exbp.exhibitionPhoto } style="height:30%; width: 38%;">
                 </div>
             </div>
             <table class="table table-bordered" style="width: 600px; text-align: center;">
@@ -28,7 +29,6 @@
                         <td>결제금액 : ${exbp.paymentPrice }원/총인원 : ${exbp.paymentQuantity }명</td>
                     </tr>
             </table>
-            <span>${exbp.paymentPrice }원</span>
             <button type="button" id="credit" class="btn" style="float: right;">결제하기</button>
             <input type="hidden" id="memberNo" value="${sessionScope.m.memberNo }">
             <input type="hidden" id="paymentSelect" value="${exbp.paymentSelect }">

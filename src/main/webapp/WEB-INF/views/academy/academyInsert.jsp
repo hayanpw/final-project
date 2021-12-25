@@ -43,18 +43,20 @@
       <div class="form-group">
         <h3><span class="line">카</span>테고리</h3>
         <select class="form-control" id="category" name="academyCategory">
-          <option>음악</option>
-          <option>미술</option>
-          <option>독서</option>
+          <option value="음악">음악</option>
+          <option value="미술">미술</option>
+          <option value="무용">무용</option>
+          <option value="독서">독서</option>
+          <option value="육아">육아</option>
         </select>
       </div>
        <div class="form-group">
         <h3><span class="line">장</span>소</h3>
         <select class="form-control" id="place" name="academyPlace">
-          <option value="A">A</option>
-          <option value="B">B</option>
-          <option value="C">C</option>
-          <option value="D">D</option>
+          <option value="무지다교육관101호">무지다교육관101호</option>
+          <option value="무지다교육관102호">무지다교육관102호</option>
+          <option value="무지다교육관201호">무지다교육관201호</option>
+          <option value="무지다교육관202호">무지다교육관202호</option>
         </select>
       </div>
          <div class="form-group">

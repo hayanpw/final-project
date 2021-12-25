@@ -50,7 +50,7 @@
 				<c:forEach items="${list }" var="exm" varStatus="i">
 					<tr>
 						<td>${i.count }</td>
-						<td><a href="/exhibitionView.do?exhibitionNo=${exm.exhibitionNo }">${exm.exhibitionTitle }</a></td>
+						<td><a href="/exhibitionView.do?exhibitionNo=${exm.exhibitionNo }" style="text-decoration: none; color: black;">${exm.exhibitionTitle }</a></td>
 						<td>${exm.bookDate }</td>
 						<td>${exm.exhibitionStart }~${exm.exhibitionEnd }</td>
 						<td>${exm.exhibitionTimeStart }~${exm.exhibitionTimeEnd }</td>
@@ -61,7 +61,7 @@
 						<c:when test="${exm.checkEmail  eq 0 }">
 							<c:if test="${exm.paymentCancel eq 0 }">
 								<td><button class="writeBtn cancelPayment" type="button" paymentNo="${exm.paymentNo }" memberNo="${sessionScope.m.memberNo }">취소하기</button></td>
-								<td><button class="writeBtn" type="button" id="emailSend" memberNo="${sessionScope.m.memberNo }" paymentNo="${exm.paymentNo }">이메일 발권</button></td>
+								<td><button class="writeBtn emailSend" type="button" id="emailSend" memberNo="${sessionScope.m.memberNo }" paymentNo="${exm.paymentNo }">이메일 발권</button></td>
 							</c:if>
 							<c:if test="${exm.paymentCancel eq 1 }">
 								<td colspan="2">취소되었습니다</td>
@@ -80,7 +80,7 @@
 					<tr>
 						<c:set var="totalCount" value="${totalCount }"/>
 						<td>${i.count + totalCount}</td>
-						<td><a href="/exhibitionView.do?exhibitionNo=${exml.exhibitionNo }">${exml.exhibitionTitle }</a></td>
+						<td><a href="/exhibitionView.do?exhibitionNo=${exml.exhibitionNo }" style="text-decoration: none; color: black;">${exml.exhibitionTitle }</a></td>
 						<td>${exml.bookDate }</td>
 						<td>${exml.exhibitionStart }~${exml.exhibitionEnd }</td>
 						<td>${exml.exhibitionTimeStart }~${exml.exhibitionTimeEnd }</td>
@@ -111,7 +111,7 @@
 		var memberNo = $(this).attr("memberNo");
 		location.href="/deletePayment.do?paymentNo="+paymentNo+"&memberNo="+memberNo;
 	});
-	$("#emailSend").click(function(){
+	$(".emailSend").click(function(){
 		var memberNo = $(this).attr("memberNo");
 		var paymentNo = $(this).attr("paymentNo");
 		swal({

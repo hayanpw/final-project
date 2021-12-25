@@ -34,13 +34,14 @@ public class AcademyController {
 	private AcademyService service;
 	//수업 등록으로 이동
 	@RequestMapping(value="/academyFrm.do")
-	public String academyFrm() {
+	public String academyFrm(Model model) {
+		model.addAttribute("headerText", "수업 등록");
 		return "academy/academyInsert";
 	}
 	//리스트 페이지 출력
 	@RequestMapping(value="/academyList.do")
 	public String academyList(Academy a,Model model,int reqPage,String category) {
-		model.addAttribute("headerText", "강좌");
+		model.addAttribute("headerText", "수업 일정");
 		//전체 페이지 겟수 출력 
 		System.out.println(category);
 		int totalCount = service.academyTotal();
@@ -137,21 +138,25 @@ public class AcademyController {
 	@RequestMapping(value="/academyView.do")
 	public String academyView(int academyNo, Model model) {
 		Academy a = service.selectOneAcademy(academyNo);
+		model.addAttribute("headerText", a.getAcademyTitle());
 		model.addAttribute("a",a);
 		return "academy/academyView";
 	}
 	//전시 결제 페이지로 이동
 	@RequestMapping(value="/academyPaymentFrm.do")
 	public String academyPaymentFrm(AcademyPayment acp,Model model) {
+		model.addAttribute("headerText", "강좌 결제");
 		model.addAttribute("acp",acp);
 		return "academy/academyPayment";
 	}
+	//전시 결제
 	@ResponseBody
 	@RequestMapping(value="academyCredit.do",produces = "application/json;charset=utf-8")
 	public String academyCredit (AcademyPayment acp) {
 		int result = service.academyCredit(acp);
 		return new Gson().toJson(result);
 	}
+	//서머노트 이미지 업로드
 	@ResponseBody
 	@RequestMapping(value = "/uploadImageAcademy.do")
 	public String uploadImage(MultipartFile file, HttpServletRequest request) {
@@ -195,14 +200,12 @@ public class AcademyController {
 		}
 		return "/resources/academyImage/editor/"+filepath;
 	}
-//	@RequestMapping(value="/studentView.do")
-//	public String studentView (int academyNo,Model model) {
-//		
-//	}
+	//수업 수정페이지로 이동
 	@RequestMapping(value="/academyUpdateFrm.do")
 	public String academyUpdateFrm (int academyNo,Model model) {
 		Academy a = service.selectOneAcademy(academyNo);
 		model.addAttribute("a",a);
+		model.addAttribute("headerText", "수업 수정");
 		return "academy/academyUpdate";
 	}
 	@RequestMapping(value="/academyUpdate.do")
@@ -260,6 +263,7 @@ public class AcademyController {
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("last", map.get("last"));
 		model.addAttribute("cancel", map.get("cancel"));
+		model.addAttribute("headerText", "수업 관리자 페이지");
 		return "academy/academyAdmin";
 	}
 	@ResponseBody
@@ -281,6 +285,7 @@ public class AcademyController {
 		model.addAttribute("list",map.get("list"));
 		model.addAttribute("last",map.get("last"));
 		model.addAttribute("totalCount",map.get("totalCount"));
+		model.addAttribute("headerText", "수업 목록");
 		return "academy/academyMypage";
 	}
 	@RequestMapping(value="/deleteAcPayment.do")

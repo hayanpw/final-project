@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="/resources/hansolCss/hansol_exhibitionAdmin.css">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/jquery-ui/jquery-ui.css">
+<link href="resources/hansolCss/hansol_default.css" rel="stylesheet">
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
@@ -44,7 +45,7 @@
 		                	<div class="exhibition"></div>
 		                </div>
 		                <div>
-		                	<button  class="btn btn-danger deleteExhibition" exhibitionNo="${ex.exhibitionNo }" >전시삭제</button>
+		                	<button  class="btn deleteExhibition" exhibitionNo="${ex.exhibitionNo }" >전시삭제</button>
 		                </div>
 	        		</div>
 	        	</c:forEach>
@@ -63,7 +64,7 @@
 			                <a href="/exhibitionView.do?exhibitionNo=${exl.exhibitionNo }" class="btn btn-default">상세보기</a>
 		                </div>
 		                <div>
-		                	<button  class="btn btn-danger deleteExhibition" exhibitionNo="${exl.exhibitionNo }">전시삭제</button>
+		                	<button  class="btn deleteExhibition" exhibitionNo="${exl.exhibitionNo }">전시삭제</button>
 		                </div>
 	        		</div>
 	        	</c:forEach>
@@ -83,7 +84,7 @@
 		                </div>
 		                <div>
 		                	<button class="btn btn-danger revivalExhibition" exhibitionNo="${exc.exhibitionNo }" style="margin-right: 20px;">전시소생</button>
-		                	<button type = "button" class ="btn btn-info refundMember" data-toggle="modal" data-target="#myModal" exhibitionNo="${exc.exhibitionNo }">환불 회원 보기</button>
+		                	<button type = "button" class ="btn refundMember" data-toggle="modal" data-target="#myModal" exhibitionNo="${exc.exhibitionNo }">환불 회원 보기</button>
 		                </div>
 	        		</div>
 	        	</c:forEach>

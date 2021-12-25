@@ -42,7 +42,7 @@
 				<c:forEach items="${list }" var="acp" varStatus="i">
 					<tr>
 						<td>${i.count }</td>
-						<td><a href="/academyView.do?academyNo=${acp.academyNo }">${acp.academyTitle }</a></td>
+						<td><a href="/academyView.do?academyNo=${acp.academyNo }" style="text-decoration: none; color: black;">${acp.academyTitle }</a></td>
 						<td>${acp.academyStart }~${acp.academyEnd }</td>
 						<td>${acp.paymentDate }</td>
 						<td>${acp.academyCategory }</td>
@@ -63,7 +63,7 @@
 					<tr>
 						<c:set var="totalCount" value="${totalCount }"/>
 						<td>${i.count + totalCount}</td>
-						<td><a href="/academyView.do?academyNo=${acpl.academyNo }">${acpl.academyTitle }</a></td>
+						<td><a href="/academyView.do?academyNo=${acpl.academyNo }" style="text-decoration: none; color: black;">${acpl.academyTitle }</a></td>
 						<td>${acpl.academyStart }~${acp.academyEnd }</td>
 						<td>${acpl.paymentDate }</td>
 						<td>${acpl.academyCategory }</td>

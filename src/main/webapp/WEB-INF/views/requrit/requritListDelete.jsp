@@ -12,8 +12,8 @@
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	 <div class="container">
-        <h2><span class="line">삭제한</span>모집 공고</h2>
-        <table id="tableee" class="table table-hover table-bordered" >
+        <h2 style="margin-top: 100px; margin-bottom: 50px;"><span class="line">삭제한</span>모집 공고</h2>
+        <table id="tableee" class="table table-hover" >
               <tr id="firstTr">
                   <th>#번호</th>
                   <th>공고명</th>

@@ -1,7 +1,4 @@
-.line{
-	padding-top : 5px;
-	border-top : 5px solid #563D39;
-}
+
 .sector{
     width: 100%;
     margin-top: 25px;
@@ -24,10 +21,7 @@
 .title{
     margin-bottom: 50px;
 }
-.line{
-	padding-top : 5px;
-	border-top : 5px solid #563D39;
-}
+
 .requritBtn{
 	border : 1px solid #BDB19A; 
 	width : 250px;

@@ -13,7 +13,7 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	 <div class="container">
 	 	<c:if test="${sessionScope.m.memberLevel eq 0 }">
-			<button class="btn" id="exhibitionInsert">전시 등록하기</button>
+			<button class="btn hsBtn1" id="exhibitionInsert" style="margin-top: 20px;" onfocus="this.blur()">전시 등록하기</button>
 		</c:if>
 		<c:if test="${empty list }">
 			<h3 style="margin-top: 200px;">진행중인 전시가 없습니다</h3>
@@ -34,7 +34,7 @@
 					<p>수업료 : ${ex.exhibitionPrice }</p>
 					<c:if test="${sessionScope.m.memberLevel eq 0 }"> 
 					<div class="infoButton">
-						<button class="btn1 exhibitionView" exhibitionNo="${ex.exhibitionNo }">상세보기</button><button class="btn1 exhibitionUpdate" exhibitionNo="${ex.exhibitionNo }">수정하기</button>
+						<button class="btn exhibitionView" exhibitionNo="${ex.exhibitionNo }" onfocus="this.blur()">상세보기</button><button class="btn exhibitionUpdate" exhibitionNo="${ex.exhibitionNo }" onfocus="this.blur()">수정하기</button>
 					</div>
 					</c:if>
 				</div>	
@@ -42,7 +42,7 @@
 		</c:forEach>
 		</ul>
 		<c:if test="${count < totalCount}">
-		<button class="moreBtn" id="more" currentCount="4" totalCount="${totalCount }" value="4">더보기 </button>
+		<button class="btn moreBtn" id="more" currentCount="4" totalCount="${totalCount }" value="4" onfocus="this.blur()">더보기 </button>
 		</c:if>
 		<input type="hidden" id="totalCount" value="${totalCount }">
 		<input type="hidden" id="memberLevel" value="${sessionScope.m.memberLevel }">
@@ -84,7 +84,7 @@
 						moreLi += "<p>금액: "+data[i].exhibitionPrice+"</p>";
 						if(memberLevel == 0){
 							moreLi += "<div class = 'infoButton'>";
-							moreLi += "<button class='btn1 exhibitioinView' exhibitionNo='"+data[i].exhibitionNo+"'>상세보기</button><button class='btn1 exhibitionUpdate' exhibitionNo='"+data[i].exhibitionNo+"'>수정하기</button><button class='btn1 exhibitionDelete'exhibitionNo='"+data[i].exhibitionNo+"'>삭제하기</button>";
+							moreLi += "<button class='btn exhibitioinView' exhibitionNo='"+data[i].exhibitionNo+"' onfocus='this.blur()'>상세보기</button><button class='btn exhibitionUpdate' exhibitionNo='"+data[i].exhibitionNo+"' onfocus='this.blur()'>수정하기</button>";
 							moreLi += "</div></div></li>";
 						}else{
 							moreLi += "</div></div></li>";

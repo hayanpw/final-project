@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="resources/hansolCss/hansol_default.css" rel="stylesheet">
 <link href="resources/hansolCss/hansol_exhibitionView.css" rel="stylesheet">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/jquery-ui/jquery-ui.css">
@@ -19,12 +20,8 @@
         <div class="topSide">
             <h2>${exb.exhibitionTitle }</h2>
             <div class="star">
-				<span><img src="resources/showImage/star-on.png" style="height: 13px;"></span>
-				<span><img src="resources/showImage/star-on.png" style="height: 13px;"></span>
-				<span><img src="resources/showImage/star-on.png" style="height: 13px;"></span>
-				<span><img src="resources/showImage/star-on.png" style="height: 13px;"></span>
-				<span><img src="resources/showImage/star-on.png" style="height: 13px;"></span>
-				<c:forEach begin="1" end="${exb.starAvg }" >
+            	<c:forEach begin="1" end="${exb.starAvg }" >
+					<span><img src="resources/showImage/star-on.png" style="height: 13px;"></span>
 				</c:forEach>
 				<span>${exb.starAvg }</span>											
             </div>
@@ -88,7 +85,7 @@
                     <p>예매수수료는 예매 당일 밤 12시 이전까지 환불되며, 그 이후 기간에는 환불되지 않습니다.</p>
               		</div>
               		<div id="menu2" class="tab-pane fate in" >
-              			<h3>관람평이</h3>
+              			<h3>전시 티켓 구매한 회원만 댓글 작성이 가능합니다</h3>  
 		    			<div class="reviewBox hideContent">
                 	<div id="insert-btn">
 
@@ -132,7 +129,7 @@
 								</li>
 								<li>
 									<p>${exr.exReviewContentBr }</p>
-									<textarea name="reviewContent" class="form-control updateContent" style="display: none;">${exr.exReviewContent }</textarea>
+									<textarea name="exReviewContent" class="form-control updateContent" style="display: none;">${exr.exReviewContent }</textarea>
 									<div class="starBox">
 										<c:forEach begin="1" end="${exr.exReviewStar }" >
 											<span><img src="resources/showImage/star-on.png" style="height: 10px;"></span>											
@@ -171,8 +168,8 @@
     	 <input type="hidden" id="exhibitionTitle" value="${exb.exhibitionTitle }">
     	 <input type="hidden" id="exhibitionPhoto" value="${exb.exhibitionPhoto }">
     	 <input type="hidden" id="bookDate" value="">
-    	 <span class="totalPrice" id="totalPrice">${exb.exhibitionPrice }</span>원
-    	 <button onclick="payment();"class="btn" id="payment" >결제하기</button>
+    	 <span class="totalPrice" id="totalPrice" style="font-size: 20px;">${exb.exhibitionPrice }</span>원
+    	 <button onclick="payment();"class="btn" id="payment" style="float: right;">결제하기</button>
     </div>
     </div>
    
@@ -217,6 +214,7 @@
 	            yearSuffix : '년',
  	            minDate: today,
 	            maxDate: endDate,
+	            beforeShowDay : noMondays, //월요일은 휴무일
 	            onSelect : function(data){
 	            	$("#bookDate").val(data);
 	            }
@@ -284,6 +282,7 @@
 			$(obj).next().show();
 		}
 		function modifyComplete(obj,exReviewNo,exhibitionNo){
+			console.log(exhibitionNo);
 			var form = $("<form action='/updateExReview.do' method='post'></form>");
 			//form안에 수정 번호 설정
 			form.append($("<input type='text' name='exReviewNo' value='"+exReviewNo+"'>"));
@@ -297,8 +296,9 @@
 			form.submit();
 			
 		}
-		function deleteReview(obj,exReviewNo,showNo){
+		function deleteReview(obj,exReviewNo,exhibitionNo){
 			var exReviewStatus = 1;
+			console.log(exhibitionNo);
 			if(confirm("관람평을 삭제하시겠습니까?")){
 				location.href="/deleteExReview.do?exReviewNo="+exReviewNo+"&exhibitionNo="+exhibitionNo;
 			}

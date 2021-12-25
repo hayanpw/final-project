@@ -12,9 +12,13 @@
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	 <div class="container">
-        <h2><span class="line">지원</span>자 리스트(${requritTitle })</h2>
-       
-        <table id="tableee" class="table table-hover table-bordered">
+        <h2 style="margin-top: 100px; margin-bottom: 50px;"><span class="line">지원</span>자 리스트(${requritTitle })</h2>
+       <c:choose>
+       <c:when test="${empty list }">
+       	<h2>아직 지원자 가 없습니다</h2>
+       </c:when>
+       <c:when test="${not empty list }">
+        <table id="tableee" class="table table-hover">
               <tr id="firstTr">
                   <th>#번호</th>
                   <th>이름 </th>
@@ -30,6 +34,8 @@
 			   </tr>
 			 </c:forEach>
           </table>
+        </c:when>
+        </c:choose>  
         </div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
