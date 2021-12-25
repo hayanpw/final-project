@@ -17,98 +17,203 @@
 		<div id="title">FAQ</div>
 		<ul id="titlemenu" class="nav nav-pills nav-justified">
 			<li class="active"><a data-toggle="pill" href="#home">공연</a></li>
-			<li><a data-toggle="pill" href="#show">전시</a></li>
-			<li><a data-toggle="pill" href="#reading">관람</a></li>
-			<li><a data-toggle="pill" href="#space">회원</a></li>
+			<li><a data-toggle="pill" href="#show">관람</a></li>
+			<li><a data-toggle="pill" href="#ticket">예매</a></li>
+			<li><a data-toggle="pill" href="#other">기타</a></li>
 		</ul>
 		<div class="tab-content">
 		  <div id="home" class="tab-pane fade in active" >
-			<button class="accordion">[&nbsp;공연&nbsp;]&nbsp;최근 공연, 전시정보를 알고 싶습니다.</button>
-			<div id="panel" class="panel">
-			  <p>홈페이지, 서비스플라자, 콜센터(02-399-1000, 오전 10시부터 오후 8시까지 연중무휴)를 통해 공연, 전시정보를 접하실 수 있습니다</p>
-			</div>
+				<ul id="bbs-faq" class="bbs-faq">
+					<li class="item">
+					<div class="q">
+						<span class="t"><a id="question" href="#1" title="답변 열기">공연 시작 몇 분 전부터 입장이 가능한가요?</a></span>
+					</div>
+					<div class="a" id="#1">
+						<p id="answer">일반적으로 공연시작 30분 전부터는 객석에 입장이 가능하며, 원활한 공연 진행을 위해 늦어도 공연시작 10분 전까지는 입장하여 주시기 바랍니다.</p>
+					</div>
+					</li>
+					<li class="item">
+					<div class="q">
+						<span class="t"><a id="question" href="#1" title="답변 열기">최근 공연, 전시정보를 알고 싶습니다.</a></span>
+					</div>
+					<div class="a" id="#1">
+						<p id="answer">홈페이지, 서비스플라자, 콜센터(02-399-1000, 오전 10시부터 오후 8시까지 연중무휴)를 통해 공연, 전시정보를 접하실 수 있습니다.</p>
+					</div>
+					</li>
+					<li class="item">
+					<div class="q">
+						<span class="t"><a id="question" href="#1" title="답변 열기">공연 영상자료(VIDEO, DVD)를 구할 수 있나요?</a></span>
+					</div>
+					<div class="a" id="#1">
+						<p id="answer">공연별 주최측에 문의하시기 바랍니다.주최측 문의 전화번호는 각 공연정보를 참고하시기 바랍니다.<br>
+						(각 공연정보는 공연명을 아실 경우 홈페이지 상단의 검색창을 통해 검색하시거나,<br>
+						공연 날짜를 아실 경우 공연/전시 메뉴에서 캘린더를 통해 검색하시면 됩니다.)
+						</p>
+					</div>
+					</li>
+					<li class="item">
+					<div class="q">
+						<span class="t"><a id="question" href="#1" title="답변 열기">공연팜플렛을 구입할 수 있을까요?</a></span>
+					</div>
+					<div class="a" id="#1">
+						<p id="answer">
+						 공연당일은 공연장 로비에서 팜플렛을 구입하실 수 있습니다.<br>공연일이 지난 경우에는 공연주최측에 문의하시기 바랍니다.
+			  			<br>주최측 문의전화는 각 공연정보를 참고하시기 바랍니다.(각 공연정보는 공연명을 아실 경우 홈페이지 상단의 검색창을 통해 검색하시거나,
+						 <br> 공연 날짜를 아실 경우 공연/전시 메뉴에서 캘린더를 통해 검색하시면 됩니다.)
+						
+						</p>
+					</div>
+					</li>
+					
+				</ul>
 			
-			<button class="accordion">공연 영상자료(VIDEO, DVD)를 구할 수 있나요?</button>
-			<div id="panel" class="panel">
-			  <p>공연별 주최측에 문의하시기 바랍니다.주최측 문의 전화번호는 각 공연정보를 참고하시기 바랍니다. </p>
-			  <p>(각 공연정보는 공연명을 아실 경우 홈페이지 상단의 검색창을 통해 검색하시거나,</p>
-			  <p>공연 날짜를 아실 경우 공연/전시 메뉴에서 캘린더를 통해 검색하시면 됩니다.)</p>
-			</div>
-			
-			<button class="accordion">공연팜플렛을 구입할 수 있을까요?</button>
-			<div id="panel" class="panel">
-			  <p>공연당일은 공연장 로비에서 팜플렛을 구입하실 수 있습니다.</p>
-			  <p>공연일이 지난 경우에는 공연주최측에 문의하시기 바랍니다.</p>
-			  <p>주최측 문의전화는 각 공연정보를 참고하시기 바랍니다.</p>
-			  <p>(각 공연정보는 공연명을 아실 경우 홈페이지 상단의 검색창을 통해 검색하시거나,</p>
-			  <p> 공연 날짜를 아실 경우 공연/전시 메뉴에서 캘린더를 통해 검색하시면 됩니다.)</p>
-			 </div>
+		  </div>
+		  <div id="show" class="tab-pane fade">
+		    <ul id="bbs-faq" class="bbs-faq">
+					<li class="item">
+					<div class="q">
+						<span class="t"><a id="question" href="#1" title="답변 열기">공연중 음식물반입이 가능한가요?</a></span>
+					</div>
+					<div class="a" id="#1">
+						<p id="answer">
+						모든 일체의 음식물은 공연장 안으로 가져갈 수 없습니다.<br>자신의 조그만 부주의가 공연자는 물론 객석의 관람자에게도 큰 피해를 주어 공연장 분위기를 망칠 수 있는 것을 양해해 주시고,
+						<br>음식물은 꼭 드신 후 입장해 주시기 바랍니다.</p>
+					</div>
+					</li>
+					<li class="item">
+					<div class="q">
+						<span class="t"><a id="question" href="#1" title="답변 열기">공연시작후 빈좌석으로 이동이 가능한가요?</a></span>
+					</div>
+					<div class="a" id="#1">
+						<p id="answer">매진이 되지 않아 좌석이 비어 있는 공연이라 하더라도 좌석 이동은 불가합니다.
+						<br>공연 중에 좌석을 이동하는 것은 다른 관객에게 불편을 초래하는 일이며, 관람환경을 해하는 행위입니다.
+						<br>설사 공연 시작 전이라 하더라도 문화에티켓에 어긋나는 일입니다.</p>
+					</div>
+					</li>
+					<li class="item">
+					<div class="q">
+						<span class="t"><a id="question" href="#1" title="답변 열기">공연 촬영, 녹음, 녹화가 가능한가요?</a></span>
+					</div>
+					<div class="a" id="#1">
+						<p id="answer">사진촬영, 녹음, 녹화는 절대 금물입니다.
+						<br>종합구성물의 무대장치나 공연장면, 유명연주자들의 모습은 모두 저작권에 해당하는 것으로, 무단촬영 배포가 금지되어 있습니다.
+						<br>세종문화회관에서도 사전에 공연단체에게 허락을 받고 상업적인 사용을 하지 않는다는 약속을 한 후에 공연기록용 사진을 촬영하며,
+						<br>프로그램이나 소식지에 사진을 사용하는 데에도 별도의 승인을 받고 있습니다.
+						<br>공연 중의 사진 촬영이나 녹음, 녹화 등은 공연물의 초상권과 저작권을 침해하는 행위이며,
+						<br>공연장은 공공장소라는 점을 감안하시어 공연관람의 기본적인 에티켓을 지켜 주시기 바랍니다.
+						</p>
+					</div>
+					</li>
+					<li class="item">
+					<div class="q">
+						<span class="t"><a id="question" href="#1" title="답변 열기">공연장 입장시 복장 제한이 있나요?</a></span>
+					</div>
+					<div class="a" id="#1">
+						<p id="answer">
+						공연장에 입장하기 위한 복장 규정은 없습니다.
+						<br>단, 공연은 영화와 달라서 관람하시는 그 순간이 지나면 다시는 똑같은 분위기, 연기를 보실수 없는 '현장' 예술입니다.
+						<br>본인 스스로 편안하게 공연에 몰입할 수 있는 복장을 갖추시는 것이 좋습니다.
+						<br>공연을 즐겨 관람하시는 분들은 스스로의 마음가짐을 위해서 정장을 고집하시기도 합니다.또 한가지는 주변의 다른 관객들에 대한 배려입니다.
+						<br>바스락 거리는 소리가 많이 나는 재질의 옷이라던가 지나치게 화려한 색상이나 디자인은 삼가시는 것이 좋습니다.
+						<br>공연관객들께서는 그 어느때보다 시각과 청각이 예민해져 있는 상태이기때문에
+						<br>평상시에는 잘 안들리던 소리나 모습에도 신경이 쓰일 수 밖에 없기 때문입니다.
+						<br>공연장을 찾으실 때 옷차림은 소중한 시간을 마음껏 즐길 수 있는 마음가짐을 표현하시는 무난하고 편안한 복장이 좋습니다.
+						</p>
+					</div>
+					</li>
+				</ul>
 		  </div>
 		  
-		  <div id="show" class="tab-pane fade">
-		    <button class="accordion">잔여석 정보에 대해서 알고 싶어요.</button>
-			<div id="panel" class="panel">
-			  <p>각 공연 상세페이지의 예매버튼 하단에 잔여석정보를 보실 수 있는 버튼이 있으며,</p>
-			<p>해당 버튼을 클릭하시면 공연일자별, 회차별 잔여석 수를 확인하실 수 있습니다.</p>
-			<p>단, 예매상황에 따라 잔여석 수가 변동될 수 있으니 정확한 잔여석정보는 예매창에서 확인해 주시기 바랍니다.</p>
-			</div>
-			
-			<button class="accordion">제가 예매한 혹은 예매할 자리가 궁금합니다.</button>
-			<div id="panel" class="panel">
-			  <p>예매한 좌석을 다시 확인하실 경우는 마이페이지에서 예매확인/취소를 클릭하시면 고객분께서 예매하신 내역을 보실 수 있습니다.</p>
-			  <p>이때 예매번호 하단의 상세내역을 클릭하시면 좌석번호를 확인하실 수 있습니다.</p>
-			  <p>또한 홈페이지 좌석배치도를 참고하시면 됩니다. 예매할 자리는 인터넷예매를 하실 경우 직접 좌석을 선택하실 수 있는 장점이 있습니다.</p>
-			</div>
-			
-			<button class="accordion">Section 3</button>
-			<div id="panel" class="panel">
-			  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-			</div>
+		  
+		  <div id="ticket" class="tab-pane fade">
+				<ul id="bbs-faq" class="bbs-faq">
+						<li class="item">
+						<div class="q">
+							<span class="t"><a id="question" href="#1" title="답변 열기">티켓 예매는 어떻게 하나요?</a></span>
+						</div>
+						<div class="a" id="#1">
+							<p id="answer">무지다 예매 방법은 인터넷, 전화, 방문 예매가 있습니다.</p>
+						</div>
+						</li>
+						<li class="item">
+						<div class="q">
+							<span class="t"><a id="question" href="#1" title="답변 열기">카드결제후 취소했는데 언제 입금되나요?</a></span>
+						</div>
+						<div class="a" id="#1">
+							<p id="answer">고객님의 카드결제일에 따라 이번달 혹은 다음달에 입금됩니다.
+							<br>정확한 입금 날짜를 확인하시려면 고객님께서 사용하시는 해당 카드사에 문의해보시는것이 가장 정확합니다. </p>
+						</div>
+						</li>
+						<li class="item">
+						<div class="q">
+							<span class="t"><a id="question" href="#1" title="답변 열기">입장권을 분실했습니다. 어떻게 해야 하나요?</a></span>
+						</div>
+						<div class="a" id="#1">
+							<p id="answer">
+							공연입장권은 소지자에게 우선권이 있으며, 예약정보만으로 입장하실 수는 없습니다.
+							<br>항상 분실하지 않도록 유의해주시기 바라며 자세한 사항은
+							<br>서비스플라자(02-399-1000, 오전 10시부터 오후 8시까지 연중무휴, 13-14시 점심시간 제외)로 전화문의하시기 바랍니다.
+							</p>
+						</div>
+						</li>
+						<li class="item">
+						<div class="q">
+							<span class="t"><a id="question" href="#1" title="답변 열기">티켓구입시 중복할인이 적용되나요?</a></span>
+						</div>
+						<div class="a" id="#1">
+							<p id="answer">
+							일반적으로 티켓 구입시 중복 할인은 적용되지 않습니다.<br>예매하시기 전에 관람을 원하시는 공연의 할인정보를 미리 숙지하시기 바랍니다.
+							</p>
+						</div>
+						</li>
+					</ul>
 		  </div>
-		  <div id="reading" class="tab-pane fade">
-			<button class="accordion">공연중 음식물반입이 가능한가요?</button>
-			<div id="panel" class="panel">
-			  <p>모든 일체의 음식물은 공연장 안으로 가져갈 수 없습니다.
-				<p>자신의 조그만 부주의가 공연자는 물론 객석의 관람자에게도 큰 피해를 주어 공연장 분위기를 망칠 수 있는 것을 양해해 주시고,
-				<p>음식물은 꼭 드신 후 입장해 주시기 바랍니다.</p>
-			</div>
-			
-			<button class="accordion">공연 촬영, 녹음, 녹화가 가능한가요?</button>
-			<div id="panel" class="panel">
-			  	<p>사진촬영, 녹음, 녹화는 절대 금물입니다.</p>
-				<p>종합구성물의 무대장치나 공연장면, 유명연주자들의 모습은 모두 저작권에 해당하는 것으로, 무단촬영 배포가 금지되어 있습니다.</p>
-				<p>세종문화회관에서도 사전에 공연단체에게 허락을 받고 상업적인 사용을 하지 않는다는 약속을 한 후에 공연기록용 사진을 촬영하며,</p>
-				<p>프로그램이나 소식지에 사진을 사용하는 데에도 별도의 승인을 받고 있습니다.</p>
-				<p>공연 중의 사진 촬영이나 녹음, 녹화 등은 공연물의 초상권과 저작권을 침해하는 행위이며,</p>
-				<p>공연장은 공공장소라는 점을 감안하시어 공연관람의 기본적인 에티켓을 지켜 주시기 바랍니다.</p>
-			</div>
-			
-			<button class="accordion">공연보러 갈때 몇시정도에 도착해야 하나요?</button>
-			<div id="panel" class="panel">
-			  <p>공연장 도착은 최소한 20분전까지는 완료하시고, </p>
-			  <p>10분전에는 자신의 좌석에 앉아 편안한 마음으로 공연을 관람할 준비를 해 주시기 바랍니다. </p>
-			  <p>원칙적으로 공연장 입장은 공연시작 이후엔 출입금지입니다. </p>
-			  <p>늦게 도착하신 경우 대기석에서 기다린 후 휴식시간(intermission)에 고객님 자리로 이동하실 수 있습니다.</p>
-			</div>
+		  
+		  
+		  <div id="other" class="tab-pane fade">
+		  		<ul id="bbs-faq" class="bbs-faq">
+					<li class="item">
+					<div class="q">
+						<span class="t"><a id="question" href="#1" title="답변 열기">아이디 또는 비밀번호를 잊어버렸어요.</a></span>
+					</div>
+					<div class="a" id="#1">
+						<p id="answer">'로그인 화면의 ''ID찾기', 또는 '비밀번호찾기'에서 실명인증을 받으신 후, ID와 비밀번호를 안내받으실 수 있습니다.<br>
+						문제가 있을 시에는 콜센터 (02-399-1000, 오전 9시부터 오후 8시까지 연중무휴)로 문의주시기 바랍니다.</p>
+					</div>
+					</li>
+					<li class="item">
+					<div class="q">
+						<span class="t"><a id="question" href="#1" title="답변 열기">인터넷 예매시 오류가 났습니다.</a></span>
+					</div>
+					<div class="a" id="#1">
+						<p id="answer">무지다 콜센터 (02-549-2233, 오전 9시부터 오후 8시까지 연중무휴)로 문의해 주시기 바랍니다.</p>
+					</div>
+					</li>
+					<li class="item">
+					<div class="q">
+						<span class="t"><a id="question" href="#1" title="답변 열기">대관서비스에 대해 알려주세요.</a></span>
+					</div>
+					<div class="a" id="#1">
+						<p id="answer">
+						홈페이지 상단 메뉴 중 대관안내를 클릭하시면 자세한 사항을 보실 수 있습니다.
+						</p>
+					</div>
+					</li>
+					<li class="item">
+					<div class="q">
+						<span class="t"><a id="question" href="#1" title="답변 열기">공연, 전시장 시설이 궁금해요.</a></span>
+					</div>
+					<div class="a" id="#1">
+						<p id="answer">
+						홈페이지 상단메뉴에서 기관소개를 클릭하시면 새 창이 열리고, 그 후 상단메뉴에서 시설소개를 클릭하시면 시설소개에 대한 자세한 사항을 보실 수 있습니다.
+						</p>
+					</div>
+					</li>
+				</ul>
+		  
 		  </div>
-		  <div id="space" class="tab-pane fade">
-		   <button class="accordion">Section 1</button>
-			<div id="panel" class="panel">
-			  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-			</div>
-			
-			<button class="accordion">Section 2</button>
-			<div id="panel" class="panel">
-			  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-			</div>
-			
-			<button class="accordion">Section 3</button>
-			<div id="panel" class="panel">
-			  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-			</div>
-		 </div>
-		</div>
 		
+		</div>
 		
 		
 		
@@ -171,6 +276,23 @@
 		</c:if>
 	</div>
 	<script type="text/javascript">
+	$(".bbs-faq .q a").click(function() {
+		$(this).closest(".q").toggleClass("active");
+		$(".bbs-faq .q a").not(this).attr({"title":"답변 열기"});
+		$(".bbs-faq .q a").not(this).closest(".q").removeClass("active");
+		var target = $(this).closest(".item").find(".a");
+		var other = $(".bbs-faq .q a").not(this).closest(".item").find(".a");
+		if ($(this).closest(".q").hasClass("active")){
+			$(this).attr({"title":"답변 닫기"});
+		}else{
+			$(this).attr({"title":"답변 열기"});
+		}
+		target.slideToggle(150);
+		other.slideUp(150);
+		return false;
+	});
+	
+	
 	$(document).on("click",".chk",function(){
 		var idx=$(".chk").index(this);
 		var boardWriter = $(".boardWriter").eq(idx).val();

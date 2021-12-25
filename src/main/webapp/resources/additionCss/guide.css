@@ -60,3 +60,31 @@
 	color: #064663;
 	font-weight: bold; 
 	}
+	.section.type01 {
+    display: flex;
+    padding: 40px 0;
+    border-bottom: 1px solid #064663;
+	}
+	
+	.section.type01 .section-left {
+    width: 340px;
+    flex: 0 0 auto;
+	}
+	#section{
+	border-top: 1px solid #064663;
+	margin-top: 20px;
+	}
+	
+	.table.type01 th {
+    padding: 12px;
+    font-size: 17px;
+    font-weight: 500;
+    border-left: 1px solid #e5e5e5;
+    background-color: #f9f9f9;
+	}
+	.table.type01 th:first-of-type {
+    border-left: none;
+	}
+	.table.type01 tr {
+    border-bottom: 1px solid #e5e5e5;
+	}

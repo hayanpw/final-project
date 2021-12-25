@@ -39,7 +39,7 @@
 					<img src="/resources/additionImage/열람실1.jpg" width="100%" height="300px">				    
 				    <div class="content-text">
 				    <span>Musée d'art <span id="line">열람실</span>은</span><br>
-				   <p>100석의 열람실이 있으며 홈페이지를 통해 좌석현황 및 배정 절차를 받아 이용할 수 있고,</p> 
+				   <p>100석의 열람실이 있으며 홈페이지를 통해 좌석현황 및 배정 절차를 받아 이용할 수 있으며,</p> 
 				   <p>비품 대여 서비스를 제공하고 있습니다.</p>
 				    </div>
 				  </div>
@@ -55,6 +55,187 @@
 				
 				<p id="title2">찾아오시는 길</p> <!--서버주소등록 새로해야함  -->
 				<div id="map" style="width:100%;height:500px;"></div>
+				
+				   <div id="section" class="section type01">
+                         <div class="section-left">
+                             <h3 class="section-title">
+                                 	자가용
+                             </h3>
+                          <img src="/resources/additionImage/car.png" alt="" class="deco">
+                         </div>
+                         <div class="section-right">
+                             <div class="table-wrap type-center">
+                                 <table class="table type01">
+                                     <colgroup>
+                                         <col style="width:20%">
+                                         <col style="width:80%">
+                                     </colgroup>
+                                     <tbody>
+                                     <tr>
+                                         <th>46번 국도이용</th>
+                                         <td>
+                                           	  서울 → 구리 → 남양주 → 마석 → 대성리→ 청평 → 가평 → 강촌 → 춘천
+                                         </td>
+                                     </tr>
+                                     <tr>
+                                         <th>
+                                             06번 국도이용
+                                         </th>
+                                         <td>
+                                             	서울 → 구리 → 덕소 → 양수리 → 양평 → 홍천 → 중앙고속도로 → 춘천
+                                         </td>
+                                     </tr>
+                                     <tr>
+                                         <th>
+                                            	 서울 ~ 춘천 고속도로이용
+                                         </th>
+                                         <td>
+                                           	  서울(올림픽대로) → 60번 서울 ~ 춘천고속도로 → 55번 중앙고속도로 → 춘천
+                                         </td>
+                                     </tr>
+                                     <tr>
+                                         <th>
+                                            	 중앙 고속도로이용
+                                         </th>
+                                         <td>
+                                            	 부산 → 대구 → 홍천 → 춘천
+                                         </td>
+                                     </tr>
+                                     </tbody>
+                                 </table>
+                             </div>
+                         </div>
+                     </div>
+                     
+                            <div  class="section type01">
+                                <div class="section-left">
+                                    <h3 class="section-title">
+                                       	 시외버스 (서울 - 춘천)
+                                    </h3>
+
+	                                <img src="/resources/additionImage/circleBus.png" alt="" class="deco">
+                                </div>
+
+                                <div class="section-right">
+                                    <div class="table-wrap type-center">
+                                        <table class="table type01">
+                                            <colgroup>
+                                                <col style="width:20%">
+                                                <col style="width:80%">
+                                            </colgroup>
+                                            <tbody>
+                                            <tr>
+                                                <th>동서울</th>
+                                                <td>
+                                                   	 동서울 → 대성리 → 청평 → 가평 → 강촌 → 춘천 : 1시간 30분소요(20분간격 운행)
+                                                    	동서울 → 춘천 [무정차: 1시간 10분소요(10~15분간격 운행)]
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                    	상봉동
+                                                </th>
+                                                <td>
+                                                   	 상봉동→ 교문리 → 마석 → 대성리 → 청평 → 가평 → 강촌 → 춘천 : 1시간 40분소요
+                                                    (30 ~ 40분간격 운행)
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                   	 강남
+                                                </th>
+                                                <td>
+                                                	    강남 → 춘천 : 1시간 30분소요(40~50분간격 운행)
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <p class="before-reference mt-normal">
+                                        	문의 : 춘천시외버스터미널 033)241-0285 / 동서울터미널 1688-5979 / 상봉터미널 02)435-2129 / 강남터미널 1688-4700
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="section type01">
+                                <div class="section-left">
+                                    <h3 class="section-title">
+                                       	 전철 / ITX-청춘열차
+                                    </h3>
+
+	                                <img src="/resources/additionImage/circleTrain.png" alt="" class="deco">
+                                </div>
+
+                                <div class="section-right">
+                                    <div class="table-wrap type-center">
+                                        <table class="table type01">
+                                            <colgroup>
+                                                <col style="width:20%">
+                                                <col style="width:80%">
+                                            </colgroup>
+                                            <tbody>
+                                            <tr>
+                                                <th>
+                                              	      전철
+                                                </th>
+                                                <td>
+						                                                    상봉 → 망우 → 갈매 → 퇴계원 → 사릉 → 금곡 → 평내호평 → 마석 → 대성리 → 청평 → 상천 → 가평 → 굴봉산 →
+						                                                    백양리 → 강촌 → 김유정 → 남춘천역 하차(1시간 15분소요) → 효자로 방향 1.24Km (택시 3분 / 도보 20분)
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                    ITX-청춘열차
+                                                </th>
+                                                <td>
+                                                 	   용산 → 청량리 → 남춘천역 하차(1시간 10분소요) → 효자로 방향 1.24Km (택시 3분 / 도보 20분)
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <p class="before-reference mt-normal">
+                                       	 문의 : 코레일 1544-8545 / 서울메트로 1577-1234
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="section type01">
+                                <div class="section-left">
+                                    <h3 class="section-title">
+                                     	   시내버스
+                                    </h3>
+
+	                                <img src="/resources/additionImage/circleBus.png" alt="" class="deco">
+                                </div>
+
+                                <div class="section-right">
+                                    <div class="table-wrap type-center">
+                                        <table class="table type01">
+                                            <colgroup>
+                                                <col style="width:20%">
+                                                <col style="width:80%">
+                                            </colgroup>
+                                            <tbody>
+                                            <tr>
+                                                <th>
+                                                   	 문화예술회관 정류소
+                                                </th>
+                                                <td>
+                                                     [정류소번호 1813, 1814] 9, 13, 13-S, 서면1
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <p class="before-reference mt-normal">
+                                      	  문의 : 버스정보센터 033)250-4093
+                                    </p>
+                                </div>
+                            </div>
 			</div>
 	<script type="text/javascript">
 	window.onload=function(){

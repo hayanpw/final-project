@@ -20,4 +20,6 @@ public class Board {
 	private int boardFix;
 	private String filename;
 	private String filepath;
+	private String startDate;
+	private String endDate;
 }

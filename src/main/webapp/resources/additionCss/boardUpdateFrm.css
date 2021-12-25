@@ -8,7 +8,7 @@
 	margin-bottom: 50px;
 	}
 	#qnaTitle{
-	width:220px;
+	width:200px;
 	border-top: 7px solid #064663;
 	margin-top:70px;
 	margin-left:70px;
@@ -43,4 +43,8 @@
 	#text{
 	border: none;
 	box-shadow: none;
+	}
+	#updatebtn{
+	background-color: #064663;
+	color: #fff;
 	}

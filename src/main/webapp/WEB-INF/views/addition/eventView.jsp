@@ -15,7 +15,7 @@
 		<input type="hidden" id="boardNo" value="${b.boardNo }">
 		<div id="table">
 			<div id="btns">
-			<a class="btn btnColor" href="/eventList.do">글목록</a>
+			<a class="btn btnColor" href="/discount.do">글목록</a>
 			<c:choose>
 			<c:when test="${sessionScope.m.memberId == b.boardWriter}">
 			<a class="btn btnColor" href="/boardDelete.do?num=&boardType=5&boardNo=${b.boardNo }">글삭제</a>
@@ -31,7 +31,7 @@
 					<td id="boardTitle" colspan="7">${b.boardTitle }</td>
 				</tr>
 				<tr>
-					<td colspan="7">이벤트 기간</td>
+					<td colspan="7">이벤트 기간 : ${b.startDate } ~ ${b.endDate } </td>
 				</tr>
 				<tr>
 					<td colspan="7">

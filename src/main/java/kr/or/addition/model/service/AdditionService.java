@@ -214,7 +214,7 @@ public class AdditionService {
 		return nCount;
 	}
 
-
+	//검색
 	public BoardPageData searchKeyword(int reqPage,int boardType,String keyword,String type) {
 		int numPerPage = 10;
 		int end = reqPage * numPerPage;
@@ -388,13 +388,13 @@ public class AdditionService {
 		return mpd;
 	}
 
-
+	//이벤트글 수
 	public int totalEventCount() {
 		int result=dao.totalEventCount();
 		return result;
 	}
 
-
+	//이벤트 글 조회
 	public ArrayList<Board> eventMore(int start) {
 		int length=3;
 		int end = start+length-1;

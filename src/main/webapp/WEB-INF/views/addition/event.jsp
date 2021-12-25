@@ -12,11 +12,22 @@
 	<div class="container">
 		<fieldset>
 			<c:if test="${not empty sessionScope.m.memberId }">
-			<div>
-				<a href="/boardWriteFrm.do?boardType=5" class="btn btn-info writeBtn">글쓰기</a>
-			</div>
+				<div>
+					<a href="/boardWriteFrm.do?boardType=5" id="writeBtn" class="btn btn-info writeBtn">글쓰기</a>
+				</div>
 			</c:if>
-			<div class="photoWrapper"></div>
+			<div class="news-title-box">
+				<ul class="bg7">
+					<li>당첨안내문자를 받으실 수 있도록 마이페이지 > 개인정보관리에서 본인의 휴대폰번호를 꼭 확인해주세요.</li>
+				</ul>
+			</div>
+						<div class="photoWrapper">
+
+						</div>
+			
+			
+			
+			
 			<div id="btnBack">
 			<button class="btn btn-outline-info" currentCount="0" 
 			totalCount="${totalCount }" value="1" id="more-btn">이벤트 더보기</button>
@@ -24,6 +35,7 @@
 			<!--totalCount : 전체게시물 수
 				currentCount : 실제로 가져온 게시물 수 
 				value : 요청한 게시물 수(reqPage) -->
+				
 		</fieldset>
 	</div>
 	<script>
@@ -35,35 +47,33 @@
 				type : "post",
 				success : function(data){
 					for(var i=0;i<data.length;i++){
-						console.log(data[0]);
 						var p = data[i];
 						var html ="";
 						if(p.filepath!=null){
-						html += "<div class='photo'>";
-						html += "<a href='/boardView.do?boardType=5&boardNo="+p.boardNo+"'><img id='eventImg' src='/resources/additionImage/"+p.filepath+"'></a>";
-						html += "<p class='caption'><a href='/boardView.do?boardType=5&boardNo="+p.boardNo+"'>"+p.boardTitle+"</a><br>조회수 : "+p.readCount+"</p></div>";
+						html += "<div class='eventContent'>";
+						html += "<a href='/boardView.do?boardType=5&boardNo="+p.boardNo+"'class='img'><img class='eventImg' src='/resources/additionImage/"+p.filepath+"' ></a>";
+						html += "<h3 class='tit'>"+p.boardTitle+"</h3>";
+						html += "<dl><dt>&nbsp;이벤트 기간</dt><dd>"+p.startDate+" ~ "+p.endDate+"</dd></dl>";
+						html += "<dl><dt>&nbsp;당첨자 발표</dt><dd>"+p.endDate+"</dd></dl></div>";
 						$(".photoWrapper").append(html);
-						}else{
-							html += "<div class='photo'>";
-							html += "<a href='/boardView.do?boardType=5&boardNo="+p.boardNo+"'><img id='eventImg' src='/resources/additionImage/이벤트.png'></a>";
-							html += "<p class='caption'><a href='/boardView.do?boardType=5&boardNo="+p.boardNo+"'>"+p.boardTitle+"</a><br>조회수 : "+p.readCount+"</p></div>";
-							$(".photoWrapper").append(html);
 						}
-					}
 					
+					}
 					//가지고 온 데이터를 화면에 출력한 후 다음 요청을 위한 값 변경
-					$("#more-btn").val(Number(start)+3);
+					$("#more-btn").val(Number(start)+3); //3
 					//지금까지 읽오온 게시물의 수를 변경(읽어온 배열의 길이만큼 기존값에 더함)
-					var curr=Number($("#more-btn").attr("currentCount"));
-					$("#more-btn").attr("currentCount",curr+data.length);
+					var curr=Number($("#more-btn").attr("currentCount")); //0
+					$("#more-btn").attr("currentCount",curr+data.length); //2
 					//전체게시물수 
-					var totalCount = $("#more-btn").attr("totalCount");
-					var currCount = $("#more-btn").attr("currentCount");
+					var totalCount = $("#more-btn").attr("totalCount");//4
+					var currCount = $("#more-btn").attr("currentCount"); //2
+					console.log(totalCount);
+					console.log(currCount);
 					if(totalCount==currCount){
 						$("#more-btn").prop("disabled",true);
 					}
-				}
-			});
+			}
+		});
 		});
 		$(function(){
 			$("#more-btn").click();

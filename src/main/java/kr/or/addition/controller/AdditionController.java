@@ -127,7 +127,7 @@ public class AdditionController {
 		} else if (b.getBoardType() == 3) {
 			model.addAttribute("loc", "/additionBoard.do?boardType=3&reqPage=1");
 		}else {
-			model.addAttribute("loc", "/eventList.do");
+			model.addAttribute("loc", "/discount.do");
 		}
 		return "common/msg";
 	}
@@ -177,7 +177,7 @@ public class AdditionController {
 		}else if(boardType == 4){
 			model.addAttribute("loc", "/myFree.do?memberId="+m.getMemberId());
 		}else {
-			model.addAttribute("loc", "/eventList.do");
+			model.addAttribute("loc", "/discount.do");
 		}
 		return "common/msg";
 	}
@@ -190,9 +190,10 @@ public class AdditionController {
 	}
 
 	// 이벤트페이지
-	@RequestMapping(value = "/eventList.do")
+	@RequestMapping(value = "/discount.do")
 	public String eventList(Model model) {
 		int totalEventCount=service.totalEventCount();
+		model.addAttribute("headerText", "이벤트");
 		model.addAttribute("totalCount", totalEventCount);
 		return "addition/event";
 	}

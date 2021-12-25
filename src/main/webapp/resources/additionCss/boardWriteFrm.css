@@ -5,16 +5,16 @@
 	margin-left:70px;
 	font-weight:700;
 	font-size: 40px;
-	margin-bottom: 50px;
+	margin-bottom: 20px;
 	}
 	#qnaTitle{
-	width:220px;
+	width:200px;
 	border-top: 7px solid #064663;
 	margin-top:70px;
 	margin-left:70px;
 	font-weight:700;
 	font-size: 40px;
-	margin-bottom: 50px;
+	margin-bottom:20px;
 	}
 	#freeTitle{
 	width:205px;
@@ -23,7 +23,7 @@
 	margin-left:70px;
 	font-weight:700;
 	font-size: 40px;
-	margin-bottom: 50px;
+	margin-bottom:20px;
 	}
 	#event{
 	width:130px;
@@ -32,7 +32,7 @@
 	margin-left:70px;
 	font-weight:700;
 	font-size: 40px;
-	margin-bottom: 50px;
+	margin-bottom: 20px;
 	}
 	#boardContent{
 	border: 1px white;
@@ -50,4 +50,13 @@
 	}
 	#btnColor:hover {
 	color: white;
+	}
+	#boardWriter{
+	width: 70px;
+	}
+	#back{
+	margin-bottom:20px;
+	float:right;
+	background-color:  #e79b36;
+	color: #fff;
 	}

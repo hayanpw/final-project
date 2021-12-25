@@ -3,10 +3,11 @@
 	margin-top:80px;
 	}
 	#write{
-		float: left;
+		float: right;
+		
 	}
 	#my{
-		float: right;
+		float: left;
 	}
 	#page{
 	text-align: center;

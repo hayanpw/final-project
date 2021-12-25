@@ -7,8 +7,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title> 
 <!-- include summernote css/js -->
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <link rel="stylesheet" href="/resources/additionCss/boardWriteFrm.css">
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
@@ -20,7 +20,7 @@
 		<div id="title">공지사항</div>
 		</c:when>
 		<c:when test="${boardType eq 2 }">
-		<div id="qnaTitle">질문과 답변</div>
+		<div id="qnaTitle">1대 1 문의</div>
 		</c:when>
 		<c:when test="${boardType eq 5 }">
 		<div id="event">이벤트</div>
@@ -29,18 +29,19 @@
 		<div id="freeTitle">소통게시판</div>
 		</c:otherwise>
 	</c:choose>
+	<a id="back" class="btn" href="javascript:window.history.back();">뒤로가기</a>
 	<form action="/boardWrite.do" method="post" enctype="multipart/form-data">
 				<table class="table" style="width:100%;">
 					<tr>
 						<td>제목</td>
-						<td colspan="6">
+						<td colspan="9">
 							<input type="text" id="text" name="boardTitle" class="form-control">
-							<input type="hidden" name="boardType" value="${boardType }">
+							<input type="hidden" id="boardType" name="boardType" value="${boardType }">
 						</td>
 					</tr>
 					<tr>
 						<td>작성자</td>
-						<td><input type="text" id="boardWriter" name="boardWriter" value="${sessionScope.m.memberId }" readonly></td>
+						<td ><input type="text" id="boardWriter" name="boardWriter" value="${sessionScope.m.memberId }" readonly></td>
 						<c:choose>
 							<c:when test="${boardType eq 2}">
 							<td>
@@ -61,20 +62,46 @@
 							<td>
 							</c:otherwise>
 						</c:choose>
-				   		<td>첨부파일</td>
-						<td style="text-align:left;">
-						<input type="file" name="addFile">
-						</td> 
-					</tr>
+						<c:if test="${boardType eq 5 }">
+						 	<td>시작일</td>
+							 <td>
+     						  <input type="date"  id="startDate" name="startDate">
+     						 </td>
+     						 <td>종료일</td>
+     						 <td>
+     							 <input type="date"  id="endDate" name="endDate">
+      						 </td>
+						</c:if>
+						<c:if test="${boardType != 5 }">
+							<td>첨부파일</td>
+									<td style="text-align:left;">
+									<input type="file" name="addFile">
+							</td> 
+						</c:if>
+						</tr>
+						<c:if test="${boardType eq 5 }">
+						<tr>
+							<td>썸네일</td>
+							<td colspan="4">
+							<div id="imageArea" style="margin-top: 10px; display: none">
+								<img id="thumbnail" style="width: 200px;">
+							</div>
+							</td> 
+							<td colspan="5" style="text-align:left;">
+								<input type="file" id="addFile" name="addFile" accept="image/*">
+							</td>
+							
+						</tr>	
+						</c:if>
 					<tr>
 						<td>내용</td>
-						<td id="img" colspan="5">
+						<td id="img" colspan="9">
 							<img id="img-view" width="500px">
 							<textarea id="summernote" name="boardContent" class="form-control"></textarea>
 						</td>
 					</tr>
 					<tr>
-						<td colspan="6">
+						<td colspan="10">
 							<button type="submit" id="btnColor" class="btn btn-block btnColor" onclick="return contentChk();">글등록</button>
 						</td>
 					</tr>
@@ -155,10 +182,65 @@
 			return false;
 		}
 		if ($('#summernote').summernote('isEmpty')) {
-			  alert('글내용을 입력하세요');
+			  alert('글내용을 입력하세요.');
 			  return false;
 			}
+		var startdate = $("#startDate").val();
+		var enddate = $("#endDate").val();
+		if(startdate=="" ||enddate==""){
+			alert("날짜를 입력해주세요.");
+			return false;
+		}
+		if(startdate>enddate){
+			alert("날짜를 확인해주세요.");
+			return false;
+		}
+		
+		var boardType = $("#boardType").val();
+		var status = $("#status").val();
+		console.log(boardType);
+		if(boardType==5 ){
+			if( $("#addFile").val() == ''){
+				alert("썸네일을 설정해주세요.");
+				return false;
+			}
+		}
+		
 	}
+	
+	$(function() {
+		var today = new Date();
+		var dd = today.getDate();
+		var mm = today.getMonth()+1; 
+		var yyyy = today.getFullYear();
+		if(dd<10){
+		  dd='0'+dd
+		} 
+		if(mm<10){
+		  mm='0'+mm
+		} 
+		today = yyyy+'-'+mm+'-'+dd;
+		$("#startDate").attr("min", today);
+		$("#endDate").attr("min", today);
+	    
+	});
+	function readURL(input) {
+		if (input.files && input.files[0]) {
+			var reader = new FileReader();
+			reader.onload = function(e) {
+				$('#thumbnail').attr('src', e.target.result); 
+			}
+			reader.readAsDataURL(input.files[0]);
+		}
+	}
+	
+	$(":input[name='addFile']").change(function() {
+		if( $(":input[name='addFile']").val() == '' ) {
+			$('#thumbnail').attr('src' , '');  
+		}
+		$('#imageArea').css({ 'display' : '' });
+		readURL(this);
+	});
 	</script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>

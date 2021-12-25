@@ -14,10 +14,12 @@
 			cnt as commentCount,
 			boardlevel as boardLevel,
 			boardfix as boardFix,
-			filepath as filepath
+			filepath as filepath,
+			startdate as startDate,
+			enddate as endDate
 		from
 		(select rownum as rnum,n.* from
-		(select board_no,board_title,board_writer,readcount,reg_date,nvl(count, 0) as cnt,boardlevel,boardfix,filepath
+		(select board_no,board_title,board_writer,readcount,reg_date,nvl(count, 0) as cnt,boardlevel,boardfix,filepath,startdate,enddate
 		from(select*from board where boardtype=#{boardType}) 
 		left join (select board_no,count(*) as count from (select board_no,board_ref,bc_del from board join comment1 on (board_no=board_ref) where bc_del=0) group by board_no) 
 		using (board_no) order by board_no desc)n) where rnum between #{start} and #{end}
@@ -35,7 +37,7 @@
 	
 	<!--글쓰기-->
 	<insert id="insertBoard" parameterType="board">
-		insert into board values (board_seq.nextval,#{boardWriter},#{boardTitle},#{boardContent},default,to_char(sysdate,'yyyy-mm-dd'),#{boardType},#{boardLevel},#{boardFix},#{filename},#{filepath})
+		insert into board values (board_seq.nextval,#{boardWriter},#{boardTitle},#{boardContent},default,to_char(sysdate,'yyyy-mm-dd'),#{boardType},#{boardLevel},#{boardFix},#{filename},#{filepath},#{startDate},#{endDate})
 		<selectKey  resultType="_int" order="AFTER" keyProperty="boardNo">
 			select max(board_no) from board
 		</selectKey>
@@ -58,9 +60,11 @@
         readcount as readCount,
         reg_date as regDate,
         cnt as commentCount,
-        boardLevel as boardLevel
+        boardLevel as boardLevel,
+        startdate as startDate,
+        enddate as endDate
         from(
-        (select filename,filepath,board_no,board_title,board_content,board_writer,readcount,reg_date,nvl(count,0) as cnt,boardLevel
+        (select filename,filepath,board_no,board_title,board_content,board_writer,readcount,reg_date,nvl(count,0) as cnt,boardLevel,startdate,enddate
 		from (select *from board where board_no =#{boardNo})
 		left join (select board_ref,count(*) as count from comment1 where bc_del=0 group by board_ref)
 		on (board_no=board_ref)))
@@ -298,11 +302,5 @@
 	select count(*) from board where boardtype=5
 	</select>
 	
-	<!--이벤트 글리스트-->
-	<select id="eventMore" parameterType="_int" resultType="board">
-	select
-	bc_del as bcDel
-	from comment1 where bc_no=#{bcRef}
-	</select>
 	
 </mapper>
