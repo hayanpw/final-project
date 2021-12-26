@@ -10,8 +10,9 @@
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="container">
+	<input type="hidden" id="memberLevel" value="${sessionScope.m.memberLevel }">
 		<fieldset>
-			<c:if test="${not empty sessionScope.m.memberId }">
+			<c:if test="${sessionScope.m.memberLevel==0 }">
 				<div>
 					<a href="/boardWriteFrm.do?boardType=5" id="writeBtn" class="btn btn-info writeBtn">글쓰기</a>
 				</div>
@@ -81,6 +82,10 @@
 		});
 	
 		$(document).on("click",".showchk",function(){
+			var memberLevel=$("#memberLevel").val();
+			if(memberLevel==0){
+				return true;
+			}
 			var idx=$(".showchk").index(this);
 			var announce= $(".announce").eq(idx).val();
 			var date = new Date();

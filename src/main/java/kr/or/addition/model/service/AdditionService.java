@@ -311,7 +311,24 @@ public class AdditionService {
 	//글수정
 	@Transactional
 	public int boardUpdate(Board b) {
-		int result=dao.boardUpdate(b);
+		System.out.println(b);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("boardNo",b.getBoardNo());
+		map.put("boardTitle",b.getBoardTitle());
+		map.put("boardContent",b.getBoardContent());
+		map.put("filename",b.getFilename());
+		map.put("filepath",b.getFilepath());
+		if(b.getBoardType()==1) {
+		map.put("keyword","fix");
+		map.put("boardFix",b.getBoardFix());
+		}else if(b.getBoardType()==2){
+		map.put("keyword","secret");
+		map.put("boardLevel",b.getBoardLevel());
+		}else {
+		map.put("keyword","");
+		}
+		System.out.println(map);
+		int result=dao.boardUpdate(map);
 		return result;
 	}
 

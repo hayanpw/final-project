@@ -177,4 +177,9 @@
 	#tag{
 	font-weight: bold;
 	}
-	
+	#ban{
+	color: gray;
+	}
+	#btns{
+	text-align: right;
+	}

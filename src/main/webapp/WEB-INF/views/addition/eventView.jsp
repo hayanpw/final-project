@@ -147,17 +147,6 @@
 					</c:if>
 				</c:forEach>
 			</div>
-			
-			<div><span class="nextTitle">다음글</span>&nbsp;
-				<a href="/boardView.do?boardType=5&boardNo=${info.nextNo}" onclick="return chkNext();">
-				<input type="hidden" id="next" value="${info.nextNo }">${info.nextTitle }
-				</a>
-			</div>
-			<div><span class="nextTitle">이전글</span>&nbsp;
-				<a href="/boardView.do?boardType=5&boardNo=${info.prevNo}" onclick="return chkPrev();">
-				<input type="hidden" id="prev" value="${info.prevNo }">${info.prevTitle }
-				</a>
-			</div>
 		</div>
 	</div>
 	

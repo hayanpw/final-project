@@ -18,9 +18,19 @@
 		<div id="table">
 		
 			<table id="table1" class="table">
-				<tr>
-					<td id="boardTitle" colspan="7">${b.boardTitle }</td>
-				</tr>
+				<c:choose>
+					<c:when test="${b.boardLevel eq 2 }">
+					<tr>
+						<td id="boardTitle" colspan="7"><span id="ban">(관리자 규제중)</span>${b.boardTitle }</td>
+					</tr>
+					</c:when>
+					<c:otherwise>
+					<tr>
+						<td id="boardTitle" colspan="7">${b.boardTitle }</td>
+					</tr>
+					</c:otherwise>
+				</c:choose>
+				
 				<tr>
 					<td>${b.boardWriter }</td>
 					<td>조회수</td>
@@ -50,23 +60,40 @@
 			
 			<div id="btns">
 			<a class="btn btnColor" href="/additionBoard.do?boardType=3&reqPage=1">글목록</a>
-			<c:if test="${sessionScope.m.memberLevel eq 0 }">
+
+
 			<c:choose>
-				<c:when test="${b.boardLevel eq 2 }">
-				<a class="btn btnColor" href="/removeRegulationBoard.do?boardNo=${b.boardNo }">규제풀기</a>
+				<c:when test="${sessionScope.m.memberLevel eq 0 && sessionScope.m.memberId == b.boardWriter}">
+					<c:choose>
+						<c:when test="${b.boardLevel eq 2 }">
+							<a class="btn btnColor" href="/removeRegulationBoard.do?boardNo=${b.boardNo }">규제풀기</a>
+						</c:when>
+						<c:otherwise>
+							<a class="btn btnColor" href="/regulationBoard.do?boardNo=${b.boardNo }">규제하기</a>
+						</c:otherwise>
+					</c:choose>
+					<a class="btn btnColor" href="/boardDelete.do?num=&boardType=3&boardNo=${b.boardNo }">글삭제</a>
+					<a class="btn btnColor" href="/boardUpdateFrm.do?boardType=3&boardNo=${b.boardNo }">글수정</a>
 				</c:when>
+				<c:when test="${sessionScope.m.memberId == b.boardWriter}"> <!--글쓴이 일반회원 글삭제 글수정  -->
+					<a class="btn btnColor" href="/boardDelete.do?num=&boardType=3&boardNo=${b.boardNo }">글삭제</a>
+					<a class="btn btnColor" href="/boardUpdateFrm.do?boardType=3&boardNo=${b.boardNo }">글수정</a>
+				</c:when>
+				<c:when test="${sessionScope.m.memberLevel eq 0 }">
+						<c:choose>
+						<c:when test="${b.boardLevel eq 2 }">
+							<a class="btn btnColor" href="/removeRegulationBoard.do?boardNo=${b.boardNo }">규제풀기</a>
+							</c:when>
+							<c:otherwise>
+							<a class="btn btnColor" href="/regulationBoard.do?boardNo=${b.boardNo }">규제하기</a>
+							</c:otherwise>
+						</c:choose>
+					<a class="btn btnColor" href="/boardDelete.do?num=&boardType=3&boardNo=${b.boardNo }">글삭제</a>
+				</c:when>
+				
 				<c:otherwise>
-				<a class="btn btnColor" href="/regulationBoard.do?boardNo=${b.boardNo }">규제하기</a>
 				</c:otherwise>
 			</c:choose>
-			</c:if>
-			<c:if test="${sessionScope.m.memberId == b.boardWriter}">
-			<a class="btn btnColor" href="/boardDelete.do?num=&boardType=3&boardNo=${b.boardNo }">글삭제</a>
-			<a class="btn btnColor" href="/boardUpdateFrm.do?boardType=3&boardNo=${b.boardNo }">글수정</a>
-			</c:if>
-			<c:if test="${sessionScope.m.memberLevel ==0 }">
-			<a class="btn btnColor" href="/boardDelete.do?boardType=3&boardNo=${b.boardNo }">글삭제</a>
-			</c:if>
 			
 		</div>
 			

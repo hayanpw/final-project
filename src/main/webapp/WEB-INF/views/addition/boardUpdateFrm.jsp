@@ -121,7 +121,20 @@
 				   			</c:otherwise>
 				   		</c:choose>
 					</tr>
-					
+					<c:choose>
+						<c:when test="${boardType  eq 1 }">
+							<tr>
+								<td>고정공지</td>
+								<td><input type="checkbox" id="boardFix" name="boardFix"><input type="hidden" id="fixchk" value="${b.boardFix }"></td>
+							</tr>
+						</c:when>
+						<c:when test="${boardType  eq 2 }">
+							<tr>
+								<td>비밀글</td>
+								<td><input type="checkbox" id="boardLevel" name="boardLevel"><input type="hidden" id="levelchk" value="${b.boardLevel }">비밀글</td>
+							</tr>
+						</c:when>
+					</c:choose>
 					<c:choose>
 						<c:when test="${boardType  eq 5 }">
 							<tr>
@@ -158,6 +171,20 @@
 		</form>
 	</div>
 	<script type="text/javascript">
+	$(document).ready(function() {
+		var fixchk = $("#fixchk").val();
+		if(fixchk==1){
+			$("#boardFix").prop('checked',true);
+		}
+		var levelchk = $("#levelchk").val();
+		if(levelchk==1){
+			$("#boardLevel").prop('checked',true);
+		}
+	
+    });
+
+	
+	
 	$(document).on("click",".delFile",function(){
 		$('#imageArea').css({ 'display' : 'none' });
 		$(".delFile").hide();
@@ -195,6 +222,16 @@
 	}
 	
 	function contentChk(){
+		if($("#boardFix").is(":checked")){
+			$("#boardFix").val(1);
+		}else{
+			$("#boardFix").val(0);
+		}
+		if($("#boardLevel").is(":checked")){
+			$("#boardLevel").val(1);
+		}else{
+			$("#boardLevel").val(0);
+		}
 		var text = $("#text").val();
 		var login = $("#boardWriter").val();
 		if(login== ""){

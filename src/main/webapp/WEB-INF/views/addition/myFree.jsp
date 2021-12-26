@@ -57,9 +57,18 @@
 							<tr>
 								<td><input type="checkbox" class="chkf"></td>
 								<td><input type="hidden" value="${b.boardNo }">${i.count }</td>
-								<td id="btitle"><a
-									href="/boardView.do?boardType=3&boardNo=${b.boardNo}">${b.boardTitle }&nbsp;[${b.commentCount }]</a></td>
-								<td>${b.regDate }</td>
+								<c:choose>
+									<c:when test="${b.boardLevel==2 }">
+									<td id="btitle"><a
+										href="/boardView.do?boardType=3&boardNo=${b.boardNo}">(관리자 규제중)${b.boardTitle }&nbsp;[${b.commentCount }]</a></td>
+									<td>${b.regDate }</td>
+									</c:when>
+									<c:otherwise>
+									<td id="btitle"><a
+										href="/boardView.do?boardType=3&boardNo=${b.boardNo}">${b.boardTitle }&nbsp;[${b.commentCount }]</a></td>
+									<td>${b.regDate }</td>
+									</c:otherwise>
+								</c:choose>
 							</tr>
 						</c:forEach>
 					</tbody>
