@@ -42,17 +42,11 @@
 	}
 	#blist{
 	float: right;
-	background-color: #064663;
-	color: #fff;
 	}
 	#delete{
 	float: right;
-	background-color: red;
-	color: #fff;
 	}
 	#update{
 	float: right;
-	background-color: #e79b36;
-	color: #fff;
 	}
     

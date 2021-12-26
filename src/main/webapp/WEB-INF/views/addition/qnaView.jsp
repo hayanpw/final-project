@@ -12,12 +12,22 @@
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="container" id="container">
-		<div id="title">질문과 답변</div>
+		<div id="title">1대 1문의</div>
 		<div id="table">
 			<table id="table1" class="table">
-				<tr>
-					<td id="boardTitle" colspan="8">${b.boardTitle }</td>
-				</tr>
+				<c:choose>
+					<c:when test="${b.boardLevel eq 1 }">
+					<tr>
+						<td id="boardTitle" colspan="8"><i class="fas fa-lock"></i>&nbsp;&nbsp;${b.boardTitle }</td>
+					</tr>
+					</c:when>
+					<c:otherwise>
+					<tr>
+						<td id="boardTitle" colspan="8">${b.boardTitle }</td>
+					</tr>
+					</c:otherwise>
+				</c:choose>
+			
 				<tr>
 					<td>작성자</td>
 					<td>${b.boardWriter }</td>
@@ -41,6 +51,32 @@
 					<td colspan="8">${b.boardContent }</td>
 				</tr>
 			</table>
+			<div id="buttons">
+			<a class="btn btnColor clist" href="/additionBoard.do?boardType=2&reqPage=1">글목록</a>
+			<c:choose>
+				<c:when test="${sessionScope.m.memberLevel eq 0 && sessionScope.m.memberId == b.boardWriter}">
+					<a class="btn btnColor clist" href="/boardUpdateFrm.do?boardType=2&boardNo=${b.boardNo }">글수정</a>
+					<a class="btn btnColor clist" href="/boardDelete.do?num=&boardType=2&boardNo=${b.boardNo }">글삭제</a>
+				</c:when>
+				<c:when test="${sessionScope.m.memberId == b.boardWriter}"> <!--글쓴이 일반회원 글삭제 글수정  -->
+					<a class="btn btnColor clist" href="/boardUpdateFrm.do?boardType=2&boardNo=${b.boardNo }">글수정</a>
+					<a class="btn btnColor clist" href="/boardDelete.do?num=&boardType=2&boardNo=${b.boardNo }">글삭제</a>
+				</c:when>
+				<c:when test="${sessionScope.m.memberLevel eq 0 }">
+					<a class="btn btnColor clist" href="/boardDelete.do?num=&boardType=2&boardNo=${b.boardNo }">글삭제</a>
+				</c:when>
+
+			</c:choose>
+			</div>
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			<c:if test="${not empty sessionScope.m && sessionScope.m.memberLevel eq 0 }">
 				<div class="inputCommentBox">
 					<form action="/insertComment.do?boardType=2" method="post">
@@ -63,6 +99,8 @@
 					</form>
 				</div>
 			</c:if>
+			
+			
 			
 			<!-- 댓글출력 -->
 			<div class="commentBox">
@@ -146,16 +184,7 @@
 					</c:if>
 				</c:forEach>
 			</div>
-			<div id="buttons">
-				<c:if test="${sessionScope.m.memberId eq b.boardWriter }">
-				<a class="btn btnColor" href="/boardDelete.do?num=&boardType=2&boardNo=${b.boardNo }">글삭제</a>
-				<a class="btn btnColor" href="/boardUpdate.do?boardType=2&boardNo=${b.boardNo }">글수정</a>
-				</c:if>
-				<c:if test="${sessionScope.m.memberLevel ==0 }">
-				<a class="btn btnColor" href="/boardDelete.do?boardType=2&boardNo=${b.boardNo }">글삭제</a>
-				</c:if>
-				<a class="btn btnColor" href="/additionBoard.do?boardType=2&reqPage=1">목록</a>
-			</div>
+			
 		</div>
 	</div>
 	<script type="text/javascript">

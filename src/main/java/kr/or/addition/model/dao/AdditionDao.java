@@ -77,8 +77,8 @@ public class AdditionDao {
 		return sqlSession.selectOne("addition.totalKCount",map);
 	}
 
-	public int boardUpdate(Board b) {
-		return sqlSession.update("addition.boardUpdate",b);
+	public int boardUpdate(HashMap<String, Object> map) {
+		return sqlSession.update("addition.boardUpdate",map);
 	}
 
 	public BoardNext selectNextBoard(HashMap<String, Object> map) {
