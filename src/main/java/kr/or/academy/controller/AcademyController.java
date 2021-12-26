@@ -27,6 +27,7 @@ import kr.or.academy.vo.AcademyPayment;
 import kr.or.academy.vo.StudentList;
 import kr.or.exhibition.vo.ExhibitionPaymentMypage;
 import kr.or.exhibition.vo.ExhibitionRefund;
+import kr.or.member.vo.Member;
 
 @Controller
 public class AcademyController {
@@ -332,6 +333,16 @@ public class AcademyController {
 	public String refundStudentView(int academyNo) {
 		ArrayList<ExhibitionRefund> list = service.refundStudentView(academyNo);
 		return new Gson().toJson(list);
+	}
+	@ResponseBody
+	@RequestMapping(value="teacherCheck.do")
+	public String teacherCheck(String academyTeacher) {
+		Member m = service.selectMyPage(academyTeacher);
+		if(m == null) {//return 은 view resolver를 통해서 가면 WEB-INF/views/1.jsp 이렇게 가고 redirect 일 경우에도 페이지 이동이 있음
+			return "0";
+		}else {
+			return "2";
+		}
 	}
 	//@RequestMapping(value="/academyDelete.do")
 	//public String academyDelete (int academyNo,Model model) {

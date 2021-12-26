@@ -23,11 +23,11 @@
       <div class="form-group">
         <h3><span class="line">수</span>업명</h3>
         <input type="hidden" name="academyNo" value="${a.academyNo }">
-        <input type="text" class="form-control" id="academyTitle" name="academyTitle" value="${a.academyTitle }">
+        <input type="text" class="form-control" id="academyTitle" name="academyTitle" value="${a.academyTitle }" required>
       </div>
        <div class="form-group">
         <h3><span class="line">수</span>업 대표사진</h3>
-        <input type="file"  id="academyfile"  name="upfile" accept="image/*">
+        <input type="file"  id="academyfile"  name="upfile" accept="image/*" required>
         <input type="hidden" name="academyPhoto" value="${a.academyPhoto }">
         <div id="imageArea" style="margin-top: 10px;">
         	<img id="thumbnail" src="${a.academyPhoto }" style="width: 200px;">
@@ -36,15 +36,15 @@
       <h3><span class="line">수</span>업 기간</h3>
       <div class="form-group col-sm-6">
         <h4>시작일</h4>
-        <input type="text" class="form-control" id="datepicker" name="academyStart" value="${a.academyStart }">
+        <input type="text" class="form-control" id="datepicker" name="academyStart" value="${a.academyStart }" required>
       </div>
       <div class="form-group col-sm-6">
         <h4>종료일</h4>
-        <input type="text" class="form-control" id="datepicker2" name="academyEnd" value="${a.academyEnd }">
+        <input type="text" class="form-control" id="datepicker2" name="academyEnd" value="${a.academyEnd }" required>
       </div>
       <div class="form-group">
         <h3><span class="line">카</span>테고리</h3>
-        <select class="form-control" id="category" name="academyCategory">
+        <select class="form-control" id="category" name="academyCategory" required>
           <option value="음악">음악</option>
           <option value="미술">미술</option>
           <option value="무용">무용</option>
@@ -54,7 +54,7 @@
       </div>
       <div class="form-group">
         <h3><span class="line">장</span>소</h3>
-        <select class="form-control" id="place" name="academyPlace">
+        <select class="form-control" id="place" name="academyPlace" required>
           <option value="무지다교육관101호">무지다교육관101호</option>
           <option value="무지다교육관102호">무지다교육관102호</option>
           <option value="무지다교육관201호">무지다교육관201호</option>
@@ -63,7 +63,7 @@
       </div>
          <div class="form-group">
           <h3><span class="line">담</span>당 강사</h3>
-          <input type="text" class="form-control" id="academyTeacher"  name="academyTeacher" value="${a.academyTeacher }">
+          <input type="text" class="form-control" id="academyTeacher"  name="academyTeacher" value="${a.academyTeacher }" readonly>
         </div>
       <div class="form-group">
         <h3><span class="line">수</span>업료</h3>
@@ -71,9 +71,9 @@
       </div>
       <div class="form-group">
         <h3><span class="line">상</span>세 설명</h3>
-         <textarea id="summernote" class="form-control" name="academyDetail">${a.academyDetail }</textarea>
+         <textarea id="summernote" class="form-control" name="academyDetail" required>${a.academyDetail }</textarea>
       </div>
-      <input type="submit" class="btn btn-info" style="float:right" value="수업 수정하기">
+      <button type="submit" class="btn" style="float:right">등록하기</button>
     </form>
     <input type="hidden" id="selectCategory" value="${a.academyCategory }">
     <input type="hidden" id="selectPlace" value="${a.academyPlace }">

@@ -2,11 +2,13 @@ package kr.or.academy.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import kr.or.member.vo.Member;
 import kr.or.academy.dao.AcademyDao;
 import kr.or.academy.vo.Academy;
 import kr.or.academy.vo.AcademyCategory;
@@ -205,8 +207,14 @@ public class AcademyService {
 	}
 
 	public ArrayList<ExhibitionRefund> refundStudentView(int academyNo) {
-		ArrayList<ExhibitionRefund> list = dao. refundStudentView(academyNo);
+		ArrayList<ExhibitionRefund> list = dao.refundStudentView(academyNo);
 		return list;
+	}
+
+
+	public Member selectMyPage(String academyTeacher) {
+		Member m = dao.teacherCheck(academyTeacher);
+		return m;
 	}
 
 }
