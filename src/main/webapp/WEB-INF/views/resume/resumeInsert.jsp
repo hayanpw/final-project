@@ -25,25 +25,25 @@
       </div>
       <div class="form-group">
         <h3><span class="line">성</span>별</h3>
-        <select class="form-control" id="resumeGender" name="resumeGender">
+        <select class="form-control" id="resumeGender" name="resumeGender" required>
           <option value="남자">남자</option>
           <option value="여자">여자</option>
         </select>
       </div>
       <div class="form-group">
           <h3><span class="line">연</span>락받으실 연락처</h3>
-          <input type="text" class="form-control" id="resumePhone"  name="resumePhone">
+          <input type="text" class="form-control" id="resumePhone"  name="resumePhone" required>
       </div>
       <div class="form-group">
         <h3><span class="line">이</span>력서 첨부</h3>
-         <label><input type="file" name="upfiles" >이력서 첨부</label>
-         <label><input type="file" name="upfiles" >경력기술서 첨부</label>
+         <label><input type="file" name="upfiles" required>이력서 첨부</label>
+         <label><input type="file" name="upfiles" required>경력기술서 첨부</label>
       </div>
       <div class="form-group">
         <h3><span class="line">간</span>단 자기소개</h3>
-        <textarea id="summernote" class="form-control" name="resumeDetail"></textarea>
+        <textarea id="summernote" class="form-control" name="resumeDetail" required></textarea>
       </div>
-      <input type="submit" class="btn btn-info" style="float:right" value="지원 하기">
+       <button type="submit" class="btn" style="float:right">등록하기</button>
     </form>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>

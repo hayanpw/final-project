@@ -204,7 +204,6 @@
 				}
 			});
 		}else{
-			console.log("999999999");
 			$.ajax({
 				url : "/searchMoreAcademy.do",
 				data : {start:start,category:category},
@@ -309,8 +308,6 @@
 					var search = $("#more").attr("search");
 					totalCount = $("#more").attr("totalCount");
 					var currCount = $("#more").attr("currentCount");
-					console.log(currCount);
-					console.log(search);
 					if(totalCount <= 4){
 						$("#more").css("display","none");
 						$("#more").prop("diabled",true);
@@ -370,8 +367,6 @@
 					var search = $("#more").attr("search");
 					totalCount = $("#more").attr("totalCount");
 					var currCount = $("#more").attr("currentCount");
-					console.log(currCount);
-					console.log(search);
 					if(totalCount <= 4){
 						$("#more").css("display","none");
 						$("#more").prop("diabled",true);

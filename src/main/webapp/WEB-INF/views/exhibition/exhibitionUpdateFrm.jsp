@@ -23,11 +23,11 @@
     <div class="form-group">
       <h3><span class="line">전</span>시제목</h3>
       <input type="hidden" name="exhibitionNo" value="${ex.exhibitionNo }">
-      <input type="text" class="form-control" id="exhibitionTitle" value="${ex.exhibitionTitle }" name="exhibitionTitle">
+      <input type="text" class="form-control" id="exhibitionTitle" value="${ex.exhibitionTitle }" name="exhibitionTitle" required>
     </div>
      <div class="form-group">
         <h3><span class="line">전</span>시 대표사진</h3>
-        <input type="file"  id="exhibitionPhoto"  name="upfile" accept="image/*">
+        <input type="file"  id="exhibitionPhoto"  name="upfile" accept="image/*" required>
         <input type="hidden" name="exhibitionPhoto" value="${ex.exhibitionPhoto }">
         <div id="imageArea" style="margin-top: 10px;">
         	<img id="thumbnail" src="${ex.exhibitionPhoto }" style="width: 200px;">
@@ -37,15 +37,15 @@
     <h3><span class="line">전</span>시 기간</h3>
     <div class="form-group col-sm-6">
       <h4>시작일</h4>
-      <input type="text" class="form-control" id="datepicker" name="exhibitionStart" value="${ex.exhibitionStart }">
+      <input type="text" class="form-control" id="datepicker" name="exhibitionStart" value="${ex.exhibitionStart }" required>
     </div>
     <div class="form-group col-sm-6">
       <h4>종료일</h4>
-      <input type="text" class="form-control" id="datepicker2" name="exhibitionEnd" value="${ex.exhibitionEnd }">
+      <input type="text" class="form-control" id="datepicker2" name="exhibitionEnd" value="${ex.exhibitionEnd }" required>
     </div>
     <div class="form-group">
         <h3><span class="line">관</span>람 연령</h3>
-        <select class="form-control" id="exhibitionAge" name="exhibitionAge">
+        <select class="form-control" id="exhibitionAge" name="exhibitionAge" required>
           <option value="전체관람">전체관람</option>
           <option value="12세 이상">12세 이상</option>
           <option value="15세 이상">15세 이상</option>
@@ -55,7 +55,7 @@
        <h3><span class="line">전</span>시 시간</h3>
     <div class="form-group col-sm-6">
       <h4>시작시간</h4>
-      <select class="form-control" id="exhibitionTimeStart" name="exhibitionTimeStart">
+      <select class="form-control" id="exhibitionTimeStart" name="exhibitionTimeStart" required>
       	  <option value="08:00">08:00</option>
           <option value="09:00">09:00</option>
           <option value="10:00">10:00</option>
@@ -63,7 +63,7 @@
     </div>
     <div class="form-group col-sm-6">
       <h4>종료시간</h4>
-      <select class="form-control" id="exhibitionTimeEnd" name="exhibitionTimeEnd">
+      <select class="form-control" id="exhibitionTimeEnd" name="exhibitionTimeEnd" required>
           <option value="16:00">16:00</option>
           <option value="17:00">17:00</option>
           <option value="18:00">18:00</option>
@@ -75,11 +75,11 @@
     </div>
     <div class="form-group">
       <h3><span class="line">상</span>세설명</h3>
-     <textarea id="summernote" class="form-control" name="exhibitionDetail">
+     <textarea id="summernote" class="form-control" name="exhibitionDetail" required>
      ${ex.exhibitionDetail }
      </textarea>
     </div>
-       <input type="submit" class="btn btn-info" style="float:right" value="등록하기">
+        <button type="submit" class="btn" style="float:right">등록하기</button>
   </form>
 </div>
 <input type="hidden" id="selectStartTime" value="${ex.exhibitionTimeStart }">

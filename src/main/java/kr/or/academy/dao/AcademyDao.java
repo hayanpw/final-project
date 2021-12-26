@@ -4,6 +4,7 @@ package kr.or.academy.dao;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import kr.or.academy.vo.AcademyPagingVo;
 import kr.or.academy.vo.AcademyPayment;
 import kr.or.academy.vo.StudentList;
 import kr.or.exhibition.vo.ExhibitionRefund;
+import kr.or.member.vo.Member;
 
 @Repository
 public class AcademyDao {
@@ -154,6 +156,12 @@ public class AcademyDao {
 		List<ExhibitionRefund> list = sqlSession.selectList("academy.refundStudentView",academyNo);
 		return (ArrayList<ExhibitionRefund>)list;
 	}
+
+	public Member teacherCheck(String academyTeacher) {
+		Member m = sqlSession.selectOne("academy.teacherCheck",academyTeacher);
+		return m;
+	}
+
 
 
 	//public int academyUpdate(Academy a) {

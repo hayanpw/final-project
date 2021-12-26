@@ -22,11 +22,11 @@
     <form action="/academyInsert.do" method="post" enctype="multipart/form-data">
       <div class="form-group">
         <h3><span class="line">수</span>업명</h3>
-        <input type="text" class="form-control" id="academyTitle" placeholder="수업명을 입력해주세요" name="academyTitle">
+        <input type="text" class="form-control" id="academyTitle" placeholder="수업명을 입력해주세요" name="academyTitle" required>
       </div>
        <div class="form-group">
         <h3><span class="line">수</span>업 대표사진</h3>
-        <input type="file"  id="academyfile"  name="upfile" accept="image/*">
+        <input type="file"  id="academyfile"  name="upfile" accept="image/*" required>
         <div id="imageArea" style="margin-top: 10px; display: none">
         	<img id="thumbnail" style="width: 200px;">
         </div>
@@ -34,15 +34,15 @@
       <h3><span class="line">수</span>업 기간</h3>
       <div class="form-group col-sm-6">
         <h4>시작일</h4>
-        <input type="text" class="form-control" id="datepicker" name="academyStart">
+        <input type="text" class="form-control" id="datepicker" name="academyStart" required>
       </div>
       <div class="form-group col-sm-6">
         <h4>종료일</h4>
-        <input type="text" class="form-control" id="datepicker2" name="academyEnd">
+        <input type="text" class="form-control" id="datepicker2" name="academyEnd" required>
       </div>
       <div class="form-group">
         <h3><span class="line">카</span>테고리</h3>
-        <select class="form-control" id="category" name="academyCategory">
+        <select class="form-control" id="category" name="academyCategory" required>
           <option value="음악">음악</option>
           <option value="미술">미술</option>
           <option value="무용">무용</option>
@@ -52,7 +52,7 @@
       </div>
        <div class="form-group">
         <h3><span class="line">장</span>소</h3>
-        <select class="form-control" id="place" name="academyPlace">
+        <select class="form-control" id="place" name="academyPlace" required>
           <option value="무지다교육관101호">무지다교육관101호</option>
           <option value="무지다교육관102호">무지다교육관102호</option>
           <option value="무지다교육관201호">무지다교육관201호</option>
@@ -61,22 +61,30 @@
       </div>
          <div class="form-group">
           <h3><span class="line">담</span>당 강사</h3>
-          <input type="text" class="form-control" id="academyTeacher" placeholder="담당 강사이름을 입력해주세요" name="academyTeacher">
+          <input type="text" class="form-control" id="academyTeacher" placeholder="담당 강사이름을 입력해주세요" name="academyTeacher" required><span id="teacherChk"></span>
         </div>
       <div class="form-group">
         <h3><span class="line">수</span>업료</h3>
-        <input type="text" class="form-control" id="academyPrice" placeholder="수업료를 입력해주세요" name="academyPrice">
+        <input type="text" class="form-control" id="academyPrice" placeholder="수업료를 입력해주세요" name="academyPrice" required>
       </div>
       <div class="form-group">
         <h3><span class="line">상</span>세 설명</h3>
-         <textarea id="summernote" class="form-control" name="academyDetail"></textarea>
+         <textarea id="summernote" class="form-control" name="academyDetail" required></textarea>
       </div>
-      <input type="submit" class="btn btn-info" style="float:right" value="수업 등록하기">
+       <button type="submit" id ="checkT" class="btn" style="float:right" flag="0">등록하기</button>
     </form>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 <script>
+$("#checkT").click(function(){
+	if ($('#checkT').attr("flag") == "0"){
+	    alert("선생님 회원 확인해 주시기 바랍니다.");
+	    $('#academyTeacher').focus();
+	    return false;
+	 }
+});
+
 function readURL(input) {
 	if (input.files && input.files[0]) {
 		var reader = new FileReader();
@@ -150,6 +158,24 @@ $(function() {
         minDate: date
     });
     
+});
+$("[name=academyTeacher]").keyup(function(){
+	var academyTeacher = $(this).val();
+	$.ajax({
+		url : "/teacherCheck.do",
+		data : {academyTeacher:academyTeacher},
+		success:function(data){
+			if(data==2){
+				$("#teacherChk").html("승인된 선생님 입니다");
+				$("#teacherChk").css("color","blue");
+				$("#checkT").attr("flag","1");
+			}else{
+				$("#teacherChk").html("선생님 회원이 아닙니다");
+				$("#teacherChk").css("color","red");
+				$("#checkT").attr("flag","0");
+			}
+		}
+	})
 });
 </script>
 </html>

@@ -222,4 +222,7 @@
             member_email as memberEmail
 		from payment join member using(member_no) where payment_cancel= 2 and payment_select = 1  and academy_no =#{academyNo}
 	</select>
+	<select id="teacherCheck" parameterType="string" resultType="m">
+		select * from member where member_name = #{academyTeacher} and member_level = 2 
+	</select>
 </mapper>

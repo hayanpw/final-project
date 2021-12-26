@@ -21,44 +21,44 @@
     <form action="/requritInsert.do" method="post">
       <div class="form-group">
         <h3><span class="line">공</span>고명</h3>
-        <input type="text" class="form-control" id="requritTitle" placeholder="공고명을 입력해주세요" name="requritTitle">
+        <input type="text" class="form-control" id="requritTitle" placeholder="공고명을 입력해주세요" name="requritTitle" required>
       </div>
       <h3><span class="line">공</span>고 기간</h3>
       <div class="form-group col-sm-6">
         <h4>시작일</h4>
-        <input type="text" class="form-control" id="datepicker" name="requritStart">
+        <input type="text" class="form-control" id="datepicker" name="requritStart" required>
       </div>
       <div class="form-group col-sm-6">
         <h4>종료일</h4>
-        <input type="text" class="form-control" id="datepicker2" name="requritEnd">
+        <input type="text" class="form-control" id="datepicker2" name="requritEnd" required>
       </div>
       <div class="form-group">
         <h3><span class="line">경</span>력 사항</h3>
-        <input type="text" class="form-control" id="resumecareer" placeholder="경력사항을 입력해주세요" name="requritCareer">
+        <input type="text" class="form-control" id="resumecareer" placeholder="경력사항을 입력해주세요" name="requritCareer" required>
       </div>
        <div class="form-group">
         <h3><span class="line">성</span>별</h3>
-        <select class="form-control" id="requritGender" name="requritGender">
+        <select class="form-control" id="requritGender" name="requritGender" required>
           <option value="남자">남자</option>
           <option value="여자">여자</option>
         </select>
       </div>
          <div class="form-group">
           <h3>직종</h3>
-          <input type="text" class="form-control" id="requritField" placeholder="직종을 입력해주세요" name="requritField">
+          <input type="text" class="form-control" id="requritField" placeholder="직종을 입력해주세요" name="requritField" required>
         </div>
      <div class="form-group">
         <h3><span class="line">고</span>용 형태</h3>
-        <select class="form-control" id="employeeType" name="employeeType">
+        <select class="form-control" id="employeeType" name="employeeType" required>
           <option value="정규직">정규직</option>
           <option value="계약직">계약직</option>
         </select>
       </div>
       <div>
         <h3><span class="line">상</span>세 설명</h3>
-       <textarea id="summernote" class="form-control" name="requritDetail"></textarea>
+       <textarea id="summernote" class="form-control" name="requritDetail" required></textarea>
       </div><br>
-      <input type="submit" class="btn btn-info" style="float:right" value="공고 등록하기">
+      <button type="submit" class="btn" style="float:right">등록하기</button>
     </form>
   </div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
