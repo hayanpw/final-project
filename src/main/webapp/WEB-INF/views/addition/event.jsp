@@ -51,10 +51,11 @@
 						var html ="";
 						if(p.filepath!=null){
 						html += "<div class='eventContent'>";
-						html += "<a href='/boardView.do?boardType=5&boardNo="+p.boardNo+"'class='img'><img class='eventImg' src='/resources/additionImage/"+p.filepath+"' ></a>";
+						html += "<a class='showchk' href='/boardView.do?boardType=5&boardNo="+p.boardNo+"'class='img'><img class='eventImg' src='/resources/additionImage/"+p.filepath+"' ></a>";
 						html += "<h3 class='tit'>"+p.boardTitle+"</h3>";
 						html += "<dl><dt>&nbsp;이벤트 기간</dt><dd>"+p.startDate+" ~ "+p.endDate+"</dd></dl>";
 						html += "<dl><dt>&nbsp;당첨자 발표</dt><dd>"+p.endDate+"</dd></dl></div>";
+						html += "<input type='hidden' class='announce' value="+p.endDate+">";
 						$(".photoWrapper").append(html);
 						}
 					
@@ -78,6 +79,27 @@
 		$(function(){
 			$("#more-btn").click();
 		});
+	
+		$(document).on("click",".showchk",function(){
+			var idx=$(".showchk").index(this);
+			var announce= $(".announce").eq(idx).val();
+			var date = new Date();
+	        var year = date.getFullYear().toString();
+	        var month = date.getMonth() + 1;
+	        month = month < 10 ? '0' + month.toString() : month.toString();
+	        var day = date.getDate();
+	        day = day < 10 ? '0' + day.toString() : day.toString();
+	        date= year +'-'+ month+'-'+ day ;
+			console.log(date);
+			console.log(announce);
+			if(date>announce){
+				alert("종료된 이벤트 입니다");
+				return false;
+			}
+			
+			
+	    });
+		
 	</script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
