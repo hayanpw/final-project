@@ -74,6 +74,7 @@ public class MemberController {
 	@RequestMapping(value="/mypage.do")
 	public String mypage(Model model) {
 		model.addAttribute("headerText", "마이페이지");
+		model.addAttribute("selectmenu",5);
 		return "member/mypage";
 	}
 	@RequestMapping(value="/adminpage.do")
@@ -138,6 +139,7 @@ public class MemberController {
 			System.out.println(email);
 			model.addAttribute("email1",email[0]);
 			model.addAttribute("email2",email[1]);
+			model.addAttribute("selectmenu",5);
 			model.addAttribute("headerText", "개인정보관리");
 			return "member/memberUpdate";
 		}else {

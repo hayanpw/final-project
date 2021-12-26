@@ -221,6 +221,7 @@ public class ReadingController {
 		model.addAttribute("headerText", "내 열람실 이용내역");
 		ArrayList<Reading> mylist = service.selectMyReading(memberId);
 		model.addAttribute("mylist", mylist);
+		model.addAttribute("selectmenu",4);
 		return "reading/readingMypage";
 	}
 	

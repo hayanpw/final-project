@@ -30,11 +30,6 @@
     color : #fff;
 }
 
-.mypage-navi-select>div>a{
-    font-weight: 900;
-    background-color:#064663;
-    color : #fff;
-}
 .mypage-navi>div:first-child>a{
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;

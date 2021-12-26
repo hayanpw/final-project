@@ -295,6 +295,7 @@ public class ExhibitionController {
 		HashMap<String, Object> map = service.selectExhibitionPaymentList(memberNo);
 		model.addAttribute("list",map.get("list"));
 		model.addAttribute("last",map.get("last"));
+		model.addAttribute("selectmenu",1);
 		model.addAttribute("totalCount",map.get("totalCount"));
 		model.addAttribute("headerText", "전시 마이페이지");
 		return "exhibition/exhibitionMypage";
