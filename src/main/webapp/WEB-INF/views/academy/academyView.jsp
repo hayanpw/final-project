@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -76,7 +77,12 @@
     <div class="leftSide">
     <div class="fixed">
     	 <div id="datepicker"></div>
+    	  <c:if test="${empty sessionScope.m }">
+    	 	<button onclick="goLogin();"class="btn" id="goLogin" style="float: right;">로그인하고 결제</button>
+    	 </c:if>
+    	 <c:if test="${not empty sessionScope.m }">
     	 <button onclick="payment();" class="btn" style="float: right;">결제하기</button>
+    	 </c:if>
     	 <input type="hidden" id="startDay" value="${a.academyStart }">
     	 <input type="hidden" id="endDay" value="${a.academyEnd }">
     	 <input type="hidden" id="paymentPrice" value="${a.academyPrice }">
@@ -90,6 +96,9 @@
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
  <script>
+ function goLogin(){
+		location.href="/loginFrm.do";
+	}
  		function payment(){
 			var academyStart = $("#startDay").val();
 			var academyEnd = $("#endDay").val();

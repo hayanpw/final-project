@@ -154,4 +154,9 @@ public class ExhibitionDao {
 		List<ExhibitionRefund> list = sqlSession.selectList("exhibition.refundMemberView",exhibitionNo);
 		return (ArrayList<ExhibitionRefund>)list;
 	}
+
+	public int countCancelQuanEx(int exhibitionNo) {
+		int count = sqlSession.selectOne("exhibition.countCancelQuanEx",exhibitionNo);
+		return 0;
+	}
 }

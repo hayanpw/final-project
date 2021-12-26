@@ -335,7 +335,7 @@ public class AcademyController {
 		return new Gson().toJson(list);
 	}
 	@ResponseBody
-	@RequestMapping(value="teacherCheck.do")
+	@RequestMapping(value="/teacherCheck.do")
 	public String teacherCheck(String academyTeacher) {
 		Member m = service.selectMyPage(academyTeacher);
 		if(m == null) {//return 은 view resolver를 통해서 가면 WEB-INF/views/1.jsp 이렇게 가고 redirect 일 경우에도 페이지 이동이 있음
@@ -343,6 +343,13 @@ public class AcademyController {
 		}else {
 			return "2";
 		}
+	}
+	@RequestMapping(value="/teacherAcademyList.do")
+	public String teacherAcademyList(String academyTeacher, Model model) {
+		ArrayList<Academy> list = service.selectTeacherAcademyList(academyTeacher);
+		model.addAttribute("headerText", "선생님 전용 페이지");
+		model.addAttribute("list",list);
+		return "academy/teacherAcademyList";
 	}
 	//@RequestMapping(value="/academyDelete.do")
 	//public String academyDelete (int academyNo,Model model) {

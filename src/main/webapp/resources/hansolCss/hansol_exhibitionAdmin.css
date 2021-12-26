@@ -38,3 +38,14 @@
 .exhibition{
 	overflow: auto;
 }
+.modal-body table tr th{
+	text-align: center;
+	background-color: #064663 ;
+	color: #ffffff;
+}
+.modal-body table tr td{
+	text-align: center;
+}
+.modal-body{
+	text-align: center;
+}

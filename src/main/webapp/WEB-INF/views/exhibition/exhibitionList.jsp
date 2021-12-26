@@ -65,6 +65,7 @@
 		$("#more").click(function(){
 			var start = $(this).val();
 			var memberLevel = $("#memberLevel").val();
+			console.log(memberLevel);
 			$.ajax({
 				url : "/moreExhibition.do",
 				data : {start:start},
@@ -82,9 +83,12 @@
 						moreLi += "<p>전시 시간: "+data[i].exhibitionTimeStart+"~"+data[i].exhibitionTimeEnd+"</p>";
 						moreLi += "<p>장소: 무지다 미술관</p>";
 						moreLi += "<p>금액: "+data[i].exhibitionPrice+"</p>";
+						if(memberLevel == ""){
+							moreLi += "</div></div></li>";
+						}
 						if(memberLevel == 0){
 							moreLi += "<div class = 'infoButton'>";
-							moreLi += "<button class='btn exhibitioinView' exhibitionNo='"+data[i].exhibitionNo+"' onfocus='this.blur()'>상세보기</button><button class='btn exhibitionUpdate' exhibitionNo='"+data[i].exhibitionNo+"' onfocus='this.blur()'>수정하기</button>";
+							moreLi += "<button class='btn exhibitionView' exhibitionNo='"+data[i].exhibitionNo+"' onfocus='this.blur()'>상세보기</button><button class='btn exhibitionUpdate' exhibitionNo='"+data[i].exhibitionNo+"' onfocus='this.blur()'>수정하기</button>";
 							moreLi += "</div></div></li>";
 						}else{
 							moreLi += "</div></div></li>";

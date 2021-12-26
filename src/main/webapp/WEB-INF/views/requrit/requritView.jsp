@@ -51,6 +51,12 @@
             </c:choose>
 			<p class="sectorLine"></p>
         </div>
+         <div class="sector">
+            <span class="first"><span class="line">이력</span>서 다운</span><br>
+            <span class="second" style="margin-left: 200px; display: inline-block;  width: 100px;">이력서</span><button onclick="download('이력서.docx')" class="btn" style="display: inline-block; margin-left: 50px;" onfocus="this.blur()"">이력서 다운</button>
+     		<span class="second" style="margin-left: 200px;  display: inline-block; width: 150px; margin-top: 5px;">경력 기술서</span><button onclick="download('경력기술서.docx')" class="btn" style="display: inline-block;" onfocus="this.blur()">경력 기술서 다운</button>
+			<p class="sectorLine"></p>
+        </div>
         <div class="sector">
             <p><span class="line">상세</span>설명</p>
             	${r.requritDetail }
@@ -58,7 +64,7 @@
         <div class="btnArea" style="text-align: center;">
         <c:choose>
         	<c:when test="${sessionScope.m.memberLevel eq 1 || sessionScope.m.memberLevel eq 2 }">
-       			 <button type="button" class="btn requritBtn" onclick="goResumeFrm();">지원하기</button>
+       			 <button type="button" class="btn btn-lg" onclick="goResumeFrm();">지원하기</button>
         	</c:when>
          	<c:when test="${sessionScope.m.memberLevel eq 0 }">
          	<c:if test="${r.requritCancel eq 0 }">
@@ -67,7 +73,7 @@
         		<button type="button" class="btn" onclick="goResumeList();">지원자보기</button>
         	</c:if>
         	<c:if test="${r.requritCancel eq 1 }">
-        		<button type="button" class="btn" id="updateRequritAndRevival">수정하고 재공고</button>
+        		<button type="button" class="btn btn-lg" id="updateRequritAndRevival">수정하고 재공고</button>
         	</c:if>
        	 	</c:when>
         </c:choose>
@@ -79,6 +85,10 @@
   	
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 	<script>
+	function download(fileName){
+		console.log(fileName);
+		location.href="/attacheFileDown.do?fileName="+fileName;
+	}
 	function goResumeFrm(){
 		var requritTitle = $(".title").html();
 		var requritNo = $("#hide").val();

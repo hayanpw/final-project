@@ -217,4 +217,9 @@ public class AcademyService {
 		return m;
 	}
 
+	public ArrayList<Academy> selectTeacherAcademyList(String academyTeacher) {
+		ArrayList<Academy> list = dao.selectTeacherAcademyList(academyTeacher);
+		return list;
+	}
+
 }

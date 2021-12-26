@@ -50,7 +50,7 @@
         	<button class="btn" id ="insertRequrit">공고 등록하기</button>
         </c:when>
         <c:otherwise>
-        	<button id="myRequritList" memberNo="${sessionScope.m.memberNo }">내가 지원한 공고 보기</button>
+        	<button class="btn" id="myRequritList" memberNo="${sessionScope.m.memberNo }">내가 지원한 공고 보기</button>
         </c:otherwise>
        </c:choose>
        </div>

@@ -196,7 +196,7 @@
 									</c:when>
 									<c:when
 										test="${not empty sessionScope.m && sessionScope.m.memberLevel == 2 }">
-										<li><a href="#">학생 관리</a></li>
+										 <li><a href="/teacherAcademyList.do?academyTeacher=${sessionScope.m.memberName }">학생관리</a></li>
 									</c:when>
 								</c:choose>
 							</ul></li>

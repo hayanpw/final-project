@@ -162,6 +162,11 @@ public class AcademyDao {
 		return m;
 	}
 
+	public ArrayList<Academy> selectTeacherAcademyList(String academyTeacher) {
+		List<Academy> list = sqlSession.selectList("academy.teacherAcademyList",academyTeacher);
+		return (ArrayList<Academy>)list;
+	}
+
 
 
 	//public int academyUpdate(Academy a) {

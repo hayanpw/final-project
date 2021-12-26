@@ -36,7 +36,7 @@
 				<h3>${sessionScope.m.memberName}님이 원하는 수업을 찾아보세요.</h3>
 				</c:when>
 				<c:otherwise>
-				<h2>수업을 찾아보아요~~~</h2>
+				<h2>수업을 찾아보세요</h2>
 				</c:otherwise>
 				</c:choose>
 			</div>
@@ -152,7 +152,6 @@
 			var start = $(this).val();
 			var category = $("#more").attr("search");
 			var type = $("#more").attr("class");
-			console.log(type);
 			if(type == "btn moreBtn"){
 			$.ajax({
 				url : "/moreAcademy.do",
@@ -186,15 +185,12 @@
 						$(".mainmenu").append(moreLi);
 					}
 					
-					console.log("스타트값"+start);
+					
 					$("#more").val(Number(start)+2);
 					var curr = Number($("#more").attr("currentCount"));
 					$("#more").attr("currentCount",curr + data.length);
 					var totalCount = $("#more").attr("totalCount");
 					var currCount = $("#more").attr("currentCount");
-					console.log(totalCount);
-					console.log(currCount);
-					console.log(category);
 					if(currCount == totalCount){
 						$("#more").css("display","none");
 						$("#more").prop("diabled",true);
@@ -234,7 +230,6 @@
 							}
 						$(".mainmenu").append(moreLi);
 					}
-					console.log("스타트값"+start);
 					$("#more").val(Number(start)+2);
 					var curr = Number($("#more").attr("currentCount"));
 					$("#more").attr("currentCount",curr + data.length);
@@ -256,7 +251,6 @@
 			$("#more").removeClass("searchMore");
 			$("#more").addClass("moreBtn");
 			$("#more").html("더보기");
-			console.log("카테고리 아작스 실행");
 			$("#more").css("display","block");
 			$("#more").attr("currentCount",4);
 			var reqPage = 4;
@@ -265,7 +259,6 @@
 				url : "/categoryAcademy.do",
 				data : {category:category,reqPage:reqPage},
 				success : function(data){
-					console.log("4444444444");
 					if(data.length < 1){
 						$(".mainmenu").empty();
 						var none = " <span class='nonebox'><img src='/resources/exhibitionImage/icon/comingsoon.png'><h3>원하시는 조건의 수업이  없습니다.</h3></span>";
@@ -275,7 +268,6 @@
 						$(".mainmenu").append(none);
 					}else{
 					$(".mainmenu").empty();
-					console.log(data.length);
 					for(var i=0;i<data.length;i++){
 						var moreLi = "";
 						moreLi += "<li class='academy'>";
@@ -317,11 +309,11 @@
 			});
 		});
 		$("#search").click(function(){
-			
 			$("#more").css("display","block");
 			$("#more").attr("currentCount",4);
 			var reqPage = 4;
 			var keyWord = $("#keyWord").val();
+			console.log(keyWord);
 			$.ajax({
 				url : "/searchAcademy.do",
 				data : {keyWord:keyWord,reqPage:reqPage},
@@ -370,6 +362,8 @@
 					if(totalCount <= 4){
 						$("#more").css("display","none");
 						$("#more").prop("diabled",true);
+						
+					}else{
 						$("#more").html("검색 결과 더보기");
 						$("#more").addClass("searchMore");
 						$("#more").removeClass("moreBtn");

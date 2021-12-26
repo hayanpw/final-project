@@ -27,7 +27,7 @@
       </div>
        <div class="form-group">
         <h3><span class="line">수</span>업 대표사진</h3>
-        <input type="file"  id="academyfile"  name="upfile" accept="image/*" required>
+        <input type="file"  id="academyfile"  name="upfile" accept="image/*">
         <input type="hidden" name="academyPhoto" value="${a.academyPhoto }">
         <div id="imageArea" style="margin-top: 10px;">
         	<img id="thumbnail" src="${a.academyPhoto }" style="width: 200px;">
@@ -71,7 +71,7 @@
       </div>
       <div class="form-group">
         <h3><span class="line">상</span>세 설명</h3>
-         <textarea id="summernote" class="form-control" name="academyDetail" required>${a.academyDetail }</textarea>
+         <textarea id="summernote" class="form-control" name="academyDetail">${a.academyDetail }</textarea>
       </div>
       <button type="submit" class="btn" style="float:right">등록하기</button>
     </form>

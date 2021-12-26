@@ -42,7 +42,7 @@
             ${r.resumeDetail }
         </div>
         	<c:if test="${sessionScope.m.memberLevel eq 0 }">
-        		<button type="button" class="btn" id="updateMemberLevel" memberNo = "${r.memberNo }">선생님 으로</button>
+        		<button type="button" class="btn" id="updateMemberLevel" memberNo = "${r.memberNo }" style="float: right;">고용하기</button>
         	</c:if>
         <input type="hidden" id ="hide" value="${r.requritNo }">
     </div>

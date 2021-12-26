@@ -85,18 +85,20 @@
                     <p>예매수수료는 예매 당일 밤 12시 이전까지 환불되며, 그 이후 기간에는 환불되지 않습니다.</p>
               		</div>
               		<div id="menu2" class="tab-pane fate in" >
-              			<h3>전시 티켓 구매한 회원만 댓글 작성이 가능합니다</h3>  
+        					 <c:if test="${empty sessionScope.m }">
+            					<p>로그인 후 댓글 작성이 가능합니다</p>  
+            				</c:if>
+            				<c:if test="${empty payment }">
+            						<p>전시 구매후 댓글 작성이 가능합니다</p>  
+            				</c:if>		
 		    			<div class="reviewBox hideContent">
                 	<div id="insert-btn">
-
+		
          <c:set var="check" value="false"/>
          <c:forEach items="${payment }" var="pm">
  			<c:if test="${not check }">
-            <c:if test="${empty sessionScope.m }">
-            	<p>전시 구매후 댓글 작성이 가능합니다</p>  
-            	<c:set var="check" value="true"/>
-            </c:if>
-            <c:if test ="${not empty sessionScope.m && pm.memberNo eq sessionScope.m.memberNo }">
+            <c:choose>
+            <c:when test ="${not empty sessionScope.m && pm.memberNo eq sessionScope.m.memberNo }">
             	<div class="inputReviewBox">
 					<form action="/insertExReview.do" method="post">
 						<input type="hidden" name="exReviewWriter" value="${sessionScope.m.memberId }">
@@ -115,8 +117,13 @@
 					<button type="submit" class="btn btn-defualt">등록</button>
 					</form>
 				</div>
-            </c:if>
-            <c:set var="check" value="true"/>
+				<c:set var="check" value="true"/>
+            </c:when>
+            <c:otherwise>
+            	<p>전시 구매후 댓글 작성이 가능합니다</p>  
+            	<c:set var="check" value="true"/>
+            </c:otherwise>
+            </c:choose>
             </c:if>
          </c:forEach>
       </div>
@@ -168,8 +175,13 @@
     	 <input type="hidden" id="exhibitionTitle" value="${exb.exhibitionTitle }">
     	 <input type="hidden" id="exhibitionPhoto" value="${exb.exhibitionPhoto }">
     	 <input type="hidden" id="bookDate" value="">
+    	 <c:if test="${empty sessionScope.m }">
+    	 	<button onclick="goLogin();"class="btn" id="goLogin" style="float: right;">로그인하고 결제</button>
+    	 </c:if>
+    	 <c:if test="${not empty sessionScope.m }">
     	 <span class="totalPrice" id="totalPrice" style="font-size: 20px;">${exb.exhibitionPrice }</span>원
     	 <button onclick="payment();"class="btn" id="payment" style="float: right;">결제하기</button>
+    	 </c:if>
     </div>
     </div>
    
@@ -177,6 +189,9 @@
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
  <script>
+function goLogin(){
+	location.href="/loginFrm.do";
+}
  		function payment(){
  			var bookDate = $("#bookDate").val();
  			var paymentPrice = Number($("#totalPrice").html()); 
@@ -212,7 +227,7 @@
 	            dayNamesShort : [ '일', '월', '화', '수', '목', '금', '토' ],
 	            dayNamesMin : [ '일', '월', '화', '수', '목', '금', '토' ],
 	            yearSuffix : '년',
- 	            minDate: today,
+ 	            minDate: start,
 	            maxDate: endDate,
 	            beforeShowDay : noMondays, //월요일은 휴무일
 	            onSelect : function(data){

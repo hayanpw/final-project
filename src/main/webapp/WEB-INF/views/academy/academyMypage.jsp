@@ -56,6 +56,9 @@
 						<c:when test="${acp.paymentCancel eq 1 }">
 							<td>취소완료</td>
 						</c:when>
+						<c:when test="${acp.paymentCancel eq 2 }">
+							<td>환불예정</td>
+						</c:when>
 						</c:choose>
 					</tr>
 				</c:forEach>

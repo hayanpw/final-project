@@ -27,7 +27,7 @@
     </div>
      <div class="form-group">
         <h3><span class="line">전</span>시 대표사진</h3>
-        <input type="file"  id="exhibitionPhoto"  name="upfile" accept="image/*" required>
+        <input type="file"  id="exhibitionPhoto"  name="upfile" accept="image/*">
         <input type="hidden" name="exhibitionPhoto" value="${ex.exhibitionPhoto }">
         <div id="imageArea" style="margin-top: 10px;">
         	<img id="thumbnail" src="${ex.exhibitionPhoto }" style="width: 200px;">

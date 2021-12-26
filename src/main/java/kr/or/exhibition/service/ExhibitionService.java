@@ -160,8 +160,13 @@ public class ExhibitionService {
 	public int deleteExhibition(int exhibitionNo) {
 		int result = dao.deleteExhibition(exhibitionNo);
 		if(result>0) {
-			result = dao.updatePaymentStatus(exhibitionNo);
-			return result;
+			int count = dao.countCancelQuanEx(exhibitionNo);
+			if(count == 0) {
+				return result;
+			}else {
+				result = dao.updatePaymentStatus(exhibitionNo);
+				return result;
+			}
 		}else {
 			return result;
 		}

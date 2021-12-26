@@ -70,7 +70,7 @@
 	<select id="selectAvgStar" parameterType="_int" resultType="_double">
 		select 
 			round(nvl(avg(ex_review_star),0),1) from exhibition_review 
-		where exhibition_no = #{exhibitionNo}
+		where exhibition_no = #{exhibitionNo} and ex_review_status = 0
 	</select>
 	<update id="exhibitionUpdate" parameterType="exb">
 		update exhibition set exhibition_title = #{exhibitionTitle}, exhibition_start = #{exhibitionStart}, exhibition_end = #{exhibitionEnd}, exhibition_photo = #{exhibitionPhoto},
@@ -228,5 +228,8 @@
             member_name as memberName,
             member_email as memberEmail
 		from payment join member using(member_no) where payment_cancel= 2 and payment_select = 1  and exhibition_no =#{exhibitionNo}
+	</select>
+	<select id="countCancelQuanEx" parameterType="_int" resultType="_int">
+		select count(*) from payment where exhibition_no= #{exhibitionNo} and payment_cancel = 0
 	</select>
 </mapper>
