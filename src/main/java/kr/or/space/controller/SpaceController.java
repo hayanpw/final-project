@@ -341,6 +341,7 @@ public class SpaceController {
 		}
 		ArrayList<SpaceMypage> list = service.selectSpaceMypage(map);
 		model.addAttribute("list", list);
+		model.addAttribute("selectmenu",3);
 		return "space/spaceMypage";
 	}
 
