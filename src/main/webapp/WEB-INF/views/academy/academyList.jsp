@@ -57,7 +57,7 @@
 					</a>
 				</div>
  				<div class="info">
-					<p>${a.academyTitle }</p>
+					<p data-toggle="tooltip" title="${a.academyTitle }">${a.academyTitle }</p>
 					<p>기간: ${a.academyStart } ~ ${a.academyEnd }</p>
 					<p>강사 : ${a.academyTeacher }</p>
 					<p>수업료 : ${a.academyPrice } 원</p>
@@ -102,7 +102,9 @@
 	<script>
 		var totalCount = $("#totalCount");
 		var memberLevel = $("#memberLevel").val();
-		
+		$(document).on(function(){
+			  $('[data-toggle="tooltip"]').tooltip({placement: "bottom"});  
+			});
 		$(document).on("click",".studentView",function(){
 			var academyNo = $(this).attr("academyNo");
 			$.ajax({
@@ -165,7 +167,7 @@
 						moreLi += "<a href='/academyView.do?academyNo="+data[i].academyNo+"'>";
 						moreLi += "<img src='"+data[i].academyPhoto+"'></a></div>";
 						moreLi += "<div class='info'>";
-						moreLi += "<p>"+data[i].academyTitle+"</p>";
+						moreLi += "<p data-toggle='tooltip' title='"+data[i].academyTitle+"'>"+data[i].academyTitle+"</p>";
 						moreLi += "<p>수업 기간: "+data[i].academyStart+"~"+data[i].academyEnd+"</p>";
 						moreLi += "<p>강사: "+data[i].academyTeacher+"</p>";
 						moreLi += "<p>수업료: "+data[i].academyPrice+"원</p>";
@@ -211,7 +213,7 @@
 						moreLi += "<a href='/academyView.do?academyNo="+data[i].academyNo+"'>";
 						moreLi += "<img src='"+data[i].academyPhoto+"'></a></div>";
 						moreLi += "<div class='info'>";
-						moreLi += "<p>"+data[i].academyTitle+"</p>";
+						moreLi += "<p data-toggle='tooltip' title='"+data[i].academyTitle+"'>"+data[i].academyTitle+"</p>";
 						moreLi += "<p>수업 기간: "+data[i].academyStart+"~"+data[i].academyEnd+"</p>";
 						moreLi += "<p>강사: "+data[i].academyTeacher+"</p>";
 						moreLi += "<p>수업료: "+data[i].academyPrice+"원</p>";
@@ -275,7 +277,7 @@
 						moreLi += "<a href='/academyView.do?academyNo="+data[i].academyNo+"'>";
 						moreLi += "<img src='"+data[i].academyPhoto+"'></a></div>";
 						moreLi += "<div class='info'>";
-						moreLi += "<p>"+data[i].academyTitle+"</p>";
+						moreLi += "<p data-toggle='tooltip' title='"+data[i].academyTitle+"'>"+data[i].academyTitle+"</p>";
 						moreLi += "<p>수업 기간: "+data[i].academyStart+"~"+data[i].academyEnd+"</p>";
 						moreLi += "<p>강사: "+data[i].academyTeacher+"</p>";
 						moreLi += "<p>수업료: "+data[i].academyPrice+"원</p>";
@@ -334,7 +336,7 @@
 						moreLi += "<a href='/academyView.do?academyNo="+data[i].academyNo+"'>";
 						moreLi += "<img src='"+data[i].academyPhoto+"'></a></div>";
 						moreLi += "<div class='info'>";
-						moreLi += "<p>"+data[i].academyTitle+"</p>";
+						moreLi += "<p data-toggle='tooltip' title='"+data[i].academyTitle+"'>"+data[i].academyTitle+"</p>";
 						moreLi += "<p>수업 기간: "+data[i].academyStart+"~"+data[i].academyEnd+"</p>";
 						moreLi += "<p>강사: "+data[i].academyTeacher+"</p>";
 						moreLi += "<p>수업료: "+data[i].academyPrice+"원</p>";
