@@ -79,7 +79,20 @@
 		</div>
 	</div>
 	</div>
+	<button class="toTop" onclick="goTop();" style="display: none">TOP</button>
 	<script>
+    $(window).on("scroll", function(){
+        if($(window).scrollTop() > 400){
+            $(".toTop").show();
+        }else{
+            $(".toTop").hide();
+        }
+    });
+    
+	function goTop() {
+		window.scrollTo(0,0);
+	}
+	
   (function() {
     var w = window;
     if (w.ChannelIO) {

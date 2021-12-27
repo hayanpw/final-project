@@ -12,7 +12,23 @@
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="container" id="container">
-		<div id="title">1대 1문의</div>
+	<div id="buttons">
+			<a id="blist" class="btn clist" href="/additionBoard.do?boardType=2&reqPage=1">글목록</a>
+			<c:choose>
+				<c:when test="${sessionScope.m.memberLevel eq 0 && sessionScope.m.memberId == b.boardWriter}">
+					<a class="btn clist" href="/boardUpdateFrm.do?boardType=2&boardNo=${b.boardNo }">글수정</a>
+					<a class="btn clist" href="/boardDelete.do?num=&boardType=2&boardNo=${b.boardNo }">글삭제</a>
+				</c:when>
+				<c:when test="${sessionScope.m.memberId == b.boardWriter}"> <!--글쓴이 일반회원 글삭제 글수정  -->
+					<a class="btn clist" href="/boardUpdateFrm.do?boardType=2&boardNo=${b.boardNo }">글수정</a>
+					<a class="btn clist" href="/boardDelete.do?num=&boardType=2&boardNo=${b.boardNo }">글삭제</a>
+				</c:when>
+				<c:when test="${sessionScope.m.memberLevel eq 0 }">
+					<a class="btn clist" href="/boardDelete.do?num=&boardType=2&boardNo=${b.boardNo }">글삭제</a>
+				</c:when>
+
+			</c:choose>
+			</div>
 		<div id="table">
 			<table id="table1" class="table">
 				<c:choose>
@@ -48,26 +64,12 @@
 					</td>
 				</tr>
 				<tr>
-					<td colspan="8">${b.boardContent }</td>
+					<td colspan="8">
+					<div style="min-height: 200px;">${b.boardContent }</div>
+					</td>
 				</tr>
 			</table>
-			<div id="buttons">
-			<a class="btn btnColor clist" href="/additionBoard.do?boardType=2&reqPage=1">글목록</a>
-			<c:choose>
-				<c:when test="${sessionScope.m.memberLevel eq 0 && sessionScope.m.memberId == b.boardWriter}">
-					<a class="btn btnColor clist" href="/boardUpdateFrm.do?boardType=2&boardNo=${b.boardNo }">글수정</a>
-					<a class="btn btnColor clist" href="/boardDelete.do?num=&boardType=2&boardNo=${b.boardNo }">글삭제</a>
-				</c:when>
-				<c:when test="${sessionScope.m.memberId == b.boardWriter}"> <!--글쓴이 일반회원 글삭제 글수정  -->
-					<a class="btn btnColor clist" href="/boardUpdateFrm.do?boardType=2&boardNo=${b.boardNo }">글수정</a>
-					<a class="btn btnColor clist" href="/boardDelete.do?num=&boardType=2&boardNo=${b.boardNo }">글삭제</a>
-				</c:when>
-				<c:when test="${sessionScope.m.memberLevel eq 0 }">
-					<a class="btn btnColor clist" href="/boardDelete.do?num=&boardType=2&boardNo=${b.boardNo }">글삭제</a>
-				</c:when>
-
-			</c:choose>
-			</div>
+			
 			
 			
 			

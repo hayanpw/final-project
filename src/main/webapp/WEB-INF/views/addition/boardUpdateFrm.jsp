@@ -15,24 +15,11 @@
  	 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
  	 <script src=" https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script>
 	<div class="container">
-	<c:choose>
-		<c:when test="${boardType eq 1 }">
-		<div id="title">공지사항</div>
-		</c:when>
-		<c:when test="${boardType eq 2 }">
-		<div id="qnaTitle">1대 1 문의</div>
-		</c:when>
-		<c:when test="${boardType eq 5 }">
-		<div id="event">이벤트</div>
-		</c:when>
-		<c:otherwise>
-		<div id="freeTitle">소통게시판</div>
-		</c:otherwise>
-	</c:choose>
+	<a id="back" class="btn" href="javascript:window.history.back();">뒤로가기</a>
 	<form action="/boardUpdate.do" method="post" enctype="multipart/form-data">
 				<input type="hidden" id="boardType" name="boardType" value="${boardType }">
 				<table class="table" style="width:100%;">
-					<tr>
+					<tr  style="border-top: 2px solid #064663;">
 						<td>제목</td>
 						<c:choose>
 							<c:when test="${boardType  eq 5 }">

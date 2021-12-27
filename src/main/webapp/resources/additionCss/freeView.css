@@ -176,10 +176,31 @@
 	}
 	#tag{
 	font-weight: bold;
+	color: #e79b36;
 	}
 	#ban{
 	color: gray;
 	}
 	#btns{
 	text-align: right;
+	margin: 5px;
 	}
+	.basicColor{
+	background-color: #e79b36;
+	color: #fff;
+	border: none;
+	}
+	.ncolor{
+	background-color:  #064663;
+	color: #fff;
+	border: none;
+	}
+	.commentBox{
+	border-top: 1px solid #eee;
+	}
+	.comments,.recomments{
+	border-bottom: 1px solid #eee;
+	}
+	.recomments>li:nth-child(2) {
+	text-align: center;
+}

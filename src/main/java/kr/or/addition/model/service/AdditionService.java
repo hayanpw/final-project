@@ -311,7 +311,6 @@ public class AdditionService {
 	//글수정
 	@Transactional
 	public int boardUpdate(Board b) {
-		System.out.println(b);
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("boardNo",b.getBoardNo());
 		map.put("boardTitle",b.getBoardTitle());
@@ -327,7 +326,6 @@ public class AdditionService {
 		}else {
 		map.put("keyword","");
 		}
-		System.out.println(map);
 		int result=dao.boardUpdate(map);
 		return result;
 	}

@@ -18,11 +18,11 @@
 			<a class="btn btnColor" href="/discount.do">글목록</a>
 			<c:choose>
 			<c:when test="${sessionScope.m.memberId == b.boardWriter}">
-			<a class="btn btnColor" href="/boardDelete.do?num=&boardType=5&boardNo=${b.boardNo }">글삭제</a>
-			<a class="btn btnColor" href="/boardUpdateFrm.do?boardType=5&boardNo=${b.boardNo }">글수정</a>
+			<a class="btn oColor" href="/boardDelete.do?num=&boardType=5&boardNo=${b.boardNo }">글삭제</a>
+			<a class="btn oColor" href="/boardUpdateFrm.do?boardType=5&boardNo=${b.boardNo }">글수정</a>
 			</c:when>
 			<c:when test="${sessionScope.m.memberLevel == 0}">
-			<a class="btn btnColor" href="/boardDelete.do?num=&boardType=5&boardNo=${b.boardNo }">글삭제</a>
+			<a class="btn oColor" href="/boardDelete.do?num=&boardType=5&boardNo=${b.boardNo }">글삭제</a>
 			</c:when>
 			</c:choose>
 			</div>
@@ -34,8 +34,8 @@
 					<td colspan="7">이벤트 기간 : ${b.startDate } ~ ${b.endDate } </td>
 				</tr>
 				<tr>
-					<td colspan="7">
-					${b.boardContent }
+					<td colspan="7" >
+					<div style="min-height: 200px;">${b.boardContent }</div>
 					</td>
 				</tr>
 			</table>

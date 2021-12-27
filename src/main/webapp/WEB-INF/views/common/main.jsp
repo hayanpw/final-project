@@ -38,8 +38,6 @@
 				<p class="textContents">
 					musée d'art 뜻은 프랑스어로 '미술관'을 뜻합니다.<br> 발음대로 읽으면 '무지다'가 되며 강원도
 					방언으로 '모이다'라는 뜻도 더하여 저희 홈페이지는 공연 전시 관람 및 열람 다양한 문화생활을 모은 장소를 만들었습니다.
-
-				
 				<p>
 					<strong>적용기간 : 2021.07.14~12.29</strong>
 				</p>
@@ -352,7 +350,20 @@
 			</div>
 		</div>
 	</div>
+	<button class="toTop" onclick="goTop();" style="display: none">TOP</button>
 	<script>
+    $(window).on("scroll", function(){
+        if($(window).scrollTop() > 400){
+            $(".toTop").show();
+        }else{
+            $(".toTop").hide();
+        }
+    });
+    
+	function goTop() {
+		window.scrollTo(0,0);
+	}
+	
                  $('.autoplay').slick({
                     slidesToShow: 3,
                     slidesToScroll: 1,
@@ -542,6 +553,24 @@ to {
 	cursor: pointer;
 	padding-left: 15px;
 	opacity: 1;
+}
+.toTop{
+	opacity: 0.7;
+    cursor: pointer;
+    display: inline-block;
+	background-color: #195083;
+	color: #fff;
+	right: 125px;
+	bottom: 65px;
+	position: fixed;
+	width: 4em;
+    text-align: center;
+    height: 4em;
+    line-height: 4em;
+    border-radius: 50%;
+    font-size: 1em;
+    z-index: 3;
+    font-weight: 500;
 }
 </style>
 </html>

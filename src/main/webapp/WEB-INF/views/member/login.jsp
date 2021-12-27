@@ -147,8 +147,8 @@
 					success : function(data) {
 						if (data == 1) {
 							$("#ajaxEmailcheck").html("전송되었습니다.");
-							$("#emailchk").val('1');
-
+/* 							$("#emailchk").val('1');
+ */
 							var email = $('#memberEmail').val();
 							
 							$.ajax({

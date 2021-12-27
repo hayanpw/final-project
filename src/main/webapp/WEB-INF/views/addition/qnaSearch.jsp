@@ -12,7 +12,6 @@
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="container" id="container">
-		<div id="title2">질문과 답변</div>
 		<div id="table">
 			<table id="table1" class="table">
 				<tr id="firtr">

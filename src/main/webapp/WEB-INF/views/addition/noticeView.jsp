@@ -11,7 +11,11 @@
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="container" id="container">
-		<div id="title">공지사항</div>
+		<c:if test="${sessionScope.m.memberLevel eq 0 }">
+		<a id="delete" class="btn" href="/boardDelete.do?num=&boardType=1&boardNo=${b.boardNo }">글삭제</a>
+		<a id="update" class="btn" href="/boardUpdateFrm.do?boardType=1&boardNo=${b.boardNo }">글수정</a>
+		</c:if>
+		<a id="blist" class="btn" href="/additionBoard.do?boardType=1&reqPage=1">글목록</a>
 		<table id="table1" class="table">
 			<tr>
 				<td id="boardTitle" colspan="3">${b.boardTitle }</td>
@@ -27,7 +31,7 @@
 			</tr>
 			<tr>
 				<td colspan="3">
-				${b.boardContent }
+				<div style="min-height: 200px;">${b.boardContent }</div>
 				</td>
 			</tr>
 		</table>
@@ -43,11 +47,7 @@
 			<input type="hidden" id="prev" value="${info.prevNo }">${info.prevTitle }
 			</a>
 		</div>
-		<c:if test="${sessionScope.m.memberLevel eq 0 }">
-		<a id="delete" class="btn" href="/boardDelete.do?num=&boardType=1&boardNo=${b.boardNo }">글삭제</a>
-		<a id="update" class="btn" href="/boardUpdateFrm.do?boardType=1&boardNo=${b.boardNo }">글수정</a>
-		</c:if>
-		<a id="blist" class="btn" href="/additionBoard.do?boardType=1&reqPage=1">글목록</a>
+	
 		</div>
 	</div>
 	<script>

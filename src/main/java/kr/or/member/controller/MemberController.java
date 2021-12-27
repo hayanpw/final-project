@@ -10,10 +10,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
+
 import kr.or.academy.service.AcademyService;
 import kr.or.academy.vo.Academy;
 import kr.or.addition.model.service.AdditionService;
 import kr.or.addition.model.vo.Board;
+import kr.or.addition.model.vo.BoardPageData;
 import kr.or.exhibition.service.ExhibitionService;
 import kr.or.exhibition.vo.Exhibition;
 import kr.or.member.service.MemberService;
@@ -66,9 +69,6 @@ public class MemberController {
 		artlist.addAll(artlist2);
 		artlist.addAll(artlist3);
 		model.addAttribute("artlist", artlist);
-		ArrayList<Board> fixlist = service.selectFixlist();
-		model.addAttribute("fixlist", fixlist);
-		session.setAttribute("fixlist", fixlist);
 		ArrayList<Academy>  academy =  academyService.selectAcademyList(4,"all");
 		model.addAttribute("academy",academy);
 		RequritPageData rpd = requritservice.selectRequritPageData(1);
@@ -76,6 +76,12 @@ public class MemberController {
 		return "common/main";
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="/noticeBoard.do",produces = "application/json;charset=utf-8;")
+	public String noticeBoard() {
+		BoardPageData bpd = additionService.selectNoticeList(1, 1);
+		return new Gson().toJson(bpd.getList());
+	}
 	@RequestMapping(value="/loginFrm.do")
 	public String loginFrm(Model model) {
 		model.addAttribute("headerText", "로그인");
