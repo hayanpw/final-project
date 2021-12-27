@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>전시 상세보기</title>
 <link href="resources/hansolCss/hansol_default.css" rel="stylesheet">
 <link href="resources/hansolCss/hansol_exhibitionView.css" rel="stylesheet">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
@@ -33,23 +33,23 @@
             <div class="exhibitionSummary">
                 <table class="summaryTable" >
                     <tr>
-                        <td>전시 기간</td>
+                        <td><strong>전시 기간</strong></td>
                         <td>${exb.exhibitionStart } ~ ${exb.exhibitionEnd }</td>
                     </tr>
                     <tr>
-                        <td>전시 시간</td>
+                        <td><strong>전시 시간</strong></td>
                         <td>${exb.exhibitionTimeStart } ~ ${exb.exhibitionTimeEnd }</td>
                     </tr>
                     <tr>
-                        <td>연령</td>
+                        <td><strong>연령</strong></td>
                         <td>${exb.exhibitionAge }</td>
                     </tr>
                     <tr>
-                        <td>티켓 가격</td>
+                        <td><strong>티켓 가격</strong></td>
                         <td>${exb.exhibitionPrice }</td>
                     </tr>
                     <tr>
-                        <td>인원선택</td>
+                        <td><strong>인원선택</strong></td>
                         <td>
                         <div class="count">
                  	        <button type="button" class="count_btn1">-</button>

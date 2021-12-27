@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>선생님 전용 페이지</title>
  	<link href="resources/hansolCss/hansol_default.css" rel="stylesheet">
     <link href="resources/hansolCss/hansol_academy.css" rel="stylesheet">
 </head>
