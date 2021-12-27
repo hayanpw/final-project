@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>아카데미 목록</title>
  	<link href="resources/hansolCss/hansol_default.css" rel="stylesheet">
     <link href="resources/hansolCss/hansol_academy.css" rel="stylesheet">
 </head>
@@ -159,7 +159,6 @@
 				url : "/moreAcademy.do",
 				data : {start:start,category:category},
 				success : function(data){
-					console.log("333333333333");
 					for(var i=0;i<data.length;i++){
 						var moreLi = "";
 						moreLi += "<li class='academy'>";

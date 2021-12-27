@@ -5,7 +5,7 @@
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>전시 결제</title>
 <link href="resources/hansolCss/hansol_default.css" rel="stylesheet">
 </head>
 <body>

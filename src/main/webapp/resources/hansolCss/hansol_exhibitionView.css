@@ -14,7 +14,7 @@
         margin: 0 auto;
     }
     .photo{
-        width :270px;
+        height :100%;
         margin-left: 50px;
      
     }
@@ -34,6 +34,7 @@
     }
     .exhibitionSummary>table tr td:first-child{
         width: 120px;
+        font-size: 18px;
     }
     .exhibitionSummary>table tr td{
         height: 50px;
@@ -110,4 +111,12 @@
 .reviewsBtn{
 	text-align: right;
 	padding-right: 20px;
+}
+.middleSide{
+	border: 2px solid #064663;
+	border-radius: 10px;
+	padding: 20px 10px;
+}
+.summaryTable>tr>td:first-child {
+	font-size: 20px;
 }

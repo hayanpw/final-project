@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>아카데미 마이페이지</title>
 <link href="resources/hansolCss/hansol_exhibitionMypage.css" rel="stylesheet">
 </head>
 <body>

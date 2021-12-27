@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>삭제한 공고</title>
 <link href="resources/hansolCss/hansol_default.css" rel="stylesheet">
 <link href="resources/hansolCss/hansol_requritList.css" rel="stylesheet">
 </head>

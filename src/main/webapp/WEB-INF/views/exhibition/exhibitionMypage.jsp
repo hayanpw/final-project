@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>전시 마이페이지</title>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <link href="resources/hansolCss/hansol_exhibitionMypage.css" rel="stylesheet">
 </head>

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>전시 상세보기</title>
 <link href="resources/hansolCss/hansol_default.css" rel="stylesheet">
 <link href="resources/hansolCss/hansol_requritView.css" rel="stylesheet">
 </head>
