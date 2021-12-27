@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title> 
+<title>글쓰기</title> 
 <!-- include summernote css/js -->
 <link rel="stylesheet" href="/resources/additionCss/boardWriteFrm.css">
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">

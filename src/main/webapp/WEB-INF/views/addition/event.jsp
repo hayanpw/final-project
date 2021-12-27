@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<title>이벤트</title> 
 <link rel="stylesheet" href="/resources/additionCss/event.css">
 </head>
 <body>
