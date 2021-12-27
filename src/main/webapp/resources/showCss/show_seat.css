@@ -77,3 +77,15 @@
     margin-top: 10px;
     width: 100%;
 }
+.stage{
+	margin-top:0;
+	margin-bottom: 20px;
+	width: 810px;
+	text-align: center;
+	background-color: #BDB19A;
+	color: #195083;
+	font-style:italic;
+	font-weight: 900;
+	border-bottom-left-radius: 50px;
+	border-bottom-right-radius: 50px;  
+}
