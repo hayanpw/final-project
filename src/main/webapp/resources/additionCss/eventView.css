@@ -161,7 +161,8 @@
 	font-size: 30px;
 	}
 	.btnColor{
-	color: #064663;
+	color: #fff;
+	background-color: #064663;
 	}
 	.btnColor:hover{
 	text-decoration:none;
@@ -180,4 +181,9 @@
 	}
 	#btns{
 	float: right;
+	margin: 5px;
+	}
+	.oColor{
+	color: #fff;
+	background-color: #e79b36;
 	}

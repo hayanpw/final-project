@@ -42,8 +42,8 @@
 			</div>	
 			</c:if>	
 			<div class="boardName">소통게시판</div>
-			<div class="table">
-				<table id="freeb" class="display table" style="width:100%">
+			<div id="ftable" class="table">
+				<table id="freeb" class="display" style="width:100%">
 					<thead>
 						<tr id="firtr">
 							<td>선택</td>
@@ -77,7 +77,7 @@
 				</div>
 				<div class="boardName">문의게시판</div>
 				<div class="table">
-				<table id="qnab" class="display table" style="width:100%">
+				<table id="qnab" class="display" style="width:100%">
 						<thead>
 							<tr id="firtr">
 							 	<td>선택</td>
@@ -111,7 +111,7 @@
 					</div>
 					<div class="boardName">댓글</div>
 					<div class="table">
-					<table id="commentb" class="display table" style="width:100%">
+					<table id="commentb" class="display" style="width:100%">
 						<thead>
 							<tr id="firtr">
 								<td>선택</td>
