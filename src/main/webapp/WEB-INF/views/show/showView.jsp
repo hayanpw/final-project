@@ -89,9 +89,9 @@
         <div class="infoWrapper">
             <div class="showInfo">
                 <div class="showNavi">
-                    <div><h2>공연정보</h2></div>
-                    <div><h2>예매및취소</h2></div>
-                    <div><h2>관람평</h2></div>
+                    <div><h3>공연정보</h3></div>
+                    <div><h3>예매및취소</h3></div>
+                    <div><h3>관람평</h3></div>
                 </div>
                 <div class="showContent hideContent">
 					${snr.s.showContent }
@@ -170,11 +170,11 @@
 	                </c:if>
                 </form>
                 <c:if test="${empty sessionScope.m }">
-                	<a href="/loginFrm.do" class="btn btn-danger btn-lg reservBtn">예매하기</a>
+                	<a href="/loginFrm.do" class="btn btn-danger btn-lg reservBtn">로그인하고 예매하기</a>
                 </c:if>
             </div>
         </div>
-        <button class="scrollZero" onclick="goTop();" style="display: none">TOP</button>
+        
     </div>
     <script>
     	function check() {
@@ -204,17 +204,6 @@
 			}
 		}
     
-	    $(window).on("scroll", function(){
-	        if($(window).scrollTop() > 400){
-	            $(".scrollZero").show();
-	        }else{
-	            $(".scrollZero").hide();
-	        }
-	    });
-	    
-    	function goTop() {
-			window.scrollTo(0,0);
-		}
     
 	    $(function() {
 	    	var showNo = ${snr.s.showNo};
