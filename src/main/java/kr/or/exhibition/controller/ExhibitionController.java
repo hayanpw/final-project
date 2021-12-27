@@ -276,6 +276,7 @@ public class ExhibitionController {
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("last", map.get("last"));
 		model.addAttribute("cancel", map.get("cancel"));
+		model.addAttribute("selectmenu",1);
 		model.addAttribute("headerText", "전시 관리자 페이지");
 		return "exhibition/exhibitionAdmin";
 	}

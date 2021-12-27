@@ -25,6 +25,7 @@
 <link rel="stylesheet" type="text/css"
 	href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.css" />
 <link rel="stylesheet" href="/resources/commonCss/mainhf.css">
+<title>Musee d art</title>
 </head>
 <body data-spy="scroll" data-target=".navbar" data-offset="50" style="overflow-x:hidden; overflow-y:auto">
 	<div class="popup">
@@ -180,7 +181,7 @@
 								<li><a href="/spaceMain.do">대관 안내</a></li>
 								<li><a href="/spaceList.do">공간 소개</a></li>
 								<li><a href="/spaceRes.do?spaceNo=0">대관 현황</a></li>
-								<li><a href="/selectSpaceBoardList.do?reqPage=0">사용 게시판</a></li>
+								<li><a href="/selectSpaceBoardList.do?reqPage=1">사용 게시판</a></li>
 							</ul></li>
 						<li><a href="/exhibitionList.do?reqPage=4">전시</a></li>
 						<li><a href="/readingNotice.do">열람실</a></li>
@@ -315,7 +316,7 @@
 
 	<div class="banner">
 		<div class="slide-right up-on-scroll">
-			<img src=" /resources/mainImage/upload/m-newbanner.jpg">
+			<a href="/boardView.do?boardType=5&boardNo=390"><img src=" /resources/mainImage/upload/m-newbanner.jpg"></a>
 		</div>
 	</div>
 
@@ -324,31 +325,28 @@
 			<div class="notice-menu">
 				<li class="l-notice">
 					<div class="tit-main">
-						<span class="small">Notice</span>
-						<h2 class="t">최신소식</h2>
+						<span class="small">Requrit</span>
+						<h2 class="t">모집공고</h2>
 					</div>
+					<c:forEach items="${requrit }" var="r" begin="0" end="1">
 					<ul class="ln-content">
-						<li class="lnc-box"><a href="#"><span class="t">제목칸
-									: [안내] 코로나19 특별방역 대처</span></a> <span class="date">2021.11.30</span></li>
-						<li class="lnc-box"><a href="#"><span class="t">제목칸
-									: [채용공고] 아카데미'첼로' 선생모집 </span></a> <span class="date">2021.12.08</span></li>
+						<li class="lnc-box"><a href="/requritView.do?requritNo=${r.requritNo }"><span class="t">${r.requritTitle }</span></a><br><span class="date">${r.requritStart }~${r.requritEnd }</span></li>
 					</ul>
+					</c:forEach>
 				</li>
 
 				<li class="r-popup">
 					<div class="tit-main">
-						<span class="small">Popup Zone</span>
-						<h2 class="t">팝업존</h2>
+						<span class="small">New Academy</span>
+						<h2 class="t">아카데미</h2>
 					</div>
 					<div class="w">
+					<c:forEach items="${academy }" var="ac" begin="0" end="1">
 						<ul class="ln-content">
-							<li class="rpc-box"><a href="#"><img
-									src=" /resources/mainImage/upload/m-popup1.jpg"></a> <span
-								class="date">2021.11.30</span></li>
-							<li class="rpc-box"><a href="#"><img
-									src=" /resources/mainImage/upload/m-popup2.jpg"></a> <span
-								class="date">2021.12.08</span></li>
+							<li class="rpc-box"><a href="/academyView.do?academyNo=${ac.academyNo }"><img src="${ac.academyPhoto }"></a> 
+							<span class="date">${ac.academyStart } ~ ${ac.academyEnd }</span></li>
 						</ul>
+					</c:forEach>
 					</div>
 				</li>
 			</div>
