@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>사용 게시판 상세보기</title>
 <link href="resources/spaceCss/space_default.css" rel="stylesheet">
 <link href="resources/spaceCss/space_boardWrite.css" rel="stylesheet">
 </head>
@@ -33,10 +33,10 @@
 				<td colspan="8"><div id="content" name="ubContent"> ${u.ubContent }</div></td>
 			</tr>
 		</table>
-		<c:if test="${sessionScope.m.memberId eq u.memberId }">
 		<div class="prev-btn">
 			<button onclick="location.href='/selectSpaceBoardList.do?reqPage=1'"> &lt  뒤로가기</button>
 		</div>
+		<c:if test="${sessionScope.m.memberId eq u.memberId }">
 		<div class="view-btn">
 			<button onclick="location.href='/deleteUseBoard.do?ubNo=${u.ubNo}'">삭제</button>
 			<button onclick="location.href='/updateUseBoardFrm.do?ubNo=${u.ubNo}'">수정</button>

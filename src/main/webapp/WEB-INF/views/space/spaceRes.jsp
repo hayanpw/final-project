@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>공간 예약</title>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />

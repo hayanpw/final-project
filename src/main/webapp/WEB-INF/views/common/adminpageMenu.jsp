@@ -6,11 +6,21 @@
 
         <div class="mypage-nav">
             <div class="mypage-navi">
-                <div class="m1"><a href="/showAdmin.do">공연관리</a></div>
-                <div><a href="/exhibitionAdmin.do">전시관리</a></div>
-                <div><a href="/academyAdminList.do">강좌관리</a></div>
-                <div><a href="/spaceAdmin.do?reqPage=1">대관관리</a></div>
-                <div><a href="/readingAdmin.do">열람실 관리</a></div>
-                <div><a href="/allMember.do?reqPage=1">회원 관리</a></div>
+                <div class="m1"><a class="selectMenu" href="/showAdmin.do?selectmenu=0">공연관리</a></div>
+                <div><a class="selectMenu" href="/exhibitionAdmin.do?selectmenu=1">전시관리</a></div>
+                <div><a class="selectMenu" href="/academyAdminList.do?selectmenu=2">강좌관리</a></div>
+                <div><a class="selectMenu" href="/spaceAdmin.do?selectmenu=3&reqPage=3">대관관리</a></div>
+                <div><a class="selectMenu" href="/readingAdmin.do?selectmenu=4">열람실 관리</a></div>
+                <div><a class="selectMenu" href="/allMember.do?selectmenu=5&reqPage=5">회원 관리</a></div>
             </div>
         </div>
+        
+       <script>
+        	$(function(){
+        		var selectmenu = '${selectmenu}';
+        		$(".selectMenu").eq(selectmenu).css("background-color","#064663");
+        		$(".selectMenu").eq(selectmenu).css("color","#fff");
+        		$(".selectMenu").eq(selectmenu).css("font-weight","bold");
+        	});
+        </script>
+        

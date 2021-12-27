@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>대관 관리자 페이자</title>
 <link href="resources/spaceCss/space_default.css" rel="stylesheet">
 <link href="resources/spaceCss/space_admin.css" rel="stylesheet">
 </head>
@@ -93,14 +93,14 @@
 			</div>
 			<div class="del-black">
 			<h3><img class="i-img" src="resources/spaceImage/settings.png" style="width: 40px; "> 블랙리스트 관리 </h3>
-					<table class="table table-hover">
+					<table class="table">
 						<tr>
 							<th>No.</th>
 							<th>아이디</th>
 							<th>블랙된 횟수</th>
 						<tr>
 				<c:forEach items="${black }" var="b" varStatus="i">
-					<tr>
+					<tr class=" t-hover">
 						<td>${i.count }</td>
 						<td>${b.blackId }</td>
 						<td>${b.blackCount }</td>

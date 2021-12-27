@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>회원가입</title>
 <link rel="stylesheet" href="/resources/memberCss/join.css">
 <script	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript"	src="http://code.jquery.com/jquery-3.3.1.js"></script>
@@ -391,7 +391,7 @@
 						success : function(data) {
 							if (data == 0) {
 								$("#ajaxEmailcheck").html("");
-								$("#emailchk").val('1');
+						/* 		$("#emailchk").val('1'); */
 								console.log(memberEmail);
 								//아이디 사용가능시 MODAL창 인증버튼시 팝업
 								var btnOpen1 = document

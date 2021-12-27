@@ -25,6 +25,7 @@
 <link rel="stylesheet" type="text/css"
 	href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.css" />
 <link rel="stylesheet" href="/resources/commonCss/mainhf.css">
+<title>Musee d art</title>
 </head>
 <body data-spy="scroll" data-target=".navbar" data-offset="50" style="overflow-x:hidden; overflow-y:auto">
 	<div class="popup">
@@ -37,8 +38,6 @@
 				<p class="textContents">
 					musée d'art 뜻은 프랑스어로 '미술관'을 뜻합니다.<br> 발음대로 읽으면 '무지다'가 되며 강원도
 					방언으로 '모이다'라는 뜻도 더하여 저희 홈페이지는 공연 전시 관람 및 열람 다양한 문화생활을 모은 장소를 만들었습니다.
-
-				
 				<p>
 					<strong>적용기간 : 2021.07.14~12.29</strong>
 				</p>
@@ -180,7 +179,7 @@
 								<li><a href="/spaceMain.do">대관 안내</a></li>
 								<li><a href="/spaceList.do">공간 소개</a></li>
 								<li><a href="/spaceRes.do?spaceNo=0">대관 현황</a></li>
-								<li><a href="/selectSpaceBoardList.do?reqPage=0">사용 게시판</a></li>
+								<li><a href="/selectSpaceBoardList.do?reqPage=1">사용 게시판</a></li>
 							</ul></li>
 						<li><a href="/exhibitionList.do?reqPage=4">전시</a></li>
 						<li><a href="/readingNotice.do">열람실</a></li>
@@ -315,7 +314,7 @@
 
 	<div class="banner">
 		<div class="slide-right up-on-scroll">
-			<img src=" /resources/mainImage/upload/m-newbanner.jpg">
+			<a href="/boardView.do?boardType=5&boardNo=390"><img src=" /resources/mainImage/upload/m-newbanner.jpg"></a>
 		</div>
 	</div>
 
@@ -324,37 +323,47 @@
 			<div class="notice-menu">
 				<li class="l-notice">
 					<div class="tit-main">
-						<span class="small">Notice</span>
-						<h2 class="t">최신소식</h2>
+						<span class="small">Requrit</span>
+						<h2 class="t">모집공고</h2>
 					</div>
+					<c:forEach items="${requrit }" var="r" begin="0" end="1">
 					<ul class="ln-content">
-						<li class="lnc-box"><a href="#"><span class="t">제목칸
-									: [안내] 코로나19 특별방역 대처</span></a> <span class="date">2021.11.30</span></li>
-						<li class="lnc-box"><a href="#"><span class="t">제목칸
-									: [채용공고] 아카데미'첼로' 선생모집 </span></a> <span class="date">2021.12.08</span></li>
+						<li class="lnc-box"><a href="/requritView.do?requritNo=${r.requritNo }"><span class="t">${r.requritTitle }</span></a><br><span class="date">${r.requritStart }~${r.requritEnd }</span></li>
 					</ul>
+					</c:forEach>
 				</li>
 
 				<li class="r-popup">
 					<div class="tit-main">
-						<span class="small">Popup Zone</span>
-						<h2 class="t">팝업존</h2>
+						<span class="small">New Academy</span>
+						<h2 class="t">아카데미</h2>
 					</div>
 					<div class="w">
+					<c:forEach items="${academy }" var="ac" begin="0" end="1">
 						<ul class="ln-content">
-							<li class="rpc-box"><a href="#"><img
-									src=" /resources/mainImage/upload/m-popup1.jpg"></a> <span
-								class="date">2021.11.30</span></li>
-							<li class="rpc-box"><a href="#"><img
-									src=" /resources/mainImage/upload/m-popup2.jpg"></a> <span
-								class="date">2021.12.08</span></li>
+							<li class="rpc-box"><a href="/academyView.do?academyNo=${ac.academyNo }"><img src="${ac.academyPhoto }"></a> 
+							<span class="date">${ac.academyStart } ~ ${ac.academyEnd }</span></li>
 						</ul>
+					</c:forEach>
 					</div>
 				</li>
 			</div>
 		</div>
 	</div>
+	<button class="toTop" onclick="goTop();" style="display: none">TOP</button>
 	<script>
+    $(window).on("scroll", function(){
+        if($(window).scrollTop() > 400){
+            $(".toTop").show();
+        }else{
+            $(".toTop").hide();
+        }
+    });
+    
+	function goTop() {
+		window.scrollTo(0,0);
+	}
+	
                  $('.autoplay').slick({
                     slidesToShow: 3,
                     slidesToScroll: 1,
@@ -544,6 +553,24 @@ to {
 	cursor: pointer;
 	padding-left: 15px;
 	opacity: 1;
+}
+.toTop{
+	opacity: 0.7;
+    cursor: pointer;
+    display: inline-block;
+	background-color: #195083;
+	color: #fff;
+	right: 125px;
+	bottom: 65px;
+	position: fixed;
+	width: 4em;
+    text-align: center;
+    height: 4em;
+    line-height: 4em;
+    border-radius: 50%;
+    font-size: 1em;
+    z-index: 3;
+    font-weight: 500;
 }
 </style>
 </html>

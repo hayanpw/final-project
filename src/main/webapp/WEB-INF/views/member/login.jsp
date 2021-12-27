@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>로그인</title>
 <link rel="stylesheet" href="/resources/memberCss/login.css">
 </head>
 <body>
@@ -147,8 +147,8 @@
 					success : function(data) {
 						if (data == 1) {
 							$("#ajaxEmailcheck").html("전송되었습니다.");
-							$("#emailchk").val('1');
-
+/* 							$("#emailchk").val('1');
+ */
 							var email = $('#memberEmail').val();
 							
 							$.ajax({

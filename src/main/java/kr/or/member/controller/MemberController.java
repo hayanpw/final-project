@@ -10,9 +10,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
+
 import kr.or.academy.service.AcademyService;
+import kr.or.academy.vo.Academy;
 import kr.or.addition.model.service.AdditionService;
 import kr.or.addition.model.vo.Board;
+import kr.or.addition.model.vo.BoardPageData;
 import kr.or.exhibition.service.ExhibitionService;
 import kr.or.exhibition.vo.Exhibition;
 import kr.or.member.service.MemberService;
@@ -21,6 +25,9 @@ import kr.or.member.vo.DeleteMember;
 import kr.or.member.vo.Member;
 import kr.or.member.vo.MemberPage;
 import kr.or.reading.model.service.ReadingService;
+import kr.or.requrit.service.RequritService;
+import kr.or.requrit.vo.Requrit;
+import kr.or.requrit.vo.RequritPageData;
 import kr.or.space.model.service.SpaceService;
 import show.service.ShowService;
 import show.vo.Show;
@@ -44,13 +51,14 @@ public class MemberController {
 	private SpaceService spaceService;
 	@Autowired
 	private AdditionService additionService;
-	
+	@Autowired
+	private RequritService requritservice;
 	public MemberController() {
 		super();
 		System.out.println("객체 생성");
 	}
 	@RequestMapping(value="/main.do")
-	public String main(Model model) {
+	public String main(Model model,HttpSession session) {
 		ArrayList<Show> showlist = showservice.selectShowList();
 		model.addAttribute("showlist", showlist);
 		ArrayList<Exhibition> artlist1 = exhibitionService.selectExhibitionList(4);
@@ -61,11 +69,19 @@ public class MemberController {
 		artlist.addAll(artlist2);
 		artlist.addAll(artlist3);
 		model.addAttribute("artlist", artlist);
-		ArrayList<Board> fixlist = service.selectFixlist();
-		model.addAttribute("fixlist", fixlist);
+		ArrayList<Academy>  academy =  academyService.selectAcademyList(4,"all");
+		model.addAttribute("academy",academy);
+		RequritPageData rpd = requritservice.selectRequritPageData(1);
+		model.addAttribute("requrit",rpd.getList());
 		return "common/main";
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="/noticeBoard.do",produces = "application/json;charset=utf-8;")
+	public String noticeBoard() {
+		BoardPageData bpd = additionService.selectNoticeList(1, 1);
+		return new Gson().toJson(bpd.getList());
+	}
 	@RequestMapping(value="/loginFrm.do")
 	public String loginFrm(Model model) {
 		model.addAttribute("headerText", "로그인");
@@ -217,6 +233,7 @@ public class MemberController {
 		MemberPage mpg = service.selectAllMember(reqPage);
 		model.addAttribute("totalCount", mpg.getTotalCount());
 		model.addAttribute("list",mpg.getList());
+		model.addAttribute("selectmenu",5);
 		model.addAttribute("pageNavi", mpg.getPageNavi());
 		model.addAttribute("start", mpg.getStart());
 		return "member/AllMember";

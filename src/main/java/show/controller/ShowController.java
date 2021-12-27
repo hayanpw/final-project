@@ -314,6 +314,7 @@ public class ShowController {
 		HashMap<String, Object> map = service.selectAdminList();
 		model.addAttribute("list", map.get("curr"));
 		model.addAttribute("last", map.get("last"));
+		model.addAttribute("selectmenu",0);
 		return "show/showAdmin";
 	}
 	

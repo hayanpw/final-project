@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>사용게시판</title>
 <link href="resources/spaceCss/space_default.css" rel="stylesheet">
 <link href="resources/spaceCss/space_boardList.css" rel="stylesheet">
 </head>
@@ -63,12 +63,12 @@
 					<th style="width: 150px;">사용공간</th>
 				</tr>
 				<c:forEach items="${list }" var="l" varStatus="i">
-					<tr>
-						<td>${i.count }</td>
-						<td><a href="/useBoardView.do?ubNo=${l.ubNo }">${l.ubTitle }</a></td>
-						<td>${l.memberId }</td>
-						<td>${l.ubDate }</td>
-						<td>${l.spaceName }</td>
+					<tr  class=" t-hover">
+						<td style="line-height: 50px;">${start + i.index}</td>
+						<td style="line-height: 50px;"><a href="/useBoardView.do?ubNo=${l.ubNo }">${l.ubTitle }</a></td>
+						<td style="line-height: 50px;">${l.memberId }</td>
+						<td style="line-height: 50px;">${l.ubDate }</td>
+						<td style="line-height: 50px;">${l.spaceName }</td>
 					</tr>
 				</c:forEach>
 			</table>
