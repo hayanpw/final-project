@@ -5,9 +5,9 @@
 			<div class="footer-menu" style="padding-top:30px">
 				  <div class="rolling_box">
 			        <ul id ="rolling_box">
-			          <li class="card_sliding" id ="first"><p></p></li>
-			          <li class="" id ="second"><p></p></li>
-			          <li class="" id ="third"><p></p></li>
+			          <li class="card_sliding" id ="first"><a></a></li>
+			          <li class="" id ="second"><a></a></li>
+			          <li class="" id ="third"><a></a></li>
 			        </ul>
 			      </div>
 			</div>

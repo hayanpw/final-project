@@ -391,7 +391,7 @@
 						success : function(data) {
 							if (data == 0) {
 								$("#ajaxEmailcheck").html("");
-								$("#emailchk").val('1');
+						/* 		$("#emailchk").val('1'); */
 								console.log(memberEmail);
 								//아이디 사용가능시 MODAL창 인증버튼시 팝업
 								var btnOpen1 = document

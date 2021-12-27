@@ -83,6 +83,7 @@ body{
 }
 
 .container{
+	padding-top:70px;
     flex:1;
 }
 #footer{
