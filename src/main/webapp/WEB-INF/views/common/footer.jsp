@@ -156,7 +156,7 @@
             padding-left: 20px;
             color: #fff;
         }
-
+	
         .card_sliding{
             top: 0 !important;
             z-index: 100 !important;

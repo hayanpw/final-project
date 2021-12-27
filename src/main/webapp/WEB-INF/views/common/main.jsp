@@ -92,7 +92,7 @@
 						</div>
 					</div>
 				</div>
-				<button class="btn-quick close">Close</button>
+				<button class="btn-quick close1">Close</button>
 			</div>
 		</div>
 	</div>
@@ -107,7 +107,7 @@
                           //$(".main_quick").css("right",size)
                       //$(".main_quick").delay(8000).animate({"right":-q_w},800)
                 }else {
-                    $(".btn-quick").removeClass("close").addClass("open").text("Open")
+                    $(".btn-quick").removeClass("close1").addClass("open").text("Open")
                       size = -q_w
                       $(".quick").css("right",-q_w)
                 }
@@ -118,12 +118,12 @@
                       $(".quick").animate({"right":0},300);
                       //$(".quick").delay(300).stop().fadeIn(300)
                       
-                    $(this).removeClass('open').addClass('close').text('Close');
+                    $(this).removeClass('open').addClass('close1').text('Close');
                   }else{
                       $(".quick").animate({"right": -650},300);
                        //$(".quick").delay(300).stop().fadeOut(300)
                        $(this).show();
-                    $(this).removeClass('close').addClass('open').text('Open');
+                    $(this).removeClass('close1').addClass('open').text('Open');
       
                   }
               })
@@ -461,7 +461,7 @@
 	color: #fff;
 }
 
-.btn-quick close {
+.btn-quick close1 {
 	z-index: 4;
 	border: rgb(11, 11, 51);
 	width: 100px;
@@ -546,14 +546,14 @@ to {
 	margin: auto;
 }
 
-.close:focus, .close:hover {
+/* .close:focus, .close:hover {
 	color: #fff;
 	background-color: rgb(11, 11, 51);
 	text-decoration: none;
 	cursor: pointer;
 	padding-left: 15px;
 	opacity: 1;
-}
+} */
 .toTop{
 	opacity: 0.7;
     cursor: pointer;
