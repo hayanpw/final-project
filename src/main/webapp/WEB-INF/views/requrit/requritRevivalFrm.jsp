@@ -41,6 +41,7 @@
        <input type="hidden" id="selectRequritGender" value="${r.requritGender}">
         <h3><span class="line">성</span>별</h3>
         <select class="form-control" id="requritGender" name="requritGender" required>
+          <option value="성별무관">성별무관</option>
           <option value="남자">남자</option>
           <option value="여자">여자</option>
         </select>
