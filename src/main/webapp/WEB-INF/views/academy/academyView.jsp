@@ -26,30 +26,30 @@
             <div class="academySummary">
                 <table class="summaryTable" >
                     <tr>
-                        <td>수업 기간</td>
+                        <td><strong>수업 기간</strong></td>
                         <td>${a.academyStart } ~ ${a.academyEnd }</td>
                     </tr>
                     <tr>
-                        <td>장소</td>
+                        <td><strong>장소</strong></td>
                         <td>${a.academyPlace }</td>
                     </tr>
                     <tr>
-                        <td>수업 시간</td>
+                        <td><strong>수업 시간</strong></td>
                         <td>19:00 ~ 20:30</td>
                     </tr>
                     <tr>
-                        <td>담당 선생님</td>
+                        <td><strong>담당 선생님</strong></td>
                         <td>${a.academyTeacher }</td>
                     </tr>
                     <tr>
-                        <td>수업료</td>
+                        <td><strong>수업료</strong></td>
                         <td>${a.academyPrice }</td>
                     </tr>
                 </table>
             </div>
         </div>
         <div class="bottomSide">
-            <ul class="nav nav-tabs">
+            <ul class="nav nav-tabs" style="color: #064663;">
                 <li class="active"><a data-toggle="tab" href="#home">수업 정보</a></li>
                 <li><a data-toggle="tab" href="#menu1">수강및취소</a></li>
               </ul>
