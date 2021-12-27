@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>공지사항</title>
 <script src="https://kit.fontawesome.com/4054b6ceaa.js" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="/resources/additionCss/notice.css">
 </head>

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>시설안내•오시는길</title>
 <link rel="stylesheet" href="/resources/additionCss/guide.css">
 </head>
 <body>

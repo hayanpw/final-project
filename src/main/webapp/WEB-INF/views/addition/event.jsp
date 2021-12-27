@@ -5,12 +5,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<title>이벤트</title> 
 <link rel="stylesheet" href="/resources/additionCss/event.css">
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="container">
 	<input type="hidden" id="memberLevel" value="${sessionScope.m.memberLevel }">
+	<input type="hidden" id="memberId" value="${sessionScope.m.memberId }">
 		<fieldset>
 			<c:if test="${sessionScope.m.memberLevel==0 }">
 				<div>
@@ -82,8 +84,8 @@
 		});
 	
 		$(document).on("click",".showchk",function(){
-			var memberLevel=$("#memberLevel").val();
-			if(memberLevel==0){
+			var memberId=$("#memberId").val();
+			if(memberId=="admin"){
 				return true;
 			}
 			var idx=$(".showchk").index(this);

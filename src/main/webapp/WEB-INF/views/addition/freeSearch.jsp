@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>소통게시판</title>
 <link rel="stylesheet" href="/resources/additionCss/freeSearch.css">
 </head>
 <body>

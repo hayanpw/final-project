@@ -264,6 +264,7 @@ public class AcademyController {
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("last", map.get("last"));
 		model.addAttribute("cancel", map.get("cancel"));
+		model.addAttribute("selectmenu",2);
 		model.addAttribute("headerText", "수업 관리자 페이지");
 		return "academy/academyAdmin";
 	}

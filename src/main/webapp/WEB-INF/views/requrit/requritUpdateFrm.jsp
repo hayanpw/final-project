@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>전시 수정</title>
 <!-- include summernote css/js -->
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <link href="resources/hansolCss/hansol_default.css" rel="stylesheet">
@@ -41,6 +41,7 @@
        <input type="hidden" id="selectRequritGender" value="${r.requritGender}">
         <h3><span class="line">성</span>별</h3>
         <select class="form-control" id="requritGender" name="requritGender" required>
+          <option value=" 성별무관"> 성별무관</option>
           <option value="남자">남자</option>
           <option value="여자">여자</option>
         </select>
@@ -53,6 +54,7 @@
         <h3><span class="line">고</span>용 형태</h3>
         <input type="hidden" id="selectEmployeeType" value="${r.employeeType}">
         <select class="form-control" id="employeeType" name="employeeType" required>
+           <option value="성별 무관">성별 무관</option>
           <option value="정규직">정규직</option>
           <option value="계약직">계약직</option>
         </select>

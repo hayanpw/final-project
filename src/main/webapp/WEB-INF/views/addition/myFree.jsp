@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>내가 쓴 글/댓글</title>
 <link rel="stylesheet" href="/resources/additionCss/myFree.css">
 </head>
 <body>

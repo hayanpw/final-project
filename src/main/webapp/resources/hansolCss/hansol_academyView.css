@@ -35,6 +35,7 @@
     }
     .academySummary>table tr td:first-child{
          width: 120px;
+         font-size: 18px;
     }
     .academySummary>table tr td{
         height: 50px;
@@ -59,3 +60,8 @@
     	margin-top: 100px;
     	margin-left: 30px;
     }
+    .middleSide{
+	border: 2px solid #064663;
+	border-radius: 10px;
+	padding: 20px 10px;
+}

@@ -325,6 +325,7 @@ public class SpaceController {
 		model.addAttribute("space", space);
 		model.addAttribute("delSpace", delSpace);
 		model.addAttribute("black", black);
+		model.addAttribute("selectmenu",3);
 		return "space/spaceAdmin";
 	}
 
