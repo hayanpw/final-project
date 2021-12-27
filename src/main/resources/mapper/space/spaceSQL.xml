@@ -271,10 +271,10 @@
 		 	filepath,
             ub.del_yn
 		 from(select rownum as rnum, b.* 
-		 from(SELECT * FROM use_board order by ub_no desc)b) ub 
+		 from(SELECT * FROM use_board )b) ub 
          join rental using(rental_no) 
          join space using(space_no) 
-         where rnum between #{start} and #{end} and ub.del_yn='N'
+         where rnum between #{start} and #{end} and ub.del_yn='N' order by ub_no desc
 	</select>
 	<select id="selectTotalCount" resultType="_int">
 		select 

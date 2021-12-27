@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>사용 게시판 작성</title>
     <link href="resources/spaceCss/space_default.css" rel="stylesheet">
     <link href="resources/spaceCss/space_boardWrite.css" rel="stylesheet">
 </head>
