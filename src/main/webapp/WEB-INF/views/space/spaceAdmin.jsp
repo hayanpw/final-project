@@ -34,7 +34,7 @@
 						</tr>
 						<c:forEach items="${list }" var="l" varStatus="i">
 							<tr>
-								<td>${i.count }</td>
+								<td>${start + i.index }</td>
 								<td><img class="info-img"
 									src="resources/spaceImage/upload/${l.filename }"></td>
 								<td>${l.spaceName }</td>

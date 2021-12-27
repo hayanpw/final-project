@@ -9,7 +9,7 @@
                 <div class="m1"><a class="selectMenu" href="/showAdmin.do?selectmenu=0">공연관리</a></div>
                 <div><a class="selectMenu" href="/exhibitionAdmin.do?selectmenu=1">전시관리</a></div>
                 <div><a class="selectMenu" href="/academyAdminList.do?selectmenu=2">강좌관리</a></div>
-                <div><a class="selectMenu" href="/spaceAdmin.do?selectmenu=3&reqPage=3">대관관리</a></div>
+                <div><a class="selectMenu" href="/spaceAdmin.do?selectmenu=3&reqPage=1">대관관리</a></div>
                 <div><a class="selectMenu" href="/readingAdmin.do?selectmenu=4">열람실 관리</a></div>
                 <div><a class="selectMenu" href="/allMember.do?selectmenu=5&reqPage=5">회원 관리</a></div>
             </div>
