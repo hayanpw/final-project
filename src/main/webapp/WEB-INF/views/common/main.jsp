@@ -350,7 +350,20 @@
 			</div>
 		</div>
 	</div>
+	<button class="toTop" onclick="goTop();" style="display: none">TOP</button>
 	<script>
+    $(window).on("scroll", function(){
+        if($(window).scrollTop() > 400){
+            $(".toTop").show();
+        }else{
+            $(".toTop").hide();
+        }
+    });
+    
+	function goTop() {
+		window.scrollTo(0,0);
+	}
+	
                  $('.autoplay').slick({
                     slidesToShow: 3,
                     slidesToScroll: 1,
@@ -540,6 +553,24 @@ to {
 	cursor: pointer;
 	padding-left: 15px;
 	opacity: 1;
+}
+.toTop{
+	opacity: 0.7;
+    cursor: pointer;
+    display: inline-block;
+	background-color: #195083;
+	color: #fff;
+	right: 125px;
+	bottom: 65px;
+	position: fixed;
+	width: 4em;
+    text-align: center;
+    height: 4em;
+    line-height: 4em;
+    border-radius: 50%;
+    font-size: 1em;
+    z-index: 3;
+    font-weight: 500;
 }
 </style>
 </html>

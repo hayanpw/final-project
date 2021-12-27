@@ -42,7 +42,7 @@
 				<br>
 				<div class="single-title">
 					<h3 class="today"><span>이</span>용방법
-						<a href="/reservationToday.do" class="btn btn-primary btn-lg" style="margin-left: 10px; background-color: #4972bc; border-radius: 0px;">좌석현황 확인하기</a>
+						<a href="/reservationToday.do" class="btn btn-primary btn" style="margin-left: 10px; background-color: #4972bc; border-radius: 0px;">좌석현황 확인하기</a>
 					</h3>
 					<ul>
 						<li>이용일 일주일 전부터 예약가능</li>
