@@ -50,7 +50,7 @@
 	 .info>p:first-child{
 		font-size: 17px;
 		font-weight : 800;
-		height: 70px;
+		margin-bottom: 53px; 
 		display: block;
 		white-space: nowrap;
 		overflow: hidden;
@@ -203,4 +203,7 @@
 }
 .info>p{
 	margin-bottom: 9px;
+}
+.studentView{
+	margin-left: 35px;
 }

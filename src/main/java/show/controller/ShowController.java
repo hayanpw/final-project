@@ -322,6 +322,7 @@ public class ShowController {
 		HashMap<String, Object> map = service.myReserv(memberId);
 		model.addAttribute("list", map.get("reservs"));
 		model.addAttribute("headerText", "마이페이지");
+		model.addAttribute("selectmenu",0);
 		return "show/showMypage";
 	}
 	

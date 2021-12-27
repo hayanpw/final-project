@@ -27,7 +27,7 @@
 					</a>
 				</div>
  				<div class="info">
-					<p>${ex.exhibitionTitle }</p>
+					<p data-toggle="tooltip" title="${ex.exhibitionTitle }">${ex.exhibitionTitle }</p>
 					<p>전시 기간: ${ex.exhibitionStart } ~ ${ex.exhibitionEnd }</p>
 					<p>전시 시간 : ${ex.exhibitionTimeStart } ~ ${ex.exhibitionTimeEnd }</p>
 					<p>장소 : 무지다 미술관 </p>
@@ -49,6 +49,9 @@
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 	<script>
+		$(document).on(function(){
+		  $('[data-toggle="tooltip"]').tooltip({placement: "bottom"});  
+		});
 		var totalCount = $("#totalCount");
 		$(document).on("click",".exhibitionView",function(){
 			var exhibitionNo = $(this).attr("exhibitionNo");
@@ -78,20 +81,21 @@
 						moreLi += "<a href='/exhibitionView.do?exhibitionNo="+data[i].exhibitionNo+"'>";
 						moreLi += "<img src='"+data[i].exhibitionPhoto+"'></a></div>";
 						moreLi += "<div class='info'>";
-						moreLi += "<p>"+data[i].exhibitionTitle+"</p>";
+						moreLi += "<p data-toggle='tooltip' title='"+data[i].exhibitionTitle+"'>"+data[i].exhibitionTitle+"</p>";
 						moreLi += "<p>전시 기간: "+data[i].exhibitionStart+"~"+data[i].exhibitionEnd+"</p>";
 						moreLi += "<p>전시 시간: "+data[i].exhibitionTimeStart+"~"+data[i].exhibitionTimeEnd+"</p>";
 						moreLi += "<p>장소: 무지다 미술관</p>";
 						moreLi += "<p>금액: "+data[i].exhibitionPrice+"</p>";
 						if(memberLevel == ""){
 							moreLi += "</div></div></li>";
-						}
+						}else{
 						if(memberLevel == 0){
 							moreLi += "<div class = 'infoButton'>";
 							moreLi += "<button class='btn exhibitionView' exhibitionNo='"+data[i].exhibitionNo+"' onfocus='this.blur()'>상세보기</button><button class='btn exhibitionUpdate' exhibitionNo='"+data[i].exhibitionNo+"' onfocus='this.blur()'>수정하기</button>";
 							moreLi += "</div></div></li>";
 						}else{
 							moreLi += "</div></div></li>";
+						}
 						}
 						$(".mainmenu").append(moreLi);
 					}

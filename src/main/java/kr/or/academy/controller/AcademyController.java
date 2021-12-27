@@ -285,6 +285,7 @@ public class AcademyController {
 		HashMap<String, Object> map = service.academyMypage(memberNo);
 		model.addAttribute("list",map.get("list"));
 		model.addAttribute("last",map.get("last"));
+		model.addAttribute("selectmenu",2);
 		model.addAttribute("totalCount",map.get("totalCount"));
 		model.addAttribute("headerText", "수업 목록");
 		return "academy/academyMypage";
