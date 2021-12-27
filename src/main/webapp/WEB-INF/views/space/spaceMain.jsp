@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>공간 메인</title>
 <link href="resources/spaceCss/space_default.css" rel="stylesheet">
 <link href="resources/spaceCss/space_main.css" rel="stylesheet">
 </head>

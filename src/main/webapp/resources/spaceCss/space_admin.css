@@ -95,3 +95,13 @@
 .pagination>#click-page>a{
 	background-color: #064663; 	
 }	
+.t-hover:hover{
+	background-color: rgba(6, 71, 101, 0.1);
+}
+.table td{
+	border-bottom: 1px solid #064663;
+}
+.table th{
+	background-color: #064663;
+	color: white;
+}

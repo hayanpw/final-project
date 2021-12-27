@@ -181,6 +181,7 @@ public class ReadingController {
 		model.addAttribute("alllist",alllist);
 		model.addAttribute("black",black);
 		model.addAttribute("fi",fi);
+		model.addAttribute("selectmenu",4);
 		return "reading/readingAdmin2";
 	}
 	

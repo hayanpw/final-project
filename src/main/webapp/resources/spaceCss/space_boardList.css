@@ -34,7 +34,6 @@
 .table th {
   padding: 10px;
   font-weight: bold;
-  vertical-align: top;
   border-bottom: 3px solid #064663;
 }
 .table th {
@@ -42,12 +41,13 @@
   font-weight: bold;
   vertical-align: top;
   border-bottom: 1px solid #064663;
-  background: #064663;;
+  background: #064663;
+  height: 60px;
 }
 .table td {
   padding: 10px;
-  vertical-align: top;
   border-bottom: 1px solid #064663;
+  
 }
 .writeBtn{
 	width : 80px;
@@ -64,4 +64,7 @@
 	border: none;
 	background-color: #064663;
 	color: white;
+}
+.t-hover:hover{
+	background-color: rgba(6, 71, 101, 0.1);
 }

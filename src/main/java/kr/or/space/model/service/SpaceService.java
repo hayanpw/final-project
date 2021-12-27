@@ -180,8 +180,8 @@ public class SpaceService {
 	@Transactional
 	public SpacePageNavi selectSpacePageNavi(int reqPage) {
 		int numPerPage = 10;
-		int end = reqPage*numPerPage;
-		int start = end - numPerPage+1;
+		int end = reqPage*numPerPage; 
+		int start = end - numPerPage+1; 
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("start", start);
 		map.put("end", end);
@@ -233,7 +233,6 @@ public class SpaceService {
 		page.setList(list);
 		page.setPageNavi(pageNavi);
 		page.setStart(start);
-		System.out.println("서비스 : "+list);
 		return page;
 	}
 	//게시판 작성할 대관
