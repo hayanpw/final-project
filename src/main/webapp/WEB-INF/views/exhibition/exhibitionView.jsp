@@ -63,9 +63,9 @@
         </div>
         <div class="bottomSide">
               <ul class="nav nav-tabs">
-                <li class="active"><a data-toggle="tab" href="#home">전시정보</a></li>
-                <li><a data-toggle="tab" href="#menu1">예매및취소</a></li>
-                <li><a data-toggle="tab" href="#menu2">관람평</a></li>
+                <li class="active"><a data-toggle="tab" href="#home" style="color: #064663;">전시정보</a></li>
+                <li><a data-toggle="tab" href="#menu1" style="color: #064663;">예매및취소</a></li>
+                <li><a data-toggle="tab" href="#menu2" style="color: #064663;">관람평</a></li>
               </ul>
               <div class="tab-content">
               		<div id="home" class="tab-pane fate in active" >
@@ -84,12 +84,12 @@
                     <h3>환불</h3>
                     <p>예매수수료는 예매 당일 밤 12시 이전까지 환불되며, 그 이후 기간에는 환불되지 않습니다.</p>
               		</div>
-              		<div id="menu2" class="tab-pane fate in" >
+              		<div id="menu2" class="tab-pane fate in" style="margin-bottom: 30px;" >
         					 <c:if test="${empty sessionScope.m }">
-            					<p>로그인 후 댓글 작성이 가능합니다</p>  
+            					<p>※로그인 후 댓글 작성이 가능합니다※</p>  
             				</c:if>
             				<c:if test="${empty payment }">
-            						<p>전시 구매후 댓글 작성이 가능합니다</p>  
+            						<p>※전시 구매후 댓글 작성이 가능합니다※</p>  
             				</c:if>		
 		    			<div class="reviewBox hideContent">
                 	<div id="insert-btn">
@@ -175,13 +175,15 @@
     	 <input type="hidden" id="exhibitionTitle" value="${exb.exhibitionTitle }">
     	 <input type="hidden" id="exhibitionPhoto" value="${exb.exhibitionPhoto }">
     	 <input type="hidden" id="bookDate" value="">
+    	 <div class="pp" style="margin-top: 10px;">
     	 <c:if test="${empty sessionScope.m }">
-    	 	<button onclick="goLogin();"class="btn" id="goLogin" style="float: right;">로그인하고 결제</button>
+    	 	<button onclick="goLogin();"class="btn" id="goLogin" style="float: right;">로그인하고 구매</button>
     	 </c:if>
     	 <c:if test="${not empty sessionScope.m }">
     	 <span class="totalPrice" id="totalPrice" style="font-size: 20px;">${exb.exhibitionPrice }</span>원
     	 <button onclick="payment();"class="btn" id="payment" style="float: right;">결제하기</button>
     	 </c:if>
+    	 </div>
     </div>
     </div>
    
@@ -256,6 +258,10 @@ function goLogin(){
 			var currAmount = Number($(".amount").html()); 
 			if($(this).html() == "+") { 
 				$(".amount").html(++currAmount);
+				if($("#amount").html()>10){
+					alert("최대 10인 까지만 가능합니다.");
+					$("#amount").html(10);
+				}
 			}else{
 				if(currAmount != 1){ 
 					$(".amount").html(--currAmount);					

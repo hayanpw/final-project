@@ -31,14 +31,6 @@
 		</div>
 		<div class="search">
 			<div class="search_text">
-				<c:choose>
-				<c:when test="${not empty sessionScope.m }">
-				<h3>${sessionScope.m.memberName}님이 원하는 수업을 찾아보세요.</h3>
-				</c:when>
-				<c:otherwise>
-				<h2>수업을 찾아보세요</h2>
-				</c:otherwise>
-				</c:choose>
 			</div>
 				<div class="search_bar">
 					<input type="text" id="keyWord" placeholder="원하는 수업명 또는 내용을 입력해주세요.">
@@ -381,6 +373,8 @@
 				var category = $(this).attr("category");
 				$("#gnb li").removeClass("on");
 				$(this).closest("li").addClass("on");
+				$(".search").css("display","none");
+				$("#insertAcademy").css("margin-top","87px")
 			});
 			
 		});

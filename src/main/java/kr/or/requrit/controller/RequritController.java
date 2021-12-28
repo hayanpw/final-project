@@ -144,6 +144,7 @@ public class RequritController {
 		model.addAttribute("list",rpd.getList());
 		model.addAttribute("pageNavi",rpd.getPageNavi());
 		model.addAttribute("start",rpd.getStart());
+		model.addAttribute("headerText", "삭제한 공고 목록");
 		return "requrit/requritListDelete";
 	}
 	@RequestMapping(value="/revivalRequritFrm.do")

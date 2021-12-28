@@ -14,7 +14,7 @@
         <div class="row" style="width: 600px;margin: 0 auto; margin-top: 130px;" >
             <div style="width: 600px; height:305px; ">
                 <div class="thumbnail" style="margin: 0 auto; border-radius: 0px; border-bottom: none; height: 100%">
-                	<img src=${acp.academyPhoto } style="height: 90%;">
+                	<img src=${acp.academyPhoto } style="height: 100%;">
                 </div>
             </div>
             <table class="table table-bordered" style="width: 600px; text-align: center;">
