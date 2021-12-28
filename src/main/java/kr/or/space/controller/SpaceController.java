@@ -404,9 +404,8 @@ public class SpaceController {
 	//사용 게시판 작성
 	@RequestMapping(value = "/writeBoard.do")
 	public String writeBoard(HttpServletRequest request, UseBoard ub, Model model, MultipartFile upfile) {
-		if(upfile != null) {
-			String savePath = request.getSession().getServletContext().getRealPath("/resources/useBoardFile/upload/");
-			
+		if(!upfile.isEmpty()) {
+		String savePath = request.getSession().getServletContext().getRealPath("/resources/useBoardFile/upload/");
 			String filename = upfile.getOriginalFilename();
 			String onlyFilename = filename.substring(0, filename.indexOf("."));
 			String extention = filename.substring(filename.indexOf("."));
@@ -425,6 +424,7 @@ public class SpaceController {
 				}
 				count++;
 			}
+			
 			try {
 				FileOutputStream fos = new FileOutputStream(new File(savePath+filepath));
 				BufferedOutputStream bos = new BufferedOutputStream(fos);
@@ -438,9 +438,30 @@ public class SpaceController {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			ub.setFilepath(filepath);
 			ub.setFilename(filename);
+			ub.setFilepath(filepath);
 		}
+		/*
+		 * if(upfile != null) { String savePath =
+		 * request.getSession().getServletContext().getRealPath(
+		 * "/resources/useBoardFile/upload/");
+		 * 
+		 * String filename = upfile.getOriginalFilename(); String onlyFilename =
+		 * filename.substring(0, filename.indexOf(".")); String extention =
+		 * filename.substring(filename.indexOf("."));
+		 * 
+		 * String filepath = null; int count = 0; while(true) { if(count==0) { filepath
+		 * = onlyFilename + extention; }else { filepath =
+		 * onlyFilename+"_"+count+extention; } File checkFile = new
+		 * File(savePath+filepath); if(!checkFile.exists()) { break; } count++; } try {
+		 * FileOutputStream fos = new FileOutputStream(new File(savePath+filepath));
+		 * BufferedOutputStream bos = new BufferedOutputStream(fos); byte[] bytes =
+		 * upfile.getBytes(); bos.write(bytes); bos.close(); } catch
+		 * (FileNotFoundException e) { // TODO Auto-generated catch block
+		 * e.printStackTrace(); } catch (IOException e) { // TODO Auto-generated catch
+		 * block e.printStackTrace(); } ub.setFilepath(filepath);
+		 * ub.setFilename(filename); }
+		 */
 		int result = service.insertUseBoard(ub);
 		if(result>0) {
 			model.addAttribute("msg", "등록 성공");			
