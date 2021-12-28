@@ -76,7 +76,7 @@
 									<button class="writeBtn" type="button" onclick="location.href='/deleteRes.do?rentalNo=${l.rentalNo}&memberId=${sessionScope.m.memberId }'">예약 취소</button>
 								</c:when>
 								<c:otherwise>
-									<button  class="updateBtn" type="button" class="btn btn-info btn-lg" data-toggle="modal"
+									<button  class="update-Btn" type="button" class="btn btn-info btn-lg" data-toggle="modal"
 							data-target="#rModal">리뷰 수정</button>
 							<input type="hidden" id="rentalNo" value="${l.rentalNo }">
 								<div class="d-review">

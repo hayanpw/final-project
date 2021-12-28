@@ -38,8 +38,7 @@
                        	<div>
 							<fieldset>
 									<label for="memberEmail" class="reg" >Email </label><input type="text" name="memberEmail" id="memberEmail">
-									<button type="button" onclick="checkEmail();" id="btnOpen1" class="findbtn">전송</button><br><br>
-									<span id="ajaxEmailcheck"></span>
+																		<span id="ajaxEmailcheck"></span><button type="button" onclick="checkEmail();" id="btnOpen1" class="findbtn">전송</button>
 									<div class="agreebox adcheck">
 										<span id="authMsg"></span><input type="hidden" id="emailchk">
 										<div></div>
@@ -47,7 +46,7 @@
 									<div class="input_wrap">
 										<div></div>
 										<div id="search_input">
-											<input type='text' id="authCode" class="search_input" placeholder="인증 코드 입력" /><span id="timeZone"></span>
+											<label for="memberEmail" class="reg" >Code </label><input type='text' id="authCode" class="search_input" placeholder="인증 코드 입력" /><span id="timeZone"></span>
 											<span id="authMsg"></span>										
 										</div>
 										<div>
@@ -60,8 +59,8 @@
 						<div>
 						 <!-- 아이디 찾기 -->
 							<div> <label id="resultId" class="reg"> ID : </label><span id="resultId"></span></div><br><br>
-							<button id="moveLogin">로그인하러가기</button>
-							<button id="changePwFrm">비밀번호변경하기</button>
+							<button id="moveLogin" class="loginbtn" >로그인하러가기</button>
+							<button id="changePwFrm" class="loginbtn" >비밀번호변경하기</button>
 						</div>
 						<div>
 						<!-- 비밀번호 변경 -->
@@ -70,7 +69,7 @@
 									<label for="memberPassword" class="reg"> PW </label>
 									<input type="password" class="input" name="memberPassword" id="memberPassword"><span id="pw-detail">(“”-+/\:; 제외)</span> <span id="pwChkRule"></span><br><br>
 									<label for="pw_re" class="reg"> 확인 </label><input type="password" class="input" name="pw_re" id="chkpw"> <span id="pwChk"></span>
-									<input type="submit" value="변경">
+									<input type="submit" class="findbtn"  value="변경">
 									<input type="hidden" name="memberId" id="memberId">
 							</fieldset>
 						</form>

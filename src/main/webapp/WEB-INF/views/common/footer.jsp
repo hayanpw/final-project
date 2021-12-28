@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-	<footer id="footer">
+	<footer id="footer" style="min-width: 1570px;">
 		<div class="footer-container">
 			<div class="footer-menu" style="padding-top:30px">
 				  <div class="rolling_box">
