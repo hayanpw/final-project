@@ -53,6 +53,8 @@ public class MemberController {
 	private AdditionService additionService;
 	@Autowired
 	private RequritService requritservice;
+
+	
 	public MemberController() {
 		super();
 		System.out.println("객체 생성");
