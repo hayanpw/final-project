@@ -126,6 +126,7 @@
 		});
 		$(function() {
 			var today = new Date(); //오늘부터
+			var naeil = today.getFullYear()+"-"+(today.getMonth()+1)+"-"+(today.getDate()+1);
 			var endDate = new Date(today);
 			endDate.setDate(endDate.getDate() + 30); //+30일까지만 예약받음
 			$("#datepicker").datepicker(
@@ -140,7 +141,7 @@
 						dayNamesShort : [ '일', '월', '화', '수', '목', '금', '토' ],
 						dayNamesMin : [ '일', '월', '화', '수', '목', '금', '토' ],
 						yearSuffix : '년',
-						minDate : today,
+						minDate : naeil,
 						maxDate : endDate,
 						beforeShowDay : noMondays, //월요일은 휴무일
 						onSelect : function(data) {
