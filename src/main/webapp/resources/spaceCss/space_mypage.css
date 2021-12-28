@@ -62,6 +62,12 @@
 	margin-top: 20px;
 	margin-left: 250px;
 }
+.update-Btn{
+	color: #064663 ;
+	background-color: white;
+	border: 1px solid #e79b36; 
+	border-radius: 10px;
+}
 #ckList{
 	color: #064663;
 	text-decoration: none;
