@@ -90,7 +90,7 @@
 			exhibition_price as exhibitionPrice,
 			exhibition_detail as exhibitionDetail,
 			exhibition_cancel as exhibitionCancel
-		from exhibition where exhibition_end > sysdate and exhibition_cancel = 0 order by 1 desc
+		from exhibition where exhibition_end >=  to_char(sysdate, ('yyyy-mm-dd')) and exhibition_cancel = 0 order by 1 desc
 	</select>
 	<select id="selectExhibitionAdminLast"  resultType="exb">
 	<![CDATA[
@@ -106,7 +106,7 @@
 			exhibition_price as exhibitionPrice,
 			exhibition_detail as exhibitionDetail,
 			exhibition_cancel as exhibitionCancel
-		from exhibition where exhibition_end < sysdate and exhibition_cancel = 0 order by 1 desc
+		from exhibition where exhibition_end < to_char(sysdate, ('yyyy-mm-dd')) and exhibition_cancel = 0 order by 1 desc
 	]]>	
 	</select>
 	<select id="selectExhibitionAdminCancel"  resultType="exb">
@@ -145,7 +145,7 @@
             exhibition_end as exhibitionEnd,
             exhibition_time_start as exhibitionTimeStart,
             exhibition_time_end as exhibitionTimeEnd
-		from payment join exhibition using(exhibition_no) where member_no=#{memberNo} and payment_select = 1  and book_date > sysdate
+		from payment join exhibition using(exhibition_no) where member_no=#{memberNo} and payment_select = 1  and book_date >= to_char(sysdate, ('yyyy-mm-dd'))   order by payment_date desc
 	</select>
 	<select id="selectExhibitionPaymenytLast" parameterType="_int" resultType="exbpm">
 	<![CDATA[
@@ -166,7 +166,7 @@
             exhibition_end as exhibitionEnd,
             exhibition_time_start as exhibitionTimeStart,
             exhibition_time_end as exhibitionTimeEnd
-		from payment join exhibition using(exhibition_no) where member_no=#{memberNo} and payment_select = 1  and book_date < sysdate
+		from payment join exhibition using(exhibition_no) where member_no=#{memberNo} and payment_select = 1  and book_date < to_char(sysdate, ('yyyy-mm-dd'))   order by payment_date desc
 	]]>	
 	</select>
 	<update id="deletePayment" parameterType="_int">
@@ -185,7 +185,7 @@
 			book_date as bookDate,
 			member_no as memberNo,
 			check_email as checkEmail
-		from payment where payment_select = 1  and exhibition_no = #{exhibitionNo} 
+		from payment where payment_select = 1  and exhibition_no = #{exhibitionNo}
 	</select>
 	<delete id="realDelete" parameterType="_int">
 		delete from payment where payment_no = #{reserveNo}

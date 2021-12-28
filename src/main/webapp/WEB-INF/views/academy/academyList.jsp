@@ -54,7 +54,7 @@
 					<p>강사 : ${a.academyTeacher }</p>
 					<p>수업료 : ${a.academyPrice } 원</p>
 					<p>
-					<c:if test="${sessionScope.m.memberLevel eq 0 || sessionScope.m.memberLevel eq 2}"> 
+					<c:if test="${sessionScope.m.memberLevel eq 0 }"> 
 						<button type = "button" class ="btn studentView" data-toggle="modal" data-target="#myModal" academyNo="${a.academyNo }" onfocus="this.blur()">참여인원보기</button>
 					</c:if>
 					</p>
@@ -166,7 +166,7 @@
 						if(memberLevel == ""){
 							moreLi += "</div></div></li>";
 						}else{
-						if(memberLevel == 0 || memberLevel == 2){
+						if(memberLevel == 0){
 						moreLi += "<button type ='button' class ='btn studentView' data-toggle='modal' data-target='#myModal' academyNo='"+data[i].academyNo+"' onfocus='this.blur()'>참여인원보기</button>";
 						}
 						moreLi += "</p><div class = 'infoButton'>";
@@ -212,7 +212,7 @@
 							if(memberLevel == ""){
 								moreLi += "</div></div></li>";
 							}else{
-							if(memberLevel == 0 || memberLevel == 2){
+							if(memberLevel == 0){
 							moreLi += "<button type ='button' class ='btn studentView' data-toggle='modal' data-target='#myModal' academyNo='"+data[i].academyNo+"' onfocus='this.blur()'>참여인원보기</button>";
 							}
 							moreLi += "</p><div class = 'infoButton'>";
@@ -276,7 +276,7 @@
 							if(memberLevel == ""){
 								moreLi += "</div></div></li>";
 							}else{
-							if(memberLevel == 0 || memberLevel == 2){
+							if(memberLevel == 0){
 							moreLi += "<button type ='button' class ='btn studentView' data-toggle='modal' data-target='#myModal' academyNo='"+data[i].academyNo+"' onfocus='this.blur()'>참여인원보기</button>";
 							}
 							moreLi += "</p><div class = 'infoButton'>";
@@ -335,7 +335,7 @@
 							if(memberLevel == ""){
 								moreLi += "</div></div></li>";
 							}else{
-							if(memberLevel == 0 || memberLevel == 2){
+							if(memberLevel == 0 ){
 							moreLi += "<button type ='button' class ='btn studentView' data-toggle='modal' data-target='#myModal' academyNo='"+data[i].academyNo+"' onfocus='this.blur()'>참여인원보기</button>";
 							}
 							moreLi += "</p><div class = 'infoButton'>";
@@ -370,11 +370,15 @@
 			$("#gnb li").removeClass("on");
 			$(".all").closest("li").addClass("on");
 			$(".categorysearch").click(function(){
+				$(".search_text").empty();
 				var category = $(this).attr("category");
+				var title = "";
 				$("#gnb li").removeClass("on");
 				$(this).closest("li").addClass("on");
-				$(".search").css("display","none");
+				$(".search_bar").css("display","none");
+				title += "<h1 style='margin-left : 50px;'><span class='line'>"+category+"</span></h1>";
 				$("#insertAcademy").css("margin-top","87px")
+				$(".search_text").append(title);
 			});
 			
 		});

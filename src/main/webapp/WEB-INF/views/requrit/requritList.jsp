@@ -6,9 +6,36 @@
 <head>
 <meta charset="UTF-8">
 <title>공고 목록</title>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <link href="resources/hansolCss/hansol_default.css" rel="stylesheet">
 <link href="resources/hansolCss/hansol_requritList.css" rel="stylesheet">
 </head>
+<style>
+.swal-modal{
+background-color: rgb(245, 248, 250);
+}
+.swal-footer {
+  margin-top: 32px;
+  overflow: hidden;
+}
+.swal-title {
+  font-size: 35px;
+  box-shadow: 0px 1px 1px #064663;
+  color : #064663;
+  height: 60px;
+}
+.swal-text{
+	font-size: 20px;
+	color : #064663;
+}
+.swal-button{
+	background-color: #064663;
+}
+.swal-button:hover{
+	background-color: #ffffff;
+	color: #064663;
+}
+</style>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	 <div class="container">
@@ -25,7 +52,14 @@
           	<c:if test="${r.requritCancel eq 0 }">
              	<tr id ="secTr">
 				   <td>${start + i.index }</td>
+				  <c:choose>
+				   <c:when test="${r.period ge 0  }">
 				   <td><a href="/requritView.do?requritNo=${r.requritNo }" style="text-decoration: none;">${r.requritTitle }</a></td>
+				   </c:when>
+				   <c:when test="${r.period le -1 }">
+				   <td><a onclick ="endRequrit();" style="text-decoration: none; cursor: pointer;">마감된 공고입니다</a></td>
+				   </c:when>
+				   </c:choose>
 				   <td>관리자</td>
 				   <c:choose>
 				   <c:when test="${r.period ge 1 }">
@@ -59,6 +93,16 @@
         </div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 	<script>
+	
+		function endRequrit() {
+			swal({
+				  title: "Musée d'art",
+				  text: "마감된 공고 입니다",
+				  button : '확인'
+				});
+				
+		}
+	
 		$("#deleteRequritList").click(function(){
 			location.href ="/deleteRequritList.do?reqPage=1";
 		});

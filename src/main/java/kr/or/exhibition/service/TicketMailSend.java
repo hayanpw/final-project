@@ -52,8 +52,8 @@ public class TicketMailSend {
 			// 이메일 제목설정
 			msg.setSubject("[Musée d'art]"+expm.getExhibitionTitle()+"이메일 발권 ", "UTF-8");
 			// 이메일 내용설정
-			msg.setContent("<h1>Musée d'art입니다.</h1>"+"<h3>"+expm.getExhibitionTitle()+" 티켓 발권이 완료되었습니다. 사용에 관한 자세한 사항은 홈페이지를 참고해주세요.</h3>"+"<h4>예약 날짜"+expm.getBookDate()+"</h4>"+
-							"<h4>장소"+expm.getExhibitionTimeStart()+"~"+expm.getExhibitionTimeEnd()+"</h4>"+"<h4>주문 번호"+expm.getPaymentNo()+"</h4>", "text/html;charset=UTF-8");
+			msg.setContent("<h1>Musée d'art입니다.</h1>"+"<h3>"+expm.getExhibitionTitle()+" 티켓 발권이 완료되었습니다. 사용에 관한 자세한 사항은 홈페이지를 참고해주세요.</h3>"+"<h3>예약 날짜"+expm.getBookDate()+"</h3>"+
+							"<h3>시간"+expm.getExhibitionTimeStart()+"~"+expm.getExhibitionTimeEnd()+"</h3>"+"<h3>주문 번호"+expm.getPaymentNo()+"</h3>", "text/html;charset=UTF-8");
 			// 이메일 전송
 			Transport.send(msg);
 			result = true;
