@@ -171,10 +171,14 @@
             z-index: 10 !important;
         }
 
-        .rolling_box ul li p {
+        .rolling_box ul li a{
             font-size: 20px;
             line-height: 5px;
             font-weight: bold;
+		    border: none;
+		    color: #fff;
+		    text-decoration: none;
+		    
         }
 
         .before_slide {
