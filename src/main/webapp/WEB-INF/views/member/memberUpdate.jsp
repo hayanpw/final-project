@@ -71,7 +71,6 @@
 						</table>
 						<div class="btnBox">
 							<button  type="submit" class="nextBtn2">정보수정</button>
-							
 						</div>	
 				</form>	
 
@@ -140,8 +139,8 @@
 					type : "post",
 					success : function(data) {
 						if (data == 0) {
-							$("#ajaxEmailcheck").html("");
-							$("#emailchk").val('1');
+							$("#ajaxEmailcheck").html("");/* 
+							$("#emailchk").val('1'); */
 							console.log(memberEmail);
 							//아이디 사용가능시 MODAL창 인증버튼시 팝업
 							var btnOpen1 = document
@@ -213,7 +212,6 @@
 								}
 							}
 							$("#btnCheck1").click(function() {
-
 								if (mailCode == null) {
 									$("#authMsg").html("인증 실패");
 									$("#authMsg").css("color", "#BDB19A");
@@ -223,6 +221,7 @@
 										$("#authMsg").html("인증성공");
 										$("#authMsg").css("color", "#BDB19A"); //여기다가 인증추가를 해야함
 										$("#emailchk").val('1');
+										
 										clearInterval(intervalId);
 										$("#timeZone").empty();
 										$("#emailcheck").val('1');

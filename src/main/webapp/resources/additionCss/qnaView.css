@@ -127,3 +127,31 @@
 	#tag{
 	font-weight: bold;
 	}
+	.clist{
+	background-color: #e79b36;
+	color: #fff;
+	border: none;
+	}
+	
+	.clist:hover{
+	text-decoration:none;
+	color: #fff;
+	}
+	
+	#blist{
+	background-color:  #064663;
+	color: #fff;
+	border: none;
+	}
+	
+	#buttons{
+	text-align: right;
+	margin: 5px;
+	}
+	
+	.commentBox{
+	border-top: 1px solid #eee;
+	}
+	.comments,.recomments{
+	border-bottom: 1px solid #eee;
+	}

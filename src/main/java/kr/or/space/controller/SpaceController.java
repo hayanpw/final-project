@@ -318,7 +318,6 @@ public class SpaceController {
 		ArrayList<Space> space = service.selectNoDelSpace();
 		ArrayList<Space> delSpace = service.selectDelSpace();
 		ArrayList<Black> black = service.selectDelBlack();
-		System.out.println(black);
 		model.addAttribute("list", spn.getRList());
 		model.addAttribute("pageNavi", spn.getPageNavi());
 		model.addAttribute("start", spn.getStart());

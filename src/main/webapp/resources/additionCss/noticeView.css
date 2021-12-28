@@ -39,14 +39,24 @@
 	
 	#adminbtn{
 	float: right;
+	
 	}
 	#blist{
 	float: right;
+	background-color: #064663;
+	color: #fff;
+	margin: 5px;
 	}
 	#delete{
 	float: right;
+	background-color: #e79b36;
+	color: #fff;
+	margin: 5px;
 	}
 	#update{
 	float: right;
+	background-color: #e79b36;
+	color: #fff;
+	margin: 5px;
 	}
     

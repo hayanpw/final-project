@@ -145,7 +145,12 @@ public class ReadingController {
 	@ResponseBody
 	@RequestMapping(value="/reservationCancel.do",produces = "application/json;charset=utf-8")
 	public String reservationCancel(Reading re, Model model) {
-		int result = service.reservationCancel(re);
+		int result=0;
+		try {
+			result = service.reservationCancel(re);
+		} catch (Exception e) {
+			return new Gson().toJson(0);
+		}
 		return new Gson().toJson(result);
 	}
 	

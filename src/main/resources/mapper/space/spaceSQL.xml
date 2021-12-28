@@ -261,20 +261,22 @@
 	</select>
 	<select id="selectUseBoardList" parameterType="map" resultType="kr.or.space.model.vo.UseBoard">
 		 select 
-		 	ub_no as ubNo, 
+		 	*
+            from
+        (select rownum as rnum, b.* 
+		 from(SELECT 
+         ub_no as ubNo, 
             space_name as spaceName,
-		 	ub.member_id as memberId, 
+		 	use_board.member_id as memberId, 
 		 	ub_title as ubTitle, 
 		 	ub_content as ubContent, 
 		 	ub_date as ubDate, 
 		 	filename, 
-		 	filepath,
-            ub.del_yn
-		 from(select rownum as rnum, b.* 
-		 from(SELECT * FROM use_board )b) ub 
+		 	filepath
+         FROM use_board 
          join rental using(rental_no) 
-         join space using(space_no) 
-         where rnum between #{start} and #{end} and ub.del_yn='N' order by ub_no desc
+         join space using(space_no)  order by ub_no desc)b) 
+         where rnum between #{start} and #{end}
 	</select>
 	<select id="selectTotalCount" resultType="_int">
 		select 
@@ -306,12 +308,11 @@
 		from use_board
 		where ub_no = #{ubNo}	
 	</select>
-	<update id="deleteUseBoard" parameterType="_int">
-		update
-			use_board set
-			del_yn = 'Y'
+	<delete id="deleteUseBoard" parameterType="_int">
+		delete
+		from use_board
 		where ub_no = #{ubNo}	
-	</update>
+	</delete>
 	<update id="updateUseBoard" parameterType="kr.or.space.model.vo.UseBoard">
 		update
 			use_board set
@@ -490,6 +491,18 @@
 		select 
 			count(*) as cnt 
 		from reading_black
-		where black_id = #{blackId};
+		where black_id = #{blackId}
 	</select>
+	<select id="selectUbRentalNo" parameterType="_int" resultType="_int">
+		select
+			rental_no
+		from use_board
+		where ub_no = #{ubNo}
+	</select>
+	<update id="updateNoBoard" parameterType="_int">
+		update
+			rental set
+			used_board = 0
+		where rental_no = #{rentalNo}	
+	</update>
 </mapper>

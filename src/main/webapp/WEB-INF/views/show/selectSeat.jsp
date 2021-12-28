@@ -35,6 +35,9 @@
 			<h2>${s.showHall } / </h2>
 			<h2>${sr.showDate }</h2>
 		</div>
+		<div>
+		<h1 class="stage">STAGE</h1>
+		</div>
 		<div class="floorWrapper">
 	        <div class="floor">
 	            <div class="firstCol">

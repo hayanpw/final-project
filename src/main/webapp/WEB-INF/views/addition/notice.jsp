@@ -12,7 +12,7 @@
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="container" id="container">
-		<div id="table">
+	<div id="table">
 			<div id="new">새글수 : ${nCount }/${totalCount } </div>
 			<div id="search">
 			<form action="/searchKeyword.do?boardType=1&reqPage=1" method="post">
@@ -49,7 +49,7 @@
 				</c:forEach> 
 				
 			</table>
-		</div>
+			</div>
 		<div id="page">
 			<div id="pageNavi">${pageNavi }</div>
 		</div>

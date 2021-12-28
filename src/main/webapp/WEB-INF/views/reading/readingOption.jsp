@@ -111,20 +111,6 @@
 		</div>	
 	
 	<script>
-	$(function(){
-		var redate = new Date($("input[name=readingDay]").val());
-		var today = new Date();
-		if(redate>today){
-			$("input[name=sub]").attr("type","submit");
-			$("#cancel").attr("class","btn btn-danger btn-lg");
-			if(${fi.fixturesNo eq 0}){
-				$("input[name=modals]").attr("type","button");
-			}else{
-				$("#fixturescancel").attr("class","btn btn-danger btn-lg");
-			}
-		}
-	});
-	
 	$("#cancel").click(function(){
 		var readingDay = "${re.readingDay }";
 		var readingId = "${sessionScope.m.memberId }";
@@ -135,7 +121,6 @@
 				data : {readingDay:readingDay,readingId:readingId},
 				type : "post",
 				success : function(data){
-					console.log(data);
 					if(data > 0){
 						alert("예약이 취소되었습니다.");
 						location.href = "/readingNotice.do";
@@ -157,7 +142,6 @@
 				data : {readingDay:readingDay,readingId:readingId},
 				type : "post",
 				success : function(data){
-					console.log(data);
 					if(data > 0){
 						alert("비품대여예약이 취소되었습니다.");
 						location.href = "/readingNotice.do";
@@ -167,6 +151,20 @@
 					}
 				}
 			});
+		}
+	});
+
+	$(function(){
+		var redate = new Date($("input[name=readingDay]").val());
+		var today = new Date();
+		if(redate>today){
+			$("input[name=sub]").attr("type","submit");
+			$("#cancel").attr("class","btn btn-danger btn-lg");
+			if(${fi.fixturesNo eq 0}){
+				$("input[name=modals]").attr("type","button");
+			}else{
+				$("#fixturescancel").attr("class","btn btn-danger btn-lg");
+			}
 		}
 	});
 	</script>

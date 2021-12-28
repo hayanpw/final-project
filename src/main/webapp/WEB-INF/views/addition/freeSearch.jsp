@@ -11,8 +11,6 @@
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="container" id="container">
-		<div id="title">소통게시판</div>
-		<div id="table">
 			<table id="table1" class="table">
 				<tr id="firtr">
 					<td>번호</td><td>제목</td><td>작성자</td><td>작성일</td><td>조회수</td>
@@ -46,7 +44,6 @@
 				</c:choose>
 				
 			</table>
-		</div>
 		<div id="page">
 			<div id="pageNavi">${pageNavi }</div>
 		</div>

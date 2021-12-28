@@ -70,6 +70,15 @@ public class AdditionController {
 	@RequestMapping(value = "/boardWriteFrm.do")
 	public String boardWriteFrm(int boardType, Model model) {
 		model.addAttribute("boardType", boardType);
+		if(boardType==1) {
+			model.addAttribute("headerText", "공지사항");
+		}else if(boardType==2) {
+			model.addAttribute("headerText", "1대1 문의");
+		}else if(boardType==3) {
+			model.addAttribute("headerText", "소통게시판");
+		}else {
+			model.addAttribute("headerText", "이벤트");
+		}
 		return "addition/boardWriteFrm";
 	}
 
@@ -236,8 +245,6 @@ public class AdditionController {
 	// 댓글삭제
 	@RequestMapping(value = "/deleteComment.do")
 	public String deleteComment(@SessionAttribute Member m,int boardType, int bcNo, int boardNo,int bcRef, Model model) {
-		System.out.println(bcNo);
-		System.out.println(bcRef);
 		int result = service.deleteComment(bcNo,bcRef);
 		if (result > 0) {
 			model.addAttribute("msg", "삭제성공");
@@ -368,10 +375,13 @@ public class AdditionController {
 		model.addAttribute("pageNavi", bpd.getPageNavi());
 		model.addAttribute("start", bpd.getStart());
 		if (boardType == 1) {
+			model.addAttribute("headerText", "공지사항");
 			return "addition/noticeSearch";
 		} else if (boardType == 2) {
+			model.addAttribute("headerText", "1대1 문의");
 			return "addition/qnaSearch";
-		} else {
+		}else {
+			model.addAttribute("headerText", "소통게시판");
 			return "addition/freeSearch";
 		}
 
@@ -383,6 +393,15 @@ public class AdditionController {
 		BoardViewData bvd = service.selectOneBoard(boardNo);
 		model.addAttribute("b", bvd.getB());
 		model.addAttribute("boardType", boardType);
+		if(boardType==1) {
+			model.addAttribute("headerText", "공지사항");
+		}else if(boardType==2) {
+			model.addAttribute("headerText", "1대1 문의");
+		}else if(boardType==3) {
+			model.addAttribute("headerText", "소통게시판");
+		}else {
+			model.addAttribute("headerText", "이벤트");
+		}
 		return "addition/boardUpdateFrm";
 	}
 

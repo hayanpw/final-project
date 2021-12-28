@@ -12,9 +12,46 @@
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div class="container" id="container">
-		<div id="title">소통게시판</div>
 		<input id="loginId" type="hidden" value="${sessionScope.m.memberId }">
 		<input type="hidden" id="boardNo" value="${b.boardNo }">
+		<div id="btns">
+			<a class="btn btnColor ncolor" href="/additionBoard.do?boardType=3&reqPage=1">글목록</a>
+
+
+			<c:choose>
+				<c:when test="${sessionScope.m.memberLevel eq 0 && sessionScope.m.memberId == b.boardWriter}">
+					<c:choose>
+						<c:when test="${b.boardLevel eq 2 }">
+							<a class="btn btnColor basicColor" href="/removeRegulationBoard.do?boardNo=${b.boardNo }">규제풀기</a>
+						</c:when>
+						<c:otherwise>
+							<a class="btn btnColor basicColor" href="/regulationBoard.do?boardNo=${b.boardNo }">규제하기</a>
+						</c:otherwise>
+					</c:choose>
+					<a class="btn btnColor basicColor" href="/boardDelete.do?num=&boardType=3&boardNo=${b.boardNo }">글삭제</a>
+					<a class="btn btnColor basicColor" href="/boardUpdateFrm.do?boardType=3&boardNo=${b.boardNo }">글수정</a>
+				</c:when>
+				<c:when test="${sessionScope.m.memberId == b.boardWriter}"> <!--글쓴이 일반회원 글삭제 글수정  -->
+					<a class="btn btnColor basicColor" href="/boardDelete.do?num=&boardType=3&boardNo=${b.boardNo }">글삭제</a>
+					<a class="btn btnColor basicColor" href="/boardUpdateFrm.do?boardType=3&boardNo=${b.boardNo }">글수정</a>
+				</c:when>
+				<c:when test="${sessionScope.m.memberLevel eq 0 }">
+						<c:choose>
+						<c:when test="${b.boardLevel eq 2 }">
+							<a id="regu" class="btn btnColor basicColor" href="/removeRegulationBoard.do?boardNo=${b.boardNo }">규제풀기</a>
+							</c:when>
+							<c:otherwise>
+							<a  class="btn btnColor basicColor" href="/regulationBoard.do?boardNo=${b.boardNo }">규제하기</a>
+							</c:otherwise>
+						</c:choose>
+					<a class="btn btnColor basicColor" href="/boardDelete.do?num=&boardType=3&boardNo=${b.boardNo }">글삭제</a>
+				</c:when>
+				
+				<c:otherwise>
+				</c:otherwise>
+			</c:choose>
+			
+		</div>
 		<div id="table">
 		
 			<table id="table1" class="table">
@@ -49,7 +86,7 @@
 				</tr>
 				</c:if>
 				<tr>
-					<td colspan="7">${b.boardContent }
+					<td colspan="7"><div style="min-height: 200px;">${b.boardContent }</div>
 						<div id="likechk">
 					    <input type="radio" value="like" name="likechk" id="like" onclick="return check(0);"><label for="like" ><i class="fas fa-thumbs-up"><span id="likeResult" >&nbsp;${l.likeSum }</span>&nbsp;&nbsp;좋아요</i></label>
 					    <input type="radio" value="dislike" name="likechk" id="dislike" onclick="return check(1);"><label for="dislike"><i class="fas fa-thumbs-down"><span id="dislikeResult">&nbsp;${l.dislikeSum }</span>&nbsp;&nbsp;싫어요</i></label>
@@ -58,44 +95,7 @@
 				</tr>
 			</table>
 			
-			<div id="btns">
-			<a class="btn btnColor" href="/additionBoard.do?boardType=3&reqPage=1">글목록</a>
-
-
-			<c:choose>
-				<c:when test="${sessionScope.m.memberLevel eq 0 && sessionScope.m.memberId == b.boardWriter}">
-					<c:choose>
-						<c:when test="${b.boardLevel eq 2 }">
-							<a class="btn btnColor" href="/removeRegulationBoard.do?boardNo=${b.boardNo }">규제풀기</a>
-						</c:when>
-						<c:otherwise>
-							<a class="btn btnColor" href="/regulationBoard.do?boardNo=${b.boardNo }">규제하기</a>
-						</c:otherwise>
-					</c:choose>
-					<a class="btn btnColor" href="/boardDelete.do?num=&boardType=3&boardNo=${b.boardNo }">글삭제</a>
-					<a class="btn btnColor" href="/boardUpdateFrm.do?boardType=3&boardNo=${b.boardNo }">글수정</a>
-				</c:when>
-				<c:when test="${sessionScope.m.memberId == b.boardWriter}"> <!--글쓴이 일반회원 글삭제 글수정  -->
-					<a class="btn btnColor" href="/boardDelete.do?num=&boardType=3&boardNo=${b.boardNo }">글삭제</a>
-					<a class="btn btnColor" href="/boardUpdateFrm.do?boardType=3&boardNo=${b.boardNo }">글수정</a>
-				</c:when>
-				<c:when test="${sessionScope.m.memberLevel eq 0 }">
-						<c:choose>
-						<c:when test="${b.boardLevel eq 2 }">
-							<a class="btn btnColor" href="/removeRegulationBoard.do?boardNo=${b.boardNo }">규제풀기</a>
-							</c:when>
-							<c:otherwise>
-							<a class="btn btnColor" href="/regulationBoard.do?boardNo=${b.boardNo }">규제하기</a>
-							</c:otherwise>
-						</c:choose>
-					<a class="btn btnColor" href="/boardDelete.do?num=&boardType=3&boardNo=${b.boardNo }">글삭제</a>
-				</c:when>
-				
-				<c:otherwise>
-				</c:otherwise>
-			</c:choose>
 			
-		</div>
 			
 			<!-- 댓글쓰기창 로그인 되있을때 -->
 			

@@ -257,8 +257,18 @@ public class SpaceService {
 		return ub;
 	}
 	//게시판 삭제
+	@Transactional
 	public int deleteUseBoard(int ubNo) {
-		return dao.deleteUseBoard(ubNo);
+		int result1 = dao.deleteUseBoard(ubNo);
+		if(result1>0) {
+			//대관 번호 조회
+			int rentalNo = dao.selectUbRentalNo(ubNo);
+			//사용 게시판 확인 번호 수정
+			int result = dao.updateNoBoard(rentalNo);
+			return result;
+		}else {
+			return -1;
+		}
 	}
 	//게시판 수정
 	public int updateUseBoard(UseBoard u) {
