@@ -8,13 +8,12 @@
 <title>글쓰기</title> 
 <!-- include summernote css/js -->
 <link rel="stylesheet" href="/resources/additionCss/boardWriteFrm.css">
-<link rel="stylesheet" href="/summernote/summernote-lite.css"> 
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet"> 
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
- 	 <script src="/summernote/jquery-3.3.1.js"></script>
-	<script src="/summernote/summernote-lite.js"></script>
-	<script src="/summernote/lang/summernote-ko-KR.js"></script>  
+	 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+  <script src=" https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script>
 	<div class="container">
 	<a id="back" class="btn" href="javascript:window.history.back();">뒤로가기</a>
 	<form action="/boardWrite.do" method="post" enctype="multipart/form-data">
