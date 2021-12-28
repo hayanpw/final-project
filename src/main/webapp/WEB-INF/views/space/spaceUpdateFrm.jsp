@@ -16,7 +16,10 @@
 		<div class="insert-main">
 			<form action="/updateSpace.do" method="post"
 				enctype="multipart/form-data">
-				<h3><img class="i-img" src="resources/spaceImage/edit.png" style="width: 40px; "> 공간 수정 </h3>
+				<h3>
+					<img class="i-img" src="resources/spaceImage/edit.png"
+						style="width: 40px;"> 공간 수정
+				</h3>
 				<input type="hidden" value="${s.spaceNo }" name="spaceNo">
 				<div class="space-info">
 					<p>
@@ -62,9 +65,10 @@
 					</p>
 					<table class="table-condensed time-table">
 						<c:forEach items="${st }" var="st">
-								<input type="hidden" value="${st.stNo }" name="stNo">
+							<input type="hidden" value="${st.stNo }" name="stNo">
 							<tr>
-								<th>이용시간 :<th>
+								<th>이용시간 :
+								<th>
 								<td><input value="${st.startTime }" name='startTime'></td>
 								<th>~</th>
 								<td><input value="${st.endTime }" name='endTime'></td>
@@ -74,18 +78,20 @@
 					<table class="table-condensed time-table">
 					</table>
 				</div>
-			<div class="space-img">
-					<p >※이미지를 새로 등록해주세요.</p>
+				<div class="space-img">
+					<p>※이미지를 새로 등록해주세요.</p>
 					<p>※이미지의 최대 개수는 3장입니다.</p>
-				 	<p>※이미지 등록 후 꼭 썸네일 사진을 클릭 해주세요.</p>
-				<input name="files" type="file" id="image" accept="image/*" onchange="setThumbnail(event);" multiple/>
-				 <div id="image_container">
-				 </div>
-	<input type="hidden" name="thumbnail">
-			<div id="insertBtn">
-				<button onclick="return checkAgree();" class="btn btn-default" type="submit">수정하기</button>
-			</div>
-		</form>
+					<p>※이미지 등록 후 꼭 썸네일 사진을 클릭 해주세요.</p>
+					<input name="files" type="file" id="image" accept="image/*"
+						onchange="setThumbnail(event);" multiple />
+					<div id="image_container"></div>
+					<input type="hidden" name="thumbnail">
+					<div id="insertBtn">
+						<button onclick="return checkAgree();" class="btn btn-default"
+							type="submit">수정하기</button>
+					</div>
+				</div>
+			</form>
 		</div>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
