@@ -1,7 +1,7 @@
 	#title{
 	width:130px;
 	border-top: 7px solid #064663;
-	margin-top:70px;
+	margin-top:30px;
 	margin-left:70px;
 	font-weight:700;
 	font-size: 40px;
@@ -20,7 +20,6 @@
 	border-top: 2px solid #eee;
     }
 	#table{
-	margin-top:50px;
 	text-align: left;
 	}
 	#table>a:first-child {
@@ -161,8 +160,8 @@
 	font-size: 30px;
 	}
 	.btnColor{
-	color: #fff;
-	background-color: #064663;
+	color: #064663;
+	background-color:  #fff;
 	}
 	.btnColor:hover{
 	text-decoration:none;
@@ -178,12 +177,25 @@
 	}
 	#tag{
 	font-weight: bold;
+	color: #e79b36;
 	}
 	#btns{
 	float: right;
 	margin: 5px;
 	}
+	#blist{
+	background-color: #064663;
+	color: #fff;
+	}
 	.oColor{
 	color: #fff;
 	background-color: #e79b36;
 	}
+		.commentBox{
+	border-top: 1px solid #eee;
+	}
+	.comments,.recomments{
+	border-bottom: 1px solid #eee;
+	}
+	.recomments>li:nth-child(2) {
+	text-align: center;

@@ -15,7 +15,7 @@
 		<input type="hidden" id="boardNo" value="${b.boardNo }">
 		<div id="table">
 			<div id="btns">
-			<a class="btn btnColor" href="/discount.do">글목록</a>
+			<a id="blist" class="btn btnColor" href="/discount.do">글목록</a>
 			<c:choose>
 			<c:when test="${sessionScope.m.memberId == b.boardWriter}">
 			<a class="btn oColor" href="/boardDelete.do?num=&boardType=5&boardNo=${b.boardNo }">글삭제</a>
