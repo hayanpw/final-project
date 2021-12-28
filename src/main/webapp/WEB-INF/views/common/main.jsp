@@ -42,7 +42,8 @@
 					<strong>적용기간 : 2021.07.14~12.29</strong>
 				</p>
 				<p style="font-size: 7px;">예쁘게 봐주시구 5개월동안 수고많으셨습니다 :) Au revir!</p>
-				<p>KH Team3</p>
+				<p>KH Team3</p><br><br><br>
+				<p style="font-size: 5px">made by 주연 승준 지원 한솔 준택 하얀</p>
 			</main>
 
 		</div>
@@ -61,34 +62,39 @@
 				<div class="pop-content">
 					<div class="pop-title">
 						<p>
-							내려온다아아아<br>
+							대관 많은 이용 바랍니다.<br>
+							종강 축하축하<br><br>
 						</p>
-						<h1>무지다 문화센터</h1>
+						<h1>무지다 문화센터<br></h1>
 					</div>
 					<div class="pop-table">
 						<div class="pop-con">
-							<span class="iconimg"><img
+							<a href="/spaceView.do?spaceNo=41&reqPage=1"><span class="iconimg"><img
 								src=" /resources/mainImage/upload/m-icon1.png"></span> <span
-								class="iconname">2021<br>무지다시즌
-							</span>
+								class="iconname"><br>다목적실
+							</span></a>
 						</div>
 						<div class="pop-con">
-							<span class="iconimg"><img
-								src=" /resources/mainImage/upload/m-icon2.png"></span> <span
-								class="iconname">2021<br>무지다시즌
-							</span>
+							<a href="/spaceView.do?spaceNo=43&reqPage=1">
+							<span class="iconimg">
+							<img src=" /resources/mainImage/upload/m-icon2.png"></span> <span
+								class="iconname"><br>연습실
+							</span></a>
 						</div>
 						<div class="pop-con">
+						<a href="/spaceView.do?spaceNo=44&reqPage=1">
 							<span class="iconimg"><img
 								src=" /resources/mainImage/upload/m-icon3.png"></span> <span
-								class="iconname">2021<br>무지다시즌
-							</span>
+								class="iconname"><br>세미나실
+							</span></a>
 						</div>
 						<div class="pop-con">
+						<a href="/spaceView.do?spaceNo=45&reqPage=1">
 							<span class="iconimg"><img
 								src=" /resources/mainImage/upload/m-icon4.png"></span> <span
-								class="iconname">2021<br>무지다시즌
+								class="iconname"><br>강의실
 							</span>
+							</a>
 						</div>
 					</div>
 				</div>
@@ -218,14 +224,13 @@
 				</c:when>
 				<c:when
 					test="${not empty sessionScope.m && sessionScope.m.memberLevel == 0}">
-					<a href="/adminpage.do">My Page[관리] <span>></span></a>
+					<a href="/allMember.do?selectmenu=5&reqPage=1">My Page[관리] <span>></span></a>
 					<br>
 					<a href="/logout.do">로그아웃</a>
 				</c:when>
 				<c:when
 					test="${not empty sessionScope.m && sessionScope.m.memberLevel == 1 || sessionScope.m.memberLevel == 2}">
-					<a href="/mypage.do?memberNo=${sessionScope.m.memberNo }">My
-						Page[일반] <span>></span>
+					<a href="/mypage.do?memberNo=${sessionScope.m.memberNo }">${sessionScope.m.memberId } Page <span>></span><br>
 					</a>
 					<a href="/logout.do"> 로그아웃</a>
 				</c:when>
