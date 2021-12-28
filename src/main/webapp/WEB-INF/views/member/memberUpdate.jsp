@@ -261,7 +261,7 @@
 									<label for="memberPassword" class="reg"> PW </label>
 									<input type="password" class="input" name="memberPassword" id="memberPassword"><span id="pw-detail">(“”-+/\:; 제외)</span> <span id="pwChkRule"></span><br><br>
 									<label for="pw_re" class="reg"> 확인 </label><input type="password" class="input" name="pw_re" id="chkpw"> <span id="pwChk"></span>
-									<input type="submit" value="변경">
+									<input type="submit" class="nextBtn"  value="변경">
 									<input type="hidden" name="memberId" id="memberId" value="${sessionScope.m.memberId}">
 									
 							</fieldset>

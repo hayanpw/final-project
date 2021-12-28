@@ -34,7 +34,7 @@
 		                        <p>예약날짜 : ${md.reserveDate}</p>              
 		                    </div>
 		                    <div class="r-box">
-		                      	<button onclick="deletemShow(this,'${md.reserveNo}');">취소하기</button>
+		                      	<button class="nextBtn" onclick="deletemShow(this,'${md.reserveNo}');">취소하기</button>
 							</div>
 						</div>
 						</c:when>
@@ -47,7 +47,7 @@
 		                        <p>예약날짜 : ${md.reserveDate}</p>              
 		                    </div>
 		                    <div class="r-box">
-		                        <button onclick="deletemSpace(this,'${md.reserveNo}');">취소하기</button>
+		                        <button class="nextBtn" onclick="deletemSpace(this,'${md.reserveNo}');">취소하기</button>
 							</div>
 							</div>
 						</c:when>
@@ -60,7 +60,7 @@
 		                        <p>예약날짜 : ${md.reserveDate}</p>              
 		                    </div>
 		                    <div class="r-box">
-		                        <button onclick="deletemRead(this,'${md.reserveNo}');">취소하기</button>
+		                        <button class="nextBtn" onclick="deletemRead(this,'${md.reserveNo}');">취소하기</button>
 							</div>
 						</div>
 						</c:when>
@@ -73,7 +73,7 @@
 		                        <p>예약날짜 : ${md.reserveDate}</p>              
 		                    </div>
 		                    <div class="r-box">
-		                        <button onclick="deletemAcademy(this,'${md.reserveNo}');">취소하기</button>
+		                        <button class="nextBtn" onclick="deletemAcademy(this,'${md.reserveNo}');">취소하기</button>
 							</div>
 						</div>
 						</c:when>
@@ -86,7 +86,7 @@
 		                        <p>예약날짜 : ${md.reserveDate}</p>              
 		                    </div>
 		                    <div class="r-box">
-		                        <button onclick="deletemExhibition(this,'${md.reserveNo}');">취소하기</button>
+		                        <button class="nextBtn" onclick="deletemExhibition(this,'${md.reserveNo}');">취소하기</button>
 							</div>
 						</div>
 						</c:when>
@@ -209,7 +209,8 @@
 </body>
 <style>
 .delete_box{
-	border: 1px solid #BDB19A;
+	border-radius: 15px;
+	border: 1px solid #064663;
 	display : flex;
 	justify-content: space-around;
 	align-items: center;
@@ -224,6 +225,11 @@
 .l-box>p{
 	margin-bottom: 0;
 }
+.l-box>a{
+    text-decoration: none;
+    font-weight: bold;
+    color:#064663;
+}
 .l-box>*{
 	margin-bottom: 5px;
 	margin-top:5px;
@@ -233,6 +239,22 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+}
+.nextBtn {
+    width: 80px;
+    height: 35px;
+    margin-left:10px;
+    background-color: #fff;
+    border: none;
+    outline: 1px solid;
+    cursor: pointer;
+    color: #064663;
+    font-size: 14px;
+}
+.nextBtn:hover{
+	transition-duration:1s;
+	color: #fff;
+	background-color: #064663;
 }
 </style>
 </html>

@@ -333,7 +333,8 @@
 					</div>
 					<c:forEach items="${requrit }" var="r" begin="0" end="1">
 					<ul class="ln-content">
-						<li class="lnc-box"><a href="/requritView.do?requritNo=${r.requritNo }"><span class="t">${r.requritTitle }</span></a><br><span class="date">${r.requritStart }~${r.requritEnd }</span></li>
+						<li class="lnc-box"><a href="/requritView.do?requritNo=${r.requritNo }"><span class="t">${r.requritTitle }</span></a><br>
+						<span class="date" style="font-size:14px; position: absolute;padding-top:100px;">${r.requritStart }~${r.requritEnd }</span></li>
 					</ul>
 					</c:forEach>
 				</li>
@@ -346,8 +347,9 @@
 					<div class="w">
 					<c:forEach items="${academy }" var="ac" begin="0" end="1">
 						<ul class="ln-content">
-							<li class="rpc-box"><a href="/academyView.do?academyNo=${ac.academyNo }"><img src="${ac.academyPhoto }"></a> 
-							<span class="date">${ac.academyStart } ~ ${ac.academyEnd }</span></li>
+							<li class="rpc-box"><a href="/academyView.do?academyNo=${ac.academyNo }"><img src="${ac.academyPhoto }" style="z-index:1;"></a> 
+							<span class="t">${ac.academyTitle}</span>
+							<span class="date" style="z-index:2;">${ac.academyStart } ~ ${ac.academyEnd }</span></li>
 						</ul>
 					</c:forEach>
 					</div>
