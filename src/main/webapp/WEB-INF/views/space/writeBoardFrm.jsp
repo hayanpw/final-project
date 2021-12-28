@@ -19,7 +19,7 @@
 			<form action="/writeBoard.do" method="post" enctype="multipart/form-data">
 				<table class="table table-border" border="1">
 					<tr>
-						<th colspan=2">제목</th>
+						<th colspan="2">제목</th>
 						<td colspan="6"><input type="text" name="ubTitle" value="${today } ${r.spaceName } 사용체크리스트 "></td>
 					</tr>
 					<tr>
