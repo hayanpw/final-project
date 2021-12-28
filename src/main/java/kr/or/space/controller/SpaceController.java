@@ -440,6 +440,7 @@ public class SpaceController {
 			}
 			ub.setFilename(filename);
 			ub.setFilepath(filepath);
+			System.out.println(savePath+filepath);
 		}
 		/*
 		 * if(upfile != null) { String savePath =
