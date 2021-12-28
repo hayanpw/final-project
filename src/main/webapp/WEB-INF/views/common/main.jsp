@@ -131,37 +131,37 @@
 	<!-- <div class="container" style="width: 100%;"> -->
 	<div class="slider-for d1">
 		<div class="sf">
-			<img src=" /resources/mainImage/upload/m-main1.jpg">
+			<a href="/showView.do?showNo=8"><img src=" /resources/mainImage/upload/m-main8.jpg"></a>
 		</div>
 		<div class="sf">
-			<img src=" /resources/mainImage/upload/m-main2.jpg">
+			<a href="/showView.do?showNo=2"><img src=" /resources/mainImage/upload/m-main2.jpg"></a>
 		</div>
 		<div class="sf">
-			<img src=" /resources/mainImage/upload/m-main3.jpg">
+			<a href="/showView.do?showNo=21"><img src=" /resources/mainImage/upload/m-main7.jpg"></a>
 		</div>
 		<div class="sf">
-			<img src=" /resources/mainImage/upload/m-main4.jpg">
+			<a href="/showView.do?showNo=6"><img src=" /resources/mainImage/upload/m-main4.jpg"></a>
 		</div>
 		<div class="sf">
-			<img src=" /resources/mainImage/upload/m-main5.jpg">
+			<a href="/showView.do?showNo=5"><img src=" /resources/mainImage/upload/m-main5.jpg"></a>
 		</div>
 	</div>
 	<div class="sliderbg">
 		<div class="slider-nav d2">
 			<div class="sn">
-				<img src=" /resources/mainImage/upload/m-show1.jpg">
+			<img src="/resources/showImage/upload/6.png">
 			</div>
 			<div class="sn">
-				<img src=" /resources/mainImage/upload/m-show2.jpg">
+			<img src=" /resources/mainImage/upload/m-show2.jpg">
 			</div>
 			<div class="sn">
-				<img src=" /resources/mainImage/upload/m-show3.jpg">
+			<img src=" /resources/mainImage/upload/show7.jpg">
 			</div>
 			<div class="sn">
-				<img src=" /resources/mainImage/upload/m-show4.jpg">
+			<img src=" /resources/mainImage/upload/m-show4.jpg">
 			</div>
 			<div class="sn">
-				<img src=" /resources/mainImage/upload/m-show5.jpg">
+			<img src=" /resources/mainImage/upload/m-show5.jpg">
 			</div>
 		</div>
 	</div>
