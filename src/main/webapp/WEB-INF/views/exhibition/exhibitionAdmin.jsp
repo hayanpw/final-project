@@ -152,7 +152,6 @@
 		});
  		$(".deleteExhibition").click(function(){
  			var exhibitionNo = $(this).attr("exhibitionNo");
-			console.log(exhibitionNo);
 	    	swal({
 				  title: "전시 내리기",
 				  text: "전시를 종료 하시겠습니까??",
@@ -193,7 +192,6 @@
 				var exhibitionDate = $(this).val();
 				var exhibitionNo = $(this).next().next().next().val();
 				var idx = $(".datepicker").index(this);
-				console.log(idx);
 				$(".exhibition").eq(idx).empty();
 				$.ajax({
 					url: "/checkPaymentExhibition.do",

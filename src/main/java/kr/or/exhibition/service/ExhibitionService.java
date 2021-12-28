@@ -81,7 +81,6 @@ public class ExhibitionService {
 	}
 
 	public int updateExReview(ExhibitionReview exr) {
-		System.out.println(exr.getExReviewContent());
 		int result = dao.updateExReview(exr);
 		return result;
 	}
@@ -112,7 +111,6 @@ public class ExhibitionService {
 		map.put("exhibitionDate", exhibitionDate);
 		map.put("exhibitionNo", exhibitionNo);
 		int totalCount = dao.checkTotalCount(map);
-		System.out.println(totalCount);
 		return totalCount;
 	}
 

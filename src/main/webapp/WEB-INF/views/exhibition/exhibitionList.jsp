@@ -68,7 +68,6 @@
 		$("#more").click(function(){
 			var start = $(this).val();
 			var memberLevel = $("#memberLevel").val();
-			console.log(memberLevel);
 			$.ajax({
 				url : "/moreExhibition.do",
 				data : {start:start},
@@ -99,14 +98,11 @@
 						}
 						$(".mainmenu").append(moreLi);
 					}
-					console.log(start);
 					$("#more").val(Number(start)+2);
 					var curr = Number($("#more").attr("currentCount"));
 					$("#more").attr("currentCount",curr + data.length);
 					var totalCount = $("#more").attr("totalCount");
 					var currCount = $("#more").attr("currentCount");
-					console.log(totalCount);
-					console.log(currCount);
 					if(currCount == totalCount){
 						$("#more").css("display","none");
 						$("#more").prop("diabled",true);

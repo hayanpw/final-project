@@ -40,7 +40,6 @@ public class RequritController {
 	//공지 리스트 페이지로 이동
 	@RequestMapping(value="/requritList.do")
 	public String requritList(Model model , int reqPage) {
-		System.out.println("컨트롤러"+reqPage);
 		RequritPageData rpd = service.selectRequritPageData(reqPage);
 		model.addAttribute("list",rpd.getList());
 		model.addAttribute("pageNavi",rpd.getPageNavi());
@@ -139,7 +138,6 @@ public class RequritController {
 	}
 	@RequestMapping(value="/deleteRequritList.do")
 	public String deleteRequritList(int reqPage, Model model) {
-		System.out.println("컨트롤러"+reqPage);
 		RequritPageData rpd = service.selectRequritPageDataLast(reqPage);
 		model.addAttribute("list",rpd.getList());
 		model.addAttribute("pageNavi",rpd.getPageNavi());
@@ -169,7 +167,6 @@ public class RequritController {
 	public void attacheFileDown(String fileName, Model model,HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String root = request.getSession().getServletContext().getRealPath("/resources/resume/upload/");
 		String file = root+fileName;
-		System.out.println("다운로드 파일 전체 경로 : "+file);
 		//서버의 물리공간에서 서블릿으로 파일을 읽어오는 객체
 		FileInputStream fis = new FileInputStream(file);
 		//파일을 읽어오는 속도를 개선하기위한 보조 스트림
@@ -185,7 +182,6 @@ public class RequritController {
 		//브라우저가 IE확인
 		boolean bool = request.getHeader("user-agent").indexOf("MSIE")!=-1 ||
 				       request.getHeader("user-agent").indexOf("Trident") != -1;
-		System.out.println("IE여부 : "+bool);
 		if(bool) {//브라우저가 IE인 경우
 			resFilename = URLEncoder.encode(fileName,"utf-8");
 			resFilename = resFilename.replace("\\\\", "20%");

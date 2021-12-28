@@ -57,7 +57,6 @@ public class ExhibitionDao {
 	}
 
 	public int updateExReview(ExhibitionReview exr) {
-		System.out.println("디에이오" +exr.getExReviewContent());
 		int result = sqlSession.update("exhibition.updateExReveiw",exr);
 		return result;
 	}

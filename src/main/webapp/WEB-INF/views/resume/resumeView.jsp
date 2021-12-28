@@ -56,8 +56,6 @@
 	$("#updateMemberLevel").click(function(){
 		var memberNo = $(this).attr("memberNo");
 		var requritNo = $("#hide").val();
-		console.log(memberNo);
-		console.log(requritNo);
 		location.href="/updateMemberLevel.do?memberNo="+memberNo+"&requritNo="+requritNo;
 	});
 	</script>

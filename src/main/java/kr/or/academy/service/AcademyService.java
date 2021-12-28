@@ -29,37 +29,30 @@ public class AcademyService {
 	}
 
 	public int academyTotal() {
-		System.out.println("전체 토탈 구하기");
 		int totalCount = dao.academyTotal();
 		return totalCount;
 	}
 
 	public ArrayList<Academy> selectAcademyList(int reqPage ,String category) {
-		System.out.println("리스트 서비스");
 		String all = "all";
 		int end = reqPage;
 		int start = end - 3;
 		AcademyPagingVo ap = new AcademyPagingVo();
 		if(category.equals(all)) {
-			System.out.println("전체선택");
 			ap.setStart(start);
 			ap.setEnd(end);
 			ap.setCategory(category);
 			ArrayList<Academy> list = dao.selectAcademy(ap);
-			System.out.println("출력되는 리스트 길이:"+list.size());
 			return list;
 		}else {
-			System.out.println("카테고리선택");
 			ap.setStart(start);
 			ap.setEnd(end);
 			ap.setCategory(category);
 			int totalCount = dao.totalCountAcademy(category);
-			System.out.println("전체 카운트"+totalCount);
 			ArrayList<Academy> list = dao.selectCategoryAcademy(ap);
 			for(Academy a : list) {
 				a.setTotalCount(totalCount);
 			}
-			System.out.println("출력되는 리스트 길이:"+list.size());
 			return list;
 		}
 	}
@@ -70,44 +63,35 @@ public class AcademyService {
 		String all = "all";
 		AcademyPagingVo ap = new AcademyPagingVo();
 		if(category.equals(all)) {
-			System.out.println("전체선택(더보기)");
 			ap.setStart(start);
 			ap.setEnd(end);
 			ap.setCategory(category);
 			ArrayList<Academy> list = dao.selectAcademy(ap);
-			System.out.println("더보기로 출력되는 리스트 길이:"+list.size());
 			return list;
 		}else {
-			System.out.println("카테고리선택(더보기)");
 			ap.setStart(start);
 			ap.setEnd(end);
 			ap.setCategory(category);
 			ArrayList<Academy> list = dao.selectCategoryAcademy(ap);
-			System.out.println("더보기로 출력되는 리스트 길이:"+list.size());
 			return list;
 		}
 	}
 	//검색으로 조회 처음에 4개 해오기
 	public ArrayList<Academy> searchAcademyList(int reqPage, String keyWord) {
-		System.out.println("검색으로 리스트 보기 서비스");
 		int end = reqPage;
 		int start = end - 3;
 		ArrayList<Academy> list = new ArrayList<Academy>();
 		if(keyWord.equals("")) {
-			System.out.println("검색어가 없습니다.");
 			return list;
 		}else {
 			AcademyPagingVo ap = new AcademyPagingVo();
 			ap.setStart(start);
 			ap.setEnd(end);
 			ap.setCategory(keyWord);
-			System.out.println("검색 실행");
 			list = dao.searchAcademyList(ap);
 			if(list.size() < 1) {
-				System.out.println("검색결과 없음");
 				return list;
 			}else {
-				System.out.println("검색결과 있음");
 				int totalCount = dao.searchAcademyTotal(keyWord);
 				for(Academy a : list) {
 					a.setTotalCount(totalCount);
@@ -131,7 +115,6 @@ public class AcademyService {
 		return acList;
 	}
 	public ArrayList<Academy> searchMoreAcademy(int start, String category) {
-		System.out.println("검색결과 더보기");
 		start = start+1;
 		int end = start +1;
 		AcademyPagingVo ap = new AcademyPagingVo();
@@ -160,7 +143,6 @@ public class AcademyService {
 
 	public int countingStar(int academyNo) {
 		int studentCount = dao.countingStar(academyNo);
-		System.out.println(studentCount);
 		return studentCount;
 	}
 

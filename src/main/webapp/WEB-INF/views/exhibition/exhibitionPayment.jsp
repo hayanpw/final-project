@@ -68,8 +68,6 @@
 		var d = new Date(); // Date 객체 생성
 		var date = d.getDate()+""+d.getHours()+""+d.getMinutes()+""+d.getSeconds(); 
 		//Date 객체로 고유식별 번호 생성
-		console.log(date);
-		console.log(paymentPrice);
 		IMP.init("imp28965926"); //결제 API 사용을 위한 가맹점 식별코드 입력
 		IMP.request_pay({
 			merchant_uid : date,    // 거래 아이디
@@ -105,7 +103,6 @@
 						}
 				 });
 				alert("결제성공");
-				console.log("카드승인번호:"+rsp.apply_num);
 				location.href="/exhibitionView.do?exhibitionNo="+exhibitionNo;
 			}else{
 				alert("결제실패");

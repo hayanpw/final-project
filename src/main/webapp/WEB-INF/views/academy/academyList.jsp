@@ -228,8 +228,6 @@
 					$("#more").attr("currentCount",curr + data.length);
 					var totalCount = $("#more").attr("totalCount");
 					var currCount = $("#more").attr("currentCount");
-					console.log(currCount);
-					console.log(category);
 					if(currCount == totalCount){
 						$("#more").css("display","none");
 						$("#more").prop("diabled",true);
@@ -306,7 +304,6 @@
 			$("#more").attr("currentCount",4);
 			var reqPage = 4;
 			var keyWord = $("#keyWord").val();
-			console.log(keyWord);
 			$.ajax({
 				url : "/searchAcademy.do",
 				data : {keyWord:keyWord,reqPage:reqPage},

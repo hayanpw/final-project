@@ -86,7 +86,6 @@
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 	<script>
 	function download(fileName){
-		console.log(fileName);
 		location.href="/attacheFileDown.do?fileName="+fileName;
 	}
 	function goResumeFrm(){

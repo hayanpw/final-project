@@ -44,7 +44,6 @@ public class AcademyController {
 	public String academyList(Academy a,Model model,int reqPage,String category) {
 		model.addAttribute("headerText", "수업 일정");
 		//전체 페이지 겟수 출력 
-		System.out.println(category);
 		int totalCount = service.academyTotal();
 		ArrayList<Academy> list = service.selectAcademyList(reqPage,category);
 		int count = list.size();
@@ -60,7 +59,6 @@ public class AcademyController {
 	public String academyInsert(Academy a,MultipartFile upfile, HttpServletRequest request,Model model) {
 		if(upfile != null) {
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/academyImage/upload/");
-			System.out.println(upfile.getSize());
 			String filename = upfile.getOriginalFilename();
 			String onlyFilename = filename.substring(0, filename.indexOf("."));
 			String extention = filename.substring(filename.indexOf("."));
@@ -213,7 +211,6 @@ public class AcademyController {
 	public String academyUpdate(Academy a,MultipartFile upfile, HttpServletRequest request,Model model) {
 		if(upfile.getSize() > 0) {
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/academyImage/upload/");
-			System.out.println(upfile.getSize());
 			String filename = upfile.getOriginalFilename();
 			String onlyFilename = filename.substring(0, filename.indexOf("."));
 			String extention = filename.substring(filename.indexOf("."));
@@ -273,10 +270,8 @@ public class AcademyController {
 	public String countingStar(int academyNo) {
 		int studentCount = service.countingStar(academyNo);
 		if(studentCount == 0) {
-			System.out.println(studentCount);
 			return "0";
 		}else {
-			System.out.println(studentCount);
 			String count = Integer.toString(studentCount);
 			return count;
 		}

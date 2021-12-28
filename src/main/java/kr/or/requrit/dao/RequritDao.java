@@ -23,8 +23,6 @@ public class RequritDao {
 	}
 
 	public ArrayList<Requrit> selectRequritList(RequritPagingVo paging) {
-		System.out.println(paging.getEnd());
-		System.out.println(paging.getStart());
 		List<Requrit> list = sqlSession.selectList("requrit.selectRequritList",paging);
 		return (ArrayList<Requrit>)list;
 	}
@@ -55,8 +53,6 @@ public class RequritDao {
 	}
 
 	public ArrayList<Requrit> selectRequritListDelete(RequritPagingVo paging) {
-		System.out.println(paging.getEnd());
-		System.out.println(paging.getStart());
 		List<Requrit> list = sqlSession.selectList("requrit.selectRequritListDelete",paging);
 		return (ArrayList<Requrit>)list;
 	}

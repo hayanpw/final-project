@@ -178,7 +178,6 @@
 			var message = "";
 			var idx = $(".countStudent").index(this);
 			$(".academy").eq(idx).empty();
-			console.log(idx);
 			$.ajax({
 				url : "/countingStar.do",
 				data : {academyNo:academyNo},

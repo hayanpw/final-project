@@ -202,7 +202,6 @@ function goLogin(){
  			var exhibitionTitle = $("#exhibitionTitle").val();
  			var exhibitionPhoto = $("#exhibitionPhoto").val();
  			var paymentSelect = 1; // 전시결제는 1 , 강좌결제는 2
- 			console.log(bookDate);
  			var form = $("<form action='/exhibitionPaymentFrm.do' method='post'></form>");
  			form.append($("<input type='text' name='paymentQuantity' value='"+paymentQuantity+"'>"));
  			form.append($("<input type='text' name='paymentPrice' value='"+paymentPrice+"'>"));
@@ -303,7 +302,6 @@ function goLogin(){
 			$(obj).next().show();
 		}
 		function modifyComplete(obj,exReviewNo,exhibitionNo){
-			console.log(exhibitionNo);
 			var form = $("<form action='/updateExReview.do' method='post'></form>");
 			//form안에 수정 번호 설정
 			form.append($("<input type='text' name='exReviewNo' value='"+exReviewNo+"'>"));
@@ -319,7 +317,6 @@ function goLogin(){
 		}
 		function deleteReview(obj,exReviewNo,exhibitionNo){
 			var exReviewStatus = 1;
-			console.log(exhibitionNo);
 			if(confirm("관람평을 삭제하시겠습니까?")){
 				location.href="/deleteExReview.do?exReviewNo="+exReviewNo+"&exhibitionNo="+exhibitionNo;
 			}

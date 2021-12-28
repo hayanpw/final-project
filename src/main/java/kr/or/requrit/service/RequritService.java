@@ -45,9 +45,7 @@ public class RequritService {
 			long period = ChronoUnit.DAYS.between(now, date);
 			r.setPeriod(period);
 		}
-		System.out.println("서비스"+list.size());
 		int totalCount = dao.selectTotalCount();
-		System.out.println("컨트롤러 카운트"+totalCount);
 		int totalPage = 0;
 		if(totalCount%numPerPage == 0) {
 			totalPage = totalCount/numPerPage;
@@ -56,7 +54,6 @@ public class RequritService {
 		}
 		int pageNaviSize = 5;
 		int pageNo = ((reqPage-1)/pageNaviSize)*pageNaviSize + 1;
-		System.out.println("페이지넘버"+pageNo);
 		//페이지네비 태그 제작 시작
 		String pageNavi = "<ul class='pagination'>";
 		//이전버튼
@@ -147,9 +144,7 @@ public class RequritService {
 			long period = ChronoUnit.DAYS.between(now, date);
 			r.setPeriod(period);
 		}
-		System.out.println("서비스"+list.size());
 		int totalCount = dao.selectTotalCountDelete();
-		System.out.println("컨트롤러 카운트"+totalCount);
 		int totalPage = 0;
 		if(totalCount%numPerPage == 0) {
 			totalPage = totalCount/numPerPage;
@@ -158,7 +153,6 @@ public class RequritService {
 		}
 		int pageNaviSize = 5;
 		int pageNo = ((reqPage-1)/pageNaviSize)*pageNaviSize + 1;
-		System.out.println("페이지넘버"+pageNo);
 		//페이지네비 태그 제작 시작
 		String pageNavi = "<ul class='pagination'>";
 		//이전버튼

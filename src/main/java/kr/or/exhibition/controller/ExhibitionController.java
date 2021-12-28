@@ -224,7 +224,6 @@ public class ExhibitionController {
 	public String academyUpdate(Exhibition ex,MultipartFile upfile, HttpServletRequest request,Model model) {
 		if(upfile.getSize() > 0) {
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/academyImage/upload/");
-			System.out.println(upfile.getSize());
 			String filename = upfile.getOriginalFilename();
 			String onlyFilename = filename.substring(0, filename.indexOf("."));
 			String extention = filename.substring(filename.indexOf("."));
@@ -340,7 +339,6 @@ public class ExhibitionController {
 	}
 	@RequestMapping(value="/deleteExhibition.do")
 	public String deleteExhibition (int exhibitionNo,Model model) {
-		System.out.println("전시 번호 :" +exhibitionNo );
 		int result = service.deleteExhibition(exhibitionNo);
 			if(result>0) {
 				model.addAttribute("msg", "전시 삭제 성공");			

@@ -43,13 +43,11 @@ public class ResumeController {
 	@RequestMapping(value="/resumeInsert.do")
 	public String resumeInsert(HttpServletRequest request,MultipartFile[] upfiles,Model model,Resume r) {
 		ArrayList<ResumeTbl> list = new ArrayList<ResumeTbl>();
-		System.out.println(upfiles.length);
 		if (upfiles[0].isEmpty()) {
 		} else {
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/resume/upload/");
 			for (MultipartFile file : upfiles) {
 				String filename = file.getOriginalFilename();
-				System.out.println(filename);
 				String onlyFilename = filename.substring(0, filename.indexOf(".")); 
 				String extention = filename.substring(filename.indexOf(".")); 
 				String filepath = null;
@@ -156,11 +154,8 @@ public class ResumeController {
 	//페이지 이동 x -> public void
 	public void resumeFileDown(int fileNo, Model model,HttpServletRequest request, HttpServletResponse response) throws IOException {
 		ResumeTbl rt = service.selectOneResumeTbl(fileNo);
-		System.out.println(rt.getFilename());
-		System.out.println(rt.getFilepath());
 		String root = request.getSession().getServletContext().getRealPath("/resources/resume/upload/");
 		String file = root+rt.getFilepath();
-		System.out.println("다운로드 파일 전체 경로 : "+file);
 		//서버의 물리공간에서 서블릿으로 파일을 읽어오는 객체
 		FileInputStream fis = new FileInputStream(file);
 		//파일을 읽어오는 속도를 개선하기위한 보조 스트림
@@ -176,7 +171,6 @@ public class ResumeController {
 		//브라우저가 IE확인
 		boolean bool = request.getHeader("user-agent").indexOf("MSIE")!=-1 ||
 				       request.getHeader("user-agent").indexOf("Trident") != -1;
-		System.out.println("IE여부 : "+bool);
 		if(bool) {//브라우저가 IE인 경우
 			resFilename = URLEncoder.encode(rt.getFilename(),"utf-8");
 			resFilename = resFilename.replace("\\\\", "20%");
