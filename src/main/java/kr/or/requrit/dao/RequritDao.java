@@ -70,4 +70,9 @@ public class RequritDao {
 		int result = sqlSession.delete("resume.deleteResume",requritNo);
 		return result;
 	}
+
+	public int deleteResumeCount(int requritNo) {
+		int result = sqlSession.selectOne("resume.deleteResumeCount",requritNo);
+		return result;
+	}
 }

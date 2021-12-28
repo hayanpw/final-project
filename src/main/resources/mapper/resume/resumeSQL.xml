@@ -75,4 +75,7 @@ where a.member_no = #{memberNo} order by 1 desc
 	<update id="deleteResume" parameterType="_int">
 		update resume set resume_cancel = 1 where requrit_no = #{requritNo}
 	</update>
+	<select id="deleteResumeCount" parameterType="_int" resultType="_int">
+		select count(*) from resume where requrit_no = #{requritNo}
+	</select>
 </mapper>

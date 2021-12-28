@@ -45,14 +45,16 @@
           <div id="pageNavi">${pageNavi }</div>
         <div class="btnArea" style="float: right; margin-right: 50px;">
         <c:choose>
-        <c:when test="${sessionScope.m.memberLevel eq 0}">
+        <c:when test="${not empty sessionScope }">
+        <c:if test="${sessionScope.m.memberLevel eq 0}">
         	<button class="btn" id ="deleteRequritList">삭제된 공고 보기</button>
         	<button class="btn" id ="insertRequrit">공고 등록하기</button>
-        </c:when>
-        <c:otherwise>
+        </c:if>
+        <c:if test="${sessionScope.m.memberLevel > 0 }">
         	<button class="btn" id="myRequritList" memberNo="${sessionScope.m.memberNo }">내가 지원한 공고 보기</button>
-        </c:otherwise>
-       </c:choose>
+        </c:if>
+        </c:when>
+ 		</c:choose>
        </div>
         </div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>

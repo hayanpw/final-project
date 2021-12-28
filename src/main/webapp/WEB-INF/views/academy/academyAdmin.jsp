@@ -32,7 +32,7 @@
 	        		<div class="academyList">
 		                <img src="${ac.academyPhoto }" class="poster">
 		                <div style="width: 800px;">
-			                <h2>수업명 : ${ac.academyTitle }</h2>
+			                <h4><strong>수업명 : ${ac.academyTitle }</strong></h4>
 			                <h4>담당 선생님 : ${ac.academyTeacher }</h4>
 			                <p>전시기간 : ${ac.academyStart } ~ ${ac.academyEnd }</p>	 
 			                <a href="/academyView.do?academyNo=${ac.academyNo }" class="btn btn-default">상세보기</a>
@@ -57,7 +57,7 @@
 	        		<div class="academyList">
 		                <img src="${acl.academyPhoto }" class="poster">
 		                <div style="width: 800px;">
-			               	<h2>수업명 : ${acl.academyTitle }</h2>
+			               	<h4><strong>수업명 : ${acl.academyTitle }</strong></h4>
 			                <h4>담당 선생님 : ${acl.academyTeacher }</h4>
 			                <p>수업기간 : ${acl.academyStart } ~ ${acl.academyEnd }</p>	 
 			                <a href="/academyView.do?academyNo=${acl.academyNo }" class="btn btn-default">상세보기</a>
@@ -82,7 +82,7 @@
 	        		<div class="academyList">
 		                <img src="${acc.academyPhoto }" class="poster">
 		                <div style="width: 800px;">
-			                <h2>수업명 : ${acc.academyTitle }</h2>
+			                <h4><strong>수업명 : ${acc.academyTitle }</strong></h4>
 			                <h4>담당 선생님 : ${acc.academyTeacher }</h4>
 			                <p>수업기간 : ${acc.academyStart } ~ ${acc.academyEnd }</p>	 
 			                <a href="/academyView.do?academyNo=${acc.academyNo }" class="btn btn-default">상세보기</a>

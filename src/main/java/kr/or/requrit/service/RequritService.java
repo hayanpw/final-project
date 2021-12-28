@@ -109,9 +109,14 @@ public class RequritService {
 	@Transactional
 	public int deleteRequrit2(int requritNo) {
 		int result = dao.deleteRequrit2(requritNo);
-		if(result >0) {
+		if(result > 0) {
+			result = dao.deleteResumeCount(requritNo);
+			if(result == 0) {
+				return 1;
+			}else {
 			result = dao.deleteResume(requritNo);
 			return result;
+			}
 		}else{
 			return result;
 		}

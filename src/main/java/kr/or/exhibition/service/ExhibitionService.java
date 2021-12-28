@@ -120,7 +120,7 @@ public class ExhibitionService {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		ArrayList<ExhibitionPayment>  list = dao.selectExhibitionPaymentList(memberNo);
 		ArrayList<ExhibitionPayment> last = dao.selectExhibitionPaymentListLast(memberNo);
-		int totalCount = last.size();
+		int totalCount = list.size();
 		map.put("list", list);
 		map.put("last", last);
 		map.put("totalCount", totalCount);
