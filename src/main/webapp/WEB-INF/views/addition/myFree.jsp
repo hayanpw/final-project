@@ -13,7 +13,6 @@
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
 	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
 	<div class="container" id="container">
-		<div id="title">내가 쓴 글/댓글</div>
 			<c:if test="${sessionScope.m.memberLevel eq 0 }">
 			<div class="boardName">공지게시판</div>
 			<div class="table">

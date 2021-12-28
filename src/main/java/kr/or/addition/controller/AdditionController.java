@@ -592,6 +592,7 @@ public class AdditionController {
 		model.addAttribute("freeList",mpd.getFreeList());
 		model.addAttribute("qnaList",mpd.getQnaList());
 		model.addAttribute("commentList",mpd.getCommentList());
+		model.addAttribute("headerText", "내가 쓴 글•댓글");
 		return "addition/myFree";
 	}
 	
