@@ -94,7 +94,7 @@
 									-
 								</c:when>
 								<c:when test="${l.usedBoard eq 0 && l.rentalDate<today}">
-									<a id="ckList" href="/selectSpaceBoardList.do?reqPage=1">☞작성하러가기</a>
+									<a id="ckList" href="/selectSpaceBoardList.do?reqPage=1">▶ 작성하러가기</a>
 								</c:when>
 							</c:choose>
 						</td>
@@ -115,7 +115,7 @@
 						<div class="modal-body">
 							<form action="/insertSpaceReview.do">
 								<input type="hidden" value="${sessionScope.m.memberId }" name="memberId">
-								<input placeholder="☞리뷰를 작성해주세요." name="srContent">
+								<input placeholder="▶ 리뷰를 작성해주세요." name="srContent">
 								<div class="modal-b"></div>
 								<button class="updateBtn" type="submit">리뷰 등록</button>
 							</form>
@@ -187,7 +187,6 @@
 		$(".d-review").click(function () {
 			var delConfirm = confirm('리뷰를 삭제하시겠습니까?');
 			var rentalNo = $(this).prev().val();
-			console.log(rentalNo);
 			   if (delConfirm) {
 				   $.ajax({
 						url : "/deleteSpaceReview.do",

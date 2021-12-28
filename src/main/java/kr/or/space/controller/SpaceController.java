@@ -20,6 +20,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
@@ -97,7 +98,7 @@ public class SpaceController {
 
 	// 신청 현황 페이지로 이동
 	@RequestMapping(value = "/spaceRes.do")
-	public String spaceRes(int spaceNo, Model model) {
+	public String spaceRes(int spaceNo, Model model, @SessionAttribute(required = false) Member m) {
 		model.addAttribute("headerText", "신청 현황"); 
 		ArrayList<Space> list = service.selectAllSpace();
 		if(spaceNo == 0) {
@@ -106,12 +107,18 @@ public class SpaceController {
 		Space s = service.selectOneSpace(spaceNo);
 		ArrayList<SpaceTime> st = service.selectSpaceTime(spaceNo);
 		ArrayList<FileVO> fv = service.selectFileList(spaceNo);
-		ArrayList<Black> b = service.selectBalckList();
+		
+		//세션이 로그인 되지 않으면 false
+		int blackCount  = 0;
+		if(m!=null) {
+			blackCount = service.selectBalckCount(m.getMemberId());
+		}
+		/* blackCount = m==null?0:service.selectBalckCount(m.getMemberId()); */
 		model.addAttribute("list", list);
 		model.addAttribute("s", s);
 		model.addAttribute("st", st);
 		model.addAttribute("fv", fv);
-		model.addAttribute("b", b);
+		model.addAttribute("blackCount", blackCount);
 		return "space/spaceRes";
 	}
 
@@ -258,7 +265,7 @@ public class SpaceController {
 		} else {
 			model.addAttribute("msg", "삭제를 실패하였습니다.");
 		}
-		model.addAttribute("loc", "/spaceList.do");
+		model.addAttribute("loc", "/spaceAdmin.do?selectmenu=3&reqPage=1");
 		return "common/msg";
 	}
 
@@ -273,8 +280,6 @@ public class SpaceController {
 		model.addAttribute("s", s);
 		model.addAttribute("rentalDate", rentalDate);
 		model.addAttribute("fv", fv);
-		System.out.println(rentalDate);
-		System.out.println(stNo);
 		return "space/spaceInfo";
 	}
 	//공간 상세보기
@@ -299,7 +304,6 @@ public class SpaceController {
 	public String moreSpaceReview(int start, int spaceNo) {
 		//아작스 data start 값 strat 받아옴
 		ArrayList<SpaceReview> list = service.moreSpaceReview(start,spaceNo);
-		System.out.println(list.size());
 		return new Gson().toJson(list);
 	}
 
@@ -333,7 +337,6 @@ public class SpaceController {
 	public String spaceMypage(String memberId, Model model, String ub) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("memberId", memberId);
-		System.out.println(ub);
 		if(ub == null) {
 			map.put("ub", "");
 		}else {
@@ -381,9 +384,6 @@ public class SpaceController {
 		model.addAttribute("list", page.getList());
 		model.addAttribute("pageNavi", page.getPageNavi());
 		model.addAttribute("start", page.getStart());
-		System.out.println(page.getList());
-		System.out.println(page.getPageNavi());
-		System.out.println(page.getStart());
 		return "space/spaceBoardList";
 	}
 
@@ -532,7 +532,6 @@ public class SpaceController {
 		UseBoard u = service.selectOneBoardView(ubNo);
 		String root = request.getSession().getServletContext().getRealPath("/resources/useBoardFile/upload/");
 		String file = root+u.getFilepath();
-		System.out.println("다운로드 파일 전체 경로 : "+file);
 		//서버의 물리공간에서 서블릿으로 파일을 읽어오는 객체
 		FileInputStream fis = new FileInputStream(file);
 		//파일을 읽어오는 속도를 개선하기위한 보조 스트림
@@ -548,7 +547,6 @@ public class SpaceController {
 		//브라우저가 IE확인
 		boolean bool = request.getHeader("user-agent").indexOf("MSIE")!=-1 ||
 				       request.getHeader("user-agent").indexOf("Trident") != -1;
-		System.out.println("IE여부 : "+bool);
 		if(bool) {//브라우저가 IE인 경우
 			resFilename = URLEncoder.encode(u.getFilename(),"utf-8");
 			resFilename = resFilename.replace("\\\\", "20%");
@@ -598,7 +596,6 @@ public class SpaceController {
 	//리뷰 수정
 	@RequestMapping(value = "/updateSpaceReview.do")
 	public String updateSpaceReview(SpaceReview sr, Model model) {
-		System.out.println(sr.getSrContent());
 		int result = service.updatetReview(sr);
 		if(result>0) {
 			model.addAttribute("msg", "수정 성공");
@@ -636,7 +633,7 @@ public class SpaceController {
 	@RequestMapping(value = "/spaceRestore.do")
 	public String spaceRestore(int spaceNo) {
 		int result = service.spaceRestore(spaceNo);
-		return "redirect:/spaceAdmin.do?reqPage=1";
+		return "redirect:/spaceAdmin.do?selectmenu=3&reqPage=1";
 	}
 	/*
 	  //마이페이지 조회 아작스

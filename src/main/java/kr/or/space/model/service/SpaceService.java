@@ -185,8 +185,6 @@ public class SpaceService {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("start", start);
 		map.put("end", end);
-		System.out.println(start);
-		System.out.println(end);
 		ArrayList<UseBoard> list = dao.selectUseBoardList(map);
 		int totalCount = dao.selectTotalCount();
 		int totalPage = 0;
@@ -259,10 +257,11 @@ public class SpaceService {
 	//게시판 삭제
 	@Transactional
 	public int deleteUseBoard(int ubNo) {
+		//대관 번호 조회
+		int rentalNo = dao.selectUbRentalNo(ubNo);
+		//게시판 삭제
 		int result1 = dao.deleteUseBoard(ubNo);
 		if(result1>0) {
-			//대관 번호 조회
-			int rentalNo = dao.selectUbRentalNo(ubNo);
 			//사용 게시판 확인 번호 수정
 			int result = dao.updateNoBoard(rentalNo);
 			return result;
@@ -421,9 +420,6 @@ public class SpaceService {
 		}else {
 			return -1;
 		}
-		System.out.println("서비스 - 공간 업데이트 : "+result1);
-		System.out.println("서비스 - 파일 업데이트 : "+result);
-		System.out.println("서비스 - 시간 업데이트 : "+stResult);
 		
 		return result;		
 	}
@@ -454,5 +450,9 @@ public class SpaceService {
 	//공간 완전 삭제
 	public int realDeleteSpace(int spaceNo) {
 		return dao.realDeleteSpace(spaceNo);
+	}
+	//블랙 된 횟수
+	public int selectBalckCount(String memberId) {
+		return dao.selectBlackCount(memberId);
 	}
 }

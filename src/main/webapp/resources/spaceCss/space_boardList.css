@@ -68,3 +68,6 @@
 .t-hover:hover{
 	background-color: rgba(6, 71, 101, 0.1);
 }
+.page-box{
+	margin-top: 30px;
+}

@@ -79,7 +79,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td>▶선택시간</td>
+					<td>▶ 선택시간</td>
 					<td><input type="text" name="startTime" disabled="disabled"></td>
 					<td>~</td>
 					<td><input type="text" name="endTime" disabled="disabled"></td>
@@ -87,39 +87,21 @@
 			</table>
 			<input type="hidden" name="stNo">
 			<div id="insert-btn">
-				<c:set var="black" value="false" />
-				<c:set var="logout" value="false" />
-				<c:set var="res" value="false" />
-				<c:if test="${fn:length(b) == 0  }">
-					<c:if test="${not logout }">
 						<c:if test="${empty sessionScope.m  }">
 							<button class="btn btn-default" type="button"
 								onclick="location.href='/loginFrm.do'">로그인 후 예약하기</button>
-							<c:set var="logout" value="true" />
-						</c:if>
 					</c:if>
+				<c:if test="${blackCount > 0}">
+					<c:if test="${not empty sessionScope.m }">
+						<div class="box">현재 예약이 불가능한 아이디 입니다.</div>
+					</c:if>
+				</c:if>
+				<c:if test="${blackCount == 0}">
 					<c:if test="${not empty sessionScope.m }">
 						<button onclick="return checkAgree();" class="btn btn-default"
 									id="resBtn" type="submit">신청하기</button>
 					</c:if>
 				</c:if>
-				<c:forEach items="${b }" var="b">
-					<c:if test="${not black }">
-						<c:if test="${b.blackId eq sessionScope.m.memberId }">
-							<div class="box">현재 예약이 불가능한 아이디 입니다.</div>
-							<c:set var="black" value="true" />
-						</c:if>
-					</c:if>
-					<c:if test="${not res }">
-						<c:if test="${not empty sessionScope.m}">
-							<c:if test="${ b.blackId ne sessionScope.m.memberId }">
-								<button onclick="return checkAgree();" class="btn btn-default"
-									id="resBtn" type="submit">신청하기</button>
-							<c:set var="res" value="true" />
-							</c:if>	
-						</c:if>
-					</c:if>
-				</c:forEach>
 			</div>
 		</div>
 		</form>

@@ -141,7 +141,6 @@
 						},
 						type : "post",
 						success : function(data) {
-							console.log(data);
 							for (var i = 0; i < data.length; i++) {
 								$(".review-box").append(
 										"<table class='review-table'><tr><th>작성자</th><td id='content' rowspan ='2'>"

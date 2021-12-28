@@ -260,12 +260,15 @@ public class SpaceDao {
 	}
 	//수정 할 대관 번호 조회
 	public int selectUbRentalNo(int ubNo) {
-		System.out.println(ubNo);		
 		int rentalNo = sqlSession.selectOne("space.selectUbRentalNo",ubNo);
 		return rentalNo;
 	}
 	//해당 대관번호의 사용게시판 체크 수정
 	public int updateNoBoard(int rentalNo) {
 		return sqlSession.update("space.updateNoBoard",rentalNo);
+	}
+	//블랙 된 횟수
+	public int selectBlackCount(String memberId) {
+		return sqlSession.selectOne("space.selectBlackCount",memberId);
 	}
 }

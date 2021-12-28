@@ -13,6 +13,12 @@
 	text-align: center;
 	margin-top: 50px;
 }
+.tb tr th{
+	border: 1px solid black;
+}
+.tb tr td{
+	border: 1px solid black;
+}
 .btn-box button{
 	border : 1px solid #064663; 
 	width : 250px;
