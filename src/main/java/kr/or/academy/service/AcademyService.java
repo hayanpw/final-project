@@ -168,7 +168,7 @@ public class AcademyService {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		ArrayList<AcademyPayment> list = dao.selecAcademtPaymentList(memberNo);
 		ArrayList<AcademyPayment> last = dao.selecAcademtPaymentListLast(memberNo);
-		int totalCount = last.size();
+		int totalCount = list.size();
 		map.put("list",list);
 		map.put("last",last);
 		map.put("totalCount",totalCount);

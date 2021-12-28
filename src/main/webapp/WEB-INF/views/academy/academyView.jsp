@@ -26,32 +26,32 @@
             <div class="academySummary">
                 <table class="summaryTable" >
                     <tr>
-                        <td>수업 기간</td>
+                        <td><strong>수업 기간</strong></td>
                         <td>${a.academyStart } ~ ${a.academyEnd }</td>
                     </tr>
                     <tr>
-                        <td>장소</td>
+                        <td><strong>장소</strong></td>
                         <td>${a.academyPlace }</td>
                     </tr>
                     <tr>
-                        <td>수업 시간</td>
+                        <td><strong>수업 시간</strong></td>
                         <td>19:00 ~ 20:30</td>
                     </tr>
                     <tr>
-                        <td>담당 선생님</td>
+                        <td><strong>담당 선생님</strong></td>
                         <td>${a.academyTeacher }</td>
                     </tr>
                     <tr>
-                        <td>수업료</td>
+                        <td><strong>수업료</strong></td>
                         <td>${a.academyPrice }</td>
                     </tr>
                 </table>
             </div>
         </div>
         <div class="bottomSide">
-            <ul class="nav nav-tabs">
-                <li class="active"><a data-toggle="tab" href="#home">수업 정보</a></li>
-                <li><a data-toggle="tab" href="#menu1">수강및취소</a></li>
+            <ul class="nav nav-tabs" style="color: #064663;">
+                <li class="active"><a data-toggle="tab" href="#home" style="color: #064663;">수업 정보</a></li>
+                <li><a data-toggle="tab" href="#menu1" style="color: #064663;">수강및취소</a></li>
               </ul>
               <div class="tab-content">
               		<div id="home" class="tab-pane fate in active" >
@@ -77,12 +77,14 @@
     <div class="leftSide">
     <div class="fixed">
     	 <div id="datepicker"></div>
+    	  <div class="pp" style="margin-top: 10px;">
     	  <c:if test="${empty sessionScope.m }">
-    	 	<button onclick="goLogin();"class="btn" id="goLogin" style="float: right;">로그인하고 결제</button>
+    	 	<button onclick="goLogin();"class="btn" id="goLogin" style="float: right;">로그인하고 등록</button>
     	 </c:if>
     	 <c:if test="${not empty sessionScope.m }">
     	 <button onclick="payment();" class="btn" style="float: right;">결제하기</button>
     	 </c:if>
+    	 </div>
     	 <input type="hidden" id="startDay" value="${a.academyStart }">
     	 <input type="hidden" id="endDay" value="${a.academyEnd }">
     	 <input type="hidden" id="paymentPrice" value="${a.academyPrice }">

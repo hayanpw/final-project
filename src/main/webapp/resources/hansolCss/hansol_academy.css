@@ -120,6 +120,10 @@
     padding: 10px 30px;
     border-radius: 50px;
     transition: 0.5s;
+    cursor: pointer;
+}
+.category a:hover{
+	text-decoration: none;
 }
 .on a{
 	border: 2px solid #064663;

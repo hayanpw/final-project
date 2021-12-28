@@ -14,8 +14,8 @@
         <h2 style="margin-left: 166px;">전시 결제</h2>
         <div class="row" style="width: 600px; margin: 0 auto;">
             <div style="width: 600px; height: 305px;">
-                <div class="thumbnail" style="margin: 0 auto; border-radius: 0px; border-bottom: none;">
-                	<img src=${exbp.exhibitionPhoto } style="height:30%; width: 38%;">
+                <div class="thumbnail" style="margin: 0 auto; border-radius: 0px; border-bottom: none; height: 305px;">
+                	<img src=${exbp.exhibitionPhoto } style="height:100%;">
                 </div>
             </div>
             <table class="table table-bordered" style="width: 600px; text-align: center;">

@@ -32,7 +32,7 @@
 	        		<div class="exhibitionList">
 		                <img src="${ex.exhibitionPhoto }" class="poster">
 		                <div style="width: 800px;">
-			                <h2>전시명 : ${ex.exhibitionTitle }</h2>
+			                <h4><strong>전시명 : ${ex.exhibitionTitle }</strong></h4>
 			                <h4>장소 : 무지다 미술관</h4>
 			                <p>전시기간 : ${ex.exhibitionStart } ~ ${ex.exhibitionEnd }</p>	 
 			                <a href="/exhibitionView.do?exhibitionNo=${ex.exhibitionNo }" class="btn btn-default">상세보기</a>
@@ -58,7 +58,7 @@
 	        		<div class="exhibitionList">
 		                <img src="${exl.exhibitionPhoto }" class="poster">
 		                <div style="width: 800px;">
-			                <h2>전시명 : ${exl.exhibitionTitle }</h2>
+			                <h4><strong>전시명 : ${exl.exhibitionTitle }</strong></h4>
 			                <h4>장소 : 무지다 미술관</h4>
 			                <p>전시기간 : ${exl.exhibitionStart } ~ ${exl.exhibitionEnd }</p>	 
 			                <a href="/exhibitionView.do?exhibitionNo=${exl.exhibitionNo }" class="btn btn-default">상세보기</a>
@@ -77,7 +77,7 @@
 	        		<div class="exhibitionList">
 		                <img src="${exc.exhibitionPhoto }" class="poster">
 		                <div style="width: 800px;">
-			                <h2>전시명 : ${exc.exhibitionTitle }</h2>
+			                <h4><strong>전시명 : ${exc.exhibitionTitle }</strong></h4>
 			                <h4>장소 : 무지다 미술관</h4>
 			                <p>전시기간 : ${exc.exhibitionStart } ~ ${exc.exhibitionEnd }</p>	 
 			                <a href="/exhibitionView.do?exhibitionNo=${exc.exhibitionNo }" class="btn btn-default">상세보기</a>

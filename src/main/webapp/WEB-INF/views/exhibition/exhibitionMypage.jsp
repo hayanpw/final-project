@@ -60,18 +60,18 @@
 						<c:choose>
 						<c:when test="${exm.checkEmail  eq 0 }">
 							<c:if test="${exm.paymentCancel eq 0 }">
-								<td><button class="writeBtn cancelPayment" type="button" paymentNo="${exm.paymentNo }" memberNo="${sessionScope.m.memberNo }">취소하기</button></td>
-								<td><button class="writeBtn emailSend" type="button" id="emailSend" memberNo="${sessionScope.m.memberNo }" paymentNo="${exm.paymentNo }">이메일 발권</button></td>
+								<td><button class="writeBtn cancelPayment" type="button" paymentNo="${exm.paymentNo }" memberNo="${sessionScope.m.memberNo }">취소</button></td>
+								<td><button class="writeBtn emailSend" type="button" id="emailSend" memberNo="${sessionScope.m.memberNo }" paymentNo="${exm.paymentNo }">발권</button></td>
 							</c:if>
 							<c:if test="${exm.paymentCancel eq 1 }">
 								<td colspan="2">취소되었습니다</td>
 							</c:if>
 							<c:if test="${exm.paymentCancel eq 2 }">
-								<td colspan="2">전시가 취소 되었습니다 3일 애내에 환불 예정</td>
+								<td colspan="2">환불 예정 입니다</td>
 							</c:if>
 						</c:when>
 						<c:when test="${exm.checkEmail eq 1 }">
-							<td colspan="2">티켓이 발권되었습니다.</td>
+							<td colspan="2">발권되었습니다</td>
 						</c:when>
 						</c:choose>
 					</tr>

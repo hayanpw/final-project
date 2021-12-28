@@ -18,7 +18,7 @@
 				<p>마감된 공고입니다</p>
 			</c:when>
 		<c:when test="${r.period ge 0 }">
-        <h2 class="title">${r.requritTitle }${r.period }</h2>
+        <h2 class="title">${r.requritTitle }</h2>
         <div class="sector">
                 <span class="first"><span class="line">경력</span></span>
                 <span class="second">${r.requritCareer }</span>
