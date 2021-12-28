@@ -137,7 +137,6 @@
 				buyer_addr	: "${sessionScope.m.addressRoad}",		//구매자 주소
 				buyer_postcode : "${sessionScope.m.postcode}"			//구매자 우편번호
 			},function(rsp){
-				console.log(rsp);
 				if(rsp.success){
 					$.ajax({
 						url : "/spaceRental.do",

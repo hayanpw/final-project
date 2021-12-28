@@ -13,10 +13,10 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="container">
 	<h3><img class="i-img" src="resources/spaceImage/search.png" style="width: 40px; "> 게시판 상세보기 </h3>
-		<table class="table table-border" border="1">
+		<table class="table tb" >
 			<tr>
-				<th colspan="2">제목</th>
-				<td colspan="6">${u.ubTitle }</td>
+				<th style="border-top: 1px solid black;" colspan="2">제목</th>
+				<td style="border-top: 1px solid black;" colspan="6">${u.ubTitle }</td>
 			</tr>
 			<tr>
 				<th>작성자</th>

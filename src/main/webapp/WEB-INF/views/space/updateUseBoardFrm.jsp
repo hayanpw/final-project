@@ -14,10 +14,10 @@
 		<div class="container">
 		<h3><img class="i-img" src="resources/spaceImage/edit.png" style="width: 40px; "> 게시판 수정 </h3>
 			<form action="/updateUseBoard.do" method="post" enctype="multipart/form-data">
-				<table class="table table-border" border="1">
+				<table class="table tb" border="1">
 					<tr>
-						<th colspan="2">제목</th>
-						<td colspan="6"><input type="text" name="ubTitle" value="${u.ubTitle }"></td>
+						<th style="border-top: 1px solid black;" colspan="2">제목</th>
+						<td style="border-top: 1px solid black;" colspan="6"><input type="text" name="ubTitle" value="${u.ubTitle }"></td>
 					</tr>
 					<tr>
 						<th>작성자</th>

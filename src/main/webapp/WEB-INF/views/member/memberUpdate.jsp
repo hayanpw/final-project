@@ -32,7 +32,7 @@
 							</tr>
 							<tr>
 								<td>비밀번호변경</td>
-								<td><a type="text" id="searchidpw" data-toggle="modal" data-target="#sModal">비밀번호 변경하고싶어요?</a></td>
+								<td><a type="text" id="searchidpw" data-toggle="modal" data-target="#sModal">비밀번호 변경하기</a></td>
 							</tr>
 							
 							<tr>

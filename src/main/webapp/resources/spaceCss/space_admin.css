@@ -1,4 +1,4 @@
-.info-img{
+.rental-img{
 	width: 200px;
 	height: 150px;
 }
@@ -9,6 +9,7 @@
 }
 .table-box table tr td{
 	text-align: center;
+	line-height: 247px;
 }
 .table-box{
 	line-height: 100%;

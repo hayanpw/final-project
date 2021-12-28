@@ -35,7 +35,7 @@
 						<c:forEach items="${list }" var="l" varStatus="i">
 							<tr>
 								<td>${start + i.index }</td>
-								<td><img class="info-img"
+								<td><img class="rental-img"
 									src="resources/spaceImage/upload/${l.filename }"></td>
 								<td>${l.spaceName }</td>
 								<td>${l.memberId }</td>
@@ -45,7 +45,7 @@
 								<c:if test="${l.rentalStatus eq 1 }">
 									<td>심사중<br>
 										<button class="mBtn"
-											onclick="location.href='/mailSend.do?rentalNo=${l.rentalNo}& memberId=${l.memberId }'">확정하기</button>
+											onclick="location.href='/mailSend.do?rentalNo=${l.rentalNo}&memberId=${l.memberId }'">확정하기</button>
 									</td>
 								</c:if>
 								<c:if test="${l.rentalStatus eq 2 }">
@@ -137,7 +137,7 @@
 						type : "post",
 						success : function(data) {
 							if(data>0){
-							 location.href = "/spaceAdmin?reqPage=1"; 
+							 location.href = "/spaceAdmin.do?selectmenu=3&reqPage=1"; 
 							}else{
 								alert("삭제 실패");
 							}

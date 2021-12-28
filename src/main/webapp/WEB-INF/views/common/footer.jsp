@@ -53,9 +53,10 @@
                       ]    // 롤링할 데이터를 넣으면 됩니다 갯수 제한 없어요
 */
 					let rollingData = new Array();
-					
+					let hrefData =  new Array();
 					for(var i=0;i<data.length;i++){
 						rollingData.push(data[i].boardTitle);
+						hrefData.push(data[i].boardNo);
 					}
 					
 				    let timer = 3500 // 롤링되는 주기 입니다 (1000 => 1초)
@@ -70,7 +71,7 @@
 				    //위 선언은 따로 완전히 수정하지 않는 한 조정할 필요는 없습니다.
 				
 				    first.children[0].innerHTML = rollingData[0]
-				
+				    first.children[0].setAttribute("href", "boardView.do?boardType=1&boardNo="+hrefData[0]);
 				    setInterval(() => {
 				        if(move == 2){
 				            first.classList.remove('card_sliding')
@@ -109,9 +110,12 @@
 				        
 				        if(dataCnt < (rollingData.length - 1)) {
 				            document.getElementById('rolling_box').children[listCnt].children[0].innerHTML = rollingData[dataCnt]
+				            document.getElementById('rolling_box').children[listCnt].children[0].setAttribute("href", "boardView.do?boardType=1&boardNo="+hrefData[dataCnt]);
+
 				                dataCnt++
 				        } else if(dataCnt == rollingData.length - 1) {
 				            document.getElementById('rolling_box').children[listCnt].children[0].innerHTML = rollingData[dataCnt]
+				            document.getElementById('rolling_box').children[listCnt].children[0].setAttribute("href", "boardView.do?boardType=1&boardNo="+hrefData[dataCnt]);
 				            dataCnt = 0
 				        }
 				
@@ -167,10 +171,14 @@
             z-index: 10 !important;
         }
 
-        .rolling_box ul li p {
+        .rolling_box ul li a{
             font-size: 20px;
             line-height: 5px;
             font-weight: bold;
+		    border: none;
+		    color: #fff;
+		    text-decoration: none;
+		    
         }
 
         .before_slide {

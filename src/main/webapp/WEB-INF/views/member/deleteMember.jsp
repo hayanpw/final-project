@@ -14,13 +14,15 @@
 	<div class="container">        
         <div class="mypage-title"><span>회</span>원탈퇴 </div>
         <div class="mypage-container" style="">
-		<c:choose>
-			<c:when test="${count eq 0 }">
+        <p class="cb" style="display:none;"><span>${list.size() }</span></p>
+			<div class="deletem" style="display:none;">
 				탈퇴하시겠습니까?
-				<a href="/deleteMember.do?memberNo=${m.memberNo}">넹 바로할래요</a>
+				<a href="/deleteMember.do?memberNo=${m.memberNo}">
+				<br>넹 바로할래요</a><br>
 				<a href="/">아뇨,다시생각해볼래요</a>
-			</c:when>
-			<c:otherwise>
+			</div>
+			
+			<c:if test="${list.size() != 0}">
 				<c:forEach items="${list}" var="md" >
 					<c:choose>
 						<c:when test="${md.selectNo eq 1}">
@@ -39,13 +41,13 @@
 						<c:when test="${md.selectNo eq 2}">
 							<div class="delete_box">
 							<div class="l-box">
-		 						<a href="#">전시리뷰써주세요</a>	
+		 						<a href="#">대관진행이 있습니다.</a>	
 		                      	<p>예약번호 : ${md.reserveNo}</p>
 								<p>대관장소 : ${md.reserveTitle}</p>
 		                        <p>예약날짜 : ${md.reserveDate}</p>              
 		                    </div>
 		                    <div class="r-box">
-		                        <button onclick="deletemSpace(this,'${md.reserveNo}');">리뷰쓰기</button>
+		                        <button onclick="deletemSpace(this,'${md.reserveNo}');">취소하기</button>
 							</div>
 							</div>
 						</c:when>
@@ -90,8 +92,7 @@
 						</c:when>
 					</c:choose>
 				</c:forEach>	
-			</c:otherwise>
-		</c:choose>
+			</c:if>
 		
         </div>
 	</div>
@@ -109,6 +110,8 @@
 					alert("삭제성공");
 					$(obj).parent().parent().fadeOut(300,function(){
 						$(this).remove();
+						$('.cb>span').html($('.cb>span').html()-1);
+						deleteBox();
 					})
 				}
 			}
@@ -126,7 +129,9 @@
 				}else{
 					alert("삭제성공");
 					$(obj).parent().parent().fadeOut(300,function(){
+						$('.cb>span').html($('.cb>span').html()-1);
 						$(this).remove();
+						deleteBox();
 					})
 				}
 			}
@@ -144,11 +149,18 @@
 				}else{
 					alert("삭제성공");
 					$(obj).parent().parent().fadeOut(300,function(){
+						$('.cb>span').html($('.cb>span').html()-1);
 						$(this).remove();
+						deleteBox();
 					})
 				}
 			}
 		});
+	}
+	function deleteBox(){
+		if($('.cb>span').html() == 0){
+			$('.deletem').css('display','block');
+		}
 	}
 	function deletemAcademy(obj, reserveNo) {
 		var md_tbl = '';
@@ -162,7 +174,9 @@
 				}else{
 					alert("삭제성공");
 					$(obj).parent().parent().fadeOut(300,function(){
+						$('.cb>span').html($('.cb>span').html()-1);
 						$(this).remove();
+						deleteBox();
 					})
 				}
 			}
@@ -180,12 +194,15 @@
 				}else{
 					alert("삭제성공");
 					$(obj).parent().parent().fadeOut(300,function(){
+						$('.cb>span').html($('.cb>span').html()-1);
 						$(this).remove();
+						deleteBox();
 					})
 				}
 			}
 		});
 	}
+	deleteBox();
 	</script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 	
