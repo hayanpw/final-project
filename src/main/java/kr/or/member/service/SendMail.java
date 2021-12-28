@@ -65,7 +65,7 @@ public class SendMail {
 		try {
 			msg.setSentDate(new Date()); // 메일 전송날짜 설정
 			// 보내는사람 정보
-			msg.setFrom(new InternetAddress("fianl3team@gmail.com", "무지다 관리자"));
+			msg.setFrom(new InternetAddress("finalpro3team@gmail.com", "무지다 관리자"));
 			// 받는사람정보
 			InternetAddress to = new InternetAddress(email);
 			msg.setRecipient(Message.RecipientType.TO, to);
