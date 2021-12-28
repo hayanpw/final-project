@@ -18,7 +18,7 @@
 	
 	<jsp:include page="/WEB-INF/views/common/mypageMenu.jsp" />
 	<div class="container">        
-        <div class="mypage-title"><span>전시</span>예매내역</div>
+        <div class="mypage-title"><span>수업</span>결제내역</div>
         <c:if test="${empty list }">
         	<div class="noRental">
         		<p>수강 내역이 없습니다.</p>
@@ -51,7 +51,7 @@
 						<td>${acp.paymentPrice }원</td>
 						<c:choose>
 						<c:when test="${acp.paymentCancel eq 0 }">
-							<td><button class="writeBtn acCancelPayment" type="button" paymentNo="${acp.paymentNo }" memberNo="${sessionScope.m.memberNo }">취소하기</button></td>
+							<td><button class="writeBtn acCancelPayment" type="button" paymentNo="${acp.paymentNo }" memberNo="${sessionScope.m.memberNo }">취소</button></td>
 						</c:when>
 						<c:when test="${acp.paymentCancel eq 1 }">
 							<td>취소완료</td>
