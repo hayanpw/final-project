@@ -213,20 +213,18 @@
 					data : {rentalNo :$(this).next().val()},
 					type : "post",
 					success : function(data) {
-						console.log(data);
 						$(".modal-b").empty();
 						$(".modal-b").append("<input type = 'hidden' name='rentalNo' value='"+data.rentalNo +"'>");
 					}
 				});
 			});
-	$(".updateBtn").click(
+	$(".update-Btn").click(
 			function() {
 				$.ajax({
 					url : "/selectReviewInfo.do",
 					data : {rentalNo :$(this).next().val()},
 					type : "post",
 					success : function(data) {
-						console.log(data);
 						$(".modal-bb").empty();
 						$(".modal-bb").append("<input type = 'hidden' name='rentalNo' value='"+data.rentalNo +"'>");
 						$("[name=srContent]").empty();
