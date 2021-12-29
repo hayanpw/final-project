@@ -257,6 +257,8 @@ public class AdditionController {
 			model.addAttribute("loc", "/boardView.do?boardType=3&boardNo=" + boardNo);
 		}else if(boardType == 4) {
 			model.addAttribute("loc", "/myFree.do?memberId="+m.getMemberId());
+		}else {
+			model.addAttribute("loc", "/boardView.do?boardType=5&boardNo=" + boardNo);
 		}
 		return "common/msg";
 	}
