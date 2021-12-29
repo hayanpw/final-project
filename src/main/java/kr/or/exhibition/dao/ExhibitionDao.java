@@ -156,6 +156,6 @@ public class ExhibitionDao {
 
 	public int countCancelQuanEx(int exhibitionNo) {
 		int count = sqlSession.selectOne("exhibition.countCancelQuanEx",exhibitionNo);
-		return 0;
+		return count;
 	}
 }

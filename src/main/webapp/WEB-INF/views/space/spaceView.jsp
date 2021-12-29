@@ -118,9 +118,9 @@
 					</table>
 				</c:forEach>
 				<div class="more-box">
-				<c:if test="${count < totalCount}">
+<%-- 				<c:if test="${count < totalCount}">
 					<button type="button" class="moreBtn" id="more" currentCount="5" totalCount="${totalCount }" value="5">더보기</button>
-				</c:if>
+				</c:if> --%>
 				</div>
 			</div>
 		</form>
