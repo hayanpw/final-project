@@ -360,7 +360,7 @@ public class SpaceController {
 			model.addAttribute("list", spn.getRList());
 			model.addAttribute("pageNavi", spn.getPageNavi());
 			model.addAttribute("start", spn.getStart());
-			return "space/spaceAdmin";
+			return "redirect:/spaceAdmin.do?selectmenu=3&reqPage=1";
 		} else {
 			model.addAttribute("msg", "메일 발송에 실패하였습니다.");
 			model.addAttribute("loc", "/");
