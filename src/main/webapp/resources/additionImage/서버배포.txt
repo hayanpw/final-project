@@ -1,0 +1,18 @@
+webserver 이미완성된 html들을 요청에 맞춰서 보여주는 기능
+was
+사용자 요청한 서비스결과를 스크립트 언어들으로 가공하여 만든 동적인 페이지를 제공하는 서버
+Maven 
+자바용 프로젝트 관리도구 project object model 문서를 통해서 프로젝트버전 및 라이브러리정보를 통합하여 관리
+
+build 작성한 소스코드를 실행할 수 있는 상태로 변환과정
+TestClass.java > TestClass.class
+
+pom.xml > maven-compiler-plugin > 버전 3.6.0으로 변경 177번
+
+jar :java Archive파일 class같은 java 리소스와 속성파일 라이브러리등이 포함되어있는 javaapplication이 동작할수있게 
+자바프로젝트를 압축한 파일
+
+war: webapplicationArchive파일 servlet/jsp컨테이너에서 사용할 웹 애플리 케이션 압축파일 .jsp.servlet,class,xml,html등이 포함
+
+iei root폴더 삭제
+iei.war root.war 파일명 변경

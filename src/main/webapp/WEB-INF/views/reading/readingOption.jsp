@@ -95,7 +95,7 @@
 					<input type="hidden" name="fixturesDay" value="${re.readingDay }">
 					<input type="hidden" name="fixturesNum" value="${re.readingNum }">
 					<input type="hidden" name="fixturesId" value="${sessionScope.m.memberId }">
-					<input type="hidden" name="fixturesName" value="${re.readingName }">
+					<input type="hidden" name="fixturesName" value="${sessionScope.m.memberName }">
 					<label><h4><input type="checkbox" name="fixturesCharger" value="1"> 충전기</h4></label><br>
 					<label><h4><input type="checkbox" name="fixturesTable" value="1"> 독서대</h4></label><br>
 					<label><h4><input type="checkbox" name="fixturesBlanket" value="1"> 담요</h4></label><br>

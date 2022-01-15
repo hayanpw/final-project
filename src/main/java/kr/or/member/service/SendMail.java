@@ -55,7 +55,7 @@ public class SendMail {
 		// 인증정보설정(gmail 로그인)
 		Session session = Session.getDefaultInstance(prop, new Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() { //비밀번호 인증코드
-				PasswordAuthentication pa = new PasswordAuthentication("finalpro3team@gmail.com", "anwlek3wh!");
+				PasswordAuthentication pa = new PasswordAuthentication("orangemarketamin@gmail.com", "1234aaaa!");
 				return pa;
 			}
 		});
@@ -65,7 +65,7 @@ public class SendMail {
 		try {
 			msg.setSentDate(new Date()); // 메일 전송날짜 설정
 			// 보내는사람 정보
-			msg.setFrom(new InternetAddress("finalpro3team@gmail.com", "무지다 관리자"));
+			msg.setFrom(new InternetAddress("orangemarketamin@gmail.com", "무지다 관리자"));
 			// 받는사람정보
 			InternetAddress to = new InternetAddress(email);
 			msg.setRecipient(Message.RecipientType.TO, to);

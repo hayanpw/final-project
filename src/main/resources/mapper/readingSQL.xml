@@ -112,7 +112,7 @@
 		from reading where reading_id=#{memberId}
 	</select>
 	<insert id="fixturesInsert" parameterType="fixtures">
-		insert into fixtures values(fixtures_seq.nextval,#{readingNo},sysdate,#{fixturesDay},#{fixturesNum},#{fixturesId},(select member_name from member where member_id='hy01'),#{fixturesCharger},#{fixturesTable},#{fixturesBlanket})
+		insert into fixtures values(fixtures_seq.nextval,#{readingNo},sysdate,#{fixturesDay},#{fixturesNum},#{fixturesId},#{fixturesName},#{fixturesCharger},#{fixturesTable},#{fixturesBlanket})
 	</insert>
 	<select id="selectOneFixtures" parameterType="reading" resultType="fixtures">
 		select
